@@ -1,0 +1,39 @@
+﻿@model EcoCar.Models.PersonManagement.Account
+@{
+    Layout = "SiteLayout";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateAccount</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+    <fieldset>
+        <legend>Create Account : </legend>
+        @Html.LabelFor(m => Model.Username)
+        @Html.TextBoxFor(m => Model.Username)
+        @*<input id="Username" name="Username" type="text" value="@Model.Username">*@
+        @Html.ValidationMessageFor(m => Model.Username)
+        <br />
+
+        @Html.LabelFor(m => Model.Password)
+        @Html.TextBoxFor(m => Model.Password)
+        @Html.ValidationMessageFor(m => Model.Password)
+        <br />
+
+        @Html.LabelFor(m => Model.IsActive)
+        @Html.TextBoxFor(m => Model.IsActive)
+        @Html.ValidationMessageFor(m => Model.IsActive)
+        <br />
+        <input type="Submit" value="Create Account" />
+    </fieldset>
+    }
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>

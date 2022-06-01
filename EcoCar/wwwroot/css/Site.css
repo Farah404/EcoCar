@@ -1,0 +1,39 @@
+﻿#entete, #menu, #contenu, #footer {
+    padding: 1px 0;
+}
+
+#entete {
+    background-color: lightcoral;
+    text-align: center;
+    background: #FF9900 url("/Content/Images/supertuto.png") 5px center no-repeat;
+    background-size: 100px;
+}
+
+#main {
+    margin: auto;
+}
+
+#menu {
+    float: left;
+    width: 240px;
+    background-color: lightsalmon;
+}
+
+#contenu {
+    margin-left: 245px;
+    background-color: lightblue;
+}
+
+#footer {
+    background-color: lightgreen;
+    text-align: center;
+    clear: both;
+}
+
+.titre {
+    text-align: center;
+}
+
+.selectionne {
+    color: red;
+}

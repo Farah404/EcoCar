@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="entete">
+        <h1>Bienvenue sur Super tuto</h1>
+    </div>
+
+    <div id="main">
+        <div id="menu">
+           @RenderSection("Menu", required:false)
+        </div>
+
+        <div id="contenu">
+            @RenderBody()
+        </div>
+    </div>
+
+    <div id="footer">
+        &copy; @DateTime.Now.Year - Super site de tutoriels, contactez moi sur monmail@supersitetutoriels.com
+    </div>
+</body>
+</html>

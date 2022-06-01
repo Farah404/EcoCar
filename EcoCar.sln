@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32505.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoCar", "EcoCar\EcoCar.csproj", "{FAAD274C-D30A-4E1A-B448-791C6BCEC918}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoCarTests", "EcoCarTests\EcoCarTests.csproj", "{BCACB908-6191-43D5-B600-484631E5D879}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FAAD274C-D30A-4E1A-B448-791C6BCEC918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAAD274C-D30A-4E1A-B448-791C6BCEC918}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAAD274C-D30A-4E1A-B448-791C6BCEC918}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAAD274C-D30A-4E1A-B448-791C6BCEC918}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCACB908-6191-43D5-B600-484631E5D879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCACB908-6191-43D5-B600-484631E5D879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCACB908-6191-43D5-B600-484631E5D879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCACB908-6191-43D5-B600-484631E5D879}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8CA6DBE-29CF-40C2-9C7A-031EAA0F9EB0}
+	EndGlobalSection
+EndGlobal

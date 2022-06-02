@@ -3,9 +3,8 @@
 }
 
 #entete {
-    background-color: lightcoral;
+    background-color: lightgreen;
     text-align: center;
-    background: #FF9900 url("/Content/Images/supertuto.png") 5px center no-repeat;
     background-size: 100px;
 }
 
@@ -16,12 +15,12 @@
 #menu {
     float: left;
     width: 240px;
-    background-color: lightsalmon;
+    background-color: lightgreen;
 }
 
 #contenu {
     margin-left: 245px;
-    background-color: lightblue;
+    background-color: lightgreen;
 }
 
 #footer {

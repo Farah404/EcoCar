@@ -44,8 +44,6 @@ C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug
 C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\EcoCar.TagHelpers.input.cache
 C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\EcoCar.TagHelpers.output.cache
 C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\EcoCar.RazorCoreGenerate.cache
-C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\Razor\Views\Account\CreateAccount.cshtml.g.cs
-C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\Razor\Views\Account\UpdateAccount.cshtml.g.cs
 C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\Razor\Views\Shared\SiteLayout.cshtml.g.cs
 C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\EcoCar.RazorTargetAssemblyInfo.cache
@@ -55,3 +53,5 @@ C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug
 C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\EcoCar.dll
 C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\EcoCar.pdb
 C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\EcoCar.genruntimeconfig.cache
+C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\Razor\Views\PersonManagement\Account\CreateAccount.cshtml.g.cs
+C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\Razor\Views\PersonManagement\Account\UpdateAccount.cshtml.g.cs

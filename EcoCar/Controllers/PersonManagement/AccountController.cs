@@ -1,12 +1,11 @@
-﻿
-using EcoCar.Models.PersonManagement;
+﻿using EcoCar.Models.PersonManagement;
 using EcoCar.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 
 using System.Linq;
 
 
-namespace EcoCar.Controllers
+namespace EcoCar.Controllers.PersonManagement
 {
     public class AccountController : Controller
     {
@@ -34,7 +33,7 @@ namespace EcoCar.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateAccount (Account account)
+        public IActionResult UpdateAccount(Account account)
         {
             if (!ModelState.IsValid)
                 return View(account);
@@ -56,7 +55,7 @@ namespace EcoCar.Controllers
 
         public IActionResult CreateAccount()
         {
-                return View();
+            return View();
         }
 
         [HttpPost]

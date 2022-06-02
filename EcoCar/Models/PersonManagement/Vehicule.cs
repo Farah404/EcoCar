@@ -12,7 +12,7 @@ namespace EcoCar.Models.PersonManagement
 
         //Attributes
         public string Brand { get; set; }
-        public string RegistrationNumber { get; set; }
+        public int RegistrationNumber { get; set; }
         public string Model { get; set; }
         public bool Hybrid { get; set; }
         public bool Electric { get; set; }

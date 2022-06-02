@@ -20,7 +20,7 @@ namespace EcoCar.Controllers
         {
             if (id != 0)
             {
-                using (IDalAccount dal = new DalAccount())
+                using (IDalPersonManagement dal = new DalPersonManagementt())
                 {
                     Account account = dal.GetAllAccounts().Where(a => a.Id == id).FirstOrDefault();
                     if (account == null)
@@ -42,7 +42,7 @@ namespace EcoCar.Controllers
 
             if (account.Id != 0)
             {
-                using (DalAccount dal = new DalAccount())
+                using (DalPersonManagementt dal = new DalPersonManagementt())
                 {
                     dal.UpdateAccount(account);
                     return RedirectToAction("UpdateAccount", new { @id = account.Id });
@@ -65,7 +65,7 @@ namespace EcoCar.Controllers
             if (!ModelState.IsValid)
                 return View(account);
 
-            using (DalAccount dal = new DalAccount())
+            using (DalPersonManagementt dal = new DalPersonManagementt())
             {
                 dal.CreateAccount(account);
                 return RedirectToAction("CreateAccount");

@@ -11,7 +11,7 @@ namespace EcoCarTests
         public void Create_Account_Verification()
         {
 
-            using (DalAccount dalAccount = new DalAccount())
+            using (DalPersonManagementt dalAccount = new DalPersonManagementt())
             {
 
                 dalAccount.DeleteCreateDatabase();

@@ -9,39 +9,39 @@ namespace EcoCar.Models.DataBase
     public class BddContext : DbContext
     {
         //Person Management
-        public DbSet<Person> Person { get; set; }
-        public DbSet<User> User { get; set; }
-        public DbSet<Administrator> Administrator { get; set; }
+        public DbSet<Person> People { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Administrator> Administrators { get; set; }
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<AccountUser> AccountUser { get; set; }
-        public DbSet<AccountAdministrator> AccountAdministrator { get; set; }
-        public DbSet<Vehicule> Vehicule { get; set; }
-        public DbSet<Insurance> Insurance { get; set; }
+        public DbSet<AccountUser> AccountUsers { get; set; }
+        public DbSet<AccountAdministrator> AccountAdministrators { get; set; }
+        public DbSet<Vehicule> Vehicules { get; set; }
+        public DbSet<Insurance> Insurances { get; set; }
 
         //Financial Management
-        public DbSet<EcoWallet> EcoWallet { get; set; }
-        public DbSet<BankDetails> BankDetails { get; set; }
-        public DbSet<BillingAddress> Billingaddress { get; set; }
-        public DbSet<EcoStore> EcoStore { get; set; }
-        public DbSet<Subscription> Subscription { get; set; }
-        public DbSet<Invoice> Invoice { get; set; }
-        public DbSet<ServiceInvoice> ServiceInvoice { get; set; }
-        public DbSet<EcoStoreInvoice> EcoStoreInvoice { get; set; }
+        public DbSet<EcoWallet> EcoWallets { get; set; }
+        public DbSet<BankDetails> BankingDetails { get; set; }
+        public DbSet<BillingAddress> Billingaddresses { get; set; }
+        public DbSet<EcoStore> EcoStores { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<ServiceInvoice> ServiceInvoices { get; set; }
+        public DbSet<EcoStoreInvoice> EcoStoreInvoices { get; set; }
 
         //Service Management
-        public DbSet<Service> Service { get; set; }
-        public DbSet<CarPoolingService> CarPoolingService { get; set; }
-        public DbSet<ParcelService> ParcelService { get; set; }
-        public DbSet<CarRentalService> CarRentalService { get; set; }
-        public DbSet<Trajectory> Trajectory { get; set; }
-        public DbSet<Itinerary> Itinerary { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<CarPoolingService> CarPoolingServices { get; set; }
+        public DbSet<ParcelService> ParcelServices { get; set; }
+        public DbSet<CarRentalService> CarRentalServices { get; set; }
+        public DbSet<Trajectory> Trajectories { get; set; }
+        public DbSet<Itinerary> Itineraries { get; set; }
 
         //Messaging Management
-        public DbSet<Message> Message { get; set; }
-        public DbSet<Reporting> Reporting { get; set; }
-        public DbSet<HelpReporting> HelpReporting { get; set; }
-        public DbSet<UserReporting> UserReporting { get; set; }
-        public DbSet<AdministratorResponse> AdministratorResponse { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Reporting> Reportings { get; set; }
+        public DbSet<HelpReporting> HelpReportings { get; set; }
+        public DbSet<UserReporting> UserReportings { get; set; }
+        public DbSet<AdministratorResponse> AdministratorResponses { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

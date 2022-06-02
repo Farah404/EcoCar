@@ -15,6 +15,10 @@ namespace EcoCar.Models.FinancialManagement
         public string InvoiceDescription { get; set; }
         public DateTime InvoiceIssueDate { get; set; }
 
+        //Foreign Key
+        public int BillingAddressId { get; set; }
+        public BillingAddress BillingAddress { get; set; }
+
 
     }
 }

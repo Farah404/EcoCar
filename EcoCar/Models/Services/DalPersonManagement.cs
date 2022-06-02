@@ -450,8 +450,6 @@ namespace EcoCar.Models.Services
 
         //-------------------------------------------------------------------------------------------------
 
-
-
         public void Dispose()
         {
             _bddContext.Dispose();

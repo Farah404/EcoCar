@@ -24,7 +24,7 @@ namespace EcoCar.Models.Services
 
         //Administrator
         List<Administrator> GetAllAdministrators();
-        int CreateAdministrator(string email, string emailPro, int phoneNumberPro);
+        int CreateAdministrator(string emailPro, int phoneNumberPro);
         void UpdateAdministrator(int id, string emailPro, int phoneNumberPro);
         void DeleteAdministrator(int id);
 
@@ -47,7 +47,7 @@ namespace EcoCar.Models.Services
         //-------------------------------------------------------------------------------------------------
 
         //AccountAdministrator
-        List<AccountUser> GetAllAccountAdministrators();
+        List<AccountAdministrator> GetAllAccountAdministrators();
         int CreateAccountAdministrator(string employeeCode);
         void UpdateAccountAdministrator(int id, string employeeCode);
         void DeleteAccountAdministrator(int id);
@@ -55,7 +55,7 @@ namespace EcoCar.Models.Services
         //-------------------------------------------------------------------------------------------------
 
         //Vehicule
-        List<AccountUser> GetAllAccountVehicules();
+        List<Vehicule> GetAllVehicules();
         int CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats);
         void UpdateVehicule(int id, string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats);
         void DeleteVehicule(int id);
@@ -63,7 +63,7 @@ namespace EcoCar.Models.Services
         //-------------------------------------------------------------------------------------------------
 
         //Insurance
-        List<AccountUser> GetAllAccountInsurances();
+        List<Insurance> GetAllInsurances();
         int CreateInsurance(string insuranceAgency, DateTime insuranceExpiration, string contractNumber);
         void UpdateInsurance(int id, string insuranceAgency, DateTime insuranceExpiration, string contractNumber);
         void DeleteInsurance(int id);

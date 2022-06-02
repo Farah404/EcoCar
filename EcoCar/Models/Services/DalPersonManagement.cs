@@ -6,10 +6,10 @@ using System.Linq;
 
 namespace EcoCar.Models.Services
 {
-    public class DalPersonManagementt : IDalPersonManagement
+    public class DalPersonManagement : IDalPersonManagement
     {
         private BddContext _bddContext;
-        public DalPersonManagementt()
+        public DalPersonManagement()
         {
             _bddContext = new BddContext();
         }
@@ -71,7 +71,7 @@ namespace EcoCar.Models.Services
         //-------------------------------------------------------------------------------------------------
 
         //CRUD User
-        public List<User> GetAllUserss()
+        public List<User> GetAllUsers()
         {
             return _bddContext.Users.ToList();
         }
@@ -166,7 +166,7 @@ namespace EcoCar.Models.Services
         }
 
         //Delete Administrator
-        public void DeleteAdministratorr(int id)
+        public void DeleteAdministrator(int id)
         {
             Administrator administrator = _bddContext.Administrators.Find(id);
 
@@ -240,14 +240,14 @@ namespace EcoCar.Models.Services
         }
 
         //Create AccountUser
-        public int CreateAccountUsers(double userRating, int EcoStatusId)
+        public int CreateAccountUser(double userRating, int EcoStatusId)
         {
             AccountUser accountUser = new AccountUser() { UserRating = userRating, EcoStatusId = EcoStatusId};
             _bddContext.AccountUsers.Add(accountUser);
             _bddContext.SaveChanges();
             return accountUser.Id;
         }
-        public void CreateAccountUsers(AccountUser accountUser)
+        public void CreateAccountUser(AccountUser accountUser)
         {
             _bddContext.AccountUsers.Update(accountUser);
             _bddContext.SaveChanges();
@@ -266,14 +266,14 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
-        public void UpdateAccountUsers(AccountUser accountUser)
+        public void UpdateAccountUser(AccountUser accountUser)
         {
             _bddContext.AccountUsers.Update(accountUser);
             _bddContext.SaveChanges();
         }
 
         //Delete AccountUser
-        public void DeleteAccountUsers(int id)
+        public void DeleteAccountUser(int id)
         {
             AccountUser accountUser = _bddContext.AccountUsers.Find(id);
 
@@ -293,14 +293,14 @@ namespace EcoCar.Models.Services
         }
 
         //Create AccountAdministrator
-        public int CreateAccountAdministrators(string employeeCode)
+        public int CreateAccountAdministrator(string employeeCode)
         {
             AccountAdministrator accountAdministrator = new AccountAdministrator() {EmployeeCode = employeeCode};
             _bddContext.AccountAdministrators.Add(accountAdministrator);
             _bddContext.SaveChanges();
             return accountAdministrator.Id;
         }
-        public void CreateAccountAdministrators(AccountAdministrator accountAdministrator)
+        public void CreateAccountAdministrator(AccountAdministrator accountAdministrator)
         {
             _bddContext.AccountAdministrators.Update(accountAdministrator);
             _bddContext.SaveChanges();
@@ -318,14 +318,14 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
-        public void UpdateAccountAdministrators(AccountAdministrator accountAdministrator)
+        public void UpdateAccountAdministrator(AccountAdministrator accountAdministrator)
         {
             _bddContext.AccountAdministrators.Update(accountAdministrator);
             _bddContext.SaveChanges();
         }
 
         //Delete AccountAdministrator
-        public void DeleteAccountAdministrators(int id)
+        public void DeleteAccountAdministrator(int id)
         {
             AccountAdministrator accountAdministrator = _bddContext.AccountAdministrators.Find(id);
 
@@ -345,14 +345,14 @@ namespace EcoCar.Models.Services
         }
 
         //Create Vehicule
-        public int CreateVehicules(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats)
+        public int CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats)
         {
             Vehicule vehicule = new Vehicule() {Brand = brand, RegistrationNumber = registrationNumber, Model = model, Hybrid = hybrid, Electric = electric, TechnicalTestExpiration = technicalTestExpiration, AvailableSeats = availableSeats };
             _bddContext.Vehicules.Add(vehicule);
             _bddContext.SaveChanges();
             return vehicule.Id;
         }
-        public void CreateVehicules(Vehicule vehicule)
+        public void CreateVehicule(Vehicule vehicule)
         {
             _bddContext.Vehicules.Update(vehicule);
             _bddContext.SaveChanges();
@@ -376,14 +376,14 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
-        public void UpdateVehicules(Vehicule vehicule)
+        public void UpdateVehicule(Vehicule vehicule)
         {
             _bddContext.Vehicules.Update(vehicule);
             _bddContext.SaveChanges();
         }
 
         //Delete Vehicule
-        public void DeleteVehicules(int id)
+        public void DeleteVehicule(int id)
         {
             Vehicule vehicule = _bddContext.Vehicules.Find(id);
 
@@ -403,14 +403,14 @@ namespace EcoCar.Models.Services
         }
 
         //Create Insurance
-        public int CreateInsurances(string insuranceAgency, DateTime insuranceExpiration, string contractNumber)
+        public int CreateInsurance(string insuranceAgency, DateTime insuranceExpiration, string contractNumber)
         {
             Insurance insurance = new Insurance() { InsuranceAgency = insuranceAgency, InsuranceExpiration = insuranceExpiration, ContractNumber = contractNumber };
             _bddContext.Insurances.Add(insurance);
             _bddContext.SaveChanges();
             return insurance.Id;
         }
-        public void CreateInsurances(Insurance insurance)
+        public void CreateInsurance(Insurance insurance)
         {
             _bddContext.Insurances.Update(insurance);
             _bddContext.SaveChanges();
@@ -430,14 +430,14 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
-        public void UpdateInsurances(Insurance insurance)
+        public void UpdateInsurance(Insurance insurance)
         {
             _bddContext.Insurances.Update(insurance);
             _bddContext.SaveChanges();
         }
 
         //Delete Insurance
-        public void DeleteInsurances(int id)
+        public void DeleteInsurance(int id)
         {
             Insurance insurance = _bddContext.Insurances.Find(id);
 

@@ -194,8 +194,9 @@ namespace EcoCar.Models.Services
         }
 
         //Create Account
-        public int CreateAccount(string username, string password, bool isActive)
+        public int CreateAccount(string username, string passwordClear, bool isActive)
         {
+            string password = EncodeMD5(passwordClear);
             Account account = new Account() { Username = username, Password = password, IsActive = isActive };
             _bddContext.Accounts.Add(account);
             _bddContext.SaveChanges();
@@ -237,15 +238,6 @@ namespace EcoCar.Models.Services
                 _bddContext.Accounts.Remove(account);
                 _bddContext.SaveChanges();
             }
-        }
-
-        public int AddAccount(string username, string passwordClear)
-        {
-            string password = EncodeMD5(passwordClear);
-            Account account = new Account() { Username = username, Password = password };
-            this._bddContext.Accounts.Add(account);
-            this._bddContext.SaveChanges();
-            return account.Id;
         }
 
         public Account Authentify(string username, string passwordClear)

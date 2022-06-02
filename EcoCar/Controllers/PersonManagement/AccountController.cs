@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Web;
 
 namespace EcoCar.Controllers.PersonManagement
 {
@@ -48,7 +47,7 @@ namespace EcoCar.Controllers.PersonManagement
                         return Redirect(returnUrl);
                     return Redirect("/");
                 }
-                ModelState.AddModelError("Account.Username", "Username et/ou mot de passe incorrect(s)");
+                ModelState.AddModelError("Account.Username", "Username or password are incorrect");
             }
             return View(viewModel);
         }
@@ -62,7 +61,7 @@ namespace EcoCar.Controllers.PersonManagement
         {
             if (ModelState.IsValid)
             {
-                int id = dalPersonManagement.AddAccount(account.Username, account.Password);
+                int id = dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive);
                 var userClaims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, id.ToString()),

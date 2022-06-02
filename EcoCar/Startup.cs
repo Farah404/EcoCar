@@ -20,7 +20,7 @@ namespace EcoCar
             .AddCookie(options =>
             
             {
-                options.LoginPath = "/Views/Login/Index";
+                options.LoginPath = "/Account/Index";
 
             });
             services.AddControllersWithViews();
@@ -50,7 +50,7 @@ namespace EcoCar
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Login}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Index}/{id?}");
             });
         }
     }

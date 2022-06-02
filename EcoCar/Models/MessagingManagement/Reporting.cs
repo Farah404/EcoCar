@@ -8,7 +8,7 @@ namespace EcoCar.Models.MessagingManagement
         public int Id { get; set; }
 
         //Attributes
-        public int ReferenceNnumber { get; set; }
+        public int ReferenceNumber { get; set; }
         public DateTime ReportingDateTime { get; set; }
 
         //Foreign Keys

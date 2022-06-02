@@ -12,7 +12,7 @@ namespace EcoCar.Models.MessagingManagement
         public string Comment { get; set; }
 
         [Required]
-        public virtual int ReportingReasonTypeId
+        public virtual int ReportingReasonId
         {
             get
             {

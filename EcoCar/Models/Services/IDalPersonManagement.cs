@@ -44,6 +44,10 @@ namespace EcoCar.Models.Services
         void UpdateAccountUser(int id, double userRating, int EcoStatusIds);
         void DeleteAccountUser(int id);
 
+        Account Authentify(string username, string passwordClear);
+        Account GetAccount(int id);
+        Account GetAccount(string idStr);
+
         //-------------------------------------------------------------------------------------------------
 
         //AccountAdministrator

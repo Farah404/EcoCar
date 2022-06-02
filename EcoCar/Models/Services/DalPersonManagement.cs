@@ -3,6 +3,8 @@ using EcoCar.Models.PersonManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using XSystem.Security.Cryptography;
 
 namespace EcoCar.Models.Services
 {
@@ -30,6 +32,12 @@ namespace EcoCar.Models.Services
             _bddContext.SaveChanges();
             return person.Id;
         }
+
+        internal Account GetAllAccounts(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreatePerson(Person person)
         {
             _bddContext.People.Update(person);
@@ -230,6 +238,46 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+
+        public int AddAccount(string username, string passwordClear)
+        {
+            string password = EncodeMD5(passwordClear);
+            Account account = new Account() { Username = username, Password = password };
+            this._bddContext.Accounts.Add(account);
+            this._bddContext.SaveChanges();
+            return account.Id;
+        }
+
+        public Account Authentify(string username, string passwordClear)
+        {
+            string password = EncodeMD5(passwordClear);
+            Account account = this._bddContext.Accounts.FirstOrDefault(a => a.Username == username && a.Password == password);
+            return account;
+        }
+
+        public static string EncodeMD5(string password)
+        {
+            string passwordOne = "ChoixResto" + password + "ASP.NET MVC";
+            return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(passwordOne)));
+        }
+
+        public Account GetAccount(int id)
+        {
+            return this._bddContext.Accounts.Find(id);
+        }
+
+        public Account GetAccount(string idStr)
+        {
+            int id;
+            if (int.TryParse(idStr, out id))
+            {
+                return this.GetAccount(id);
+            }
+            return null;
+        }
+
+
+
 
         //-------------------------------------------------------------------------------------------------
 

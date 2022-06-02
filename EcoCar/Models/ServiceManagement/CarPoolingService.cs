@@ -39,7 +39,7 @@ namespace EcoCar.Models.ServiceManagement
         public bool PetsAllowed { get; set; }
         public bool SmokingAllowed { get; set; }
         public bool MusicAllowed { get; set; }
-        public bool Chattingallowed { get; set; }
+        public bool ChattingAllowed { get; set; }
 
         //Foreign Keys
         public int VehiculeId { get; set; }

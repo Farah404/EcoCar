@@ -11,7 +11,7 @@ namespace EcoCar.Models.ServiceManagement
         public int DurationHours { get; set; }
         public int StopNumber { get; set; }
         public int StopsDurationMinutes { get; set; }
-        public string PickupAddress { get; set; }
+        public string PickUpAddress { get; set; }
         public string DeliveryAddress { get; set; }
 
         [Required]

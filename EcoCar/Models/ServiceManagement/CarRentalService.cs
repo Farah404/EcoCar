@@ -10,7 +10,7 @@ namespace EcoCar.Models.ServiceManagement
         public int Id { get; set; }
 
         //Attributes
-        public string KeyPickupAddress { get; set; }
+        public string KeyPickUpAddress { get; set; }
         public string KeyDropOffAddress { get; set; }
 
         //Foreign Keys

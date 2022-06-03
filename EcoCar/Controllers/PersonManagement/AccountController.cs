@@ -18,6 +18,10 @@ namespace EcoCar.Controllers.PersonManagement
         }
 
         public IActionResult Index()
+        { return View(); 
+        }
+
+        public IActionResult LoginAccount()
         {
             AccountViewModel viewModel = new AccountViewModel { Authentification = HttpContext.User.Identity.IsAuthenticated };
             if (viewModel.Authentification)
@@ -29,7 +33,7 @@ namespace EcoCar.Controllers.PersonManagement
         }
 
         [HttpPost]
-        public IActionResult Index(AccountViewModel viewModel, string returnUrl)
+        public IActionResult LoginAccount(AccountViewModel viewModel, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -119,24 +123,6 @@ namespace EcoCar.Controllers.PersonManagement
             }
         }
 
-        //public IActionResult CreateAccount()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public IActionResult CreateAccount(Account account)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return View(account);
-
-        //    using (DalPersonManagement dal = new DalPersonManagement())
-        //    {
-        //        dal.CreateAccount(account);
-        //        return RedirectToAction("CreateAccount");
-
-        //    }
-        //}
     }
 }
 

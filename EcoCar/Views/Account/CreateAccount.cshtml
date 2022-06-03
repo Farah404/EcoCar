@@ -1,0 +1,71 @@
+﻿@model EcoCar.ViewModels.AccountViewModel
+@{
+    Layout = "/Views/Shared/MainLayout.cshtml";
+}
+<section class="sign-in-form" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+                <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+                        <div class="col-lg-6">
+                            <div class="card-body p-md-5 mx-md-4">
+                                <div class="text-center">
+                                    <img src="~/Images/EcoCar.png"
+                                         style="width: 185px;" alt="logo">
+                                    <h4 class="mt-1 mb-5 pb-1">Je crée mon compte EcoCar</h4>
+                                </div>
+                                <form>
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="form2Example11" class="form-control"
+                                               placeholder="Nom" />
+                                        <label class="form-label" for="form2Example11"></label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="form2Example11" class="form-control"
+                                               placeholder="Prénom" />
+                                        <label class="form-label" for="form2Example11"></label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input type="email" id="form2Example11" class="form-control"
+                                               placeholder="Email" />
+                                        <label class="form-label" for="form2Example11"></label>
+                                    </div>
+                                    <div class="form-outline datepicker">
+                                        <input type="text" id="datePicker" class="form-control"
+                                               placeholder="Selectionnez votre date de naissance" />
+                                        <label class="form-label" for="form2Example11"></label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="form2Example22" class="form-control"
+                                               placeholder="CNI" />
+                                        <label class="form-label" for="form2Example22"></label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="form2Example22" class="form-control"
+                                               placeholder="Numéro de permis de conduire" />
+                                        <label class="form-label" for="form2Example22"></label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="form2Example22" class="form-control"
+                                               placeholder="Numéro de téléphone" />
+                                        <label class="form-label" for="form2Example22"></label>
+                                    </div>
+                                    <div class="text-center pt-1 mb-5 pb-1">
+                                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">S'inscrire</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                <img src=~/Images/CityEcoCar.png width="900" height="500" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr class="rounded">

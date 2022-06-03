@@ -1,6 +1,0 @@
-C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCarTests\bin\Debug\netcoreapp3.1\CoverletSourceRootsMapping
-C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCarTests\obj\Debug\netcoreapp3.1\EcoCarTests.csproj.AssemblyReference.cache
-C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCarTests\obj\Debug\netcoreapp3.1\EcoCarTests.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCarTests\obj\Debug\netcoreapp3.1\EcoCarTests.AssemblyInfoInputs.cache
-C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCarTests\obj\Debug\netcoreapp3.1\EcoCarTests.AssemblyInfo.cs
-C:\Users\farah\Desktop\FormationIsika\ProjetVisualStudio\EcoCar\EcoCarTests\obj\Debug\netcoreapp3.1\EcoCarTests.csproj.CoreCompileInputs.cache

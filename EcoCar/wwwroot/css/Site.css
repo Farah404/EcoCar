@@ -224,3 +224,8 @@ h4 {
         -webkit-transform: translateY(0%);
     }
 }
+
+hr.rounded {
+    border-top: 8px solid lightgreen;
+    border-radius: 5px;
+}

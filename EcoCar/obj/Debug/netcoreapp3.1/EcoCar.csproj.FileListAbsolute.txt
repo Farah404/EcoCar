@@ -58,3 +58,4 @@ C:\DevCDA17\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\EcoCar.csproj.CopyComplete
 C:\DevCDA17\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\EcoCar.dll
 C:\DevCDA17\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\EcoCar.pdb
 C:\DevCDA17\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\EcoCar.genruntimeconfig.cache
+C:\DevCDA17\EcoCar\EcoCar\obj\Debug\netcoreapp3.1\Razor\Views\Shared\MainLayout.cshtml.g.cs

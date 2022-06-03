@@ -6540,19 +6540,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\farah\\.nuget\\packages\\": {}
+    "C:\\Users\\Ariak\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\farah\\Desktop\\FormationIsika\\ProjetVisualStudio\\EcoCar\\EcoCarTests\\EcoCarTests.csproj",
+      "projectUniqueName": "C:\\DevCDA17\\EcoCar\\EcoCarTests\\EcoCarTests.csproj",
       "projectName": "EcoCarTests",
-      "projectPath": "C:\\Users\\farah\\Desktop\\FormationIsika\\ProjetVisualStudio\\EcoCar\\EcoCarTests\\EcoCarTests.csproj",
-      "packagesPath": "C:\\Users\\farah\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\farah\\Desktop\\FormationIsika\\ProjetVisualStudio\\EcoCar\\EcoCarTests\\obj\\",
+      "projectPath": "C:\\DevCDA17\\EcoCar\\EcoCarTests\\EcoCarTests.csproj",
+      "packagesPath": "C:\\Users\\Ariak\\.nuget\\packages\\",
+      "outputPath": "C:\\DevCDA17\\EcoCar\\EcoCarTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\farah\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ariak\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6566,8 +6566,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\farah\\Desktop\\FormationIsika\\ProjetVisualStudio\\EcoCar\\EcoCar\\EcoCar.csproj": {
-              "projectPath": "C:\\Users\\farah\\Desktop\\FormationIsika\\ProjetVisualStudio\\EcoCar\\EcoCar\\EcoCar.csproj"
+            "C:\\DevCDA17\\EcoCar\\EcoCar\\EcoCar.csproj": {
+              "projectPath": "C:\\DevCDA17\\EcoCar\\EcoCar\\EcoCar.csproj"
             }
           }
         }

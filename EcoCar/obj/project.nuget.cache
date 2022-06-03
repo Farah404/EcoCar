@@ -1,0 +1,59 @@
+{
+  "version": 2,
+  "dgSpecHash": "6/XaXEAiDn4raVN9cP29WKKf+TkyNFI1E+y4opiLSrNAWhv1UAOBCXJdjdP+FeixywCOR1jnSemjspKmD7GWGA==",
+  "success": true,
+  "projectFilePath": "C:\\DevCDA17\\EcoCar\\EcoCar\\EcoCar.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ariak\\.nuget\\packages\\commonservicelocator\\1.3.0\\commonservicelocator.1.3.0.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.1\\microsoft.bcl.hashcode.1.1.1.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.entityframeworkcore\\3.1.15\\microsoft.entityframeworkcore.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\3.1.15\\microsoft.entityframeworkcore.abstractions.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\3.1.15\\microsoft.entityframeworkcore.analyzers.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.entityframeworkcore.design\\3.1.15\\microsoft.entityframeworkcore.design.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\3.1.15\\microsoft.entityframeworkcore.relational.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\3.1.15\\microsoft.entityframeworkcore.tools.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\3.1.15\\microsoft.extensions.caching.abstractions.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.extensions.caching.memory\\3.1.15\\microsoft.extensions.caching.memory.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.15\\microsoft.extensions.configuration.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.1.15\\microsoft.extensions.configuration.abstractions.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.1.15\\microsoft.extensions.configuration.binder.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.15\\microsoft.extensions.dependencyinjection.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.15\\microsoft.extensions.dependencyinjection.abstractions.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.extensions.logging\\3.1.15\\microsoft.extensions.logging.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.15\\microsoft.extensions.logging.abstractions.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.extensions.options\\3.1.15\\microsoft.extensions.options.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.15\\microsoft.extensions.primitives.3.1.15.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\mysqlconnector\\0.69.10\\mysqlconnector.0.69.10.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\3.2.5\\pomelo.entityframeworkcore.mysql.3.2.5.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\pomelo.jsonobject\\2.2.1\\pomelo.jsonobject.2.2.1.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\system.collections.immutable\\1.7.1\\system.collections.immutable.1.7.1.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.1\\system.diagnostics.diagnosticsource.4.7.1.nupkg.sha512",
+    "C:\\Users\\Ariak\\.nuget\\packages\\xact.core.pcl\\0.0.5014\\xact.core.pcl.0.0.5014.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'CommonServiceLocator 1.3.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "CommonServiceLocator",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'XAct.Core.PCL 0.0.5014' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "XAct.Core.PCL",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}

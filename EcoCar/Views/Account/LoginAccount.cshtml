@@ -22,32 +22,30 @@
                                     <h4 class="mt-1 mb-5 pb-1">Je me connecte à mon compte EcoCar</h4>
                                 </div>
 
-                                <form>
-
-                                    <div class="form-outline mb-4">
-                                        <input type="email" id="form2Example11" class="form-control"
-                                               placeholder="Nom d'utilisateur" />
-                                        <label class="form-label" for="form2Example11"></label>
+                                @using (Html.BeginForm())
+                                {
+                                    <div class="form-floating mb-3">
+                                        @Html.TextBoxFor(model => model.Account.Username, new { @class = "form-control", placeholder = "Nom d'utilisateur" })
+                                        @Html.ValidationMessageFor(model =>model.Account.Username)
                                     </div>
 
-                                    <div class="form-outline mb-4">
-                                        <input type="password" id="form2Example22" class="form-control"
-                                               placeholder="Mot de passe" />
-                                        <label class="form-label" for="form2Example22"></label>
+                                    <div class="form-floating mb-3">
+                                        @Html.TextBoxFor(model => model.Account.Password, new { @type="password", @class = "form-control", placeholder = "Mot de passe" })
+                                        @Html.ValidationMessageFor(model => model.Account.Password)
                                     </div>
 
-                                    <div class="text-center pt-1 mb-5 pb-1">
-                                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Se Connecter</button>
-                                       <a class="text-muted" href="#!">J'ai oublié mon mot de passe</a>
-                                    </div>
-                                </form>
+                                     <!-- Submit Button-->
+                                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Se Connecter</button>
+                                }
 
-
+                                <div class="text-center pt-1 mb-5 pb-1">
+                                    <a class="text-muted" href="#!">J'ai oublié mon mot de passe</a>
+                                </div>
                             </div>
-                                         <div >
-                                        <p>Je ne possède pas un compte Eco Car</p>
-                                        <button type="button" class="btn" onclick ="location.href='CreatePerson'">S'inscrire</button>
-                                    </div>
+                            <div>
+                                <p>Je ne possède pas un compte Eco Car</p>
+                                <button type="button" class="btn" onclick="location.href='CreatePerson'">S'inscrire</button>
+                            </div>
                         </div>
                         <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                             <div class="text-white px-3 py-4 p-md-5 mx-md-4">

@@ -1,4 +1,4 @@
-﻿@model EcoCar.ViewModels.PersonViewModel
+﻿@model EcoCar.ViewModels.AccountViewModel
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "EcoStore";
@@ -28,7 +28,14 @@
                                         @Html.TextBoxFor(model => model.Person.LastName, new { @class = "form-control", placeholder = "Nom" })
                                         @Html.ValidationMessageFor(model => model.Person.LastName)
                                     </div>
-                                    <button class="btn btn-primary btn-xl" type="submit" onclick="location.href='CreateUse' ">Suivant</button>
+
+                                    <div>
+                                        @Html.ValidationMessageFor(model => model.Person.ProfilePictureURL)
+                                        <input type="file" id="file" name="file" multiple>
+                                    </div>
+
+
+                                    <button class="btn btn-primary btn-xl" type="submit" onclick="location.href='CreateUser' ">Suivant</button>
                                 }
 
                             </div>

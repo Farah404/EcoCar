@@ -33,11 +33,6 @@ namespace EcoCar.Models.Services
             return person.Id;
         }
 
-        internal Account GetAllAccounts(string name)
-        {
-            throw new NotImplementedException();
-        }
-
         public void CreatePerson(Person person)
         {
             _bddContext.People.Update(person);
@@ -249,13 +244,13 @@ namespace EcoCar.Models.Services
 
         public static string EncodeMD5(string password)
         {
-            string passwordOne = "ChoixResto" + password + "ASP.NET MVC";
+            string passwordOne = "EcoCar" + password + "ASP.NET MVC";
             return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(passwordOne)));
         }
 
         public Account GetAccount(int id)
         {
-            return this._bddContext.Accounts.Find(id);
+            return this._bddContext.Accounts.FirstOrDefault(a => a.Id == id);
         }
 
         public Account GetAccount(string idStr)

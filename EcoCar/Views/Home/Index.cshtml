@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "EcoCar Accueil";
 }
- <div class="jumbotron text-center"
+<div class="jumbotron text-center"
         <h1>EcoCar</h1>
         <p>Faciliter l'optimisation des déplacements dans une optique éco-vertueuse et conviviale</p>
 
@@ -17,31 +17,35 @@
         </form>
 
     </div>
-    <!-- Add two containers (.container-fluid), and add a custom class to the second container (.bg-grey - adds a gray background color):
-    -->
-    <div id="about" class="container-fluid">
-        <div class="row">
-            <div class="col-sm-8">
-                <h2>A propos d'EcoCar</h2>
-                <p>EcoCar vise à renforcer la solidarité et le maillage territorial en apportant une solution technique intuitive et pratique qui met en relation les usagers ayant un besoin de transport d’une part et ceux effectuant déjà ce trajet ou pouvant l’effectuer d’autre part.
-                    L’objectif est de permettre aux particuliers de rendre ou de demander des services de transport aux autres membres de leur communauté via une plate-forme interactive.
-                    Ces services de transport comportent : 
-                    <li>Le transport ponctuel ou régulier sur le modèle du covoiturage</li>
-                    <li> Le transport ponctuel à la demande</li>
-                    <li> Le transport de colis</li>
-                    <li> La location de véhicule</li>
-</p>
-                <button class="btn btn-success btn-lg" onclick="location.href='/Home/EcoCarValues'">Découvrir EcoCar</button>
-            </div>
-            <div class="col-sm-4">
-                <video src="/Video/EcoCarPub.mp4" style="width:100%" typeof="video/mp4" controls loop preload="auto" slideanim></video>
-            </div>
+<!-- Add two containers (.container-fluid), and add a custom class to the second container (.bg-grey - adds a gray background color):
+-->
+<div id="about" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-8">
+            <h2>A propos d'EcoCar</h2>
+
+            <p>
+                EcoCar vise à renforcer la solidarité et le maillage territorial en apportant une solution technique intuitive et pratique qui met en relation les usagers ayant un besoin de transport d’une part et ceux effectuant déjà ce trajet ou pouvant l’effectuer d’autre part.
+                L’objectif est de permettre aux particuliers de rendre ou de demander des services de transport aux autres membres de leur communauté via une plate-forme interactive.
+                Ces services de transport comportent :
+                <ul><li>Le transport ponctuel ou régulier sur le modèle du covoiturage</li>
+                <li> Le transport ponctuel à la demande</li>
+                <li> Le transport de colis</li>
+                <li> La location de véhicule</li>
+                </ul>
+            </p>
+
+            <button class="btn btn-success btn-lg" onclick="location.href='/Home/EcoCarValues'">Découvrir EcoCar</button>
+        </div>
+        <div class="col-sm-4">
+            <video src="/Video/EcoCarPub.mp4" style="width:100%" typeof="video/mp4" controls loop preload="auto" slideanim></video>
         </div>
     </div>
- 
+</div>
 
-        <!--Carousel-->
-            <div class="container-fluid bg-grey">
+
+<!--Carousel-->
+<div class="container-fluid bg-grey">
     <center><h2>Ce que nos membres disent de nous</h2></center>
     <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
         <!-- Indicators -->
@@ -74,76 +78,50 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+</div>
+<!--Pricing container-->
+<div id="pricing" class="container-fluid bg-grey">
+    <div class="text-center">
+        <h2>Remplissez votre EcoWallet</h2>
+        <h4>Choisissez le mode de financement le plus adapté à vos besoins</h4>
     </div>
-    <!--Pricing container-->
-    <div id="pricing" class="container-fluid bg-grey">
-        <div class="text-center">
-            <h2>Tarification</h2>
-            <h4>Choisissez le mode de financement le plus adapté à vos besoins</h4>
+    <div class="row slideanim">
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Abonnez Vous</h1>
+                </div>
+                <div class="panel-body">
+                    <p><img src="~/Images/sub6Months.png" style="width:275;height:225px;"></p>
+                </div>
+                <div class="panel-footer">
+                    <h4>3 options d'abonnement</h4>
+                    <button onclick="    location.href = 'Financial/EcoStore';" class="btn btn-lg">Consulter EcoStore</button>
+                </div>
+            </div>
         </div>
-        <div class="row slideanim">
-            <div class="col-sm-4">
-                <div class="panel panel-default text-center">
-                    <div class="panel-heading">
-                        <h1>Mensuel</h1>
-                    </div>
-                    <div class="panel-body">
-                        <p><strong>20</strong> Lorem</p>
-                        <p><strong>15</strong> Ipsum</p>
-                        <p><strong>5</strong> Dolor</p>
-                        <p><strong>2</strong> Sit</p>
-                        <p><strong>Endless</strong> Amet</p>
-                    </div>
-                    <div class="panel-footer">
-                        <h3>$19</h3>
-                        <h4>par mois</h4>
-                        <button class="btn btn-lg">Sign Up</button>
-                    </div>
+        <div class="col-sm-4">
+            <p><img src="~/Images/EcoCar.png" style="width:500px;height:500;"></p>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Achetez des Ecocoins</h1>
                 </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="panel panel-default text-center">
-                    <div class="panel-heading">
-                        <h1>Trimestriel</h1>
-                    </div>
-                    <div class="panel-body">
-                        <p><strong>50</strong> Lorem</p>
-                        <p><strong>25</strong> Ipsum</p>
-                        <p><strong>10</strong> Dolor</p>
-                        <p><strong>5</strong> Sit</p>
-                        <p><strong>Endless</strong> Amet</p>
-                    </div>
-                    <div class="panel-footer">
-                        <h3>$29</h3>
-                        <h4>par mois</h4>
-                        <button class="btn btn-lg">Sign Up</button>
-                    </div>
+                <div class="panel-body">
+                    <p><img src="~/Images/EcoCoin.png" style="width:225px;height:225px;"></p>
                 </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="panel panel-default text-center">
-                    <div class="panel-heading">
-                        <h1>Semestriel</h1>
-                    </div>
-                    <div class="panel-body">
-                        <p><strong>100</strong> Lorem</p>
-                        <p><strong>50</strong> Ipsum</p>
-                        <p><strong>25</strong> Dolor</p>
-                        <p><strong>10</strong> Sit</p>
-                        <p><strong>Endless</strong> Amet</p>
-                    </div>
-                    <div class="panel-footer">
-                        <h3>$49</h3>
-                        <h4>par mois</h4>
-                        <button class="btn btn-lg">Sign Up</button>
-                    </div>
+                <div class="panel-footer">
+                    <h4>3 options de lot d'EcoCoins</h4>
+                    <button onclick="    location.href = 'Financial/EcoStore';" class="btn btn-lg">Consulter EcoStore</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 
-        
-    <!-- Image of location/map -->
-     <!--<img src="~/Images/CityEcoCar.png" style="width:70%">-->   
+
+<!-- Image of location/map -->
+<!--<img src="~/Images/CityEcoCar.png" style="width:70%">-->   

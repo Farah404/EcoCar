@@ -21,12 +21,13 @@ namespace EcoCar.Controllers
         public IActionResult LoginAccount()
         {
             AccountViewModel viewModel = new AccountViewModel { Authentification = HttpContext.User.Identity.IsAuthenticated };
-            if (viewModel.Authentification)
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
-                viewModel.Account = dalPersonManagement.GetAccount(HttpContext.User.Identity.Name);
-                return View(viewModel);
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                viewModel.Account = dalPersonManagement.GetAccount(userId);
+                return Redirect("/home/index");
             }
-            return View();
+            return View(viewModel);
         }
         [HttpPost]
         public IActionResult LoginAccount(AccountViewModel viewModel, string returnUrl)
@@ -38,19 +39,24 @@ namespace EcoCar.Controllers
                 {
                     var userClaims = new List<Claim>()
                     {
-                        new Claim(ClaimTypes.Name, account.Id.ToString())
+                        new Claim(ClaimTypes.Name, account.Username),
+                        new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
                     };
+
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
+
                     var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
                     HttpContext.SignInAsync(userPrincipal);
+
                     if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
                     return Redirect("/");
                 }
-                ModelState.AddModelError("Account.Username", "Username or password are incorrect");
+                ModelState.AddModelError("Account.Username", "Nom d'utilisateur et/ou mot de passe incorrect(s)");
             }
             return View(viewModel);
         }
+
 
         //Creating a person
         public IActionResult CreatePerson()

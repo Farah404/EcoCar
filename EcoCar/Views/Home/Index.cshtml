@@ -1,6 +1,4 @@
-﻿@model EcoCar.ViewModels.AccountViewModel
-
-@{
+﻿@{
     Layout = "~/Views/Shared/MainLayout.cshtml";
 }
  <div class="jumbotron text-center"
@@ -32,7 +30,7 @@
                     <li> Le transport de colis</li>
                     <li> La location de véhicule</li>
 </p>
-                <button class="btn btn-default btn-lg" href="/NavBarPages/EcoCarValues">Découvrir EcoCar</button>
+                <button class="btn btn-success btn-lg" onclick="location.href='/Home/EcoCarValues'">Découvrir EcoCar</button>
             </div>
             <div class="col-sm-4">
                 <video src="/Video/EcoCarPub.mp4" style="width:100%" typeof="video/mp4" controls loop preload="auto" slideanim></video>

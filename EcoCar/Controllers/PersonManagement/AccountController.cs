@@ -17,11 +17,6 @@ namespace EcoCar.Controllers.PersonManagement
             dalPersonManagement = new DalPersonManagement();
         }
 
-        //Launching Page
-        public IActionResult Index()
-        { return View(); 
-        }
-
         //Login
         public IActionResult LoginAccount()
         {

@@ -6,7 +6,7 @@
     background-color: #93bb83;
     color: #ffffff;
     font-size: 75px;
-    padding: 100px 25px;
+    padding: 25px 25px;
     font-family: Montserrat, sans-serif;
 }
 /*containers reference*/
@@ -176,13 +176,6 @@ body {
     color: #818181;
 }
 
-.jumbotron {
-    font-family: Montserrat, sans-serif;
-}
-
-.navbar {
-    font-family: Montserrat, sans-serif;
-}
 /*Styling headers*/
 h2 {
     font-size: 24px;

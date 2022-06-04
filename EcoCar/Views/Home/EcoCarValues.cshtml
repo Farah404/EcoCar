@@ -115,7 +115,7 @@
     </div>
 
 
-    <div class="container-fluid bg-grey">
+    <div class="container-fluid">
         <div class="col-sm-8">
             <h2>Respect des conditions générales d’utilisation</h2>
             <p>
@@ -168,7 +168,7 @@
             <div class="col-sm-8">
                 <h2>Axe urbain</h2>
                 <p>
-                    Axe urbain 
+                    Axe urbain
                     ➢ Réduire la circulation automobile en augmentant le taux de remplissage des voitures
                     particulières et par conséquent de réduire significativement les embouteillages, le bruit,
                     les accidents de la circulation et par conséquent contribuer à améliorer le confort de vie
@@ -187,7 +187,7 @@
         <div class="col-sm-8">
             <h2>Axe écologique</h2>
             <p>
-                Axe écologique 
+                Axe écologique
                 ➢ Le transport est l’activité qui contribue le plus aux émissions de gaz à effet de serre (GES)
                 de la France. Le parc français routier comprend 44,4 millions de véhicules dont 85 % de
                 voitures particulières. En 2019, les voitures particulières (37,7 millions de véhicules) ont
@@ -219,30 +219,59 @@
 
     <!-- Add two containers (.container-fluid), and add a custom class to the second container (.bg-grey - adds a gray background color):
         -->
+          <!--Portfolio containers-->
+
+    <div id="portfolio" class="container-fluid text-center bg-grey">
+        <h2>Portfolio</h2>
+        <h4>Les EcoCrEAAAATES</h4>
+        <div class="row text-center slideanim">
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="paris.jpg" alt="Paris">
+                    <p><strong>Paris</strong></p>
+                    <p>Yes, we built Paris</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="newyork.jpg" alt="New York">
+                    <p><strong>New York</strong></p>
+                    <p>We built New York</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="sanfran.jpg" alt="San Francisco">
+                    <p><strong>San Francisco</strong></p>
+                    <p>Yes, San Fran is ours</p>
+                </div>
+            </div>
         </div>
+        </div>
+</div>
 
 
 
 <script>
-function openTab(evt, tabName) {
-  // Declare all variables
-  var i, tabcontent, tablinks;
+    function openTab(evt, tabName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
 
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
 
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
 
-  // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(tabName).style.display = "block";
-  evt.currentTarget.className += " active";
-} 
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
 </script>
 

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
-namespace EcoCar.Controllers.PersonManagement
+namespace EcoCar.Controllers
 {
     public class AccountController : Controller
     {
@@ -60,7 +60,7 @@ namespace EcoCar.Controllers.PersonManagement
         [HttpPost]
         public IActionResult CreatePerson(Person person)
         {
-            dalPersonManagement.CreatePerson(person.Name, person.LastName, person.ProfilePictureURL);               
+            dalPersonManagement.CreatePerson(person.Name, person.LastName, person.ProfilePictureURL);
             return View(person);
         }
 
@@ -72,7 +72,7 @@ namespace EcoCar.Controllers.PersonManagement
         [HttpPost]
         public IActionResult CreateUser(User user)
         {
-             dalPersonManagement.CreateUser(user.Email, user.BirthDate, user.PhoneNumber, user.IdentityCardNumber, user.DrivingPermitNumber);             
+            dalPersonManagement.CreateUser(user.Email, user.BirthDate, user.PhoneNumber, user.IdentityCardNumber, user.DrivingPermitNumber);
             return View(user);
         }
 
@@ -87,7 +87,7 @@ namespace EcoCar.Controllers.PersonManagement
             dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive);
             return View(account);
         }
- 
+
         public ActionResult Deconnexion()
         {
             HttpContext.SignOutAsync();

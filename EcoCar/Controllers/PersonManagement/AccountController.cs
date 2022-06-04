@@ -65,10 +65,7 @@ namespace EcoCar.Controllers.PersonManagement
         [HttpPost]
         public IActionResult CreatePerson(Person person)
         {
-            if (ModelState.IsValid)
-            {
-                int id = dalPersonManagement.CreatePerson(person.Name, person.LastName, person.ProfilePictureURL);               
-            }
+            dalPersonManagement.CreatePerson(person.Name, person.LastName, person.ProfilePictureURL);               
             return View(person);
         }
 
@@ -80,10 +77,7 @@ namespace EcoCar.Controllers.PersonManagement
         [HttpPost]
         public IActionResult CreateUser(User user)
         {
-            if (ModelState.IsValid)
-            {
-                int id = dalPersonManagement.CreateUser(user.Email, user.BirthDate, user.PhoneNumber, user.IdentityCardNumber, user.DrivingPermitNumber);             
-            }
+             dalPersonManagement.CreateUser(user.Email, user.BirthDate, user.PhoneNumber, user.IdentityCardNumber, user.DrivingPermitNumber);             
             return View(user);
         }
 
@@ -95,20 +89,10 @@ namespace EcoCar.Controllers.PersonManagement
         [HttpPost]
         public IActionResult CreateAccount(Account account)
         {
-            if (ModelState.IsValid)
-            {
-                int id = dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive);
-                var userClaims = new List<Claim>()
-                {
-                    new Claim(ClaimTypes.Name, id.ToString()),
-                };
-                var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
-                var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
-                HttpContext.SignInAsync(userPrincipal);
-                return Redirect("/");
-            }
+            dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive);
             return View(account);
         }
+ 
         public ActionResult Deconnexion()
         {
             HttpContext.SignOutAsync();

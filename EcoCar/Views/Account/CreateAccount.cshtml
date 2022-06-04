@@ -15,23 +15,19 @@
                                          style="width: 185px;" alt="logo">
                                     <h4 class="mt-1 mb-5 pb-1">Je crée mon compte EcoCar</h4>
                                 </div>
-                                <form>
-
-                                    <div class="form-outline mb-4">
-                                        <input type="text" id="form2Example11" class="form-control"
-                                               placeholder="Nom d'utilisateur" />
-                                        <label class="form-label" for="form2Example11"></label>
-                                    </div>
-                                    <div class="form-outline mb-4">
-                                        <input type="password" id="form2Example11" class="form-control"
-                                               placeholder="Mot de passe" />
-                                        <label class="form-label" for="form2Example11"></label>
-                                    </div>
-
-                                    <div class="text-center pt-1 mb-5 pb-1">
-                                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">S'inscrire</button>
-                                    </div>
-                                </form>
+                                @using (Html.BeginForm())
+                    {
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.Account.Username, new { @class = "form-control", placeholder = "Alias" })
+                            @Html.ValidationMessageFor(model => model.Account.Username)
+                        </div>
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.Account.Password, new { @type = "password", @class = "form-control", placeholder = "Mot de passe" })
+                            @Html.ValidationMessageFor(model => model.Account.Password)
+                        </div>
+                        <!-- Submit Button-->
+                        <button class="btn btn-success btn-xl" type="submit" onclick="location.href='Index'">Créer</button>
+                    }
                             </div>
                         </div>
                         <div class="col-lg-6 d-flex align-items-center gradient-custom-2">

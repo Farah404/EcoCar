@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "EcoCar Values";
+    ViewBag.Title = "Valeurs et équipe EcoCar";
 }
 <div class="jumbotron text-center"
         <h1>EcoCar</h1>
@@ -11,16 +11,14 @@
 <!-- Tab links -->
 <div class="tab">
     <button class="tablinks" onclick="openTab(event, 'Charter')">Charte des Valeurs</button>
-    <button class="tablinks" onclick="openTab(event, 'Story')">Histoire de EcoCar</button>
+    <button class="tablinks" onclick="openTab(event, 'Story')">Raisons du développement d'EcoCar</button>
     <button class="tablinks" onclick="openTab(event, 'Devs')">Les Devs KREATE</button>
 </div>
 
 
 <!--Values Charter Tab-->
 <div id="Charter" class="tabcontent">
-    <!-- Add two containers (.container-fluid), and add a custom class to the second container (.bg-grey - adds a gray background color):
-        -->
-    <div id="about" class="container-fluid">
+       <div id="about" class="container-fluid">
         <div class="row">
             <div class="col-sm-8">
                 <h2>Préambule</h2>
@@ -134,8 +132,6 @@
 <!--EcoCar Story Tab-->
 <div id="Story" class="tabcontent">
 
-    <!-- Add two containers (.container-fluid), and add a custom class to the second container (.bg-grey - adds a gray background color):
-        -->
     <div id="about" class="container-fluid">
         <div class="row">
             <div class="col-sm-8">
@@ -217,9 +213,6 @@
 
 <!--devs Tab-->
 <div id="Devs" class="tabcontent">
-
-    <!-- Add two containers (.container-fluid), and add a custom class to the second container (.bg-grey - adds a gray background color):
-        -->
           <!--Portfolio containers-->
 
     <div id="portfolio" class="container-fluid text-center bg-grey">
@@ -257,22 +250,18 @@
     function openTab(evt, tabName) {
         // Declare all variables
         var i, tabcontent, tablinks;
-
         // Get all elements with class="tabcontent" and hide them
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
             tabcontent[i].style.display = "none";
         }
-
         // Get all elements with class="tablinks" and remove the class "active"
         tablinks = document.getElementsByClassName("tablinks");
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
-
         // Show the current tab, and add an "active" class to the button that opened the tab
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
     }
 </script>
-

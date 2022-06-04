@@ -1,6 +1,11 @@
-﻿.jumbotron {
-    background-color: #a1df86; /* GreenPasterL */
+﻿/*Color green EcoCar body : #93bb83 */
+/*Color green EcoCar wheels : #a1df86 */
+/*Color green EcoCar armature : #3e6a3e */
+
+.jumbotron {
+    background-color: #93bb83;
     color: #ffffff;
+    font-size: 75px;
     padding: 100px 25px;
     font-family: Montserrat, sans-serif;
 }
@@ -25,12 +30,12 @@
 
 /*styling Icons from glyphicons*/
 .logo-small {
-    color: #008805;
+    color: #93bb83;
     font-size: 50px;
 }
 
 .logo {
-    color: #008805;
+    color: #93bb83;
     font-size: 200px;
 }
 
@@ -40,25 +45,25 @@
     border: none;
     border-radius: 0;
 }
-.thumbnail img {
-    width: 100%;
-    height: 100%;
-    margin-bottom: 10px;
 
-}
+    .thumbnail img {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 10px;
+    }
 
 /*Styling Carousel*/
 .carousel-control.right, .carousel-control.left {
     background-image: none;
-    color: #f4511e;
+    color: #93bb83;
 }
 
 .carousel-indicators li {
-    border-color: #f4511e;
+    border-color: #93bb83;
 }
 
-.carousel-indicators li.active {
-        background-color: #f4511e;
+    .carousel-indicators li.active {
+        background-color: #93bb83;
     }
 
 .item h4 {
@@ -75,7 +80,7 @@
 
 /*Styling Pricing Containers*/
 .panel {
-    border: 1px solid #f4511e;
+    border: 1px solid #93bb83;
     border-radius: 0;
     transition: box-shadow 0.5s;
 }
@@ -85,9 +90,9 @@
     }
 
 .panel-footer .btn:hover {
-    border: 1px solid #f4511e;
+    border: 1px solid #93bb83;
     background-color: #fff !important;
-    color: #f4511e;
+    color: #93bb83;
 }
 
 .panel-heading {
@@ -116,14 +121,14 @@
 
     .panel-footer .btn {
         margin: 15px 0;
-        background-color: #f4511e;
+        background-color: #a1df86;
         color: #fff;
     }
 
 /*Styling NavBar*/
 .navbar {
     margin-bottom: 0;
-    background-color: #f4511e;
+    background-color: #93bb83;
     z-index: 9999;
     border: 0;
     font-size: 12px !important;
@@ -137,7 +142,7 @@
     }
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #f4511e !important;
+    color: #04bc3b !important;
     background-color: #fff !important;
 }
 
@@ -150,7 +155,7 @@
 footer .glyphicon {
     font-size: 20px;
     margin-bottom: 20px;
-    color: #f4511e;
+    color: #93bb83;
 }
 
 /*Styling Googlefonts*/

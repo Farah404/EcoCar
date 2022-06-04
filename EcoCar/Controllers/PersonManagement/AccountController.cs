@@ -17,10 +17,12 @@ namespace EcoCar.Controllers.PersonManagement
             dalPersonManagement = new DalPersonManagement();
         }
 
+        //Launching Page
         public IActionResult Index()
         { return View(); 
         }
 
+        //Login
         public IActionResult LoginAccount()
         {
             AccountViewModel viewModel = new AccountViewModel { Authentification = HttpContext.User.Identity.IsAuthenticated };
@@ -31,7 +33,6 @@ namespace EcoCar.Controllers.PersonManagement
             }
             return View();
         }
-
         [HttpPost]
         public IActionResult LoginAccount(AccountViewModel viewModel, string returnUrl)
         {
@@ -55,11 +56,42 @@ namespace EcoCar.Controllers.PersonManagement
             }
             return View(viewModel);
         }
+
+        //Creating a person
+        public IActionResult CreatePerson()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreatePerson(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                int id = dalPersonManagement.CreatePerson(person.Name, person.LastName, person.ProfilePictureURL);               
+            }
+            return View(person);
+        }
+
+        //Creating a user based on a person
+        public IActionResult CreateUser()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateUser(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                int id = dalPersonManagement.CreateUser(user.Email, user.BirthDate, user.PhoneNumber, user.IdentityCardNumber, user.DrivingPermitNumber);             
+            }
+            return View(user);
+        }
+
+        //Creating an account based on a user
         public IActionResult CreateAccount()
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult CreateAccount(Account account)
         {
@@ -83,6 +115,7 @@ namespace EcoCar.Controllers.PersonManagement
             return Redirect("/");
         }
 
+        //Updating Account
         public IActionResult UpdateAccount(int id)
         {
             if (id != 0)
@@ -99,9 +132,6 @@ namespace EcoCar.Controllers.PersonManagement
             }
             return View("Error");
         }
-
-
-
         [HttpPost]
         public IActionResult UpdateAccount(Account account)
         {

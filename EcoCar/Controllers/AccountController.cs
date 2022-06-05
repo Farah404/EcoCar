@@ -2,6 +2,7 @@
 using EcoCar.Models.Services;
 using EcoCar.ViewModels;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace EcoCar.Controllers
             }
             return View();
         }
+        [Authorize]
         [HttpPost]
         public IActionResult LoginAccount(AccountViewModel viewModel, string returnUrl)
         {
@@ -136,6 +138,11 @@ namespace EcoCar.Controllers
             {
                 return View("Error");
             }
+        }
+
+        public ActionResult UserProfile()
+        {
+            return View();
         }
 
     }

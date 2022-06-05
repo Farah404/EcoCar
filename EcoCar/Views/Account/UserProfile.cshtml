@@ -1,6 +1,29 @@
-﻿@model EcoCar.ViewModels.AccountViewModel
-
+﻿@model EcoCar.Models.PersonManagement.AccountUser
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "EcoStore";
+    ViewBag.Title = "Mon profil";
 }
+    @using (Html.BeginForm())
+    {
+    <fieldset>
+        <legend>Update Account : </legend>
+
+        @Html.HiddenFor(a=>a.AccountId);
+
+        @Html.LabelFor(m => Model.UserRating)
+        @Html.TextBoxFor(m => Model.UserRating)
+        @*<input id="Username" name="Username" type="text" value="@Model.Username">*@
+        @Html.ValidationMessageFor(m => Model.UserRating)
+        <br />
+
+        @Html.LabelFor(m => Model.EcoStatusId)
+        @Html.TextBoxFor(m => Model.EcoStatusId)
+        @Html.ValidationMessageFor(m => Model.EcoStatusId)
+        <br />
+        <input type="Submit" value="Update Account" />
+    </fieldset>
+    }
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

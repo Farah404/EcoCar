@@ -20,7 +20,7 @@ namespace EcoCar
             .AddCookie(options =>
             
             {
-                options.LoginPath = "/Account/LoginAccount";
+                options.LoginPath = "/Home/Index";
 
             });
             services.AddControllersWithViews();

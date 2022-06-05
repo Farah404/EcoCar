@@ -1,7 +1,7 @@
-﻿@model EcoCar.ViewModels.AccountViewModel
+﻿@model EcoCar.ViewModels.FinancialViewModel
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "EcoStore";
+    ViewBag.Title = "CreateAccountSTEP GOEINAOGIBNAEO";
 }
 <section class="sign-in-form" style="background-color: #eee;">
     <div class="container py-5 h-100">
@@ -19,15 +19,27 @@
                                 @using (Html.BeginForm())
                     {
                         <div class="form-floating mb-3">
-                            @Html.TextBoxFor(model => model.Account.Username, new { @class = "form-control", placeholder = "Alias" })
-                            @Html.ValidationMessageFor(model => model.Account.Username)
+                            @Html.TextBoxFor(model => model.BillingAddress.AddressLine, new { @class = "form-control", placeholder = "Adresse" })
+                            @Html.ValidationMessageFor(model => model.BillingAddress.AddressLine)
                         </div>
                         <div class="form-floating mb-3">
-                            @Html.TextBoxFor(model => model.Account.Password, new { @type = "password", @class = "form-control", placeholder = "Mot de passe" })
-                            @Html.ValidationMessageFor(model => model.Account.Password)
+                            @Html.TextBoxFor(model => model.BillingAddress.City, new {@class = "form-control", placeholder = "Ville" })
+                            @Html.ValidationMessageFor(model => model.BillingAddress.City)
+                        </div>
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.BillingAddress.Region, new {@class = "form-control", placeholder = "Département" })
+                            @Html.ValidationMessageFor(model => model.BillingAddress.Region)
+                        </div>
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.BillingAddress.Country, new {@class = "form-control", placeholder = "Pays" })
+                            @Html.ValidationMessageFor(model => model.BillingAddress.Country)
+                        </div>
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.BillingAddress.PostalCode, new {@class = "form-control", placeholder = "Code Postal" })
+                            @Html.ValidationMessageFor(model => model.BillingAddress.PostalCode)
                         </div>
                         <!-- Submit Button-->
-                        <button class="btn btn-success btn-xl" type="submit" onclick="location.href='/Home/Index'">Créer</button>
+                        <button class="btn btn-success btn-xl" type="submit">Suivant</button>
                     }
                             </div>
                         </div>

@@ -1,7 +1,7 @@
-﻿@model EcoCar.ViewModels.AccountViewModel
+﻿@model EcoCar.ViewModels.FinancialViewModel
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "EcoStore";
+    ViewBag.Title = "CreateAccountStepNGIJAENGEIAZUG";
 }
 <section class="sign-in-form" style="background-color: #eee;">
     <div class="container py-5 h-100">
@@ -19,15 +19,19 @@
                                 @using (Html.BeginForm())
                     {
                         <div class="form-floating mb-3">
-                            @Html.TextBoxFor(model => model.Account.Username, new { @class = "form-control", placeholder = "Alias" })
-                            @Html.ValidationMessageFor(model => model.Account.Username)
+                            @Html.TextBoxFor(model => model.BankDetails.BankName, new { @class = "form-control", placeholder = "Nom de votre banque" })
+                            @Html.ValidationMessageFor(model => model.BankDetails.BankName)
                         </div>
                         <div class="form-floating mb-3">
-                            @Html.TextBoxFor(model => model.Account.Password, new { @type = "password", @class = "form-control", placeholder = "Mot de passe" })
-                            @Html.ValidationMessageFor(model => model.Account.Password)
+                            @Html.TextBoxFor(model => model.BankDetails.Swift, new {@class = "form-control", placeholder = "Numéro SWIFT" })
+                            @Html.ValidationMessageFor(model => model.BankDetails.Swift)
+                        </div>
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.BankDetails.Iban, new {@class = "form-control", placeholder = "Numéro IBAN" })
+                            @Html.ValidationMessageFor(model => model.BankDetails.Iban)
                         </div>
                         <!-- Submit Button-->
-                        <button class="btn btn-success btn-xl" type="submit" onclick="location.href='/Home/Index'">Créer</button>
+                        <button class="btn btn-success btn-xl" type="submit">Créer</button>
                     }
                             </div>
                         </div>

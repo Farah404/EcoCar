@@ -27,7 +27,7 @@ namespace EcoCar.Controllers
                 viewModel.Account = dalPersonManagement.GetAccount(userId);
                 return Redirect("/home/index");
             }
-            return View(viewModel);
+            return View();
         }
         [HttpPost]
         public IActionResult LoginAccount(AccountViewModel viewModel, string returnUrl)
@@ -50,11 +50,11 @@ namespace EcoCar.Controllers
 
                     if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
-                    return Redirect("/");
+                    return Redirect("/Home/Index");
                 }
                 ModelState.AddModelError("Account.Username", "Nom d'utilisateur et/ou mot de passe incorrect(s)");
             }
-            return View(viewModel);
+            return View();
         }
 
 
@@ -67,7 +67,7 @@ namespace EcoCar.Controllers
         public IActionResult CreatePerson(Person person)
         {
             dalPersonManagement.CreatePerson(person.Name, person.LastName, person.ProfilePictureURL);
-            return View(person);
+            return Redirect("/Financial/CreateBankDetails");
         }
 
         //Creating a user based on a person
@@ -79,7 +79,7 @@ namespace EcoCar.Controllers
         public IActionResult CreateUser(User user)
         {
             dalPersonManagement.CreateUser(user.Email, user.BirthDate, user.PhoneNumber, user.IdentityCardNumber, user.DrivingPermitNumber);
-            return View(user);
+            return Redirect("/Account/CreateAccount");
         }
 
         //Creating an account based on a user
@@ -91,13 +91,13 @@ namespace EcoCar.Controllers
         public IActionResult CreateAccount(Account account)
         {
             dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive);
-            return View(account);
+            return Redirect("/Home/Index");
         }
 
         public ActionResult Deconnexion()
         {
             HttpContext.SignOutAsync();
-            return Redirect("/");
+            return Redirect("/Home/Index");
         }
 
         //Updating Account

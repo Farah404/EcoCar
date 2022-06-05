@@ -25,8 +25,9 @@
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.User.BirthDate, new { @class = "form-control", placeholder = "Selectionnez votre date de naissance" })
+                                        @Html.TextBoxFor(model => model.User.BirthDate, new { @class = "datepicker" })
                                         @Html.ValidationMessageFor(model => model.User.BirthDate)
+                                        
                                     </div>
 
                                     <div class="form-outline mb-4">
@@ -64,4 +65,12 @@
 
 <hr class="rounded">
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
 
+        });
+    });
+</script>

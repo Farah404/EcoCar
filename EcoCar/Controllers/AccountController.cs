@@ -93,7 +93,7 @@ namespace EcoCar.Controllers
         public IActionResult CreateAccount(Account account)
         {
             dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive);
-            return Redirect("/Home/Index");
+            return Redirect("/Account/CreatePerson");
         }
 
         public ActionResult Deconnexion()
@@ -141,6 +141,16 @@ namespace EcoCar.Controllers
         }
 
         public ActionResult UserProfile()
+        {
+            return View();
+        }
+
+        public ActionResult UserProfilePersonal()
+        {
+            return View();
+        }
+
+        public ActionResult ForgotPassword()
         {
             return View();
         }

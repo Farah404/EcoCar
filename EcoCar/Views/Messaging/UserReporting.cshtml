@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Mon profil";
+}
+<div class="jumbotron text-center">
+    <h1>EcoCar</h1>
+    <p>Faciliter l'optimisation des déplacements dans une optique éco-vertueuse et conviviale</p>
+</div>
+
+<div id="contact" class="container-fluid">
+    <h2 class="text-center">Signaler l'utilisateur '***'</h2>
+    <div class="row">
+        <div class="col-sm-5">
+            <center><img src="~/Images/reporting.png" style="width:450px;height:450px;"></center>
+        </div>
+        <form method="post" enctype="text/plain">
+            <div class="col-sm-7">
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+
+                        <input class="form-control" id="email" name="name" placeholder="Email ou nom Utilisateur EcoCar" type="text" required>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="text" name="email" placeholder="Raison de signalement" type="email" required>
+                    </div>
+                </div>
+                <textarea class="form-control" id="comments" name="comments" placeholder="Commentaires" rows="5" required></textarea><br>
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <button class="btn btn-default pull-right" type="submit">Envoyer</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr class="solid">

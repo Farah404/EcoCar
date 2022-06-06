@@ -3,7 +3,7 @@
 
 using EcoCar.Models.FinancialManagement;
 using System;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace EcoCar.Models.PersonManagement
 {
@@ -14,6 +14,8 @@ namespace EcoCar.Models.PersonManagement
 
         //Attributes
         public string Email { get; set; }
+        [DataType(DataType.Date, ErrorMessage = "Date only")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
         public int PhoneNumber { get; set; }
         public int IdentityCardNumber { get; set; }

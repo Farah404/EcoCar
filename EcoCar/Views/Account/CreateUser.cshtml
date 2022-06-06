@@ -3,13 +3,19 @@
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "EcoStore";
 }
+
+<div class="jumbotron text-center">
+    <h1>EcoCar</h1>
+    <p>Faciliter l'optimisation des déplacements dans une optique éco-vertueuse et conviviale</p>
+</div>
+
 <section class="sign-in-form" style="background-color: #eee;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-xl-10">
                 <div class="card rounded-3 text-black">
                     <div class="row g-0">
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="card-body p-md-5 mx-md-4">
                                 <div class="text-center">
                                     <img src="~/Images/EcoCar.png"
@@ -23,28 +29,28 @@
                                         @Html.TextBoxFor(model => model.User.Email, new { @class = "form-control", placeholder = "Email" })
                                         @Html.ValidationMessageFor(model => model.User.Email)
                                     </div>
-
+                                     <br>
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.User.BirthDate, new { @class = "datepicker" })
+                                        @Html.EditorFor(model => model.User.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.User.BirthDate)
                                         
                                     </div>
-
+                                     <br>
                                     <div class="form-outline mb-4">
                                         @Html.TextBoxFor(model => model.User.IdentityCardNumber, new { @class = "form-control", placeholder = "CNI" })
                                         @Html.ValidationMessageFor(model => model.User.IdentityCardNumber)
                                     </div>
-
+                                     <br>
                                     <div class="form-outline mb-4">
                                         @Html.TextBoxFor(model => model.User.DrivingPermitNumber, new { @class = "form-control", placeholder = "Numéro de permis de conduire" })
                                         @Html.ValidationMessageFor(model => model.User.DrivingPermitNumber)
                                     </div>
-
+                                     <br>
                                     <div class="form-outline mb-4">
                                         @Html.TextBoxFor(model => model.User.PhoneNumber, new { @class = "form-control", placeholder = "Numéro de téléphone" })
                                         @Html.ValidationMessageFor(model => model.User.PhoneNumber)
                                     </div>
-
+                                     <br>
 
                                     <button class="btn btn-primary btn-xl" type="submit">Suivant</button>
                                 }
@@ -53,7 +59,7 @@
                         </div>
                         <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                             <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                <img src=~/Images/CityEcoCar.png width="900" height="500" />
+                                <center><img src=~/Images/CityEcoCar.png width="900" height="500" /></center>
                             </div>
                         </div>
                     </div>

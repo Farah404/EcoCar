@@ -5,6 +5,11 @@
     ViewBag.Title = "EcoStore";
 }
 
+<div class="jumbotron text-center">
+    <h1>EcoCar</h1>
+    <p>Faciliter l'optimisation des déplacements dans une optique éco-vertueuse et conviviale</p>
+</div>
+
 <!-- Add two containers (.container-fluid), and add a custom class to the second container (.bg-grey - adds a gray background color):
     -->
 <section class="sign-in-form" style="background-color: #eee;">
@@ -13,10 +18,10 @@
             <div class="col-xl-10">
                 <div class="card rounded-3 text-black">
                     <div class="row g-0">
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="card-body p-md-5 mx-md-4">
-
                                 <div class="text-center">
+                                    <br><br>
                                     <img src="~/Images/EcoCar.png"
                                          style="width: 185px;" alt="logo">
                                     <h4 class="mt-1 mb-5 pb-1">Je me connecte à mon compte EcoCar</h4>
@@ -25,32 +30,33 @@
                                 @using (Html.BeginForm())
                                 {
                                     <div class="form-floating mb-3">
-                                        @Html.TextBoxFor(model => model.Account.Username, new { @class = "form-control", placeholder = "Nom d'utilisateur" })
+                                        @Html.TextBoxFor(model => model.Account.Username, new {@class = "form-control", placeholder = "Nom d'utilisateur" })
                                         @Html.ValidationMessageFor(model =>model.Account.Username)
                                     </div>
-
+                                    <br>
                                     <div class="form-floating mb-3">
                                         @Html.TextBoxFor(model => model.Account.Password, new { @type="password", @class = "form-control", placeholder = "Mot de passe" })
                                         @Html.ValidationMessageFor(model => model.Account.Password)
                                     </div>
-
-                                     <!-- Submit Button-->
+                                    <br>
+                                    <!-- Submit Button-->
                                     <button class="btn btn-primary" type="submit">Se Connecter</button>
-                                }
-
+                                }<br>
                                 <div>
-                                    <a class="text-muted" href="">J'ai oublié mon mot de passe</a>
+                                    <a class="text-muted" href="ForgotPassword">J'ai oublié mon mot de passe</a>
                                 </div>
                             </div>
                             <div>
-                                <p>Je ne possède pas un compte Eco Car
-                                <button type="button" class="text-muted" onclick="location.href='CreatePerson'">S'inscrire</button></p>
+                                <p>
+                                    Je ne possède pas un compte EcoCar
+                                    <button type="button" class="text-muted" onclick="location.href='CreatePerson'">S'inscrire</button>
+                                </p>
                             </div>
                         </div>
                         <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                             <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                <img src=~/Images/CityEcoCar.png width="900" height="500" />
-
+                                <br>
+                                <center><img src=~/Images/CityEcoCar.png width="900px" height="500px" /></center>
                             </div>
                         </div>
                     </div>
@@ -58,7 +64,5 @@
             </div>
         </div>
     </div>
+    <hr class="solid">
 </section>
-
-<hr class="rounded">
-

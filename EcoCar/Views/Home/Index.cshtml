@@ -2,20 +2,17 @@
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "EcoCar Accueil";
 }
-<div class="jumbotron text-center"
-        <h1>EcoCar</h1>
+<div class="jumbotron text-center">
+        <h1><strong>Eco</strong>Car</h1>
         <p>Faciliter l'optimisation des déplacements dans une optique éco-vertueuse et conviviale</p>
 
         <!--Add a form with an input field and a button-->
         <form class="form-inline">
-            <div class="input-group">
-                <input type="email" class="form-control" size="50" placeholder="Zone cherchée" required>
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-success">Rechercher</button>
-                </div>
+            <div class="formHalf headForms  floatLeft inlineElements">
+                <button onclick="location.href='/Service/Service'" type="button" class="btn btn-success">Liste de Prestations</button>
+                <button onclick="location.href='/Service/CreateService'" type="button" class="btn btn-success">Proposer une Prestations</button>
             </div>
         </form>
-
     </div>
 <!-- Add two containers (.container-fluid), and add a custom class to the second container (.bg-grey - adds a gray background color):
 -->
@@ -28,17 +25,18 @@
                 EcoCar vise à renforcer la solidarité et le maillage territorial en apportant une solution technique intuitive et pratique qui met en relation les usagers ayant un besoin de transport d’une part et ceux effectuant déjà ce trajet ou pouvant l’effectuer d’autre part.
                 L’objectif est de permettre aux particuliers de rendre ou de demander des services de transport aux autres membres de leur communauté via une plate-forme interactive.
                 Ces services de transport comportent :
-                <ul><li>Le transport ponctuel ou régulier sur le modèle du covoiturage</li>
-                <li> Le transport ponctuel à la demande</li>
-                <li> Le transport de colis</li>
-                <li> La location de véhicule</li>
+                <ul>
+                    <li>Le transport ponctuel ou régulier sur le modèle du covoiturage</li>
+                    <li> Le transport ponctuel à la demande</li>
+                    <li> Le transport de colis</li>
+                    <li> La location de véhicule</li>
                 </ul>
             </p>
 
             <button class="btn btn-success btn-lg" onclick="location.href='/Home/EcoCarValues'">Découvrir EcoCar</button>
         </div>
         <div class="col-sm-4">
-            <video src="/Video/EcoCarPub.mp4" style="width:100%" typeof="video/mp4" controls loop preload="auto" slideanim></video>
+            <video src="/Video/EcoCarPub.mp4" style="width:100%" typeof="video/mp4" controls autoplay muted loop preload="auto" slideanim></video>
         </div>
     </div>
 </div>
@@ -96,12 +94,23 @@
                 </div>
                 <div class="panel-footer">
                     <h4>3 options d'abonnement</h4>
-                    <button onclick="    location.href = 'Financial/EcoStore';" class="btn btn-lg">Consulter EcoStore</button>
+                    <button onclick="    location.href = '/Financial/EcoStore';" class="btn btn-lg">Consulter EcoStore</button>
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
-            <p><img src="~/Images/EcoCar.png" style="width:500px;height:500;"></p>
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>EcoStore</h1>
+                </div>
+                <div class="panel-body">
+                    <p><img src="~/Images/EcoStore.png" style="width:225px;height:225px;"></p>
+                </div>
+                <div class="panel-footer">
+                    <h4>   Votre EcoStore est disponible 24/24  </h4>
+                    <button onclick="    location.href = '/Financial/EcoStore';" class="btn btn-lg">Consulter EcoStore</button>
+                </div>
+            </div>
         </div>
         <div class="col-sm-4">
             <div class="panel panel-default text-center">
@@ -113,7 +122,7 @@
                 </div>
                 <div class="panel-footer">
                     <h4>3 options de lot d'EcoCoins</h4>
-                    <button onclick="    location.href = 'Financial/EcoStore';" class="btn btn-lg">Consulter EcoStore</button>
+                    <button onclick="    location.href = '/Financial/EcoStore';" class="btn btn-lg">Consulter EcoStore</button>
                 </div>
             </div>
         </div>

@@ -16,6 +16,7 @@ namespace EcoCar.Models.Services
 
         //User
         List<User> GetAllUsers();
+
         int CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber);
         void UpdateUser(int id, string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber);
         void DeleteUser(int id);

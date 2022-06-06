@@ -242,12 +242,6 @@ namespace EcoCar.Models.Services
             return account;
         }
 
-        public static string EncodeMD5(string password)
-        {
-            string passwordOne = "EcoCar" + password + "ASP.NET MVC";
-            return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(passwordOne)));
-        }
-
         public Account GetAccount(int id)
         {
             return this._bddContext.Accounts.FirstOrDefault(a => a.Id == id);
@@ -261,6 +255,11 @@ namespace EcoCar.Models.Services
                 return this.GetAccount(id);
             }
             return null;
+        }
+        public static string EncodeMD5(string password)
+        {
+            string passwordOne = "EcoCar" + password + "ASP.NET MVC";
+            return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(passwordOne)));
         }
 
 

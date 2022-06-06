@@ -28,7 +28,7 @@ namespace EcoCar.Controllers
                 viewModel.Account = dalPersonManagement.GetAccount(userId);
                 return Redirect("/home/index");
             }
-            return View();
+            return View(viewModel);
         }
         [Authorize]
         [HttpPost]

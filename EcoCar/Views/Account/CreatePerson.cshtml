@@ -1,14 +1,21 @@
 ﻿@model EcoCar.ViewModels.AccountViewModel
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "CreateAccountStepCreatePerson";
 }
-<section class="sign-in-form" style="background-color: #eee;">
+
+<div class="jumbotron text-center">
+    <h1>EcoCar</h1>
+    <p>Faciliter l'optimisation des déplacements dans une optique éco-vertueuse et conviviale</p>
+</div>
+
+<section class="sign-in-form" style="background-color: white;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-xl-10">
                 <div class="card rounded-3 text-black">
                     <div class="row g-0">
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="card-body p-md-5 mx-md-4">
                                 <div class="text-center">
                                     <img src="~/Images/EcoCar.png"
@@ -22,22 +29,28 @@
                                         @Html.TextBoxFor(model => model.Person.Name, new { @class = "form-control", placeholder = "Prenom" })
                                         @Html.ValidationMessageFor(model => model.Person.Name)
                                     </div>
-
+                                     <br>
                                     <div class="form-outline mb-4">
                                         @Html.TextBoxFor(model => model.Person.LastName, new { @class = "form-control", placeholder = "Nom" })
                                         @Html.ValidationMessageFor(model => model.Person.LastName)
                                     </div>
+                                     <br>
+                                    <div>
+                                        @Html.ValidationMessageFor(model => model.Person.ProfilePictureURL)
+                                        <input type="file" id="file" name="file" multiple>
+                                    </div>
+
+                                     <br>
                                     <button class="btn btn-primary btn-xl" type="submit">Suivant</button>
                                 }
 
                             </div>
                         </div>
-                                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-                        <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                            <img src=~/Images/CityEcoCar.png width="900" height="500" />
+                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                <img src=~/Images/CityEcoCar.png width="1100px" height="600px" />
+                            </div>
                         </div>
-                    </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -45,4 +58,4 @@
     </div>
 </section>
 
-<hr class="rounded">
+<hr class="solid">

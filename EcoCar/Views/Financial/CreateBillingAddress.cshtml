@@ -1,0 +1,72 @@
+﻿@model EcoCar.ViewModels.FinancialViewModel
+@{
+    Layout = "/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "CreateAccountStepBillingAddress";
+}
+<div class="jumbotron text-center">
+    <h1>EcoCar</h1>
+    <p>Faciliter l'optimisation des déplacements dans une optique éco-vertueuse et conviviale</p>
+</div>
+
+<section class="sign-in-form" style="background-color: white;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+                <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+                        <div class="col-lg-4">
+                            <div class="card-body p-md-5 mx-md-4">
+                                <div class="text-center">
+                                    <img src="~/Images/EcoCar.png"
+                                         style="width: 185px;" alt="logo">
+                                    <h4 class="mt-1 mb-5 pb-1">Je crée mon compte EcoCar</h4>
+                                </div>
+                                @using (Html.BeginForm())
+                    {
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.BillingAddress.AddressLine, new { @class = "form-control", placeholder = "Adresse" })
+                            @Html.ValidationMessageFor(model => model.BillingAddress.AddressLine)
+                        </div>
+                         <br>
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.BillingAddress.City, new {@class = "form-control", placeholder = "Ville" })
+                            @Html.ValidationMessageFor(model => model.BillingAddress.City)
+                        </div>
+                         <br>
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.BillingAddress.Region, new {@class = "form-control", placeholder = "Département" })
+                            @Html.ValidationMessageFor(model => model.BillingAddress.Region)
+                        </div>
+                         <br>
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.BillingAddress.Country, new {@class = "form-control", placeholder = "Pays" })
+                            @Html.ValidationMessageFor(model => model.BillingAddress.Country)
+                        </div>
+                         <br>
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.BillingAddress.PostalCode, new {@class = "form-control", placeholder = "Code Postal" })
+                            @Html.ValidationMessageFor(model => model.BillingAddress.PostalCode)
+                        </div>
+
+                         @Html.Hidden("bankDetailsId", @ViewBag.bankDetailsId, null)
+                         @Html.Hidden("personId", @ViewBag.personId, null)
+
+                         <br>
+                        <!-- Submit Button-->
+                        <button class="btn btn-primary btn-xl" type="submit">Suivant</button>
+                    
+                    }
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                               <img src=~/Images/CityEcoCar.png width="1100px" height="600px" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr class="solid">

@@ -1,7 +1,18 @@
 ﻿@model EcoCar.Models.PersonManagement.Account
 @{
-    Layout = "SiteLayout";
+    Layout = "/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "UpdateAccount";
 }
+<div class="jumbotron text-center">
+    <h1>EcoCar</h1>
+    <p>Faciliter l'optimisation des déplacements dans une optique éco-vertueuse et conviviale</p>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
     @using (Html.BeginForm())
     {
     <fieldset>
@@ -10,17 +21,17 @@
         @Html.TextBoxFor(m => Model.Username)
         @*<input id="Username" name="Username" type="text" value="@Model.Username">*@
         @Html.ValidationMessageFor(m => Model.Username)
-        <br />
+        <br>
 
         @Html.LabelFor(m => Model.Password)
         @Html.TextBoxFor(m => Model.Password)
         @Html.ValidationMessageFor(m => Model.Password)
-        <br />
+        <br>
 
         @Html.LabelFor(m => Model.IsActive)
         @Html.TextBoxFor(m => Model.IsActive)
         @Html.ValidationMessageFor(m => Model.IsActive)
-        <br />
+        <br>
         <input type="Submit" value="Update Account" />
     </fieldset>
     }

@@ -22,8 +22,7 @@
 </head>
 
 <body id="EcoCarPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-
-    <!-- NavigationBar-->
+     <!-- NavigationBar-->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -32,20 +31,40 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">EcoHome</a>
+                 @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="navbar-brand" href="/">Welcome Back Eco @User.Identity.Name</a>
+
+                        }
+                        else
+                        {
+                            <a class="navbar-brand" href="/">EcoHome</a>
+                        }
+                    }
+                
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/Financial/EcoStore">ECOSTORE</a></li>
+                    <li><a href="#pricing"><bold>ECO</bold>STORE</a></li>
                     <li><a href="#services">SERVICES</a></li>
                     <li><a href="#contact">CONTACT</a></li>
-                    <li><a href="/account/LoginAccount">COMPTE</a></li>
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a href="/account/LoginAccount">ECOCOMPTE</a></li>
+                            <li><a href="/account/LoginAccount">DECONNEXION</a></li>
+
+                        }
+                        else
+                        {
+                            <li><a href="/account/LoginAccount">ECOCONNEXION</a></li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
     </nav>
-
-
     <div id="main">
 
         <div id="contenu">

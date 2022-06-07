@@ -1,5 +1,6 @@
 ﻿using EcoCar.Models.DataBase;
 using EcoCar.Models.PersonManagement;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,11 +32,6 @@ namespace EcoCar.Models.Services
             _bddContext.People.Add(person);
             _bddContext.SaveChanges();
             return person.Id;
-        }
-
-        internal Account GetAllAccounts(string name)
-        {
-            throw new NotImplementedException();
         }
 
         public void CreatePerson(Person person)
@@ -81,16 +77,31 @@ namespace EcoCar.Models.Services
         //CRUD User
         public List<User> GetAllUsers()
         {
-            return _bddContext.Users.ToList();
+            return _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).ToList();
         }
 
-        //Create User
-        public int CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber)
+        public User GetUsers(int id)
         {
-            User user = new User() { Email = email, BirthDate = birthDate, PhoneNumber = phoneNumber, IdentityCardNumber = identityCardNumber, DrivingPermitNumber = drivingPermitNumber};
+            return _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).FirstOrDefault(e => e.Id == id);
+        }
+
+
+        //Create User
+        public User CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId)
+        {
+            User user = new User() { 
+                Email = email, 
+                BirthDate = birthDate, 
+                PhoneNumber = phoneNumber, 
+                IdentityCardNumber = identityCardNumber, 
+                DrivingPermitNumber = drivingPermitNumber,
+                BankDetails = _bddContext.BankingDetails.First(b => b.Id == bankDetailsId),
+                BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId),
+                Person = _bddContext.People.First(b => b.Id == personId)
+            };
             _bddContext.Users.Add(user);
             _bddContext.SaveChanges();
-            return user.Id;
+            return user;
         }
         public void CreateUser(User user)
         {
@@ -247,15 +258,9 @@ namespace EcoCar.Models.Services
             return account;
         }
 
-        public static string EncodeMD5(string password)
-        {
-            string passwordOne = "ChoixResto" + password + "ASP.NET MVC";
-            return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(passwordOne)));
-        }
-
         public Account GetAccount(int id)
         {
-            return this._bddContext.Accounts.Find(id);
+            return this._bddContext.Accounts.FirstOrDefault(a => a.Id == id);
         }
 
         public Account GetAccount(string idStr)
@@ -266,6 +271,11 @@ namespace EcoCar.Models.Services
                 return this.GetAccount(id);
             }
             return null;
+        }
+        public static string EncodeMD5(string password)
+        {
+            string passwordOne = "EcoCar" + password + "ASP.NET MVC";
+            return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(passwordOne)));
         }
 
 

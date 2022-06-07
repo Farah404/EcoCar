@@ -7,5 +7,7 @@ namespace EcoCar.ViewModels
         public Account Account { get; set; }
         public bool Authentification { get; set; }
         public Person Person { get; set; }
+        public User User { get; set; }
+
     }
 }

@@ -1,6 +1,127 @@
-﻿       
- @model EcoCar.ViewModels.EcoStoreViewModel
-
-@{
-    Layout = "/Views/Shared/MainLayout.cshtml";
+﻿@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "EcoStore";
 }
+<div class="jumbotron text-center">
+    <h1>EcoCar</h1>
+    <p>Faciliter l'optimisation des déplacements dans une optique éco-vertueuse et conviviale</p>
+</div>
+
+<!--Pricing container Subscribe-->
+<div id="pricing" class="container-fluid bg-grey">
+    <div class="text-center">
+        <h2>Abonnement</h2>
+        <h4>Choisissez le type d'abonnement le plus adapté à vos besoins</h4>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Mensuel</h1>
+                </div>
+                <div class="panel-body">
+                    <p><img src="~/Images/subMonth.png" style="width:125px;height:225;"></p>
+                </div>
+                <div class="panel-footer">
+                    <h3>$19</h3>
+                    <h4>par mois</h4>
+                    <button class="btn btn-lg">Je m'abonne</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Trimestriel</h1>
+                </div>
+                <div class="panel-body">
+
+                    <p><img src="~/Images/sub3Months.png" style="width:200px;height:300;"></p>
+                </div>
+                <div class="panel-footer">
+                    <h3>$29</h3>
+                    <h4>par mois</h4>
+                    <button class="btn btn-lg">Je m'abonne</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Semestriel</h1>
+                </div>
+                <div class="panel-body">
+
+                    <p><img src="~/Images/sub6Months.png" style="width:200px;height:300;"></p>
+                </div>
+                <div class="panel-footer">
+                    <h3>$49</h3>
+                    <h4>par mois</h4>
+                    <button class="btn btn-lg">Je m'abonne</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Pricing container Buy EcoCoins-->
+<div id="pricing" class="container-fluid bg-grey">
+    <div class="text-center">
+        <h2>Achat EcoCoins</h2>
+        <h4>Choisissez le lot EcoCoins le plus adapté à vos besoins</h4>
+    </div>
+    <div class="row slideanim">
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Lot 1</h1>
+                </div>
+                <div class="panel-body">
+                    <p><img src="~/Images/EcoCoin.png" style="width:100px;height:100px;"></p>
+                </div>
+                <div class="panel-footer">
+                    <h3>$19</h3>
+                    <h4>par mois</h4>
+                    <button class="btn btn-lg">Sign Up</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Lot 2</h1>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
+                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
+                    </p>
+                </div>
+                <div class="panel-footer">
+                    <h3>$29</h3>
+                    <h4>par mois</h4>
+                    <button class="btn btn-lg">Sign Up</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Lot 3</h1>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
+                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
+                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
+                    </p>
+                </div>
+                <div class="panel-footer">
+                    <h3>$49</h3>
+                    <h4>par mois</h4>
+                    <button class="btn btn-lg">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

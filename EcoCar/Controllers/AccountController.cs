@@ -2,12 +2,13 @@
 using EcoCar.Models.Services;
 using EcoCar.ViewModels;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
-namespace EcoCar.Controllers.PersonManagement
+namespace EcoCar.Controllers
 {
     public class AccountController : Controller
     {
@@ -17,22 +18,20 @@ namespace EcoCar.Controllers.PersonManagement
             dalPersonManagement = new DalPersonManagement();
         }
 
-        //Launching Page
-        public IActionResult Index()
-        { return View(); 
-        }
-
         //Login
         public IActionResult LoginAccount()
         {
             AccountViewModel viewModel = new AccountViewModel { Authentification = HttpContext.User.Identity.IsAuthenticated };
-            if (viewModel.Authentification)
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
-                viewModel.Account = dalPersonManagement.GetAccount(HttpContext.User.Identity.Name);
-                return View(viewModel);
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                viewModel.Account = dalPersonManagement.GetAccount(userId);
+                return Redirect("/home/index");
             }
-            return View();
+            return View(viewModel);
         }
+
+        [Authorize]
         [HttpPost]
         public IActionResult LoginAccount(AccountViewModel viewModel, string returnUrl)
         {
@@ -43,19 +42,24 @@ namespace EcoCar.Controllers.PersonManagement
                 {
                     var userClaims = new List<Claim>()
                     {
-                        new Claim(ClaimTypes.Name, account.Id.ToString())
+                        new Claim(ClaimTypes.Name, account.Username),
+                        new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
                     };
+
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
+
                     var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
                     HttpContext.SignInAsync(userPrincipal);
+
                     if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
-                    return Redirect("/");
+                    return Redirect("/Home/Index");
                 }
-                ModelState.AddModelError("Account.Username", "Username or password are incorrect");
+                ModelState.AddModelError("Account.Username", "Nom d'utilisateur et/ou mot de passe incorrect(s)");
             }
-            return View(viewModel);
+            return View();
         }
+
 
         //Creating a person
         public IActionResult CreatePerson()
@@ -65,20 +69,36 @@ namespace EcoCar.Controllers.PersonManagement
         [HttpPost]
         public IActionResult CreatePerson(Person person)
         {
-            dalPersonManagement.CreatePerson(person.Name, person.LastName, person.ProfilePictureURL);               
-            return View(person);
+            int personId = dalPersonManagement.CreatePerson(person.Name, person.LastName, person.ProfilePictureURL);
+            string url = "/Financial/CreateBankDetails" + "?personId=" + personId;
+            return Redirect(url);
         }
 
         //Creating a user based on a person
-        public IActionResult CreateUser()
+        public IActionResult CreateUser(int bankDetailsId, int billingAddressId, int personId)
         {
+            User user = new User()
+            {
+                BankDetailsId = bankDetailsId,
+                BillingAddressId = billingAddressId,
+                PersonId = personId
+            };
             return View();
         }
         [HttpPost]
         public IActionResult CreateUser(User user)
         {
-             dalPersonManagement.CreateUser(user.Email, user.BirthDate, user.PhoneNumber, user.IdentityCardNumber, user.DrivingPermitNumber);             
-            return View(user);
+            dalPersonManagement.CreateUser(
+                user.Email, 
+                user.BirthDate, 
+                user.PhoneNumber, 
+                user.IdentityCardNumber, 
+                user.DrivingPermitNumber, 
+                user.BankDetailsId, 
+                user.BillingAddressId, 
+                user.PersonId);
+
+            return Redirect("/Home/Index");
         }
 
         //Creating an account based on a user
@@ -90,13 +110,13 @@ namespace EcoCar.Controllers.PersonManagement
         public IActionResult CreateAccount(Account account)
         {
             dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive);
-            return View(account);
+            return Redirect("/Account/CreatePerson");
         }
- 
+
         public ActionResult Deconnexion()
         {
             HttpContext.SignOutAsync();
-            return Redirect("/");
+            return Redirect("/Home/Index");
         }
 
         //Updating Account
@@ -135,6 +155,21 @@ namespace EcoCar.Controllers.PersonManagement
             {
                 return View("Error");
             }
+        }
+
+        public ActionResult UserProfile()
+        {
+            return View();
+        }
+
+        public ActionResult UserProfilePersonal()
+        {
+            return View();
+        }
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
         }
 
     }

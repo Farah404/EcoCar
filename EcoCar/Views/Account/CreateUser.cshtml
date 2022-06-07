@@ -1,56 +1,69 @@
-﻿@model EcoCar.ViewModels.AccountViewModel
+﻿@model EcoCar.Models.PersonManagement.User
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "CreateAccountStepCreateUser";
 }
-<section class="sign-in-form" style="background-color: #eee;">
+
+<div class="jumbotron text-center">
+    <h1>EcoCar</h1>
+    <p>Faciliter l'optimisation des déplacements dans une optique éco-vertueuse et conviviale</p>
+</div>
+
+<section class="sign-in-form" style="background-color: white;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-xl-10">
                 <div class="card rounded-3 text-black">
                     <div class="row g-0">
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="card-body p-md-5 mx-md-4">
                                 <div class="text-center">
                                     <img src="~/Images/EcoCar.png"
                                          style="width: 185px;" alt="logo">
                                     <h4 class="mt-1 mb-5 pb-1">Je crée mon compte EcoCar</h4>
                                 </div>
-                                <form>
 
+                                @using (Html.BeginForm())
+                                {
                                     <div class="form-outline mb-4">
-                                        <input type="email" id="form2Example11" class="form-control"
-                                               placeholder="Email" />
-                                        <label class="form-label" for="form2Example11"></label>
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+                                        @Html.ValidationMessageFor(model => model.Email)
                                     </div>
-                                    <div class="form-outline datepicker">
-                                        <input type="text" id="datePicker" class="form-control"
-                                               placeholder="Selectionnez votre date de naissance" />
-                                        <label class="form-label" for="form2Example11"></label>
-                                    </div>
+                                    <br>
                                     <div class="form-outline mb-4">
-                                        <input type="text" id="form2Example22" class="form-control"
-                                               placeholder="CNI" />
-                                        <label class="form-label" for="form2Example22"></label>
+                                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.BirthDate)
+
                                     </div>
+                                    <br>
                                     <div class="form-outline mb-4">
-                                        <input type="text" id="form2Example22" class="form-control"
-                                               placeholder="Numéro de permis de conduire" />
-                                        <label class="form-label" for="form2Example22"></label>
+                                        @Html.TextBoxFor(model => model.IdentityCardNumber, new { @class = "form-control", placeholder = "CNI" })
+                                        @Html.ValidationMessageFor(model => model.IdentityCardNumber)
                                     </div>
+                                    <br>
                                     <div class="form-outline mb-4">
-                                        <input type="text" id="form2Example22" class="form-control"
-                                               placeholder="Numéro de téléphone" />
-                                        <label class="form-label" for="form2Example22"></label>
+                                        @Html.TextBoxFor(model => model.DrivingPermitNumber, new { @class = "form-control", placeholder = "Numéro de permis de conduire" })
+                                        @Html.ValidationMessageFor(model => model.DrivingPermitNumber)
                                     </div>
-                                    <div class="text-center pt-1 mb-5 pb-1">
-                                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" onclick ="location.href='CreateAccount'" type="button">Suivant</button>
+                                    <br>
+                                    <div class="form-outline mb-4">
+                                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Numéro de téléphone" })
+                                        @Html.ValidationMessageFor(model => model.PhoneNumber)
                                     </div>
-                                </form>
+                                    <br>
+
+                                    @Html.HiddenFor(model => model.BankDetailsId)
+                                    @Html.HiddenFor(model => model.BillingAddressId)
+                                    @Html.HiddenFor(model => model.PersonId)
+
+                                    <button class="btn btn-primary btn-xl" type="submit">Suivant</button>
+                                }
+
                             </div>
                         </div>
                         <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                             <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                <img src=~/Images/CityEcoCar.png width="900" height="500" />
+                                <img src=~/Images/CityEcoCar.png width="1100px" height="600px" />
                             </div>
                         </div>
                     </div>
@@ -59,4 +72,14 @@
         </div>
     </div>
 </section>
-<hr class="rounded">
+
+<hr class="solid">
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+        });
+    });
+</script>

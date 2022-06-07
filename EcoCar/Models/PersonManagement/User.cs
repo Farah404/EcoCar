@@ -3,14 +3,25 @@
 
 using EcoCar.Models.FinancialManagement;
 using System;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace EcoCar.Models.PersonManagement
 {
     public class User
     {
-        //Primary Key
         public int Id { get; set; }
+        [Display(Name = "Prénom")]
+        [Required]
+        [MaxLength(20)]
+        public string Prenom { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string Password { get; set; }
+        public Role Role { get; set; }
+
+
+        //Primary Key
+        //public int Id { get; set; }
 
         //Attributes
         public string Email { get; set; }
@@ -33,3 +44,12 @@ namespace EcoCar.Models.PersonManagement
     }
 
 }
+
+    public enum Role
+    {
+        Admin,
+        ReadWrite,
+        ReadOnly
+    }
+
+

@@ -3,6 +3,8 @@ using EcoCar.Models.ServiceManagement;
 using EcoCar.Models.MessagingManagement;
 using Microsoft.EntityFrameworkCore;
 using EcoCar.Models.PersonManagement;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace EcoCar.Models.DataBase
 {
@@ -43,11 +45,36 @@ namespace EcoCar.Models.DataBase
         public DbSet<UserReporting> UserReportings { get; set; }
         public DbSet<AdministratorResponse> AdministratorResponses { get; set; }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=ChoixSejourDebug");
+            }
+            else
+            {
+                IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+                optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"));
+            }
+
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // specification on configuration
+
+            //Declare non nullable columns
+            modelBuilder.Entity<User>().Property(u => u.Prenom).IsRequired();
+            //Add uniqueness constraint
+            modelBuilder.Entity<User>().HasIndex(u => u.Prenom).IsUnique();
+        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
+        //}
 
         public void InitializeDb()
         {

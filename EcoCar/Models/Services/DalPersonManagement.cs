@@ -205,10 +205,15 @@ namespace EcoCar.Models.Services
         }
 
         //Create Account
-        public int CreateAccount(string username, string passwordClear, bool isActive)
+        public int CreateAccount(string username, string passwordClear, bool isActive, int personId)
         {
             string password = EncodeMD5(passwordClear);
-            Account account = new Account() { Username = username, Password = password, IsActive = isActive };
+            Account account = new Account() { 
+                Username = username, 
+                Password = password, 
+                IsActive = isActive, 
+                Person = _bddContext.People.First(b=>b.Id == personId) 
+            };
             _bddContext.Accounts.Add(account);
             _bddContext.SaveChanges();
             return account.Id;

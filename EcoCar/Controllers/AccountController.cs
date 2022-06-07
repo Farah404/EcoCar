@@ -86,7 +86,7 @@ namespace EcoCar.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateUser(User user)
+        public IActionResult CreateUser(User user, int personId)
         {
             dalPersonManagement.CreateUser(
                 user.Email, 
@@ -98,19 +98,21 @@ namespace EcoCar.Controllers
                 user.BillingAddressId, 
                 user.PersonId);
 
-            return Redirect("/Home/Index");
+            string url = "/Account/CreateAccount" + "?personId=" + personId;
+            return Redirect(url);
         }
 
         //Creating an account based on a user
-        public IActionResult CreateAccount()
+        public IActionResult CreateAccount(int personId)
         {
+            ViewBag.PersonId = personId;
             return View();
         }
         [HttpPost]
-        public IActionResult CreateAccount(Account account)
+        public IActionResult CreateAccount(Account account, int personId)
         {
-            dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive);
-            return Redirect("/Account/CreatePerson");
+            dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive, account.PersonId);
+            return Redirect("/Home/Index");
         }
 
         public ActionResult Deconnexion()

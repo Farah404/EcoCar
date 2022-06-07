@@ -1,4 +1,4 @@
-﻿@model EcoCar.ViewModels.AccountViewModel
+﻿@model EcoCar.Models.PersonManagement.Account
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "CreateAccountStepOne";
@@ -25,15 +25,18 @@
                                 @using (Html.BeginForm())
                     {
                         <div class="form-floating mb-3">
-                            @Html.TextBoxFor(model => model.Account.Username, new { @class = "form-control", placeholder = "Alias" })
-                            @Html.ValidationMessageFor(model => model.Account.Username)
+                            @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Alias" })
+                            @Html.ValidationMessageFor(model => model.Username)
                         </div>
                          <br>
                         <div class="form-floating mb-3">
-                            @Html.TextBoxFor(model => model.Account.Password, new { @type = "password", @class = "form-control", placeholder = "Mot de passe" })
-                            @Html.ValidationMessageFor(model => model.Account.Password)
+                            @Html.TextBoxFor(model => model.Password, new { @type = "password", @class = "form-control", placeholder = "Mot de passe" })
+                            @Html.ValidationMessageFor(model => model.Password)
                         </div>
                          <br>
+
+                         @Html.Hidden("personId", @ViewBag.personId, null)
+
                         <!-- Submit Button-->
                         <button class="btn btn-success btn-xl" type="submit">Créer</button>
                     }

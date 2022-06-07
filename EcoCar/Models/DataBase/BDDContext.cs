@@ -53,15 +53,6 @@ namespace EcoCar.Models.DataBase
         {
             this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
-            this.Accounts.AddRange(
-                new Account
-                {
-                    Id = 1,
-                    Username = "Farah",
-                    Password = "Farah",
-                    IsActive = true,
-                }
-                );
             this.SaveChanges();
         }
             //Defining character length properties of each table

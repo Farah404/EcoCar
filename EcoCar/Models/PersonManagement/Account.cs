@@ -14,7 +14,7 @@ namespace EcoCar.Models.PersonManagement
         public bool IsActive { get; set; }
 
         //Foreign Key
-        public int? PersonId { get; set; }
+        public int PersonId { get; set; }
         public Person Person { get; set; }
 
     }

@@ -53,8 +53,8 @@
                         if (User.Identity.IsAuthenticated)
                         {
                             <li><a href="/account/LoginAccount">ECOCOMPTE</a></li>
-                            <li><a href="/account/LoginAccount">DECONNEXION</a></li>
 
+                            <li>@Html.ActionLink("DECONNEXION", "SignOut", "Account")</li>
                         }
                         else
                         {

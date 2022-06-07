@@ -22,9 +22,16 @@ namespace EcoCar.Models.Services
         {
             return _bddContext.Services.ToList();
         }
-        public int CreateService(DateTime publicationDateTime, DateTime expirationDateTime, int referenceNumber, bool isExpired, DateTime start, DateTime end, int serviceTypeId)
+        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, int serviceTypeId)
         {
-            Service service = new Service() { PublicationDateTime = publicationDateTime, ExpirationDateTime = expirationDateTime, ReferenceNumber = referenceNumber, IsExpired = isExpired, Start = start, End = end, ServiceTypeId = serviceTypeId };
+            Service service = new Service() { 
+                PublicationDate = publicationDate,
+
+                ExpirationDate = expirationDate, 
+                ReferenceNumber = referenceNumber, 
+                IsExpired = isExpired, 
+                Start = start, End = end, 
+                ServiceTypeId = serviceTypeId };
             _bddContext.Services.Add(service);
             _bddContext.SaveChanges();
             return service.Id;
@@ -34,15 +41,15 @@ namespace EcoCar.Models.Services
             _bddContext.Services.Update(service);
             _bddContext.SaveChanges();
         }
-        public void UpdateService(int id, DateTime publicationDateTime, DateTime expirationDateTime, int referenceNumber, bool isExpired, DateTime start, DateTime end, int serviceTypeId)
+        public void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, int serviceTypeId)
         {
             Service service = _bddContext.Services.Find(id);
 
             if (service != null)
             {
                 service.Id = id;
-                service.PublicationDateTime = publicationDateTime;
-                service.ExpirationDateTime = expirationDateTime;
+                service.PublicationDate = publicationDate;
+                service.ExpirationDate = expirationDate;
                 service.ReferenceNumber = referenceNumber;
                 service.IsExpired = isExpired;
                 service.Start = start;

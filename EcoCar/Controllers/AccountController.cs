@@ -12,7 +12,7 @@ namespace EcoCar.Controllers
 {
     public class AccountController : Controller
     {
-        private DalPersonManagement dalPersonManagement;
+        private IDalPersonManagement dalPersonManagement;
         public AccountController()
         {
             dalPersonManagement = new DalPersonManagement();
@@ -31,7 +31,6 @@ namespace EcoCar.Controllers
             return View(viewModel);
         }
 
-        [Authorize]
         [HttpPost]
         public IActionResult LoginAccount(AccountViewModel viewModel, string returnUrl)
         {
@@ -115,7 +114,7 @@ namespace EcoCar.Controllers
             return Redirect("/Home/Index");
         }
 
-        public ActionResult Deconnexion()
+        public ActionResult SignOut()
         {
             HttpContext.SignOutAsync();
             return Redirect("/Home/Index");

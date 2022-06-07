@@ -9,93 +9,68 @@
 </div>
 
 
-<center>
-    <button class="tablink" onclick="openPage('CarPoolingService', this)" id="defaultOpen">Covoiturage</button>
-    <button class="tablink" onclick="openPage('ParcelService', this)">Transport de colis</button>
-    <button class="tablink" onclick="openPage('CarRentalService', this)">Location</button>
-</center>
 
-<div id="CarPoolingService" class="tabcontent">
-    <center>
-        @using (Html.BeginForm())
+
+
+<Center>
+    <h4>Proposer un service</h4>
+    @using (Html.BeginForm())
     {
+        //Autofill of current Date: Date of publication of the service
         <div class="form-floating mb-3">
-            @Html.TextBoxFor(model => model.Service.Start, new { @class = "form-control", placeholder = "CarPoolingService", style="width: 500px" })
-            @Html.ValidationMessageFor(model => model.Service.Start)
-        </div>
-         <br>
-        <div class="form-floating mb-3">
-            @Html.TextBoxFor(model => model.Service.ServiceTypeId, new { @class = "form-control", placeholder = "", style="width: 500px" })
-            @Html.ValidationMessageFor(model => model.Service.ServiceTypeId)
+            @Html.Label("Date de publication de la prestation")
+            @Html.TextBoxFor(model => model.Service.PublicationDate, new{@id="currentDate",@readonly = true})
         </div>
         <br>
-        <button class="btn btn-success" type="submit">Soumettre</button>
 
-    }
-    </center>
-</div>
-
-<div id="ParcelService" class="tabcontent">
-    <center>
-        @using (Html.BeginForm())
-    {
         <div class="form-floating mb-3">
-            @Html.TextBoxFor(model => model.Service.Start, new { @class = "form-control", placeholder = "ParcelService" , style="width: 500px"})
-            @Html.ValidationMessageFor(model => model.Service.Start)
-        </div>
-         <br>
-        <div class="form-floating mb-3">
-            @Html.TextBoxFor(model => model.Service.ServiceTypeId, new { @class = "form-control", placeholder = "" , style="width: 500px"})
-            @Html.ValidationMessageFor(model => model.Service.ServiceTypeId)
+            @Html.Label("Numero de reference de la prestation")
+            @Html.TextBoxFor(model => model.Service.ReferenceNumber, new{@id="Refnunmber",@readonly = true})
         </div>
         <br>
-        <button class="btn btn-success" type="submit">Soumettre</button>
 
-    }
-    </center>
-</div>
 
-<div id="CarRentalService" class="tabcontent">
-    <center>
-        @using (Html.BeginForm())
-    {
-        <div class="form-floating mb-3">
-            @Html.TextBoxFor(model => model.Service.Start, new { @class = "form-control", placeholder = "CarRentalService", style="width: 500px"})
+        <div class="form-outline mb-3">
+            @Html.Label("Date de debut")
+            @Html.EditorFor(model => model.Service.Start, new { htmlAttributes = new { @class = "form-control", style="width:200px"}})
             @Html.ValidationMessageFor(model => model.Service.Start)
         </div>
-         <br>
-        <div class="form-floating mb-3">
-            @Html.TextBoxFor(model => model.Service.ServiceTypeId, new { @class = "form-control", placeholder = "", style="width: 500px" })
-            @Html.ValidationMessageFor(model => model.Service.ServiceTypeId)
+        <br>
+
+        <div class="form-outline mb-3">
+            @Html.Label("Date de fin")
+            @Html.EditorFor(model => model.Service.End, new { htmlAttributes = new { @class = "form-control",style="width:200px"}})
+            @Html.ValidationMessageFor(model => model.Service.Start)
         </div>
         <br>
+
+        @*
+            <div class="form-floating mb-3">
+
+            @Html.Label("Type de la prestation")
+            @Html.DropDownListFor(x => x.Service,new SelectList(Model.Service, "ServiceTypeId", "ServiceType", Model.CustomerId),"-- Select --")
+            @Html.ValidationMessageFor(x => x.CustomerId)
+        </div>
+        <br>
+
         <button class="btn btn-success" type="submit">Soumettre</button>
+        *@
     }
-    </center>
-</div>
+
+
+</Center>
 
 <script>
-    function openPage(pageName, elmnt, color) {
-        // Hide all elements with class="tabcontent" by default */
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
+    var today = new Date();
+    var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+    document.getElementById("currentDate").value = date;
 
-        // Remove the background color of all tablinks/buttons
-        tablinks = document.getElementsByClassName("tablink");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].style.backgroundColor = "";
-        }
+    $(document).ready(function() {
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+        });
+    });
 
-        // Show the specific tab content
-        document.getElementById(pageName).style.display = "block";
-
-        // Add the specific color to the button used to open the tab content
-        elmnt.style.backgroundColor = color;
-    }
-
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
 </script>
+

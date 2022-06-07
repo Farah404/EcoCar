@@ -13,8 +13,8 @@ namespace EcoCar.Models.ServiceManagement
 
         //Attributes
         public int IdServiceProvider { get; set; }
-        public DateTime PublicationDateTime { get; set; }
-        public DateTime ExpirationDateTime { get; set; }
+        public DateTime PublicationDate { get; set; }
+        public DateTime ExpirationDate { get; set; }
         public int ReferenceNumber { get; set; }
         public bool IsExpired { get; set; }
         public DateTime Start { get; set; }

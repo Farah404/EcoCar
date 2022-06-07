@@ -3,10 +3,11 @@ using EcoCar.Models.ServiceManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static EcoCar.Models.ServiceManagement.Service;
 
 namespace EcoCar.Models.Services
 {
-    public class DalServiceManagement
+    public class DalServiceManagement : IDalServiceManagement
     {
         private BddContext _bddContext;
         public DalServiceManagement()
@@ -199,7 +200,7 @@ namespace EcoCar.Models.Services
             _bddContext.Itineraries.Update(itinerary);
             _bddContext.SaveChanges();
         }
-        public void UpdateItineray(int id, string firstStopAddress, string secondStopAddress, string thirdStopAddress)
+        public void UpdateItinerary(int id, string firstStopAddress, string secondStopAddress, string thirdStopAddress)
         {
             Itinerary itinerary = _bddContext.Itineraries.Find(id);
 
@@ -321,7 +322,7 @@ namespace EcoCar.Models.Services
             _bddContext.SaveChanges();
         }
 
-        public void DeleteTrajectories(int id)
+        public void DeleteTrajectory(int id)
         {
             Trajectory trajectory = _bddContext.Trajectories.Find(id);
             if (trajectory != null)

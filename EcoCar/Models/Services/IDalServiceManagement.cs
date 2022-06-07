@@ -1,6 +1,7 @@
 ﻿using System;
 using EcoCar.Models.ServiceManagement;
 using System.Collections.Generic;
+using static EcoCar.Models.ServiceManagement.Service;
 
 namespace EcoCar.Models.Services
 {
@@ -10,7 +11,8 @@ namespace EcoCar.Models.Services
 
         List<Service> GetAllServices();
         int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType);
-        void UpdateService(int id, DateTime publicationDateTime, DateTime expirationDateTime, int referenceNumber, bool isExpired, DateTime start, DateTime end, int serviceTypeId);
+        void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType);
+        void UpdateService(Service service);
         void DeleteService(int id);
 
         //-------------------------------------------------------------------------------------------------
@@ -37,6 +39,7 @@ namespace EcoCar.Models.Services
         List<Itinerary> GetAllItineraries();
         int CreateItinerary(string firstStopAddress, string secondStopAddress, string thirdStopAddress);
         void UpdateItinerary(int id, string firstStopAddress, string secondStopAddress, string thirdStopAddress);
+        void UpdateItinerary(Itinerary itinerary);
         void DeleteItinerary(int id);
 
         //-------------------------------------------------------------------------------------------------
@@ -55,6 +58,8 @@ namespace EcoCar.Models.Services
         List<Trajectory> GetAllTrajectories();
         int CreateTrajectory(int durationHours, int stopNumber, int stopsDurationMinutes, string pickUpAddress, string deliveryAddress);
         void UpdateTrajectory(int id, int durationHours, int stopNumber, int stopsDurationMinutes, string pickUpAddress, string deliveryAddress);
+
+        void UpdateTrajectory(Trajectory trajectory);
         void DeleteTrajectory(int id);
 
         //-------------------------------------------------------------------------------------------------

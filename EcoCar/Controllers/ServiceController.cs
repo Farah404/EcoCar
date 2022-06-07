@@ -7,7 +7,7 @@ namespace EcoCar.Controllers
 {
     public class ServiceController : Controller
     {
-        private DalServiceManagement dalServiceManagement;
+        private IDalServiceManagement dalServiceManagement;
         public ServiceController()
         {
             dalServiceManagement = new DalServiceManagement();
@@ -28,6 +28,9 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult CreateService(Service service)
         {
+            var selectedValue = service.SelectServiceType;
+            ViewBag.ServiceType = selectedValue.ToString();
+           
             dalServiceManagement.CreateService(
                 service.PublicationDate,
                 service.ExpirationDate,
@@ -37,10 +40,20 @@ namespace EcoCar.Controllers
                 service.End,
                 service.SelectServiceType
                 );
-
-            var selectedValue = service.SelectServiceType;
-            ViewBag.ServiceType = selectedValue.ToString();
-            return View();
+            string url = "/Service/CreateCarRentalService";
+            if (selectedValue == Service.ServiceType.ParcelService )
+            {
+                url = "/Service/CreateParcelService";
+            }
+            else
+            {
+                if (selectedValue == Service.ServiceType.CarPoolingService)
+                {
+                    url = "/Service/CreateCarPoolingService";
+                    
+                }
+            }
+            return View(url);
         }
 
 

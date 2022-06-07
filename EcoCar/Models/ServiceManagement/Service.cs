@@ -20,12 +20,12 @@ namespace EcoCar.Models.ServiceManagement
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public ServiceType SelectServiceType { get; set; }
-    }
-    public enum ServiceType
-    {
-        CarPoolingService,
-        ParcelService,
-        CarRentalService
+        public enum ServiceType
+        {
+            CarPoolingService,
+            ParcelService,
+            CarRentalService
+        }
     }
 
 }

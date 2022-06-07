@@ -1,4 +1,6 @@
-﻿@model EcoCar.Models.ServiceManagement.Service
+﻿@using static EcoCar.Models.ServiceManagement.Service
+
+@model EcoCar.Models.ServiceManagement.Service
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Proposer une Prestation";
@@ -38,12 +40,11 @@
                         @Html.ValidationMessageFor(model => model.End)
                     </div>
                     <br>
-
+                    
                     <div class="form-outline mb-3">
                         @Html.Label("Type de Prestation")
-                        @Html.DropDownListFor("SelectServiceType", new SelectList(Enum.GetValues(typeof(ServiceType))),"--Select ServiceType--")
+                        @Html.DropDownListFor(model => model.SelectServiceType, new SelectList(Enum.GetValues(typeof(ServiceType))),"--Select ServiceType--")  
                         @Html.ValidationMessageFor(model => model.SelectServiceType)
-                        @ViewBag.ServiceType
                     </div>
                     <br>
 

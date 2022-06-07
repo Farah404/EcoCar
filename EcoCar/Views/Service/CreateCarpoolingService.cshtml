@@ -1,95 +1,56 @@
 ﻿@model EcoCar.ViewModels.ServiceViewModel
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "Proposer une Prestation";
+    ViewBag.Title = "Proposer une Prestation de Covoiturage";
 }
-<center>
-    <button class="tablink" onclick="openPage('CarPoolingService', this)" id="defaultOpen">Covoiturage</button>
-    <button class="tablink" onclick="openPage('ParcelService', this)">Transport de colis</button>
-    <button class="tablink" onclick="openPage('CarRentalService', this)">Location</button>
-</center>
 
-<div id="CarPoolingService" class="tabcontent">
-    <center>
-        @using (Html.BeginForm())
-    {
-        <div class="form-floating mb-3">
-            @Html.TextBoxFor(model => model.Service.Start, new { @class = "form-control", placeholder = "CarPoolingService", style="width: 500px" })
-            @Html.ValidationMessageFor(model => model.Service.Start)
-        </div>
-         <br>
-        <div class="form-floating mb-3">
-            @Html.TextBoxFor(model => model.Service.ServiceTypeId, new { @class = "form-control", placeholder = "", style="width: 500px" })
-            @Html.ValidationMessageFor(model => model.Service.ServiceTypeId)
-        </div>
-        <br>
-        <button class="btn btn-success" type="submit">Soumettre</button>
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Proposer un service</h4>
 
-    }
-    </center>
+                @using (Html.BeginForm())
+                {
+                    <div class="form-floating mb-3">
+                        @Html.Label("Numero de reference de la prestation")
+                        @Html.TextBoxFor(model => model.Service.ReferenceNumber, new{ @class = "form-control",@id="Refnunmber",@readonly = true,style="width:300px"})
+                    </div>
+                    <br>
+
+                    <div class="form-outline mb-3">
+                        @Html.Label("Date de debut")
+                        @Html.EditorFor(model => model.Service.Start, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.Service.Start)
+                    </div>
+                    <br>
+
+                    <div class="form-outline mb-3">
+                        @Html.Label("Date de fin")
+                        @Html.EditorFor(model => model.Service.End, new { htmlAttributes = new { @class = "form-control",style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.Service.End)
+                    </div>
+                    <br>
+
+                    <div class="form-outline mb-3">
+                        @Html.Label("Type de Prestation")
+                        @Html.TextBoxFor(model => model.Service.ReferenceNumber, new{ @class = "form-control",@id="Refnunmber",style="width:300px"})
+                        @Html.ValidationMessageFor(model => model.Service.ReferenceNumber)
+                    </div>
+                    <br>
+
+                    <button class="btn btn-success" type="submit">Soumettre</button>
+                }
+            </div>
+            <div class="col-md-6">
+                <img alt="" style="width:100%;" title="" src="~/Images/EcoCar.png">
+            </div>
+
+        </div>
+
+    </div>
 </div>
 
-<div id="ParcelService" class="tabcontent">
-    <center>
-        @using (Html.BeginForm())
-    {
-        <div class="form-floating mb-3">
-            @Html.TextBoxFor(model => model.Service.Start, new { @class = "form-control", placeholder = "ParcelService" , style="width: 500px"})
-            @Html.ValidationMessageFor(model => model.Service.Start)
-        </div>
-         <br>
-        <div class="form-floating mb-3">
-            @Html.TextBoxFor(model => model.Service.ServiceTypeId, new { @class = "form-control", placeholder = "" , style="width: 500px"})
-            @Html.ValidationMessageFor(model => model.Service.ServiceTypeId)
-        </div>
-        <br>
-        <button class="btn btn-success" type="submit">Soumettre</button>
+<hr class="solid">
 
-    }
-    </center>
-</div>
 
-<div id="CarRentalService" class="tabcontent">
-    <center>
-        @using (Html.BeginForm())
-    {
-        <div class="form-floating mb-3">
-            @Html.TextBoxFor(model => model.Service.Start, new { @class = "form-control", placeholder = "CarRentalService", style="width: 500px"})
-            @Html.ValidationMessageFor(model => model.Service.Start)
-        </div>
-         <br>
-        <div class="form-floating mb-3">
-            @Html.TextBoxFor(model => model.Service.ServiceTypeId, new { @class = "form-control", placeholder = "", style="width: 500px" })
-            @Html.ValidationMessageFor(model => model.Service.ServiceTypeId)
-        </div>
-        <br>
-        <button class="btn btn-success" type="submit">Soumettre</button>
-    }
-    </center>
-</div>
-
-<script>
-    function openPage(pageName, elmnt, color) {
-        // Hide all elements with class="tabcontent" by default */
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        // Remove the background color of all tablinks/buttons
-        tablinks = document.getElementsByClassName("tablink");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].style.backgroundColor = "";
-        }
-
-        // Show the specific tab content
-        document.getElementById(pageName).style.display = "block";
-
-        // Add the specific color to the button used to open the tab content
-        elmnt.style.backgroundColor = color;
-    }
-
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-</script>

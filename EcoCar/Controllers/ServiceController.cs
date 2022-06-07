@@ -1,7 +1,7 @@
-﻿using EcoCar.Models.Services;
-using EcoCar.ViewModels;
+﻿using EcoCar.Models.ServiceManagement;
+using EcoCar.Models.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace EcoCar.Controllers
 {
@@ -19,11 +19,31 @@ namespace EcoCar.Controllers
 
         }
 
+
         public ActionResult CreateService()
         {
             return View();
-
         }
+
+        [HttpPost]
+        public IActionResult CreateService(Service service)
+        {
+            dalServiceManagement.CreateService(
+                service.PublicationDate,
+                service.ExpirationDate,
+                service.ReferenceNumber,
+                service.IsExpired,
+                service.Start,
+                service.End,
+                service.SelectServiceType
+                );
+
+            var selectedValue = service.SelectServiceType;
+            ViewBag.ServiceType = selectedValue.ToString();
+            return View();
+        }
+
+
 
         public ActionResult CreateCarPoolingService()
         {
@@ -42,6 +62,6 @@ namespace EcoCar.Controllers
             return View();
 
         }
-      
+
     }
 }

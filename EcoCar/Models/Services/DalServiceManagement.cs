@@ -22,16 +22,18 @@ namespace EcoCar.Models.Services
         {
             return _bddContext.Services.ToList();
         }
-        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, int serviceTypeId)
+        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType)
         {
-            Service service = new Service() { 
+            Service service = new Service()
+            {
                 PublicationDate = publicationDate,
-
-                ExpirationDate = expirationDate, 
-                ReferenceNumber = referenceNumber, 
-                IsExpired = isExpired, 
-                Start = start, End = end, 
-                ServiceTypeId = serviceTypeId };
+                ExpirationDate = expirationDate,
+                ReferenceNumber = referenceNumber,
+                IsExpired = isExpired,
+                Start = start,
+                End = end,
+                SelectServiceType = selectServiceType
+            };
             _bddContext.Services.Add(service);
             _bddContext.SaveChanges();
             return service.Id;
@@ -41,7 +43,7 @@ namespace EcoCar.Models.Services
             _bddContext.Services.Update(service);
             _bddContext.SaveChanges();
         }
-        public void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, int serviceTypeId)
+        public void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType)
         {
             Service service = _bddContext.Services.Find(id);
 
@@ -54,7 +56,8 @@ namespace EcoCar.Models.Services
                 service.IsExpired = isExpired;
                 service.Start = start;
                 service.End = end;
-                service.ServiceTypeId = serviceTypeId;
+                service.SelectServiceType = selectServiceType;
+
                 _bddContext.SaveChanges();
             }
 

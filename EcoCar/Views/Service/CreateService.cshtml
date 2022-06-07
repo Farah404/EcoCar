@@ -1,55 +1,68 @@
-﻿@model EcoCar.ViewModels.ServiceViewModel
+﻿@model EcoCar.Models.ServiceManagement.Service
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Proposer une Prestation";
 }
-<Center>
-    <h4>Proposer un service</h4>
-    @using (Html.BeginForm())
-    {
-        //Autofill of current Date: Date of publication of the service
-        <div class="form-floating mb-3">
-            @Html.Label("Date de publication de la prestation")
-            @Html.TextBoxFor(model => model.Service.PublicationDate, new{@id="currentDate",@readonly = true})
+
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Proposer un service</h4>
+
+                @using (Html.BeginForm())
+                {
+                    //Autofill of current Date: Date of publication of the service
+                    <div class="form-floating mb-3">
+                        @Html.Label("Date de publication de la prestation")
+                        @Html.TextBoxFor(model => model.PublicationDate, new{ @class = "form-control",@id="currentDate",@readonly = true,style="width:300px"})
+                    </div>
+                    <br>
+
+                    <div class="form-floating mb-3">
+                        @Html.Label("Numero de reference de la prestation")
+                        @Html.TextBoxFor(model => model.ReferenceNumber, new{ @class = "form-control",@id="Refnunmber",@readonly = true,style="width:300px"})
+                    </div>
+                    <br>
+
+                    <div class="form-outline mb-3">
+                        @Html.Label("Date de debut")
+                        @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.Start)
+                    </div>
+                    <br>
+
+                    <div class="form-outline mb-3">
+                        @Html.Label("Date de fin")
+                        @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control",style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.End)
+                    </div>
+                    <br>
+
+                    <div class="form-outline mb-3">
+                        @Html.Label("Type de Prestation")
+                        @Html.DropDownListFor("SelectServiceType", new SelectList(Enum.GetValues(typeof(ServiceType))),"--Select ServiceType--")
+                        @Html.ValidationMessageFor(model => model.SelectServiceType)
+                        @ViewBag.ServiceType
+                    </div>
+                    <br>
+
+
+                    <button class="btn btn-success" type="submit">Soumettre</button>
+                }
+            </div>
+            <div class="col-md-6">
+                <img alt="" style="width:100%;" title="" src="~/Images/EcoCar.png">
+            </div>
+
         </div>
-        <br>
 
-        <div class="form-floating mb-3">
-            @Html.Label("Numero de reference de la prestation")
-            @Html.TextBoxFor(model => model.Service.ReferenceNumber, new{@id="Refnunmber",@readonly = true})
-        </div>
-        <br>
+    </div>
+</div>
+
+<hr class="solid">
 
 
-        <div class="form-outline mb-3">
-            @Html.Label("Date de debut")
-            @Html.EditorFor(model => model.Service.Start, new { htmlAttributes = new { @class = "form-control", style="width:200px"}})
-            @Html.ValidationMessageFor(model => model.Service.Start)
-        </div>
-        <br>
-
-        <div class="form-outline mb-3">
-            @Html.Label("Date de fin")
-            @Html.EditorFor(model => model.Service.End, new { htmlAttributes = new { @class = "form-control",style="width:200px"}})
-            @Html.ValidationMessageFor(model => model.Service.Start)
-        </div>
-        <br>
-
-        @*
-            <div class="form-floating mb-3">
-
-            @Html.Label("Type de la prestation")
-            @Html.DropDownListFor(x => x.Service,new SelectList(Model.Service, "ServiceTypeId", "ServiceType", Model.CustomerId),"-- Select --")
-            @Html.ValidationMessageFor(x => x.CustomerId)
-        </div>
-        <br>
-
-        <button class="btn btn-success" type="submit">Soumettre</button>
-        *@
-    }
-
-
-</Center>
 
 <script>
     var today = new Date();
@@ -62,6 +75,12 @@
             changeYear: true,
         });
     });
+
+    var i = 1;
+    function buttonClick() {
+        document.getElementById('Refnunmber').value = ++i;
+    }
+
 
 </script>
 

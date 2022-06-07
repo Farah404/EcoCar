@@ -1,6 +1,8 @@
 ﻿using EcoCar.Models.FinancialManagement;
+using EcoCar.Models.PersonManagement;
 using EcoCar.Models.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace EcoCar.Controllers
 {
@@ -17,25 +19,47 @@ namespace EcoCar.Controllers
             return View();
         }
         // Create bAnking details & billing address
-        public IActionResult CreateBankDetails()
+        public IActionResult CreateBankDetails(int personId)
         {
+            ViewBag.PersonId = personId;
             return View();
         }
         [HttpPost]
-        public IActionResult CreateBankDetails(BankDetails bankDetails)
+        public IActionResult CreateBankDetails(BankDetails bankDetails, int personId)
         {
-            dalFinancialManagement.CreateBankDetails(bankDetails.BankName, bankDetails.Swift, bankDetails.Iban);
-            return Redirect("/Financial/CreateBillingAddress");
+            int bankDetailsId = dalFinancialManagement.CreateBankDetails(bankDetails.BankName, bankDetails.Swift, bankDetails.Iban);
+            string url = "/Financial/CreateBillingAddress" + "?personId=" + personId + "&bankDetailsId=" + bankDetailsId;
+            return Redirect(url);
         }
-        public IActionResult CreateBillingAddress()
+
+        public IActionResult CreateBillingAddress(int personId, int bankDetailsId)
         {
+            ViewBag.BankDetailsId = bankDetailsId;
+            ViewBag.PersonId = personId;
             return View();
         }
         [HttpPost]
-        public IActionResult CreateBillingAddress(BillingAddress billingAddress)
+        public IActionResult CreateBillingAddress(BillingAddress billingAddress, int bankDetailsId, int personId)
         {
-            dalFinancialManagement.CreateBillingAddress(billingAddress.AddressLine, billingAddress.City, billingAddress.Region, billingAddress.Country, billingAddress.PostalCode) ;
-            return Redirect("/Account/CreateUser");
+
+            int billingAddressId = dalFinancialManagement.CreateBillingAddress(billingAddress.AddressLine, billingAddress.City, billingAddress.Region, billingAddress.Country, billingAddress.PostalCode);
+            string url = "/Account/CreateUser" + "?personId=" + personId + "&bankDetailsId=" + bankDetailsId + "&billingAddressId=" + billingAddressId; ;
+            return Redirect(url);
+        }
+
+        public IActionResult ListBankDetails()
+        {
+            {
+                List<BankDetails> listBankDetails = dalFinancialManagement.GetAllBankingDetails();
+                return View(listBankDetails);
+            }
+        }
+        public IActionResult ListBillingAddress()
+        {
+            {
+                List<BillingAddress> listBillingAddress = dalFinancialManagement.GetAllBillingaddresses();
+                return View(listBillingAddress);
+            }
         }
     }
 }

@@ -47,9 +47,14 @@
                             @Html.TextBoxFor(model => model.BillingAddress.PostalCode, new {@class = "form-control", placeholder = "Code Postal" })
                             @Html.ValidationMessageFor(model => model.BillingAddress.PostalCode)
                         </div>
+
+                         @Html.Hidden("bankDetailsId", @ViewBag.bankDetailsId, null)
+                         @Html.Hidden("personId", @ViewBag.personId, null)
+
                          <br>
                         <!-- Submit Button-->
                         <button class="btn btn-primary btn-xl" type="submit">Suivant</button>
+                    
                     }
                             </div>
                         </div>

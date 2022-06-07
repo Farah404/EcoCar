@@ -39,6 +39,9 @@
                             @Html.ValidationMessageFor(model => model.BankDetails.Iban)
                         </div>
                          <br>
+
+                         @Html.Hidden("personId", @ViewBag.personId, null)
+
                         <!-- Submit Button-->
                         <button class="btn btn-primary btn-xl" type="submit">Suivant</button>
                     }

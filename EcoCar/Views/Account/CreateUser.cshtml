@@ -1,4 +1,4 @@
-﻿@model EcoCar.ViewModels.AccountViewModel
+﻿@model EcoCar.Models.PersonManagement.User
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "CreateAccountStepCreateUser";
@@ -26,31 +26,35 @@
                                 @using (Html.BeginForm())
                                 {
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.User.Email, new { @class = "form-control", placeholder = "Email" })
-                                        @Html.ValidationMessageFor(model => model.User.Email)
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+                                        @Html.ValidationMessageFor(model => model.Email)
                                     </div>
-                                     <br>
+                                    <br>
                                     <div class="form-outline mb-4">
-                                        @Html.EditorFor(model => model.User.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.User.BirthDate)
-                                        
+                                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.BirthDate)
+
                                     </div>
-                                     <br>
+                                    <br>
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.User.IdentityCardNumber, new { @class = "form-control", placeholder = "CNI" })
-                                        @Html.ValidationMessageFor(model => model.User.IdentityCardNumber)
+                                        @Html.TextBoxFor(model => model.IdentityCardNumber, new { @class = "form-control", placeholder = "CNI" })
+                                        @Html.ValidationMessageFor(model => model.IdentityCardNumber)
                                     </div>
-                                     <br>
+                                    <br>
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.User.DrivingPermitNumber, new { @class = "form-control", placeholder = "Numéro de permis de conduire" })
-                                        @Html.ValidationMessageFor(model => model.User.DrivingPermitNumber)
+                                        @Html.TextBoxFor(model => model.DrivingPermitNumber, new { @class = "form-control", placeholder = "Numéro de permis de conduire" })
+                                        @Html.ValidationMessageFor(model => model.DrivingPermitNumber)
                                     </div>
-                                     <br>
+                                    <br>
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.User.PhoneNumber, new { @class = "form-control", placeholder = "Numéro de téléphone" })
-                                        @Html.ValidationMessageFor(model => model.User.PhoneNumber)
+                                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Numéro de téléphone" })
+                                        @Html.ValidationMessageFor(model => model.PhoneNumber)
                                     </div>
-                                     <br>
+                                    <br>
+
+                                    @Html.HiddenFor(model => model.BankDetailsId)
+                                    @Html.HiddenFor(model => model.BillingAddressId)
+                                    @Html.HiddenFor(model => model.PersonId)
 
                                     <button class="btn btn-primary btn-xl" type="submit">Suivant</button>
                                 }
@@ -59,7 +63,7 @@
                         </div>
                         <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                             <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                              <img src=~/Images/CityEcoCar.png width="1100px" height="600px" />
+                                <img src=~/Images/CityEcoCar.png width="1100px" height="600px" />
                             </div>
                         </div>
                     </div>
@@ -72,11 +76,10 @@
 <hr class="solid">
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         $(".datepicker").datepicker({
             changeMonth: true,
             changeYear: true,
-
         });
     });
 </script>

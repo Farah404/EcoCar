@@ -30,6 +30,7 @@ namespace EcoCar.Controllers
             }
             return View(viewModel);
         }
+
         [Authorize]
         [HttpPost]
         public IActionResult LoginAccount(AccountViewModel viewModel, string returnUrl)
@@ -68,20 +69,36 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult CreatePerson(Person person)
         {
-            dalPersonManagement.CreatePerson(person.Name, person.LastName, person.ProfilePictureURL);
-            return Redirect("/Financial/CreateBankDetails");
+            int personId = dalPersonManagement.CreatePerson(person.Name, person.LastName, person.ProfilePictureURL);
+            string url = "/Financial/CreateBankDetails" + "?personId=" + personId;
+            return Redirect(url);
         }
 
         //Creating a user based on a person
-        public IActionResult CreateUser()
+        public IActionResult CreateUser(int bankDetailsId, int billingAddressId, int personId)
         {
+            User user = new User()
+            {
+                BankDetailsId = bankDetailsId,
+                BillingAddressId = billingAddressId,
+                PersonId = personId
+            };
             return View();
         }
         [HttpPost]
         public IActionResult CreateUser(User user)
         {
-            dalPersonManagement.CreateUser(user.Email, user.BirthDate, user.PhoneNumber, user.IdentityCardNumber, user.DrivingPermitNumber);
-            return Redirect("/Account/CreateAccount");
+            dalPersonManagement.CreateUser(
+                user.Email, 
+                user.BirthDate, 
+                user.PhoneNumber, 
+                user.IdentityCardNumber, 
+                user.DrivingPermitNumber, 
+                user.BankDetailsId, 
+                user.BillingAddressId, 
+                user.PersonId);
+
+            return Redirect("/Home/Index");
         }
 
         //Creating an account based on a user

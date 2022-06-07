@@ -14,6 +14,13 @@ namespace EcoCar.Controllers
         public ActionResult UserReporting()
         {
             return View();
+
+        }
+
+        public ActionResult Message()
+        {
+            return View();
+
         }
     }
 }

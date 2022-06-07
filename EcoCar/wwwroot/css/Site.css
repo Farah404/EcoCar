@@ -233,9 +233,8 @@ h4 {
     }
 }
 
-hr.rounded {
-    border-top: 8px solid lightgreen;
-    border-radius: 5px;
+hr.solid {
+    border-top: solid lightgreen;
 }
 
 

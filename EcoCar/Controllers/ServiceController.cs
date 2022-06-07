@@ -13,7 +13,7 @@ namespace EcoCar.Controllers
             dalServiceManagement = new DalServiceManagement();
         }
 
-        public ActionResult Service()
+        public ActionResult SearchService()
         {
             return View();
 

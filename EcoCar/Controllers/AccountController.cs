@@ -111,7 +111,7 @@ namespace EcoCar.Controllers
         public IActionResult CreateAccount(Account account, int personId)
         {
             dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive, account.PersonId);
-            return Redirect("/Home/Index");
+            return Redirect("/Account/LoginAccount");
         }
 
         public ActionResult SignOut()

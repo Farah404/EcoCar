@@ -2,7 +2,6 @@
 
 
 using EcoCar.Models.PersonManagement;
-using System.ComponentModel.DataAnnotations;
 
 namespace EcoCar.Models.ServiceManagement
 {
@@ -28,8 +27,8 @@ namespace EcoCar.Models.ServiceManagement
         public bool ChattingAllowed { get; set; }
 
         //Foreign Keys
-        public int VehiculeId { get; set; }
-        public Vehicule Vehicule { get; set; }
+        //public int VehiculeId { get; set; }
+        //public Vehicule Vehicule { get; set; }
         public int TrajectoryId { get; set; }
         public Trajectory Trajectory { get; set; }
 

@@ -12,5 +12,7 @@ namespace EcoCar.ViewModels
 
         public ParcelService ParcelService { get; set; }
 
+        public Trajectory trajectory { get; set; }
+
     }
 }

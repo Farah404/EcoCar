@@ -79,7 +79,8 @@ namespace EcoCar.Models.Services
         //CRUD User
         public List<User> GetAllUsers()
         {
-            return _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).ToList();
+            List<User> listUsers = _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).ToList();
+            return listUsers;
         }
 
         public User GetUser(int id)
@@ -442,7 +443,7 @@ namespace EcoCar.Models.Services
         }
 
         //Create Vehicule
-        public int CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId)
+        public Vehicule CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId)
         {
             Vehicule vehicule = new Vehicule() {
                 Brand = brand, 
@@ -456,7 +457,7 @@ namespace EcoCar.Models.Services
             };
             _bddContext.Vehicules.Add(vehicule);
             _bddContext.SaveChanges();
-            return vehicule.Id;
+            return vehicule;
         }
         public void CreateVehicule(Vehicule vehicule)
         {

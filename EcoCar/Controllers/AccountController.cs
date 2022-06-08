@@ -187,10 +187,10 @@ namespace EcoCar.Controllers
                    insurance.ContractNumber
                    );
             string url = "/Account/CreateVehicule" + "?insuranceId=" + insuranceId;
-            return View(url);
+            return Redirect(url);
         }
 
-    public ActionResult CreateVehicule(int insuranceId)
+        public ActionResult CreateVehicule(int insuranceId)
         {
             Vehicule vehicule = new Vehicule()
             {
@@ -213,7 +213,7 @@ namespace EcoCar.Controllers
                    vehicule.InsuranceId
                    );
             string url = "/Account/UserProfilePersonal";
-            return View(url);
+            return Redirect(url);
         }
 
     }

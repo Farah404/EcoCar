@@ -1,4 +1,5 @@
 ﻿using EcoCar.Models.PersonManagement;
+using System.Collections.Generic;
 
 namespace EcoCar.ViewModels
 {
@@ -12,6 +13,7 @@ namespace EcoCar.ViewModels
         public Vehicule Vehicule { get; set; }
         public Insurance Insurance { get; set; }
 
+        public List<User> ListUsers { get; set; }
 
     }
 }

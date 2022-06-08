@@ -1,4 +1,5 @@
-﻿@model EcoCar.Models.PersonManagement.Account
+﻿@*@model EcoCar.Models.PersonManagement.Account*@
+@model List<EcoCar.Models.PersonManagement.User>
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Mon profil";
@@ -18,9 +19,9 @@
                         <li>
                             <span>
 
-                                @Html.Label("Nom d'utilisateur") <br>
+                             @*   @Html.Label("Nom d'utilisateur") <br>
                                 @Html.TextBoxFor(model => model.Username)
-                                @Html.ValidationMessageFor(model => model.Username)
+                                @Html.ValidationMessageFor(model => model.Username)*@
                                 <br>
 
                             </span>
@@ -35,7 +36,15 @@
                 <strong>Information</strong><br>
 
                 <div class="table-responsive">
-
+                    
+                    @foreach (var user in Model)
+                    {
+                        <p>@user.Person.Name</p>
+                        <p>@user.Person.Id</p>
+                        <p>@user.BirthDate</p>
+                    }
+                    @*NotWorkingYet*@
+                    
                     <table class="table table-user-information">
 
                         <tbody>

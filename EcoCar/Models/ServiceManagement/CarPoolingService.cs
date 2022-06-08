@@ -12,27 +12,13 @@ namespace EcoCar.Models.ServiceManagement
         public int Id { get; set; }
 
         //Attributes
-
-        [Required]
-        public virtual int CarPoolingTypeId
-        {
-            get
-            {
-                return (int)this.CarPooling;
-            }
-            set
-            {
-                CarPooling = (CarPoolingType)value;
-            }
-        }
-        [EnumDataType(typeof(CarPoolingType))]
-        public CarPoolingType CarPooling { get; set; }
+        public CarPoolingType SelectCarPoolingType { get; set; }
         public enum CarPoolingType
         {
-            HomeToWork = 0,
-            HomeToSchool = 1,
-            Events = 2,
-            Travel = 3,
+            HomeToWork ,
+            HomeToSchool,
+            Events,
+            Travel
         }
 
         public int AvailableSeats { get; set; }

@@ -40,8 +40,10 @@ namespace EcoCar.Controllers
                 service.End,
                 service.SelectServiceType
                 );
+
+
             string url = "/Service/CreateCarRentalService";
-            if (selectedValue == Service.ServiceType.ParcelService )
+            if (selectedValue == Service.ServiceType.ParcelService)
             {
                 url = "/Service/CreateParcelService";
             }
@@ -50,10 +52,11 @@ namespace EcoCar.Controllers
                 if (selectedValue == Service.ServiceType.CarPoolingService)
                 {
                     url = "/Service/CreateCarPoolingService";
-                    
+
                 }
             }
-            return View(url);
+
+            return Redirect (url);
         }
 
 

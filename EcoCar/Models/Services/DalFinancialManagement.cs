@@ -1,8 +1,10 @@
 ﻿using EcoCar.Models.DataBase;
 using EcoCar.Models.FinancialManagement;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static EcoCar.Models.FinancialManagement.Invoice;
 
 namespace EcoCar.Models.Services
 {
@@ -128,13 +130,24 @@ namespace EcoCar.Models.Services
         //CRUD Invoice
         public List<Invoice> GetAllInvoices()
         {
-            return _bddContext.Invoices.ToList();
+            return _bddContext.Invoices.Include(e => e.BillingAddress).ToList();
+        }
+
+        public Invoice GetInvoice(int id)
+        {
+            return _bddContext.Invoices.Include(e => e.BillingAddress).FirstOrDefault(e => e.Id == id);
         }
 
         //Create Invoice
-        public int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate)
+        public int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId)
         {
-            Invoice invoice = new Invoice() { InvoiceNumber = invoiceNumber, InvoiceDescription = invoiceDescription, InvoiceIssueDate = invoiceIssueDate};
+            Invoice invoice = new Invoice() { 
+                InvoiceNumber = invoiceNumber, 
+                InvoiceDescription = invoiceDescription, 
+                InvoiceIssueDate = invoiceIssueDate,
+                SelectInvoiceType = selectInvoiceType,
+                BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId)
+            };
             _bddContext.Invoices.Add(invoice);
             _bddContext.SaveChanges();
             return invoice.Id;
@@ -146,7 +159,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update Invoice
-        public void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate)
+        public void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId)
         {
             Invoice invoice = _bddContext.Invoices.Find(id);
 
@@ -156,6 +169,8 @@ namespace EcoCar.Models.Services
                 invoice.InvoiceNumber = invoiceNumber;
                 invoice.InvoiceDescription = invoiceDescription;
                 invoice.InvoiceIssueDate = invoiceIssueDate;
+                invoice.SelectInvoiceType = selectInvoiceType;
+                invoice.BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId);
                 _bddContext.SaveChanges();
             }
         }
@@ -182,13 +197,23 @@ namespace EcoCar.Models.Services
         //CRUD ServiceInvoice
         public List<ServiceInvoice> GetAllServiceInvoices()
         {
-            return _bddContext.ServiceInvoices.ToList();
+            return _bddContext.ServiceInvoices.Include(e => e.Service).Include(e => e.Invoice).ToList();
+        }
+
+        public ServiceInvoice GetServiceInvoice(int id)
+        {
+            return _bddContext.ServiceInvoices.Include(e => e.Service).Include(e => e.Invoice).FirstOrDefault(e => e.Id == id);
         }
 
         //Create ServiceInvoice
-        public int CreateServiceInvoice(int iIdServiceProvider, int idServiceConsumer)
+        public int CreateServiceInvoice(int iIdServiceProvider, int idServiceConsumer, int serviceId, int invoiceId)
         {
-            ServiceInvoice serviceInvoice = new ServiceInvoice() { IdServiceProvider = iIdServiceProvider, IdServiceConsumer = idServiceConsumer};
+            ServiceInvoice serviceInvoice = new ServiceInvoice() { 
+                IdServiceProvider = iIdServiceProvider, 
+                IdServiceConsumer = idServiceConsumer,
+                Service = _bddContext.Services.First(b => b.Id == serviceId),
+                Invoice = _bddContext.Invoices.First(b => b.Id == invoiceId),
+            };
             _bddContext.ServiceInvoices.Add(serviceInvoice);
             _bddContext.SaveChanges();
             return serviceInvoice.Id;
@@ -200,7 +225,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update ServiceInvoice
-        public void UpdateServiceInvoice(int id, int iIdServiceProvider, int idServiceConsumer)
+        public void UpdateServiceInvoice(int id, int iIdServiceProvider, int idServiceConsumer, int serviceId, int invoiceId)
         {
             ServiceInvoice serviceInvoice = _bddContext.ServiceInvoices.Find(id);
 
@@ -209,6 +234,8 @@ namespace EcoCar.Models.Services
                 serviceInvoice.Id = id;
                 serviceInvoice.IdServiceProvider = iIdServiceProvider;
                 serviceInvoice.IdServiceConsumer = idServiceConsumer;
+                serviceInvoice.Service = _bddContext.Services.First(b => b.Id == serviceId);
+                serviceInvoice.Invoice = _bddContext.Invoices.First(b => b.Id == invoiceId);
                 _bddContext.SaveChanges();
             }
         }

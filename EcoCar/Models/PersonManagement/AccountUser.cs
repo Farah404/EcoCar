@@ -2,7 +2,6 @@
 //The AccountUser.cs contains details used by a user in order to acces to their account
 
 using EcoCar.Models.FinancialManagement;
-using System.ComponentModel.DataAnnotations;
 
 namespace EcoCar.Models.PersonManagement
 {
@@ -14,27 +13,14 @@ namespace EcoCar.Models.PersonManagement
         //Attributes
         public double UserRating { get; set; }
 
-        [Required]
-        public virtual int EcoStatusId
-        {
-            get
-            {
-                return (int)this.EcoStatus;
-            }
-            set
-            {
-                EcoStatus = (EcoStatusType)value;
-            }
-        }
-        [EnumDataType(typeof(EcoStatusType))]
-        public EcoStatusType EcoStatus { get; set; }
+        public EcoStatusType SelectEcoStatusType { get; set; }
 
         public enum EcoStatusType
         {
-            EcoSeed = 0,
-            EcoLeaf = 1,
-            EcoTree = 2,
-            EcoForest = 3
+            EcoSeed,
+            EcoLeaf,
+            EcoTree,
+            EcoForest
         }
 
         //Foreign Keys

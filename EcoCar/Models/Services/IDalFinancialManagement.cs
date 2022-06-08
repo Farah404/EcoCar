@@ -1,6 +1,7 @@
 ﻿using EcoCar.Models.FinancialManagement;
 using System;
 using System.Collections.Generic;
+using static EcoCar.Models.FinancialManagement.Invoice;
 
 namespace EcoCar.Models.Services
 {
@@ -24,16 +25,16 @@ namespace EcoCar.Models.Services
 
         //Invoice
         List<Invoice> GetAllInvoices();
-        int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate);
-        void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDates);
+        int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId);
+        void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId);
         void DeleteInvoice(int id);
 
         //-------------------------------------------------------------------------------------------------
 
         //ServiceInvoice
         List<ServiceInvoice> GetAllServiceInvoices();
-        int CreateServiceInvoice(int iIdServiceProvider, int idServiceConsumer);
-        void UpdateServiceInvoice(int id, int iIdServiceProvider, int idServiceConsumers);
+        int CreateServiceInvoice(int iIdServiceProvider, int idServiceConsumer, int serviceId, int invoiceId);
+        void UpdateServiceInvoice(int id, int iIdServiceProvider, int idServiceConsumer, int serviceId, int invoiceId);
         void DeleteServiceInvoice(int id);
 
         //-------------------------------------------------------------------------------------------------

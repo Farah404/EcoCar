@@ -1,9 +1,12 @@
 ﻿using EcoCar.Models.DataBase;
 using EcoCar.Models.ServiceManagement;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static EcoCar.Models.ServiceManagement.CarPoolingService;
 using static EcoCar.Models.ServiceManagement.Service;
+using static EcoCar.Models.ServiceManagement.Trajectory;
 
 namespace EcoCar.Models.Services
 {
@@ -85,11 +88,38 @@ namespace EcoCar.Models.Services
 
         public List<CarPoolingService> GetAllCarPoolingServices()
         {
-            return _bddContext.CarPoolingServices.ToList();
+            return _bddContext.CarPoolingServices.Include(e => e.Vehicule).Include(e => e.Trajectory).Include(e => e.Service).ToList();
         }
-        public int CreateCarPoolingService(int carPoolingTypeId, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed)
+
+        public CarPoolingService GetCarPoolingService(int id)
         {
-            CarPoolingService carPoolingService = new CarPoolingService() { CarPoolingTypeId = carPoolingTypeId, AvailableSeats = avalaibleSeats, PetsAllowed = petsAllowed, SmokingAllowed = smokingAllowed, MusicAllowed = musicAllowed, ChattingAllowed = chattingAllowed };
+            return _bddContext.CarPoolingServices.Include(e => e.Vehicule).Include(e => e.Trajectory).Include(e => e.Service).FirstOrDefault(e => e.Id == id);
+        }
+
+        public int CreateCarPoolingService(
+            CarPoolingType selectCarPoolingType,
+            int avalaibleSeats,
+            bool petsAllowed,
+            bool smokingAllowed,
+            bool musicAllowed,
+            bool chattingAllowed,
+            int vehiculeId,
+            int trajectoryId,
+            int serviceId
+            )
+        {
+            CarPoolingService carPoolingService = new CarPoolingService()
+            {
+                SelectCarPoolingType = selectCarPoolingType,
+                AvailableSeats = avalaibleSeats,
+                PetsAllowed = petsAllowed,
+                SmokingAllowed = smokingAllowed,
+                MusicAllowed = musicAllowed,
+                ChattingAllowed = chattingAllowed,
+                Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId),
+                Trajectory = _bddContext.Trajectories.First(b => b.Id == trajectoryId),
+                Service = _bddContext.Services.First(b => b.Id == serviceId)
+            };
             _bddContext.CarPoolingServices.Add(carPoolingService);
             _bddContext.SaveChanges();
             return carPoolingService.Id;
@@ -99,19 +129,32 @@ namespace EcoCar.Models.Services
             _bddContext.CarPoolingServices.Update(service);
             _bddContext.SaveChanges();
         }
-        public void UpdateCarPoolingService(int id, int carPoolingTypeId, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed)
+        public void UpdateCarPoolingService(
+            int id,
+            CarPoolingType selectCarPoolingType,
+            int avalaibleSeats,
+            bool petsAllowed,
+            bool smokingAllowed,
+            bool musicAllowed,
+            bool chattingAllowed,
+            int vehiculeId,
+            int trajectoryId,
+            int serviceId)
         {
             CarPoolingService service = _bddContext.CarPoolingServices.Find(id);
 
             if (service != null)
             {
                 service.Id = id;
-                service.CarPoolingTypeId = carPoolingTypeId;
+                service.SelectCarPoolingType = selectCarPoolingType;
                 service.AvailableSeats = avalaibleSeats;
                 service.PetsAllowed = petsAllowed;
                 service.SmokingAllowed = smokingAllowed;
                 service.MusicAllowed = musicAllowed;
                 service.ChattingAllowed = chattingAllowed;
+                service.VehiculeId = vehiculeId;
+                service.TrajectoryId = trajectoryId;
+                service.Service = _bddContext.Services.First(b => b.Id == serviceId);
                 _bddContext.SaveChanges();
             }
 
@@ -131,17 +174,30 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+
         //-------------------------------------------------------------------------------------------------
 
         //CRUD CarRentalService
 
         public List<CarRentalService> GetAllCarRentalServices()
         {
-            return _bddContext.CarRentalServices.ToList();
+            return _bddContext.CarRentalServices.Include(e => e.Vehicule).Include(e => e.Service).ToList();
         }
-        public int CreateCarRentalService(string keyPickUpAdress, string keyDropOffAdress)
+
+        public CarRentalService GetCarRentalService(int id)
         {
-            CarRentalService carRentalService = new CarRentalService() { KeyPickUpAddress = keyPickUpAdress, KeyDropOffAddress = keyDropOffAdress };
+            return _bddContext.CarRentalServices.Include(e => e.Vehicule).Include(e => e.Service).FirstOrDefault(e => e.Id == id);
+        }
+
+        public int CreateCarRentalService(string keyPickUpAdress, string keyDropOffAdress, int vehiculeId, int serviceId)
+        {
+            CarRentalService carRentalService = new CarRentalService()
+            {
+                KeyPickUpAddress = keyPickUpAdress,
+                KeyDropOffAddress = keyDropOffAdress,
+                Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId),
+                Service = _bddContext.Services.First(b => b.Id == serviceId)
+            };
             _bddContext.CarRentalServices.Add(carRentalService);
             _bddContext.SaveChanges();
             return carRentalService.Id;
@@ -151,7 +207,7 @@ namespace EcoCar.Models.Services
             _bddContext.CarRentalServices.Update(carRentalService);
             _bddContext.SaveChanges();
         }
-        public void UpdateCarRentalService(int id, string keyPickUpAdress, string keyDropOffAdress)
+        public void UpdateCarRentalService(int id, string keyPickUpAdress, string keyDropOffAdress, int vehiculeId, int serviceId)
         {
             CarRentalService carRentalService = _bddContext.CarRentalServices.Find(id);
 
@@ -160,6 +216,8 @@ namespace EcoCar.Models.Services
                 carRentalService.Id = id;
                 carRentalService.KeyPickUpAddress = keyPickUpAdress;
                 carRentalService.KeyDropOffAddress = keyDropOffAdress;
+                carRentalService.VehiculeId = vehiculeId;
+                carRentalService.Service = _bddContext.Services.First(b => b.Id == serviceId);
                 _bddContext.SaveChanges();
             }
 
@@ -176,6 +234,73 @@ namespace EcoCar.Models.Services
             if (carRentalService != null)
             {
                 _bddContext.CarRentalServices.Remove(carRentalService);
+                _bddContext.SaveChanges();
+            }
+        }
+
+        //-------------------------------------------------------------------------------------------------
+
+        //CRUD ParcelService
+
+        public List<ParcelService> GetAllParcelServices()
+        {
+            return _bddContext.ParcelServices.Include(e => e.Trajectory).Include(e => e.Service).ToList();
+        }
+
+        public ParcelService GetParcelService(int id)
+        {
+            return _bddContext.ParcelServices.Include(e => e.Trajectory).Include(e => e.Service).FirstOrDefault(e => e.Id == id);
+        }
+    
+        public int CreateParcelService(int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId)
+        {
+            ParcelService parcelService = new ParcelService()
+            {
+                BarCode = barCode,
+                WeightKilogrammes = weightKilogrammes,
+                AtypicalVolume = atypicalVolume,
+                Fragile = fragile,
+                Trajectory = _bddContext.Trajectories.First(b => b.Id == trajectoryId),
+                Service = _bddContext.Services.First(b => b.Id == serviceId)
+            };
+            _bddContext.ParcelServices.Add(parcelService);
+            _bddContext.SaveChanges();
+            return parcelService.Id;
+        }
+        public void CreateParcelService(ParcelService parcelService)
+        {
+            _bddContext.ParcelServices.Update(parcelService);
+            _bddContext.SaveChanges();
+        }
+        public void UpdateParcelService(int id, int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId)
+        {
+            ParcelService parcelService = _bddContext.ParcelServices.Find(id);
+
+            if (parcelService != null)
+            {
+                parcelService.Id = id;
+                parcelService.BarCode = barCode;
+                parcelService.WeightKilogrammes = weightKilogrammes;
+                parcelService.AtypicalVolume = atypicalVolume;
+                parcelService.Fragile = fragile;
+                parcelService.TrajectoryId = trajectoryId;
+                parcelService.Service = _bddContext.Services.First(b => b.Id == serviceId);
+                _bddContext.SaveChanges();
+            }
+
+        }
+        public void UpdateParcelService(ParcelService parcelService)
+        {
+            _bddContext.ParcelServices.Update(parcelService);
+            _bddContext.SaveChanges();
+        }
+
+        public void DeleteParcelService(int id)
+        {
+            ParcelService parcelService = _bddContext.ParcelServices.Find(id);
+            if (parcelService != null)
+            {
+                _bddContext.ParcelServices.Remove(parcelService);
                 _bddContext.SaveChanges();
             }
         }
@@ -231,66 +356,29 @@ namespace EcoCar.Models.Services
         }
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD ParcelService
-
-        public List<ParcelService> GetAllParcelServices()
-        {
-            return _bddContext.ParcelServices.ToList();
-        }
-        public int CreateParcelService(int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile)
-        {
-            ParcelService parcelService = new ParcelService() { BarCode = barCode, WeightKilogrammes = weightKilogrammes, AtypicalVolume = atypicalVolume, Fragile = fragile };
-            _bddContext.ParcelServices.Add(parcelService);
-            _bddContext.SaveChanges();
-            return parcelService.Id;
-        }
-        public void CreateParcelService(ParcelService parcelService)
-        {
-            _bddContext.ParcelServices.Update(parcelService);
-            _bddContext.SaveChanges();
-        }
-        public void UpdateParcelService(int id, int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile)
-        {
-            ParcelService parcelService = _bddContext.ParcelServices.Find(id);
-
-            if (parcelService != null)
-            {
-                parcelService.Id = id;
-                parcelService.BarCode = barCode;
-                parcelService.WeightKilogrammes = weightKilogrammes;
-                parcelService.AtypicalVolume = atypicalVolume;
-                parcelService.Fragile = fragile;
-                _bddContext.SaveChanges();
-            }
-
-        }
-        public void UpdateParcelService(ParcelService parcelService)
-        {
-            _bddContext.ParcelServices.Update(parcelService);
-            _bddContext.SaveChanges();
-        }
-
-        public void DeleteParcelService(int id)
-        {
-            ParcelService parcelService = _bddContext.ParcelServices.Find(id);
-            if (parcelService != null)
-            {
-                _bddContext.ParcelServices.Remove(parcelService);
-                _bddContext.SaveChanges();
-            }
-        }
-
-        //-------------------------------------------------------------------------------------------------
 
         //CRUD Trajectory
 
         public List<Trajectory> GetAllTrajectories()
         {
-            return _bddContext.Trajectories.ToList();
+            return _bddContext.Trajectories.Include(e => e.Itinerary).ToList();
         }
-        public int CreateTrajectory(int durationHours, int stopNumber, int stopsDurationMinutes, string pickUpAddress, string deliveryAddress)
+
+        public Trajectory GetTrajectory(int id)
         {
-            Trajectory trajectory = new Trajectory() { DurationHours = durationHours, StopNumber = stopNumber, StopsDurationMinutes = stopsDurationMinutes, PickUpAddress = pickUpAddress, DeliveryAddress = deliveryAddress };
+            return _bddContext.Trajectories.Include(e => e.Itinerary).FirstOrDefault(e => e.Id == id);
+        }
+        public int CreateTrajectory(int durationHours, int stopNumber, int stopsDurationMinutes, string pickUpAddress, string deliveryAddress, TrajectoryType selectTrajectoryType, int itineraryId)
+        {
+            Trajectory trajectory = new Trajectory() { 
+                DurationHours = durationHours, 
+                StopNumber = stopNumber, 
+                StopsDurationMinutes = stopsDurationMinutes, 
+                PickUpAddress = pickUpAddress, 
+                DeliveryAddress = deliveryAddress,
+                SelectTrajectoryType = selectTrajectoryType,
+                Itinerary = _bddContext.Itineraries.First(b => b.Id == itineraryId)
+            };
             _bddContext.Trajectories.Add(trajectory);
             _bddContext.SaveChanges();
             return trajectory.Id;
@@ -300,7 +388,7 @@ namespace EcoCar.Models.Services
             _bddContext.Trajectories.Update(trajectory);
             _bddContext.SaveChanges();
         }
-        public void UpdateTrajectory(int id, int durationHours, int stopNumber, int stopsDurationMinutes, string pickUpAddress, string deliveryAddress)
+        public void UpdateTrajectory(int id, int durationHours, int stopNumber, int stopsDurationMinutes, string pickUpAddress, string deliveryAddress, TrajectoryType selectTrajectoryType, int itineraryId)
         {
             Trajectory trajectory = _bddContext.Trajectories.Find(id);
 
@@ -312,6 +400,8 @@ namespace EcoCar.Models.Services
                 trajectory.StopsDurationMinutes = stopsDurationMinutes;
                 trajectory.PickUpAddress = pickUpAddress;
                 trajectory.DeliveryAddress = deliveryAddress;
+                trajectory.SelectTrajectoryType = selectTrajectoryType;
+                trajectory.Itinerary = _bddContext.Itineraries.First(b => b.Id == itineraryId);
                 _bddContext.SaveChanges();
             }
 

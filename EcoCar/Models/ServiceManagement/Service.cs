@@ -2,7 +2,10 @@
 //The Service.cs contains all details related to a service that can be purchased or proposed by a user
 
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Reflection;
 
 namespace EcoCar.Models.ServiceManagement
 {
@@ -29,3 +32,5 @@ namespace EcoCar.Models.ServiceManagement
     }
 
 }
+
+

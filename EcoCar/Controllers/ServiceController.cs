@@ -94,7 +94,7 @@ namespace EcoCar.Controllers
                 trajectory.SelectTrajectoryType,
                 trajectory.ItineraryId
                 );
-            string url = "/Service/CreateCarPoolingService" + "?itineraryId=" + itineraryId + "&TrajectoryId=" + trajectoryId + "?serviceId=" + serviceId;
+            string url = "/Service/CreateCarPoolingService" + "?itineraryId=" + itineraryId + "&TrajectoryId=" + trajectoryId + "&serviceId=" + serviceId;
             return Redirect(url);
         }
 
@@ -121,7 +121,7 @@ namespace EcoCar.Controllers
                 carPoolingService.TrajectoryId,
                 carPoolingService.ServiceId
                 );
-            string url = "Home/Index";
+            string url = "/Home/Index";
             return Redirect (url);
         }
 

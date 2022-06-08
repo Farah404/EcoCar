@@ -70,14 +70,15 @@ namespace EcoCar.Controllers
             return Redirect(url);
         }
         //Creating Trajectory
-        public IActionResult CreateTrajectory(int itineraryId, int serviceId)
+        public IActionResult CreateTrajectory(int itineraryId, int serviceId, int vehiculeId)
         {
             ViewBag.itineraryId = itineraryId;
             ViewBag.serviceId = serviceId;
+            ViewBag.vehiculeId = vehiculeId;
             return View();
         }
         [HttpPost]
-        public IActionResult CreateTrajectory(Trajectory trajectory, int itineraryId, int serviceId)
+        public IActionResult CreateTrajectory(Trajectory trajectory, int itineraryId, int serviceId, int vehiculeId)
         {
             int trajectoryId = dalServiceManagement.CreateTrajectory(
                 trajectory.DurationHours,
@@ -88,15 +89,16 @@ namespace EcoCar.Controllers
                 trajectory.SelectTrajectoryType,
                 trajectory.ItineraryId
                 );
-            string url = "/Service/CreateCarPoolingService" + "?itineraryId=" + itineraryId + "&TrajectoryId=" + trajectoryId + "&serviceId=" + serviceId;
+            string url = "/Service/CreateCarPoolingService" + "?itineraryId=" + itineraryId + "&TrajectoryId=" + trajectoryId + "&serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
             return Redirect(url);
         }
-        public IActionResult CreateCarPoolingService(int serviceId, int trajectoryId)
+        public IActionResult CreateCarPoolingService(int serviceId, int trajectoryId, int vehiculeId)
         {
             CarPoolingService carPoolingService = new CarPoolingService()
             {
                 ServiceId = serviceId,
-                TrajectoryId = trajectoryId
+                TrajectoryId = trajectoryId,
+                VehiculeId = vehiculeId
             };
             return View();
         }
@@ -110,6 +112,7 @@ namespace EcoCar.Controllers
                 carPoolingService.SmokingAllowed,
                 carPoolingService.MusicAllowed,
                 carPoolingService.ChattingAllowed,
+                carPoolingService.VehiculeId,
                 carPoolingService.TrajectoryId,
                 carPoolingService.ServiceId
                 );

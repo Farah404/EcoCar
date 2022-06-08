@@ -158,21 +158,63 @@ namespace EcoCar.Controllers
             }
         }
 
-        public ActionResult UserProfile()
+        public IActionResult UserProfile()
         {
             return View();
         }
 
-        public ActionResult UserProfilePersonal()
+        public IActionResult UserProfilePersonal()
         {
             return View();
         }
 
-        public ActionResult ForgotPassword()
+        public IActionResult ForgotPassword()
         {
             return View();
         }
 
+        public IActionResult CreateInsurance()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateInsurance(Insurance insurance)
+        {
+            int insuranceId = dalPersonManagement.CreateInsurance(
+                   insurance.InsuranceAgency,
+                   insurance.InsuranceExpiration,
+                   insurance.ContractNumber
+                   );
+            string url = "/Account/CreateVehicule" + "?insuranceId=" + insuranceId;
+            return View(url);
+        }
+
+    public ActionResult CreateVehicule(int insuranceId)
+        {
+            Vehicule vehicule = new Vehicule()
+            {
+                InsuranceId = insuranceId,
+            };
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult CreateVehicule(Vehicule vehicule)
+        {
+            dalPersonManagement.CreateVehicule(
+                   vehicule.Brand,
+                   vehicule.RegistrationNumber,
+                   vehicule.Model,
+                   vehicule.Hybrid,
+                   vehicule.Electric,
+                   vehicule.TechnicalTestExpiration,
+                   vehicule.AvailableSeats,
+                   vehicule.InsuranceId
+                   );
+            string url = "/Account/UserProfilePersonal";
+            return View(url);
+        }
 
     }
 }

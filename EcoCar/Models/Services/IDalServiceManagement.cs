@@ -22,8 +22,8 @@ namespace EcoCar.Models.Services
         //CarPoolingService
 
         List<CarPoolingService> GetAllCarPoolingServices();
-        CarPoolingService CreateCarPoolingService(CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int trajectoryId, int serviceId);
-        void UpdateCarPoolingService(int id, CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int trajectoryId, int serviceId);
+        CarPoolingService CreateCarPoolingService(CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int trajectoryId, int vehiculeId, int serviceId);
+        void UpdateCarPoolingService(int id, CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int trajectoryId, int vehiculeId, int serviceId);
         void DeleteCarPoolingService(int id);
 
         //-------------------------------------------------------------------------------------------------

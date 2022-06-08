@@ -53,91 +53,91 @@ namespace EcoCar.Models.DataBase
         {
             this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
-            this.People.Add(
-                new Person
-                {
-                    Id = 1,
-                    Name = "RandomName",
-                    LastName = "RandomLastName",
-                    ProfilePictureURL = "wololo.jpg"
-                }
-                );
-            this.Users.Add(
-                new User
-                {
-                    Id = 1,
-                    Email = "random@ecocar.com",
-                    PhoneNumber = 1234457891,
-                    IdentityCardNumber = 1234535315,
-                    DrivingPermitNumber = 1230432153,
-                    BankDetailsId = 1,
-                    BillingAddressId = 1,
-                    PersonId = 1
-                }
-                );
-            this.Accounts.Add(
-                new Account
-                {
-                    Id = 1,
-                    Username = "random",
-                    Password = "5E-A1-36-6C-34-CC-38-0D-AD-F1-62-AC-F6-CB-FD-42", //random
-                    IsActive = true,
-                    PersonId = 1
-                });
-            this.AccountUsers.Add(
-                new AccountUser
-                {
-                    Id = 1,
-                    UserRating = 4,
-                    AccountId = 1,
-                    EcoWalletId = 1,
-                    VehiculeId = 1
-                });
-            this.BankingDetails.Add(
-                new BankDetails
-                {
-                    Id = 1,
-                    BankName = "SwissBank",
-                    Swift = "OABGAOG",
-                    Iban = "FIOAFNEOAIFNAFKNAEFOJKN°31234"
-                });
-            this.BillingAddresses.Add(
-                new BillingAddress
-                {
-                    Id = 1,
-                    AddressLine = "403, Salty Road",
-                    City = "Brest",
-                    Region = "SaltyAlpes",
-                    Country = "France",
-                    PostalCode = 40404
-                });
-            this.EcoWallets.Add(
-                new EcoWallet
-                {
-                    Id = 1,
-                    EcoCoinsAmount = 101,
-                    Subscription = false,
-                    EcoCoinsValueEuros = 41
-                });
-            this.Vehicules.Add(
-                new Vehicule
-                {
-                    Id = 1,
-                    Brand = "AnAmazingBrand",
-                    RegistrationNumber = 001,
-                    Model = "Teslite",
-                    Hybrid = true,
-                    Electric = false,
-                    AvailableSeats = 3,
-                    InsuranceID = 1
-                });
-            this.Insurances.Add(
-                new Insurance
-                {
-                    Id = 1,
-                    InsuranceAgency = "OFIBNA",
-                    ContractNumber = "R124124124TRAT"
-                });
+            //this.People.Add(
+            //    new Person
+            //    {
+            //        Id = 1,
+            //        Name = "RandomName",
+            //        LastName = "RandomLastName",
+            //        ProfilePictureURL = "wololo.jpg"
+            //    }
+            //    );
+            //this.Users.Add(
+            //    new User
+            //    {
+            //        Id = 1,
+            //        Email = "random@ecocar.com",
+            //        PhoneNumber = 1234457891,
+            //        IdentityCardNumber = 1234535315,
+            //        DrivingPermitNumber = 1230432153,
+            //        BankDetailsId = 1,
+            //        BillingAddressId = 1,
+            //        PersonId = 1
+            //    }
+            //    );
+            //this.Accounts.Add(
+            //    new Account
+            //    {
+            //        Id = 1,
+            //        Username = "random",
+            //        Password = "5E-A1-36-6C-34-CC-38-0D-AD-F1-62-AC-F6-CB-FD-42", //random
+            //        IsActive = true,
+            //        PersonId = 1
+            //    });
+            //this.AccountUsers.Add(
+            //    new AccountUser
+            //    {
+            //        Id = 1,
+            //        UserRating = 4,
+            //        AccountId = 1,
+            //        EcoWalletId = 1,
+            //        VehiculeId = 1
+            //    });
+            //this.BankingDetails.Add(
+            //    new BankDetails
+            //    {
+            //        Id = 1,
+            //        BankName = "SwissBank",
+            //        Swift = "OABGAOG",
+            //        Iban = "FIOAFNEOAIFNAFKNAEFOJKN°31234"
+            //    });
+            //this.BillingAddresses.Add(
+            //    new BillingAddress
+            //    {
+            //        Id = 1,
+            //        AddressLine = "403, Salty Road",
+            //        City = "Brest",
+            //        Region = "SaltyAlpes",
+            //        Country = "France",
+            //        PostalCode = 40404
+            //    });
+            //this.EcoWallets.Add(
+            //    new EcoWallet
+            //    {
+            //        Id = 1,
+            //        EcoCoinsAmount = 101,
+            //        Subscription = false,
+            //        EcoCoinsValueEuros = 41
+            //    });
+            //this.Vehicules.Add(
+            //    new Vehicule
+            //    {
+            //        Id = 1,
+            //        Brand = "AnAmazingBrand",
+            //        RegistrationNumber = 001,
+            //        Model = "Teslite",
+            //        Hybrid = true,
+            //        Electric = false,
+            //        AvailableSeats = 3,
+            //        InsuranceID = 1
+            //    });
+            //this.Insurances.Add(
+            //    new Insurance
+            //    {
+            //        Id = 1,
+            //        InsuranceAgency = "OFIBNA",
+            //        ContractNumber = "R124124124TRAT"
+            //    });
             this.SaveChanges();
         }
         //Defining character length properties of each table

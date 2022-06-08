@@ -1,4 +1,4 @@
-﻿@model EcoCar.Models.PersonManagement.AccountUser
+﻿@model EcoCar.Models.PersonManagement.Account
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Mon profil";
@@ -13,7 +13,19 @@
             <div class="col-md-4">
                 <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
                 <ul title="Ratings" class="list-inline ratings text-center">
-                    <li><span>Nom d'utilisateur</span></li>
+                    @using (Html.BeginForm())
+                    {
+                        <li>
+                            <span>
+
+                                @Html.Label("Nom d'utilisateur") <br>
+                                @Html.TextBoxFor(model => model.Username)
+                                @Html.ValidationMessageFor(model => model.Username)
+                                <br>
+
+                            </span>
+                        </li>
+                    }
                 </ul>
                 <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Messaging/UserReporting'">Signaler l'utilisateur</button>
                 <br> <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Messaging/Message'">Contacter l'utilisateur</button>

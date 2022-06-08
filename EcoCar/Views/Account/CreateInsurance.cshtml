@@ -1,0 +1,48 @@
+﻿@model EcoCar.Models.PersonManagement.Insurance
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Création Véhicule";
+}
+
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Proposer un service</h4>
+
+            @using (Html.BeginForm())
+            {
+                @Html.Label("FirtsStopAddress")
+
+                <br>
+                @Html.TextBoxFor(model => model.InsuranceAgency, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                @Html.ValidationMessageFor(model => model.InsuranceAgency)            
+                    <br>
+
+                @Html.Label("FirtsStopAddress")
+
+                <br>
+                @Html.TextBoxFor(model => model.InsuranceExpiration, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                @Html.ValidationMessageFor(model => model.InsuranceAgency)            
+                    <br>
+
+                @Html.Label("FirtsStopAddress")
+
+                <br>
+                @Html.TextBoxFor(model => model.ContractNumber, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                @Html.ValidationMessageFor(model => model.InsuranceAgency)            
+                    <br>    
+                
+                <button class="btn btn-success" type="submit">Soumettre</button>
+            
+            }
+
+            </div>
+            <div class="col-md-6">
+                <img alt="" style="width:100%;" title="" src="~/Images/Itinerary.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="solid">

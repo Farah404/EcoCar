@@ -20,7 +20,7 @@ namespace EcoCar.Models.PersonManagement
         public int AvailableSeats { get; set; }
 
         //Foreign Keys
-        public int InsuranceID { get; set; }
+        public int InsuranceId { get; set; }
         public Insurance Insurance { get; set; }
 
     }

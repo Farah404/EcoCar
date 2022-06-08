@@ -104,6 +104,7 @@ namespace EcoCar.Models.Services
             bool musicAllowed,
             bool chattingAllowed,
             int trajectoryId,
+            int vehiculeId,
             int serviceId
             )
         {
@@ -115,7 +116,7 @@ namespace EcoCar.Models.Services
                 SmokingAllowed = smokingAllowed,
                 MusicAllowed = musicAllowed,
                 ChattingAllowed = chattingAllowed,
-                //Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId),
+                Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId),
                 Trajectory = _bddContext.Trajectories.First(b => b.Id == trajectoryId),
                 Service = _bddContext.Services.First(b => b.Id == serviceId)
             };
@@ -136,6 +137,7 @@ namespace EcoCar.Models.Services
             bool smokingAllowed,
             bool musicAllowed,
             bool chattingAllowed,
+            int vehiculeId,
             int trajectoryId,
             int serviceId)
         {
@@ -150,8 +152,8 @@ namespace EcoCar.Models.Services
                 service.SmokingAllowed = smokingAllowed;
                 service.MusicAllowed = musicAllowed;
                 service.ChattingAllowed = chattingAllowed;
-                //service.VehiculeId = vehiculeId;
-                service.TrajectoryId = trajectoryId;
+                service.Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId);
+                service.Trajectory = _bddContext.Trajectories.First(b => b.Id == trajectoryId);
                 service.Service = _bddContext.Services.First(b => b.Id == serviceId);
                 _bddContext.SaveChanges();
             }

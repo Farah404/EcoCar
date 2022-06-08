@@ -1,25 +1,38 @@
-﻿@model EcoCar.Models.PersonManagement.AccountUser
+﻿@model EcoCar.ViewModels.AccountViewModel
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Mon profil";
 }
 
-
-<br>
-<br>
-<br>
-<br>
 <div class="container bootstrap snippets bootdey">
     <div class="panel-body inf-content">
         <div class="row">
             <div class="col-md-4">
                 <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
                 <ul title="Ratings" class="list-inline ratings text-center">
-                    <li><span>Nom d'utilisateur</span></li>
+                    @using (Html.BeginForm())
+
+                    {
+                        <li>
+                            <span>
+
+                                @{
+                                    if (User.Identity.IsAuthenticated)
+                                    {
+                                        <a class="navbar-brand" href="/">@User.Identity.Name</a>
+
+                                    }
+                                }
+
+                            </span>
+                        </li>
+                    }
+
                 </ul>
                 <button class="btn btn-primary center-block" type="submit" onclick="location.href='UpdateAccount/1'">Modifier mon profil</button>
                 <br>
                 <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Financial/EcoStore'">J'achète des EcoCoins</button>
+                <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/CreateInsurance'">CreateVehicule</button>
             </div>
             <div class="col-md-6">
 
@@ -39,7 +52,6 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                    
                                 </td>
                             </tr>
 
@@ -51,7 +63,6 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                    
                                 </td>
                             </tr>
 
@@ -63,7 +74,6 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                    
                                 </td>
                             </tr>
 
@@ -75,7 +85,6 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                    
                                 </td>
                             </tr>
 
@@ -87,7 +96,6 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                  
                                 </td>
                             </tr>
                         </tbody>
@@ -110,7 +118,6 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                   
                                 </td>
                             </tr>
 
@@ -122,10 +129,9 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                 
                                 </td>
                             </tr>
-                         
+
                         </tbody>
                     </table>
                 </div>
@@ -134,10 +140,10 @@
     </div>
 </div>
 <hr class="solid">
-    <div id="services" class="container-fluid text-center">
-        <h2>Mon historique de prestations</h2>
-        <br>
-        </div>
+<div id="services" class="container-fluid text-center">
+    <h2>Mon historique de prestations</h2>
+    <br>
+</div>
 
 <hr class="solid">
 

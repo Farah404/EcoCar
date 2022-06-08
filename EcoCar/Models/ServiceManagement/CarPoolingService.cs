@@ -31,6 +31,8 @@ namespace EcoCar.Models.ServiceManagement
         //public Vehicule Vehicule { get; set; }
         public int TrajectoryId { get; set; }
         public Trajectory Trajectory { get; set; }
+        public int VehiculeId { get; set; }
+        public Vehicule Vehicule { get; set; }
 
         //Inheritance Class
         public int ServiceId { get; set; }

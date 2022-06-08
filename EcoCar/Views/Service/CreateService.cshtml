@@ -16,33 +16,33 @@
                 {
                     //Autofill of current Date: Date of publication of the service
                     <div class="form-floating mb-3">
-                        @Html.Label("Date de publication de la prestation")
+                        @Html.Label("Date de publication de la prestation")<br>
                         @Html.TextBoxFor(model => model.PublicationDate, new{ @class = "form-control",@id="currentDate",@readonly = true,style="width:300px"})
                     </div>
                     <br>
 
                     <div class="form-floating mb-3">
-                        @Html.Label("Numero de reference de la prestation")
+                        @Html.Label("Numero de reference de la prestation")<br>
                         @Html.TextBoxFor(model => model.ReferenceNumber, new{ @class = "form-control",@id="Refnunmber",@readonly = true,style="width:300px"})
                     </div>
                     <br>
 
                     <div class="form-outline mb-3">
-                        @Html.Label("Date de debut")
+                        @Html.Label("Date de debut")<br>
                         @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
                         @Html.ValidationMessageFor(model => model.Start)
                     </div>
                     <br>
 
                     <div class="form-outline mb-3">
-                        @Html.Label("Date de fin")
+                        @Html.Label("Date de fin")<br>
                         @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control",style="width:300px"}})
                         @Html.ValidationMessageFor(model => model.End)
                     </div>
                     <br>
                     
                     <div class="form-outline mb-3">
-                        @Html.Label("Type de Prestation")
+                        @Html.Label("Type de Prestation")<br>
                         @Html.DropDownListFor(model => model.SelectServiceType, new SelectList(Enum.GetValues(typeof(ServiceType))),"--Selectionnez le type de prestation--")  
                         @Html.ValidationMessageFor(model => model.SelectServiceType)
                     </div>

@@ -22,8 +22,8 @@ namespace EcoCar.Models.Services
         //CarPoolingService
 
         List<CarPoolingService> GetAllCarPoolingServices();
-        int CreateCarPoolingService(CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int vehiculeId, int trajectoryId, int serviceId);
-        void UpdateCarPoolingService(int id, CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int vehiculeId, int trajectoryId, int serviceId);
+        CarPoolingService CreateCarPoolingService(CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int trajectoryId, int serviceId);
+        void UpdateCarPoolingService(int id, CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int trajectoryId, int serviceId);
         void DeleteCarPoolingService(int id);
 
         //-------------------------------------------------------------------------------------------------
@@ -62,7 +62,6 @@ namespace EcoCar.Models.Services
         List<Trajectory> GetAllTrajectories();
         int CreateTrajectory(int durationHours, int stopNumber, int stopsDurationMinutes, string pickUpAddress, string deliveryAddress, TrajectoryType selectTrajectoryType, int itineraryId);
         void UpdateTrajectory(int id, int durationHours, int stopNumber, int stopsDurationMinutes, string pickUpAddress, string deliveryAddress, TrajectoryType selectTrajectoryType, int itineraryId);
-
         void UpdateTrajectory(Trajectory trajectory);
         void DeleteTrajectory(int id);
 

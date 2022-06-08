@@ -88,22 +88,21 @@ namespace EcoCar.Models.Services
 
         public List<CarPoolingService> GetAllCarPoolingServices()
         {
-            return _bddContext.CarPoolingServices.Include(e => e.Vehicule).Include(e => e.Trajectory).Include(e => e.Service).ToList();
+            return _bddContext.CarPoolingServices.Include(e => e.Trajectory).Include(e => e.Service).ToList();
         }
 
         public CarPoolingService GetCarPoolingService(int id)
         {
-            return _bddContext.CarPoolingServices.Include(e => e.Vehicule).Include(e => e.Trajectory).Include(e => e.Service).FirstOrDefault(e => e.Id == id);
+            return _bddContext.CarPoolingServices.Include(e => e.Trajectory).Include(e => e.Service).FirstOrDefault(e => e.Id == id);
         }
 
-        public int CreateCarPoolingService(
+        public CarPoolingService CreateCarPoolingService(
             CarPoolingType selectCarPoolingType,
             int avalaibleSeats,
             bool petsAllowed,
             bool smokingAllowed,
             bool musicAllowed,
             bool chattingAllowed,
-            int vehiculeId,
             int trajectoryId,
             int serviceId
             )
@@ -116,13 +115,13 @@ namespace EcoCar.Models.Services
                 SmokingAllowed = smokingAllowed,
                 MusicAllowed = musicAllowed,
                 ChattingAllowed = chattingAllowed,
-                Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId),
+                //Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId),
                 Trajectory = _bddContext.Trajectories.First(b => b.Id == trajectoryId),
                 Service = _bddContext.Services.First(b => b.Id == serviceId)
             };
             _bddContext.CarPoolingServices.Add(carPoolingService);
             _bddContext.SaveChanges();
-            return carPoolingService.Id;
+            return carPoolingService;
         }
         public void CreateCarPoolingService(CarPoolingService service)
         {
@@ -137,7 +136,6 @@ namespace EcoCar.Models.Services
             bool smokingAllowed,
             bool musicAllowed,
             bool chattingAllowed,
-            int vehiculeId,
             int trajectoryId,
             int serviceId)
         {
@@ -152,7 +150,7 @@ namespace EcoCar.Models.Services
                 service.SmokingAllowed = smokingAllowed;
                 service.MusicAllowed = musicAllowed;
                 service.ChattingAllowed = chattingAllowed;
-                service.VehiculeId = vehiculeId;
+                //service.VehiculeId = vehiculeId;
                 service.TrajectoryId = trajectoryId;
                 service.Service = _bddContext.Services.First(b => b.Id == serviceId);
                 _bddContext.SaveChanges();

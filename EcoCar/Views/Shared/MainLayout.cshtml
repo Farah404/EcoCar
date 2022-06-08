@@ -7,10 +7,7 @@
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @*<title>@ViewBag.Title</title>*@
-
-
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -20,13 +17,11 @@
     <script src="~/Scripts/jquery-3.5.1.min.js"></script>
     <script src="~/Scripts/bootstrap-3.4.1.min.js"></script>*@
 </head>
-
 <body id="EcoCarPage" data-spy="scroll" data-target=".navbar" data-offset="60">
     <div class="jumbotron text-center">
     <h1><strong>Eco</strong>Car</h1>
     <p>Faciliter l'optimisation des déplacements dans une optique éco-vertueuse et conviviale</p>
 </div>
-
     <!-- NavigationBar-->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -36,28 +31,42 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">EcoHome</a>
+               @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="navbar-brand" href="/">Welcome Back Eco @User.Identity.Name</a>
+                        }
+                        else
+                        {
+                            <a class="navbar-brand" href="/">EcoHome</a>
+                        }
+                    }
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/Financial/EcoStore">ECOSTORE</a></li>
                     <li><a href="#services">SERVICES</a></li>
                     <li><a href="#contact">CONTACT</a></li>
-                    <li><a href="/account/LoginAccount">COMPTE</a></li>
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a href="/account/UserProfilePersonal">ECOCOMPTE</a></li>
+                            <li>@Html.ActionLink("DECONNEXION", "SignOut", "Account")</li>
+                        }
+                        else
+                        {
+                            <li><a href="/account/LoginAccount">ECOCONNEXION</a></li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
     </nav>
-
-
     <div id="main">
-
         <div id="contenu">
             @RenderBody()
         </div>
     </div>
-
-
     <!-- Services Containers / link to services-->
     <div id="services" class="container-fluid text-center">
         <h2>SERVICES</h2>
@@ -112,7 +121,6 @@
             <div class="col-sm-7">
                 <div class="row">
                     <div class="col-sm-6 form-group">
-                        
                         <input class="form-control" id="name" name="name" placeholder="Nom" type="text" required>
                     </div>
                     <div class="col-sm-6 form-group">
@@ -168,7 +176,5 @@
             });
         });
 </script>
-
-
 </body>
 </html>

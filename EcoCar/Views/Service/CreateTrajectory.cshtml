@@ -5,57 +5,57 @@
     ViewBag.Title = "Création Trajet";
 }
 
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Proposer un service</h4>
 
+                @using (Html.BeginForm())
+                {
+                    @Html.Label("Durée en heure")<br>
+                    @Html.TextBoxFor(model => model.DurationHours, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.DurationHours)
+                    <br>
 
+                    @Html.Label("Numéro d'arrêts") <br>
+                    @Html.TextBoxFor(model => model.StopNumber, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.StopNumber)
+                    <br>
 
-    @using (Html.BeginForm())
-    {
-        <div class="container bootstrap snippets bootdey">
-            <div class="panel-body inf-content">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h4>Proposer une prestation de Covoiturage</h4>
-                        @Html.Label("Durée en heure")<br>
-                        @Html.TextBoxFor(model => model.DurationHours, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.DurationHours)
-                        <br>
+                    @Html.Label("Durée d'arrêt en minutes") <br>
+                    @Html.TextBoxFor(model => model.StopsDurationMinutes, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.StopsDurationMinutes)
 
-                        @Html.Label("Numéro d'arrêts")<br>
-                        @Html.TextBoxFor(model => model.StopNumber, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.StopNumber)
-                        <br>
+                    <br>
+                    @Html.Label("Adresse de départ") <br>
+                    @Html.TextBoxFor(model => model.PickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.PickUpAddress)
 
-                        @Html.Label("Durée d'arrêt en minutes")<br>
-                        @Html.TextBoxFor(model => model.StopsDurationMinutes, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.StopsDurationMinutes)
+                    <br>
+                    @Html.Label("Adresse d'arrivée") <br>
+                    @Html.TextBoxFor(model => model.DeliveryAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.DeliveryAddress)
 
-                        <br>
-                        @Html.Label("Adresse de départ")<br>
-                        @Html.TextBoxFor(model => model.PickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.PickUpAddress)
+                    <br>
+                    @Html.Label("Type de covoiturage") <br>
+                    @Html.DropDownListFor(model => model.SelectTrajectoryType, new SelectList(Enum.GetValues(typeof(TrajectoryType))),"--Selectionnez le type de trajet--")
+                    @Html.ValidationMessageFor(model => model.SelectTrajectoryType)
 
-                        <br>
-                        @Html.Label("Adresse d'arrivée")<br>
-                        @Html.TextBoxFor(model => model.DeliveryAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.DeliveryAddress)
+                    @Html.HiddenFor(model => model.ItineraryId)
 
-                        <br>
-                        @Html.Label("Type de covoiturage")<br>
-                        @Html.DropDownListFor(model => model.SelectTrajectoryType, new SelectList(Enum.GetValues(typeof(TrajectoryType))),"--Selectionnez le type de trajet--")
-                        @Html.ValidationMessageFor(model => model.SelectTrajectoryType)
+                    <br>
+                    <button class="btn btn-success" type="submit">Soumettre</button>
+                }
 
-                        @Html.HiddenFor(model => model.ItineraryId)
-                        <br>
-                        <div style="overflow:auto;">
-                            <button class="btn btn-success" type="submit">Suivant</button>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <img alt="" style="width:100%;" title="" src="~/Images/Itinerary.png">
             </div>
         </div>
-    }
-
-
+    </div>
+</div>
 
 <hr class="solid">
 

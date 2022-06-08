@@ -40,22 +40,21 @@
                         @Html.ValidationMessageFor(model => model.End)
                     </div>
                     <br>
-                    
+
                     <div class="form-outline mb-3">
                         @Html.Label("Type de Prestation")<br>
-                        @Html.DropDownListFor(model => model.SelectServiceType, new SelectList(Enum.GetValues(typeof(ServiceType))),"--Selectionnez le type de prestation--")  
+                        @Html.DropDownListFor(model => model.SelectServiceType, new SelectList(Enum.GetValues(typeof(ServiceType))),"--Selectionnez le type de prestation--")
                         @Html.ValidationMessageFor(model => model.SelectServiceType)
                     </div>
                     <br>
-
-
                     <button class="btn btn-success" type="submit">Soumettre</button>
                 }
-            </div>
-            <div class="col-md-6">
-                <img alt="" style="width:100%;" title="" src="~/Images/EcoCar.png">
+
             </div>
 
+            <div  class="col-md-6">
+                <img style="width:1000px;" title="" src="~/Images/Ville.png">
+            </div>
         </div>
 
     </div>
@@ -69,19 +68,14 @@
     var today = new Date();
     var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
     document.getElementById("currentDate").value = date;
-
     $(document).ready(function() {
         $(".datepicker").datepicker({
             changeMonth: true,
             changeYear: true,
         });
     });
-
     var i = 1;
     function buttonClick() {
         document.getElementById('Refnunmber').value = ++i;
     }
-
-
 </script>
-

@@ -6,70 +6,61 @@
 }
 
 
-    @using (Html.BeginForm())
-    {
-        <div class="container bootstrap snippets bootdey">
-            <div class="panel-body inf-content">
-                <div class="row">
-                    <div class="col-md-4">
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Proposer un service</h4>
 
-                        <h4>Proposer une prestation de Covoiturage</h4>
+                @using (Html.BeginForm())
+                {
+                    @Html.Label("Type de covoiturage") <br>
+                    @Html.DropDownListFor(model => model.SelectCarPoolingType, new SelectList(Enum.GetValues(typeof(CarPoolingType))),"--Selectionnez le type de covoiturage--")
+                    @Html.ValidationMessageFor(model => model.SelectCarPoolingType)
+                    <br>
 
-                        <div class="form-outline mb-3">
-                            @Html.Label("Type de covoiturage")<br>
-                            @Html.DropDownListFor(model => model.SelectCarPoolingType, new SelectList(Enum.GetValues(typeof(CarPoolingType))),"--Selectionnez le type de covoiturage--")
-                            @Html.ValidationMessageFor(model => model.SelectCarPoolingType)
-                        </div>
-                        <br>
 
-                        <div class="form-outline mb-3">
-                            @Html.Label("Sièges disponibles")<br>
-                            @Html.TextBoxFor(model => model.AvailableSeats, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                            @Html.ValidationMessageFor(model => model.AvailableSeats)
-                        </div>
-                        <br>
+                    @Html.Label("Sièges disponibles")  <br>
+                    @Html.TextBoxFor(model => model.AvailableSeats, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.AvailableSeats)
+                    <br>
 
-                        <div class="form-outline mb-3">
-                            @Html.Label("Animaux de compagnie")<br>
-                            @Html.CheckBoxFor(model => model.PetsAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                            @Html.ValidationMessageFor(model => model.PetsAllowed)
-                        </div>
-                        <br>
 
-                        <div class="form-outline mb-3">
-                            @Html.Label("Autorisation de fumer")<br>
-                            @Html.CheckBoxFor(model => model.SmokingAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                            @Html.ValidationMessageFor(model => model.SmokingAllowed)
-                        </div>
-                        <br>
+                    @Html.Label("Animaux de compagnie")<br>
+                    @Html.CheckBoxFor(model => model.PetsAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.PetsAllowed) 
+                    <br>
 
-                        <div class="form-outline mb-3">
-                            @Html.Label("Musique Forte")<br>
-                            @Html.CheckBoxFor(model => model.MusicAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                            @Html.ValidationMessageFor(model => model.MusicAllowed)
-                        </div>
-                        <br>
 
-                        <div class="form-outline mb-3">
-                            @Html.Label("Discussion")<br>
-                            @Html.CheckBoxFor(model => model.ChattingAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                            @Html.ValidationMessageFor(model => model.ChattingAllowed)
-                        </div>
-                        <br>
+                    @Html.Label("Autorisation de fumer") <br>
+                    @Html.CheckBoxFor(model => model.SmokingAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.SmokingAllowed)
+                    <br>
 
-                        @Html.HiddenFor(model => model.ServiceId)
-                        @Html.HiddenFor(model => model.TrajectoryId)
+                    @Html.Label("Musique Forte")<br>
+                    @Html.CheckBoxFor(model => model.MusicAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.MusicAllowed)
+                    <br>
 
-                        <br>
-                        <div style="overflow:auto;">
-                            <button class="btn btn-success" type="submit">Soumettre</button>
-                        </div>
-                    </div>
-                </div>
+
+                    @Html.Label("Discussion")<br>
+                    @Html.CheckBoxFor(model => model.ChattingAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.ChattingAllowed)
+                    <br>
+
+                    @Html.HiddenFor(model => model.ServiceId)
+                    @Html.HiddenFor(model => model.TrajectoryId)
+
+                    <br>
+                    <button class="btn btn-success" type="submit">Soumettre</button>
+                }
+
+            </div>
+            <div class="col-md-6">
+                <img alt="" style="width:800px;" title="" src="~/Images/Covoit.png">
             </div>
         </div>
-    }
-
+    </div>
+</div>
 
 <hr class="solid">
-

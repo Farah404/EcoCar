@@ -121,21 +121,13 @@ namespace EcoCar.Controllers
         }
 
         //Updating Account
-        public IActionResult UpdateAccount(int id)
+        public IActionResult UpdateAccount()
         {
-            if (id != 0)
-            {
-                using (IDalPersonManagement dal = new DalPersonManagement())
-                {
-                    Account account = dal.GetAllAccounts().Where(a => a.Id == id).FirstOrDefault();
-                    if (account == null)
-                    {
-                        return View("Error");
-                    }
-                    return View(account);
-                }
-            }
-            return View("Error");
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            List<User> users = dalPersonManagement.GetAllUsers();
+            users = users.Where(u => u.Id == userId).ToList();
+            return View(users.ToList());
+
         }
         [HttpPost]
         public IActionResult UpdateAccount(Account account)
@@ -160,15 +152,9 @@ namespace EcoCar.Controllers
 
         public IActionResult UserProfile()
         {
-            //var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            //List<User> users = dalPersonManagement.GetAllUsers();
-            //users = users.Where(u => u.Id.CompareTo(userId)).ToList();
-
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             List<User> users = dalPersonManagement.GetAllUsers();
             users = users.Where(u => u.Id==userId).ToList();
-
-
             return View(users.ToList()) ;
         }
 
@@ -176,7 +162,13 @@ namespace EcoCar.Controllers
 
         public IActionResult UserProfilePersonal()
         {
-            return View();
+            {
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                List<User> users = dalPersonManagement.GetAllUsers();
+                users = users.Where(u => u.Id == userId).ToList();
+                return View(users.ToList());
+            }
+          
         }
 
         public IActionResult ForgotPassword()

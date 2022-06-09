@@ -16,6 +16,7 @@ namespace EcoCar.Models.Services
         void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType);
         void UpdateService(Service service);
         void DeleteService(int id);
+       
 
         //-------------------------------------------------------------------------------------------------
 
@@ -66,5 +67,18 @@ namespace EcoCar.Models.Services
         void DeleteTrajectory(int id);
 
         //-------------------------------------------------------------------------------------------------
+
+
+        //Search Service
+
+        void FilterServices(string ServiceType);
+
+
+        //------------------------------------------------------------------------------------------------------
     }
+
+
+
+
+
 }

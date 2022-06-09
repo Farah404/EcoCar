@@ -423,6 +423,29 @@ namespace EcoCar.Models.Services
         {
             _bddContext.Dispose();
         }
+
+        public Service FilterServices(string ServiceType)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IDalServiceManagement.FilterServices(string ServiceType)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        //Search Service
+
+        //public void FilterServices(string ServiceType)
+        //{
+
+        //}
+
+
+        //------------------------------------------------------------------------------------------------------
     }
+
+
 
 }

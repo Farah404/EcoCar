@@ -1,6 +1,9 @@
 ﻿using EcoCar.Models.ServiceManagement;
 using EcoCar.Models.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace EcoCar.Controllers
 {
     public class ServiceController : Controller
@@ -124,5 +127,48 @@ namespace EcoCar.Controllers
         {
             return View();
         }
+
+        //Search Service
+
+        public ActionResult ServicesFilter (string ServiceType)
+        {
+            var services = dalServiceManagement.GetAllServices();
+
+            if (ServiceType != "all")
+            {
+                string mainCategory = ServiceType.Split('/')[0];
+
+                services = services.Where(s => s.GetType().Name.Contains(mainCategory)).ToList();
+
+                string subCategory = ServiceType.Split('/')[1];
+
+                if (mainCategory == "carPoolingService")
+                {
+                    List<CarPoolingService> carPoolingServices = services.Cast<CarPoolingService>().ToList();
+                    //carPoolingServices = carPoolingServices.Where(l => l.CarPoolingType.ToString() == subCategory).ToList();
+                    services = carPoolingServices.Cast<Service>().ToList();
+                }
+
+                else if (mainCategory == "CarRentalService")
+                {
+                    List<CarRentalService> CarRentalServices = services.Cast<CarRentalService>().ToList();
+                    //carRentalServices = CarRentalServices.Where(l => l.CarRentalType.ToString() == subCategory).ToList();
+                    services = CarRentalServices.Cast<Service>().ToList();
+                }
+
+                else if (mainCategory == "ParcelService")
+                {
+                    List<ParcelService> ParcelServices = services.Cast<ParcelService>().ToList();
+                    //ParcelServices = ParcelServices.Where(l => l.ParcelType.ToString() == subCategory).ToList();
+                    services = ParcelServices.Cast<Service>().ToList();
+                }
+
+
+            }
+
+            return View("SearchService", services);
+        }
+
+
     }
 }

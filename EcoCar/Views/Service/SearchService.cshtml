@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<EcoCar.Models.ServiceManagement.Service>
+
+@{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "EcoCar Accueil";
 }
@@ -12,3 +14,42 @@
 
             </div>
         </form>
+
+        <form action = "/service/ServicesFilter" method="get">
+				<div id = "choix_typeService"><label> Rechercher par type de service : </label> <br/>  
+					<select name="ServiceType" onChange = "submit()"> 
+						<option value =""> Sélectionner</option> 
+						<option value ="all">All</option> 
+						<optgroup label ="Covoiturage">
+							<option value ="Carpooling/HomeToWork">Domicile-travail</option> 
+							<option value ="Carpooling/HomeToSchool">Domicile-Ecole/Université</option>
+							<option value ="Carpooling/Events">Evénement</option> 
+							<option value ="Carpooling/Travel">Voyage</option>						
+						</optgroup>
+                       </select>
+                    </div>
+        </form>
+
+        <div class="row justify-content-start">
+			@foreach (var service in Model)
+			{
+				<div class="card col-6 m-5" style="width: 18rem;">
+					<div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            @*<h5 class="card-title">@NOM DU SERVICE</h5>*@
+                            <div class="my-3">
+                               @* <img src="@sejour.ImagePath" width="200" height="200" />*@
+                            </div>
+
+                            <h6 class="card-subtitle mb-2 text-muted">@service.ReferenceNumber </h6>
+                            <h6 class="card-subtitle mb-2 text-muted">@service.Start</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">@service.End</h6>
+                            <p class="card-text">@service.SelectServiceType</p>
+
+                        </div>				
+
+					</div>
+				</div>
+			}
+			<div class="col-4 m-5" style="width: 18rem;">
+        </div>

@@ -1,0 +1,51 @@
+﻿@model EcoCar.Models.PersonManagement.AccountAdministrator
+
+@{
+    Layout = "/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "EcoConnexion";
+}
+
+<!-- Add two containers (.container-fluid), and add a custom class to the second container (.bg-grey - adds a gray background color):
+    -->
+<section class="sign-in-form" style="background-color: white">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+                <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+                        <div class="col-lg-4">
+                            <div class="card-body p-md-5 mx-md-4">
+                                <div class="text-center">
+                                    <br><br>
+                                    <img src="~/Images/EcoCar.png"
+                                         style="width: 185px;" alt="logo">
+                                    <h4 class="mt-1 mb-5 pb-1">Je me connecte à mon compte EcoCar</h4>
+                                </div>
+                                <center>
+                                @using (Html.BeginForm())
+                                {
+                                    <div class="form-floating mb-3">
+                                        @Html.TextBoxFor(model => model.EmployeeCode, new {@class = "form-control", placeholder = "EmployeeCode" })
+                                        @Html.ValidationMessageFor(model =>model.EmployeeCode)
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <!-- Submit Button-->
+                                    <button class="btn btn-success btn-xl" type="submit">Se Connecter</button>
+                                }</center><br>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                               
+                                 <img src=~/Images/CityEcoCar.png width="1100px" height="600px" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr class="solid">

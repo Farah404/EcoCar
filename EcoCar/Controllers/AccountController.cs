@@ -178,6 +178,11 @@ namespace EcoCar.Controllers
             return View();
         }
 
+        public IActionResult LoginAdmin()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult CreateInsurance(Insurance insurance)
         {

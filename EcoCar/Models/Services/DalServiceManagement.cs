@@ -24,7 +24,8 @@ namespace EcoCar.Models.Services
 
         public List<Service> GetAllServices()
         {
-            return _bddContext.Services.ToList();
+           List<Service> services = _bddContext.Services.ToList();
+           return services;
         }
         public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType)
         {

@@ -13,10 +13,7 @@ namespace EcoCar.Controllers
         {
             dalServiceManagement = new DalServiceManagement();
         }
-        public ActionResult SearchService()
-        {
-            return View();
-        }
+    
         public ActionResult CreateService()
         {
             return View();
@@ -129,6 +126,12 @@ namespace EcoCar.Controllers
         }
 
         //Search Service
+
+        public ActionResult SearchService()
+        {
+            List<Service> services = dalServiceManagement.GetAllServices();
+            return View(services.ToList());
+        }
 
         public ActionResult ServicesFilter (string ServiceType)
         {

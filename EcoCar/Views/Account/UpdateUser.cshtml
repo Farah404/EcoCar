@@ -1,27 +1,25 @@
-﻿@*@model EcoCar.Models.PersonManagement.Account*@
-@model List<EcoCar.Models.PersonManagement.User>
+﻿@model EcoCar.Models.PersonManagement.User
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Mon profil";
 }
-<form>
     <div class="container bootstrap snippets bootdey">
         <div class="panel-body inf-content">
             <div class="row">
-
+                @using (Html.BeginForm(FormMethod.Post))
+                                {
                 @*Profile picture Part with buttons*@
                 <div class="col-md-4">
                     <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
                     <ul title="Ratings" class="list-inline ratings text-center">
                         <li>
                             <span>
-                                @foreach (var user in Model)
-                                {
+                               
 
-                                    <input type="text" class="form-control" size="10" value="@User.Identity.Name" required>
-                                }
+                                
                                 <br>
-                                <p>Modifier ma photo de profile</p>
+                                <p>Modifier ma photo de profil</p>
+                                @Html.TextBoxFor(model => model.Person.ProfilePictureURL, new { @class = "form-control", placeholder = "ProfilePicUrl", })
                                 <input type="file" id="file" name="file" multiple>
                                 <br>
                             </span>
@@ -47,11 +45,10 @@
                                     </td>
                                     <td class="text-success">
 
-
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.Person.Name" required>
-                                        }
+                                        @Html.TextBoxFor(model => model.Person.Name, new { @class = "form-control", placeholder = "Prénom" })
+                                <input type="file" id="file" name="file" multiple>
+                                      
+                                       
 
                                     </td>
 
@@ -65,10 +62,8 @@
                                     <td class="text-success">
 
 
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.Person.LastName" required>
-                                        }
+                                        @Html.TextBoxFor(model => model.Person.LastName, new { @class = "form-control", placeholder = "Prénom" })
+                                        
 
                                     </td>
 
@@ -91,18 +86,23 @@
                                     <td class="text-success">
                                     </td>
                                 </tr>
-
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-gift text-success"></span>
+                                        Date de naissance
+                                    </td>
+                                    <td class="text-success">
+                                        @Html.TextBoxFor(model => model.BirthDate, new { @class = "form-control", placeholder = "Prénom" })
+                                      
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-ok text-success"></span>
                                         Email
                                     </td>
                                     <td class="text-success">
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.Email" required>
-
-                                        }
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Prénom" })
                                     </td>
                                 </tr>
 
@@ -112,11 +112,7 @@
                                         Numéro de Téléphone
                                     </td>
                                     <td class="text-success">
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.PhoneNumber" required>
-
-                                        }
+                                       @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Prénom" })
                                     </td>
                                 </tr>
 
@@ -127,10 +123,7 @@
 
                                     </td>
                                     <td class="text-success">
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.IdentityCardNumber" required>
-                                        }
+                                        @Html.TextBoxFor(model => model.IdentityCardNumber, new { @class = "form-control", placeholder = "Prénom" })
                                     </td>
                                 </tr>
 
@@ -140,10 +133,7 @@
                                         Numéro de permis de conduire
                                     </td>
                                     <td class="text-success">
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.DrivingPermitNumber" required>
-                                        }
+                                        @Html.TextBoxFor(model => model.DrivingPermitNumber, new { @class = "form-control", placeholder = "Prénom" })
                                     </td>
                                 </tr>
 
@@ -206,10 +196,7 @@
                                     </td>
                                     <td class="text-success">
 
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.BankDetails.BankName" required>
-                                        }
+                                      @Html.TextBoxFor(model => model.BankDetails.BankName, new { @class = "form-control", placeholder = "Prénom" })
 
                                     </td>
                                 </tr>
@@ -220,10 +207,7 @@
                                         Numéro SWIFT
                                     </td>
                                     <td class="text-success">
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.BankDetails.Swift" required>
-                                        }
+                                        @Html.TextBoxFor(model => model.BankDetails.Swift, new { @class = "form-control", placeholder = "Prénom" })
                                     </td>
                                 </tr>
 
@@ -233,10 +217,7 @@
                                         Numéro IBAN
                                     </td>
                                     <td class="text-success">
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.BankDetails.Iban" required>
-                                        }
+                                        @Html.TextBoxFor(model => model.BankDetails.Iban, new { @class = "form-control", placeholder = "Prénom" })
                                     </td>
                                 </tr>
                             </tbody>
@@ -257,10 +238,7 @@
                                     </td>
                                     <td class="text-success">
 
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.BillingAddress.AddressLine" required>
-                                        }
+                                        @Html.TextBoxFor(model => model.BillingAddress.AddressLine, new { @class = "form-control", placeholder = "Prénom" })
 
                                     </td>
                                 </tr>
@@ -271,23 +249,17 @@
                                         Vile
                                     </td>
                                     <td class="text-success">
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.BillingAddress.City" required>
-                                        }
+                                        @Html.TextBoxFor(model => model.BillingAddress.City, new { @class = "form-control", placeholder = "Prénom" })
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-ok text-success"></span>
-                                        Département
+                                        Région
                                     </td>
                                     <td class="text-success">
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.BillingAddress.Region" required>
-                                        }
+                                        @Html.TextBoxFor(model => model.BillingAddress.Region, new { @class = "form-control", placeholder = "Prénom" })
                                     </td>
                                 </tr>
 
@@ -297,35 +269,36 @@
                                         Pays
                                     </td>
                                     <td class="text-success">
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.BillingAddress.Country" required>
-                                        }
+                                        @Html.TextBoxFor(model => model.BillingAddress.Country, new { @class = "form-control", placeholder = "Prénom" })
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-ok text-success"></span>
-                                        Code Postale
+                                        Code Postal
                                     </td>
                                     <td class="text-success">
-                                        @foreach (var user in Model)
-                                        {
-                                            <input type="text" class="form-control" size="10" value="@user.BillingAddress.PostalCode" required>
-                                        }
+                                        @Html.TextBoxFor(model => model.BillingAddress.PostalCode, new { @class = "form-control", placeholder = "Prénom" })
                                     </td>
                                 </tr>
+                                
+                                    @Html.HiddenFor(model =>model.BankDetailsId)
+                                    @Html.HiddenFor(model =>model.BillingAddressId)
+                                    @Html.HiddenFor(model =>model.PersonId)
+                                   
 
                             </tbody>
                         </table>
-                        <button class="btn btn-success" type="submit">Soumettre</button>
+                        
                     </div>
                 </div>
-            </div>
+              <button class="btn btn-success btn-xl" type="submit">Soumettre les modifications</button>
+            }
         </div>
     </div>
-</form>
+
+   
 
 <hr class="solid">
 

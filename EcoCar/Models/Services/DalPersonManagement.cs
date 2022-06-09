@@ -1,5 +1,6 @@
 ﻿using EcoCar.Models.DataBase;
 using EcoCar.Models.PersonManagement;
+using EcoCar.Models.FinancialManagement;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -114,29 +115,37 @@ namespace EcoCar.Models.Services
 
         //Update User
         public void UpdateUser(
-            int id, 
-            string email, 
-            DateTime birthDate, 
-            int phoneNumber, 
-            int identityCardNumber, 
-            int drivingPermitNumber, 
-            int bankDetailsId, 
-            int billingAddressId, 
+            int id,
+            string email,
+            DateTime birthDate,
+            int phoneNumber,
+            int identityCardNumber,
+            int drivingPermitNumber,
+            int bankDetailsId,
+            int billingAddressId,
             int personId
+            //string name,
+            //string lastName,
+            //string profilePictureURL
+
             )
         {
-            User user = _bddContext.Users.Find(id);
+            
+            User userToUpdate = _bddContext.Users.Find(id);
 
-            if (user != null)
+            if (userToUpdate != null)
             {
-                user.Id = id;
-                user.Email = email;
-                user.BirthDate = birthDate;
-                user.PhoneNumber = phoneNumber;
-                user.IdentityCardNumber = identityCardNumber;
-                user.BankDetails = _bddContext.BankingDetails.First(b => b.Id == bankDetailsId);
-                user.BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId);
-                user.Person = _bddContext.People.First(b => b.Id == personId);
+                userToUpdate.Id = id;
+                userToUpdate.Email = email;
+                userToUpdate.BirthDate = birthDate;
+                userToUpdate.PhoneNumber = phoneNumber;
+                userToUpdate.IdentityCardNumber = identityCardNumber;
+                userToUpdate.BankDetails = _bddContext.BankingDetails.First(b => b.Id == bankDetailsId);
+                userToUpdate.BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId);
+                userToUpdate.Person = _bddContext.People.First(b => b.Id == personId);
+                //userToUpdate.Person.Name = name;
+                //userToUpdate.Person.LastName = lastName;
+                //userToUpdate.Person.ProfilePictureURL = profilePictureURL;
                 _bddContext.SaveChanges();
             }
         }

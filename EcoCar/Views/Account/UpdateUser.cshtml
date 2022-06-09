@@ -1,0 +1,334 @@
+﻿@*@model EcoCar.Models.PersonManagement.Account*@
+@model List<EcoCar.Models.PersonManagement.User>
+@{
+    Layout = "/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Mon profil";
+}
+<form>
+    <div class="container bootstrap snippets bootdey">
+        <div class="panel-body inf-content">
+            <div class="row">
+
+                @*Profile picture Part with buttons*@
+                <div class="col-md-4">
+                    <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
+                    <ul title="Ratings" class="list-inline ratings text-center">
+                        <li>
+                            <span>
+                                @foreach (var user in Model)
+                                {
+
+                                    <input type="text" class="form-control" size="10" value="@User.Identity.Name" required>
+                                }
+                                <br>
+                                <p>Modifier ma photo de profile</p>
+                                <input type="file" id="file" name="file" multiple>
+                                <br>
+                            </span>
+                        </li>
+                    </ul>
+
+                </div>
+
+
+                @*Information*@
+                <div class="col-md-6">
+                    <span class="text-success"><strong>Information</strong><br></span>
+                    <div class="table-responsive">
+
+                        <table class="table table-user-information">
+
+                            <tbody>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user  text-success"></span>
+                                        Prénom
+                                    </td>
+                                    <td class="text-success">
+
+
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.Person.Name" required>
+                                        }
+
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user  text-success"></span>
+                                        Nom
+                                    </td>
+                                    <td class="text-success">
+
+
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.Person.LastName" required>
+                                        }
+
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
+                                        EcoStatus
+                                    </td>
+                                    <td class="text-success">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-star text-success"></span>
+                                        EcoRating
+                                    </td>
+                                    <td class="text-success">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok text-success"></span>
+                                        Email
+                                    </td>
+                                    <td class="text-success">
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.Email" required>
+
+                                        }
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok text-success"></span>
+                                        Numéro de Téléphone
+                                    </td>
+                                    <td class="text-success">
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.PhoneNumber" required>
+
+                                        }
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok text-success"></span>
+                                        CNI
+
+                                    </td>
+                                    <td class="text-success">
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.IdentityCardNumber" required>
+                                        }
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok text-success"></span>
+                                        Numéro de permis de conduire
+                                    </td>
+                                    <td class="text-success">
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.DrivingPermitNumber" required>
+                                        }
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-calendar text-success"></span>
+                                        EcoMembre depuis
+                                    </td>
+                                    <td class="text-success">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        @*EcoWallet*@
+                        <span class="text-success"><strong>Mon EcoWallet</strong><br></span>
+                        <div class="table-responsive">
+
+                            <table class="table table-user-information">
+
+                                <tbody>
+
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-piggy-bank  text-success"></span>
+                                            Montant EcoCoins
+                                        </td>
+                                        <td class="text-success">
+                                            <a class="text-muted" href="/Financial/EcoStore">J'achète des EcoCoins</a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-leaf text-success"></span>
+                                            Formule Abonnement
+                                        </td>
+                                        <td class="text-success">
+                                            <a class="text-muted" href="/Financial/EcoStore">Je m'abonne</a>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    @*Banking Details*@
+                    <span class="text-success"><strong>Relevé d'identité bancaire</strong><br></span>
+                    <div class="table-responsive">
+
+                        <table class="table table-user-information">
+
+                            <tbody>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user  text-success"></span>
+                                        Nom de votre Banque
+                                    </td>
+                                    <td class="text-success">
+
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.BankDetails.BankName" required>
+                                        }
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok text-success"></span>
+                                        Numéro SWIFT
+                                    </td>
+                                    <td class="text-success">
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.BankDetails.Swift" required>
+                                        }
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok text-success"></span>
+                                        Numéro IBAN
+                                    </td>
+                                    <td class="text-success">
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.BankDetails.Iban" required>
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    @*Billing Address*@
+                    <span class="text-success"><strong>Votre adresse de Facturation</strong><br></span>
+                    <div class="table-responsive">
+
+                        <table class="table table-user-information">
+
+                            <tbody>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user  text-success"></span>
+                                        Adresse
+                                    </td>
+                                    <td class="text-success">
+
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.BillingAddress.AddressLine" required>
+                                        }
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok text-success"></span>
+                                        Vile
+                                    </td>
+                                    <td class="text-success">
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.BillingAddress.City" required>
+                                        }
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok text-success"></span>
+                                        Département
+                                    </td>
+                                    <td class="text-success">
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.BillingAddress.Region" required>
+                                        }
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok text-success"></span>
+                                        Pays
+                                    </td>
+                                    <td class="text-success">
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.BillingAddress.Country" required>
+                                        }
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok text-success"></span>
+                                        Code Postale
+                                    </td>
+                                    <td class="text-success">
+                                        @foreach (var user in Model)
+                                        {
+                                            <input type="text" class="form-control" size="10" value="@user.BillingAddress.PostalCode" required>
+                                        }
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <button class="btn btn-success" type="submit">Soumettre</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<hr class="solid">
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

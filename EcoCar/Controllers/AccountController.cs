@@ -121,7 +121,7 @@ namespace EcoCar.Controllers
         }
 
         //Updating Account
-        public IActionResult UpdateAccount()
+        public IActionResult UpdateUser()
         {
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             List<User> users = dalPersonManagement.GetAllUsers();
@@ -129,25 +129,13 @@ namespace EcoCar.Controllers
             return View(users.ToList());
 
         }
+
         [HttpPost]
-        public IActionResult UpdateAccount(Account account)
+        public IActionResult UpdateUser(User user)
         {
-            if (!ModelState.IsValid)
-                return View(account);
-
-
-            if (account.Id != 0)
-            {
-                using (DalPersonManagement dal = new DalPersonManagement())
-                {
-                    dal.UpdateAccount(account);
-                    return RedirectToAction("UpdateAccount", new { @id = account.Id });
-                }
-            }
-            else
-            {
-                return View("Error");
-            }
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            dalPersonManagement.UpdateUser(user);
+            return View();
         }
 
         public IActionResult UserProfile()

@@ -113,7 +113,17 @@ namespace EcoCar.Models.Services
         }
 
         //Update User
-        public void UpdateUser(int id, string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId)
+        public void UpdateUser(
+            int id, 
+            string email, 
+            DateTime birthDate, 
+            int phoneNumber, 
+            int identityCardNumber, 
+            int drivingPermitNumber, 
+            int bankDetailsId, 
+            int billingAddressId, 
+            int personId
+            )
         {
             User user = _bddContext.Users.Find(id);
 

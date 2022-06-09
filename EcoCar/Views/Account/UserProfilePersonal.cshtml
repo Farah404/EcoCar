@@ -24,10 +24,7 @@
                         </span>
                     </li>
                 </ul>
-
-                <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/UpdateAccount'">Modifier mon profil</button>
-                <br>
-                <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Financial/EcoStore'">J'achète des EcoCoins</button>
+                <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/UpdateUser'">Modifier mon profil</button>
                 <br>
                 <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/CreateInsurance'">CreateVehicule</button>
             </div>
@@ -77,7 +74,20 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-ok text-success"></span>
+                                    <span class="glyphicon glyphicon-gift text-success"></span>
+                                    Date de naissance
+                                </td>
+                                <td class="text-success">
+                                     @foreach (var user in Model)
+                                    {
+                                        <p>@user.BirthDate</p>
+                                    }
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-inbox text-success"></span>
                                     Email
                                 </td>
                                 <td class="text-success">
@@ -90,8 +100,8 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-ok text-success"></span>
-                                    Numéro de Téléphone
+                                    <span class="glyphicon glyphicon-phone text-success"></span>
+                                    Numéro de téléphone
                                 </td>
                                 <td class="text-success">
                                     @foreach (var user in Model)
@@ -103,7 +113,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-ok text-success"></span>
+                                    <span class="glyphicon glyphicon-credit-card text-success"></span>
                                     CNI
 
                                 </td>
@@ -117,7 +127,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-ok text-success"></span>
+                                    <span class="glyphicon glyphicon-dashboard text-success"></span>
                                     Numéro de permis de conduire
                                 </td>
                                 <td class="text-success">
@@ -159,7 +169,7 @@
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-leaf text-success"></span>
-                                        Formule Abonnement
+                                        Formule abonnement
                                     </td>
                                     <td class="text-success">
                                     </td>
@@ -180,7 +190,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-user  text-success"></span>
+                                    <span class="glyphicon glyphicon-font  text-success"></span>
                                     Nom de votre Banque
                                 </td>
                                 <td class="text-success">
@@ -195,7 +205,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-ok text-success"></span>
+                                    <span class="glyphicon glyphicon-sort-by-order-alt text-success"></span>
                                     Numéro SWIFT
                                 </td>
                                 <td class="text-success">
@@ -208,7 +218,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-ok text-success"></span>
+                                    <span class="glyphicon glyphicon-sort-by-order text-success"></span>
                                     Numéro IBAN
                                 </td>
                                 <td class="text-success">
@@ -231,7 +241,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-user  text-success"></span>
+                                    <span class="glyphicon glyphicon-map-marker  text-success"></span>
                                     Adresse
                                 </td>
                                 <td class="text-success">
@@ -246,7 +256,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-ok text-success"></span>
+                                    <span class="glyphicon glyphicon-picture text-success"></span>
                                     Vile
                                 </td>
                                 <td class="text-success">
@@ -259,7 +269,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-ok text-success"></span>
+                                    <span class="glyphicon glyphicon-tree-conifer text-success"></span>
                                     Département
                                 </td>
                                 <td class="text-success">
@@ -272,7 +282,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-ok text-success"></span>
+                                    <span class="glyphicon glyphicon-globe text-success"></span>
                                     Pays
                                 </td>
                                 <td class="text-success">
@@ -285,7 +295,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-ok text-success"></span>
+                                    <span class="glyphicon glyphicon-send text-success"></span>
                                     Code Postale
                                 </td>
                                 <td class="text-success">

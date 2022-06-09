@@ -160,8 +160,19 @@ namespace EcoCar.Controllers
 
         public IActionResult UserProfile()
         {
-            return View();
+            //var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //List<User> users = dalPersonManagement.GetAllUsers();
+            //users = users.Where(u => u.Id.CompareTo(userId)).ToList();
+
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            List<User> users = dalPersonManagement.GetAllUsers();
+            users = users.Where(u => u.Id==userId).ToList();
+
+
+            return View(users.ToList()) ;
         }
+
+
 
         public IActionResult UserProfilePersonal()
         {

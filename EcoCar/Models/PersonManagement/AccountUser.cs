@@ -11,6 +11,7 @@ namespace EcoCar.Models.PersonManagement
         public int Id { get; set; }
 
         //Attributes
+
         public double UserRating { get; set; }
 
         public EcoStatusType SelectEcoStatusType { get; set; }

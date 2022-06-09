@@ -28,32 +28,43 @@ namespace EcoCar.Controllers
         public IActionResult CreateService(Service service)
         {
             if (HttpContext.User.Identity.IsAuthenticated)
-            {
-                var selectedValue = service.SelectServiceType;
-                ViewBag.ServiceType = selectedValue.ToString();
-                int serviceId = dalServiceManagement.CreateService(
-                   service.PublicationDate,
-                   service.ExpirationDate,
-                   service.ReferenceNumber,
-                   service.IsExpired,
-                   service.Start,
-                   service.End,
-                   service.SelectServiceType
-                   );
-                string url = "/Service/CreateCarRentalService";
-                if (selectedValue == Service.ServiceType.ParcelService)
-                {
-                    url = "/Service/CreateParcelService";
-                }
-                else
-                {
-                    if (selectedValue == Service.ServiceType.CarPoolingService)
-                    {
-                        url = "/Service/CreateItinerary" + "?serviceId=" + serviceId;
-                    }
-                }
-                return Redirect(url);
-            }
+                // TO add => récupere variable véhicule id
+                // ToAdd condition ListVéhiculesId existe)
+                // if(
+                        //{
+
+            
+                            {
+                                var selectedValue = service.SelectServiceType;
+                                ViewBag.ServiceType = selectedValue.ToString();
+                                int serviceId = dalServiceManagement.CreateService(
+                                   service.PublicationDate,
+                                   service.ExpirationDate,
+                                   service.ReferenceNumber,
+                                   service.IsExpired,
+                                   service.Start,
+                                   service.End,
+                                   service.SelectServiceType
+                                   );
+                                string url = "/Service/CreateCarRentalService";
+                                if (selectedValue == Service.ServiceType.ParcelService)
+                                {
+                                    url = "/Service/CreateParcelService";
+                                }
+                                else
+                                {
+                                    if (selectedValue == Service.ServiceType.CarPoolingService)
+                                    {
+                                        url = "/Service/CreateItinerary" + "?serviceId=" + serviceId;
+                                    }
+                                }
+                                return Redirect(url);
+                            }
+                //else
+                //{
+                //    return Redirect("/Account/UserProfilePersonal");
+                //}
+                    //}
             return Redirect("/account/loginAccount");
         }
         //Creating Itinerary

@@ -3,6 +3,7 @@ using EcoCar.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using static EcoCar.Models.ServiceManagement.CarPoolingService;
 
 namespace EcoCar.Controllers
 {
@@ -127,13 +128,7 @@ namespace EcoCar.Controllers
 
         //Search Service
 
-        public ActionResult SearchService()
-        {
-            List<Service> services = dalServiceManagement.GetAllServices();
-            return View(services.ToList());
-        }
-
-        public ActionResult ServicesFilter (string ServiceType)
+      public ActionResult ServicesFilter (string ServiceType)
         {
             var services = dalServiceManagement.GetAllServices();
 
@@ -147,15 +142,12 @@ namespace EcoCar.Controllers
 
                 if (mainCategory == "carPoolingService")
                 {
-                    List<CarPoolingService> carPoolingServices = services.Cast<CarPoolingService>().ToList();
-                    //carPoolingServices = carPoolingServices.Where(l => l.CarPoolingType.ToString() == subCategory).ToList();
-                    services = carPoolingServices.Cast<Service>().ToList();
+                    return View("CarPoolingSearch");
                 }
 
                 else if (mainCategory == "CarRentalService")
                 {
                     List<CarRentalService> CarRentalServices = services.Cast<CarRentalService>().ToList();
-                    //carRentalServices = CarRentalServices.Where(l => l.CarRentalType.ToString() == subCategory).ToList();
                     services = CarRentalServices.Cast<Service>().ToList();
                 }
 
@@ -171,6 +163,31 @@ namespace EcoCar.Controllers
 
             return View("SearchService", services);
         }
+
+
+        public ActionResult SearchCarPoolingService (CarPoolingType SelectCarPoolingType)
+        {
+            var services = dalServiceManagement.GetAllServices();
+            List<CarPoolingService> carPoolingServices = services.Cast<CarPoolingService>().ToList();
+            services = carPoolingServices.Cast<Service>().ToList();
+            
+            //List<CarPoolingService> carPoolingServices = services.Cast<CarPoolingService>().ToList();
+
+            return View ("SearchCarPooling");
+
+        }
+
+        //public ActionResult SearchParcelService()
+        //{
+        //    var services = dalServiceManagement.GetAllServices();
+        //    List<CarPoolingService> carPoolingServices = services.Cast<CarPoolingService>().ToList();
+        //    services = carPoolingServices.Cast<Service>().ToList();
+
+        //    //List<CarPoolingService> carPoolingServices = services.Cast<CarPoolingService>().ToList();
+
+        //    return View("SearchCarPooling");
+
+        //}
 
 
     }

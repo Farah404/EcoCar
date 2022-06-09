@@ -1,37 +1,36 @@
-﻿@model List<EcoCar.Models.ServiceManagement.Service>
-@*@model IEnumerable<CarPoolingService>*@
+﻿
+@using EcoCar.Models.ServiceManagement
+@model IEnumerable<CarPoolingService>
 @*@model EcoCar.Models.ServiceManagement.Trajectory*@
-
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "EcoCar Accueil";
+    ViewBag.Title = "EcoCar Covoiturage";
 }
-        <!--Add a form with an input field and a button-->
-        
-        <form action = "/service/FilterServices" method="get">
+             
+        <form action = "/service/ServicesFilter" method="get">
 				<div id = "choix_typeService"><label> Rechercher par type de service : </label> <br/>  
 					<select name="ServiceType" onChange = "submit()"> 
 						<option value ="Tous">Tous</option> 
-                        <option value ="HomeToWork">Domicile-Travail</option>
-                        <option value ="HomeToSchool">Domicile-Ecole/Université</option>
-                        <option value ="Events">Evénement</option>
-                         <option value ="Travel">Voyage</option>
+                        <option value ="CarPooling">Covoiturage</option>
+                        <option value ="CarRental">Location de véhicule</option>
+                        <option value ="Parcel">Transport de colis</option>
 					</select>
                  </div>
         </form>
-            
-        
-       <div class="row justify-content-start">
+   
+         <div class="row justify-content-start">
 			@foreach (var service in Model)
 			{
 				<div class="card col-6 m-5" style="width: 18rem;">
 					<div class="card-body d-flex flex-column justify-content-between">
                         <div>
-                             <h5 class="card-title">@service.ReferenceNumber</h5>
-                          <div class="my-3">
-                              @* <img src="@sejour.imagepath" width="200" height="200" />*@
+                            @*<h5 class="card-title">@Html.LabelFor(model => model.) && @Html.LabelFor(model => model.DeliveryAddress) ; </h5>*@
+                            @*<h5 class="card-title">@NOM DU SERVICE</h5>*@
+                            <div class="my-3">
+                               @* <img src="@sejour.ImagePath" width="200" height="200" />*@
                             </div>
 
+                            <h6 class="card-subtitle mb-2 text-muted">@service.ReferenceNumber </h6>
                             <h6 class="card-subtitle mb-2 text-muted">@service.Start</h6>
                             <h6 class="card-subtitle mb-2 text-muted">@service.End</h6>
                             <p class="card-text">@service.SelectServiceType</p>

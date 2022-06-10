@@ -19,7 +19,7 @@
                                 
                                 <br>
                                 <p>Modifier ma photo de profil</p>
-                                @Html.TextBoxFor(model => model.Person.ProfilePictureURL, new { @class = "form-control", placeholder = "ProfilePicUrl", })
+                                @Html.TextBoxFor(model => model.Person.ProfilePictureURL, new { @class = "form-control", placeholder = "Votre image de profil", })
                                 <input type="file" id="file" name="file" multiple>
                                 <br>
                             </span>
@@ -62,7 +62,7 @@
                                     <td class="text-success">
 
 
-                                        @Html.TextBoxFor(model => model.Person.LastName, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.TextBoxFor(model => model.Person.LastName, new { @class = "form-control", placeholder = "Nom" })
                                         
 
                                     </td>
@@ -92,7 +92,7 @@
                                         Date de naissance
                                     </td>
                                     <td class="text-success">
-                                        @Html.TextBoxFor(model => model.BirthDate, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.EditorFor(model => model.BirthDate, new { @class = "form-control", placeholder = "Date de naissance" })
                                       
                                     </td>
                                 </tr>
@@ -102,7 +102,7 @@
                                         Email
                                     </td>
                                     <td class="text-success">
-                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Courriel" })
                                     </td>
                                 </tr>
 
@@ -112,7 +112,7 @@
                                         Numéro de Téléphone
                                     </td>
                                     <td class="text-success">
-                                       @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Prénom" })
+                                       @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Numéro de téléphone" })
                                     </td>
                                 </tr>
 
@@ -123,7 +123,7 @@
 
                                     </td>
                                     <td class="text-success">
-                                        @Html.TextBoxFor(model => model.IdentityCardNumber, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.TextBoxFor(model => model.IdentityCardNumber, new { @class = "form-control", placeholder = "CNI" })
                                     </td>
                                 </tr>
 
@@ -133,7 +133,7 @@
                                         Numéro de permis de conduire
                                     </td>
                                     <td class="text-success">
-                                        @Html.TextBoxFor(model => model.DrivingPermitNumber, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.TextBoxFor(model => model.DrivingPermitNumber, new { @class = "form-control", placeholder = "Numéro de permis de conduire" })
                                     </td>
                                 </tr>
 
@@ -196,7 +196,7 @@
                                     </td>
                                     <td class="text-success">
 
-                                      @Html.TextBoxFor(model => model.BankDetails.BankName, new { @class = "form-control", placeholder = "Prénom" })
+                                      @Html.TextBoxFor(model => model.BankDetails.BankName, new { @class = "form-control", placeholder = "Agence bancaire" })
 
                                     </td>
                                 </tr>
@@ -207,7 +207,7 @@
                                         Numéro SWIFT
                                     </td>
                                     <td class="text-success">
-                                        @Html.TextBoxFor(model => model.BankDetails.Swift, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.TextBoxFor(model => model.BankDetails.Swift, new { @class = "form-control", placeholder = "Code SWIFT" })
                                     </td>
                                 </tr>
 
@@ -217,7 +217,7 @@
                                         Numéro IBAN
                                     </td>
                                     <td class="text-success">
-                                        @Html.TextBoxFor(model => model.BankDetails.Iban, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.TextBoxFor(model => model.BankDetails.Iban, new { @class = "form-control", placeholder = "IBAN" })
                                     </td>
                                 </tr>
                             </tbody>
@@ -238,7 +238,7 @@
                                     </td>
                                     <td class="text-success">
 
-                                        @Html.TextBoxFor(model => model.BillingAddress.AddressLine, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.TextBoxFor(model => model.BillingAddress.AddressLine, new { @class = "form-control", placeholder = "Adresse" })
 
                                     </td>
                                 </tr>
@@ -249,7 +249,7 @@
                                         Vile
                                     </td>
                                     <td class="text-success">
-                                        @Html.TextBoxFor(model => model.BillingAddress.City, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.TextBoxFor(model => model.BillingAddress.City, new { @class = "form-control", placeholder = "Ville" })
                                     </td>
                                 </tr>
 
@@ -259,7 +259,7 @@
                                         Région
                                     </td>
                                     <td class="text-success">
-                                        @Html.TextBoxFor(model => model.BillingAddress.Region, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.TextBoxFor(model => model.BillingAddress.Region, new { @class = "form-control", placeholder = "Région" })
                                     </td>
                                 </tr>
 
@@ -269,7 +269,7 @@
                                         Pays
                                     </td>
                                     <td class="text-success">
-                                        @Html.TextBoxFor(model => model.BillingAddress.Country, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.TextBoxFor(model => model.BillingAddress.Country, new { @class = "form-control", placeholder = "Pays" })
                                     </td>
                                 </tr>
 
@@ -279,7 +279,7 @@
                                         Code Postal
                                     </td>
                                     <td class="text-success">
-                                        @Html.TextBoxFor(model => model.BillingAddress.PostalCode, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.TextBoxFor(model => model.BillingAddress.PostalCode, new { @class = "form-control", placeholder = "Code postal" })
                                     </td>
                                 </tr>
                                 
@@ -293,7 +293,8 @@
                         
                     </div>
                 </div>
-              <button class="btn btn-success btn-xl" type="submit">Soumettre les modifications</button>
+                <center><button class="btn btn-success btn-xl" type="submit">Soumettre les modifications</button></center>
+              
             }
         </div>
     </div>

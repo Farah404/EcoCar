@@ -12,7 +12,7 @@
 <div class="container-fluid bg-grey">
     @*Service List Display*@
     <div class="table-responsive">
-        <center><input  style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation..."></center><br />
+        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation..."></center><br />
         <table class="table" id="userTable">
             <thead>
                 <tr class="header">
@@ -25,14 +25,16 @@
             <tbody>
                 @foreach (var service in Model)
                 {
+
                     <tr>
 
 
                         <td>@service.Start</td>
                         <td>@service.SelectServiceType</td>
                         <td>@service.ReferenceNumber</td>
-                        <td><a href="/Service/ReserveCarPoolingService" ><span class="glyphicon glyphicon-transfer  text-success"></span></a>
-                            </td>
+                        <td>
+                            <a href="/Service/ReserveCarPoolingService/@service.Id"><span class="glyphicon glyphicon-transfer  text-success"></span></a>
+                        </td>
 
 
                     </tr>

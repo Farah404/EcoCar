@@ -93,11 +93,11 @@ namespace EcoCar.Models.Services
         //Create User
         public User CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId)
         {
-            User user = new User() { 
-                Email = email, 
-                BirthDate = birthDate, 
-                PhoneNumber = phoneNumber, 
-                IdentityCardNumber = identityCardNumber, 
+            User user = new User() {
+                Email = email,
+                BirthDate = birthDate,
+                PhoneNumber = phoneNumber,
+                IdentityCardNumber = identityCardNumber,
                 DrivingPermitNumber = drivingPermitNumber,
                 BankDetails = _bddContext.BankingDetails.First(b => b.Id == bankDetailsId),
                 BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId),

@@ -35,6 +35,7 @@ namespace EcoCar.Models.DataBase
         public DbSet<CarRentalService> CarRentalServices { get; set; }
         public DbSet<Trajectory> Trajectories { get; set; }
         public DbSet<Itinerary> Itineraries { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
 
         //Messaging Management
         public DbSet<Message> Messages { get; set; }
@@ -46,7 +47,7 @@ namespace EcoCar.Models.DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rootine;database=EcoCar");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
         }
 
         public void InitializeDb()
@@ -73,7 +74,7 @@ namespace EcoCar.Models.DataBase
                     BankDetailsId = 1,
                     BillingAddressId = 1,
                     PersonId = 1,
-                    VehiculeId=1
+                    VehiculeId=1,
                 }
                 );
             this.Accounts.Add(

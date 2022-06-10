@@ -26,7 +26,7 @@ namespace EcoCar.Models.Services
         {
             return _bddContext.Services.ToList();
         }
-        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType)
+        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType, int? userProviderId)
         {
             Service service = new Service()
             {
@@ -36,7 +36,8 @@ namespace EcoCar.Models.Services
                 IsExpired = isExpired,
                 Start = start,
                 End = end,
-                SelectServiceType = selectServiceType
+                SelectServiceType = selectServiceType,
+                UserProvider = _bddContext.Users.First(s => s.Id == userProviderId)
             };
             _bddContext.Services.Add(service);
             _bddContext.SaveChanges();
@@ -116,8 +117,8 @@ namespace EcoCar.Models.Services
                 SmokingAllowed = smokingAllowed,
                 MusicAllowed = musicAllowed,
                 ChattingAllowed = chattingAllowed,
-                Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId),
                 Trajectory = _bddContext.Trajectories.First(b => b.Id == trajectoryId),
+                Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId),
                 Service = _bddContext.Services.First(b => b.Id == serviceId)
             };
             _bddContext.CarPoolingServices.Add(carPoolingService);
@@ -262,7 +263,7 @@ namespace EcoCar.Models.Services
                 Fragile = fragile,
                 Trajectory = _bddContext.Trajectories.First(b => b.Id == trajectoryId),
                 Service = _bddContext.Services.First(b => b.Id == serviceId),
-                Vehicule = _bddContext.Vehicules.First(b =>b.Id == vehiculeId)
+                Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId)
             };
             _bddContext.ParcelServices.Add(parcelService);
             _bddContext.SaveChanges();
@@ -371,11 +372,12 @@ namespace EcoCar.Models.Services
         }
         public int CreateTrajectory(int durationHours, int stopNumber, int stopsDurationMinutes, string pickUpAddress, string deliveryAddress, TrajectoryType selectTrajectoryType, int itineraryId)
         {
-            Trajectory trajectory = new Trajectory() { 
-                DurationHours = durationHours, 
-                StopNumber = stopNumber, 
-                StopsDurationMinutes = stopsDurationMinutes, 
-                PickUpAddress = pickUpAddress, 
+            Trajectory trajectory = new Trajectory()
+            {
+                DurationHours = durationHours,
+                StopNumber = stopNumber,
+                StopsDurationMinutes = stopsDurationMinutes,
+                PickUpAddress = pickUpAddress,
                 DeliveryAddress = deliveryAddress,
                 SelectTrajectoryType = selectTrajectoryType,
                 Itinerary = _bddContext.Itineraries.First(b => b.Id == itineraryId)
@@ -426,6 +428,57 @@ namespace EcoCar.Models.Services
         {
             _bddContext.Dispose();
         }
+
+        //-------------------------------------------------------------------------------------------------
+
+        //CRUD Reservation
+
+        public List<Reservation> GetAllReservations()
+        {
+            return _bddContext.Reservations.Include(r => r.ServiceConsumed).Include(r => r.ServiceUserConsumer).ToList();
+        }
+
+
+
+        //Create Reservation
+        public Reservation CreateReservation(int serviceConsumedId, int serviceUserConsumerId)
+        {
+            Reservation reservation = new Reservation()
+            {
+
+                ServiceConsumed = _bddContext.Services.First(s => s.Id == serviceConsumedId),
+                ServiceUserConsumer = _bddContext.Users.First(s => s.Id == serviceUserConsumerId)
+            };
+            _bddContext.Reservations.Add(reservation);
+            _bddContext.SaveChanges();
+            return reservation;
+        }
+        public void CreateReservation(Reservation reservation)
+        {
+            _bddContext.Reservations.Update(reservation);
+            _bddContext.SaveChanges();
+        }
+
+        //Update Reservation
+        public void UpdateReservation(int id, int serviceConsumedId, int serviceUserConsumerId)
+        {
+            Reservation reservation = _bddContext.Reservations.Find(id);
+
+            if (reservation != null)
+            {
+                reservation.Id = id;
+                reservation.ServiceConsumed = _bddContext.Services.First(s => s.Id == serviceConsumedId);
+                reservation.ServiceUserConsumer = _bddContext.Users.First(s => s.Id == serviceUserConsumerId);
+                _bddContext.SaveChanges();
+            }
+        }
+
+        public void UpdateReservation(Reservation reservation)
+        {
+            _bddContext.Reservations.Update(reservation);
+            _bddContext.SaveChanges();
+        }
+
     }
 
 }

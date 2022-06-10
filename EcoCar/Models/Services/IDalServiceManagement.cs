@@ -39,7 +39,7 @@ namespace EcoCar.Models.Services
         //ParcelService
 
         List<ParcelService> GetAllParcelServices();
-        int CreateParcelService(int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId);
+        int CreateParcelService(int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId, int vehiculeId);
         void UpdateParcelService(int id, int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId);
         void DeleteParcelService(int id);
 

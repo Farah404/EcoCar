@@ -251,8 +251,8 @@ namespace EcoCar.Models.Services
         {
             return _bddContext.ParcelServices.Include(e => e.Trajectory).Include(e => e.Service).FirstOrDefault(e => e.Id == id);
         }
-    
-        public int CreateParcelService(int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId)
+
+        public int CreateParcelService(int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId, int vehiculeId)
         {
             ParcelService parcelService = new ParcelService()
             {
@@ -261,7 +261,8 @@ namespace EcoCar.Models.Services
                 AtypicalVolume = atypicalVolume,
                 Fragile = fragile,
                 Trajectory = _bddContext.Trajectories.First(b => b.Id == trajectoryId),
-                Service = _bddContext.Services.First(b => b.Id == serviceId)
+                Service = _bddContext.Services.First(b => b.Id == serviceId),
+                Vehicule = _bddContext.Vehicules.First(b =>b.Id == vehiculeId)
             };
             _bddContext.ParcelServices.Add(parcelService);
             _bddContext.SaveChanges();

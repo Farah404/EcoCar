@@ -77,13 +77,14 @@ namespace EcoCar.Controllers
         }
 
         //Creating a user based on a person
-        public IActionResult CreateUser(int bankDetailsId, int billingAddressId, int personId)
+        public IActionResult CreateUser(int bankDetailsId, int billingAddressId, int personId, int? vehiculeId)
         {
             User user = new User()
             {
                 BankDetailsId = bankDetailsId,
                 BillingAddressId = billingAddressId,
-                PersonId = personId
+                PersonId = personId,
+                VehiculeId = vehiculeId
             };
             return View();
         }
@@ -98,7 +99,8 @@ namespace EcoCar.Controllers
                 user.DrivingPermitNumber, 
                 user.BankDetailsId, 
                 user.BillingAddressId, 
-                user.PersonId);
+                user.PersonId,
+                user.VehiculeId);
 
             string url = "/Account/CreateAccount" + "?personId=" + personId;
             return Redirect(url);

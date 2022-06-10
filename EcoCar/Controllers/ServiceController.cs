@@ -1,14 +1,20 @@
 ﻿using EcoCar.Models.ServiceManagement;
+using EcoCar.Models.PersonManagement;
 using EcoCar.Models.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Security.Claims;
+
 namespace EcoCar.Controllers
 {
     public class ServiceController : Controller
     {
         private IDalServiceManagement dalServiceManagement;
+        private IDalPersonManagement dalPersonManagement;
         public ServiceController()
         {
             dalServiceManagement = new DalServiceManagement();
+            dalPersonManagement = new DalPersonManagement();
         }
         public ActionResult SearchService()
         {
@@ -16,26 +22,19 @@ namespace EcoCar.Controllers
         }
         public ActionResult CreateService()
         {
+
             return View();
         }
-        //if (HttpContext.User.Identity.IsAuthenticated)
-        //    {
-        //        var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //        viewModel.Account = dalPersonManagement.GetAccount(userId);
-        //        return Redirect("/home/index");
-        //    }
+ 
         [HttpPost]
         public IActionResult CreateService(Service service)
         {
             if (HttpContext.User.Identity.IsAuthenticated)
-                // TO add => récupere variable véhicule id
-                // ToAdd condition ListVéhiculesId existe)
-                // if(
-                        //{
-
-            
                             {
-                                var selectedValue = service.SelectServiceType;
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                User user = dalPersonManagement.GetAllUsers().FirstOrDefault(r => r.Id == userId);
+                int? vehiculeId = user.VehiculeId;
+                var selectedValue = service.SelectServiceType;
                                 ViewBag.ServiceType = selectedValue.ToString();
                                 int serviceId = dalServiceManagement.CreateService(
                                    service.PublicationDate,
@@ -46,38 +45,34 @@ namespace EcoCar.Controllers
                                    service.End,
                                    service.SelectServiceType
                                    );
-                                string url = "/Service/CreateCarRentalService";
+                                string url = "/Service/CreateItinerary"+ "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
                                 if (selectedValue == Service.ServiceType.ParcelService)
                                 {
-                                    url = "/Service/CreateParcelService";
+                                    url = "/Service/CreateItinerary" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
                                 }
                                 else
                                 {
-                                    if (selectedValue == Service.ServiceType.CarPoolingService)
+                                    if (selectedValue == Service.ServiceType.CarRentalService)
                                     {
-                                        url = "/Service/CreateItinerary" + "?serviceId=" + serviceId;
+                                        url = "/Service/CreateCarRentalService" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
                                     }
                                 }
                                 return Redirect(url);
                             }
-                //else
-                //{
-                //    return Redirect("/Account/UserProfilePersonal");
-                //}
-                    //}
             return Redirect("/account/loginAccount");
         }
         //Creating Itinerary
-        public IActionResult CreateItinerary(int serviceId)
+        public IActionResult CreateItinerary(int serviceId, int vehiculeId)
         {
             ViewBag.serviceId = serviceId;
+            ViewBag.vehiculeId = vehiculeId;
             return View();
         }
         [HttpPost]
-        public IActionResult CreateItinerary(Itinerary itinerary, int serviceId)
+        public IActionResult CreateItinerary(Itinerary itinerary, int serviceId, int vehiculeId)
         {
             int itineraryId = dalServiceManagement.CreateItinerary(itinerary.FirtsStopAddress, itinerary.SecondStopAddress, itinerary.ThirdStopAddress);
-            string url = "/Service/CreateTrajectory" + "?serviceId=" + serviceId + "&itineraryId=" + itineraryId;
+            string url = "/Service/CreateTrajectory" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId +"&itineraryId=" + itineraryId;
             return Redirect(url);
         }
         //Creating Trajectory
@@ -100,7 +95,13 @@ namespace EcoCar.Controllers
                 trajectory.SelectTrajectoryType,
                 trajectory.ItineraryId
                 );
+            Service service = dalServiceManagement.GetAllServices().FirstOrDefault(r => r.Id == serviceId);
+            var selectedValue = service.SelectServiceType;
             string url = "/Service/CreateCarPoolingService" + "?itineraryId=" + itineraryId + "&TrajectoryId=" + trajectoryId + "&serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
+            if (selectedValue == Service.ServiceType.ParcelService)
+            {
+                url = "/Service/CreateParcelService" + "?itineraryId=" + itineraryId + "&TrajectoryId=" + trajectoryId + "&serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
+            }
             return Redirect(url);
         }
         public IActionResult CreateCarPoolingService(int serviceId, int trajectoryId, int vehiculeId)
@@ -130,13 +131,51 @@ namespace EcoCar.Controllers
             string url = "/Home/Index";
             return Redirect(url);
         }
-        public ActionResult CreateCarRentalService()
+        public ActionResult CreateCarRentalService(int serviceId, int vehiculeId)
         {
+            CarRentalService carRentalService = new CarRentalService()
+            {
+                ServiceId = serviceId,
+                VehiculeId = vehiculeId
+            };
             return View();
         }
-        public ActionResult CreateParcelService()
+        [HttpPost]
+        public IActionResult CreateCarRentalService(CarRentalService carRentalService)
         {
+            dalServiceManagement.CreateCarRentalService(
+                carRentalService.KeyPickUpAddress,
+                carRentalService.KeyDropOffAddress,
+                carRentalService.VehiculeId,
+                carRentalService.ServiceId
+                );
+            string url = "/Home/Index";
+            return Redirect(url);
+        }
+        public ActionResult CreateParcelService(int serviceId, int trajectoryId, int vehiculeId)
+        {
+            ParcelService parcelService = new ParcelService()
+            {
+                ServiceId = serviceId,
+                TrajectoryId = trajectoryId,
+                VehiculeId = vehiculeId
+            };
             return View();
+        }
+        [HttpPost]
+        public IActionResult CreateParcelService(ParcelService parcelService)
+        {
+            dalServiceManagement.CreateParcelService(
+                parcelService.BarCode,
+                parcelService.WeightKilogrammes,
+                parcelService.AtypicalVolume,
+                parcelService.Fragile,
+                parcelService.TrajectoryId,
+                parcelService.ServiceId,
+                parcelService.VehiculeId
+                );
+            string url = "/Home/Index";
+            return Redirect(url);
         }
     }
 }

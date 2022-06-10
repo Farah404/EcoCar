@@ -28,6 +28,9 @@ namespace EcoCar.Models.PersonManagement
         public int BillingAddressId { get; set; }
         public BillingAddress BillingAddress { get; set; }
 
+        public int? VehiculeId { get; set; }
+        public Vehicule Vehicule { get; set; }
+
         //Inheritance Class
         public int PersonId { get; set; }
         public Person Person { get; set; }

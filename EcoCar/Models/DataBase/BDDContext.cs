@@ -72,7 +72,8 @@ namespace EcoCar.Models.DataBase
                     DrivingPermitNumber = 1230432153,
                     BankDetailsId = 1,
                     BillingAddressId = 1,
-                    PersonId = 1
+                    PersonId = 1,
+                    VehiculeId=1
                 }
                 );
             this.Accounts.Add(

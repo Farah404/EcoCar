@@ -55,8 +55,7 @@ namespace EcoCar.Controllers
                                service.Start,
                                service.End,
                                service.SelectServiceType,
-                               userId,
-                               null
+                               userId
                                ) ;
                                 string url = "/Service/CreateItinerary"+ "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
                                 if (selectedValue == Service.ServiceType.ParcelService)
@@ -195,7 +194,9 @@ namespace EcoCar.Controllers
         public ActionResult ReserveCarPoolingService()
         {
 
-            return View();
+            List<CarPoolingService> carPoolingServices = dalServiceManagement.GetAllCarPoolingServices();
+
+            return View(carPoolingServices.ToList());
 
         }
     }

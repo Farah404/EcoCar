@@ -28,8 +28,6 @@ namespace EcoCar.Models.ServiceManagement
         public int? UserProviderId { get; set; }
         public User UserProvider { get; set; }
 
-        public int? UserConsumerId { get; set; }
-        public User UserConsumer { get; set; }
     }
 
 }

@@ -1,6 +1,6 @@
-﻿@using static EcoCar.Models.ServiceManagement.Service
+﻿@using static EcoCar.Models.ServiceManagement.CarPoolingService
 
-@model List<EcoCar.Models.ServiceManagement.Service>
+@model List<EcoCar.Models.ServiceManagement.CarPoolingService>
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Proposer une Prestation";
@@ -33,7 +33,10 @@
                                     Type de covoiturage
                                 </td>
                                 <td class="text-success">
-                                    ***
+                                    @foreach (var carPoolingService in Model)
+                                    {
+                                        <p>@carPoolingService.SelectCarPoolingType.</p>
+                                    }
                                 </td>
                             </tr>
 

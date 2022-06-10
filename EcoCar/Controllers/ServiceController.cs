@@ -109,11 +109,20 @@ namespace EcoCar.Controllers
                 );
             Service service = dalServiceManagement.GetAllServices().FirstOrDefault(r => r.Id == serviceId);
             var selectedValue = service.SelectServiceType;
-            string url = "/Service/CreateCarPoolingService" + "?itineraryId=" + itineraryId + "&TrajectoryId=" + trajectoryId + "&serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
+            string url = "/Shared/Error";
             if (selectedValue == Service.ServiceType.ParcelService)
             {
-                url = "/Service/CreateParcelService" + "?itineraryId=" + itineraryId + "&TrajectoryId=" + trajectoryId + "&serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
+                url = "/Service/CreateParcelService" + "?itineraryId=" + itineraryId + "&trajectoryId=" + trajectoryId + "&serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
             }
+            else if(selectedValue == Service.ServiceType.CarPoolingService)
+                {
+                url = "/Service/CreateCarPoolingService" + "?itineraryId=" + itineraryId + "&trajectoryId=" + trajectoryId + "&serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
+                }
+                else
+                {
+                url = "/Service/CreateCarRentalService" + "?itineraryId=" + itineraryId + "&trajectoryId=" + trajectoryId + "&serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
+            }
+            
             return Redirect(url);
         }
         public IActionResult CreateCarPoolingService(int serviceId, int trajectoryId, int vehiculeId)
@@ -136,8 +145,8 @@ namespace EcoCar.Controllers
                 carPoolingService.SmokingAllowed,
                 carPoolingService.MusicAllowed,
                 carPoolingService.ChattingAllowed,
-                carPoolingService.VehiculeId,
                 carPoolingService.TrajectoryId,
+                carPoolingService.VehiculeId,
                 carPoolingService.ServiceId
                 );
             string url = "/Home/Index";

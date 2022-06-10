@@ -117,8 +117,8 @@ namespace EcoCar.Models.Services
                 SmokingAllowed = smokingAllowed,
                 MusicAllowed = musicAllowed,
                 ChattingAllowed = chattingAllowed,
-                Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId),
                 Trajectory = _bddContext.Trajectories.First(b => b.Id == trajectoryId),
+                Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId),
                 Service = _bddContext.Services.First(b => b.Id == serviceId)
             };
             _bddContext.CarPoolingServices.Add(carPoolingService);

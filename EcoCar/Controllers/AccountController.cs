@@ -1,4 +1,5 @@
 ﻿using EcoCar.Models.PersonManagement;
+using EcoCar.Models.FinancialManagement;
 using EcoCar.Models.Services;
 using EcoCar.ViewModels;
 using Microsoft.AspNetCore.Authentication;
@@ -13,9 +14,11 @@ namespace EcoCar.Controllers
     public class AccountController : Controller
     {
         private IDalPersonManagement dalPersonManagement;
+        private IDalFinancialManagement dalFinancialManagement;
         public AccountController()
         {
             dalPersonManagement = new DalPersonManagement();
+            dalFinancialManagement = new DalFinancialManagement();
         }
 
         //Login
@@ -74,13 +77,14 @@ namespace EcoCar.Controllers
         }
 
         //Creating a user based on a person
-        public IActionResult CreateUser(int bankDetailsId, int billingAddressId, int personId)
+        public IActionResult CreateUser(int bankDetailsId, int billingAddressId, int personId, int? vehiculeId)
         {
             User user = new User()
             {
                 BankDetailsId = bankDetailsId,
                 BillingAddressId = billingAddressId,
-                PersonId = personId
+                PersonId = personId,
+                VehiculeId = vehiculeId
             };
             return View();
         }
@@ -95,7 +99,8 @@ namespace EcoCar.Controllers
                 user.DrivingPermitNumber, 
                 user.BankDetailsId, 
                 user.BillingAddressId, 
-                user.PersonId);
+                user.PersonId,
+                user.VehiculeId);
 
             string url = "/Account/CreateAccount" + "?personId=" + personId;
             return Redirect(url);
@@ -121,58 +126,140 @@ namespace EcoCar.Controllers
         }
 
         //Updating Account
-        public IActionResult UpdateAccount(int id)
+        public IActionResult UpdateUser(int? id)
+        
         {
-            if (id != 0)
+            if (id.HasValue)
             {
-                using (IDalPersonManagement dal = new DalPersonManagement())
-                {
-                    Account account = dal.GetAllAccounts().Where(a => a.Id == id).FirstOrDefault();
-                    if (account == null)
-                    {
-                        return View("Error");
-                    }
-                    return View(account);
-                }
-            }
-            return View("Error");
-        }
-        [HttpPost]
-        public IActionResult UpdateAccount(Account account)
-        {
-            if (!ModelState.IsValid)
-                return View(account);
+                User user = dalPersonManagement.GetAllUsers().FirstOrDefault(r => r.Id == id.Value);
+                if (user == null)
+                    return View("Error");
 
+                //string fileName = sejour.ImagePath.Split('/').Last();
+                //string uploads = Path.Combine(_webEnv.WebRootPath, "images");
+                //string filePath = Path.Combine(uploads, fileName);
+                //using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                //{
+                //    var file = new FormFile(fileStream, 0, fileStream.Length, null, fileName);
+                //    sejour.Image = file;
 
-            if (account.Id != 0)
-            {
-                using (DalPersonManagement dal = new DalPersonManagement())
-                {
-                    dal.UpdateAccount(account);
-                    return RedirectToAction("UpdateAccount", new { @id = account.Id });
-                }
+                //}
+                return View(user);
             }
             else
+                return NotFound();
+            //int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            //List<User> users = dalPersonManagement.GetAllUsers();
+            //users = users.Where(u => u.Id == userId).ToList();
+            //return View(users.ToList());
+
+        }
+
+        [HttpPost]
+        public IActionResult UpdateUser(User user)
+        {
+            dalPersonManagement.UpdateUser(
+                user.Id,
+                user.Email,
+                user.BirthDate,
+                user.PhoneNumber,
+                user.IdentityCardNumber,
+                user.DrivingPermitNumber,
+                user.BankDetailsId,
+                user.BillingAddressId,
+                user.PersonId
+                //user.BankDetails.BankName,
+                //user.BankDetails.Iban,
+                //user.BankDetails.Swift
+                //user.BillingAddress.City,
+                //user.BillingAddress.Country,
+                //user.BillingAddress.Region,
+                //user.BillingAddress.AddressLine,
+                //user.BillingAddress.PostalCode,
+                //user.Person.Name,
+                //user.Person.LastName,
+                //user.Person.ProfilePictureURL
+                );
+            dalPersonManagement.UpdatePerson(user.PersonId, user.Person.Name, user.Person.LastName, user.Person.ProfilePictureURL);
+            dalFinancialManagement.UpdateBankDetails(user.BankDetailsId, user.BankDetails.BankName, user.BankDetails.Swift, user.BankDetails.Iban);
+            dalFinancialManagement.UpdateBillingAddress(user.BillingAddressId, user.BillingAddress.AddressLine, user.BillingAddress.City, user.BillingAddress.Region, user.BillingAddress.Country, user.BillingAddress.PostalCode);
+            
+            return Redirect("/Account/UserProfilePersonal");
+        }
+
+        public IActionResult UserProfile()
+        {
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            List<User> users = dalPersonManagement.GetAllUsers();
+            users = users.Where(u => u.Id==userId).ToList();
+            return View(users.ToList()) ;
+        }
+
+
+
+        public IActionResult UserProfilePersonal()
+        {
             {
-                return View("Error");
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                List<User> users = dalPersonManagement.GetAllUsers();
+                users = users.Where(u => u.Id == userId).ToList();
+                return View(users.ToList());
             }
+          
         }
 
-        public ActionResult UserProfile()
+        public IActionResult ForgotPassword()
         {
             return View();
         }
 
-        public ActionResult UserProfilePersonal()
+        public IActionResult CreateInsurance()
         {
             return View();
         }
 
-        public ActionResult ForgotPassword()
+        public IActionResult LoginAdmin()
         {
             return View();
         }
 
+        [HttpPost]
+        public IActionResult CreateInsurance(Insurance insurance)
+        {
+            int insuranceId = dalPersonManagement.CreateInsurance(
+                   insurance.InsuranceAgency,
+                   insurance.InsuranceExpiration,
+                   insurance.ContractNumber
+                   );
+            string url = "/Account/CreateVehicule" + "?insuranceId=" + insuranceId;
+            return Redirect(url);
+        }
+
+        public ActionResult CreateVehicule(int insuranceId)
+        {
+            Vehicule vehicule = new Vehicule()
+            {
+                InsuranceId = insuranceId,
+            };
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult CreateVehicule(Vehicule vehicule)
+        {
+            dalPersonManagement.CreateVehicule(
+                   vehicule.Brand,
+                   vehicule.RegistrationNumber,
+                   vehicule.Model,
+                   vehicule.Hybrid,
+                   vehicule.Electric,
+                   vehicule.TechnicalTestExpiration,
+                   vehicule.AvailableSeats,
+                   vehicule.InsuranceId
+                   );
+            string url = "/Account/UserProfilePersonal";
+            return Redirect(url);
+        }
 
     }
 }

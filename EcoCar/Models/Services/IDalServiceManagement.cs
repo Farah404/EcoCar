@@ -22,8 +22,8 @@ namespace EcoCar.Models.Services
         //CarPoolingService
 
         List<CarPoolingService> GetAllCarPoolingServices();
-        CarPoolingService CreateCarPoolingService(CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int trajectoryId, int serviceId);
-        void UpdateCarPoolingService(int id, CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int trajectoryId, int serviceId);
+        CarPoolingService CreateCarPoolingService(CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int trajectoryId, int vehiculeId, int serviceId);
+        void UpdateCarPoolingService(int id, CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int trajectoryId, int vehiculeId, int serviceId);
         void DeleteCarPoolingService(int id);
 
         //-------------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ namespace EcoCar.Models.Services
         //ParcelService
 
         List<ParcelService> GetAllParcelServices();
-        int CreateParcelService(int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId);
+        int CreateParcelService(int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId, int vehiculeId);
         void UpdateParcelService(int id, int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId);
         void DeleteParcelService(int id);
 

@@ -46,7 +46,7 @@ namespace EcoCar.Models.DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=rootine;database=EcoCar");
         }
 
         public void InitializeDb()
@@ -72,7 +72,8 @@ namespace EcoCar.Models.DataBase
                     DrivingPermitNumber = 1230432153,
                     BankDetailsId = 1,
                     BillingAddressId = 1,
-                    PersonId = 1
+                    PersonId = 1,
+                    VehiculeId=1
                 }
                 );
             this.Accounts.Add(
@@ -129,7 +130,7 @@ namespace EcoCar.Models.DataBase
                     Hybrid = true,
                     Electric = false,
                     AvailableSeats = 3,
-                    InsuranceID = 1
+                    InsuranceId = 1,
                 });
             this.Insurances.Add(
                 new Insurance

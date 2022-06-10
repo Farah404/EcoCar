@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EcoCar.Models.PersonManagement
 {
-    public class Vehicule
+    public class Vehicle
     {
         //Primary Key
         public int Id { get; set; }

@@ -17,9 +17,9 @@ namespace EcoCar.Models.Services
 
         //User
         List<User> GetAllUsers();
-
-        User CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId);
-        void UpdateUser(int id, string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId);
+        User GetUser(int id);
+        User CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId);
+        void UpdateUser(int id, string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId/*, string name, string lastName, string profilePictureURL*/);
         void DeleteUser(int id);
 
         //-------------------------------------------------------------------------------------------------
@@ -61,8 +61,8 @@ namespace EcoCar.Models.Services
 
         //Vehicule
         List<Vehicule> GetAllVehicules();
-        int CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuraceId);
-        void UpdateVehicule(int id, string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuraceId);
+        Vehicule CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId);
+        void UpdateVehicule(int id, string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId);
         void DeleteVehicule(int id);
 
         //-------------------------------------------------------------------------------------------------

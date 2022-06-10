@@ -1,5 +1,6 @@
 ﻿using EcoCar.Models.DataBase;
 using EcoCar.Models.PersonManagement;
+using EcoCar.Models.FinancialManagement;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -79,7 +80,8 @@ namespace EcoCar.Models.Services
         //CRUD User
         public List<User> GetAllUsers()
         {
-            return _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).ToList();
+            List<User> listUsers = _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).ToList();
+            return listUsers;
         }
 
         public User GetUser(int id)
@@ -89,7 +91,7 @@ namespace EcoCar.Models.Services
 
 
         //Create User
-        public User CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId)
+        public User CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId)
         {
             User user = new User() { 
                 Email = email, 
@@ -99,7 +101,8 @@ namespace EcoCar.Models.Services
                 DrivingPermitNumber = drivingPermitNumber,
                 BankDetails = _bddContext.BankingDetails.First(b => b.Id == bankDetailsId),
                 BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId),
-                Person = _bddContext.People.First(b => b.Id == personId)
+                Person = _bddContext.People.First(b => b.Id == personId),
+                Vehicule = _bddContext.Vehicules.FirstOrDefault(b => b.Id == vehiculeId)
             };
             _bddContext.Users.Add(user);
             _bddContext.SaveChanges();
@@ -112,20 +115,38 @@ namespace EcoCar.Models.Services
         }
 
         //Update User
-        public void UpdateUser(int id, string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId)
-        {
-            User user = _bddContext.Users.Find(id);
+        public void UpdateUser(
+            int id,
+            string email,
+            DateTime birthDate,
+            int phoneNumber,
+            int identityCardNumber,
+            int drivingPermitNumber,
+            int bankDetailsId,
+            int billingAddressId,
+            int personId
+            //string name,
+            //string lastName,
+            //string profilePictureURL
 
-            if (user != null)
+            )
+        {
+            
+            User userToUpdate = _bddContext.Users.Find(id);
+
+            if (userToUpdate != null)
             {
-                user.Id = id;
-                user.Email = email;
-                user.BirthDate = birthDate;
-                user.PhoneNumber = phoneNumber;
-                user.IdentityCardNumber = identityCardNumber;
-                user.BankDetails = _bddContext.BankingDetails.First(b => b.Id == bankDetailsId);
-                user.BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId);
-                user.Person = _bddContext.People.First(b => b.Id == personId);
+                userToUpdate.Id = id;
+                userToUpdate.Email = email;
+                userToUpdate.BirthDate = birthDate;
+                userToUpdate.PhoneNumber = phoneNumber;
+                userToUpdate.IdentityCardNumber = identityCardNumber;
+                userToUpdate.BankDetails = _bddContext.BankingDetails.First(b => b.Id == bankDetailsId);
+                userToUpdate.BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId);
+                userToUpdate.Person = _bddContext.People.First(b => b.Id == personId);
+                //userToUpdate.Person.Name = name;
+                //userToUpdate.Person.LastName = lastName;
+                //userToUpdate.Person.ProfilePictureURL = profilePictureURL;
                 _bddContext.SaveChanges();
             }
         }
@@ -442,7 +463,7 @@ namespace EcoCar.Models.Services
         }
 
         //Create Vehicule
-        public int CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId)
+        public Vehicule CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId)
         {
             Vehicule vehicule = new Vehicule() {
                 Brand = brand, 
@@ -456,7 +477,7 @@ namespace EcoCar.Models.Services
             };
             _bddContext.Vehicules.Add(vehicule);
             _bddContext.SaveChanges();
-            return vehicule.Id;
+            return vehicule;
         }
         public void CreateVehicule(Vehicule vehicule)
         {

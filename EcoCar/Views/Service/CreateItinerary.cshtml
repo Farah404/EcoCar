@@ -2,7 +2,7 @@
 @model EcoCar.Models.ServiceManagement.Itinerary
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "Création Itinerary";
+    ViewBag.Title = "Définition de l'itinéraire";
 }
 
 
@@ -16,21 +16,21 @@
 
                 @using (Html.BeginForm())
                 {
-                    @Html.Label("FirtsStopAddress")<br>
+                    @Html.Label("Première étape éventuelle")<br>
                     @Html.TextBoxFor(model => model.FirtsStopAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
                     @Html.ValidationMessageFor(model => model.FirtsStopAddress)
                     <br>
 
-                    @Html.Label("SecondStopAddress")<br>
+                    @Html.Label("Deuxième étape éventuelle")<br>
                     @Html.TextBoxFor(model => model.SecondStopAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
                     @Html.ValidationMessageFor(model => model.SecondStopAddress)
                     <br>
 
-                    @Html.Label("ThirdStopAddress") <br>
+                    @Html.Label("Troisième étape éventuelle") <br>
                     @Html.TextBoxFor(model => model.ThirdStopAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
                     @Html.ValidationMessageFor(model => model.ThirdStopAddress)
                     <br>
-                    <button class="btn btn-success" type="submit">Soumettre</button>
+                    <button class="btn btn-success" type="submit">Suivant</button>
                 }
 
             </div>

@@ -1,7 +1,7 @@
 ﻿@model EcoCar.Models.PersonManagement.Account
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "CreateAccountStepOne";
+    ViewBag.Title = "Création de compte EcoCar";
 }
 <section class="sign-in-form" style="background-color: white;">
     <div class="container py-5 h-100">
@@ -19,7 +19,7 @@
                                 @using (Html.BeginForm())
                     {
                         <div class="form-floating mb-3">
-                            @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Alias" })
+                            @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Nom d'utilisateur" })
                             @Html.ValidationMessageFor(model => model.Username)
                         </div>
                          <br>

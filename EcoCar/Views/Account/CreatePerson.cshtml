@@ -20,7 +20,7 @@
                                 @using (Html.BeginForm())
                                 {
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.Person.Name, new { @class = "form-control", placeholder = "Prenom" })
+                                        @Html.TextBoxFor(model => model.Person.Name, new { @class = "form-control", placeholder = "Prénom" })
                                         @Html.ValidationMessageFor(model => model.Person.Name)
                                     </div>
                                      <br>
@@ -30,6 +30,7 @@
                                     </div>
                                      <br>
                                     <div>
+                                        @Html.TextBoxFor(model => model.Person.ProfilePictureURL, new { @class = "form-control", placeholder = "Votre image de profil" })
                                         @Html.ValidationMessageFor(model => model.Person.ProfilePictureURL)
                                         <input type="file" id="file" name="file" multiple>
                                     </div>

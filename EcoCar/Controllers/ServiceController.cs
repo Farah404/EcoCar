@@ -188,5 +188,13 @@ namespace EcoCar.Controllers
             string url = "/Home/Index";
             return Redirect(url);
         }
+
+        //Reserve
+        public ActionResult ReserveCarPoolingService()
+        {
+
+            return View();
+
+        }
     }
 }

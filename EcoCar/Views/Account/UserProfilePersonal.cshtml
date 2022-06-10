@@ -29,13 +29,13 @@
                     <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/UpdateUser/@user.Id'">Modifier mon profil</button>
                     <br>
                 }
-                <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/CreateInsurance'">CreateVehicule</button>
+                <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/CreateInsurance'">Ajouter un véhicule</button>
             </div>
 
 
             @*Information*@
             <div class="col-md-6">
-                <span class="text-success"><strong>Information</strong><br></span>
+                <span class="text-success"><strong>Informations</strong><br></span>
                 <div class="table-responsive">
 
                     <table class="table table-user-information">
@@ -117,7 +117,7 @@
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-credit-card text-success"></span>
-                                    CNI
+                                    Numéro de carte d'identité ou passeport
 
                                 </td>
                                 <td class="text-success">
@@ -172,7 +172,7 @@
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-leaf text-success"></span>
-                                        Formule abonnement
+                                        Formule d'abonnement
                                     </td>
                                     <td class="text-success">
                                     </td>
@@ -194,7 +194,7 @@
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-font  text-success"></span>
-                                    Nom de votre Banque
+                                    Nom de l'agence bancaire
                                 </td>
                                 <td class="text-success">
 
@@ -235,7 +235,7 @@
                     </table>
                 </div>
                 @*Billing Address*@
-                <span class="text-success"><strong>Votre adresse de Facturation</strong><br></span>
+                <span class="text-success"><strong>Adresse de Facturation</strong><br></span>
                 <div class="table-responsive">
 
                     <table class="table table-user-information">
@@ -260,7 +260,7 @@
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-picture text-success"></span>
-                                    Vile
+                                    Ville
                                 </td>
                                 <td class="text-success">
                                     @foreach (var user in Model)
@@ -273,7 +273,7 @@
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-tree-conifer text-success"></span>
-                                    Département
+                                    Région
                                 </td>
                                 <td class="text-success">
                                     @foreach (var user in Model)
@@ -299,7 +299,7 @@
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-send text-success"></span>
-                                    Code Postale
+                                    Code postal
                                 </td>
                                 <td class="text-success">
                                     @foreach (var user in Model)

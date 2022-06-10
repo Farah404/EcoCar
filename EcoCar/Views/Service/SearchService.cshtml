@@ -3,7 +3,7 @@
 @model List<EcoCar.Models.ServiceManagement.Service>
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "Proposer une Prestation";
+    ViewBag.Title = "Rechercher un service";
 }
 <!--Add a form with an input field and a button-->
 
@@ -12,7 +12,7 @@
 <div class="container-fluid bg-grey">
     @*Service List Display*@
     <div class="table-responsive">
-        <center><input  style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Chercher une prestation.."></center><br />
+        <center><input  style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation..."></center><br />
         <table class="table" id="userTable">
             <thead>
                 <tr class="header">
@@ -31,7 +31,7 @@
                         <td>@service.Start</td>
                         <td>@service.SelectServiceType</td>
                         <td>@service.ReferenceNumber</td>
-                        <td><span class="glyphicon glyphicon-transfer  text-success"></span>
+                        <td><a href="/Service/ReserveCarPoolingService" ><span class="glyphicon glyphicon-transfer  text-success"></span></a>
                             </td>
 
 

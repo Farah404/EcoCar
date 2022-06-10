@@ -1,7 +1,7 @@
 ﻿@model EcoCar.Models.PersonManagement.User
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "CreateAccountStepCreateUser";
+    ViewBag.Title = "Création de compte EcoCar";
 }
 <section class="sign-in-form" style="background-color: white;">
     <div class="container py-5 h-100">
@@ -20,18 +20,18 @@
                                 @using (Html.BeginForm())
                                 {
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Courriel" })
                                         @Html.ValidationMessageFor(model => model.Email)
                                     </div>
                                     <br>
                                     <div class="form-outline mb-4">
-                                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control",placeholder = "Date de naissance" } })
                                         @Html.ValidationMessageFor(model => model.BirthDate)
 
                                     </div>
                                     <br>
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.IdentityCardNumber, new { @class = "form-control", placeholder = "CNI" })
+                                        @Html.TextBoxFor(model => model.IdentityCardNumber, new { @class = "form-control", placeholder = "Numéro de carte d'identité" })
                                         @Html.ValidationMessageFor(model => model.IdentityCardNumber)
                                     </div>
                                     <br>

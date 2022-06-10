@@ -100,7 +100,8 @@ namespace EcoCar.Controllers
                 user.BankDetailsId, 
                 user.BillingAddressId, 
                 user.PersonId,
-                user.VehiculeId);
+                user.VehiculeId
+                );
 
             string url = "/Account/CreateAccount" + "?personId=" + personId;
             return Redirect(url);

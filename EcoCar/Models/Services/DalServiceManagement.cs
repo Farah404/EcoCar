@@ -26,7 +26,7 @@ namespace EcoCar.Models.Services
         {
             return _bddContext.Services.ToList();
         }
-        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType)
+        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType, int? userProviderId, int? userConsumerId)
         {
             Service service = new Service()
             {
@@ -36,7 +36,9 @@ namespace EcoCar.Models.Services
                 IsExpired = isExpired,
                 Start = start,
                 End = end,
-                SelectServiceType = selectServiceType
+                SelectServiceType = selectServiceType,
+                UserProvider = _bddContext.Users.First(s=>s.Id == userProviderId),
+                UserConsumer = _bddContext.Users.FirstOrDefault(s => s.Id == userConsumerId)
             };
             _bddContext.Services.Add(service);
             _bddContext.SaveChanges();

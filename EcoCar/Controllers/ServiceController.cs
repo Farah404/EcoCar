@@ -46,16 +46,18 @@ namespace EcoCar.Controllers
                 User user = dalPersonManagement.GetAllUsers().FirstOrDefault(r => r.Id == userId);
                 int? vehiculeId = user.VehiculeId;
                 var selectedValue = service.SelectServiceType;
-                                ViewBag.ServiceType = selectedValue.ToString();
-                                int serviceId = dalServiceManagement.CreateService(
-                                   service.PublicationDate,
-                                   service.ExpirationDate,
-                                   service.ReferenceNumber,
-                                   service.IsExpired,
-                                   service.Start,
-                                   service.End,
-                                   service.SelectServiceType
-                                   );
+                ViewBag.ServiceType = selectedValue.ToString();
+                int serviceId = dalServiceManagement.CreateService(
+                               service.PublicationDate,
+                               service.ExpirationDate,
+                               service.ReferenceNumber,
+                               service.IsExpired,
+                               service.Start,
+                               service.End,
+                               service.SelectServiceType,
+                               userId,
+                               null
+                               ) ;
                                 string url = "/Service/CreateItinerary"+ "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
                                 if (selectedValue == Service.ServiceType.ParcelService)
                                 {

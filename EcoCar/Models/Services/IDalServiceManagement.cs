@@ -12,7 +12,7 @@ namespace EcoCar.Models.Services
         //Service
 
         List<Service> GetAllServices();
-        int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType);
+        int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType, int? userProviderId, int? userConsumer);
         void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType);
         void UpdateService(Service service);
         void DeleteService(int id);

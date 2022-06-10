@@ -2,6 +2,7 @@
 //The User.cs contains all details of a specific user wishing to create an account
 
 using EcoCar.Models.FinancialManagement;
+using EcoCar.Models.ServiceManagement;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -34,6 +35,7 @@ namespace EcoCar.Models.PersonManagement
         //Inheritance Class
         public int PersonId { get; set; }
         public Person Person { get; set; }
+
 
     }
 

@@ -219,11 +219,6 @@ namespace EcoCar.Controllers
                 userId
                 );
 
-            
-
-            //List<CarPoolingService> carPoolingServices = dalServiceManagement.GetAllCarPoolingServices();
-            //carPoolingServices = carPoolingServices.Where(x => x.Id == id).ToList();
-
             dalServiceManagement.UpdateCarPoolingService(
                 carPoolingService.Id,
                 carPoolingService.SelectCarPoolingType,
@@ -239,5 +234,72 @@ namespace EcoCar.Controllers
             string url = "/Home/Index";
             return Redirect(url);
         }
+
+        public ActionResult ReserveParcelService(int? id)
+        {
+            List<ParcelService> parcelServices = dalServiceManagement.GetAllParcelServices();
+            parcelServices = parcelServices.Where(x => x.Id == id).ToList();
+            return View(parcelServices.ToList());
+
+        }
+
+        [HttpPost]
+        public IActionResult ReserveParcelService(Reservation reservation, int id)
+        {
+            ParcelService parcelService = dalServiceManagement.GetAllParcelServices().FirstOrDefault(x => x.Id == id);
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            dalServiceManagement.CreateReservation(
+                parcelService.Service.Id,
+                userId
+                );
+
+            dalServiceManagement.UpdateParcelService(
+                parcelService.Id,
+                parcelService.BarCode,
+                parcelService.WeightKilogrammes,
+                parcelService.AtypicalVolume,
+                parcelService.Fragile,
+                parcelService.TrajectoryId,
+                parcelService.ServiceId,
+                parcelService.VehiculeId
+                );
+
+            string url = "/Home/Index";
+            return Redirect(url);
+        }
+
+        public ActionResult ReserveCarRentalService(int? id)
+        {
+            List<CarRentalService> carRentalServices = dalServiceManagement.GetAllCarRentalServices();
+            carRentalServices = carRentalServices.Where(x => x.Id == id).ToList();
+            return View(carRentalServices.ToList());
+
+        }
+
+        [HttpPost]
+        public IActionResult ReserveCarRentalService(Reservation reservation, int id)
+        {
+            CarRentalService carRentalService = dalServiceManagement.GetAllCarRentalServices().FirstOrDefault(x => x.Id == id);
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            dalServiceManagement.CreateReservation(
+                carRentalService.Service.Id,
+                userId
+                );
+
+            dalServiceManagement.UpdateCarRentalService(
+                carRentalService.Id,
+                carRentalService.KeyPickUpAddress,
+                carRentalService.KeyDropOffAddress,
+                carRentalService.VehiculeId,
+                carRentalService.ServiceId
+                );
+
+            string url = "/Home/Index";
+            return Redirect(url);
+        }
+
+
     }
 }

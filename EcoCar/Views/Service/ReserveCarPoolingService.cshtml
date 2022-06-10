@@ -3,7 +3,7 @@
 @model List<EcoCar.Models.ServiceManagement.CarPoolingService>
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "Proposer une Prestation";
+    ViewBag.Title = "Reserver une prestation de covoiturage";
 }
 <!--Add a form with an input field and a button-->
 
@@ -13,18 +13,22 @@
 
             @*Profile picture Part with buttons*@
             <div class="col-md-4">
-                <img alt="" style="width:100%;" class="img-circle img-thumbnail  isTooltip" src="~/Images/Covoit.png">
-                @using (Html.BeginForm()){
-                <button class="btn btn-primary center-block" type="submit">Réserver la prestation</button>
-@*
+                <img alt="" style="width:100%;" class=" img-thumbnail" src="~/Images/Covoit.png">
+
+                @using (Html.BeginForm())
+                {
+                    <br><button class="btn btn-primary center-block" type="submit">Réserver la prestation</button>
+
+                    @*
                 @foreach(var carPoolingService in Model){
 
                 <button a.href="/Account/UserProfile/@carPoolingService.Service.UserProviderId" class="btn btn-primary center-block" type="submit">Consulter le profil de l'EcoMembre</button>
                 }*@
+
                 }
             </div>
-                
-            
+
+
 
             <div class="col-md-6">
                 <div class="table-responsive">
@@ -35,34 +39,34 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-user  text-success"></span>
+                                    <span class="glyphicon glyphicon-road  text-success"></span>
                                     Type de covoiturage
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carPoolingService in Model)
                                     {
-                                        <p>@carPoolingService.SelectCarPoolingType.</p>
+                                        <p>@carPoolingService.SelectCarPoolingType</p>
                                     }
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
-                                    AvailableSeats
+                                    <span class="glyphicon glyphicon-user text-success"></span>
+                                    Sièges disponibles
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carPoolingService in Model)
                                     {
-                                        <p>@carPoolingService.AvailableSeats.</p>
+                                        <p>@carPoolingService.AvailableSeats</p>
                                     }
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
-                                    DurationHours
+                                    <span class="glyphicon glyphicon-hourglass text-success"></span>
+                                    Durée du trajet en heure
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carPoolingService in Model)
@@ -74,8 +78,8 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
-                                    StopNumber
+                                    <span class="glyphicon glyphicon-pause text-success"></span>
+                                    Nombre d'arrêts
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carPoolingService in Model)
@@ -86,8 +90,8 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
-                                    StopsDurationMinutes
+                                    <span class="glyphicon glyphicon-time text-success"></span>
+                                    Durée d'arrêt en minutes
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carPoolingService in Model)
@@ -99,8 +103,8 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
-                                    PickUpAddress
+                                    <span class="glyphicon glyphicon-arrow-up text-success"></span>
+                                    Adresse de départ
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carPoolingService in Model)
@@ -112,8 +116,8 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
-                                    DeliveryAddress
+                                    <span class="glyphicon glyphicon-arrow-down text-success"></span>
+                                    Adresse d'arrivée
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carPoolingService in Model)
@@ -125,8 +129,8 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
-                                    SelectTrajectoryType
+                                    <span class="glyphicon glyphicon-resize-small text-success"></span>
+                                    Type du trajet
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carPoolingService in Model)
@@ -145,8 +149,8 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-user  text-success"></span>
-                                    PetsAllowed
+                                    <span class="glyphicon glyphicon-heart  text-success"></span>
+                                    Animaux de compagnie
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carPoolingService in Model)
@@ -158,8 +162,8 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
-                                    SmokingAllowed
+                                    <span class="glyphicon glyphicon-fire text-success"></span>
+                                    Fumeur
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carPoolingService in Model)
@@ -171,8 +175,8 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
-                                    MusicAllowed
+                                    <span class="glyphicon glyphicon-headphones text-success"></span>
+                                    Musique
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carPoolingService in Model)
@@ -184,8 +188,8 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
-                                    ChattingAllowed
+                                    <span class="glyphicon glyphicon-bullhorn text-success"></span>
+                                    Discussion
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carPoolingService in Model)
@@ -207,11 +211,5 @@
     </div>
 </div>
 
-
-<hr class="solid">
-<div id="services" class="container-fluid text-center">
-    <h2>Mon historique de prestations</h2>
-    <br>
-</div>
 
 <hr class="solid">

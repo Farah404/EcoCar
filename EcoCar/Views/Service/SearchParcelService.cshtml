@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "EcoCar Transport de colis";
+}
+        <!--Add a form with an input field and a button-->
+
+        
+        
+        
+        
+        <form action = "/service/SearchParcelService" method="get">
+				<div id = "choix_typeService"><label> Rechercher par caractéristiques du colis : </label> <br/>  
+					<select name="ServiceType" onChange = "submit()"> 
+						<option value ="Tous">Tous</option> 
+                        <option value ="WeightKilogrammes">Poids</option>
+                        <option value ="AtypicalVolume">Volume Atypique</option>
+                        <option value ="Fragile">Colis Fragile</option>
+					</select>
+                 </div>
+        </form>
+
+

@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "EcoCar Location de Véhicules";
+}
+        <!--Add a form with an input field and a button-->
+
+        <<form class="form-inline"> 
+            <div class="formHalf headForms  floatLeft inlineElements"> 
+                <input type="text" class="form-control" size="10" placeholder="Type de vehicule" required> 
+                <input type="text" class="form-control" size="10" placeholder="Lieu de retrait" required> 
+                 <input type="text" class="form-control" size="10" placeholder="Lieu de retour" required> 
+                 <input type="date" class="form-control" size="10" placeholder="Durée de location" required> 
+                 <button type="button" class="btn btn-success">Rechercher</button> 
+            </div> 
+        </form>
+
+        <form action = "/service/SearchCarpooling" method="get">
+				<div id = "choix_typeService"><label> Rechercher par marque de véhicule : </label> <br/> @* ou par mix de catégories/sous catégories type de moteur, marque, etc.*@
+					<select name="ServiceType" onChange = "submit()"> 
+
+                        <option value ="All">Tous</option> 
+                        <option value ="HomeToWork">Domicile-Travail</option>
+                        <option value ="HomeToSchool">Domicile-Ecole/Université</option>
+                        <option value ="Events">Evénement</option>
+                         <option value ="Travel">Voyage</option>
+					</select>
+                 </div>
+        </form>

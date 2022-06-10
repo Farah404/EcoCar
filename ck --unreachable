@@ -1,0 +1,60 @@
+[33m402199f[m[33m ([m[1;36mHEAD[m[33m, [m[1;32mSearchService[m[33m)[m Attempt all filters in one view => abort: no foreign key between Trajectory class and Service Classe
+[33m3b6aee9[m Search Service : Filter services method + view /!\ Existing service in the database are not displayed online (will be fixed)
+[33mb6cb6a3[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m Latest Version 08/06
+[33m5205c86[m Merge pull request #4 from Farah404/CreateCarPooling_Problem
+[33m83dd20e[m CarPoolingPbFixed
+[33m6e05e74[m CarPoolingService not working
+[33m3d37320[m Navigation entre type de prestation ok + FK added dans DAL/IDAL pour personne et service
+[33mc449ea6[m CreateService into BDD ok & redirectionPaths to appropriateServices okay-ish since views don't show
+[33m219528d[m Create Service View - drop dpwn list to be fixed
+[33me759fc4[m Adjusting Jumbotron & fixing paths on many views
+[33m44bb636[m Version prete pour modifier le shared layout
+[33ma7ba483[m Creation Account OK
+[33mdd1c63b[m Merge pull request #3 from Farah404/AccountViews_navigationLike
+[33mb5335d4[m[33m ([m[1;31morigin/AccountViews_navigationLike[m[33m)[m Lastest Version with Create user Ok and latest view updates
+[33m901383f[m Minor front changes + contacting user form added
+[33m263257c[m fixing NavBarlinks with IndexLayout & adding authentifiedNavBarLabels
+[33m6145307[m[33m ([m[1;31morigin/AccountViews_navigation[m[33m)[m FrontView MAJ
+[33mef25742[m SignIn OK
+[33ma1147e7[m AccountCreationOkay-ish & FinancialControllerCreated
+[33m0eb95b8[m EcoCarValues mini maj
+[33m58e5201[m about view minor modifications
+[33m44274f3[m EcoStore view WIP
+[33m1ad8737[m titles
+[33mb5c6cbf[m EcoStore View
+[33m0264b3b[m update values view
+[33m8037539[m Charte de Valeurs avec des tab
+[33m27b647a[m IndexAboutViews update & HomeFolder & HomeController
+[33m7bb43e9[m First try BDD account and homepage delete
+[33m11fecfb[m AddPerson Okay
+[33ma14bfbe[m IndexAdjustment
+[33m139cd4b[m IndexViewsv1
+[33m1bd1a21[m MainLayout MAJ
+[33m838d429[m SignUpOkayishView
+[33m489d7a9[m Maj View Login
+[33md1e8000[m Merge branch 'master' of https://github.com/Farah404/EcoCar
+[33m4ddb700[m Clean Version
+[33me9b208e[m remove vs obj bin
+[33medc92b1[m LatestVersion
+[33m3186a3f[m SiteLayoutMainLayoutDev
+[33md7936e3[m Brl_FrontEndSiteLayoutTemplate
+[33ma21281b[m Merge pull request #1 from Farah404/F_newVersion_withViews
+[33me52c7a6[m Delete EcoCar.dll
+[33m94619e7[m Delete EcoCar.deps.json
+[33m15636f7[m Delete EcoCar.Views.pdb
+[33m863b5db[m Delete EcoCar.Views.dll
+[33m83e05d7[m Delete EcoCar.pdb
+[33m64b6103[m Delete EcoCar/obj directory
+[33m367f5b8[m Delete .vs directory
+[33m6e633f2[m View create account
+[33macda4e8[m Views not working
+[33m15a9f51[m ajout gitignore
+[33m10a317e[m remove bin obj .vs
+[33ma13e124[m New Packages and Project Layout
+[33mcbaeb96[m All CRUD OK
+[33m3c73b93[m DalServiceManagement
+[33m1bd3687[m DalFinancialManagement
+[33md180107[m DalPersonManagement OK
+[33m3db449a[m DalPersonManagement
+[33m96a3ac8[m FolderCSS
+[33m82ef474[m initial commit

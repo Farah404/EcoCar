@@ -128,9 +128,10 @@ namespace EcoCar.Controllers
 
         //Search Service
 
-      public ActionResult ServicesFilter (string ServiceType)
+        public ActionResult SearchService(string ServiceType)
         {
-            var services = dalServiceManagement.GetAllServices();
+            
+             var services = dalServiceManagement.GetAllServices();
 
             if (ServiceType != "all")
             {
@@ -138,11 +139,11 @@ namespace EcoCar.Controllers
 
                 services = services.Where(s => s.GetType().Name.Contains(mainCategory)).ToList();
 
-                string subCategory = ServiceType.Split('/')[1];
+                //string subCategory = ServiceType.Split('/')[1];
 
-                if (mainCategory == "carPoolingService")
+                if (mainCategory == "CarPooling")
                 {
-                    return View("CarPoolingSearch");
+                    return View("SearchCarpooling");
                 }
 
                 else if (mainCategory == "CarRentalService")
@@ -161,31 +162,86 @@ namespace EcoCar.Controllers
 
             }
 
-            return View("SearchService", services);
+            return View();
+
         }
 
-
-        public ActionResult SearchCarPoolingService (CarPoolingType SelectCarPoolingType)
+        public ActionResult SearchCarpooling()
         {
-            var services = dalServiceManagement.GetAllServices();
-            List<CarPoolingService> carPoolingServices = services.Cast<CarPoolingService>().ToList();
-            services = carPoolingServices.Cast<Service>().ToList();
-            
-            //List<CarPoolingService> carPoolingServices = services.Cast<CarPoolingService>().ToList();
-
-            return View ("SearchCarPooling");
+            return View();
 
         }
 
-        //public ActionResult SearchParcelService()
+        public ActionResult SearchParcelService()
+        {
+            return View();
+
+        }
+
+        public ActionResult SearchCarRentalService()
+        {
+            return View();
+
+        }
+
+        //public ActionResult ServicesFilter (string ServiceType)
+        //  {
+        //      var services = dalServiceManagement.GetAllServices();
+
+        //      if (ServiceType != "all")
+        //      {
+        //          string mainCategory = ServiceType.Split('/')[0];
+
+        //          services = services.Where(s => s.GetType().Name.Contains(mainCategory)).ToList();
+
+        //          string subCategory = ServiceType.Split('/')[1];
+
+        //          if (mainCategory == "HomeToWork")
+        //          {
+        //              return View("SearchCarpooling");
+        //          }
+
+        //          else if (mainCategory == "CarRentalService")
+        //          {
+        //              List<CarRentalService> CarRentalServices = services.Cast<CarRentalService>().ToList();
+        //              services = CarRentalServices.Cast<Service>().ToList();
+        //          }
+
+        //          else if (mainCategory == "ParcelService")
+        //          {
+        //              List<ParcelService> ParcelServices = services.Cast<ParcelService>().ToList();
+        //              //ParcelServices = ParcelServices.Where(l => l.ParcelType.ToString() == subCategory).ToList();
+        //              services = ParcelServices.Cast<Service>().ToList();
+        //          }
+
+
+        //      }
+
+        //      return View("SearchService", services);
+        //  }
+
+
+        //  public ActionResult SearchCarPooling (CarPoolingType SelectCarPoolingType)
+        //  {
+        //      var services = dalServiceManagement.GetAllServices();
+        //      List<CarPoolingService> carPoolingServices = services.Cast<CarPoolingService>().ToList();
+        //      services = carPoolingServices.Cast<Service>().ToList();
+
+        //      //List<CarPoolingService> carPoolingServices = services.Cast<CarPoolingService>().ToList();
+
+        //      return View ("SearchCarPooling");
+
+        //  }
+
+        //public ActionResult searchParcelService()
         //{
         //    var services = dalServiceManagement.GetAllServices();
-        //    List<CarPoolingService> carPoolingServices = services.Cast<CarPoolingService>().ToList();
-        //    services = carPoolingServices.Cast<Service>().ToList();
+        //    list<ParcelService> parcelServices = services.cast<parcelservice>().tolist();
+        //    services = parcelServices.Cast<Service>().ToList();
 
-        //    //List<CarPoolingService> carPoolingServices = services.Cast<CarPoolingService>().ToList();
 
-        //    return View("SearchCarPooling");
+
+        //    return View("searchParcelService");
 
         //}
 

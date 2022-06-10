@@ -274,7 +274,7 @@ namespace EcoCar.Models.Services
             _bddContext.ParcelServices.Update(parcelService);
             _bddContext.SaveChanges();
         }
-        public void UpdateParcelService(int id, int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId)
+        public void UpdateParcelService(int id, int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId, int vehiculeId)
         {
             ParcelService parcelService = _bddContext.ParcelServices.Find(id);
 
@@ -285,8 +285,10 @@ namespace EcoCar.Models.Services
                 parcelService.WeightKilogrammes = weightKilogrammes;
                 parcelService.AtypicalVolume = atypicalVolume;
                 parcelService.Fragile = fragile;
-                parcelService.TrajectoryId = trajectoryId;
+                parcelService.Trajectory = _bddContext.Trajectories.First(b => b.Id == trajectoryId);
                 parcelService.Service = _bddContext.Services.First(b => b.Id == serviceId);
+                parcelService.Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId);
+
                 _bddContext.SaveChanges();
             }
 

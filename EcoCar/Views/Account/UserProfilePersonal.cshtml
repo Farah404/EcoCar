@@ -24,11 +24,11 @@
                         </span>
                     </li>
                 </ul>
-                 @foreach (var user in Model)
-                                    {
-                <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/UpdateUser/@user.Id'">Modifier mon profil</button>
-                <br>
-                                    }
+                @foreach (var user in Model)
+                {
+                    <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/UpdateUser/@user.Id'">Modifier mon profil</button>
+                    <br>
+                }
                 <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/CreateInsurance'">CreateVehicule</button>
             </div>
 
@@ -81,7 +81,7 @@
                                     Date de naissance
                                 </td>
                                 <td class="text-success">
-                                     @foreach (var user in Model)
+                                    @foreach (var user in Model)
                                     {
                                         <p>@user.BirthDate</p>
                                     }

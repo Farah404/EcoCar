@@ -135,23 +135,12 @@ namespace EcoCar.Controllers
                 if (user == null)
                     return View("Error");
 
-                //string fileName = sejour.ImagePath.Split('/').Last();
-                //string uploads = Path.Combine(_webEnv.WebRootPath, "images");
-                //string filePath = Path.Combine(uploads, fileName);
-                //using (Stream fileStream = new FileStream(filePath, FileMode.Create))
-                //{
-                //    var file = new FormFile(fileStream, 0, fileStream.Length, null, fileName);
-                //    sejour.Image = file;
 
-                //}
                 return View(user);
             }
             else
                 return NotFound();
-            //int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            //List<User> users = dalPersonManagement.GetAllUsers();
-            //users = users.Where(u => u.Id == userId).ToList();
-            //return View(users.ToList());
+
 
         }
 
@@ -168,17 +157,6 @@ namespace EcoCar.Controllers
                 user.BankDetailsId,
                 user.BillingAddressId,
                 user.PersonId
-                //user.BankDetails.BankName,
-                //user.BankDetails.Iban,
-                //user.BankDetails.Swift
-                //user.BillingAddress.City,
-                //user.BillingAddress.Country,
-                //user.BillingAddress.Region,
-                //user.BillingAddress.AddressLine,
-                //user.BillingAddress.PostalCode,
-                //user.Person.Name,
-                //user.Person.LastName,
-                //user.Person.ProfilePictureURL
                 );
             dalPersonManagement.UpdatePerson(user.PersonId, user.Person.Name, user.Person.LastName, user.Person.ProfilePictureURL);
             dalFinancialManagement.UpdateBankDetails(user.BankDetailsId, user.BankDetails.BankName, user.BankDetails.Swift, user.BankDetails.Iban);

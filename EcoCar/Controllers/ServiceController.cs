@@ -4,6 +4,7 @@ using EcoCar.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Security.Claims;
+using System.Collections.Generic;
 
 namespace EcoCar.Controllers
 {
@@ -16,10 +17,20 @@ namespace EcoCar.Controllers
             dalServiceManagement = new DalServiceManagement();
             dalPersonManagement = new DalPersonManagement();
         }
+
+
         public ActionResult SearchService()
         {
-            return View();
+            List<Service> services = dalServiceManagement.GetAllServices();
+
+            return View(services.ToList());
+
         }
+
+
+
+
+
         public ActionResult CreateService()
         {
 

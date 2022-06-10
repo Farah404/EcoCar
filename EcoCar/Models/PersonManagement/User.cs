@@ -4,6 +4,7 @@
 using EcoCar.Models.FinancialManagement;
 using EcoCar.Models.ServiceManagement;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace EcoCar.Models.PersonManagement
@@ -36,6 +37,7 @@ namespace EcoCar.Models.PersonManagement
         public int PersonId { get; set; }
         public Person Person { get; set; }
 
+        public virtual ICollection<Reservation> Reservation { get; set; }
 
     }
 

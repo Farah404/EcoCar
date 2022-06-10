@@ -202,7 +202,6 @@ namespace EcoCar.Controllers
         //Reserve
         public ActionResult ReserveCarPoolingService(int? id)
         {
-
             List<CarPoolingService> carPoolingServices = dalServiceManagement.GetAllCarPoolingServices();
             carPoolingServices = carPoolingServices.Where(x => x.Id == id).ToList();
             return View(carPoolingServices.ToList());
@@ -210,11 +209,35 @@ namespace EcoCar.Controllers
         }
 
         [HttpPost]
-        public IActionResult ReserveCarPoolingService()
+        public IActionResult ReserveCarPoolingService(Reservation reservation, int id)
         {
+            CarPoolingService carPoolingService = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
+            dalServiceManagement.CreateReservation(
+                carPoolingService.Service.Id,
+                userId
+                );
 
-            return View();
+            
+
+            //List<CarPoolingService> carPoolingServices = dalServiceManagement.GetAllCarPoolingServices();
+            //carPoolingServices = carPoolingServices.Where(x => x.Id == id).ToList();
+
+            dalServiceManagement.UpdateCarPoolingService(
+                carPoolingService.Id,
+                carPoolingService.SelectCarPoolingType,
+                (carPoolingService.AvailableSeats)-1,
+                carPoolingService.PetsAllowed,
+                carPoolingService.SmokingAllowed,
+                carPoolingService.MusicAllowed,
+                carPoolingService.ChattingAllowed,
+                carPoolingService.VehiculeId,
+                carPoolingService.TrajectoryId,
+                carPoolingService.ServiceId);
+
+            string url = "/Home/Index";
+            return Redirect(url);
         }
     }
 }

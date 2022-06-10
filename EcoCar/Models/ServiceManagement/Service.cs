@@ -3,6 +3,7 @@
 
 using EcoCar.Models.PersonManagement;
 using System;
+using System.Collections.Generic;
 
 namespace EcoCar.Models.ServiceManagement
 {
@@ -27,6 +28,8 @@ namespace EcoCar.Models.ServiceManagement
         }
         public int? UserProviderId { get; set; }
         public User UserProvider { get; set; }
+
+        public virtual ICollection<Reservation> Reservation { get; set; }
 
     }
 

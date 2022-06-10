@@ -441,14 +441,13 @@ namespace EcoCar.Models.Services
 
 
         //Create Reservation
-        public Reservation CreateReservation(int reservationNumber, int serviceConsumedId, int serviceUserConsumerId)
+        public Reservation CreateReservation(int serviceConsumedId, int serviceUserConsumerId)
         {
             Reservation reservation = new Reservation()
             {
 
-                ReservationNumber = reservationNumber,
-                ServiceConsumed = _bddContext.Reservations.First(s => s.Id == serviceConsumedId),
-                ServiceUserConsumer = _bddContext.Reservations.First(s => s.Id == serviceUserConsumerId)
+                ServiceConsumed = _bddContext.Services.First(s => s.Id == serviceConsumedId),
+                ServiceUserConsumer = _bddContext.Users.First(s => s.Id == serviceUserConsumerId)
             };
             _bddContext.Reservations.Add(reservation);
             _bddContext.SaveChanges();
@@ -461,15 +460,15 @@ namespace EcoCar.Models.Services
         }
 
         //Update Reservation
-        public void UpdateReservation(int id, int serviceId, int serviceUserConsumerId)
+        public void UpdateReservation(int id, int serviceConsumedId, int serviceUserConsumerId)
         {
-            Reservation person = _bddContext.Reservations.Find(id);
+            Reservation reservation = _bddContext.Reservations.Find(id);
 
-            if (person != null)
+            if (reservation != null)
             {
-                person.Id = id;
-                person.ServiceId = serviceId;
-                person.ServiceUserConsumerId = serviceUserConsumerId;
+                reservation.Id = id;
+                reservation.ServiceConsumed = _bddContext.Services.First(s => s.Id == serviceConsumedId);
+                reservation.ServiceUserConsumer = _bddContext.Users.First(s => s.Id == serviceUserConsumerId);
                 _bddContext.SaveChanges();
             }
         }

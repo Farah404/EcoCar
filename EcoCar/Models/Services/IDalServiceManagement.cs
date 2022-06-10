@@ -69,8 +69,8 @@ namespace EcoCar.Models.Services
 
         //Reservation
 
-        List<Reservation> GetAllReservation();
-        Reservation CreateReservation(int reservationNumber, int serviceId, int serviceUserConsumerId);
-        void UpdateReservation(int id, int reservationNumber, int serviceId, int serviceUserConsumerId);
+        List<Reservation> GetAllReservations();
+        Reservation CreateReservation( int serviceConsumedId, int serviceUserConsumerId);
+        void UpdateReservation(int id, int serviceConsumedId, int serviceUserConsumerId);
     }
 }

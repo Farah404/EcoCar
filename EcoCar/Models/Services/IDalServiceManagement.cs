@@ -72,6 +72,13 @@ namespace EcoCar.Models.Services
         //Search Service
 
         void FilterServices(string ServiceType);
+        void SearchServices(string ServiceType);
+        void SearchCarpooling();
+        void SearchParcelService();
+        void SearchCarRentalService();
+
+       // void FilterServices(string ServiceType);
+      
 
 
         //------------------------------------------------------------------------------------------------------

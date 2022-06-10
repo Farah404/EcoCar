@@ -425,9 +425,27 @@ namespace EcoCar.Models.Services
             _bddContext.Dispose();
         }
 
-        public Service FilterServices(string ServiceType)
+        public Service SearchServices(string ServiceType)
         {
             throw new NotImplementedException();
+        }
+
+        public CarPoolingService SearchCarpooling()
+        {
+            throw new NotImplementedException();
+
+        }
+
+        public ParcelService SearchParcelService()
+        {
+            throw new NotImplementedException();
+
+        }
+
+        public CarRentalService SearchCarRentalService()
+        {
+            throw new NotImplementedException();
+
         }
 
         void IDalServiceManagement.FilterServices(string ServiceType)
@@ -435,13 +453,25 @@ namespace EcoCar.Models.Services
             throw new NotImplementedException();
         }
 
+        void IDalServiceManagement.SearchServices(string ServiceType)
+        {
+            throw new NotImplementedException();
+        }
 
-        //Search Service
+        void IDalServiceManagement.SearchCarpooling()
+        {
+            throw new NotImplementedException();
+        }
 
-        //public void FilterServices(string ServiceType)
-        //{
+        void IDalServiceManagement.SearchParcelService()
+        {
+            throw new NotImplementedException();
+        }
 
-        //}
+        void IDalServiceManagement.SearchCarRentalService()
+        {
+            throw new NotImplementedException();
+        }
 
 
         //------------------------------------------------------------------------------------------------------

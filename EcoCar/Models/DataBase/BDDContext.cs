@@ -3,6 +3,7 @@ using EcoCar.Models.ServiceManagement;
 using EcoCar.Models.MessagingManagement;
 using Microsoft.EntityFrameworkCore;
 using EcoCar.Models.PersonManagement;
+using System;
 
 namespace EcoCar.Models.DataBase
 {
@@ -139,6 +140,155 @@ namespace EcoCar.Models.DataBase
                     ContractNumber = "R124124124TRAT"
                 });
             this.SaveChanges();
+
+            this.Itineraries.AddRange(
+                new Itinerary
+                {
+                    Id = 100,
+                    FirtsStopAddress = "1, Rue B, 13000 Marseille",
+                    //SecondStopAddress = "1, Rue C, 13000 Marseille",
+                    //ThirdStopAddress = "1, Rue D, 13000 Marseille"
+                },
+
+                new Itinerary
+                {
+                    Id = 300,
+                    FirtsStopAddress = "2, Rue B, 13100 Aix en Provence",
+                    //SecondStopAddress = "1, Rue C, 13000 Marseille",
+                    //ThirdStopAddress = "1, Rue D, 13000 Marseille"
+                });
+            this.SaveChanges();
+
+
+            this.Trajectories.AddRange(
+
+                new Trajectory
+                {
+                    Id = 100,
+                    DurationHours = (int)1.5,
+                    StopNumber = 1,
+                    StopsDurationMinutes = 30,
+                    PickUpAddress = "1, Rue A, 13000 Marseille",
+                    DeliveryAddress = "2, Rue A, 13100 Aix en Provence",
+                    SelectTrajectoryType = Trajectory.TrajectoryType.Regular,
+                    ItineraryId = 100
+
+                },
+
+                new Trajectory
+                {
+                    Id = 300,
+                    DurationHours = (int)1.5,
+                    StopNumber = 1,
+                    StopsDurationMinutes = 5,
+                    PickUpAddress = "1, Rue A, 13000 Marseille",
+                    DeliveryAddress = "2, Rue A, 13100 Aix en Provence",
+                    SelectTrajectoryType = Trajectory.TrajectoryType.Punctual,
+                    ItineraryId = 300
+
+                });
+            this.SaveChanges();
+
+            
+
+
+            this.Services.AddRange(
+
+                new Service
+                {
+                    Id=100,
+                    IdServiceProvider = 100,
+                    PublicationDate= new DateTime(2022, 06, 10),
+                    ExpirationDate = new DateTime(2022, 06, 19),
+                    ReferenceNumber = 100,
+                   // Isexpired=false,
+                   Start = new DateTime(2022, 06, 21),
+                   End = new DateTime(2022,06,21),
+
+                   SelectServiceType = Service.ServiceType.CarPoolingService
+                },
+
+
+                new Service
+                {
+                    Id = 200,
+                    IdServiceProvider = 200,
+                    PublicationDate = new DateTime(2022, 06, 10),
+                    ExpirationDate = new DateTime(2022, 06, 19),
+                    ReferenceNumber = 100,
+                    // Isexpired=false,
+                    Start = new DateTime(2022, 06, 21),
+                    End = new DateTime(2022, 06, 21),
+
+                    SelectServiceType = Service.ServiceType.CarRentalService
+                },
+
+
+                new Service
+                {
+                    Id = 300,
+                    IdServiceProvider = 300,
+                    PublicationDate = new DateTime(2022, 06, 10),
+                    ExpirationDate = new DateTime(2022, 06, 19),
+                    ReferenceNumber = 300,
+                    // Isexpired=false,
+                    Start = new DateTime(2022, 06, 21),
+                    End = new DateTime(2022, 06, 21),
+
+                    SelectServiceType = Service.ServiceType.ParcelService
+                });
+            this.SaveChanges();
+            
+            
+            this.CarPoolingServices.Add(
+
+                new CarPoolingService
+                {
+                    Id=100,
+                    ServiceId=100,
+                    SelectCarPoolingType = CarPoolingService.CarPoolingType.HomeToWork,
+                    AvailableSeats=3,
+                    PetsAllowed = false,
+                    SmokingAllowed = false,
+                    MusicAllowed = true,
+                    ChattingAllowed=false,
+                    TrajectoryId=100
+
+                });
+            this.SaveChanges();
+
+
+            this.CarRentalServices.Add(
+
+                new CarRentalService
+                {
+                    Id = 200,
+                    ServiceId = 200,
+                    KeyPickUpAddress = "1, Rue A, 13000 Marseille",
+                    KeyDropOffAddress = "1, Rue A, 13000 Marseille",
+                    VehiculeId = 1,
+
+
+                });
+
+            this.ParcelServices.Add(
+
+                new ParcelService
+                {
+                    Id = 300,
+                    ServiceId = 300,
+                    BarCode = 300000,
+                    WeightKilogrammes = 5,
+                    AtypicalVolume = true,
+                    Fragile = false,
+                    TrajectoryId = 300,
+
+                });
+            this.SaveChanges();
+
+            
+
+
         }
         //Defining character length properties of each table
         //protected override void OnModelCreating(ModelBuilder modelBuilder)

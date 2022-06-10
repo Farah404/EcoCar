@@ -200,13 +200,21 @@ namespace EcoCar.Controllers
         }
 
         //Reserve
-        public ActionResult ReserveCarPoolingService()
+        public ActionResult ReserveCarPoolingService(int? id)
         {
 
             List<CarPoolingService> carPoolingServices = dalServiceManagement.GetAllCarPoolingServices();
-
+            carPoolingServices = carPoolingServices.Where(x => x.Id == id).ToList();
             return View(carPoolingServices.ToList());
 
+        }
+
+        [HttpPost]
+        public IActionResult ReserveCarPoolingService()
+        {
+
+
+            return View();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace EcoCar.Models.Services
                 Start = start,
                 End = end,
                 SelectServiceType = selectServiceType,
-                UserProvider = _bddContext.Users.First(s=>s.Id == userProviderId)
+                UserProvider = _bddContext.Users.First(s => s.Id == userProviderId)
             };
             _bddContext.Services.Add(service);
             _bddContext.SaveChanges();
@@ -263,7 +263,7 @@ namespace EcoCar.Models.Services
                 Fragile = fragile,
                 Trajectory = _bddContext.Trajectories.First(b => b.Id == trajectoryId),
                 Service = _bddContext.Services.First(b => b.Id == serviceId),
-                Vehicule = _bddContext.Vehicules.First(b =>b.Id == vehiculeId)
+                Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId)
             };
             _bddContext.ParcelServices.Add(parcelService);
             _bddContext.SaveChanges();
@@ -372,11 +372,12 @@ namespace EcoCar.Models.Services
         }
         public int CreateTrajectory(int durationHours, int stopNumber, int stopsDurationMinutes, string pickUpAddress, string deliveryAddress, TrajectoryType selectTrajectoryType, int itineraryId)
         {
-            Trajectory trajectory = new Trajectory() { 
-                DurationHours = durationHours, 
-                StopNumber = stopNumber, 
-                StopsDurationMinutes = stopsDurationMinutes, 
-                PickUpAddress = pickUpAddress, 
+            Trajectory trajectory = new Trajectory()
+            {
+                DurationHours = durationHours,
+                StopNumber = stopNumber,
+                StopsDurationMinutes = stopsDurationMinutes,
+                PickUpAddress = pickUpAddress,
                 DeliveryAddress = deliveryAddress,
                 SelectTrajectoryType = selectTrajectoryType,
                 Itinerary = _bddContext.Itineraries.First(b => b.Id == itineraryId)
@@ -427,6 +428,58 @@ namespace EcoCar.Models.Services
         {
             _bddContext.Dispose();
         }
+
+        //-------------------------------------------------------------------------------------------------
+
+        //CRUD Reservation
+
+        public List<Reservation> GetAllReservations()
+        {
+            return _bddContext.Reservations.Include(r => r.ServiceConsumed).Include(r => r.ServiceUserConsumer).ToList();
+        }
+
+
+
+        //Create Reservation
+        public Reservation CreateReservation(int reservationNumber, int serviceConsumedId, int serviceUserConsumerId)
+        {
+            Reservation reservation = new Reservation()
+            {
+
+                ReservationNumber = reservationNumber,
+                ServiceConsumed = _bddContext.Reservations.First(s => s.Id == serviceConsumedId),
+                ServiceUserConsumer = _bddContext.Reservations.First(s => s.Id == serviceUserConsumerId)
+            };
+            _bddContext.Reservations.Add(reservation);
+            _bddContext.SaveChanges();
+            return reservation;
+        }
+        public void CreateReservation(Reservation reservation)
+        {
+            _bddContext.Reservations.Update(reservation);
+            _bddContext.SaveChanges();
+        }
+
+        //Update Reservation
+        public void UpdateReservation(int id, int serviceId, int serviceUserConsumerId)
+        {
+            Reservation person = _bddContext.Reservations.Find(id);
+
+            if (person != null)
+            {
+                person.Id = id;
+                person.ServiceId = serviceId;
+                person.ServiceUserConsumerId = serviceUserConsumerId;
+                _bddContext.SaveChanges();
+            }
+        }
+
+        public void UpdateReservation(Reservation reservation)
+        {
+            _bddContext.Reservations.Update(reservation);
+            _bddContext.SaveChanges();
+        }
+
     }
 
 }

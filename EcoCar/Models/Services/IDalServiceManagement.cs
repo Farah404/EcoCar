@@ -66,5 +66,11 @@ namespace EcoCar.Models.Services
         void DeleteTrajectory(int id);
 
         //-------------------------------------------------------------------------------------------------
+
+        //Reservation
+
+        List<Reservation> GetAllReservation();
+        Reservation CreateReservation(int reservationNumber, int serviceId, int serviceUserConsumerId);
+        void UpdateReservation(int id, int reservationNumber, int serviceId, int serviceUserConsumerId);
     }
 }

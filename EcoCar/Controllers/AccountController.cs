@@ -1,9 +1,7 @@
 ﻿using EcoCar.Models.PersonManagement;
-using EcoCar.Models.FinancialManagement;
 using EcoCar.Models.Services;
 using EcoCar.ViewModels;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +59,49 @@ namespace EcoCar.Controllers
             }
             return View();
         }
+        public IActionResult AdminHome()
+        {
+            return View();
+        }
+        public IActionResult LoginAdministrator()
+        {
+            AccountViewModel viewModel = new AccountViewModel { Authentification = HttpContext.User.Identity.IsAuthenticated };
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                var administratorId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                viewModel.Administrator = dalPersonManagement.GetAdministrator(administratorId);
+                return Redirect("/Account/AdminHome");
+            }
+            return View(viewModel);
+        }
 
+        [HttpPost]
+        public IActionResult LoginAdministrator(AccountViewModel viewModel, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                Administrator administrator = dalPersonManagement.AuthentifyAdministrator(viewModel.Administrator.Username, viewModel.Administrator.Password);
+                if (administrator != null)
+                {
+                    var userClaims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.Name, administrator.Username),
+                        new Claim(ClaimTypes.NameIdentifier, administrator.Id.ToString()),
+                    };
+
+                    var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
+
+                    var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
+                    HttpContext.SignInAsync(userPrincipal);
+
+                    if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        return Redirect(returnUrl);
+                    return Redirect("/Account/AdminHome");
+                }
+                ModelState.AddModelError("Administrator.Username", "Nom d'utilisateur et/ou mot de passe incorrect(s)");
+            }
+            return Redirect("/Account/AdminHome");
+        }
 
         //Creating a person
         public IActionResult CreatePerson()
@@ -193,11 +233,6 @@ namespace EcoCar.Controllers
         }
 
         public IActionResult CreateInsurance()
-        {
-            return View();
-        }
-
-        public IActionResult LoginAdmin()
         {
             return View();
         }

@@ -22,5 +22,10 @@ namespace EcoCar.Controllers
             return View();
 
         }
+
+        public IActionResult AdminInbox()
+        {
+            return View();
+        }
     }
 }

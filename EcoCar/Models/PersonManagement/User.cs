@@ -2,9 +2,7 @@
 //The User.cs contains all details of a specific user wishing to create an account
 
 using EcoCar.Models.FinancialManagement;
-using EcoCar.Models.ServiceManagement;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace EcoCar.Models.PersonManagement
@@ -29,7 +27,6 @@ namespace EcoCar.Models.PersonManagement
         public BankDetails BankDetails { get; set; }
         public int BillingAddressId { get; set; }
         public BillingAddress BillingAddress { get; set; }
-
         public int? VehiculeId { get; set; }
         public Vehicule Vehicule { get; set; }
 

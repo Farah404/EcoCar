@@ -60,5 +60,10 @@ namespace EcoCar.Controllers
                 return View(listBillingAddress);
             }
         }
+
+        public IActionResult UpdateEcoStore()
+        {
+            return View();
+        }
     }
 }

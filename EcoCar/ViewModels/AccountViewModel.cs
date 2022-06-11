@@ -10,9 +10,9 @@ namespace EcoCar.ViewModels
         public bool Authentification { get; set; }
         public Person Person { get; set; }
         public User User { get; set; }
+        public Administrator Administrator { get; set; }
         public Vehicule Vehicule { get; set; }
         public Insurance Insurance { get; set; }
-
         public List<User> ListUsers { get; set; }
 
     }

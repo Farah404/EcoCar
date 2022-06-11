@@ -26,9 +26,12 @@ namespace EcoCar.Models.Services
 
         //Administrator
         List<Administrator> GetAllAdministrators();
-        int CreateAdministrator(string emailPro, int phoneNumberPro, int personId);
-        void UpdateAdministrator(int id, string emailPro, int phoneNumberPro, int personId);
+        int CreateAdministrator(string username, string password, string emailPro, int phoneNumberPro, string employeeCode);
+        void UpdateAdministrator(int id, string username, string password, string emailPro, int phoneNumberPro, string employeeCode);
         void DeleteAdministrator(int id);
+        Administrator AuthentifyAdministrator(string username, string passwordClear);
+        Administrator GetAdministrator(int id);
+        Administrator GetAdministrator(string idStr);
 
         //-------------------------------------------------------------------------------------------------
 
@@ -48,14 +51,6 @@ namespace EcoCar.Models.Services
         int CreateAccountUser(double userRating, EcoStatusType selectEcoStatusType, int ecoWalletId, int vehiculeId, int accountId);
         void UpdateAccountUser(int id, double userRating, EcoStatusType selectEcoStatusType, int ecoWalletId, int vehiculeId, int accountId);
         void DeleteAccountUser(int id);
-
-        //-------------------------------------------------------------------------------------------------
-
-        //AccountAdministrator
-        List<AccountAdministrator> GetAllAccountAdministrators();
-        int CreateAccountAdministrator(string employeeCode, int accountId);
-        void UpdateAccountAdministrator(int id, string employeeCode, int accountId);
-        void DeleteAccountAdministrator(int id);
 
         //-------------------------------------------------------------------------------------------------
 

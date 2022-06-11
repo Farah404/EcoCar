@@ -125,9 +125,6 @@ namespace EcoCar.Models.Services
             int bankDetailsId,
             int billingAddressId,
             int personId
-            //string name,
-            //string lastName,
-            //string profilePictureURL
 
             )
         {
@@ -144,9 +141,6 @@ namespace EcoCar.Models.Services
                 userToUpdate.BankDetails = _bddContext.BankingDetails.First(b => b.Id == bankDetailsId);
                 userToUpdate.BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId);
                 userToUpdate.Person = _bddContext.People.First(b => b.Id == personId);
-                //userToUpdate.Person.Name = name;
-                //userToUpdate.Person.LastName = lastName;
-                //userToUpdate.Person.ProfilePictureURL = profilePictureURL;
                 _bddContext.SaveChanges();
             }
         }
@@ -173,21 +167,41 @@ namespace EcoCar.Models.Services
         //CRUD Administrator
         public List<Administrator> GetAllAdministrators()
         {
-            return _bddContext.Administrators.Include(e => e.Person).ToList();
+            return _bddContext.Administrators.ToList();
         }
 
         public Administrator GetAdministrator(int id)
         {
-            return _bddContext.Administrators.Include(e => e.Person).FirstOrDefault(e => e.Id == id);
+            return _bddContext.Administrators.FirstOrDefault(e => e.Id == id);
+        }
+
+        public Administrator GetAdministrator(string idStr)
+        {
+            int id;
+            if (int.TryParse(idStr, out id))
+            {
+                return this.GetAdministrator(id);
+            }
+            return null;
+        }
+
+        public Administrator AuthentifyAdministrator(string username, string passwordClear)
+        {
+            string password = EncodeMD5(passwordClear);
+            Administrator administrator = this._bddContext.Administrators.FirstOrDefault(a => a.Username == username && a.Password == password);
+            return administrator;
         }
 
         //Create Administrator
-        public int CreateAdministrator(string emailPro, int phoneNumberPro, int personId)
+        public int CreateAdministrator(string username, string passwordClear, string emailPro, int phoneNumberPro, string employeeCode)
         {
+            string password = EncodeMD5(passwordClear);
             Administrator administrator = new Administrator() {
+                Username = username,
+                Password = passwordClear,
                 EmailPro = emailPro, 
                 PhoneNumberPro = phoneNumberPro,
-                Person = _bddContext.People.First(b => b.Id == personId)
+                EmployeeCode = employeeCode
             };
             _bddContext.Administrators.Add(administrator);
             _bddContext.SaveChanges();
@@ -200,16 +214,18 @@ namespace EcoCar.Models.Services
         }
 
         //Update Administrator
-        public void UpdateAdministrator(int id, string emailPro, int phoneNumberPro, int personId)
+        public void UpdateAdministrator(int id, string username, string password, string emailPro, int phoneNumberPro, string employeeCode)
         {
             Administrator administrator = _bddContext.Administrators.Find(id);
 
             if (administrator != null)
             {
                 administrator.Id = id;
+                administrator.Username = username;
+                administrator.Password = password;
                 administrator.EmailPro = emailPro;
                 administrator.PhoneNumberPro = phoneNumberPro;
-                administrator.Person = _bddContext.People.First(b => b.Id == personId);
+                administrator.EmployeeCode = employeeCode;
                 _bddContext.SaveChanges();
             }
         }
@@ -388,67 +404,7 @@ namespace EcoCar.Models.Services
             }
         }
 
-        //-------------------------------------------------------------------------------------------------
-
-        //CRUD AccountAdministrator
-        public List<AccountAdministrator> GetAllAccountAdministrators()
-        {
-            return _bddContext.AccountAdministrators.Include(e => e.Account).ToList();
-        }
-
-        public AccountAdministrator GetAccountAdministrators(int id)
-        {
-            return _bddContext.AccountAdministrators.Include(e => e.Account).FirstOrDefault(e => e.Id == id);
-        }
-
-        //Create AccountAdministrator
-        public int CreateAccountAdministrator(string employeeCode, int accountId)
-        {
-            AccountAdministrator accountAdministrator = new AccountAdministrator() {
-                EmployeeCode = employeeCode,
-                Account = _bddContext.Accounts.First(b => b.Id == accountId)
-            };
-            _bddContext.AccountAdministrators.Add(accountAdministrator);
-            _bddContext.SaveChanges();
-            return accountAdministrator.Id;
-        }
-        public void CreateAccountAdministrator(AccountAdministrator accountAdministrator)
-        {
-            _bddContext.AccountAdministrators.Update(accountAdministrator);
-            _bddContext.SaveChanges();
-        }
-
-        //Update AccountAdministrator
-        public void UpdateAccountAdministrator(int id, string employeeCode, int accountId)
-        {
-            AccountAdministrator accountAdministrator = _bddContext.AccountAdministrators.Find(id);
-
-            if (accountAdministrator != null)
-            {
-                accountAdministrator.Id = id;
-                accountAdministrator.EmployeeCode = employeeCode;
-                accountAdministrator.Account = _bddContext.Accounts.First(b => b.Id == accountId);
-                _bddContext.SaveChanges();
-            }
-        }
-        public void UpdateAccountAdministrator(AccountAdministrator accountAdministrator)
-        {
-            _bddContext.AccountAdministrators.Update(accountAdministrator);
-            _bddContext.SaveChanges();
-        }
-
-        //Delete AccountAdministrator
-        public void DeleteAccountAdministrator(int id)
-        {
-            AccountAdministrator accountAdministrator = _bddContext.AccountAdministrators.Find(id);
-
-            if (accountAdministrator != null)
-            {
-                _bddContext.AccountAdministrators.Remove(accountAdministrator);
-                _bddContext.SaveChanges();
-            }
-        }
-
+        
         //-------------------------------------------------------------------------------------------------
 
         //CRUD Vehicule

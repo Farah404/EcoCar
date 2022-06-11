@@ -14,7 +14,6 @@ namespace EcoCar.Models.DataBase
         public DbSet<Administrator> Administrators { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<AccountUser> AccountUsers { get; set; }
-        public DbSet<AccountAdministrator> AccountAdministrators { get; set; }
         public DbSet<Vehicule> Vehicules { get; set; }
         public DbSet<Insurance> Insurances { get; set; }
 
@@ -57,6 +56,20 @@ namespace EcoCar.Models.DataBase
             this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
 
+            //Admin
+            this.Administrators.Add(
+                new Administrator
+                {
+                    Id = 1,
+                    Username = "Admin",
+                    Password = "5E-A1-36-6C-34-CC-38-0D-AD-F1-62-AC-F6-CB-FD-42", //random,
+                    EmailPro = "Admin@EcoCar.com",
+                    PhoneNumberPro = 0764958674,
+                    EmployeeCode = "AD123"
+                }
+                );
+
+            //User1
             this.People.Add(
                 new Person
                 {

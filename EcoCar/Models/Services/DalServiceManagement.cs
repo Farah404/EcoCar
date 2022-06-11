@@ -26,18 +26,19 @@ namespace EcoCar.Models.Services
         {
             return _bddContext.Services.ToList();
         }
-        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType, int? userProviderId)
+        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType, int? userProviderId, int serviceTypeLinkId)
         {
             Service service = new Service()
             {
                 PublicationDate = publicationDate,
                 ExpirationDate = expirationDate,
                 ReferenceNumber = referenceNumber,
-                IsExpired = isExpired,
+                IsAvailable = true,
                 Start = start,
                 End = end,
                 SelectServiceType = selectServiceType,
-                UserProvider = _bddContext.Users.First(s => s.Id == userProviderId)
+                UserProvider = _bddContext.Users.First(s => s.Id == userProviderId),
+                ServiceTypeLink = _bddContext.ServiceTypeLinks.First(s => s.Id == serviceTypeLinkId)
             };
             _bddContext.Services.Add(service);
             _bddContext.SaveChanges();
@@ -48,7 +49,7 @@ namespace EcoCar.Models.Services
             _bddContext.Services.Update(service);
             _bddContext.SaveChanges();
         }
-        public void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType)
+        public void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType)
         {
             Service service = _bddContext.Services.Find(id);
 
@@ -58,7 +59,7 @@ namespace EcoCar.Models.Services
                 service.PublicationDate = publicationDate;
                 service.ExpirationDate = expirationDate;
                 service.ReferenceNumber = referenceNumber;
-                service.IsExpired = isExpired;
+                service.IsAvailable = isAvailable;
                 service.Start = start;
                 service.End = end;
                 service.SelectServiceType = selectServiceType;
@@ -67,11 +68,32 @@ namespace EcoCar.Models.Services
             }
 
         }
+
         public void UpdateService(Service service)
         {
             _bddContext.Services.Update(service);
             _bddContext.SaveChanges();
         }
+
+
+        public void ServiceAvailability(int id)
+        {
+            Service service = _bddContext.Services.Find(id);
+            if (service != null)
+            {
+                service.Id = id;
+                service.IsAvailable = false;
+
+                _bddContext.SaveChanges();
+            }
+        }
+
+        public void ServiceAvailability(Service service)
+        {
+            _bddContext.Services.Update(service);
+            _bddContext.SaveChanges();
+        }
+
 
         public void DeleteService(int id)
         {

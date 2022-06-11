@@ -19,6 +19,7 @@
                     <th>Date de début</th>
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
+                    <th>Disponibilité</th>
                     <th>Reserver</th>
                 </tr>
             </thead>
@@ -32,9 +33,30 @@
                         <td>@service.Start</td>
                         <td>@service.SelectServiceType</td>
                         <td>@service.ReferenceNumber</td>
-                        <td>
-                            <a href="/Service/ReserveCarPoolingService/@service.Id"><span class="glyphicon glyphicon-transfer  text-success"></span></a>
-                        </td>
+                        <td>@service.IsAvailable</td>
+
+                        @if (@service.SelectServiceType == ServiceType.CarPoolingService)
+                        {
+                            <td>
+                                <a href="/Service/ReserveCarPoolingService/@service.Id"><span class="glyphicon glyphicon-transfer  text-success"></span></a>
+                            </td>
+                        }
+
+                        else
+                        {
+                            if (@service.SelectServiceType == ServiceType.ParcelService)
+                            {
+                                <td>
+                                    <a href="/Service/ReserveParcelService/@service.Id"><span class="glyphicon glyphicon-transfer  text-success"></span></a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <a href="/Service/ReserveCarRentalService/@service.Id"><span class="glyphicon glyphicon-transfer  text-success"></span></a>
+                                </td>
+                            }
+                        }
 
 
                     </tr>

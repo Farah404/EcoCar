@@ -36,12 +36,12 @@ namespace EcoCar.Controllers
 
             return View();
         }
- 
+
         [HttpPost]
         public IActionResult CreateService(Service service)
         {
             if (HttpContext.User.Identity.IsAuthenticated)
-                            {
+            {
                 int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 User user = dalPersonManagement.GetAllUsers().FirstOrDefault(r => r.Id == userId);
                 int? vehiculeId = user.VehiculeId;
@@ -51,26 +51,27 @@ namespace EcoCar.Controllers
                                service.PublicationDate,
                                service.ExpirationDate,
                                service.ReferenceNumber,
-                               service.IsExpired,
+                               service.IsAvailable,
                                service.Start,
                                service.End,
                                service.SelectServiceType,
-                               userId
-                               ) ;
-                                string url = "/Service/CreateItinerary"+ "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
-                                if (selectedValue == Service.ServiceType.ParcelService)
-                                {
-                                    url = "/Service/CreateItinerary" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
-                                }
-                                else
-                                {
-                                    if (selectedValue == Service.ServiceType.CarRentalService)
-                                    {
-                                        url = "/Service/CreateCarRentalService" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
-                                    }
-                                }
-                                return Redirect(url);
-                            }
+                               userId,
+                               service.ServiceTypeLinkId
+                               );
+                string url = "/Service/CreateItinerary" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
+                if (selectedValue == Service.ServiceType.ParcelService)
+                {
+                    url = "/Service/CreateItinerary" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
+                }
+                else
+                {
+                    if (selectedValue == Service.ServiceType.CarRentalService)
+                    {
+                        url = "/Service/CreateCarRentalService" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
+                    }
+                }
+                return Redirect(url);
+            }
             return Redirect("/account/loginAccount");
         }
         //Creating Itinerary
@@ -84,7 +85,7 @@ namespace EcoCar.Controllers
         public IActionResult CreateItinerary(Itinerary itinerary, int serviceId, int vehiculeId)
         {
             int itineraryId = dalServiceManagement.CreateItinerary(itinerary.FirtsStopAddress, itinerary.SecondStopAddress, itinerary.ThirdStopAddress);
-            string url = "/Service/CreateTrajectory" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId +"&itineraryId=" + itineraryId;
+            string url = "/Service/CreateTrajectory" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId + "&itineraryId=" + itineraryId;
             return Redirect(url);
         }
         //Creating Trajectory
@@ -114,15 +115,15 @@ namespace EcoCar.Controllers
             {
                 url = "/Service/CreateParcelService" + "?itineraryId=" + itineraryId + "&trajectoryId=" + trajectoryId + "&serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
             }
-            else if(selectedValue == Service.ServiceType.CarPoolingService)
-                {
+            else if (selectedValue == Service.ServiceType.CarPoolingService)
+            {
                 url = "/Service/CreateCarPoolingService" + "?itineraryId=" + itineraryId + "&trajectoryId=" + trajectoryId + "&serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
-                }
-                else
-                {
+            }
+            else
+            {
                 url = "/Service/CreateCarRentalService" + "?itineraryId=" + itineraryId + "&trajectoryId=" + trajectoryId + "&serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
             }
-            
+
             return Redirect(url);
         }
         public IActionResult CreateCarPoolingService(int serviceId, int trajectoryId, int vehiculeId)
@@ -214,25 +215,34 @@ namespace EcoCar.Controllers
             CarPoolingService carPoolingService = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            dalServiceManagement.CreateReservation(
+            if (carPoolingService.AvailableSeats != 0)
+            {
+                dalServiceManagement.CreateReservation(
                 carPoolingService.Service.Id,
                 userId
                 );
+                dalServiceManagement.UpdateCarPoolingService(
+                    carPoolingService.Id,
+                    carPoolingService.SelectCarPoolingType,
+                    (carPoolingService.AvailableSeats) - 1,
+                    carPoolingService.PetsAllowed,
+                    carPoolingService.SmokingAllowed,
+                    carPoolingService.MusicAllowed,
+                    carPoolingService.ChattingAllowed,
+                    carPoolingService.VehiculeId,
+                    carPoolingService.TrajectoryId,
+                    carPoolingService.ServiceId);
 
-            dalServiceManagement.UpdateCarPoolingService(
-                carPoolingService.Id,
-                carPoolingService.SelectCarPoolingType,
-                (carPoolingService.AvailableSeats)-1,
-                carPoolingService.PetsAllowed,
-                carPoolingService.SmokingAllowed,
-                carPoolingService.MusicAllowed,
-                carPoolingService.ChattingAllowed,
-                carPoolingService.VehiculeId,
-                carPoolingService.TrajectoryId,
-                carPoolingService.ServiceId);
-
-            string url = "/Home/Index";
-            return Redirect(url);
+                dalServiceManagement.ServiceAvailability(
+                    carPoolingService.Service.Id
+                    );
+                string url = "/Home/Index";
+                return Redirect(url);
+            }
+            else
+            {
+                return Redirect("/Service/SearchService");
+            }
         }
 
         public ActionResult ReserveParcelService(int? id)
@@ -249,24 +259,36 @@ namespace EcoCar.Controllers
             ParcelService parcelService = dalServiceManagement.GetAllParcelServices().FirstOrDefault(x => x.Id == id);
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            dalServiceManagement.CreateReservation(
-                parcelService.Service.Id,
-                userId
-                );
+            if (parcelService.Service.IsAvailable != false)
+            {
+                dalServiceManagement.CreateReservation(
+                    parcelService.Service.Id,
+                    userId
+                    );
 
-            dalServiceManagement.UpdateParcelService(
-                parcelService.Id,
-                parcelService.BarCode,
-                parcelService.WeightKilogrammes,
-                parcelService.AtypicalVolume,
-                parcelService.Fragile,
-                parcelService.TrajectoryId,
-                parcelService.ServiceId,
-                parcelService.VehiculeId
-                );
+                dalServiceManagement.UpdateParcelService(
+                    parcelService.Id,
+                    parcelService.BarCode,
+                    parcelService.WeightKilogrammes,
+                    parcelService.AtypicalVolume,
+                    parcelService.Fragile,
+                    parcelService.TrajectoryId,
+                    parcelService.ServiceId,
+                    parcelService.VehiculeId
+                    );
 
-            string url = "/Home/Index";
-            return Redirect(url);
+                dalServiceManagement.ServiceAvailability(
+                    parcelService.Service.Id
+                    );
+
+
+                string url = "/Home/Index";
+                return Redirect(url);
+            }
+            else
+            {
+                return Redirect("/Service/SearchService");
+            }
         }
 
         public ActionResult ReserveCarRentalService(int? id)
@@ -283,21 +305,32 @@ namespace EcoCar.Controllers
             CarRentalService carRentalService = dalServiceManagement.GetAllCarRentalServices().FirstOrDefault(x => x.Id == id);
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            dalServiceManagement.CreateReservation(
-                carRentalService.Service.Id,
-                userId
-                );
+            if (carRentalService.Service.IsAvailable != false)
+            {
+                dalServiceManagement.CreateReservation(
+                    carRentalService.Service.Id,
+                    userId
+                    );
 
-            dalServiceManagement.UpdateCarRentalService(
-                carRentalService.Id,
-                carRentalService.KeyPickUpAddress,
-                carRentalService.KeyDropOffAddress,
-                carRentalService.VehiculeId,
-                carRentalService.ServiceId
-                );
+                dalServiceManagement.UpdateCarRentalService(
+                    carRentalService.Id,
+                    carRentalService.KeyPickUpAddress,
+                    carRentalService.KeyDropOffAddress,
+                    carRentalService.VehiculeId,
+                    carRentalService.ServiceId
+                    );
 
-            string url = "/Home/Index";
-            return Redirect(url);
+                dalServiceManagement.ServiceAvailability(
+                    carRentalService.Service.Id
+                    );
+
+                string url = "/Home/Index";
+                return Redirect(url);
+            }
+            else
+            {
+                return Redirect("/Service/SearchService");
+            }
         }
 
 

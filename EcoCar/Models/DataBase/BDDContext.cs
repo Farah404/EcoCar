@@ -36,6 +36,7 @@ namespace EcoCar.Models.DataBase
         public DbSet<Trajectory> Trajectories { get; set; }
         public DbSet<Itinerary> Itineraries { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<ServiceTypeLink> ServiceTypeLinks { get; set; }
 
         //Messaging Management
         public DbSet<Message> Messages { get; set; }
@@ -74,7 +75,7 @@ namespace EcoCar.Models.DataBase
                     BankDetailsId = 1,
                     BillingAddressId = 1,
                     PersonId = 1,
-                    VehiculeId=1,
+                    VehiculeId = 1,
                 }
                 );
             this.Accounts.Add(
@@ -140,6 +141,99 @@ namespace EcoCar.Models.DataBase
                     InsuranceAgency = "OFIBNA",
                     ContractNumber = "R124124124TRAT"
                 });
+
+            //User2
+            this.People.Add(
+            new Person
+            {
+                Id = 2,
+                Name = "Farah",
+                LastName = "Farah",
+                ProfilePictureURL = "Farah.jpg"
+            }
+            );
+            this.Users.Add(
+                new User
+                {
+                    Id = 2,
+                    Email = "Farah@ecocar.com",
+                    PhoneNumber = 1234457891,
+                    IdentityCardNumber = 1234535315,
+                    DrivingPermitNumber = 1230432153,
+                    BankDetailsId = 1,
+                    BillingAddressId = 1,
+                    PersonId = 1,
+                    VehiculeId = 1,
+                }
+                );
+            this.Accounts.Add(
+                new Account
+                {
+                    Id = 2,
+                    Username = "Farah",
+                    Password = "5E-A1-36-6C-34-CC-38-0D-AD-F1-62-AC-F6-CB-FD-42", //random
+                    IsActive = true,
+                    PersonId = 1
+                });
+            this.AccountUsers.Add(
+                new AccountUser
+                {
+                    Id = 2,
+                    UserRating = 4,
+                    AccountId = 1,
+                    EcoWalletId = 1,
+                    VehiculeId = 1
+                });
+            this.BankingDetails.Add(
+                new BankDetails
+                {
+                    Id = 2,
+                    BankName = "SwissBank",
+                    Swift = "OABGAOG",
+                    Iban = "FIOAFNEOAIFNAFKNAEFOJKN°31234"
+                });
+            this.BillingAddresses.Add(
+                new BillingAddress
+                {
+                    Id = 2,
+                    AddressLine = "403, Salty Road",
+                    City = "Brest",
+                    Region = "SaltyAlpes",
+                    Country = "France",
+                    PostalCode = 40404
+                });
+            this.EcoWallets.Add(
+                new EcoWallet
+                {
+                    Id = 2,
+                    EcoCoinsAmount = 101,
+                    Subscription = false,
+                    EcoCoinsValueEuros = 41
+                });
+            this.Vehicules.Add(
+                new Vehicule
+                {
+                    Id = 2,
+                    Brand = "AnAmazingBrand",
+                    RegistrationNumber = 001,
+                    Model = "Teslite",
+                    Hybrid = true,
+                    Electric = false,
+                    AvailableSeats = 3,
+                    InsuranceId = 1,
+                });
+            this.Insurances.Add(
+                new Insurance
+                {
+                    Id = 2,
+                    InsuranceAgency = "OFIBNA",
+                    ContractNumber = "R124124124TRAT"
+                });
+
+
+
+
+
             this.SaveChanges();
         }
         //Defining character length properties of each table

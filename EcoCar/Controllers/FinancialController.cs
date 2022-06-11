@@ -65,5 +65,10 @@ namespace EcoCar.Controllers
         {
             return View();
         }
+
+        public IActionResult ShoppingCart()
+        {
+            return View();
+        }
     }
 }

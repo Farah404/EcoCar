@@ -31,9 +31,12 @@ namespace EcoCar.Models.ServiceManagement
         public int? UserProviderId { get; set; }
         public User UserProvider { get; set; }
 
-        public int? ServiceTypeLinkId { get; set; }
-        public ServiceTypeLink ServiceTypeLink { get; set; }
-
+        public Service()
+        {
+            this.CarPoolingServices = new HashSet<CarPoolingService>();
+            
+        }
+        public virtual ICollection<CarPoolingService> CarPoolingServices { get; set; }
     }
 
 }

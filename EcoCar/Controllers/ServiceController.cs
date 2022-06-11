@@ -22,9 +22,24 @@ namespace EcoCar.Controllers
         public ActionResult SearchService()
         {
             List<Service> services = dalServiceManagement.GetAllServices();
-
             return View(services.ToList());
 
+        }
+
+        [HttpPost]
+        public ActionResult SearchService(int id)
+        {
+
+            Service service = dalServiceManagement.GetAllServices().FirstOrDefault(s=> s.Id == id);
+
+            List < CarPoolingService > carPoolingServices = service.CarPoolingServices.Where(s => s.ServiceId == service.Id).ToList();
+            int carPoolingServiceId = 0;
+            foreach (CarPoolingService carPoolingService in carPoolingServices)
+            {
+                 carPoolingServiceId = carPoolingService.Id;
+            }
+
+            return Redirect("/Service/ReserveCarPoolingService/" + carPoolingServiceId);
         }
 
 
@@ -57,11 +72,8 @@ namespace EcoCar.Controllers
                                service.Start,
                                service.End,
                                service.SelectServiceType,
-                               userId,
-                               0
+                               userId
                                );
-                int serviceTypeLinkId = dalServiceManagement.CreateServiceTypeLink();
-                dalServiceManagement.UpdateServiceTypeLinkInService(serviceId, serviceTypeLinkId);
 
                 string url = "/Service/CreateItinerary" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
                 if (selectedValue == Service.ServiceType.ParcelService)
@@ -134,6 +146,7 @@ namespace EcoCar.Controllers
         public IActionResult CreateCarPoolingService(int serviceId, int trajectoryId, int vehiculeId)
         {
             CarPoolingService carPoolingService = new CarPoolingService()
+
             {
                 ServiceId = serviceId,
                 TrajectoryId = trajectoryId,
@@ -155,7 +168,6 @@ namespace EcoCar.Controllers
                 carPoolingService.VehiculeId,
                 carPoolingService.ServiceId
                 );
-            dalServiceManagement.UpdateServiceTypeLink(carPoolingService.Id);
             string url = "/Home/Index";
             return Redirect(url);
         }

@@ -47,6 +47,8 @@ namespace EcoCar.Controllers
                 int? vehiculeId = user.VehiculeId;
                 var selectedValue = service.SelectServiceType;
                 ViewBag.ServiceType = selectedValue.ToString();
+
+
                 int serviceId = dalServiceManagement.CreateService(
                                service.PublicationDate,
                                service.ExpirationDate,
@@ -56,8 +58,11 @@ namespace EcoCar.Controllers
                                service.End,
                                service.SelectServiceType,
                                userId,
-                               service.ServiceTypeLinkId
+                               0
                                );
+                int serviceTypeLinkId = dalServiceManagement.CreateServiceTypeLink();
+                dalServiceManagement.UpdateServiceTypeLinkInService(serviceId, serviceTypeLinkId);
+
                 string url = "/Service/CreateItinerary" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
                 if (selectedValue == Service.ServiceType.ParcelService)
                 {
@@ -150,6 +155,7 @@ namespace EcoCar.Controllers
                 carPoolingService.VehiculeId,
                 carPoolingService.ServiceId
                 );
+            dalServiceManagement.UpdateServiceTypeLink(carPoolingService);
             string url = "/Home/Index";
             return Redirect(url);
         }

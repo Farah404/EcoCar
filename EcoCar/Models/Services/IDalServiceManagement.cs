@@ -17,6 +17,11 @@ namespace EcoCar.Models.Services
         void UpdateService(Service service);
         void ServiceAvailability(int id);
         void ServiceAvailability(Service service);
+        int CreateServiceTypeLink();
+        void UpdateServiceTypeLinkInService(int id, int serviceTypeLinkId);
+        void UpdateServiceTypeLinkInService(Service service);
+        void UpdateServiceTypeLink(int carPoolingServiceId);
+        void UpdateServiceTypeLink(CarPoolingService carPoolingService);
         void DeleteService(int id);
 
         //-------------------------------------------------------------------------------------------------

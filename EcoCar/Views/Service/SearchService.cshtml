@@ -38,7 +38,7 @@
                         @if (@service.SelectServiceType == ServiceType.CarPoolingService)
                         {
                             <td>
-                                <a href="/Service/ReserveCarPoolingService/@service.Id"><span class="glyphicon glyphicon-transfer  text-success"></span></a>
+                                <a href="/Service/ReserveCarPoolingService/@service.ServiceTypeLink.CarPoolingServiceId"><span class="glyphicon glyphicon-transfer  text-success"></span></a>
                             </td>
                         }
 
@@ -47,13 +47,13 @@
                             if (@service.SelectServiceType == ServiceType.ParcelService)
                             {
                                 <td>
-                                    <a href="/Service/ReserveParcelService/@service.Id"><span class="glyphicon glyphicon-transfer  text-success"></span></a>
+                                    <a href="/Service/ReserveParcelService/@service.ServiceTypeLink.ParcelServiceId"><span class="glyphicon glyphicon-transfer  text-success"></span></a>
                                 </td>
                             }
                             else
                             {
                                 <td>
-                                    <a href="/Service/ReserveCarRentalService/@service.Id"><span class="glyphicon glyphicon-transfer  text-success"></span></a>
+                                    <a href="/Service/ReserveCarRentalService/@service.ServiceTypeLink.CarRentalServiceId"><span class="glyphicon glyphicon-transfer  text-success"></span></a>
                                 </td>
                             }
                         }

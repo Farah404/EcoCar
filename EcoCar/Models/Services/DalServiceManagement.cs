@@ -20,12 +20,54 @@ namespace EcoCar.Models.Services
 
         //-------------------------------------------------------------------------------------------------
 
+        public int CreateServiceTypeLink()
+        {
+            ServiceTypeLink serviceTypeLink = new ServiceTypeLink();
+            _bddContext.ServiceTypeLinks.Add(serviceTypeLink);
+            _bddContext.SaveChanges();
+            return serviceTypeLink.Id;
+        }
+        //-------------------------------------------------------------------------------------------------
+
         // CRUD Service 
 
         public List<Service> GetAllServices()
         {
             return _bddContext.Services.ToList();
         }
+
+        public void UpdateServiceTypeLink(int carPoolingServiceId)
+        {
+            CarPoolingService carPoolingService = _bddContext.CarPoolingServices.Find(carPoolingServiceId);
+            carPoolingService.Service.ServiceTypeLink.CarPoolingServiceId = carPoolingServiceId;
+            _bddContext.SaveChanges();
+        }
+
+        public void UpdateServiceTypeLink(CarPoolingService carPoolingService)
+        {
+            _bddContext.CarPoolingServices.Update(carPoolingService);
+            _bddContext.SaveChanges();
+        }
+
+        public void UpdateServiceTypeLinkInService(int id, int serviceTypeLinkId)
+        {
+            Service service = _bddContext.Services.Find(id);
+            if (service != null)
+            {
+                service.Id = id;
+                service.ServiceTypeLinkId = serviceTypeLinkId;
+
+                _bddContext.SaveChanges();
+            }
+        }
+
+        public void UpdateServiceTypeLinkInService(Service service)
+        {
+            _bddContext.Services.Update(service);
+            _bddContext.SaveChanges();
+        }
+
+
         public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType, int? userProviderId, int serviceTypeLinkId)
         {
             Service service = new Service()
@@ -38,7 +80,7 @@ namespace EcoCar.Models.Services
                 End = end,
                 SelectServiceType = selectServiceType,
                 UserProvider = _bddContext.Users.First(s => s.Id == userProviderId),
-                ServiceTypeLink = _bddContext.ServiceTypeLinks.First(s => s.Id == serviceTypeLinkId)
+                ServiceTypeLink = _bddContext.ServiceTypeLinks.FirstOrDefault(s => s.Id == serviceTypeLinkId)
             };
             _bddContext.Services.Add(service);
             _bddContext.SaveChanges();
@@ -221,6 +263,7 @@ namespace EcoCar.Models.Services
                 Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId),
                 Service = _bddContext.Services.First(b => b.Id == serviceId)
             };
+            carRentalService.Service.ServiceTypeLink.CarRentalServiceId = carRentalService.Id;
             _bddContext.CarRentalServices.Add(carRentalService);
             _bddContext.SaveChanges();
             return carRentalService.Id;
@@ -287,6 +330,7 @@ namespace EcoCar.Models.Services
                 Service = _bddContext.Services.First(b => b.Id == serviceId),
                 Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId)
             };
+            parcelService.Service.ServiceTypeLink.ParcelServiceId = parcelService.Id;
             _bddContext.ParcelServices.Add(parcelService);
             _bddContext.SaveChanges();
             return parcelService.Id;

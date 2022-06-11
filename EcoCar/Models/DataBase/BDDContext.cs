@@ -55,6 +55,7 @@ namespace EcoCar.Models.DataBase
         {
             this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
+
             this.People.Add(
                 new Person
                 {
@@ -230,10 +231,61 @@ namespace EcoCar.Models.DataBase
                     ContractNumber = "R124124124TRAT"
                 });
 
+            this.ServiceTypeLinks.Add(
+                new ServiceTypeLink
+                {
+                    Id = 1,
+                    CarPoolingServiceId=null,
+                    ParcelServiceId= null,
+                    CarRentalServiceId= null
 
-
-
-
+                });
+            this.Services.Add(
+                new Service
+                {
+                    Id = 1,
+                    ReferenceNumber = 123456,
+                    IsAvailable = false,
+                    UserProviderId = 1,
+                    ServiceTypeLinkId = 1
+                });
+            this.Itineraries.Add(
+                new Itinerary
+                {
+                    Id = 1,
+                    FirtsStopAddress = "3 rue francois",
+                    SecondStopAddress = "2 rue nelly",
+                    ThirdStopAddress = "ile maurice",
+                });
+            this.Trajectories.Add(
+                new Trajectory
+                {
+                    Id = 1,
+                    ItineraryId = 1,
+                });
+            this.CarPoolingServices.Add(
+                new CarPoolingService
+                {
+                    Id = 1,
+                    TrajectoryId = 1,
+                    VehiculeId = 1,
+                    ServiceId = 1
+                });
+            this.ParcelServices.Add(
+                new ParcelService
+                {
+                    Id = 1,
+                    TrajectoryId = 1,
+                    VehiculeId = 1,
+                    ServiceId = 1
+                });
+            this.CarRentalServices.Add(
+                new CarRentalService
+                {
+                    Id = 1,
+                    VehiculeId = 1,
+                    ServiceId = 1
+                });
             this.SaveChanges();
         }
         //Defining character length properties of each table

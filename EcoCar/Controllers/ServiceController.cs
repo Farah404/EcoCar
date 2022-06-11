@@ -155,7 +155,7 @@ namespace EcoCar.Controllers
                 carPoolingService.VehiculeId,
                 carPoolingService.ServiceId
                 );
-            dalServiceManagement.UpdateServiceTypeLink(carPoolingService);
+            dalServiceManagement.UpdateServiceTypeLink(carPoolingService.Id);
             string url = "/Home/Index";
             return Redirect(url);
         }

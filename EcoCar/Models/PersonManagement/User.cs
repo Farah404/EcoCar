@@ -37,7 +37,6 @@ namespace EcoCar.Models.PersonManagement
         public int PersonId { get; set; }
         public Person Person { get; set; }
 
-        public virtual ICollection<Reservation> Reservation { get; set; }
 
     }
 

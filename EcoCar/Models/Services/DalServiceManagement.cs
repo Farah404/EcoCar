@@ -22,7 +22,13 @@ namespace EcoCar.Models.Services
 
         public int CreateServiceTypeLink()
         {
-            ServiceTypeLink serviceTypeLink = new ServiceTypeLink();
+            ServiceTypeLink serviceTypeLink = new ServiceTypeLink()
+            {
+                CarPoolingServiceId = 0,
+                ParcelServiceId = 0,
+                CarRentalServiceId = 0
+            };
+            
             _bddContext.ServiceTypeLinks.Add(serviceTypeLink);
             _bddContext.SaveChanges();
             return serviceTypeLink.Id;

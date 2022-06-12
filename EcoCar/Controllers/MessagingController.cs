@@ -27,5 +27,10 @@ namespace EcoCar.Controllers
         {
             return View();
         }
+
+        public IActionResult EcoUserInbox()
+        {
+            return View();
+        }
     }
 }

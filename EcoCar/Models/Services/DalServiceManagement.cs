@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using static EcoCar.Models.ServiceManagement.CarPoolingService;
 using static EcoCar.Models.ServiceManagement.Service;
+using static EcoCar.Models.ServiceManagement.ServiceRequest;
+using static EcoCar.Models.ServiceManagement.ServiceRequestFinal;
 using static EcoCar.Models.ServiceManagement.Trajectory;
 
 namespace EcoCar.Models.Services
@@ -505,6 +507,86 @@ namespace EcoCar.Models.Services
             _bddContext.SaveChanges();
         }
 
+
+        //-------------------------------------------------------------------------------------------------
+
+        //CRUD ServiceRequestFinal
+
+        public List<ServiceRequestFinal> GetAllServiceRequestsFinal()
+        {
+            return _bddContext.ServiceRequestsFinal.ToList();
+        }
+
+        public ServiceRequestFinal GetServiceRequestFinal(int id)
+        {
+            return _bddContext.ServiceRequestsFinal.FirstOrDefault(e => e.Id == id);
+        }
+
+        public int CreateServiceRequestFinal(
+            DateTime publicationDate,
+            int referenceNumber,
+            DateTime start,
+            ServiceRequestType selectServiceRequestType,
+            string pickUpAddress,
+            string deliveryAddress,
+
+            CarPoolingRequestType selectCarPoolingRequestType,
+            int passengerNumber, 
+            int petsNumber,
+            bool smoking,
+            bool music,
+            bool chatting,
+
+            int barCode,
+            double weightKilogrammes,
+            bool atypicalVolume,
+            bool fragile,
+
+            string keyPickUpAddress,
+            string keyDropOffAddress,
+            string usageComments,
+
+            int userProviderId
+
+            )
+        {
+            ServiceRequestFinal serviceRequestFinal = new ServiceRequestFinal()
+            {
+                PublicationDate = publicationDate,
+                ReferenceNumber = referenceNumber,
+                Start = start,
+                SelectServiceRequestType = selectServiceRequestType,
+                PickUpAddress = pickUpAddress,
+                DeliveryAddress = deliveryAddress,
+
+                SelectCarPoolingRequestType = selectCarPoolingRequestType,
+                PassengerNumber = passengerNumber,
+                PetsNumber = petsNumber,
+                Smoking = smoking,
+                Music = music,
+                Chatting = chatting,
+
+                BarCode= barCode,
+                WeightKilogrammes = weightKilogrammes,
+                AtypicalVolume = atypicalVolume,
+                Fragile = fragile,
+
+                KeyPickUpAddress = keyPickUpAddress,
+                KeyDropOffAddress = keyDropOffAddress,
+                UsageComments = usageComments,
+
+                UserProvider = _bddContext.Users.First(s => s.Id == userProviderId)
+
+            };
+            _bddContext.ServiceRequestsFinal.Add(serviceRequestFinal);
+            _bddContext.SaveChanges();
+            return serviceRequestFinal.Id;
+        }
+        public void CreateServiceRequestFinal(ServiceRequestFinal serviceRequestFinal)
+        {
+            _bddContext.ServiceRequestsFinal.Update(serviceRequestFinal);
+            _bddContext.SaveChanges();
+        }
     }
 
 }

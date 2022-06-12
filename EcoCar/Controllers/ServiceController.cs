@@ -30,21 +30,17 @@ namespace EcoCar.Controllers
         public ActionResult SearchService(int id)
         {
 
-            Service service = dalServiceManagement.GetAllServices().FirstOrDefault(s=> s.Id == id);
+            Service service = dalServiceManagement.GetAllServices().FirstOrDefault(s => s.Id == id);
 
-            List < CarPoolingService > carPoolingServices = service.CarPoolingServices.Where(s => s.ServiceId == service.Id).ToList();
+            List<CarPoolingService> carPoolingServices = service.CarPoolingServices.Where(s => s.ServiceId == service.Id).ToList();
             int carPoolingServiceId = 0;
             foreach (CarPoolingService carPoolingService in carPoolingServices)
             {
-                 carPoolingServiceId = carPoolingService.Id;
+                carPoolingServiceId = carPoolingService.Id;
             }
 
             return Redirect("/Service/ReserveCarPoolingService/" + carPoolingServiceId);
         }
-
-
-
-
 
         public ActionResult CreateService()
         {
@@ -352,5 +348,53 @@ namespace EcoCar.Controllers
         }
 
 
+        public IActionResult CreateServiceRequestFinal()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateServiceRequestFinal(ServiceRequestFinal serviceRequestFinal)
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                User user = dalPersonManagement.GetAllUsers().FirstOrDefault(r => r.Id == userId);
+                int serviceRequestFinalId = dalServiceManagement.CreateServiceRequestFinal(
+                               serviceRequestFinal.PublicationDate,
+                               serviceRequestFinal.ReferenceNumber,
+                               serviceRequestFinal.Start,
+                               serviceRequestFinal.SelectServiceRequestType,
+                               serviceRequestFinal.PickUpAddress,
+                                serviceRequestFinal.DeliveryAddress,
+
+                                serviceRequestFinal.SelectCarPoolingRequestType,
+                                serviceRequestFinal.PassengerNumber,
+                                serviceRequestFinal.PetsNumber,
+                                serviceRequestFinal.Smoking,
+                                serviceRequestFinal.Music,
+                                serviceRequestFinal.Chatting,
+
+                                serviceRequestFinal.BarCode,
+                                serviceRequestFinal.WeightKilogrammes,
+                                serviceRequestFinal.AtypicalVolume,
+                                serviceRequestFinal.Fragile,
+
+                                serviceRequestFinal.KeyPickUpAddress,
+                                serviceRequestFinal.KeyDropOffAddress,
+                                serviceRequestFinal.UsageComments,
+                                userId
+                               );
+
+                return Redirect("/service/CreateServiceRequestFinal");
+            }
+            return Redirect("/account/loginAccount");
+        }
+
+
+        public IActionResult SearchRequest()
+        {
+            return View();
+        }
     }
 }

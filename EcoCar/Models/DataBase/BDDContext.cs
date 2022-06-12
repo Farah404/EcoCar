@@ -29,6 +29,7 @@ namespace EcoCar.Models.DataBase
 
         //Service Management
         public DbSet<Service> Services { get; set; }
+        public DbSet<ServiceRequestFinal> ServiceRequestsFinal { get; set; }
         public DbSet<CarPoolingService> CarPoolingServices { get; set; }
         public DbSet<ParcelService> ParcelServices { get; set; }
         public DbSet<CarRentalService> CarRentalServices { get; set; }

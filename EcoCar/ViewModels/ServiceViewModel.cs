@@ -6,6 +6,10 @@ namespace EcoCar.ViewModels
     {
         public Service Service { get; set; }
 
+        public ServiceRequest ServiceRequest { get; set; }
+
+        public ServiceRequestFinal ServiceRequestFinal { get; set; }
+
         public CarPoolingService CarPoolingService { get; set; }
 
         public CarRentalService CarRentalService { get; set; }

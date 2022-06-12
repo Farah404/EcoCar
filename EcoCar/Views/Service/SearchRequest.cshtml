@@ -1,0 +1,53 @@
+﻿@using static EcoCar.Models.ServiceManagement.ServiceRequest
+
+@model List<EcoCar.Models.ServiceManagement.ServiceRequest>
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Rechercher une demande";
+}
+<!--Add a form with an input field and a button-->
+
+
+
+<div class="container-fluid bg-grey">
+    @*Service List Display*@
+    <div class="table-responsive">
+        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une demande..."></center><br />
+        <table class="table" id="userTable">
+            <thead>
+                <tr class="header">
+                    <th>Date de publication</th>
+                    <th>Type de service</th>
+                    <th>Numéro de réference</th>
+                    <th>Voir en détails</th>
+                </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<hr class="solid">
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, cell, i, j;
+        filter = document.getElementById("searchInput").value.toLowerCase();
+        table = document.getElementById("userTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            const tdArray = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < tdArray.length; j++) {
+                const cellValue = tdArray[j];
+                if (cellValue && cellValue.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                }
+            }
+        }
+    }
+
+</script>

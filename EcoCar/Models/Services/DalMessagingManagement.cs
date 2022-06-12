@@ -4,6 +4,7 @@ using EcoCar.Models.MessagingManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static EcoCar.Models.MessagingManagement.UserReporting;
 
 namespace EcoCar.Models.Services
 {
@@ -129,9 +130,9 @@ namespace EcoCar.Models.Services
         }
 
         //Create UserReporting
-        public int CreateUserReporting(string comment, int reportingReasonId)
+        public int CreateUserReporting(string comment, ReportingReason selectReportingReason)
         {
-            UserReporting userReporting = new UserReporting() { Comment = comment, ReportingReasonId = reportingReasonId };
+            UserReporting userReporting = new UserReporting() { Comment = comment, SelectReportingReason = selectReportingReason };
             _bddContext.UserReportings.Add(userReporting);
             _bddContext.SaveChanges();
             return userReporting.Id;
@@ -143,7 +144,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update UserReporting
-        public void UpdateUserReporting(int id, string comment, int reportingReasonId)
+        public void UpdateUserReporting(int id, string comment, ReportingReason selectReportingReason)
         {
             UserReporting userReporting = _bddContext.UserReportings.Find(id);
 
@@ -151,7 +152,7 @@ namespace EcoCar.Models.Services
             {
                 userReporting.Id = id;
                 userReporting.Comment = comment;
-                userReporting.ReportingReasonId = reportingReasonId;
+                userReporting.SelectReportingReason = selectReportingReason;
                 _bddContext.SaveChanges();
             }
         }

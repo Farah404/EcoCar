@@ -1,4 +1,7 @@
-﻿@{
+﻿@model List<EcoCar.Models.FinancialManagement.EcoStore>
+
+
+@{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "EcoStore";
 }
@@ -18,9 +21,20 @@
                     <p><img src="~/Images/subMonth.png" style="width:125px;height:225;"></p>
                 </div>
                 <div class="panel-footer">
-                    <h3>$19</h3>
-                    <h4>par mois</h4>
-                    <button class="btn btn-lg">Je m'abonne</button>
+                    <h3>
+                        @foreach (var ecoStore in Model)
+                        {
+                            @ecoStore.MonthlySubscriptionPrice
+                        }
+                    </h3>
+                    <h4>tous les mois pour</h4>
+                    <h3>
+                        @foreach (var ecoStore in Model)
+                        {
+                            @ecoStore.MonthlySubscription
+                        }
+                    </h3>
+                    <button type="submit" name="action" value="MonthlySubscription" class="btn btn-success btn-xl">Je m'abonne</button>
                 </div>
             </div>
         </div>
@@ -34,9 +48,20 @@
                     <p><img src="~/Images/sub3Months.png" style="width:200px;height:300;"></p>
                 </div>
                 <div class="panel-footer">
-                    <h3>$29</h3>
-                    <h4>par mois</h4>
-                    <button class="btn btn-lg">Je m'abonne</button>
+                    <h3>
+                        @foreach (var ecoStore in Model)
+                        {
+                            @ecoStore.TrimestrialSubscriptionPrice
+                        }
+                    </h3>
+                    <h4>tous les 3 mois pour</h4>
+                    <h3>
+                        @foreach (var ecoStore in Model)
+                        {
+                            @ecoStore.TrimestrialSubscription
+                        }
+                    </h3>
+                    <button type="submit" name="action" value="TrimestrialSubscription" class="btn btn-success btn-xl">Je m'abonne</button>
                 </div>
             </div>
         </div>
@@ -50,9 +75,20 @@
                     <p><img src="~/Images/sub6Months.png" style="width:200px;height:300;"></p>
                 </div>
                 <div class="panel-footer">
-                    <h3>$49</h3>
-                    <h4>par mois</h4>
-                    <button class="btn btn-lg">Je m'abonne</button>
+                    <h3>
+                        @foreach (var ecoStore in Model)
+                        {
+                            @ecoStore.SemestrialSubscriptionPrice
+                        }
+                    </h3>
+                    <h4>tous les 6 mois pour</h4>
+                    <h3>
+                        @foreach (var ecoStore in Model)
+                        {
+                            @ecoStore.SemestrialSubscription
+                        }
+                    </h3>
+                    <button type="submit" name="action" value="SemestrialSubscription" class="btn btn-success btn-xl">Je m'abonne</button>
                 </div>
             </div>
         </div>
@@ -75,9 +111,20 @@
                     <p><img src="~/Images/EcoCoin.png" style="width:100px;height:100px;"></p>
                 </div>
                 <div class="panel-footer">
-                    <h3>$19</h3>
-                    <h4>par mois</h4>
-                    <button class="btn btn-lg">Sign Up</button>
+                    <h3>
+                        @foreach (var ecoStore in Model)
+                        {
+                            @ecoStore.EcoCoinsBatchOnePrice
+                        }
+                    </h3>
+                    <h4>pour</h4>
+                    <h3>
+                        @foreach (var ecoStore in Model)
+                        {
+                            @ecoStore.EcoCoinsBatchOne
+                        }
+                    </h3>
+                    <button type="submit" name="action" value="SemestrialSubscription" class="btn btn-success btn-xl">J'achète</button>
                 </div>
             </div>
         </div>
@@ -93,9 +140,20 @@
                     </p>
                 </div>
                 <div class="panel-footer">
-                    <h3>$29</h3>
-                    <h4>par mois</h4>
-                    <button class="btn btn-lg">Sign Up</button>
+                    <h3>
+                        @foreach (var ecoStore in Model)
+                        {
+                            @ecoStore.EcoCoinsBatchTwoPrice
+                        }
+                    </h3>
+                    <h4>pour</h4>
+                    <h3>
+                        @foreach (var ecoStore in Model)
+                        {
+                            @ecoStore.EcoCoinsBatchTwo
+                        }
+                    </h3>
+                    <button type="submit" name="action" value="EcoCoinsBatchTwo" class="btn btn-success btn-xl">J'achète</button>
                 </div>
             </div>
         </div>
@@ -112,9 +170,20 @@
                     </p>
                 </div>
                 <div class="panel-footer">
-                    <h3>$49</h3>
-                    <h4>par mois</h4>
-                    <button class="btn btn-lg">Sign Up</button>
+                    <h3>
+                        @foreach (var ecoStore in Model)
+                        {
+                            @ecoStore.EcoCoinsBatchThree
+                        }
+                    </h3>
+                    <h4>pour</h4>
+                    <h3>
+                        @foreach (var ecoStore in Model)
+                        {
+                            @ecoStore.EcoCoinsBatchThreePrice
+                        }
+                    </h3>
+                    <button type="submit" name="action" value="EcoCoinsBatchThreePrice" class="btn btn-success btn-xl">J'achète</button>
                 </div>
             </div>
         </div>

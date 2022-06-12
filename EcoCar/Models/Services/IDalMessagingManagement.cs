@@ -2,6 +2,7 @@
 using EcoCar.Models.MessagingManagement;
 using System;
 using System.Collections.Generic;
+using static EcoCar.Models.MessagingManagement.UserReporting;
 
 namespace EcoCar.Models.Services
 {
@@ -25,8 +26,8 @@ namespace EcoCar.Models.Services
 
         //UserReporting
         List<UserReporting> GetAllUserReportings();
-        int CreateUserReporting(string comment, int reportingReasonId);
-        void UpdateUserReporting(int id, string comment, int reportingReasonId);
+        int CreateUserReporting(string comment, ReportingReason selectReportingReason);
+        void UpdateUserReporting(int id, string comment, ReportingReason selectReportingReason);
         void DeleteUserReporting(int id);
 
         //-------------------------------------------------------------------------------------------------

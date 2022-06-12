@@ -8,41 +8,42 @@ namespace EcoCar.Models.DataBase
 {
     public class BddContext : DbContext
     {
-        //Person Management
+        #region Person Management tables
         public DbSet<Person> People { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Administrator> Administrators { get; set; }
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<AccountUser> AccountUsers { get; set; }
         public DbSet<Vehicule> Vehicules { get; set; }
         public DbSet<Insurance> Insurances { get; set; }
-
-        //Financial Management
+        #endregion
+        #region Financial Management tables
         public DbSet<EcoWallet> EcoWallets { get; set; }
         public DbSet<BankDetails> BankingDetails { get; set; }
         public DbSet<BillingAddress> BillingAddresses { get; set; }
         public DbSet<EcoStore> EcoStores { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<ServiceInvoice> ServiceInvoices { get; set; }
         public DbSet<EcoStoreInvoice> EcoStoreInvoices { get; set; }
-
-        //Service Management
+        #endregion
+        #region Service Management tables
         public DbSet<Service> Services { get; set; }
-        public DbSet<ServiceRequestFinal> ServiceRequestsFinal { get; set; }
+        public DbSet<ServiceRequest> ServiceRequests { get; set; }
         public DbSet<CarPoolingService> CarPoolingServices { get; set; }
         public DbSet<ParcelService> ParcelServices { get; set; }
         public DbSet<CarRentalService> CarRentalServices { get; set; }
         public DbSet<Trajectory> Trajectories { get; set; }
         public DbSet<Itinerary> Itineraries { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
-
-        //Messaging Management
+        #endregion
+        #region Messagins Management tables
         public DbSet<Message> Messages { get; set; }
         public DbSet<Reporting> Reportings { get; set; }
         public DbSet<HelpReporting> HelpReportings { get; set; }
         public DbSet<UserReporting> UserReportings { get; set; }
         public DbSet<AdministratorResponse> AdministratorResponses { get; set; }
+        #endregion
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -57,7 +58,123 @@ namespace EcoCar.Models.DataBase
             this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
 
-            //Admin
+            #region Initializing the EcoStore
+            this.EcoStores.Add(
+                new EcoStore
+                {
+                    Id = 1,
+                    SelectPurchaseType = EcoStore.PurchaseType.EcoCoinsBatchOne,
+                    EcoCoinsBatchOnePrice = 10.00,
+                    EcoCoinsBatchOne = 20,
+                    EcoCoinsBatchTwoPrice = 0,
+                    EcoCoinsBatchTwo = 0,
+                    EcoCoinsBatchThreePrice = 0,
+                    EcoCoinsBatchThree = 0,
+                    MonthlySubscriptionPrice = 0,
+                    MonthlySubscription = 0,
+                    TrimestrialSubscriptionPrice = 0,
+                    TrimestrialSubscription = 0,
+                    SemestrialSubscriptionPrice = 0,
+                    SemestrialSubscription = 0
+                });
+
+            this.EcoStores.Add(
+                new EcoStore
+                {
+                    Id = 2,
+                    SelectPurchaseType = EcoStore.PurchaseType.EcoCoinsBatchTwo,
+                    EcoCoinsBatchOnePrice = 0,
+                    EcoCoinsBatchOne = 0,
+                    EcoCoinsBatchTwoPrice = 18.00,
+                    EcoCoinsBatchTwo = 40,
+                    EcoCoinsBatchThreePrice = 0,
+                    EcoCoinsBatchThree = 0,
+                    MonthlySubscriptionPrice = 0,
+                    MonthlySubscription = 0,
+                    TrimestrialSubscriptionPrice = 0,
+                    TrimestrialSubscription = 0,
+                    SemestrialSubscriptionPrice = 0,
+                    SemestrialSubscription = 0
+                });
+
+            this.EcoStores.Add(
+                new EcoStore
+                {
+                    Id = 3,
+                    SelectPurchaseType = EcoStore.PurchaseType.EcoCoinsBatchThree,
+                    EcoCoinsBatchOnePrice = 0,
+                    EcoCoinsBatchOne = 0,
+                    EcoCoinsBatchTwoPrice = 0,
+                    EcoCoinsBatchTwo = 0,
+                    EcoCoinsBatchThreePrice = 35.00,
+                    EcoCoinsBatchThree = 60,
+                    MonthlySubscriptionPrice = 0,
+                    MonthlySubscription = 0,
+                    TrimestrialSubscriptionPrice = 0,
+                    TrimestrialSubscription = 0,
+                    SemestrialSubscriptionPrice = 0,
+                    SemestrialSubscription = 0
+                });
+
+            this.EcoStores.Add(
+                new EcoStore
+                {
+                    Id = 4,
+                    SelectPurchaseType = EcoStore.PurchaseType.MonthlySubscription,
+                    EcoCoinsBatchOnePrice = 0,
+                    EcoCoinsBatchOne = 0,
+                    EcoCoinsBatchTwoPrice = 0,
+                    EcoCoinsBatchTwo = 0,
+                    EcoCoinsBatchThreePrice = 0,
+                    EcoCoinsBatchThree = 0,
+                    MonthlySubscriptionPrice = 10.00,
+                    MonthlySubscription = 20,
+                    TrimestrialSubscriptionPrice = 0,
+                    TrimestrialSubscription = 0,
+                    SemestrialSubscriptionPrice = 0,
+                    SemestrialSubscription = 0
+                });
+
+            this.EcoStores.Add(
+                new EcoStore
+                {
+                    Id = 5,
+                    SelectPurchaseType = EcoStore.PurchaseType.TrimestrialSubscription,
+                    EcoCoinsBatchOnePrice = 0,
+                    EcoCoinsBatchOne = 0,
+                    EcoCoinsBatchTwoPrice = 0,
+                    EcoCoinsBatchTwo = 0,
+                    EcoCoinsBatchThreePrice = 0,
+                    EcoCoinsBatchThree = 0,
+                    MonthlySubscriptionPrice = 0,
+                    MonthlySubscription = 0,
+                    TrimestrialSubscriptionPrice = 50.00,
+                    TrimestrialSubscription = 30,
+                    SemestrialSubscriptionPrice = 0,
+                    SemestrialSubscription = 0
+                });
+
+            this.EcoStores.Add(
+                new EcoStore
+                {
+                    Id = 6,
+                    SelectPurchaseType = EcoStore.PurchaseType.SemestrialSubscription,
+                    EcoCoinsBatchOnePrice = 0,
+                    EcoCoinsBatchOne = 0,
+                    EcoCoinsBatchTwoPrice = 0,
+                    EcoCoinsBatchTwo = 0,
+                    EcoCoinsBatchThreePrice = 0,
+                    EcoCoinsBatchThree = 0,
+                    MonthlySubscriptionPrice = 0,
+                    MonthlySubscription = 0,
+                    TrimestrialSubscriptionPrice = 0,
+                    TrimestrialSubscription = 0,
+                    SemestrialSubscriptionPrice = 70.00,
+                    SemestrialSubscription = 50
+                });
+            #endregion
+
+            #region Initializing the admins
             this.Administrators.Add(
                 new Administrator
                 {
@@ -69,8 +186,9 @@ namespace EcoCar.Models.DataBase
                     EmployeeCode = "AD123"
                 }
                 );
+            #endregion
 
-            //User1
+            #region  Initializing User1
             this.People.Add(
                 new Person
                 {
@@ -92,6 +210,9 @@ namespace EcoCar.Models.DataBase
                     BillingAddressId = 1,
                     PersonId = 1,
                     VehiculeId = 1,
+                    UserRating = 4,
+                    AccountId = 1,
+                    EcoWalletId = 1
                 }
                 );
             this.Accounts.Add(
@@ -103,15 +224,7 @@ namespace EcoCar.Models.DataBase
                     IsActive = true,
                     PersonId = 1
                 });
-            this.AccountUsers.Add(
-                new AccountUser
-                {
-                    Id = 1,
-                    UserRating = 4,
-                    AccountId = 1,
-                    EcoWalletId = 1,
-                    VehiculeId = 1
-                });
+
             this.BankingDetails.Add(
                 new BankDetails
                 {
@@ -157,8 +270,9 @@ namespace EcoCar.Models.DataBase
                     InsuranceAgency = "OFIBNA",
                     ContractNumber = "R124124124TRAT"
                 });
+            #endregion
 
-            //User2
+            #region Initializing User2
             this.People.Add(
             new Person
             {
@@ -180,6 +294,8 @@ namespace EcoCar.Models.DataBase
                     BillingAddressId = 1,
                     PersonId = 1,
                     VehiculeId = 1,
+                    AccountId = 1,
+                    EcoWalletId = 1
                 }
                 );
             this.Accounts.Add(
@@ -191,15 +307,7 @@ namespace EcoCar.Models.DataBase
                     IsActive = true,
                     PersonId = 1
                 });
-            this.AccountUsers.Add(
-                new AccountUser
-                {
-                    Id = 2,
-                    UserRating = 4,
-                    AccountId = 1,
-                    EcoWalletId = 1,
-                    VehiculeId = 1
-                });
+            
             this.BankingDetails.Add(
                 new BankDetails
                 {
@@ -246,12 +354,12 @@ namespace EcoCar.Models.DataBase
                     ContractNumber = "R124124124TRAT"
                 });
             this.SaveChanges();
+            #endregion
         }
 
 
 
-
-        //Defining character length properties of each table
+        #region Defining character length properties of each table
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
@@ -442,5 +550,6 @@ namespace EcoCar.Models.DataBase
         //           .HasColumnType("varchar(20)");
         //    });
         //}
+        #endregion
     }
 }

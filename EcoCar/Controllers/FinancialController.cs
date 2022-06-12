@@ -2,6 +2,7 @@
 using EcoCar.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EcoCar.Controllers
 {
@@ -13,10 +14,8 @@ namespace EcoCar.Controllers
             dalFinancialManagement = new DalFinancialManagement();
         }
 
-        public ActionResult EcoStore()
-        {
-            return View();
-        }
+
+        #region Creating bank details and billing address as part of creating an account
         // Create bAnking details & billing address
         public IActionResult CreateBankDetails(int personId)
         {
@@ -60,16 +59,34 @@ namespace EcoCar.Controllers
                 return View(listBillingAddress);
             }
         }
+        #endregion
 
+        #region Ecostore
+        public ActionResult EcoStore()
+        {
+            List<EcoStore> ecoStores = dalFinancialManagement.GetAllEcoStores();
+            return View(ecoStores.ToList());
+        }
         public IActionResult UpdateEcoStore()
         {
             return View();
         }
+        #endregion
 
+        #region Shopping Cart and payment
         public IActionResult ShoppingCart()
+        {
+            List<ShoppingCart> shoppingCart = dalFinancialManagement.GetAllShoppingCarts();
+            return View(shoppingCart.ToList());
+        }
+
+        public IActionResult PaymentForm()
         {
             return View();
         }
+        #endregion
+
+        #region Invoices: Ecostore and service
         public IActionResult EcoStoreInvoice()
         {
             return View();
@@ -79,11 +96,8 @@ namespace EcoCar.Controllers
         {
             return View();
         }
+        #endregion 
 
-        public IActionResult PaymentForm()
-        {
-            return View();
-        }
 
     }
 }

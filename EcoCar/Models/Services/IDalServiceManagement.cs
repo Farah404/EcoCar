@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using static EcoCar.Models.ServiceManagement.Service;
 using static EcoCar.Models.ServiceManagement.CarPoolingService;
 using static EcoCar.Models.ServiceManagement.Trajectory;
-using static EcoCar.Models.ServiceManagement.ServiceRequestFinal;
+using static EcoCar.Models.ServiceManagement.ServiceRequest;
 
 namespace EcoCar.Models.Services
 {
@@ -76,10 +76,10 @@ namespace EcoCar.Models.Services
 
         //-------------------------------------------------------------------------------------------------
 
-        //ServiceRequestFinal
+        //ServiceRequest
 
-        List<ServiceRequestFinal> GetAllServiceRequestsFinal();
-        int CreateServiceRequestFinal(
+        List<ServiceRequest> GetAllServiceRequests();
+        int CreateServiceRequest(
             DateTime publicationDate, 
             int referenceNumber, 
             DateTime start, 

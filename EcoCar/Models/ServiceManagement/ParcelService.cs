@@ -1,4 +1,4 @@
-﻿//ClassDescription
+﻿
 
 using EcoCar.Models.PersonManagement;
 

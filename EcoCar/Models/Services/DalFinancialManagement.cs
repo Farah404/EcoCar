@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static EcoCar.Models.FinancialManagement.EcoStore;
 using static EcoCar.Models.FinancialManagement.Invoice;
 
 namespace EcoCar.Models.Services
@@ -14,6 +15,11 @@ namespace EcoCar.Models.Services
         public DalFinancialManagement()
         {
             _bddContext = new BddContext();
+        }
+
+        public void Dispose()
+        {
+            _bddContext.Dispose();
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -405,7 +411,7 @@ namespace EcoCar.Models.Services
             _bddContext.SaveChanges();
         }
 
-        //Delete Subscription
+        //Delete EcoWallet
         public void DeleteEcoWallet(int id)
         {
             EcoWallet ecoWallet = _bddContext.EcoWallets.Find(id);
@@ -417,9 +423,64 @@ namespace EcoCar.Models.Services
             }
         }
 
-        public void Dispose()
+
+        //-------------------------------------------------------------------------------------------------
+
+        //CRUD EcoStore
+        public List<EcoStore> GetAllEcoStores()
         {
-            _bddContext.Dispose();
+            return _bddContext.EcoStores.ToList();
+        }
+
+        //Create EcoStore
+        public int CreateEcoStore(
+            PurchaseType selectPurchaseType, 
+            double ecoCoinsBatchOnePrice, 
+            int ecoCoinsBatchOne,
+            double ecoCoinsBatchTwoPrice,
+            int ecoCoinsBatchTwo,
+            double ecoCoinsBatchThreePrice,
+            int ecoCoinsBatchThree,
+            double monthlySubscriptionPrice,
+            int monthlySubscription,
+            double trimestrialSubscriptionPrice,
+            int trimestrialSubscription,
+            double semestrialSubscriptionPrice,
+            int semestrialSubscription
+            )
+        {
+            EcoStore ecoStore = new EcoStore() {
+                SelectPurchaseType = selectPurchaseType,
+                EcoCoinsBatchOnePrice = ecoCoinsBatchOnePrice,
+                EcoCoinsBatchOne = ecoCoinsBatchOne,
+                EcoCoinsBatchTwoPrice = ecoCoinsBatchTwoPrice,
+                EcoCoinsBatchTwo = ecoCoinsBatchTwo,
+                EcoCoinsBatchThreePrice = ecoCoinsBatchThreePrice,
+                EcoCoinsBatchThree = ecoCoinsBatchThree,
+                MonthlySubscriptionPrice = monthlySubscriptionPrice,
+                MonthlySubscription = monthlySubscription,
+                TrimestrialSubscriptionPrice = trimestrialSubscriptionPrice,
+                TrimestrialSubscription = trimestrialSubscription,
+                SemestrialSubscriptionPrice = semestrialSubscriptionPrice,
+                SemestrialSubscription = semestrialSubscription,
+
+            };
+            _bddContext.EcoStores.Add(ecoStore);
+            _bddContext.SaveChanges();
+            return ecoStore.Id;
+        }
+        public void CreateEcoStore(EcoStore ecoStore)
+        {
+            _bddContext.EcoStores.Update(ecoStore);
+            _bddContext.SaveChanges();
+        }
+
+        //-------------------------------------------------------------------------------------------------
+
+        //CRUD ShoppingCart
+        public List<ShoppingCart> GetAllShoppingCarts()
+        {
+            return _bddContext.ShoppingCarts.ToList();
         }
     }
 }

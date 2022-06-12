@@ -20,7 +20,16 @@ namespace EcoCar.Models.PersonManagement
         public int PhoneNumber { get; set; }
         public int IdentityCardNumber { get; set; }
         public int DrivingPermitNumber { get; set; }
+        public double UserRating { get; set; }
+        public EcoStatusType SelectEcoStatusType { get; set; }
 
+        public enum EcoStatusType
+        {
+            EcoSeed,
+            EcoLeaf,
+            EcoTree,
+            EcoForest
+        }
 
         //Foreign Keys
         public int BankDetailsId { get; set; }
@@ -29,6 +38,10 @@ namespace EcoCar.Models.PersonManagement
         public BillingAddress BillingAddress { get; set; }
         public int? VehiculeId { get; set; }
         public Vehicule Vehicule { get; set; }
+        public int? EcoWalletId { get; set; }
+        public EcoWallet EcoWallet { get; set; }
+        public int? AccountId { get; set; }
+        public Account Account { get; set; }
 
         //Inheritance Class
         public int PersonId { get; set; }

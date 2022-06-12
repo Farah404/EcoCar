@@ -9,6 +9,7 @@ using System.Security.Claims;
 
 namespace EcoCar.Controllers
 {
+    
     public class AccountController : Controller
     {
         private IDalPersonManagement dalPersonManagement;
@@ -19,6 +20,7 @@ namespace EcoCar.Controllers
             dalFinancialManagement = new DalFinancialManagement();
         }
 
+        #region Authentification
         //Login
         public IActionResult LoginAccount()
         {
@@ -102,7 +104,9 @@ namespace EcoCar.Controllers
             }
             return Redirect("/Account/AdminHome");
         }
+        #endregion
 
+        #region Creating a user
         //Creating a person
         public IActionResult CreatePerson()
         {
@@ -137,10 +141,14 @@ namespace EcoCar.Controllers
                 user.PhoneNumber, 
                 user.IdentityCardNumber, 
                 user.DrivingPermitNumber, 
+                user.UserRating,
+                user.SelectEcoStatusType,
                 user.BankDetailsId, 
                 user.BillingAddressId, 
                 user.PersonId,
-                user.VehiculeId
+                user.VehiculeId,
+                user.EcoWalletId,
+                user.AccountId
                 );
 
             string url = "/Account/CreateAccount" + "?personId=" + personId;
@@ -181,8 +189,6 @@ namespace EcoCar.Controllers
             }
             else
                 return NotFound();
-
-
         }
 
         [HttpPost]
@@ -197,7 +203,10 @@ namespace EcoCar.Controllers
                 user.DrivingPermitNumber,
                 user.BankDetailsId,
                 user.BillingAddressId,
-                user.PersonId
+                user.PersonId,
+                user.VehiculeId,
+                user.EcoWalletId,
+                user.AccountId
                 );
             dalPersonManagement.UpdatePerson(user.PersonId, user.Person.Name, user.Person.LastName, user.Person.ProfilePictureURL);
             dalFinancialManagement.UpdateBankDetails(user.BankDetailsId, user.BankDetails.BankName, user.BankDetails.Swift, user.BankDetails.Iban);
@@ -231,7 +240,9 @@ namespace EcoCar.Controllers
         {
             return View();
         }
+        #endregion
 
+        #region Creating a vehicule with a valid insurance
         public IActionResult CreateInsurance()
         {
             return View();
@@ -274,7 +285,7 @@ namespace EcoCar.Controllers
             string url = "/Account/UserProfilePersonal";
             return Redirect(url);
         }
-
+        #endregion
     }
 }
 

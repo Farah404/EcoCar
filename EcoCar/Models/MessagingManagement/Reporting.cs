@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Class Description
+//The Reporting.cs is the parent class for HelpReporting.cs and fore UserReporting.cs
+
+
+using System;
 
 namespace EcoCar.Models.MessagingManagement
 {
@@ -10,9 +14,5 @@ namespace EcoCar.Models.MessagingManagement
         //Attributes
         public int ReferenceNumber { get; set; }
         public DateTime ReportingDateTime { get; set; }
-
-        //Foreign Keys
-
-        //Inheritance Class
     }
 }

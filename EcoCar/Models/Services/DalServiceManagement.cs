@@ -7,7 +7,7 @@ using System.Linq;
 using static EcoCar.Models.ServiceManagement.CarPoolingService;
 using static EcoCar.Models.ServiceManagement.Service;
 using static EcoCar.Models.ServiceManagement.ServiceRequest;
-using static EcoCar.Models.ServiceManagement.ServiceRequestFinal;
+using static EcoCar.Models.ServiceManagement.ServiceRequest;
 using static EcoCar.Models.ServiceManagement.Trajectory;
 
 namespace EcoCar.Models.Services
@@ -512,17 +512,17 @@ namespace EcoCar.Models.Services
 
         //CRUD ServiceRequestFinal
 
-        public List<ServiceRequestFinal> GetAllServiceRequestsFinal()
+        public List<ServiceRequest> GetAllServiceRequests()
         {
-            return _bddContext.ServiceRequestsFinal.ToList();
+            return _bddContext.ServiceRequests.ToList();
         }
 
-        public ServiceRequestFinal GetServiceRequestFinal(int id)
+        public ServiceRequest GetServiceRequest(int id)
         {
-            return _bddContext.ServiceRequestsFinal.FirstOrDefault(e => e.Id == id);
+            return _bddContext.ServiceRequests.FirstOrDefault(e => e.Id == id);
         }
 
-        public int CreateServiceRequestFinal(
+        public int CreateServiceRequest(
             DateTime publicationDate,
             int referenceNumber,
             DateTime start,
@@ -550,7 +550,7 @@ namespace EcoCar.Models.Services
 
             )
         {
-            ServiceRequestFinal serviceRequestFinal = new ServiceRequestFinal()
+            ServiceRequest serviceRequest = new ServiceRequest()
             {
                 PublicationDate = publicationDate,
                 ReferenceNumber = referenceNumber,
@@ -578,13 +578,13 @@ namespace EcoCar.Models.Services
                 UserProvider = _bddContext.Users.First(s => s.Id == userProviderId)
 
             };
-            _bddContext.ServiceRequestsFinal.Add(serviceRequestFinal);
+            _bddContext.ServiceRequests.Add(serviceRequest);
             _bddContext.SaveChanges();
-            return serviceRequestFinal.Id;
+            return serviceRequest.Id;
         }
-        public void CreateServiceRequestFinal(ServiceRequestFinal serviceRequestFinal)
+        public void CreateServiceRequestFinal(ServiceRequest serviceRequest)
         {
-            _bddContext.ServiceRequestsFinal.Update(serviceRequestFinal);
+            _bddContext.ServiceRequests.Update(serviceRequest);
             _bddContext.SaveChanges();
         }
     }

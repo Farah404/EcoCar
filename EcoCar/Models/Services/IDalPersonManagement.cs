@@ -1,7 +1,7 @@
 ﻿using EcoCar.Models.PersonManagement;
 using System;
 using System.Collections.Generic;
-using static EcoCar.Models.PersonManagement.AccountUser;
+using static EcoCar.Models.PersonManagement.User;
 
 namespace EcoCar.Models.Services
 {
@@ -18,8 +18,8 @@ namespace EcoCar.Models.Services
         //User
         List<User> GetAllUsers();
         User GetUser(int id);
-        User CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId);
-        void UpdateUser(int id, string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId/*, string name, string lastName, string profilePictureURL*/);
+        User CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, double userRating, EcoStatusType selectEcoStatusType, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId, int? ecoWalletId, int? accountId);
+        void UpdateUser(int id, string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId, int? ecoWalletId, int? accountId);
         void DeleteUser(int id);
 
         //-------------------------------------------------------------------------------------------------
@@ -46,13 +46,6 @@ namespace EcoCar.Models.Services
 
         //-------------------------------------------------------------------------------------------------
 
-        //AccountUser
-        List<AccountUser> GetAllAccountUsers();
-        int CreateAccountUser(double userRating, EcoStatusType selectEcoStatusType, int ecoWalletId, int vehiculeId, int accountId);
-        void UpdateAccountUser(int id, double userRating, EcoStatusType selectEcoStatusType, int ecoWalletId, int vehiculeId, int accountId);
-        void DeleteAccountUser(int id);
-
-        //-------------------------------------------------------------------------------------------------
 
         //Vehicule
         List<Vehicule> GetAllVehicules();

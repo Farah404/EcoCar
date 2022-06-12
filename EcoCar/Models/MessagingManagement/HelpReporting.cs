@@ -1,4 +1,7 @@
-﻿using EcoCar.Models.PersonManagement;
+﻿//Class Description
+//The HelReporting.cs contains a message sent by the user to an administrator in order to help with a problem occuring on the EcoCar website
+
+using EcoCar.Models.PersonManagement;
 
 namespace EcoCar.Models.MessagingManagement
 {

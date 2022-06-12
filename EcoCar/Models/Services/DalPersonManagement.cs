@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using XSystem.Security.Cryptography;
-using static EcoCar.Models.PersonManagement.AccountUser;
+using static EcoCar.Models.PersonManagement.User;
 
 namespace EcoCar.Models.Services
 {
@@ -91,7 +91,21 @@ namespace EcoCar.Models.Services
 
 
         //Create User
-        public User CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId)
+        public User CreateUser(
+            string email, 
+            DateTime birthDate, 
+            int phoneNumber, 
+            int identityCardNumber, 
+            int drivingPermitNumber, 
+            double userRating,
+            EcoStatusType selectEcoStatusType,
+            int bankDetailsId, 
+            int billingAddressId, 
+            int personId, 
+            int? vehiculeId,
+            int? ecoWalletId,
+            int? accountId
+            )
         {
             User user = new User() {
                 Email = email,
@@ -99,10 +113,14 @@ namespace EcoCar.Models.Services
                 PhoneNumber = phoneNumber,
                 IdentityCardNumber = identityCardNumber,
                 DrivingPermitNumber = drivingPermitNumber,
+                UserRating = userRating,
+                SelectEcoStatusType = selectEcoStatusType,
                 BankDetails = _bddContext.BankingDetails.First(b => b.Id == bankDetailsId),
                 BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId),
                 Person = _bddContext.People.First(b => b.Id == personId),
-                Vehicule = _bddContext.Vehicules.FirstOrDefault(b => b.Id == vehiculeId)
+                Vehicule = _bddContext.Vehicules.FirstOrDefault(b => b.Id == vehiculeId),
+                EcoWallet = _bddContext.EcoWallets.FirstOrDefault(b => b.Id == ecoWalletId),
+                Account = _bddContext.Accounts.FirstOrDefault(b => b.Id == accountId)
             };
             _bddContext.Users.Add(user);
             _bddContext.SaveChanges();
@@ -117,14 +135,17 @@ namespace EcoCar.Models.Services
         //Update User
         public void UpdateUser(
             int id,
-            string email,
+             string email,
             DateTime birthDate,
             int phoneNumber,
             int identityCardNumber,
             int drivingPermitNumber,
             int bankDetailsId,
             int billingAddressId,
-            int personId
+            int personId,
+            int? vehiculeId,
+            int? ecoWalletId,
+            int? accountId
 
             )
         {
@@ -138,9 +159,13 @@ namespace EcoCar.Models.Services
                 userToUpdate.BirthDate = birthDate;
                 userToUpdate.PhoneNumber = phoneNumber;
                 userToUpdate.IdentityCardNumber = identityCardNumber;
+                userToUpdate.DrivingPermitNumber = drivingPermitNumber;
                 userToUpdate.BankDetails = _bddContext.BankingDetails.First(b => b.Id == bankDetailsId);
                 userToUpdate.BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId);
                 userToUpdate.Person = _bddContext.People.First(b => b.Id == personId);
+                userToUpdate.Vehicule = _bddContext.Vehicules.First(b => b.Id==vehiculeId);
+                userToUpdate.EcoWallet = _bddContext.EcoWallets.First(b => b.Id== ecoWalletId);
+                userToUpdate.Account = _bddContext.Accounts.First(b => b.Id == accountId);
                 _bddContext.SaveChanges();
             }
         }
@@ -335,75 +360,6 @@ namespace EcoCar.Models.Services
             Account account = this._bddContext.Accounts.FirstOrDefault(a => a.Username == username && a.Password == password);
             return account;
         }
-
-
-        //-------------------------------------------------------------------------------------------------
-
-        //CRUD AccountUser
-        public List<AccountUser> GetAllAccountUsers()
-        {
-            return _bddContext.AccountUsers.Include(e => e.EcoWallet).Include(e => e.Vehicule).Include(e => e.Account).ToList();
-        }
-
-        public AccountUser GetAccountUser(int id)
-        {
-            return _bddContext.AccountUsers.Include(e => e.EcoWallet).Include(e => e.Vehicule).Include(e => e.Account).FirstOrDefault(e => e.Id == id);
-        }
-
-        //Create AccountUser
-        public int CreateAccountUser(double userRating, EcoStatusType selectEcoStatusType, int ecoWalletId, int vehiculeId, int accountId)
-        {
-            AccountUser accountUser = new AccountUser() { 
-                UserRating = userRating,
-                SelectEcoStatusType = selectEcoStatusType,
-                EcoWallet = _bddContext.EcoWallets.First(b => b.Id == ecoWalletId),
-                Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId),
-                Account = _bddContext.Accounts.First(b => b.Id == accountId),
-            };
-            _bddContext.AccountUsers.Add(accountUser);
-            _bddContext.SaveChanges();
-            return accountUser.Id;
-        }
-        public void CreateAccountUser(AccountUser accountUser)
-        {
-            _bddContext.AccountUsers.Update(accountUser);
-            _bddContext.SaveChanges();
-        }
-
-        //Update AccountUser
-        public void UpdateAccountUser(int id, double userRating, EcoStatusType selectEcoStatusType, int ecoWalletId, int vehiculeId, int accountId)
-        {
-            AccountUser accountUser = _bddContext.AccountUsers.Find(id);
-
-            if (accountUser != null)
-            {
-                accountUser.Id = id;
-                accountUser.UserRating = userRating;
-                accountUser.SelectEcoStatusType = selectEcoStatusType;
-                accountUser.EcoWallet = _bddContext.EcoWallets.First(b => b.Id == ecoWalletId);
-                accountUser.Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId);
-                accountUser.Account = _bddContext.Accounts.First(b => b.Id == accountId);
-                _bddContext.SaveChanges();
-            }
-        }
-        public void UpdateAccountUser(AccountUser accountUser)
-        {
-            _bddContext.AccountUsers.Update(accountUser);
-            _bddContext.SaveChanges();
-        }
-
-        //Delete AccountUser
-        public void DeleteAccountUser(int id)
-        {
-            AccountUser accountUser = _bddContext.AccountUsers.Find(id);
-
-            if (accountUser != null)
-            {
-                _bddContext.AccountUsers.Remove(accountUser);
-                _bddContext.SaveChanges();
-            }
-        }
-
         
         //-------------------------------------------------------------------------------------------------
 

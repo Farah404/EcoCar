@@ -19,14 +19,12 @@ namespace EcoCar.Controllers
             dalPersonManagement = new DalPersonManagement();
         }
 
-
+        #region Searching a service in the list of services
         public ActionResult SearchService()
         {
             ServiceViewModel serviceViewModel = new ServiceViewModel();
 
-
             return View(serviceViewModel);
-
         }
 
         [HttpPost]
@@ -44,7 +42,9 @@ namespace EcoCar.Controllers
 
             return Redirect("/Service/ReserveCarPoolingService/" + carPoolingServiceId);
         }
+        #endregion
 
+        #region Creating a service
         public ActionResult CreateService()
         {
 
@@ -90,6 +90,9 @@ namespace EcoCar.Controllers
             }
             return Redirect("/account/loginAccount");
         }
+        #endregion
+
+        #region Creating an itinerary and a trajectory as a part of the creation of a carpooling service and a parcel service
         //Creating Itinerary
         public IActionResult CreateItinerary(int serviceId, int vehiculeId)
         {
@@ -142,6 +145,9 @@ namespace EcoCar.Controllers
 
             return Redirect(url);
         }
+        #endregion
+
+        #region Creatin carpooling service
         public IActionResult CreateCarPoolingService(int serviceId, int trajectoryId, int vehiculeId)
         {
             CarPoolingService carPoolingService = new CarPoolingService()
@@ -170,6 +176,9 @@ namespace EcoCar.Controllers
             string url = "/Home/Index";
             return Redirect(url);
         }
+        #endregion
+
+        #region Creating car rental service
         public ActionResult CreateCarRentalService(int serviceId, int vehiculeId)
         {
             CarRentalService carRentalService = new CarRentalService()
@@ -191,6 +200,9 @@ namespace EcoCar.Controllers
             string url = "/Home/Index";
             return Redirect(url);
         }
+        #endregion
+
+        #region Creating parcel service
         public ActionResult CreateParcelService(int serviceId, int trajectoryId, int vehiculeId)
         {
             ParcelService parcelService = new ParcelService()
@@ -216,14 +228,15 @@ namespace EcoCar.Controllers
             string url = "/Home/Index";
             return Redirect(url);
         }
+        #endregion
 
+        #region Reserving a carpooling service
         //Reserve
         public ActionResult ReserveCarPoolingService(int? id)
         {
             List<CarPoolingService> carPoolingServices = dalServiceManagement.GetAllCarPoolingServices();
             carPoolingServices = carPoolingServices.Where(x => x.Id == id).ToList();
             return View(carPoolingServices.ToList());
-
         }
 
         [HttpPost]
@@ -261,13 +274,14 @@ namespace EcoCar.Controllers
                 return Redirect("/Service/SearchService");
             }
         }
+        #endregion
 
+        #region Reserving a parcel service
         public ActionResult ReserveParcelService(int? id)
         {
             List<ParcelService> parcelServices = dalServiceManagement.GetAllParcelServices();
             parcelServices = parcelServices.Where(x => x.Id == id).ToList();
             return View(parcelServices.ToList());
-
         }
 
         [HttpPost]
@@ -307,7 +321,9 @@ namespace EcoCar.Controllers
                 return Redirect("/Service/SearchService");
             }
         }
+        #endregion
 
+        #region Reserving a car rental service
         public ActionResult ReserveCarRentalService(int? id)
         {
             List<CarRentalService> carRentalServices = dalServiceManagement.GetAllCarRentalServices();
@@ -349,55 +365,56 @@ namespace EcoCar.Controllers
                 return Redirect("/Service/SearchService");
             }
         }
+        #endregion
 
-
-        public IActionResult CreateServiceRequestFinal()
+        #region Creating a service request
+        public IActionResult CreateServiceRequest()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult CreateServiceRequestFinal(ServiceRequestFinal serviceRequestFinal)
+        public IActionResult CreateServiceRequest(ServiceRequest serviceRequest)
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 User user = dalPersonManagement.GetAllUsers().FirstOrDefault(r => r.Id == userId);
-                int serviceRequestFinalId = dalServiceManagement.CreateServiceRequestFinal(
-                               serviceRequestFinal.PublicationDate,
-                               serviceRequestFinal.ReferenceNumber,
-                               serviceRequestFinal.Start,
-                               serviceRequestFinal.SelectServiceRequestType,
-                               serviceRequestFinal.PickUpAddress,
-                                serviceRequestFinal.DeliveryAddress,
-
-                                serviceRequestFinal.SelectCarPoolingRequestType,
-                                serviceRequestFinal.PassengerNumber,
-                                serviceRequestFinal.PetsNumber,
-                                serviceRequestFinal.Smoking,
-                                serviceRequestFinal.Music,
-                                serviceRequestFinal.Chatting,
-
-                                serviceRequestFinal.BarCode,
-                                serviceRequestFinal.WeightKilogrammes,
-                                serviceRequestFinal.AtypicalVolume,
-                                serviceRequestFinal.Fragile,
-
-                                serviceRequestFinal.KeyPickUpAddress,
-                                serviceRequestFinal.KeyDropOffAddress,
-                                serviceRequestFinal.UsageComments,
-                                userId
+                int serviceRequestlId = dalServiceManagement.CreateServiceRequest(
+                               serviceRequest.PublicationDate,
+                               serviceRequest.ReferenceNumber,
+                               serviceRequest.Start,
+                               serviceRequest.SelectServiceRequestType,
+                               serviceRequest.PickUpAddress,
+                               serviceRequest.DeliveryAddress,
+                               serviceRequest.SelectCarPoolingRequestType,
+                               serviceRequest.PassengerNumber,
+                               serviceRequest.PetsNumber,
+                               serviceRequest.Smoking,
+                               serviceRequest.Music,
+                               serviceRequest.Chatting,
+                               serviceRequest.BarCode,
+                               serviceRequest.WeightKilogrammes,
+                               serviceRequest.AtypicalVolume,
+                               serviceRequest.Fragile,
+                               serviceRequest.KeyPickUpAddress,
+                               serviceRequest.KeyDropOffAddress,
+                               serviceRequest.UsageComments,
+                               userId
                                );
 
-                return Redirect("/service/CreateServiceRequestFinal");
+                return Redirect("/home/index");
             }
             return Redirect("/account/loginAccount");
         }
+        #endregion
 
-
+        #region Searching a service request in the lists of requests
         public IActionResult SearchRequest()
         {
-            return View();
+            List<ServiceRequest> serviceRequests = dalServiceManagement.GetAllServiceRequests();
+            return View(serviceRequests.ToList());
         }
+        #endregion
     }
 }

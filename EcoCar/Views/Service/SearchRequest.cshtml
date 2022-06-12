@@ -19,11 +19,21 @@
                     <th>Date de publication</th>
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
-                    <th>Voir en détails</th>
+                    <th>Consulter la demande</th>
                 </tr>
             </thead>
             <tbody>
-              
+                @foreach (var serviceRequest in Model)
+                {
+                <tr>
+                   
+                         <td>@serviceRequest.PublicationDate</td>
+                         <td>@serviceRequest.SelectServiceRequestType</td>
+                         <td>@serviceRequest.ReferenceNumber</td>
+                         <td><span class="glyphicon glyphicon-paperclip text-success"></span></td>
+                    
+                </tr>
+                }
             </tbody>
         </table>
     </div>

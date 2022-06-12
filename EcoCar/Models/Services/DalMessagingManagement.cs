@@ -16,9 +16,14 @@ namespace EcoCar.Models.Services
             _bddContext = new BddContext();
         }
 
+        public void Dispose()
+        {
+            _bddContext.Dispose();
+        }
+
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Message
+        #region CRUD Message
         public List<Message> GetAllMessages()
         {
             return _bddContext.Messages.ToList();
@@ -67,10 +72,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Reporting
+        # region CRUD Reporting
         public List<Reporting> GetAllReportings()
         {
             return _bddContext.Reportings.ToList();
@@ -120,10 +126,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD UserReporting
+        # region CRUD UserReporting
         public List<UserReporting> GetAllUserReportings()
         {
             return _bddContext.UserReportings.ToList();
@@ -173,10 +180,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD HelpReporting
+        #region CRUD HelpReporting
         public List<HelpReporting> GetAllHelpReportings()
         {
             return _bddContext.HelpReportings.ToList();
@@ -225,10 +233,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD AdministratorResponse
+        #region CRUD AdministratorResponse
         public List<AdministratorResponse> GetAllAdministratorResponses()
         {
             return _bddContext.AdministratorResponses.ToList();
@@ -277,10 +286,9 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
-        public void Dispose()
-        {
-            _bddContext.Dispose();
-        }
+        //-------------------------------------------------------------------------------------------------
+
     }
 }

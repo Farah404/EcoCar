@@ -7,7 +7,6 @@ using System.Linq;
 using static EcoCar.Models.ServiceManagement.CarPoolingService;
 using static EcoCar.Models.ServiceManagement.Service;
 using static EcoCar.Models.ServiceManagement.ServiceRequest;
-using static EcoCar.Models.ServiceManagement.ServiceRequest;
 using static EcoCar.Models.ServiceManagement.Trajectory;
 
 namespace EcoCar.Models.Services
@@ -22,7 +21,7 @@ namespace EcoCar.Models.Services
 
         //-------------------------------------------------------------------------------------------------
 
-        // CRUD Service 
+        #region CRUD Service 
 
         public List<Service> GetAllServices()
         {
@@ -106,10 +105,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD CarPoolingService
+        #region CRUD CarPoolingService
 
         public List<CarPoolingService> GetAllCarPoolingServices()
         {
@@ -199,10 +199,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD CarRentalService
+        #region CRUD CarRentalService
 
         public List<CarRentalService> GetAllCarRentalServices()
         {
@@ -263,10 +264,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD ParcelService
+        #region CRUD ParcelService
 
         public List<ParcelService> GetAllParcelServices()
         {
@@ -334,10 +336,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Itinerary
+        #region CRUD Itinerary
 
         public List<Itinerary> GetAllItineraries()
         {
@@ -384,10 +387,12 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
+
         //-------------------------------------------------------------------------------------------------
 
 
-        //CRUD Trajectory
+        #region CRUD Trajectory
 
         public List<Trajectory> GetAllTrajectories()
         {
@@ -457,9 +462,11 @@ namespace EcoCar.Models.Services
             _bddContext.Dispose();
         }
 
+        #endregion
+
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Reservation
+        #region CRUD Reservation
 
         public List<Reservation> GetAllReservations()
         {
@@ -507,10 +514,11 @@ namespace EcoCar.Models.Services
             _bddContext.SaveChanges();
         }
 
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD ServiceRequestFinal
+        #region CRUD ServiceRequestFinal
 
         public List<ServiceRequest> GetAllServiceRequests()
         {
@@ -587,6 +595,9 @@ namespace EcoCar.Models.Services
             _bddContext.ServiceRequests.Update(serviceRequest);
             _bddContext.SaveChanges();
         }
+        #endregion
+
+        //-------------------------------------------------------------------------------------------------
     }
 
 }

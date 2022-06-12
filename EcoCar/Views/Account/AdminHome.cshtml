@@ -7,7 +7,7 @@
 
 
 <div class="container-fluid bg-grey">
-    @*Service List Display*@
+    @*Users List Display*@
     <div class="table-responsive">
         <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher un utilisateur"></center><br />
         <table class="table" id="userTable">
@@ -37,7 +37,7 @@
 </div>
 
 <div class="container-fluid">
-    @*Service List Display*@
+    @*Services List Display*@
     <div class="table-responsive">
         <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation"></center><br />
         <table class="table" id="userTable">
@@ -64,7 +64,34 @@
 </div>
 
 <div class="container-fluid bg-grey">
-    @*Service List Display*@
+    @*Requests List Display*@
+    <div class="table-responsive">
+        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation"></center><br />
+        <table class="table" id="userTable">
+            <thead>
+
+                <tr class="header">
+                    <th>Date de début</th>
+                    <th>Type de service</th>
+                    <th>Numéro de réference</th>
+                    <th>Provider</th>
+                    <th>Consumer</th>
+                    <th>Statut</th>
+                    <th>Commande</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container-fluid ">
+    @*Purchases List Display*@
     <div class="table-responsive">
         <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher un achat"></center><br />
         <table class="table" id="userTable">

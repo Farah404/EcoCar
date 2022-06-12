@@ -21,7 +21,6 @@ namespace EcoCar.Models.DataBase
         public DbSet<BankDetails> BankingDetails { get; set; }
         public DbSet<BillingAddress> BillingAddresses { get; set; }
         public DbSet<EcoStore> EcoStores { get; set; }
-        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<ServiceInvoice> ServiceInvoices { get; set; }

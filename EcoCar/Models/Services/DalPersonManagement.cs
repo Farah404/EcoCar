@@ -19,9 +19,14 @@ namespace EcoCar.Models.Services
             _bddContext = new BddContext();
         }
 
+        public void Dispose()
+        {
+            _bddContext.Dispose();
+        }
+
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Person
+        #region CRUD Person
 
         public List<Person> GetAllPeople()
         {
@@ -74,10 +79,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD User
+        # region CRUD User
         public List<User> GetAllUsers()
         {
             List<User> listUsers = _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).ToList();
@@ -186,10 +192,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Administrator
+        # region CRUD Administrator
         public List<Administrator> GetAllAdministrators()
         {
             return _bddContext.Administrators.ToList();
@@ -271,10 +278,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Account
+        #region CRUD Account
         public List<Account> GetAllAccounts()
         {
             return _bddContext.Accounts.Include(e => e.Person).ToList(); 
@@ -360,10 +368,11 @@ namespace EcoCar.Models.Services
             Account account = this._bddContext.Accounts.FirstOrDefault(a => a.Username == username && a.Password == password);
             return account;
         }
-        
+        #endregion
+
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Vehicule
+        #region CRUD Vehicule
         public List<Vehicule> GetAllVehicules()
         {
             return _bddContext.Vehicules.Include(e => e.Insurance).ToList();
@@ -433,10 +442,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Insurance
+        #region CRUD Insurance
         public List<Insurance> GetAllInsurances()
         {
             return _bddContext.Insurances.ToList();
@@ -487,13 +497,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        public void Dispose()
-        {
-            _bddContext.Dispose();
-        }
+
 
     }
 }

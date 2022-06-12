@@ -81,5 +81,7 @@ namespace EcoCar.Models.Services
             double semestrialSubscriptionPrice,
             int semestrialSubscription
             );
+
+        //-------------------------------------------------------------------------------------------------
     }
 }

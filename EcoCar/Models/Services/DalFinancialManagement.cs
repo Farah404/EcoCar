@@ -24,7 +24,7 @@ namespace EcoCar.Models.Services
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD BankDetails
+        #region CRUD Bank Details
         public List<BankDetails> GetAllBankingDetails()
         {
             return _bddContext.BankingDetails.ToList();
@@ -75,10 +75,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD BillingAddress
+        #region CRUD BillingAddress
         public List<BillingAddress> GetAllBillingaddresses()
         {
             return _bddContext.BillingAddresses.ToList();
@@ -130,10 +131,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Invoice
+        #region CRUD Invoice
         public List<Invoice> GetAllInvoices()
         {
             return _bddContext.Invoices.Include(e => e.BillingAddress).ToList();
@@ -197,9 +199,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
+        #region CRUD Service Invoice
         //CRUD ServiceInvoice
         public List<ServiceInvoice> GetAllServiceInvoices()
         {
@@ -262,10 +266,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD EcoStoreInvoice
+        #region CRUD EcoStore Invoice
         public List<EcoStoreInvoice> GetAllEcoStoreInvoices()
         {
             return _bddContext.EcoStoreInvoices.ToList();
@@ -313,10 +318,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Subscription
+        #region CRUD Subscription
         public List<Subscription> GetAllSubscriptions()
         {
             return _bddContext.Subscriptions.ToList();
@@ -368,10 +374,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD EcoWallet
+        #region CRUD EcoWallet
         public List<EcoWallet> GetAllEcoWallets()
         {
             return _bddContext.EcoWallets.ToList();
@@ -422,10 +429,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
-
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
+        #region CRUD EcoStore
         //CRUD EcoStore
         public List<EcoStore> GetAllEcoStores()
         {
@@ -474,13 +482,10 @@ namespace EcoCar.Models.Services
             _bddContext.EcoStores.Update(ecoStore);
             _bddContext.SaveChanges();
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD ShoppingCart
-        public List<ShoppingCart> GetAllShoppingCarts()
-        {
-            return _bddContext.ShoppingCarts.ToList();
-        }
+
     }
 }

@@ -1,4 +1,7 @@
-﻿@model List<EcoCar.Models.FinancialManagement.ShoppingCart>
+﻿@*SHOPPING CART WILL BE INCLUDED IN ECOSTORE INSTEAD OF BEING A CLASS ON ITS OWN*@
+
+
+@*@model List<EcoCar.Models.FinancialManagement.ShoppingCart>
 
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
@@ -26,7 +29,7 @@
                             <th class="text-center py-3 px-4" style="width: 200px;">Prestation ou EcoAchat</th>
                             <th class="text-right py-3 px-4" style="width: 200px;">Prix en EcoCoins</th>
                             <th class="text-right py-3 px-4" style="width: 200px;">Prix en Euros</th>
-                            <th class="text-right py-3 px-4" style="width: 200px;">Total</th>
+                            <th class="product-line-price" style="width: 200px;">Total</th>
                             <th class="text-center py-3 px-4" style="width: 200px;">Vider mon panier</th>
                         </tr>
                     </thead>
@@ -42,10 +45,10 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-right font-weight-semibold align-middle p-4">$57.55</td>
-                            <td class="text-right font-weight-semibold align-middle p-4">$115.1</td>
-                            <td class="text-right font-weight-semibold align-middle p-4">$115.1</td>
-                            <td class="text-center font-weight-semibold align-middle p-4"><a href="#">Supprimer</a></td>
+                            <td class="product-line-price">$57.55</td>
+                            <td class="product-line-price">$115.1</td>
+                            <td class="product-line-price">$115.1</td>
+                            <td class="product-removal"><a href="#">Supprimer</a></td>
                         </tr>
 
                         <tr>
@@ -57,10 +60,10 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-right font-weight-semibold align-middle p-4">$1049.00</td>
-                            <td class="text-right font-weight-semibold align-middle p-4">$115.1</td>
-                            <td class="text-right font-weight-semibold align-middle p-4">$1049.00</td>
-                            <td class="text-center font-weight-semibold align-middle p-4"><a href="#">Supprimer</a></td>
+                            <td class="product-line-price">$57.55</td>
+                            <td class="product-line-price">$115.1</td>
+                            <td class="product-line-price">$115.1</td>
+                            <td class="product-removal"><a href="#">Supprimer</a></td>
                         </tr>
 
                         <tr>
@@ -72,10 +75,10 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
-                            <td class="text-right font-weight-semibold align-middle p-4">$115.1</td>
-                            <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
-                            <td class="text-center font-weight-semibold align-middle p-4"><a href="#">Supprimer</a></td>
+                            <td class="product-line-price">$57.55</td>
+                            <td class="product-line-price">$115.1</td>
+                            <td class="product-line-price">$115.1</td>
+                            <td class="product-removal"><a href="#">Supprimer</a></td>
                         </tr>
 
                     </tbody>
@@ -87,8 +90,8 @@
             <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
                 <div class="d-flex">
                     <div class="text-right mt-4">
-                        <label class="text-muted font-weight-normal m-0"><a href="/Financial/EcoStore/" target="_blank">EcoCoins dans votre EcoWallet: $1164.65</a></label><br />
-                        <label class="text-muted font-weight-normal m-0">Prix Total à payer en EcoCoins: $1164.65</label>
+                        <label class="totals"><a href="/Financial/EcoStore/" target="_blank">EcoCoins dans votre EcoWallet: $1164.65</a></label><br />
+                        <label class="totals">Prix Total à payer en EcoCoins: $1164.65</label>
                         <div class="float-right">
                             <button type="button" class="btn btn-lg btn-primary mt-2">Payer</button>
                         </div>
@@ -99,3 +102,55 @@
     </div>
 </div>
 <hr class="solid">
+
+<script>
+    /* Assign actions */
+
+    $('.product-removal button').click(function() {
+        removeItem(this);
+    });
+
+
+    /* Recalculate cart */
+    function recalculateCart() {
+        var subtotal = 0;
+
+        /* Sum up row totals */
+        $('.product').each(function() {
+            subtotal += parseFloat($(this).children('.product-line-price').text());
+        });
+
+        /* Calculate totals */
+        var total = subtotal;
+
+        /* Update totals display */
+        $('.totals-value').fadeOut(fadeTime, function() {
+            $('#cart-subtotal').html(subtotal.toFixed(2));
+            $('#cart-total').html(total.toFixed(2));
+            if (total == 0) {
+                $('.checkout').fadeOut(fadeTime);
+            } else {
+                $('.checkout').fadeIn(fadeTime);
+            }
+            $('.totals-value').fadeIn(fadeTime);
+        });
+    }
+
+
+    /* Update quantity */
+    function updateQuantity(quantityInput) {
+        /* Calculate line price */
+        var linePrice = parseFloat(productRow.children('.product-price').text());
+    }
+
+
+    /* Remove item from cart */
+    function removeItem(removeButton) {
+        /* Remove row from DOM and recalc cart total */
+        var productRow = $(removeButton).parent().parent();
+        productRow.slideUp(fadeTime, function() {
+            productRow.remove();
+            recalculateCart();
+        });
+    }
+</script>*@

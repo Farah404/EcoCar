@@ -73,13 +73,7 @@ namespace EcoCar.Controllers
         }
         #endregion
 
-        #region Shopping Cart and payment
-        public IActionResult ShoppingCart()
-        {
-            List<ShoppingCart> shoppingCart = dalFinancialManagement.GetAllShoppingCarts();
-            return View(shoppingCart.ToList());
-        }
-
+        #region Payment
         public IActionResult PaymentForm()
         {
             return View();

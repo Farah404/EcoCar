@@ -236,3 +236,30 @@ h4 {
 hr.solid {
     border-top: solid lightgreen;
 }
+
+.ui-w-40 {
+    width: 40px !important;
+    height: auto;
+}
+
+.ui-product-color {
+    display: inline-block;
+    overflow: hidden;
+    margin: .144em;
+    width: .875rem;
+    height: .875rem;
+    border-radius: 10rem;
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
+    vertical-align: middle;
+}
+
+
+.nav-pills .nav-link {
+    color: forestgreen
+}
+
+    .nav-pills .nav-link.active {
+        color: forestgreen
+    }
+

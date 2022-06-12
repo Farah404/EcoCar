@@ -12,11 +12,6 @@ namespace EcoCar.Models.PersonManagement
         public string Username { get; set; }
         public string Password { get; set; }
         public bool IsActive { get; set; }
-        public AccountRole SelectRole { get; set; }
-        public enum AccountRole
-        {
-            User, Administrator
-        }
 
         //Foreign Key
         public int PersonId { get; set; }

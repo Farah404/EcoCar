@@ -1,6 +1,6 @@
 ﻿@using static EcoCar.Models.ServiceManagement.Service
 
-@model List<EcoCar.Models.ServiceManagement.Service>
+@model EcoCar.ViewModels.ServiceViewModel
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Rechercher un service";
@@ -19,28 +19,42 @@
                     <th>Date de début</th>
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
+                    <th>Disponibilité</th>
                     <th>Reserver</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var service in Model)
+                @foreach (var carPoolingService in Model.CarPoolingServices)
                 {
-
                     <tr>
-
-
-                        <td>@service.Start</td>
-                        <td>@service.SelectServiceType</td>
-                        <td>@service.ReferenceNumber</td>
-                        <td>
-                            <a href="/Service/ReserveCarPoolingService/@service.Id"><span class="glyphicon glyphicon-transfer  text-success"></span></a>
-                        </td>
-
-
+                        <td>@carPoolingService.Service.Id</td>
+                        <td>@carPoolingService.Service.Start</td>
+                        <td>@carPoolingService.Service.ReferenceNumber</td>
+                        <td>@carPoolingService.Service.IsAvailable</td>
                     </tr>
-
+                }
+                @foreach (var carRentalService in Model.CarRentalServices)
+                {
+                    <tr>
+                        <td>@carRentalService.Service.Id</td>
+                        <td>@carRentalService.Service.Start</td>
+                        <td>@carRentalService.Service.ReferenceNumber</td>
+                        <td>@carRentalService.Service.IsAvailable</td>
+                    </tr>
                 }
 
+                @foreach (var parcelService in Model.ParcelServices)
+                {
+                    <tr>
+                        <td>@parcelService.Service.Id</td>
+                        <td>@parcelService.Service.Start</td>
+                        <td>@parcelService.Service.ReferenceNumber</td>
+                        <td>@parcelService.Service.IsAvailable</td>
+                    </tr>
+                }
+
+                @Html.Hidden("serviceId",@ViewBag.serviceId,null)
+                
 
             </tbody>
         </table>

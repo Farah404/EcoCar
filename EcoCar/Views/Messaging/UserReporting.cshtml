@@ -1,141 +1,29 @@
-﻿@model EcoCar.Models.PersonManagement.AccountUser
-@{
+﻿@{
     Layout = "/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "Mon profil";
+    ViewBag.Title = "Signalement";
 }
-<br>
-<br>
-<br>
-<br>
-<div class="container bootstrap snippets bootdey">
-    <div class="panel-body inf-content">
-        <div class="row">
-            <div class="col-md-4">
-                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
-                <ul title="Ratings" class="list-inline ratings text-center">
-                    <li><span>Nom d'utilisateur</span></li>
-                </ul>
-                <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Messaging/UserReporting'">Signaler l'utilisateur</button>
-            </div>
-            <div class="col-md-6">
-
-                <strong>Information</strong><br>
-
-                <div class="table-responsive">
-
-                    <table class="table table-user-information">
-
-                        <tbody>
-
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-user  text-success"></span>
-                                        Nom et Prénom
-                                    </strong>
-                                </td>
-                                <td class="text-success">
-                                    ***
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
-                                        EcoStatus
-                                    </strong>
-                                </td>
-                                <td class="text-success">
-                                    ***
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-star text-success"></span>
-                                        EcoRating
-                                    </strong>
-                                </td>
-                                <td class="text-success">
-                                    ***
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-ok text-success"></span>
-                                        Email et numéro de téléphone vérifié
-                                    </strong>
-                                </td>
-                                <td class="text-success">
-                                    ***
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-calendar text-success"></span>
-                                        EcoMembre depuis
-                                    </strong>
-                                </td>
-                                <td class="text-success">
-                                    ***
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
+<div id="contact" class="container-fluid">
+    <h2 class="text-center">Contacter l'utilisateur '***'</h2>
+    <div class="row">
+        <div class="col-sm-5">
+            <center><img src="~/Images/reporting.png" style="width:450px;height:450px;"></center>
+        </div>
+        <form method="post" enctype="text/plain">
+            <div class="col-sm-7">
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="text" name="idPrestation" placeholder="Numéro de référence de la prestation" type="text" required>
+                    </div>
+                </div>
+                <textarea class="form-control" id="comments" name="comments" placeholder="Commentaires" rows="5" required></textarea><br>
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <button class="btn btn-default pull-right" type="submit">Envoyer</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
 <hr class="solid">
-
-<div class="container bootstrap snippets bootdey">
-    <div class="panel-body inf-content">
-        <div class="row">
-            <div class="col-md-6">
-
-                <strong>Prestations en cours</strong><br>
-
-                <div class="table-responsive">
-
-                    <table class="table table-user-information">
-
-                        <tbody>
-
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-road  text-success"></span>
-                                        Prestation #2565
-                                    </strong>
-                                </td>
-                                <td class="text-success">
-                                    ***
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <img alt="" style="width:700px;" title="" src="~/Images/Covoiturage.png" data-original-title="Usuario">
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-<script src="~/Scripts/jquery-3.3.1.js"></script>
-<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

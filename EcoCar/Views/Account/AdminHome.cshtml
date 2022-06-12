@@ -1,0 +1,116 @@
+﻿@model EcoCar.ViewModels.AccountViewModel
+
+@{
+    Layout = "/Views/Shared/LayoutAdmin.cshtml";
+    ViewBag.Title = "Tableau de bord administrateur";
+}
+
+
+<div class="container-fluid bg-grey">
+    @*Service List Display*@
+    <div class="table-responsive">
+        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher un utilisateur"></center><br />
+        <table class="table" id="userTable">
+            <thead>
+
+                <tr class="header">
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>EcoRating</th>
+                    <th>EcoStatus</th>
+                    <th>Email</th>
+                    <th>Numéro de Téléphone</th>
+                    <th>Numéro de carte d'identité</th>
+                    <th>Numéro de permis de conduire</th>
+                    <th>Véhicule</th>
+                    <th>EcoMembre depuis</th>
+                    <th>Montant EcoCoins</th>
+                    <th>Formule d'abonnement</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container-fluid">
+    @*Service List Display*@
+    <div class="table-responsive">
+        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation"></center><br />
+        <table class="table" id="userTable">
+            <thead>
+
+                <tr class="header">
+                    <th>Date de début</th>
+                    <th>Type de service</th>
+                    <th>Numéro de réference</th>
+                    <th>Provider</th>
+                    <th>Consumer</th>
+                    <th>Statut</th>
+                    <th>Commande</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container-fluid bg-grey">
+    @*Service List Display*@
+    <div class="table-responsive">
+        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher un achat"></center><br />
+        <table class="table" id="userTable">
+            <thead>
+
+                <tr class="header">
+                    <th>Date d'achat</th>
+                    <th>Type d'achat</th>
+                    <th>Numéro de Facture</th>
+                    <th>Provider</th>
+                    <th>Consumer</th>
+                    <th>Lien vers la Facture</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, cell, i, j;
+        filter = document.getElementById("searchInput").value.toLowerCase();
+        table = document.getElementById("userTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            const tdArray = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < tdArray.length; j++) {
+                const cellValue = tdArray[j];
+                if (cellValue && cellValue.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                }
+            }
+        }
+    }
+
+</script>

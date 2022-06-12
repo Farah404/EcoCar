@@ -60,5 +60,30 @@ namespace EcoCar.Controllers
                 return View(listBillingAddress);
             }
         }
+
+        public IActionResult UpdateEcoStore()
+        {
+            return View();
+        }
+
+        public IActionResult ShoppingCart()
+        {
+            return View();
+        }
+        public IActionResult EcoStoreInvoice()
+        {
+            return View();
+        }
+
+        public IActionResult ServiceInvoice()
+        {
+            return View();
+        }
+
+        public IActionResult PaymentForm()
+        {
+            return View();
+        }
+
     }
 }

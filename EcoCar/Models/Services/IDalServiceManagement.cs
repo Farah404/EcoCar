@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using static EcoCar.Models.ServiceManagement.Service;
 using static EcoCar.Models.ServiceManagement.CarPoolingService;
 using static EcoCar.Models.ServiceManagement.Trajectory;
+using static EcoCar.Models.ServiceManagement.ServiceRequestFinal;
 
 namespace EcoCar.Models.Services
 {
@@ -12,9 +13,11 @@ namespace EcoCar.Models.Services
         //Service
 
         List<Service> GetAllServices();
-        int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType, int? userProviderId);
-        void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isExpired, DateTime start, DateTime end, ServiceType selectServiceType);
+        int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType, int? userProviderId);
+        void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType);
         void UpdateService(Service service);
+        void ServiceAvailability(int id);
+        void ServiceAvailability(Service service);
         void DeleteService(int id);
 
         //-------------------------------------------------------------------------------------------------
@@ -55,8 +58,6 @@ namespace EcoCar.Models.Services
 
         //-------------------------------------------------------------------------------------------------
 
-
-
         //Trajectory
 
         List<Trajectory> GetAllTrajectories();
@@ -72,5 +73,37 @@ namespace EcoCar.Models.Services
         List<Reservation> GetAllReservations();
         Reservation CreateReservation( int serviceConsumedId, int serviceUserConsumerId);
         void UpdateReservation(int id, int serviceConsumedId, int serviceUserConsumerId);
+
+        //-------------------------------------------------------------------------------------------------
+
+        //ServiceRequestFinal
+
+        List<ServiceRequestFinal> GetAllServiceRequestsFinal();
+        int CreateServiceRequestFinal(
+            DateTime publicationDate, 
+            int referenceNumber, 
+            DateTime start, 
+            ServiceRequestType selectServiceRequestType, 
+            string pickUpAddress, 
+            string deliveryAddress, 
+
+            CarPoolingRequestType selectCarPoolingRequestType, 
+            int passengerNumber, 
+            int petsNumber, 
+            bool smoking, 
+            bool music, 
+            bool chatting, 
+
+            int barCode,
+            double weightKilogrammes, 
+            bool atypicalVolume, 
+            bool fragile, 
+
+            string keyPickUpAddress, 
+            string keyDropOffAddress, 
+            string usageComments,
+
+            int userProviderId);
+
     }
 }

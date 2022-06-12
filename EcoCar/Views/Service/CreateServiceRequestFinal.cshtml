@@ -1,0 +1,177 @@
+﻿@using static EcoCar.Models.ServiceManagement.ServiceRequestFinal
+@model EcoCar.Models.ServiceManagement.ServiceRequestFinal
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Déposer une demande";
+}
+
+
+<div class="container py-5">
+
+    <div class="panel-body inf-content">
+
+        <div class="row mb-4">
+
+            <h4>Demander un service</h4>
+
+            @using (Html.BeginForm())
+            {
+                @*General*@
+                <div class="col-lg-4 mx-auto">
+                    @Html.Label("Date de publication de la prestation")<br>
+                    @Html.TextBoxFor(model => model.PublicationDate, new{ @class = "form-control",@id="currentDate",@readonly = true,style="width:300px"})<br>
+
+                    @Html.Label("Numero de reference de la prestation")<br>
+                    @Html.TextBoxFor(model => model.ReferenceNumber, new{ @class = "form-control",@id="Refnunmber",@readonly = true,style="width:300px"}) <br>
+
+                    @Html.Label("Date de debut") <br>
+                    @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.Start)
+
+                    @Html.Label("Adresse de départ")  <br>
+                    @Html.TextBoxFor(model => model.PickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.PickUpAddress)
+                    <br>
+
+                    @Html.Label("Adresse d'arrivée")  <br>
+                    @Html.TextBoxFor(model => model.DeliveryAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.DeliveryAddress)
+                    <br>
+                    @Html.Label("Type de Prestation")<br>
+                    @Html.DropDownListFor(model => model.SelectServiceRequestType, new SelectList(Enum.GetValues(typeof(ServiceRequestType))),"--Selectionnez le type de prestation--")
+                    @Html.ValidationMessageFor(model => model.SelectServiceRequestType)
+                    <button class="btn btn-success" type="submit">Soumettre</button>
+                </div>
+
+                <div class="col-lg-8 mx-auto">
+                    <div class="bg-white pt-4 pl-2 pr-2 pb-2">
+                        <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
+                            <li class="nav-item"> <a data-toggle="pill" href="#CarPoolingServiceRequest" class="nav-link active "> Demande de covoiturage </a> </li>
+                            <li class="nav-item"> <a data-toggle="pill" href="#ParcelRequestServiceRequest" class="nav-link ">Demande de transport de Colis </a> </li>
+                            <li class="nav-item"> <a data-toggle="pill" href="#CarRentalServicerequest" class="nav-link "> Demande de location de véhicule </a> </li>
+                        </ul>
+                    </div>
+                    <div id="CarPoolingServiceRequest" class="tab-pane fade show active pt-3">
+
+                        @*CarPoolingServiceRequest*@
+                        @Html.Label("Type de covoiturage") <br>
+                        @Html.DropDownListFor(model => model.SelectCarPoolingRequestType, new SelectList(Enum.GetValues(typeof(CarPoolingRequestType))),"--Selectionnez le type de vocoituragee--")
+                        @Html.ValidationMessageFor(model => model.SelectCarPoolingRequestType)
+                        <br>
+
+                        @Html.Label("Numéro de passagers")  <br>
+                        @Html.TextBoxFor(model => model.PassengerNumber, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.PassengerNumber)
+                        <br>
+
+                        @Html.Label("Animaux de compagnie")  <br>
+                        @Html.TextBoxFor(model => model.PetsNumber, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.PetsNumber)
+                        <br>
+
+                        @Html.Label("Autorisation de fumer") <br>
+                        @Html.CheckBoxFor(model => model.Smoking, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.Smoking)
+                        <br>
+
+                        @Html.Label("Musique forte")<br>
+                        @Html.CheckBoxFor(model => model.Music, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.Music)
+                        <br>
+
+                        @Html.Label("Discussion")<br>
+                        @Html.CheckBoxFor(model => model.Chatting, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.Chatting)
+                        <br>
+                    </div>
+
+                    <div id="ParcelRequestServiceRequest" class="tab-pane fade pt-3">
+
+                        @*ParcelRequestServiceRequest*@
+                        @Html.Label("BarCode") <br>
+                        @Html.TextBoxFor(model => model.BarCode, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.BarCode)
+                        <br>
+
+                        @Html.Label("WeightKilogrammes") <br>
+                        @Html.TextBoxFor(model => model.WeightKilogrammes, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.WeightKilogrammes)
+                        <br>
+
+                        @Html.Label("AtypicalVolume") <br>
+                        @Html.CheckBoxFor(model => model.AtypicalVolume, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.AtypicalVolume)
+                        <br>
+
+                        @Html.Label("Fragile")
+
+                        <br>
+                        @Html.CheckBoxFor(model => model.Fragile, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.Fragile)
+                        <br>
+                    </div>
+
+                    <div id="CarRentalServicerequest" class="tab-pane fade pt-3">
+                        @*CarRentalServicerequest*@
+                        @Html.Label("Lieu de récupération initial des clés") <br>
+                        @Html.TextBoxFor(model => model.KeyPickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.KeyPickUpAddress)
+                        <br>
+
+
+                        @Html.Label("Lieu de retour des clés") <br>
+                        @Html.TextBoxFor(model => model.KeyDropOffAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.KeyDropOffAddress)
+                        <br>
+
+                        @Html.Label("Commentaire") <br>
+                        @Html.TextBoxFor(model => model.UsageComments, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.UsageComments)
+                        <br>
+                    </div>
+
+
+
+                </div>
+
+
+            }
+
+        </div>
+    </div>
+</div>
+
+
+<hr class="solid">
+
+<script>
+    //Actual Date
+    var today = new Date();
+    var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+    document.getElementById("currentDate").value = date;
+    $(document).ready(function() {
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+        });
+    });
+
+    //Random Reference Number
+    function randomNumber(len) {
+        var randomNumber;
+        var n = '';
+
+        for (var count = 0; count < len; count++) {
+            randomNumber = Math.floor(Math.random() * 10);
+            n += randomNumber.toString();
+        }
+        return n;
+    }
+
+    document.getElementById("Refnunmber").value = randomNumber(9);
+
+
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

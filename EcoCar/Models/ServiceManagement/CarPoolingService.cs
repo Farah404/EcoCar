@@ -27,8 +27,6 @@ namespace EcoCar.Models.ServiceManagement
         public bool ChattingAllowed { get; set; }
 
         //Foreign Keys
-        //public int VehiculeId { get; set; }
-        //public Vehicule Vehicule { get; set; }
         public int TrajectoryId { get; set; }
         public Trajectory Trajectory { get; set; }
         public int VehiculeId { get; set; }
@@ -36,7 +34,7 @@ namespace EcoCar.Models.ServiceManagement
 
         //Inheritance Class
         public int ServiceId { get; set; }
-        public Service Service { get; set; }
+        public virtual Service Service { get; set; }
 
     }
 }

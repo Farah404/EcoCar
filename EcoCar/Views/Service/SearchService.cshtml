@@ -1,6 +1,6 @@
 ﻿@using static EcoCar.Models.ServiceManagement.Service
 
-@model List<EcoCar.Models.ServiceManagement.Service>
+@model EcoCar.ViewModels.ServiceViewModel
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Rechercher un service";
@@ -24,50 +24,37 @@
                 </tr>
             </thead>
             <tbody>
-                @using (Html.BeginForm()){
-                @foreach (var service in Model)
+                @foreach (var carPoolingService in Model.CarPoolingServices)
                 {
-
                     <tr>
-
-
-                        <td>@service.Start</td>
-                        <td>@service.SelectServiceType</td>
-                        <td>@service.ReferenceNumber</td>
-                        <td>@service.IsAvailable</td>
-
-                        @if (@service.SelectServiceType == ServiceType.CarPoolingService)
-                        {
-                            
-                            <td>
-                                <button class="btn btn-primary center-block" type="submit">Modifier mon profil</button>
-                                <span class="glyphicon glyphicon-transfer  text-success"></span>
-                            </td>
-                            
-                        }
-                        
-                        else
-                        {
-                            if (@service.SelectServiceType == ServiceType.ParcelService)
-                            {
-                                <td>
-                                    <a href="/Service/ReserveParcelService/@service.Id"><span class="glyphicon glyphicon-transfer  text-success"></span></a>
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <a href="/Service/ReserveCarRentalService/@service."><span class="glyphicon glyphicon-transfer  text-success"></span></a>
-                                </td>
-                            }
-                        }
-
-
+                        <td>@carPoolingService.Service.Id</td>
+                        <td>@carPoolingService.Service.Start</td>
+                        <td>@carPoolingService.Service.ReferenceNumber</td>
+                        <td>@carPoolingService.Service.IsAvailable</td>
                     </tr>
+                }
+                @foreach (var carRentalService in Model.CarRentalServices)
+                {
+                    <tr>
+                        <td>@carRentalService.Service.Id</td>
+                        <td>@carRentalService.Service.Start</td>
+                        <td>@carRentalService.Service.ReferenceNumber</td>
+                        <td>@carRentalService.Service.IsAvailable</td>
+                    </tr>
+                }
 
+                @foreach (var parcelService in Model.ParcelServices)
+                {
+                    <tr>
+                        <td>@parcelService.Service.Id</td>
+                        <td>@parcelService.Service.Start</td>
+                        <td>@parcelService.Service.ReferenceNumber</td>
+                        <td>@parcelService.Service.IsAvailable</td>
+                    </tr>
                 }
+
                 @Html.Hidden("serviceId",@ViewBag.serviceId,null)
-                }
+                
 
             </tbody>
         </table>

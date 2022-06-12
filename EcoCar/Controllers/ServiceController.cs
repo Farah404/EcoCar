@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Security.Claims;
 using System.Collections.Generic;
+using EcoCar.ViewModels;
 
 namespace EcoCar.Controllers
 {
@@ -21,8 +22,10 @@ namespace EcoCar.Controllers
 
         public ActionResult SearchService()
         {
-            List<Service> services = dalServiceManagement.GetAllServices();
-            return View(services.ToList());
+            ServiceViewModel serviceViewModel = new ServiceViewModel();
+
+
+            return View(serviceViewModel);
 
         }
 

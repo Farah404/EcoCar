@@ -70,5 +70,20 @@ namespace EcoCar.Controllers
         {
             return View();
         }
+        public IActionResult EcoStoreInvoice()
+        {
+            return View();
+        }
+
+        public IActionResult ServiceInvoice()
+        {
+            return View();
+        }
+
+        public IActionResult PaymentForm()
+        {
+            return View();
+        }
+
     }
 }

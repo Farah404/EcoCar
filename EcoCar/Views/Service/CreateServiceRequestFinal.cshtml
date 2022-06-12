@@ -6,47 +6,53 @@
 }
 
 
-<div class="container bootstrap snippets bootdey">
+<div class="container py-5">
+
     <div class="panel-body inf-content">
-        <div class="row">
-            <div class="col-md-4">
-                <h4>Proposer un service</h4>
 
-                @using (Html.BeginForm())
-                {
-                    <div id="type-demande">
-                        @*General*@
+        <div class="row mb-4">
 
-                        @Html.Label("Date de publication de la prestation")<br>
-                        @Html.TextBoxFor(model => model.PublicationDate, new{ @class = "form-control",@id="currentDate",@readonly = true,style="width:300px"})
+            <h4>Demander un service</h4>
 
-                        <br>
-                        @Html.Label("Numero de reference de la prestation")<br>
-                        @Html.TextBoxFor(model => model.ReferenceNumber, new{ @class = "form-control",@id="Refnunmber",@readonly = true,style="width:300px"})
+            @using (Html.BeginForm())
+            {
+                @*General*@
+                <div class="col-lg-4 mx-auto">
+                    @Html.Label("Date de publication de la prestation")<br>
+                    @Html.TextBoxFor(model => model.PublicationDate, new{ @class = "form-control",@id="currentDate",@readonly = true,style="width:300px"})<br>
 
-                        <br>
-                        @Html.Label("Date de debut")<br>
-                        @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.Start)
+                    @Html.Label("Numero de reference de la prestation")<br>
+                    @Html.TextBoxFor(model => model.ReferenceNumber, new{ @class = "form-control",@id="Refnunmber",@readonly = true,style="width:300px"}) <br>
 
-                        <br>
-                        @Html.Label("Type de demande") <br>
-                        @Html.DropDownListFor(model => model.SelectServiceRequestType, new SelectList(Enum.GetValues(typeof(ServiceRequestType))),"--Selectionnez le type de demande--")
-                        @Html.ValidationMessageFor(model => model.SelectServiceRequestType)
-                        <br>
+                    @Html.Label("Date de debut") <br>
+                    @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.Start)
 
-                        @Html.Label("Adresse de départ")  <br>
-                        @Html.TextBoxFor(model => model.PickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.PickUpAddress)
-                        <br>
+                    @Html.Label("Adresse de départ")  <br>
+                    @Html.TextBoxFor(model => model.PickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.PickUpAddress)
+                    <br>
 
-                        @Html.Label("Adresse d'arrivée")  <br>
-                        @Html.TextBoxFor(model => model.DeliveryAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.DeliveryAddress)
-                        <br>
+                    @Html.Label("Adresse d'arrivée")  <br>
+                    @Html.TextBoxFor(model => model.DeliveryAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.DeliveryAddress)
+                    <br>
+                    @Html.Label("Type de Prestation")<br>
+                    @Html.DropDownListFor(model => model.SelectServiceRequestType, new SelectList(Enum.GetValues(typeof(ServiceRequestType))),"--Selectionnez le type de prestation--")
+                    @Html.ValidationMessageFor(model => model.SelectServiceRequestType)
+                    <button class="btn btn-success" type="submit">Soumettre</button>
+                </div>
+
+                <div class="col-lg-8 mx-auto">
+                    <div class="bg-white pt-4 pl-2 pr-2 pb-2">
+                        <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
+                            <li class="nav-item"> <a data-toggle="pill" href="#CarPoolingServiceRequest" class="nav-link active "> Demande de covoiturage </a> </li>
+                            <li class="nav-item"> <a data-toggle="pill" href="#ParcelRequestServiceRequest" class="nav-link ">Demande de transport de Colis </a> </li>
+                            <li class="nav-item"> <a data-toggle="pill" href="#CarRentalServicerequest" class="nav-link "> Demande de location de véhicule </a> </li>
+                        </ul>
                     </div>
+                    <div id="CarPoolingServiceRequest" class="tab-pane fade show active pt-3">
 
-                    <div id="CarPoolingServiceRequest" class="group">
                         @*CarPoolingServiceRequest*@
                         @Html.Label("Type de covoiturage") <br>
                         @Html.DropDownListFor(model => model.SelectCarPoolingRequestType, new SelectList(Enum.GetValues(typeof(CarPoolingRequestType))),"--Selectionnez le type de vocoituragee--")
@@ -79,7 +85,8 @@
                         <br>
                     </div>
 
-                    <div id="ParcelRequestServiceRequest" class="group">
+                    <div id="ParcelRequestServiceRequest" class="tab-pane fade pt-3">
+
                         @*ParcelRequestServiceRequest*@
                         @Html.Label("BarCode") <br>
                         @Html.TextBoxFor(model => model.BarCode, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
@@ -104,7 +111,7 @@
                         <br>
                     </div>
 
-                    <div id="CarRentalServicerequest" class="group">
+                    <div id="CarRentalServicerequest" class="tab-pane fade pt-3">
                         @*CarRentalServicerequest*@
                         @Html.Label("Lieu de récupération initial des clés") <br>
                         @Html.TextBoxFor(model => model.KeyPickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
@@ -123,16 +130,17 @@
                         <br>
                     </div>
 
-                    <button class="btn btn-success" type="submit">Soumettre</button>
-                }
 
-            </div>
-            <div class="col-md-6">
-                <img alt="" style="width:80%;" title="" src="~/Images/ServiceRequest.png">
-            </div>
+
+                </div>
+
+
+            }
+
         </div>
     </div>
 </div>
+
 
 <hr class="solid">
 
@@ -161,4 +169,9 @@
     }
 
     document.getElementById("Refnunmber").value = randomNumber(9);
+
+
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 </script>

@@ -242,8 +242,6 @@ hr.solid {
     height: auto;
 }
 
-
-
 .ui-product-color {
     display: inline-block;
     overflow: hidden;
@@ -255,3 +253,13 @@ hr.solid {
     box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
     vertical-align: middle;
 }
+
+
+.nav-pills .nav-link {
+    color: forestgreen
+}
+
+    .nav-pills .nav-link.active {
+        color: forestgreen
+    }
+

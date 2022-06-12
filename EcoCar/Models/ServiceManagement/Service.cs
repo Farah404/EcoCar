@@ -34,9 +34,13 @@ namespace EcoCar.Models.ServiceManagement
         public Service()
         {
             this.CarPoolingServices = new HashSet<CarPoolingService>();
+            this.ParcelServices = new HashSet<ParcelService>();
+            this.CarRentalServices = new HashSet<CarRentalService>();
             
         }
         public virtual ICollection<CarPoolingService> CarPoolingServices { get; set; }
+        public virtual ICollection<ParcelService> ParcelServices { get; set; }
+        public virtual ICollection<CarRentalService> CarRentalServices { get; set; }
     }
 
 }

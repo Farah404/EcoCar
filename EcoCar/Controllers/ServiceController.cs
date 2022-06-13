@@ -129,7 +129,7 @@ namespace EcoCar.Controllers
         }
 
         //Search Service
-        
+        [HttpPost]   
      public ActionResult SearchByDate (DateTime selection)
         {
             var services = dalServiceManagement.GetAllServices();
@@ -144,11 +144,11 @@ namespace EcoCar.Controllers
 
                     if (! (services != null))
                 {
-                    return View ("SearchError");
+                    return Redirect ("SearchError");
                 }
                 else
                 {
-                    return View(services.ToList());
+                    return View ("SearchService",services);
                 }
             }
                 
@@ -191,32 +191,53 @@ namespace EcoCar.Controllers
 
 
 
-    public ActionResult SearchService(string Selection)
+    public ActionResult SearchService(string selection, DateTime StartingDate, DateTime EndingDate)
         {
+            
+            
+            
             var services = dalServiceManagement.GetAllServices();
 
-           
-            //if (Selection != "all")
+
+
+            if (selection != "All"){
+                services = services.Where(s => s.SelectServiceType.ToString() == selection).ToList();
+
+            }
+
+            if ( StartingDate.Year != 1)
+            {
+                services = services.Where(s => s.Start == StartingDate).ToList();
+            }
+
+
+            if (EndingDate.Year != 1)
+            {
+                services = services.Where(s => s.End == EndingDate).ToList();
+            }
+
+            //if (selection != "All")
             //{
-            //    services = services.Where(s => s.GetType().Name.Contains(Selection)).ToList();
 
-            //    if (Selection == "carpoolingservice")
-            //    {
-            //        return View("searchcarpooling");
-            //    }
 
-            //    else if (Selection == "carrentalservice")
+            //    if( selection == "CarPoolingService")
             //    {
 
-            //        return View("searchcarrentalservice");
+            //        return View("SearchCarpoolingService", services);
             //    }
 
-            //    else if (Selection == "parcelservice")
+            //    else if (selection == "CarRentalService")
             //    {
-            //        return View("searchparcelservice");
+
+            //        return View("SearchCarRentalService", services);
+
+            //    }
+            //    else if (selection == "ParcelService")
+            //    {
+            //        return View("SearchParcelService", services);
             //    }
 
-            
+
             //}
 
 
@@ -224,8 +245,32 @@ namespace EcoCar.Controllers
 
         }
 
+        //[HttpPost]
+        //public ActionResult SearchService()
+        //{
+        //    var services = dalServiceManagement.GetAllServices();
 
-        public ActionResult SearchByOption()
+        //    if (selection != StartingDate && selection != EndingDate)
+        //    {
+        //        services = services.Where(s => s.Start >= StartingDate || s.End <= EndingDate).OrderBy(s => s.Start).ToList();
+
+        //        if (!(services != null))
+        //        {
+        //            return Redirect("SearchError");
+        //        }
+        //        else
+        //        {
+        //            return View(services);
+        //        }
+        //    }
+
+        //}
+
+
+
+
+
+            public ActionResult SearchByOption()
         {
             return View();
         }
@@ -238,45 +283,45 @@ namespace EcoCar.Controllers
         {
             List<CarPoolingService> carPoolingServices = dalServiceManagement.GetAllCarPoolingServices();
 
-            //if (Selection != "All")
+            //if (selection != "all")
             //{
-            //    CarPoolingservices = carPoolingservices.Where(s => s.GetType().Name.Contains(Selection)).ToList();
+            //    carpoolingservices = carpoolingservices.where(s => s.gettype().name.contains(selection)).tolist();
 
-            //    if (Selection == "HomeToWork")
+            //    if (selection == "hometowork")
             //    {
-            //        List<HomeToWork> homeToWorks = carPoolingservices.Cast<HomeToWork>().ToList();
+            //        list<hometowork> hometoworks = carpoolingservices.cast<hometowork>().tolist();
 
-            //        carPoolingservices = homeToWorks.Cast<CarPoolingService>().ToList();
+            //        carpoolingservices = hometoworks.cast<carpoolingservice>().tolist();
             //    }
 
-            //    else if (Selection == "HomeToSchool")
+            //    else if (selection == "hometoschool")
             //    {
 
-            //        List<HomeToSchool> homeToSchools = carPoolingservices.Cast<HomeToSchool>().ToList();
+            //        list<hometoschool> hometoschools = carpoolingservices.cast<hometoschool>().tolist();
 
-            //        carPoolingservices = homeToSchools.Cast<CarPoolingService>().ToList();
+            //        carpoolingservices = hometoschools.cast<carpoolingservice>().tolist();
             //    }
 
-            //    else if (Selection == "Events")
+            //    else if (selection == "events")
             //    {
-            //        List<Events> eventss = carPoolingservices.Cast<Events>().ToList();
+            //        list<events> eventss = carpoolingservices.cast<events>().tolist();
 
-            //        carPoolingservices = eventss.Cast<CarPoolingService>().ToList();
+            //        carpoolingservices = eventss.cast<carpoolingservice>().tolist();
             //    }
 
 
-            //    else if (Selection == "Travel")
+            //    else if (selection == "travel")
             //    {
-            //        List<Travel> travels = carPoolingservices.Cast<Travel>().ToList();
+            //        list<travel> travels = carpoolingservices.cast<travel>().tolist();
 
-            //        carPoolingservices = travels.Cast<CarPoolingService>().ToList();
+            //        carpoolingservices = travels.cast<carpoolingservice>().tolist();
             //    }
 
 
             //}
 
 
-          return View(carPoolingServices.ToList());
+            return View(carPoolingServices.ToList());
 
         }
 

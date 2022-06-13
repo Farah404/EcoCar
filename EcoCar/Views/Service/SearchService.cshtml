@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "EcoCar Services";
 }
-        
+@*        
 
 <div> 
 			<form action = "/service/SearchByDate" method="get">
@@ -15,7 +15,7 @@
                 <input type="text" name="Selection" value="" onkeypress = "submit"placeholder="Date de fin"/>
 				 <button class="btn btn-primary btn-xl" type="submit">Valider</button>
 			</form>
- </div>
+ </div>*@
 
 @*<form class="form-inline"> 
             <div class="formHalf headForms  floatLeft inlineElements"> 
@@ -28,14 +28,21 @@
 
 
 <form action = "/service/SearchService" method="get">
+    
+                <label for="Selection">Rechercher par date:</label>
+				<input type="date" name="StartingDate" value=""  placeholder="Date de début"/>
+                <input type="date" name="EndingDate" value="" placeholder="Date de fin"/>
 				<div id = "choix_typeService"><label> Rechercher par type de service : </label> <br/>  
-					<select name="ServiceType" onChange = "submit()"> 
+@*					<select name="selection" onChange = "submit()"> 
+*@                     <select name="selection"> 
 						<option value ="All">Tous</option> 
-                        <option value ="CarPooling">Covoiturage</option>
-                        <option value ="CarRental">Location de véhicule</option>
-                        <option value ="Parcel">Transport de colis</option>
+                        <option value ="CarPoolingService">Covoiturage</option>
+                        <option value ="CarRentalService">Location de véhicule</option>
+                        <option value ="ParcelService">Transport de colis</option>
 					</select>
                  </div>
+
+                 <button class="btn btn-primary btn-xl" type="submit">Valider</button>
         </form>
         
 
@@ -54,7 +61,16 @@
     
 </div> 
 }
+
+
+@if (Model.Count == 0){
+     <h1>Oooh...Aucun service ne correspond à votre recherche actuellement</h1>
+    <h3> Poster une demande</h3>
+    <h3> <a href="EcoCar/Views/Shared/SearchService">Modifier les critères de recherche</a></h3>
     
+    
+}
+
 
 
 

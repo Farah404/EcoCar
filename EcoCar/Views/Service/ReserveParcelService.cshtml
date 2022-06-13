@@ -37,11 +37,35 @@
                     <span class="text-success"><strong>Information</strong><br></span>
                     <table class="table table-user-information">
                         <tbody>
-
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-road  text-success"></span>
+                                    Date et heure de départ
+                                </td>
+                                <td class="text-success">
+                                    @foreach (var parcelService in Model)
+                                    {
+                                        <p>@parcelService.Service.Start</p>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-road  text-success"></span>
+                                    Date et heure de d'arrivée'
+                                </td>
+                                <td class="text-success">
+                                    @foreach (var parcelService in Model)
+                                    {
+                                        <p>@parcelService.Service.End</p>
+                                    }
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-barcode  text-success"></span>
-                                    BarCode
+                                    Code barre
                                 </td>
                                 <td class="text-success">
                                     @foreach (var parcelService in Model)
@@ -54,7 +78,7 @@
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-dashboard text-success"></span>
-                                    WeightKilogrammes
+                                    Poids en kilogrammes
                                 </td>
                                 <td class="text-success">
                                     @foreach (var parcelService in Model)
@@ -67,7 +91,7 @@
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-cloud text-success"></span>
-                                    AtypicalVolume
+                                    Forme atypique
                                 </td>
                                 <td class="text-success">
                                     @foreach (var parcelService in Model)

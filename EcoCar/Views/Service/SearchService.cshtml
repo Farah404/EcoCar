@@ -3,16 +3,16 @@
 @model EcoCar.ViewModels.ServiceViewModel
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "Rechercher un service";
+    ViewBag.Title = "Rechercher une prestation";
 }
-<!--Add a form with an input field and a button-->
+<!--Service List without requestedservices-->
 
 
 
 <div class="container-fluid bg-grey">
     @*Service List Display*@
     <div class="table-responsive">
-        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation..."></center><br />
+        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une proposition de prestation..."></center><br />
         <table class="table" id="userTable">
             <thead>
                 <tr class="header">
@@ -55,6 +55,64 @@
                         <td>@parcelService.Service.ReferenceNumber</td>
                         <td>@parcelService.Service.IsAvailable</td>
                     <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                    </tr>
+                }
+
+                @Html.Hidden("serviceId",@ViewBag.serviceId,null)
+                
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Requested services list-->
+<div class="container-fluid">
+    @*Service List Display*@
+    <div class="table-responsive">
+        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une demande de prestation..."></center><br />
+        <table class="table" id="userTable">
+            <thead>
+                <tr class="header">
+                    <th>Date de début</th>
+                    <th>Type de service</th>
+                    <th>Numéro de réference</th>
+                    <th>Disponibilité</th>
+                    <th>Reserver</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var carPoolingServiceRequest in Model.CarPoolingServices.Where(s => s.Service.IsRequest == true))
+                {
+                    <tr>
+                        <td>@carPoolingServiceRequest.Service.Start</td>
+                        <td>@carPoolingServiceRequest.Service.SelectServiceType</td>
+                        <td>@carPoolingServiceRequest.Service.ReferenceNumber</td>
+                        <td>@carPoolingServiceRequest.Service.IsAvailable</td>
+                        <td> <a href="/Service/ReserveCarPoolingService/@carPoolingServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                    </tr>
+                }
+                @foreach (var carRentalServiceRequest in Model.CarRentalServices.Where(s => s.Service.IsRequest == true))
+                {
+                    <tr>
+                        <td>@carRentalServiceRequest.Service.Start</td>
+                        <td>@carRentalServiceRequest.Service.SelectServiceType</td>
+                        <td>@carRentalServiceRequest.Service.ReferenceNumber</td>
+                        <td>@carRentalServiceRequest.Service.IsAvailable</td>
+                        <td> <a href="/Service/ReserveCarRentalService/@carRentalServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                    </tr>
+
+                   
+                }
+
+                @foreach (var parcelServiceRequest in Model.ParcelServices.Where(s => s.Service.IsRequest == true))
+                {
+                    <tr>
+                        <td>@parcelServiceRequest.Service.Start</td>
+                        <td>@parcelServiceRequest.Service.SelectServiceType</td>
+                        <td>@parcelServiceRequest.Service.ReferenceNumber</td>
+                        <td>@parcelServiceRequest.Service.IsAvailable</td>
+                    <td> <a href="/Service/ReserveParcelService/@parcelServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
 

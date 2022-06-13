@@ -17,6 +17,7 @@
             <thead>
                 <tr class="header">
                     <th>Date de début</th>
+                    <th>Horaire de début</th>
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
                     @*<th>EcoMembre prestataire</th>*@
@@ -28,7 +29,8 @@
                 @foreach (var carPoolingService in Model.CarPoolingServices)
                 {
                     <tr>
-                        <td>@carPoolingService.Service.Start</td>
+                        <td>@carPoolingService.Service.Start.ToShortDateString()</td>
+                        <td>@carPoolingService.Service.Start.TimeOfDay</td>
                         <td>@carPoolingService.Service.SelectServiceType</td>
                         <td>@carPoolingService.Service.ReferenceNumber</td>
                         @*<td>@carPoolingService.Service.UserProvider.Account.Username</td>*@
@@ -39,7 +41,8 @@
                 @foreach (var carRentalService in Model.CarRentalServices)
                 {
                     <tr>
-                        <td>@carRentalService.Service.Start</td>
+                        <td>@carRentalService.Service.Start.ToShortDateString()</td>
+                        <td>@carRentalService.Service.Start.TimeOfDay</td>
                         <td>@carRentalService.Service.SelectServiceType</td>
                         <td>@carRentalService.Service.ReferenceNumber</td>
                         @*<td>@carRentalService.Service.UserProvider.Account.Username</td>*@
@@ -53,7 +56,8 @@
                 @foreach (var parcelService in Model.ParcelServices)
                 {
                     <tr>
-                        <td>@parcelService.Service.Start</td>
+                        <td>@parcelService.Service.Start.ToShortDateString()</td>
+                        <td>@parcelService.Service.Start.TimeOfDay</td>
                         <td>@parcelService.Service.SelectServiceType</td>
                         <td>@parcelService.Service.ReferenceNumber</td>
                         @*<td>@parcelService.Service.UserProvider.Account.Username</td>*@
@@ -79,6 +83,7 @@
             <thead>
                 <tr class="header">
                     <th>Date de début</th>
+                    <th>Horaire de début</th>
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
                    @* <th>EcoMembre demandeur</th>*@
@@ -90,7 +95,8 @@
                 @foreach (var carPoolingServiceRequest in Model.CarPoolingServices.Where(s => s.Service.IsRequest == true))
                 {
                     <tr>
-                        <td>@carPoolingServiceRequest.Service.Start</td>
+                        <td>@carPoolingServiceRequest.Service.Start.ToShortDateString()</td>
+                        <td>@carPoolingServiceRequest.Service.Start.TimeOfDay</td>
                         <td>@carPoolingServiceRequest.Service.SelectServiceType</td>
                         <td>@carPoolingServiceRequest.Service.ReferenceNumber</td>
                         @*<td>@carPoolingServiceRequest.Service.UserProvider.Account.Username</td>*@
@@ -101,7 +107,8 @@
                 @foreach (var carRentalServiceRequest in Model.CarRentalServices.Where(s => s.Service.IsRequest == true))
                 {
                     <tr>
-                        <td>@carRentalServiceRequest.Service.Start</td>
+                        <td>@carRentalServiceRequest.Service.Start.ToShortDateString()</td>
+                        <td>@carRentalServiceRequest.Service.Start.TimeOfDay</td>
                         <td>@carRentalServiceRequest.Service.SelectServiceType</td>
                         <td>@carRentalServiceRequest.Service.ReferenceNumber</td>
                         @*<td>@carRentalServiceRequest.Service.UserProvider.Account.Username</td>*@
@@ -115,7 +122,8 @@
                 @foreach (var parcelServiceRequest in Model.ParcelServices.Where(s => s.Service.IsRequest == true))
                 {
                     <tr>
-                        <td>@parcelServiceRequest.Service.Start</td>
+                        <td>@parcelServiceRequest.Service.Start.ToShortDateString()</td>
+                        <td>@parcelServiceRequest.Service.Start.TimeOfDay</td>
                         <td>@parcelServiceRequest.Service.SelectServiceType</td>
                         <td>@parcelServiceRequest.Service.ReferenceNumber</td>
                         @*<td>@parcelServiceRequest.Service.UserProvider.Account.Username</td>*@

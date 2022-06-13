@@ -23,7 +23,7 @@
                     <th>EcoMembre depuis</th>
                     <th>Montant EcoCoins</th>
                     <th>Formule d'abonnement</th>
-                    <th>Suspendre</th>
+                    <th>EcoSuspension</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,10 +36,10 @@
                     <td>@users.UserRating</td>
                     <td>@users.SelectEcoStatusType</td>
                     <td>@users.Email</td>
-                    <td>@users.Account.CreationDate</td>
+                    <td>@users.Account.CreationDate.ToShortDateString()</td>
                     <td>@users.EcoWallet.EcoCoinsAmount</td>
                     <td>@users.EcoWallet.Subscription</td>
-                    <td>lien</td>
+                    <td><a href="/Account/UserProfilePersonalByAdmin/@users.Id" type="submit"> Détails</a></td> 
                 </tr>
                 }
             </tbody>
@@ -53,25 +53,53 @@
         <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation"></center><br />
         <table class="table" id="userTable">
             <thead>
-
+               
                 <tr class="header">
                     <th>Date de début</th>
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
                     <th>Provider</th>
-                    <th>Consumer</th>
                     <th>Statut</th>
                     <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody>
+                 @foreach (var carPoolingService in Model.CarPoolingServices)
+                {
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>@carPoolingService.Service.Start.ToShortDateString()</td>
+                    <td>@carPoolingService.Service.SelectServiceType</td>
+                    <td>@carPoolingService.Service.ReferenceNumber</td>
+                    <td>@carPoolingService.Service.UserProviderId</td>
+                    <td>@carPoolingService.Service.IsAvailable</td>
+                    <td>lien</td>
 
                 </tr>
+                }
+                 @foreach (var carRentalService in Model.CarRentalServices)
+                {
+                <tr>
+                    <td>@carRentalService.Service.Start.ToShortDateString()</td>
+                    <td>@carRentalService.Service.SelectServiceType</td>
+                    <td>@carRentalService.Service.ReferenceNumber</td>
+                    <td>@carRentalService.Service.UserProviderId</td>
+                    <td>@carRentalService.Service.IsAvailable</td>
+                    <td>lien</td>
+
+                </tr>
+                }
+                 @foreach (var parcelService in Model.ParcelServices)
+                {
+                <tr>
+                    <td>@parcelService.Service.Start.ToShortDateString()</td>
+                    <td>@parcelService.Service.SelectServiceType</td>
+                    <td>@parcelService.Service.ReferenceNumber</td>
+                    <td>@parcelService.Service.UserProviderId</td>
+                    <td>@parcelService.Service.IsAvailable</td>
+                    <td>lien</td>
+
+                </tr>
+                }
             </tbody>
         </table>
     </div>
@@ -80,7 +108,7 @@
 <div class="container-fluid bg-grey">
     @*Requests List Display*@
     <div class="table-responsive">
-        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation"></center><br />
+        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une demande de prestation"></center><br />
         <table class="table" id="userTable">
             <thead>
 
@@ -89,16 +117,48 @@
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
                     <th>Provider</th>
-                    <th>Consumer</th>
                     <th>Statut</th>
-                    <th>Commande</th>
+                    <th>Supprimer</th>
 
                 </tr>
             </thead>
             <tbody>
+                @foreach (var carPoolingService in Model.CarPoolingServices.Where(c=>c.Service.IsRequest==true))
+                {
                 <tr>
-                    <td></td>
+                    <td>@carPoolingService.Service.Start.ToShortDateString()</td>
+                    <td>@carPoolingService.Service.SelectServiceType</td>
+                    <td>@carPoolingService.Service.ReferenceNumber</td>
+                    <td>@carPoolingService.Service.UserProviderId</td>
+                    <td>@carPoolingService.Service.IsAvailable</td>
+                    <td>lien</td>
+
                 </tr>
+                }
+                 @foreach (var carRentalService in Model.CarRentalServices.Where(c=>c.Service.IsRequest==true))
+                {
+                <tr>
+                    <td>@carRentalService.Service.Start.ToShortDateString()</td>
+                    <td>@carRentalService.Service.SelectServiceType</td>
+                    <td>@carRentalService.Service.ReferenceNumber</td>
+                    <td>@carRentalService.Service.UserProviderId</td>
+                    <td>@carRentalService.Service.IsAvailable</td>
+                    <td>lien</td>
+
+                </tr>
+                }
+                 @foreach (var parcelService in Model.ParcelServices.Where(c=>c.Service.IsRequest==true))
+                {
+                <tr>
+                    <td>@parcelService.Service.Start.ToShortDateString()</td>
+                    <td>@parcelService.Service.SelectServiceType</td>
+                    <td>@parcelService.Service.ReferenceNumber</td>
+                    <td>@parcelService.Service.UserProviderId</td>
+                    <td>@parcelService.Service.IsAvailable</td>
+                    <td>lien</td>
+
+                </tr>
+                }
             </tbody>
         </table>
     </div>

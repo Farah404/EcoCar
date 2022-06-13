@@ -28,10 +28,12 @@
                                         @Html.TextBoxFor(model => model.Administrator.Username, new {@class = "form-control", placeholder = "Nom d'utilisateur" })
                                         @Html.ValidationMessageFor(model =>model.Administrator.Username)
                                     </div>
+                                    <br />
                                     <div class="form-floating mb-3">
                                         @Html.TextBoxFor(model => model.Administrator.Password, new { @type="password", @class = "form-control", placeholder = "Mot de passe" })
                                         @Html.ValidationMessageFor(model =>model.Administrator.Password)
                                     </div>
+                                    <br />
                                     <div class="form-floating mb-3">
                                         @Html.TextBoxFor(model => model.Administrator.EmployeeCode, new {@class = "form-control", placeholder = "Code Employé" })
                                         @Html.ValidationMessageFor(model =>model.Administrator.EmployeeCode)

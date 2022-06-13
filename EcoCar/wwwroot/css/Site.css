@@ -6,7 +6,7 @@
     background-color: #93bb83;
     color: #ffffff;
     font-size: 75px;
-    padding: 25px 25px;
+    padding: 50px 25px;
     font-family: Montserrat, sans-serif;
 }
 /*containers reference*/
@@ -149,7 +149,7 @@
 }
 
     .navbar li a, .navbar .navbar-brand {
-        color: #000000 !important;
+        color: #fff !important;
     }
 
 .navbar-nav li a:hover, .navbar-nav li.active a {

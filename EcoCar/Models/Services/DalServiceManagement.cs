@@ -24,10 +24,11 @@ namespace EcoCar.Models.Services
 
         public List<Service> GetAllServices()
         {
-            return _bddContext.Services.Include(e=>e.UserProvider).ToList();
+            List<Service> services = _bddContext.Services.Include(s=>s.UserProvider).ToList();
+            return services;
         }
 
-        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int? userProviderId)
+        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int userProviderId)
         {
             Service service = new Service()
             {

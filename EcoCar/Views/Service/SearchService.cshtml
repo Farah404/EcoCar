@@ -19,6 +19,7 @@
                     <th>Date de début</th>
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
+                    @*<th>EcoMembre prestataire</th>*@
                     <th>Disponibilité</th>
                     <th>Reserver</th>
                 </tr>
@@ -30,6 +31,7 @@
                         <td>@carPoolingService.Service.Start</td>
                         <td>@carPoolingService.Service.SelectServiceType</td>
                         <td>@carPoolingService.Service.ReferenceNumber</td>
+                        @*<td>@carPoolingService.Service.UserProvider.Account.Username</td>*@
                         <td>@carPoolingService.Service.IsAvailable</td>
                         <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
@@ -40,6 +42,7 @@
                         <td>@carRentalService.Service.Start</td>
                         <td>@carRentalService.Service.SelectServiceType</td>
                         <td>@carRentalService.Service.ReferenceNumber</td>
+                        @*<td>@carRentalService.Service.UserProvider.Account.Username</td>*@
                         <td>@carRentalService.Service.IsAvailable</td>
                         <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
@@ -53,6 +56,7 @@
                         <td>@parcelService.Service.Start</td>
                         <td>@parcelService.Service.SelectServiceType</td>
                         <td>@parcelService.Service.ReferenceNumber</td>
+                        @*<td>@parcelService.Service.UserProvider.Account.Username</td>*@
                         <td>@parcelService.Service.IsAvailable</td>
                     <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
@@ -77,6 +81,7 @@
                     <th>Date de début</th>
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
+                   @* <th>EcoMembre demandeur</th>*@
                     <th>Disponibilité</th>
                     <th>Reserver</th>
                 </tr>
@@ -88,6 +93,7 @@
                         <td>@carPoolingServiceRequest.Service.Start</td>
                         <td>@carPoolingServiceRequest.Service.SelectServiceType</td>
                         <td>@carPoolingServiceRequest.Service.ReferenceNumber</td>
+                        @*<td>@carPoolingServiceRequest.Service.UserProvider.Account.Username</td>*@
                         <td>@carPoolingServiceRequest.Service.IsAvailable</td>
                         <td> <a href="/Service/ReserveCarPoolingService/@carPoolingServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
@@ -98,6 +104,7 @@
                         <td>@carRentalServiceRequest.Service.Start</td>
                         <td>@carRentalServiceRequest.Service.SelectServiceType</td>
                         <td>@carRentalServiceRequest.Service.ReferenceNumber</td>
+                        @*<td>@carRentalServiceRequest.Service.UserProvider.Account.Username</td>*@
                         <td>@carRentalServiceRequest.Service.IsAvailable</td>
                         <td> <a href="/Service/ReserveCarRentalService/@carRentalServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
@@ -111,6 +118,7 @@
                         <td>@parcelServiceRequest.Service.Start</td>
                         <td>@parcelServiceRequest.Service.SelectServiceType</td>
                         <td>@parcelServiceRequest.Service.ReferenceNumber</td>
+                        @*<td>@parcelServiceRequest.Service.UserProvider.Account.Username</td>*@
                         <td>@parcelServiceRequest.Service.IsAvailable</td>
                     <td> <a href="/Service/ReserveParcelService/@parcelServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>

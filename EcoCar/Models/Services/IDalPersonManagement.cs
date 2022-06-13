@@ -18,9 +18,11 @@ namespace EcoCar.Models.Services
         //User
         List<User> GetAllUsers();
         User GetUser(int id);
+        User GetUserByEmail(string email);
         User CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, double userRating, EcoStatusType selectEcoStatusType, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId, int? ecoWalletId, int? accountId);
         void UpdateUser(int id, string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId, int? ecoWalletId, int? accountId);
         void DeleteUser(int id);
+        void UpdateUserVehicule(int userId, int vehiculeId);
 
         //-------------------------------------------------------------------------------------------------
 
@@ -37,8 +39,9 @@ namespace EcoCar.Models.Services
 
         //Account
         List<Account> GetAllAccounts();
-        int CreateAccount(string username, string password, bool isActive, int personId);
+        int CreateAccount(string username, string password, bool isActive, DateTime creationDate, int personId);
         void UpdateAccount(int id, string username, string password, bool isActive, int personId);
+        void UpdateAccountPassword(int id, string password);
         void DeleteAccount(int id);
         Account Authentify(string username, string passwordClear);
         Account GetAccount(int id);
@@ -49,7 +52,7 @@ namespace EcoCar.Models.Services
 
         //Vehicule
         List<Vehicule> GetAllVehicules();
-        Vehicule CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId);
+        int CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId);
         void UpdateVehicule(int id, string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId);
         void DeleteVehicule(int id);
 

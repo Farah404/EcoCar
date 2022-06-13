@@ -358,7 +358,16 @@ namespace EcoCar.Models.DataBase
 
 
         #region Defining character length properties of each table
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    // specification on configuration
 
+        //    //Declare non nullable columns
+        //    //modelBuilder.Entity<Account>().Property(u => u.Username).IsRequired();
+        //    //Add uniqueness constraint
+        //    modelBuilder.Entity<Account>().HasIndex(u => u.Username).IsUnique();
+        //    modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+        //}
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    modelBuilder.Entity<Person>(entity =>

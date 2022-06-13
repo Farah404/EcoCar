@@ -32,21 +32,10 @@
 
                 <strong>Information</strong><br>
 
-                <div class="table-responsive">
-                    
-                  
-                    
-                        
-                        
-                        
+                <div class="table-responsive">      
                         <p>@Model.User.BirthDate</p>
-                    
-               
-                    
                     <table class="table table-user-information">
-
                         <tbody>
-
                             <tr>
                                 <td>
                                     <strong>
@@ -103,7 +92,7 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                    ***
+                                    <p>@Model.Account.CreationDate</p>
                                 </td>
                             </tr>
 
@@ -114,22 +103,71 @@
         </div>
     </div>
 </div>
+<div id="services" class="container-fluid bg-grey">
+    <center><h2>Prestations de @Model.User.Account.Username en cours</h2></center>
+  @*Service List Display*@
+    <div class="table-responsive">
+        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Prestations du membre en cours"></center><br />
+        <table class="table" id="userTable">
+            <thead>
+                <tr class="header">
+                    <th>Date de début</th>
+                    <th>Type de service</th>
+                    <th>Numéro de réference</th>
+                    <th>Prestation demandée</th>
+                    <th>Consulter la prestation<th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var carPoolingService in Model.CarPoolingServices.Where(c=>c.Service.IsAvailable==true))
+                {
+                    <tr>
+                        <td>@carPoolingService.Service.Start</td>
+                        <td>@carPoolingService.Service.SelectServiceType</td>
+                        <td>@carPoolingService.Service.ReferenceNumber</td>
+                        <td>@carPoolingService.Service.IsRequest</td>
+                        <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                    </tr>
+                }
+                @foreach (var carRentalService in Model.CarRentalServices.Where(c=>c.Service.IsAvailable==true))
+                {
+                    <tr>
+                        <td>@carRentalService.Service.Start</td>
+                        <td>@carRentalService.Service.SelectServiceType</td>
+                        <td>@carRentalService.Service.ReferenceNumber</td>
+                        <td>@carRentalService.Service.IsRequest</td>
+                        <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                    </tr>
 
-<hr class="solid">
+                   
+                }
+
+                @foreach (var parcelService in Model.ParcelServices)
+                {
+                    <tr>
+                        <td>@parcelService.Service.Start</td>
+                        <td>@parcelService.Service.SelectServiceType</td>
+                        <td>@parcelService.Service.ReferenceNumber</td>
+                        <td>@parcelService.Service.IsRequest</td>
+                    <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                    </tr>
+                }
+
+                @Html.Hidden("serviceId",@ViewBag.serviceId,null)
+                
+
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <div class="container bootstrap snippets bootdey">
     <div class="panel-body inf-content">
         <div class="row">
-            <div class="col-md-6">
-
                 <strong>Prestations en cours</strong><br>
-
                 <div class="table-responsive">
-
                     <table class="table table-user-information">
-
                         <tbody>
-
                             <tr>
                                 <td>
                                     <strong>
@@ -144,10 +182,6 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <img alt="" style="width:700px;" title="" src="~/Images/Covoiturage.png" data-original-title="Usuario">
-            </div>
         </div>
     </div>
 </div>

@@ -23,6 +23,9 @@ namespace EcoCar.Controllers
         public ActionResult SearchService()
         {
             ServiceViewModel serviceViewModel = new ServiceViewModel();
+            serviceViewModel.CarPoolingServices = dalServiceManagement.GetAllCarPoolingServices();
+            serviceViewModel.ParcelServices = dalServiceManagement.GetAllParcelServices();
+            serviceViewModel.CarRentalServices = dalServiceManagement.GetAllCarRentalServices();
 
             return View(serviceViewModel);
         }
@@ -262,17 +265,29 @@ namespace EcoCar.Controllers
                     carPoolingService.VehiculeId,
                     carPoolingService.TrajectoryId,
                     carPoolingService.ServiceId);
-
-                dalServiceManagement.ServiceAvailability(
+                CarPoolingService carPoolingServiceUpdated = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
+                
+                if (carPoolingServiceUpdated.AvailableSeats == 0)
+                {
+                    dalServiceManagement.ServiceAvailability(
                     carPoolingService.Service.Id
                     );
-                string url = "/Home/Index";
-                return Redirect(url);
+                    string url = "/Home/Index";
+                    return Redirect(url);
+                }
+                else
+                {
+                    string url = "/Home/Index";
+                    return Redirect(url);
+                }
             }
+
             else
             {
-                return Redirect("/Service/SearchService");
+                return Redirect("/Home/Index");
+
             }
+
         }
         #endregion
 

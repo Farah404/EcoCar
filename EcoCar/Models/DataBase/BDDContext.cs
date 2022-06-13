@@ -289,12 +289,12 @@ namespace EcoCar.Models.DataBase
                     PhoneNumber = 1234457891,
                     IdentityCardNumber = 1234535315,
                     DrivingPermitNumber = 1230432153,
-                    BankDetailsId = 1,
-                    BillingAddressId = 1,
-                    PersonId = 1,
-                    VehiculeId = 1,
-                    AccountId = 1,
-                    EcoWalletId = 1
+                    BankDetailsId = 2,
+                    BillingAddressId = 2,
+                    PersonId = 2,
+                    VehiculeId = 2,
+                    AccountId = 2,
+                    EcoWalletId = 2
                 }
                 );
             this.Accounts.Add(
@@ -304,7 +304,7 @@ namespace EcoCar.Models.DataBase
                     Username = "Farah",
                     Password = "5E-A1-36-6C-34-CC-38-0D-AD-F1-62-AC-F6-CB-FD-42", //random
                     IsActive = true,
-                    PersonId = 1
+                    PersonId = 2
                 });
             
             this.BankingDetails.Add(
@@ -343,7 +343,7 @@ namespace EcoCar.Models.DataBase
                     Hybrid = true,
                     Electric = false,
                     AvailableSeats = 3,
-                    InsuranceId = 1,
+                    InsuranceId = 2,
                 });
             this.Insurances.Add(
                 new Insurance

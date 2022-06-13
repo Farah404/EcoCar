@@ -17,14 +17,15 @@
 
                 @using (Html.BeginForm())
                 {
-                    <br><button class="btn btn-primary center-block" type="submit">Réserver la prestation</button>
+                    <br>
 
-                    
-                @foreach(var carPoolingService in Model){
+                    <button class="btn btn-primary center-block" type="submit">Réserver la prestation</button>
 
-                <button a.href="/Account/UserProfile/@carPoolingService.Service.UserProviderId" class="btn btn-primary center-block" type="submit">Consulter le profil de l'EcoMembre</button>
                 }
+                @foreach (var carPoolingService in Model)
+                {
 
+                    <button onclick="location.href='/Account/UserProfile/@carPoolingService.Service.UserProviderId'" class="btn btn-success center-block">Consulter le profil de l'EcoMembre</button>
                 }
             </div>
 

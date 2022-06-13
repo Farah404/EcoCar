@@ -27,29 +27,34 @@
                 @foreach (var carPoolingService in Model.CarPoolingServices)
                 {
                     <tr>
-                        <td>@carPoolingService.Service.Id</td>
                         <td>@carPoolingService.Service.Start</td>
+                        <td>@carPoolingService.Service.SelectServiceType</td>
                         <td>@carPoolingService.Service.ReferenceNumber</td>
                         <td>@carPoolingService.Service.IsAvailable</td>
+                        <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
                 @foreach (var carRentalService in Model.CarRentalServices)
                 {
                     <tr>
-                        <td>@carRentalService.Service.Id</td>
                         <td>@carRentalService.Service.Start</td>
+                        <td>@carRentalService.Service.SelectServiceType</td>
                         <td>@carRentalService.Service.ReferenceNumber</td>
                         <td>@carRentalService.Service.IsAvailable</td>
+                        <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
+
+                   
                 }
 
                 @foreach (var parcelService in Model.ParcelServices)
                 {
                     <tr>
-                        <td>@parcelService.Service.Id</td>
                         <td>@parcelService.Service.Start</td>
+                        <td>@parcelService.Service.SelectServiceType</td>
                         <td>@parcelService.Service.ReferenceNumber</td>
                         <td>@parcelService.Service.IsAvailable</td>
+                    <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
 

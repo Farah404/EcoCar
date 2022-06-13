@@ -1,5 +1,5 @@
-﻿@*@model EcoCar.Models.PersonManagement.Account*@
-@model List<EcoCar.Models.PersonManagement.User>
+﻿
+@model EcoCar.ViewModels.AccountViewModel
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Eco Profil";
@@ -33,13 +33,13 @@
 
                 <div class="table-responsive">
                     
-                  *@foreach (var user in Model)
-                    {
-
-                        <p>@user.Person.Name</p>
-                        <p>@user.Person.Id</p>
-                        <p>@user.BirthDate</p>
-                    }
+                  
+                    
+                        <p>@Model.User.Account.Username</p>
+                        <p>@Model.User.Person.Name</p>
+                        <p>@Model.User.Person.Id</p>
+                        <p>@Model.User.BirthDate</p>
+                    
                
                     
                     <table class="table table-user-information">

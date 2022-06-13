@@ -20,13 +20,11 @@
                     <br>
 
                     <button class="btn btn-primary center-block" type="submit">Réserver la prestation</button>
+                }
+                @foreach (var carRentalService in Model)
+                {
 
-                    @*
-                @foreach(var carpoolingservice in model){
-
-                <button a.href="/account/userprofile/@carpoolingservice.service.userproviderid" class="btn btn-primary center-block" type="submit">consulter le profil de l'ecomembre</button>
-                }*@
-
+                    <button onclick="location.href='/Account/UserProfile/@carRentalService.Service.UserProviderId'" class="btn btn-success center-block">Consulter le profil de l'EcoMembre</button>
                 }
             </div>
             <div class="col-md-6">

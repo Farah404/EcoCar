@@ -86,13 +86,13 @@ namespace EcoCar.Models.Services
         # region CRUD User
         public List<User> GetAllUsers()
         {
-            List<User> listUsers = _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).ToList();
+            List<User> listUsers = _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).Include(e=>e.Account).Include(e=>e.Vehicule).Include(e=>e.EcoWallet).ToList();
             return listUsers;
         }
 
         public User GetUser(int id)
         {
-            return _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).FirstOrDefault(e => e.Id == id);
+            return _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).Include(e => e.Account).Include(e => e.Vehicule).Include(e => e.EcoWallet).FirstOrDefault(e => e.Id == id);
         }
 
 
@@ -316,7 +316,7 @@ namespace EcoCar.Models.Services
             Account account = new Account() { 
                 Username = username, 
                 Password = password, 
-                IsActive = isActive, 
+                IsActive = true, 
                 Person = _bddContext.People.First(b=>b.Id == personId) 
             };
             _bddContext.Accounts.Add(account);

@@ -21,7 +21,7 @@ namespace EcoCar.ViewModels
 
         public Insurance Insurance { get; set; }
 
-        public List<User> ListUsers { get; set; }
+        public List<User> Users { get; set; }
 
     }
 }

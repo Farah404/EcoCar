@@ -215,12 +215,11 @@ namespace EcoCar.Controllers
             return Redirect("/Account/UserProfilePersonal");
         }
 
-        public IActionResult UserProfile()
-        {
-            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            List<User> users = dalPersonManagement.GetAllUsers();
-            users = users.Where(u => u.Id==userId).ToList();
-            return View(users.ToList()) ;
+        public IActionResult UserProfile(int id)
+        { 
+            AccountViewModel viewModel = new AccountViewModel();
+            viewModel.User = dalPersonManagement.GetUser(id);
+            return View(viewModel) ;
         }
 
 

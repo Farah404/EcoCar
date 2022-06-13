@@ -28,7 +28,6 @@ namespace EcoCar.Models.DataBase
         #endregion
         #region Service Management tables
         public DbSet<Service> Services { get; set; }
-        public DbSet<ServiceRequest> ServiceRequests { get; set; }
         public DbSet<CarPoolingService> CarPoolingServices { get; set; }
         public DbSet<ParcelService> ParcelServices { get; set; }
         public DbSet<CarRentalService> CarRentalServices { get; set; }
@@ -47,7 +46,7 @@ namespace EcoCar.Models.DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=rootine;database=EcoCar");
         }
 
 

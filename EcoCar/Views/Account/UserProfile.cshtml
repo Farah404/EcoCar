@@ -18,14 +18,15 @@
                     {
                         <li>
                             <span>
+                                <p>@Model.User.Account.Username</p>
                                 <br>
 
                             </span>
                         </li>
                     }
                 </ul>
-                <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Messaging/UserReporting'">Signaler l'utilisateur</button>
-                <br> <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Messaging/Message'">Contacter l'utilisateur</button>
+                <button class="btn btn-success center-block" type="submit" onclick="location.href='/Messaging/UserReporting'">Signaler l'utilisateur</button>
+                <br> <button class="btn btn-success center-block" type="submit" onclick="location.href='/Messaging/Message'">Contacter l'utilisateur</button>
             </div>
             <div class="col-md-6">
 
@@ -35,9 +36,9 @@
                     
                   
                     
-                        <p>@Model.User.Account.Username</p>
-                        <p>@Model.User.Person.Name</p>
-                        <p>@Model.User.Person.Id</p>
+                        
+                        
+                        
                         <p>@Model.User.BirthDate</p>
                     
                
@@ -54,7 +55,7 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                    ***
+                                    <p>@Model.User.Person.LastName @Model.User.Person.Name</p>
                                 </td>
                             </tr>
 
@@ -66,7 +67,7 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                    ***
+                                    <p>@Model.User.SelectEcoStatusType</p>
                                 </td>
                             </tr>
 
@@ -78,7 +79,7 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                    ***
+                                   <p>@Model.User.UserRating</p>
                                 </td>
                             </tr>
 
@@ -86,11 +87,11 @@
                                 <td>
                                     <strong>
                                         <span class="glyphicon glyphicon-ok text-success"></span>
-                                        Email et numéro de téléphone vérifié
+                                        Email et numéro de téléphone vérifiés
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                    ***
+                                    
                                 </td>
                             </tr>
 

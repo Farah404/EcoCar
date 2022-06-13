@@ -26,11 +26,11 @@
                 </ul>
                 @foreach (var user in Model)
                 {
-                    <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/UpdateUser/@user.Id'">Modifier mon profil</button>
+                    <button class="btn btn-success center-block" type="submit" onclick="location.href='/Account/UpdateUser/@user.Id'">Modifier mon profil</button>
                     <br>
                 }
-                <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/CreateInsurance'">Ajouter un véhicule</button>
-                <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Messaging/EcoUserInbox'">Messagerie</button>
+                <button class="btn btn-success center-block" type="submit" onclick="location.href='/Account/CreateInsurance'">Ajouter un véhicule</button>
+                <button class="btn btn-success center-block" type="submit" onclick="location.href='/Messaging/EcoUserInbox'">Messagerie</button>
             </div>
 
 
@@ -64,6 +64,10 @@
                                     EcoStatus
                                 </td>
                                 <td class="text-success">
+                                    @foreach (var user in Model)
+                                    {
+                                        <p>@user.SelectEcoStatusType</p>
+                                    }
                                 </td>
                             </tr>
 
@@ -73,6 +77,10 @@
                                     EcoRating
                                 </td>
                                 <td class="text-success">
+                                     @foreach (var user in Model)
+                                    {
+                                        <p>@user.UserRating</p>
+                                    }
                                 </td>
                             </tr>
 

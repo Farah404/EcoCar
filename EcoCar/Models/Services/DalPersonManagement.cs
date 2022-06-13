@@ -120,7 +120,7 @@ namespace EcoCar.Models.Services
                 IdentityCardNumber = identityCardNumber,
                 DrivingPermitNumber = drivingPermitNumber,
                 UserRating = userRating,
-                SelectEcoStatusType = selectEcoStatusType,
+                SelectEcoStatusType = 0,
                 BankDetails = _bddContext.BankingDetails.First(b => b.Id == bankDetailsId),
                 BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId),
                 Person = _bddContext.People.First(b => b.Id == personId),

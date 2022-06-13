@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using static EcoCar.Models.ServiceManagement.CarPoolingService;
 using static EcoCar.Models.ServiceManagement.Service;
-using static EcoCar.Models.ServiceManagement.ServiceRequest;
 using static EcoCar.Models.ServiceManagement.Trajectory;
 
 namespace EcoCar.Models.Services
@@ -25,10 +24,10 @@ namespace EcoCar.Models.Services
 
         public List<Service> GetAllServices()
         {
-            return _bddContext.Services.ToList();
+            return _bddContext.Services.Include(e=>e.UserProvider).ToList();
         }
 
-        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType, int? userProviderId)
+        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int? userProviderId)
         {
             Service service = new Service()
             {
@@ -38,6 +37,7 @@ namespace EcoCar.Models.Services
                 IsAvailable = true,
                 Start = start,
                 End = end,
+                IsRequest = false,
                 SelectServiceType = selectServiceType,
                 UserProvider = _bddContext.Users.First(s => s.Id == userProviderId)
             };
@@ -520,79 +520,37 @@ namespace EcoCar.Models.Services
 
         #region CRUD ServiceRequestFinal
 
-        public List<ServiceRequest> GetAllServiceRequests()
+        //public List<Service> GetAllServiceRequests()
+        //{
+        //    return _bddContext.Services.ToList();
+        //}
+
+        //public Service GetServiceRequest(int id)
+        //{
+        //    return _bddContext.Services.FirstOrDefault(e => e.Id == id);
+        //}
+
+        public int CreateServiceRequest(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int? userProviderId)
         {
-            return _bddContext.ServiceRequests.ToList();
-        }
-
-        public ServiceRequest GetServiceRequest(int id)
-        {
-            return _bddContext.ServiceRequests.FirstOrDefault(e => e.Id == id);
-        }
-
-        public int CreateServiceRequest(
-            DateTime publicationDate,
-            int referenceNumber,
-            DateTime start,
-            ServiceRequestType selectServiceRequestType,
-            string pickUpAddress,
-            string deliveryAddress,
-
-            CarPoolingRequestType selectCarPoolingRequestType,
-            int passengerNumber, 
-            int petsNumber,
-            bool smoking,
-            bool music,
-            bool chatting,
-
-            int barCode,
-            double weightKilogrammes,
-            bool atypicalVolume,
-            bool fragile,
-
-            string keyPickUpAddress,
-            string keyDropOffAddress,
-            string usageComments,
-
-            int userProviderId
-
-            )
-        {
-            ServiceRequest serviceRequest = new ServiceRequest()
+            Service serviceRequest = new Service()
             {
                 PublicationDate = publicationDate,
+                ExpirationDate = expirationDate,
                 ReferenceNumber = referenceNumber,
+                IsAvailable = true,
                 Start = start,
-                SelectServiceRequestType = selectServiceRequestType,
-                PickUpAddress = pickUpAddress,
-                DeliveryAddress = deliveryAddress,
-
-                SelectCarPoolingRequestType = selectCarPoolingRequestType,
-                PassengerNumber = passengerNumber,
-                PetsNumber = petsNumber,
-                Smoking = smoking,
-                Music = music,
-                Chatting = chatting,
-
-                BarCode= barCode,
-                WeightKilogrammes = weightKilogrammes,
-                AtypicalVolume = atypicalVolume,
-                Fragile = fragile,
-
-                KeyPickUpAddress = keyPickUpAddress,
-                KeyDropOffAddress = keyDropOffAddress,
-                UsageComments = usageComments,
-
+                End = end,
+                IsRequest = true,
+                SelectServiceType = selectServiceType,
                 UserProvider = _bddContext.Users.First(s => s.Id == userProviderId)
-
             };
-            _bddContext.ServiceRequests.Add(serviceRequest);
+            _bddContext.Services.Add(serviceRequest);
             _bddContext.SaveChanges();
             return serviceRequest.Id;
         }
-        public void CreateServiceRequestFinal(ServiceRequest serviceRequest)
+        public void CreateServiceRequestFinal(Service serviceRequest)
         {
-            _bddContext.ServiceRequests.Update(serviceRequest);
+            _bddContext.Services.Update(serviceRequest);
             _bddContext.SaveChanges();
         }
         #endregion

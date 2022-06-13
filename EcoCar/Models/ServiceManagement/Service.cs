@@ -19,6 +19,7 @@ namespace EcoCar.Models.ServiceManagement
         public bool IsAvailable { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
+        public bool IsRequest { get; set; }
         public ServiceType SelectServiceType { get; set; }
         public enum ServiceType
         {

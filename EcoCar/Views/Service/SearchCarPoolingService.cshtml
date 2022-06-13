@@ -1,0 +1,59 @@
+﻿
+@*@using EcoCar.Models.ServiceManagement*@
+@*@model IEnumerable<CarPoolingService>*@
+@*@model EcoCar.Models.ServiceManagement.Trajectory*@
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "EcoCar Covoiturage";
+}
+        
+        <form class="form-inline"> 
+            <div class="formHalf headForms  floatLeft inlineElements"> 
+                <input type="text" class="form-control" size="10" placeholder="Départ" required> 
+                 <input type="text" class="form-control" size="10" placeholder="Destination" required> 
+                 <input type="date" class="form-control" size="10" placeholder="Quand?" required> 
+                 <button type="button" class="btn btn-success">Rechercher</button> 
+            </div> 
+        </form>     
+
+
+        <form action = "/service/SearchCarpoolingService" method="get">
+				<div id = "choix_typeService"><label> Rechercher par type de trajet : </label> <br/>  
+					<select name="ServiceType" onChange = "submit()"> 
+
+                        <option value ="All">Tous</option> 
+                        <option value ="HomeToWork">Domicile-Travail</option>
+                        <option value ="HomeToSchool">Domicile-Ecole/Université</option>
+                        <option value ="Events">Evénement</option>
+                         <option value ="Travel">Voyage</option>
+					</select>
+                 </div>
+        </form>
+            
+   
+         @*<div class="row justify-content-start">
+			@foreach (var service in Model)
+			{
+				<div class="card col-6 m-5" style="width: 18rem;">
+					<div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            @*<h5 class="card-title">@Html.LabelFor(model => model.) && @Html.LabelFor(model => model.DeliveryAddress) ; </h5>*@
+                            @*<h5 class="card-title">@NOM DU SERVICE</h5>*@
+                            @*<div class="my-3">*@
+                               @* <img src="@sejour.ImagePath" width="200" height="200" />*@
+                            @*</div>
+
+                            <h6 class="card-subtitle mb-2 text-muted">@service.referenceNumber </h6>
+                            <h6 class="card-subtitle mb-2 text-muted">@service.Start</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">@service.End</h6>
+                            <p class="card-text">@service.SelectServiceType</p>
+
+                        </div>				
+
+					</div>
+				</div>
+			}
+       ]
+
+			<div class="col-4 m-5" style="width: 18rem;">*@
+        </div>

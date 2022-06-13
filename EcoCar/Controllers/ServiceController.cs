@@ -1,9 +1,11 @@
 ﻿using EcoCar.Models.ServiceManagement;
 using EcoCar.Models.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static EcoCar.Models.ServiceManagement.CarPoolingService;
+using static EcoCar.Models.ServiceManagement.Service;
 
 namespace EcoCar.Controllers
 {
@@ -127,58 +129,179 @@ namespace EcoCar.Controllers
         }
 
         //Search Service
-
-        public ActionResult SearchService(string ServiceType)
+        
+     public ActionResult SearchByDate (DateTime selection)
         {
-            
-             var services = dalServiceManagement.GetAllServices();
+            var services = dalServiceManagement.GetAllServices();
+            //DateTime date = Selection.HasConversion<DateTime>();
+            //string Date = DateTime.Now.ToString("dd-MM-yyyy");
+            DateTime StartingDate = DateTime.Today;
+            DateTime EndingDate = DateTime.Today;
 
-            if (ServiceType != "all")
+            if (selection != StartingDate && selection != EndingDate) 
             {
-                string mainCategory = ServiceType.Split('/')[0];
+                services = services.Where(s => s.Start >= StartingDate || s.End <= EndingDate).OrderBy(s=>s.Start).ToList();
 
-                services = services.Where(s => s.GetType().Name.Contains(mainCategory)).ToList();
-
-                //string subCategory = ServiceType.Split('/')[1];
-
-                if (mainCategory == "CarPooling")
+                    if (! (services != null))
                 {
-                    return View("SearchCarpooling");
+                    return View ("SearchError");
+                }
+                else
+                {
+                    return View(services.ToList());
+                }
+            }
+                
+            else if    (selection != StartingDate)
+            {
+
+                services = services.Where(s => s.Start >= StartingDate).OrderBy(s => s.Start).ToList();
+
+                if (!(services != null))
+                {
+                    return View("SearchError");
                 }
 
-                else if (mainCategory == "CarRentalService")
+                else
                 {
-                    List<CarRentalService> CarRentalServices = services.Cast<CarRentalService>().ToList();
-                    services = CarRentalServices.Cast<Service>().ToList();
+                    return View(services.ToList());
                 }
-
-                else if (mainCategory == "ParcelService")
-                {
-                    List<ParcelService> ParcelServices = services.Cast<ParcelService>().ToList();
-                    //ParcelServices = ParcelServices.Where(l => l.ParcelType.ToString() == subCategory).ToList();
-                    services = ParcelServices.Cast<Service>().ToList();
-                }
-
 
             }
 
-            return View();
+            else if (selection != EndingDate)
+            {
+                services = services.Where(s => s.End <= EndingDate).ToList().OrderBy(s => s.Start).ToList(); ;
+
+                if (!(services != null))
+                {
+                    return View("SearchError");
+                }
+
+                else
+                {
+                    return View(services.ToList());
+                }
+               
+            }
+              
+            return View(services.ToList());
 
         }
 
-        public ActionResult SearchCarpooling()
+
+
+    public ActionResult SearchService(string Selection)
+        {
+            var services = dalServiceManagement.GetAllServices();
+
+           
+            //if (Selection != "all")
+            //{
+            //    services = services.Where(s => s.GetType().Name.Contains(Selection)).ToList();
+
+            //    if (Selection == "carpoolingservice")
+            //    {
+            //        return View("searchcarpooling");
+            //    }
+
+            //    else if (Selection == "carrentalservice")
+            //    {
+
+            //        return View("searchcarrentalservice");
+            //    }
+
+            //    else if (Selection == "parcelservice")
+            //    {
+            //        return View("searchparcelservice");
+            //    }
+
+            
+            //}
+
+
+            return View(services);
+
+        }
+
+
+        public ActionResult SearchByOption()
         {
             return View();
-
         }
 
-        public ActionResult SearchParcelService()
+
+
+
+        public ActionResult SearchCarpoolingService(string Selection)
+                    
         {
-            return View();
+            List<CarPoolingService> carPoolingServices = dalServiceManagement.GetAllCarPoolingServices();
+
+            //if (Selection != "All")
+            //{
+            //    CarPoolingservices = carPoolingservices.Where(s => s.GetType().Name.Contains(Selection)).ToList();
+
+            //    if (Selection == "HomeToWork")
+            //    {
+            //        List<HomeToWork> homeToWorks = carPoolingservices.Cast<HomeToWork>().ToList();
+
+            //        carPoolingservices = homeToWorks.Cast<CarPoolingService>().ToList();
+            //    }
+
+            //    else if (Selection == "HomeToSchool")
+            //    {
+
+            //        List<HomeToSchool> homeToSchools = carPoolingservices.Cast<HomeToSchool>().ToList();
+
+            //        carPoolingservices = homeToSchools.Cast<CarPoolingService>().ToList();
+            //    }
+
+            //    else if (Selection == "Events")
+            //    {
+            //        List<Events> eventss = carPoolingservices.Cast<Events>().ToList();
+
+            //        carPoolingservices = eventss.Cast<CarPoolingService>().ToList();
+            //    }
+
+
+            //    else if (Selection == "Travel")
+            //    {
+            //        List<Travel> travels = carPoolingservices.Cast<Travel>().ToList();
+
+            //        carPoolingservices = travels.Cast<CarPoolingService>().ToList();
+            //    }
+
+
+            //}
+
+
+          return View(carPoolingServices.ToList());
 
         }
 
-        public ActionResult SearchCarRentalService()
+        public ActionResult SearchParcelService(string Selection)
+
+        {
+           List<ParcelService> parcelServices = dalServiceManagement.GetAllParcelServices();
+
+            //if (Selection != "All")
+            //{
+            //    ParcelServices = parcelServices.Where(s => s.GetType.Name.contains(Selection)).ToList();
+
+            //    if (Selection == "StopNumber")
+            //    {
+
+            //    }
+            //}
+
+
+
+            return View(parcelServices.ToList());
+
+        }
+
+        public ActionResult SearchCarRentalService(string Selection)
         {
             return View();
 

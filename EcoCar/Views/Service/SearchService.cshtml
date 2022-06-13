@@ -6,12 +6,31 @@
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "EcoCar Services";
 }
-        <!--Add a form with an input field and a button-->
+        
 
-        <form action = "/service/ServicesFilter" method="get">
+<div> 
+			<form action = "/service/SearchByDate" method="get">
+				 <label for="Selection">Rechercher par date:</label>
+				<input type="text" name="Selection" value="" onkeypress = "submit" placeholder="Date de début"/>
+                <input type="text" name="Selection" value="" onkeypress = "submit"placeholder="Date de fin"/>
+				 <button class="btn btn-primary btn-xl" type="submit">Valider</button>
+			</form>
+ </div>
+
+@*<form class="form-inline"> 
+            <div class="formHalf headForms  floatLeft inlineElements"> 
+                <input type="text" class="form-control" size="10" placeholder="Départ" required> 
+                 <input type="text" class="form-control" size="10" placeholder="Destination" required> 
+                 <input type="date" class="form-control" size="10" placeholder="Quand?" required> 
+                 <button type="button" class="btn btn-success">Rechercher</button> 
+            </div> 
+        </form>*@
+
+
+<form action = "/service/SearchService" method="get">
 				<div id = "choix_typeService"><label> Rechercher par type de service : </label> <br/>  
 					<select name="ServiceType" onChange = "submit()"> 
-						<option value ="Tous">Tous</option> 
+						<option value ="All">Tous</option> 
                         <option value ="CarPooling">Covoiturage</option>
                         <option value ="CarRental">Location de véhicule</option>
                         <option value ="Parcel">Transport de colis</option>
@@ -19,10 +38,56 @@
                  </div>
         </form>
         
+
+@foreach (var service in Model) 
+{
+<h2 style="text-align:center"> Provider's Name propose un(e) @service.SelectServiceType </h2>  @*Récupérer prénom du prestataire via IdServiceProvider de la classe service + forcer le nom du service => traduire en français*@
+
+<div class="card">
+    
+  <img src="~/Images/Covoiturage.png" alt="Covoiturage" style="width:50%"> @*Image selon le type de service*@
+  <h3> Du @service.Start</h3>
+  <h3> Au @service.End</h3>
+  <h5>Référence n°@service.ReferenceNumber</h5>
+  <p class="price"> Tarif : 20 € </p>
+  <p><button>Réserver</button></p>
+    
+</div> 
+}
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Add a form with an input field and a button-->
+
         
         
-       <div class="row justify-content-start">
-			@foreach (var service in Model)
+        
+      @* <div class="row justify-content-start">
+			
 			{
 				<div class="card col-6 m-5" style="width: 18rem;">
 					<div class="card-body d-flex flex-column justify-content-between">
@@ -41,3 +106,4 @@
 
 			<div class="col-4 m-5" style="width: 18rem;">
         </div>
+*@

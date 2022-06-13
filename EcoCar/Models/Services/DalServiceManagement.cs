@@ -430,7 +430,7 @@ namespace EcoCar.Models.Services
             throw new NotImplementedException();
         }
 
-        public CarPoolingService SearchCarpooling()
+        public CarPoolingService SearchCarpoolingService()
         {
             throw new NotImplementedException();
 
@@ -458,7 +458,7 @@ namespace EcoCar.Models.Services
             throw new NotImplementedException();
         }
 
-        void IDalServiceManagement.SearchCarpooling()
+        void IDalServiceManagement.SearchCarpoolingService()
         {
             throw new NotImplementedException();
         }

@@ -73,6 +73,7 @@ namespace EcoCar.Controllers
                                service.IsAvailable,
                                service.Start,
                                service.End,
+                               service.IsRequest,
                                service.SelectServiceType,
                                userId
                                );
@@ -389,32 +390,21 @@ namespace EcoCar.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateServiceRequest(ServiceRequest serviceRequest)
+        public IActionResult CreateServiceRequest(Service serviceRequest)
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 User user = dalPersonManagement.GetAllUsers().FirstOrDefault(r => r.Id == userId);
-                int serviceRequestlId = dalServiceManagement.CreateServiceRequest(
+                int serviceRequestId = dalServiceManagement.CreateService(
                                serviceRequest.PublicationDate,
+                               serviceRequest.ExpirationDate,
                                serviceRequest.ReferenceNumber,
+                               serviceRequest.IsAvailable,
                                serviceRequest.Start,
-                               serviceRequest.SelectServiceRequestType,
-                               serviceRequest.PickUpAddress,
-                               serviceRequest.DeliveryAddress,
-                               serviceRequest.SelectCarPoolingRequestType,
-                               serviceRequest.PassengerNumber,
-                               serviceRequest.PetsNumber,
-                               serviceRequest.Smoking,
-                               serviceRequest.Music,
-                               serviceRequest.Chatting,
-                               serviceRequest.BarCode,
-                               serviceRequest.WeightKilogrammes,
-                               serviceRequest.AtypicalVolume,
-                               serviceRequest.Fragile,
-                               serviceRequest.KeyPickUpAddress,
-                               serviceRequest.KeyDropOffAddress,
-                               serviceRequest.UsageComments,
+                               serviceRequest.End,
+                               serviceRequest.IsRequest,
+                               serviceRequest.SelectServiceType,
                                userId
                                );
 
@@ -425,11 +415,11 @@ namespace EcoCar.Controllers
         #endregion
 
         #region Searching a service request in the lists of requests
-        public IActionResult SearchRequest()
-        {
-            List<ServiceRequest> serviceRequests = dalServiceManagement.GetAllServiceRequests();
-            return View(serviceRequests.ToList());
-        }
+        //public IActionResult SearchRequest()
+        //{
+        //    List<ServiceRequest> serviceRequests = dalServiceManagement.GetAllServiceRequests();
+        //    return View(serviceRequests.ToList());
+        //}
         #endregion
     }
 }

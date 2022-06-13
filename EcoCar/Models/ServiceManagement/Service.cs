@@ -16,9 +16,11 @@ namespace EcoCar.Models.ServiceManagement
         public DateTime PublicationDate { get; set; }
         public DateTime ExpirationDate { get; set; }
         public int ReferenceNumber { get; set; }
+      
         public bool IsAvailable { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
+        public bool IsRequest { get; set; }
         public ServiceType SelectServiceType { get; set; }
         public enum ServiceType
         {
@@ -28,7 +30,7 @@ namespace EcoCar.Models.ServiceManagement
         }
 
         //Foreign Keys
-        public int? UserProviderId { get; set; }
+        public int UserProviderId { get; set; }
         public User UserProvider { get; set; }
 
         public Service()

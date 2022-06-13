@@ -1,9 +1,9 @@
-﻿@using static EcoCar.Models.ServiceManagement.CarRentalService
+﻿@using static EcoCar.Models.ServiceManagement.ParcelService
 
-@model List<EcoCar.Models.ServiceManagement.CarRentalService>
+@model List<EcoCar.Models.ServiceManagement.ParcelService>
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "Reserver une prestation de location de véhicule";
+    ViewBag.Title = "Répondre à une demande de transport de colis";
 }
 <!--Add a form with an input field and a button-->
 
@@ -13,7 +13,7 @@
 
             @*Profile picture Part with buttons*@
             <div class="col-md-4">
-                <img alt="" style="width:100%;" class=" img-thumbnail" src="~/Images/CarRental.png">
+                <img alt="" style="width:100%;" class=" img-thumbnail" src="~/Images/ParcelDelivery.png">
 
                 @using (Html.BeginForm())
                 {
@@ -22,12 +22,15 @@
                     <button class="btn btn-primary center-block" type="submit">Réserver la prestation</button>
                 }
                 <br />
-                @foreach (var carRentalService in Model)
+                @foreach (var parcelService in Model)
                 {
 
-                    <button onclick="location.href='/Account/UserProfile/@carRentalService.Service.UserProviderId'" class="btn btn-success center-block">Consulter le profil de l'EcoMembre</button>
+                    <button onclick="location.href='/Account/UserProfile/@parcelService.Service.UserProviderId'" class="btn btn-success center-block">Consulter le profil de l'EcoMembre</button>
                 }
             </div>
+
+
+
             <div class="col-md-6">
                 <div class="table-responsive">
                     @*Information*@
@@ -40,9 +43,9 @@
                                     Date et heure de départ
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
+                                    @foreach (var parcelService in Model)
                                     {
-                                        <p>@carRentalService.Service.Start</p>
+                                        <p>@parcelService.Service.Start</p>
                                     }
                                 </td>
                             </tr>
@@ -53,85 +56,75 @@
                                     Date et heure de d'arrivée'
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
+                                    @foreach (var parcelService in Model)
                                     {
-                                        <p>@carRentalService.Service.End</p>
+                                        <p>@parcelService.Service.End</p>
                                     }
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-road  text-success"></span>
-                                    KeyPickUpAddress
+                                    <span class="glyphicon glyphicon-barcode  text-success"></span>
+                                    Code barre
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
+                                    @foreach (var parcelService in Model)
                                     {
-                                        <p>@carRentalService.KeyPickUpAddress</p>
+                                        <p>@parcelService.BarCode</p>
                                     }
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-user text-success"></span>
-                                    KeyDropOffAddress
+                                    <span class="glyphicon glyphicon-dashboard text-success"></span>
+                                    Poids en kilogrammes
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
+                                    @foreach (var parcelService in Model)
                                     {
-                                        <p>@carRentalService.KeyDropOffAddress</p>
+                                        <p>@parcelService.WeightKilogrammes</p>
                                     }
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-hourglass text-success"></span>
-                                    Vehicule.Brand
+                                    <span class="glyphicon glyphicon-cloud text-success"></span>
+                                    Forme atypique
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
+                                    @foreach (var parcelService in Model)
                                     {
-                                        <p>@carRentalService.Vehicule.Brand</p>
+                                        <p>@parcelService.AtypicalVolume</p>
                                     }
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-pause text-success"></span>
-                                    Vehicule.Model
+                                    <span class="glyphicon glyphicon-flash text-success"></span>
+                                    Fragile
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
+                                    @foreach (var parcelService in Model)
                                     {
-                                        <p>@carRentalService.Vehicule.Model</p>
+                                        <p>@parcelService.Fragile</p>
                                     }
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-time text-success"></span>
-                                    Vehicule.Hybrid
-                                </td>
-                                <td class="text-success">
-                                    @foreach (var carRentalService in Model)
-                                    {
-                                        <p>@carRentalService.Vehicule.Hybrid</p>
-                                    }
-                                </td>
-                            </tr>
+
+
 
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-arrow-up text-success"></span>
-                                    Vehicule.Electric
+                                    Adresse de départ
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
+                                    @foreach (var parcelService in Model)
                                     {
-                                        <p>@carRentalService.Vehicule.Electric</p>
+                                        <p>@parcelService.Trajectory.PickUpAddress</p>
                                     }
                                 </td>
                             </tr>
@@ -139,22 +132,20 @@
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-arrow-down text-success"></span>
-                                    Vehicule.AvailableSeats
+                                    Adresse d'arrivée
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
+                                    @foreach (var parcelService in Model)
                                     {
-                                        <p>@carRentalService.Vehicule.AvailableSeats</p>
+                                        <p>@parcelService.Trajectory.DeliveryAddress</p>
                                     }
                                 </td>
                             </tr>
+
                         </tbody>
                     </table>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </div>

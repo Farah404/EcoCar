@@ -1,5 +1,6 @@
-﻿@using static EcoCar.Models.ServiceManagement.ServiceRequest
-@model EcoCar.Models.ServiceManagement.ServiceRequest
+﻿@using static EcoCar.Models.ServiceManagement.CarPoolingService
+@using static EcoCar.Models.ServiceManagement.Service
+@model EcoCar.ViewModels.ServiceViewModel
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Déposer une demande";
@@ -19,27 +20,27 @@
                 @*General*@
                 <div class="col-lg-4 mx-auto">
                     @Html.Label("Date de publication de la prestation")<br>
-                    @Html.TextBoxFor(model => model.PublicationDate, new{ @class = "form-control",@id="currentDate",@readonly = true,style="width:300px"})<br>
+                    @Html.TextBoxFor(model => model.Service.PublicationDate, new{ @class = "form-control",@id="currentDate",@readonly = true,style="width:300px"})<br>
 
                     @Html.Label("Numero de reference de la prestation")<br>
-                    @Html.TextBoxFor(model => model.ReferenceNumber, new{ @class = "form-control",@id="Refnunmber",@readonly = true,style="width:300px"}) <br>
+                    @Html.TextBoxFor(model => model.Service.ReferenceNumber, new{ @class = "form-control",@id="Refnunmber",@readonly = true,style="width:300px"}) <br>
 
                     @Html.Label("Date de debut") <br>
-                    @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.Start)
+                    @Html.EditorFor(model => model.Service.Start, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.Service.Start)
 
                     @Html.Label("Adresse de départ")  <br>
-                    @Html.TextBoxFor(model => model.PickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.PickUpAddress)
+                    @Html.TextBoxFor(model => model.Trajectory.PickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.Trajectory.PickUpAddress)
                     <br>
 
                     @Html.Label("Adresse d'arrivée")  <br>
-                    @Html.TextBoxFor(model => model.DeliveryAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.DeliveryAddress)
+                    @Html.TextBoxFor(model => model.Trajectory.DeliveryAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.Trajectory.DeliveryAddress)
                     <br>
                     @Html.Label("Type de Prestation")<br>
-                    @Html.DropDownListFor(model => model.SelectServiceRequestType, new SelectList(Enum.GetValues(typeof(ServiceRequestType))),"--Selectionnez le type de prestation--")
-                    @Html.ValidationMessageFor(model => model.SelectServiceRequestType)
+                    @Html.DropDownListFor(model => model.Service.SelectServiceType, new SelectList(Enum.GetValues(typeof(ServiceType))),"--Selectionnez le type de prestation--")
+                    @Html.ValidationMessageFor(model => model.Service.SelectServiceType)
                     <button class="btn btn-success" type="submit">Soumettre</button>
                 </div>
 
@@ -55,33 +56,36 @@
 
                         @*CarPoolingServiceRequest*@
                         @Html.Label("Type de covoiturage") <br>
-                        @Html.DropDownListFor(model => model.SelectCarPoolingRequestType, new SelectList(Enum.GetValues(typeof(CarPoolingRequestType))),"--Selectionnez le type de vocoituragee--")
-                        @Html.ValidationMessageFor(model => model.SelectCarPoolingRequestType)
+                        @Html.DropDownListFor(model => model.CarPoolingService.SelectCarPoolingType, new SelectList(Enum.GetValues(typeof(CarPoolingType))),"--Selectionnez le type de vocoituragee--")
+                        @Html.ValidationMessageFor(model => model.CarPoolingService.SelectCarPoolingType)
                         <br>
 
                         @Html.Label("Numéro de passagers")  <br>
-                        @Html.TextBoxFor(model => model.PassengerNumber, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.PassengerNumber)
+                        @Html.TextBoxFor(model => model.CarPoolingService.AvailableSeats, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.CarPoolingService.AvailableSeats)
                         <br>
 
-                        @Html.Label("Animaux de compagnie")  <br>
-                        @Html.TextBoxFor(model => model.PetsNumber, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.PetsNumber)
-                        <br>
+                        @Html.Label("Animaux de compagnie")<br>
+                    @Html.CheckBoxFor(model => model.CarPoolingService.PetsAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.CarPoolingService.PetsAllowed) 
+                    <br>
 
-                        @Html.Label("Autorisation de fumer") <br>
-                        @Html.CheckBoxFor(model => model.Smoking, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.Smoking)
-                        <br>
 
-                        @Html.Label("Musique forte")<br>
-                        @Html.CheckBoxFor(model => model.Music, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.Music)
-                        <br>
+                    @Html.Label("Autorisation de fumer") <br>
+                    @Html.CheckBoxFor(model => model.CarPoolingService.SmokingAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.CarPoolingService.SmokingAllowed)
+                    <br>
 
-                        @Html.Label("Discussion")<br>
-                        @Html.CheckBoxFor(model => model.Chatting, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.Chatting)
+                    @Html.Label("Musique forte")<br>
+                    @Html.CheckBoxFor(model => model.CarPoolingService.MusicAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.CarPoolingService.MusicAllowed)
+                    <br>
+
+
+                    @Html.Label("Discussion")<br>
+                    @Html.CheckBoxFor(model => model.CarPoolingService.ChattingAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.CarPoolingService.ChattingAllowed)
+                    <br>
                         <br>
                     </div>
 
@@ -89,45 +93,40 @@
 
                         @*ParcelRequestServiceRequest*@
                         @Html.Label("BarCode") <br>
-                        @Html.TextBoxFor(model => model.BarCode, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.BarCode)
-                        <br>
+                    @Html.TextBoxFor(model => model.ParcelService.BarCode, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.ParcelService.BarCode)
+                    <br>
 
-                        @Html.Label("WeightKilogrammes") <br>
-                        @Html.TextBoxFor(model => model.WeightKilogrammes, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.WeightKilogrammes)
-                        <br>
 
-                        @Html.Label("AtypicalVolume") <br>
-                        @Html.CheckBoxFor(model => model.AtypicalVolume, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.AtypicalVolume)
-                        <br>
+                    @Html.Label("WeightKilogrammes") <br>
+                    @Html.TextBoxFor(model => model.ParcelService.WeightKilogrammes, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.ParcelService.WeightKilogrammes)
+                    <br>
 
-                        @Html.Label("Fragile")
 
-                        <br>
-                        @Html.CheckBoxFor(model => model.Fragile, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.Fragile)
-                        <br>
+                    @Html.Label("AtypicalVolume") <br>
+                    @Html.CheckBoxFor(model => model.ParcelService.AtypicalVolume, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.ParcelService.AtypicalVolume)
+                    <br>
+
+
+                    @Html.Label("Fragile")<br>
+                    @Html.CheckBoxFor(model => model.ParcelService.Fragile, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.ParcelService.Fragile)
                     </div>
 
                     <div id="CarRentalServicerequest" class="tab-pane fade pt-3">
                         @*CarRentalServicerequest*@
                         @Html.Label("Lieu de récupération initial des clés") <br>
-                        @Html.TextBoxFor(model => model.KeyPickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.KeyPickUpAddress)
-                        <br>
+                    @Html.TextBoxFor(model => model.CarRentalService.KeyPickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.CarRentalService.KeyPickUpAddress)
+                    <br>
 
 
-                        @Html.Label("Lieu de retour des clés") <br>
-                        @Html.TextBoxFor(model => model.KeyDropOffAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.KeyDropOffAddress)
-                        <br>
-
-                        @Html.Label("Commentaire") <br>
-                        @Html.TextBoxFor(model => model.UsageComments, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                        @Html.ValidationMessageFor(model => model.UsageComments)
-                        <br>
+                    @Html.Label("Lieu de retour des clés") <br>
+                    @Html.TextBoxFor(model => model.CarRentalService.KeyDropOffAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.CarRentalService.KeyDropOffAddress)
+                    <br>
                     </div>
 
 

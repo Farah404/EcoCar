@@ -14,23 +14,34 @@
             <thead>
 
                 <tr class="header">
+                    <th>Nom d'utilisateur</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>EcoRating</th>
                     <th>EcoStatus</th>
                     <th>Email</th>
-                    <th>Numéro de Téléphone</th>
-                    <th>Numéro de carte d'identité</th>
-                    <th>Numéro de permis de conduire</th>
-                    <th>Véhicule</th>
                     <th>EcoMembre depuis</th>
                     <th>Montant EcoCoins</th>
                     <th>Formule d'abonnement</th>
+                    <th>Suspendre</th>
                 </tr>
             </thead>
             <tbody>
-
-
+                @foreach (var users in Model.Users)
+                {
+                 <tr>
+                    <td><a href="/account/userprofile/@users.Id">@users.Account.Username</a></td>
+                    <td>@users.Person.LastName</td>
+                    <td>@users.Person.Name</td>
+                    <td>@users.UserRating</td>
+                    <td>@users.SelectEcoStatusType</td>
+                    <td>@users.Email</td>
+                    <td>@users.Account.CreationDate</td>
+                    <td>@users.EcoWallet.EcoCoinsAmount</td>
+                    <td>@users.EcoWallet.Subscription</td>
+                    <td>lien</td>
+                </tr>
+                }
             </tbody>
         </table>
     </div>
@@ -50,13 +61,16 @@
                     <th>Provider</th>
                     <th>Consumer</th>
                     <th>Statut</th>
-                    <th>Commande</th>
-
+                    <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
                 </tr>
             </tbody>
         </table>

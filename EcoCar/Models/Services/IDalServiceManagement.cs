@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using static EcoCar.Models.ServiceManagement.Service;
 using static EcoCar.Models.ServiceManagement.CarPoolingService;
 using static EcoCar.Models.ServiceManagement.Trajectory;
-using static EcoCar.Models.ServiceManagement.ServiceRequest;
 
 namespace EcoCar.Models.Services
 {
@@ -13,7 +12,7 @@ namespace EcoCar.Models.Services
         //Service
 
         List<Service> GetAllServices();
-        int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType, int? userProviderId);
+        int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int userProviderId);
         void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType);
         void UpdateService(Service service);
         void ServiceAvailability(int id);
@@ -78,32 +77,7 @@ namespace EcoCar.Models.Services
 
         //ServiceRequest
 
-        List<ServiceRequest> GetAllServiceRequests();
-        int CreateServiceRequest(
-            DateTime publicationDate, 
-            int referenceNumber, 
-            DateTime start, 
-            ServiceRequestType selectServiceRequestType, 
-            string pickUpAddress, 
-            string deliveryAddress, 
-
-            CarPoolingRequestType selectCarPoolingRequestType, 
-            int passengerNumber, 
-            int petsNumber, 
-            bool smoking, 
-            bool music, 
-            bool chatting, 
-
-            int barCode,
-            double weightKilogrammes, 
-            bool atypicalVolume, 
-            bool fragile, 
-
-            string keyPickUpAddress, 
-            string keyDropOffAddress, 
-            string usageComments,
-
-            int userProviderId);
+        int CreateServiceRequest(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int? userProviderId);
 
         //-------------------------------------------------------------------------------------------------
 

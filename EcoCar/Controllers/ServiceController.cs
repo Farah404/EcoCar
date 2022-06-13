@@ -22,10 +22,15 @@ namespace EcoCar.Controllers
         #region Searching a service in the list of services
         public ActionResult SearchService()
         {
-            ServiceViewModel serviceViewModel = new ServiceViewModel();
-            serviceViewModel.CarPoolingServices = dalServiceManagement.GetAllCarPoolingServices();
-            serviceViewModel.ParcelServices = dalServiceManagement.GetAllParcelServices();
-            serviceViewModel.CarRentalServices = dalServiceManagement.GetAllCarRentalServices();
+            ServiceViewModel serviceViewModel = new ServiceViewModel
+                {
+                Users = dalPersonManagement.GetAllUsers(),
+                CarPoolingServices = dalServiceManagement.GetAllCarPoolingServices(),
+                ParcelServices = dalServiceManagement.GetAllParcelServices(),
+                CarRentalServices = dalServiceManagement.GetAllCarRentalServices()
+                
+                };
+           
 
             return View(serviceViewModel);
         }
@@ -61,35 +66,44 @@ namespace EcoCar.Controllers
             {
                 int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 User user = dalPersonManagement.GetAllUsers().FirstOrDefault(r => r.Id == userId);
-                int? vehiculeId = user.VehiculeId;
-                var selectedValue = service.SelectServiceType;
-                ViewBag.ServiceType = selectedValue.ToString();
-
-
-                int serviceId = dalServiceManagement.CreateService(
-                               service.PublicationDate,
-                               service.ExpirationDate,
-                               service.ReferenceNumber,
-                               service.IsAvailable,
-                               service.Start,
-                               service.End,
-                               service.SelectServiceType,
-                               userId
-                               );
-
-                string url = "/Service/CreateItinerary" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
-                if (selectedValue == Service.ServiceType.ParcelService)
+                if (user.VehiculeId == null)
                 {
-                    url = "/Service/CreateItinerary" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
+                    Redirect("/Home/Index");
+                    //if we have time : fix the fact that Service controller always redirect to /Home/index in this case whatever path we write
                 }
                 else
                 {
-                    if (selectedValue == Service.ServiceType.CarRentalService)
+                    int? vehiculeId = user.VehiculeId;
+                    var selectedValue = service.SelectServiceType;
+                    ViewBag.ServiceType = selectedValue.ToString();
+
+
+                    int serviceId = dalServiceManagement.CreateService(
+                                   service.PublicationDate,
+                                   service.ExpirationDate,
+                                   service.ReferenceNumber,
+                                   service.IsAvailable,
+                                   service.Start,
+                                   service.End,
+                                   service.IsRequest,
+                                   service.SelectServiceType,
+                                   userId
+                                   );
+
+                    string url = "/Service/CreateItinerary" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
+                    if (selectedValue == Service.ServiceType.ParcelService)
                     {
-                        url = "/Service/CreateCarRentalService" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
+                        url = "/Service/CreateItinerary" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
                     }
+                    else
+                    {
+                        if (selectedValue == Service.ServiceType.CarRentalService)
+                        {
+                            url = "/Service/CreateCarRentalService" + "?serviceId=" + serviceId + "&vehiculeId=" + vehiculeId;
+                        }
+                    }
+                    return Redirect(url);
                 }
-                return Redirect(url);
             }
             return Redirect("/account/loginAccount");
         }
@@ -389,32 +403,21 @@ namespace EcoCar.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateServiceRequest(ServiceRequest serviceRequest)
+        public IActionResult CreateServiceRequest(Service serviceRequest)
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 User user = dalPersonManagement.GetAllUsers().FirstOrDefault(r => r.Id == userId);
-                int serviceRequestlId = dalServiceManagement.CreateServiceRequest(
+                int serviceRequestId = dalServiceManagement.CreateService(
                                serviceRequest.PublicationDate,
+                               serviceRequest.ExpirationDate,
                                serviceRequest.ReferenceNumber,
+                               serviceRequest.IsAvailable,
                                serviceRequest.Start,
-                               serviceRequest.SelectServiceRequestType,
-                               serviceRequest.PickUpAddress,
-                               serviceRequest.DeliveryAddress,
-                               serviceRequest.SelectCarPoolingRequestType,
-                               serviceRequest.PassengerNumber,
-                               serviceRequest.PetsNumber,
-                               serviceRequest.Smoking,
-                               serviceRequest.Music,
-                               serviceRequest.Chatting,
-                               serviceRequest.BarCode,
-                               serviceRequest.WeightKilogrammes,
-                               serviceRequest.AtypicalVolume,
-                               serviceRequest.Fragile,
-                               serviceRequest.KeyPickUpAddress,
-                               serviceRequest.KeyDropOffAddress,
-                               serviceRequest.UsageComments,
+                               serviceRequest.End,
+                               serviceRequest.IsRequest,
+                               serviceRequest.SelectServiceType,
                                userId
                                );
 
@@ -425,11 +428,11 @@ namespace EcoCar.Controllers
         #endregion
 
         #region Searching a service request in the lists of requests
-        public IActionResult SearchRequest()
-        {
-            List<ServiceRequest> serviceRequests = dalServiceManagement.GetAllServiceRequests();
-            return View(serviceRequests.ToList());
-        }
+        //public IActionResult SearchRequest()
+        //{
+        //    List<ServiceRequest> serviceRequests = dalServiceManagement.GetAllServiceRequests();
+        //    return View(serviceRequests.ToList());
+        //}
         #endregion
     }
 }

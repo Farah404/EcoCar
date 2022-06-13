@@ -1,4 +1,5 @@
-﻿using EcoCar.Models.ServiceManagement;
+﻿using EcoCar.Models.PersonManagement;
+using EcoCar.Models.ServiceManagement;
 using System.Collections.Generic;
 
 namespace EcoCar.ViewModels
@@ -6,8 +7,6 @@ namespace EcoCar.ViewModels
     public class ServiceViewModel
     {
         public Service Service { get; set; }
-
-        public ServiceRequest ServiceRequest { get; set; }
 
         public CarPoolingService CarPoolingService { get; set; }
 
@@ -22,5 +21,12 @@ namespace EcoCar.ViewModels
         public List <ParcelService> ParcelServices { get; set; }
 
         public List <CarRentalService> CarRentalServices { get; set; }
+
+        public User User { get; set; }
+        public Account Account { get; set; }
+
+        public List<User> Users { get; set; }
+
+
     }
 }

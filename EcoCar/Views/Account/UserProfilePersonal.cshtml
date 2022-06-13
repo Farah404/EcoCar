@@ -1,5 +1,6 @@
 ﻿@*@model EcoCar.Models.PersonManagement.Account*@
-@model List<EcoCar.Models.PersonManagement.User>
+@*@model List<EcoCar.Models.PersonManagement.User>*@
+@model EcoCar.ViewModels.AccountViewModel
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Mon profil";
@@ -24,13 +25,11 @@
                         </span>
                     </li>
                 </ul>
-                @foreach (var user in Model)
-                {
-                    <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/UpdateUser/@user.Id'">Modifier mon profil</button>
+                    <button class="btn btn-success center-block" type="submit" onclick="location.href='/Account/UpdateUser/@Model.User.Id'">Modifier mon profil</button>
                     <br>
-                }
-                <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Account/CreateInsurance'">Ajouter un véhicule</button>
-                <button class="btn btn-primary center-block" type="submit" onclick="location.href='/Messaging/EcoUserInbox'">Messagerie</button>
+                <button class="btn btn-success center-block" type="submit" onclick="location.href='/Account/CreateInsurance'">Ajouter un véhicule</button>
+                <br />
+                <button class="btn btn-success center-block" type="submit" onclick="location.href='/Messaging/EcoUserInbox'">Messagerie</button>
             </div>
 
 
@@ -49,12 +48,7 @@
                                     Nom et Prénom
                                 </td>
                                 <td class="text-success">
-
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.Person.Name @user.Person.LastName</p>
-                                    }
-
+                                        <p>@Model.User.Person.LastName @Model.User.Person.Name</p>
                                 </td>
                             </tr>
 
@@ -64,6 +58,7 @@
                                     EcoStatus
                                 </td>
                                 <td class="text-success">
+                                        <p>@Model.User.SelectEcoStatusType</p>
                                 </td>
                             </tr>
 
@@ -73,6 +68,7 @@
                                     EcoRating
                                 </td>
                                 <td class="text-success">
+                                        <p>@Model.User.UserRating</p>
                                 </td>
                             </tr>
 
@@ -82,10 +78,7 @@
                                     Date de naissance
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.BirthDate</p>
-                                    }
+                                        <p>@Model.User.BirthDate</p>
                                 </td>
                             </tr>
 
@@ -95,10 +88,7 @@
                                     Email
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.Email</p>
-                                    }
+                                        <p>@Model.User.Email</p>
                                 </td>
                             </tr>
 
@@ -108,10 +98,7 @@
                                     Numéro de téléphone
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.PhoneNumber</p>
-                                    }
+                                        <p>@Model.User.PhoneNumber</p>
                                 </td>
                             </tr>
 
@@ -122,10 +109,7 @@
 
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.IdentityCardNumber</p>
-                                    }
+                                        <p>@Model.User.IdentityCardNumber</p>
                                 </td>
                             </tr>
 
@@ -135,10 +119,7 @@
                                     Numéro de permis de conduire
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.DrivingPermitNumber</p>
-                                    }
+                                        <p>@Model.User.DrivingPermitNumber</p>
                                 </td>
                             </tr>
 
@@ -148,6 +129,7 @@
                                     EcoMembre depuis
                                 </td>
                                 <td class="text-success">
+                                    <p>@Model.Account.CreationDate</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -198,12 +180,7 @@
                                     Nom de l'agence bancaire
                                 </td>
                                 <td class="text-success">
-
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.BankDetails.BankName</p>
-                                    }
-
+                                        <p>@Model.User.BankDetails.BankName</p>
                                 </td>
                             </tr>
 
@@ -213,10 +190,7 @@
                                     Numéro SWIFT
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.BankDetails.Swift</p>
-                                    }
+                                        <p>@Model.User.BankDetails.Swift</p>
                                 </td>
                             </tr>
 
@@ -226,10 +200,7 @@
                                     Numéro IBAN
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.BankDetails.Iban</p>
-                                    }
+                                        <p>@Model.User.BankDetails.Iban</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -249,12 +220,7 @@
                                     Adresse
                                 </td>
                                 <td class="text-success">
-
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.BillingAddress.AddressLine</p>
-                                    }
-
+                                        <p>@Model.User.BillingAddress.AddressLine</p>
                                 </td>
                             </tr>
 
@@ -264,10 +230,8 @@
                                     Ville
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.BillingAddress.City</p>
-                                    }
+                                        <p>@Model.User.BillingAddress.City</p>
+
                                 </td>
                             </tr>
 
@@ -277,10 +241,7 @@
                                     Région
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.BillingAddress.Region</p>
-                                    }
+                                        <p>@Model.User.BillingAddress.Region</p>
                                 </td>
                             </tr>
 
@@ -290,10 +251,7 @@
                                     Pays
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.BillingAddress.Country</p>
-                                    }
+                                        <p>@Model.User.BillingAddress.Country</p>
                                 </td>
                             </tr>
 
@@ -303,10 +261,7 @@
                                     Code postal
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var user in Model)
-                                    {
-                                        <p>@user.BillingAddress.PostalCode</p>
-                                    }
+                                        <p>@Model.User.BillingAddress.PostalCode</p>
                                 </td>
                             </tr>
 
@@ -319,15 +274,88 @@
     </div>
 </div>
 
-<hr class="solid">
-<div id="services" class="container-fluid text-center">
-    <h2>Mon historique de prestations</h2>
-    <br>
+<div id="services" class="container-fluid bg-grey">
+    <center><h2>Mon historique de prestations</h2></center>
+  @*Service List Display*@
+    <div class="table-responsive">
+        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une de mes prestations..."></center><br />
+        <table class="table" id="userTable">
+            <thead>
+                <tr class="header">
+                    <th>Date de début</th>
+                    <th>Type de service</th>
+                    <th>Numéro de réference</th>
+                    <th>Prestation demandée</th>
+                    <th>Disponibilité</th>
+                    <th>Consulter la facture</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var carPoolingService in Model.CarPoolingServices)
+                {
+                    <tr>
+                        <td>@carPoolingService.Service.Start</td>
+                        <td>@carPoolingService.Service.SelectServiceType</td>
+                        <td>@carPoolingService.Service.ReferenceNumber</td>
+                        <td>@carPoolingService.Service.IsRequest</td>
+                        <td>@carPoolingService.Service.IsAvailable</td>
+                        <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                    </tr>
+                }
+                @foreach (var carRentalService in Model.CarRentalServices)
+                {
+                    <tr>
+                        <td>@carRentalService.Service.Start</td>
+                        <td>@carRentalService.Service.SelectServiceType</td>
+                        <td>@carRentalService.Service.ReferenceNumber</td>
+                        <td>@carRentalService.Service.IsRequest</td>
+                        <td>@carRentalService.Service.IsAvailable</td>
+                        <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                    </tr>
+
+                   
+                }
+
+                @foreach (var parcelService in Model.ParcelServices)
+                {
+                    <tr>
+                        <td>@parcelService.Service.Start</td>
+                        <td>@parcelService.Service.SelectServiceType</td>
+                        <td>@parcelService.Service.ReferenceNumber</td>
+                        <td>@parcelService.Service.IsRequest</td>
+                        <td>@parcelService.Service.IsAvailable</td>
+                    <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                    </tr>
+                }
+
+                @Html.Hidden("serviceId",@ViewBag.serviceId,null)
+                
+
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<hr class="solid">
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, cell, i, j;
+        filter = document.getElementById("searchInput").value.toLowerCase();
+        table = document.getElementById("userTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            const tdArray = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < tdArray.length; j++) {
+                const cellValue = tdArray[j];
+                if (cellValue && cellValue.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                }
+            }
+        }
+    }
 
-
+</script>
 
 
 

@@ -3,7 +3,7 @@
 @model List<EcoCar.Models.ServiceManagement.CarPoolingService>
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "Reserver une prestation de covoiturage";
+    ViewBag.Title = "Répondre à une demande de covoiturage";
 }
 <!--Add a form with an input field and a button-->
 
@@ -38,7 +38,7 @@
                     <span class="text-success"><strong>Information</strong><br></span>
                     <table class="table table-user-information">
                         <tbody>
-                             <tr>
+                            <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-road  text-success"></span>
                                     Date et heure de départ
@@ -75,11 +75,10 @@
                                     }
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-user text-success"></span>
-                                    Sièges disponibles
+                                    Nombre de passagers
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carPoolingService in Model)
@@ -88,7 +87,6 @@
                                     }
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-hourglass text-success"></span>
@@ -101,32 +99,6 @@
                                     }
                                 </td>
                             </tr>
-
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-pause text-success"></span>
-                                    Nombre d'arrêts
-                                </td>
-                                <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.Trajectory.StopNumber</p>
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-time text-success"></span>
-                                    Durée d'arrêt en minutes
-                                </td>
-                                <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.Trajectory.StopsDurationMinutes</p>
-                                    }
-                                </td>
-                            </tr>
-
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-arrow-up text-success"></span>
@@ -172,7 +144,6 @@
                     <span class="text-success"><strong>Preferences</strong><br></span>
                     <table class="table table-user-information">
                         <tbody>
-
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-heart  text-success"></span>
@@ -185,7 +156,6 @@
                                     }
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-fire text-success"></span>
@@ -198,7 +168,6 @@
                                     }
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-headphones text-success"></span>
@@ -211,7 +180,6 @@
                                     }
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-bullhorn text-success"></span>
@@ -224,13 +192,8 @@
                                     }
                                 </td>
                             </tr>
-
-
                         </tbody>
                     </table>
-
-
-
                 </div>
             </div>
         </div>

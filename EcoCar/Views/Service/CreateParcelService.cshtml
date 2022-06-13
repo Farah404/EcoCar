@@ -14,8 +14,7 @@
                 @using (Html.BeginForm())
                 {
                     @Html.Label("BarCode") <br>
-                    @Html.TextBoxFor(model => model.BarCode, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.BarCode)
+                    @Html.TextBoxFor(model => model.BarCode, new { htmlAttributes = new { @class = "form-control",@id="Refnunmber",@readonly = true, style="width:300px"}})
                     <br>
 
 

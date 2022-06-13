@@ -3,7 +3,7 @@
 @model List<EcoCar.Models.ServiceManagement.CarRentalService>
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "Reserver une prestation de location de véhicule";
+    ViewBag.Title = "Répondre à une sollicitation de véhicule";
 }
 <!--Add a form with an input field and a button-->
 
@@ -19,7 +19,7 @@
                 {
                     <br>
 
-                    <button class="btn btn-primary center-block" type="submit">Réserver la prestation</button>
+                    <button class="btn btn-success center-block" type="submit">Réserver la prestation</button>
                 }
                 <br />
                 @foreach (var carRentalService in Model)
@@ -62,7 +62,7 @@
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-road  text-success"></span>
-                                    KeyPickUpAddress
+                                    Lieu de remise des clés
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carRentalService in Model)
@@ -71,11 +71,10 @@
                                     }
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-user text-success"></span>
-                                    KeyDropOffAddress
+                                    Lieu de récupération des clés
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carRentalService in Model)
@@ -88,7 +87,7 @@
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-hourglass text-success"></span>
-                                    Vehicule.Brand
+                                    Marque du véhicule
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carRentalService in Model)
@@ -97,11 +96,10 @@
                                     }
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-pause text-success"></span>
-                                    Vehicule.Model
+                                    Modèle du véhicule
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carRentalService in Model)
@@ -112,34 +110,8 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-time text-success"></span>
-                                    Vehicule.Hybrid
-                                </td>
-                                <td class="text-success">
-                                    @foreach (var carRentalService in Model)
-                                    {
-                                        <p>@carRentalService.Vehicule.Hybrid</p>
-                                    }
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-arrow-up text-success"></span>
-                                    Vehicule.Electric
-                                </td>
-                                <td class="text-success">
-                                    @foreach (var carRentalService in Model)
-                                    {
-                                        <p>@carRentalService.Vehicule.Electric</p>
-                                    }
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
                                     <span class="glyphicon glyphicon-arrow-down text-success"></span>
-                                    Vehicule.AvailableSeats
+                                    Nombres de places disponibles
                                 </td>
                                 <td class="text-success">
                                     @foreach (var carRentalService in Model)

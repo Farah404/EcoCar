@@ -33,61 +33,77 @@
                     </thead>
 
                     <tbody>
+                        @if (@Model.ShoppingCart.QuantityBatchOne != 0)
+                        {
+                            <tr>
+                                <td class="product-line-price">@Model.EcoStore.NameOne</td>
+                                <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOne</td>
+                                <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
+                                <td class="product-line-price">@Model.ShoppingCart.QuantityBatchOne</td>
+                                <td class="product-line-price">Total</td>
+                                <td class="product-removal"><a href="#">Supprimer</a></td>
+                            </tr>
+                        }
 
-                        <tr>
-                            <td class="product-line-price">@Model.EcoStore.NameOne</td>
-                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOne</td>
-                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
-                            <td class="product-line-price">@Model.ShoppingCart.QuantityBatchOne</td>
-                            <td class="product-line-price">Total</td>
-                            <td class="product-removal"><a href="#">Supprimer</a></td>
-                        </tr>
+                        @if (@Model.ShoppingCart.QuantityBatchTwo != 0)
+                        {
+                            <tr>
+                                <td class="product-line-price">@Model.EcoStore.NameTwo</td>
+                                <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchTwo</td>
+                                <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchTwoPrice</td>
+                                <td class="product-line-price">@Model.ShoppingCart.QuantityBatchTwo</td>
+                                <td class="product-line-price">Total</td>
+                                <td class="product-removal"><a href="#">Supprimer</a></td>
+                            </tr>
+                        }
 
-                        <tr>
-                            <td class="product-line-price">@Model.EcoStore.NameTwo</td>
-                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchTwo</td>
-                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchTwoPrice</td>
-                            <td class="product-line-price">@Model.ShoppingCart.QuantityBatchTwo</td>
-                            <td class="product-line-price">Total</td>
-                            <td class="product-removal"><a href="#">Supprimer</a></td>
-                        </tr>
+                        @if (@Model.ShoppingCart.QuantityBatchThree != 0)
+                        {
+                            <tr>
+                                <td class="product-line-price">@Model.EcoStore.NameThree</td>
+                                <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchThree</td>
+                                <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
+                                <td class="product-line-price">@Model.ShoppingCart.QuantityBatchThree</td>
+                                <td class="product-line-price">Total</td>
+                                <td class="product-removal"><a href="#">Supprimer</a></td>
+                            </tr>
+                        }
 
-                        <tr>
-                            <td class="product-line-price">@Model.EcoStore.NameThree</td>
-                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchThree</td>
-                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
-                            <td class="product-line-price">@Model.ShoppingCart.QuantityBatchThree</td>
-                            <td class="product-line-price">Total</td>
-                            <td class="product-removal"><a href="#">Supprimer</a></td>
-                        </tr>
+                        @if (@Model.ShoppingCart.QuantityMonthlySubscription != 0)
+                        {
+                            <tr>
+                                <td class="product-line-price">@Model.EcoStore.NameMonth</td>
+                                <td class="product-line-price">@Model.EcoStore.MonthlySubscription</td>
+                                <td class="product-line-price">@Model.EcoStore.MonthlySubscriptionPrice</td>
+                                <td class="product-line-price">@Model.ShoppingCart.QuantityMonthlySubscription</td>
+                                <td class="product-line-price">Total</td>
+                                <td class="product-removal"><a href="#">Supprimer</a></td>
+                            </tr>
+                        }
 
-                        <tr>
-                            <td class="product-line-price">@Model.EcoStore.NameMonth</td>
-                            <td class="product-line-price">@Model.EcoStore.MonthlySubscription</td>
-                            <td class="product-line-price">@Model.EcoStore.MonthlySubscriptionPrice</td>
-                            <td class="product-line-price">@Model.ShoppingCart.QuantityMonthlySubscription</td>
-                            <td class="product-line-price">Total</td>
-                            <td class="product-removal"><a href="#">Supprimer</a></td>
-                        </tr>
+                        @if (@Model.ShoppingCart.QuantityTrimestrialSubscription != 0)
+                        {
+                            <tr>
+                                <td class="product-line-price">@Model.EcoStore.NameTrimester</td>
+                                <td class="product-line-price">@Model.EcoStore.TrimestrialSubscription</td>
+                                <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
+                                <td class="product-line-price">@Model.ShoppingCart.QuantityTrimestrialSubscription</td>
+                                <td class="product-line-price">Total</td>
+                                <td class="product-removal"><a href="#">Supprimer</a></td>
+                            </tr>
+                        }
 
-                        <tr>
-                            <td class="product-line-price">@Model.EcoStore.NameTrimester</td>
-                            <td class="product-line-price">@Model.EcoStore.TrimestrialSubscription</td>
-                            <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
-                            <td class="product-line-price">@Model.ShoppingCart.QuantityTrimestrialSubscription</td>
-                            <td class="product-line-price">Total</td>
-                            <td class="product-removal"><a href="#">Supprimer</a></td>
-                        </tr>
-
-                        <tr>
-                            <td class="product-line-price">@Model.EcoStore.NameSemester</td>
-                            <td class="product-line-price">@Model.EcoStore.SemestrialSubscription</td>
-                            <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
-                            <td class="product-line-price">@Model.ShoppingCart.QuantitySemestrialSubscription</td>
-                            <td class="product-line-price">Total</td>
-                            <td class="product-removal"><a href="#">Supprimer</a></td>
-                        </tr>
-
+                        @if (@Model.ShoppingCart.QuantitySemestrialSubscription != 0)
+                        {
+                            <tr>
+                                <td class="product-line-price">@Model.EcoStore.NameSemester</td>
+                                <td class="product-line-price">@Model.EcoStore.SemestrialSubscription</td>
+                                <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
+                                <td class="product-line-price">@Model.ShoppingCart.QuantitySemestrialSubscription</td>
+                                <td class="product-line-price">Total</td>
+                                <td class="product-removal"><a href="#">Supprimer</a></td>
+                            </tr>
+                        }
 
 
 

@@ -92,7 +92,6 @@ namespace EcoCar.Controllers
                     shoppingCart.UserId);
                 return Redirect("/Financial/EcoStore");
             
-            return Redirect("/Financial/EcoStore");
         }
 
 

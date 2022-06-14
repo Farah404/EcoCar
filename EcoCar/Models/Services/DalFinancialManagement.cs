@@ -577,13 +577,13 @@ namespace EcoCar.Models.Services
             if (shoppingCart != null)
             {
                 shoppingCart.Id = id;
-                shoppingCart.QuantityBatchOne = quantityBatchOne;
-                shoppingCart.QuantityBatchTwo = quantityBatchTwo;
-                shoppingCart.QuantityBatchThree = quantityBatchThree;
-                shoppingCart.QuantityMonthlySubscription = quantityMonthlySubscription;
-                shoppingCart.QuantityTrimestrialSubscription = quantityTrimestrialSubscription;
-                shoppingCart.QuantitySemestrialSubscription = quantitysemestrialSubscription;
-                shoppingCart.TotalPriceEuros = totalPriceEuros;
+                shoppingCart.QuantityBatchOne = shoppingCart.QuantityBatchOne+quantityBatchOne;
+                shoppingCart.QuantityBatchTwo = shoppingCart.QuantityBatchTwo+quantityBatchTwo;
+                shoppingCart.QuantityBatchThree = shoppingCart.QuantityBatchThree+quantityBatchThree;
+                shoppingCart.QuantityMonthlySubscription = shoppingCart.QuantityMonthlySubscription+quantityMonthlySubscription;
+                shoppingCart.QuantityTrimestrialSubscription = shoppingCart.QuantityTrimestrialSubscription+quantityTrimestrialSubscription;
+                shoppingCart.QuantitySemestrialSubscription = shoppingCart.QuantitySemestrialSubscription+quantitysemestrialSubscription;
+                shoppingCart.TotalPriceEuros = shoppingCart.TotalPriceEuros+totalPriceEuros;
                 shoppingCart.User = _bddContext.Users.First(u => u.Id == userId);
                 _bddContext.SaveChanges();
             }

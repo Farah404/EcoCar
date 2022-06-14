@@ -34,9 +34,9 @@ namespace EcoCar.Models.Services
         }
 
         //Create Person
-        public int CreatePerson(string name, string lastName, string profilePictureURL)
+        public int CreatePerson(string name, string lastName)
         {
-            Person person = new Person() { Name = name, LastName = lastName, ProfilePictureURL = profilePictureURL };
+            Person person = new Person() { Name = name, LastName = lastName};
             _bddContext.People.Add(person);
             _bddContext.SaveChanges();
             return person.Id;
@@ -49,7 +49,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update Person
-        public void UpdatePerson(int id, string name, string lastName, string profilePictureURL)
+        public void UpdatePerson(int id, string name, string lastName, string profilePicturePath)
         {
             Person person = _bddContext.People.Find(id);
 
@@ -58,7 +58,7 @@ namespace EcoCar.Models.Services
                 person.Id = id;
                 person.Name = name;
                 person.LastName = lastName;
-                person.ProfilePictureURL = profilePictureURL;
+                person.ProfilePicturePath = profilePicturePath;
                 _bddContext.SaveChanges();
             }
         }

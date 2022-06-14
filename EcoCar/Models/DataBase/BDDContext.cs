@@ -129,7 +129,7 @@ namespace EcoCar.Models.DataBase
                     Id = 1,
                     Name = "RandomName",
                     LastName = "RandomLastName",
-                    ProfilePictureURL = "wololo.jpg"
+                    ProfilePicturePath = "wololo.jpg"
                 }
                 );
             this.Users.Add(
@@ -213,7 +213,7 @@ namespace EcoCar.Models.DataBase
                 Id = 2,
                 Name = "Farah",
                 LastName = "Farah",
-                ProfilePictureURL = "Farah.jpg"
+                ProfilePicturePath = "Farah.jpg"
             }
             );
             this.Users.Add(

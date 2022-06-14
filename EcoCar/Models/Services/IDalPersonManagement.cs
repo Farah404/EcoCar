@@ -9,8 +9,8 @@ namespace EcoCar.Models.Services
     {
         //Person
         List<Person> GetAllPeople();
-        int CreatePerson(string name, string lastName, string profilePictureURL);
-        void UpdatePerson(int id, string name, string lastName, string profilePictureURL);
+        int CreatePerson(string name, string lastName);
+        void UpdatePerson(int id, string name, string lastName, string ProfilePicturePath);
         void DeletePerson (int id);
 
         //-------------------------------------------------------------------------------------------------

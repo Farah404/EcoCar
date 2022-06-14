@@ -3,21 +3,24 @@
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Mon profil";
 }
-    <div class="container bootstrap snippets bootdey">
-        <div class="panel-body inf-content">
-            <div class="row">
-                @using (Html.BeginForm(FormMethod.Post))
-                                {
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            @using (Html.BeginForm(FormMethod.Post))
+            {
                 @*Profile picture Part with buttons*@
                 <div class="col-md-4">
-                    <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
+                    <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="@Model.Person.ProfilePicturePath" data-original-title="Usuario">
                     <ul title="Ratings" class="list-inline ratings text-center">
                         <li>
                             <span>
                                 <br>
                                 Modifier ma photo de profil
-                                @Html.TextBoxFor(model => model.Person.ProfilePictureURL, new { @class = "form-control", placeholder = "Votre image de profil", })
-                                <input type="file" id="file" name="file" multiple>
+                                @Html.HiddenFor(model=>model.Person.ProfilePicturePath)
+                                @Html.LabelFor(model => model.Person.ProfilePicture, new { id = "imageLabel", @style = "text-align:center;" })
+                                @Html.TextBoxFor(model => model.Person.ProfilePicture, new { placeholder = "Description", @type = "file" })
+
+
                                 <br>
                             </span>
                         </li>
@@ -38,7 +41,6 @@
                                     <td class="text-success">
 
                                         @Html.TextBoxFor(model => model.Person.Name, new { @class = "form-control", placeholder = "Prénom" })
-                                <input type="file" id="file" name="file" multiple>
                                     </td>
                                 </tr>
                                 <tr>
@@ -75,7 +77,7 @@
                                     </td>
                                     <td class="text-success">
                                         @Html.EditorFor(model => model.BirthDate, new { @class = "form-control", placeholder = "Date de naissance" })
-                                      
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -94,7 +96,7 @@
                                         Numéro de téléphone
                                     </td>
                                     <td class="text-success">
-                                       @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Numéro de téléphone" })
+                                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Numéro de téléphone" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -123,7 +125,6 @@
                                         EcoMembre depuis
                                     </td>
                                     <td class="text-success">
-                                  
                                     </td>
                                 </tr>
                             </tbody>
@@ -177,7 +178,7 @@
                                     </td>
                                     <td class="text-success">
 
-                                      @Html.TextBoxFor(model => model.BankDetails.BankName, new { @class = "form-control", placeholder = "Agence bancaire" })
+                                        @Html.TextBoxFor(model => model.BankDetails.BankName, new { @class = "form-control", placeholder = "Agence bancaire" })
 
                                     </td>
                                 </tr>
@@ -263,27 +264,27 @@
                                         @Html.TextBoxFor(model => model.BillingAddress.PostalCode, new { @class = "form-control", placeholder = "Code postal" })
                                     </td>
                                 </tr>
-                                
-                                    @Html.HiddenFor(model =>model.BankDetailsId)
-                                    @Html.HiddenFor(model =>model.BillingAddressId)
-                                    @Html.HiddenFor(model =>model.PersonId)
-                                    @Html.HiddenFor(model =>model.AccountId)
-                                    @Html.HiddenFor(model =>model.VehiculeId)
-                                    @Html.HiddenFor(model =>model.EcoWalletId)
-                                   
+
+                                @Html.HiddenFor(model =>model.BankDetailsId)
+                                @Html.HiddenFor(model =>model.BillingAddressId)
+                                @Html.HiddenFor(model =>model.PersonId)
+                                @Html.HiddenFor(model =>model.AccountId)
+                                @Html.HiddenFor(model =>model.VehiculeId)
+                                @Html.HiddenFor(model =>model.EcoWalletId)
+
 
                             </tbody>
                         </table>
-                        
+
                     </div>
                 </div>
                 <center><button class="btn btn-success btn-xl" type="submit">Soumettre les modifications</button></center>
-              
+
             }
         </div>
 
     </div>
-    </div>
+</div>
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>

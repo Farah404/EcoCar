@@ -349,3 +349,18 @@ hr.solid {
     top: 50%;
     transform: translateY(30%);
 }
+
+.col-qty > * {
+    vertical-align: middle;
+}
+
+.col-qty > input {
+    max-width: 2.6em;
+}
+
+
+a.qty {
+    font-size: 20px;
+    text-align: center;
+    color: #3e6a3e;
+}

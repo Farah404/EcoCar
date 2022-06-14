@@ -5,178 +5,196 @@
     ViewBag.Title = "Mon Panier";
 }
 
-
 <div class="landscape">
     <center><img src="~/Images/EcoCart.png"></center>
 </div>
-<div class="container px-3 my-5 clearfix">
-    <!-- Shopping cart table -->
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table" id="userTable">
+            <thead>
+                <tr class="header">
+                    <th>EcoAchat</th>
+                    <th>Montant EcoCoins</th>
+                    <th>Prix en Euros</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th>Vider mon panier</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (@Model.ShoppingCart.QuantityBatchOne != 0)
+                {
+                    <tr>
+                        <td class="product-name">@Model.EcoStore.NameOne</td>
+                        <td class="product-eco-ecoin">@Model.EcoStore.EcoCoinsBatchOne</td>
+                        <td id="unitaryPrice" class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
+                        <td class="col col-qty layout-inline">
+                            <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
+                            <input id="qty" value="@Model.ShoppingCart.QuantityBatchOne"/>
+                            <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
+                        </td>
+                        <td><a id="totalInline" class="product-total-price" /></td>
+                        <td><a class="product-removal" href="#">Supprimer</a></td>
+                    </tr>
+                }
 
-    <div class="card">
+                @if (@Model.ShoppingCart.QuantityBatchTwo != 0)
+                {
+                    <tr>
+                        <td class="product-name">@Model.EcoStore.NameTwo</td>
+                        <td class="product-eco-ecoin">@Model.EcoStore.EcoCoinsBatchTwo</td>
+                        <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchTwoPrice</td>
+                        <td class="col col-qty layout-inline">
+                            <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
+                            <input tupe="numeric" value="@Model.ShoppingCart.QuantityBatchTwo"/>
+                            <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
+                        </td>
+                        <td class="product-total-price">Total</td>
+                        <td><a class="product-removal" href="#">Supprimer</a></td>
+                    </tr>
+                }
 
-        <div class="card-header">
-            <h2>Mon EcoCart</h2>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered m-0">
-                    <thead>
-                        <tr>
-                            <!-- Set columns width -->
-                            <th class="text-center py-3 px-4" style="width: 200px;">EcoAchat</th>
-                            <th class="text-right py-3 px-4" style="width: 200px;">Montant EcoCoins</th>
-                            <th class="text-right py-3 px-4" style="width: 200px;">Prix en Euros</th>
-                            <th class="text-right py-3 px-4" style="width: 200px;">Quantité</th>
-                            <th class="product-line-price" style="width: 200px;">Total</th>
-                            <th class="text-center py-3 px-4" style="width: 200px;">Vider mon panier</th>
-                        </tr>
-                    </thead>
+                @if (@Model.ShoppingCart.QuantityBatchThree != 0)
+                {
+                    <tr>
+                        <td class="product-name">@Model.EcoStore.NameThree</td>
+                        <td class="product-eco-ecoin">@Model.EcoStore.EcoCoinsBatchThree</td>
+                        <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
+                        <td class="col col-qty layout-inline">
+                            <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
+                            <input tupe="numeric" value="@Model.ShoppingCart.QuantityBatchThree"/>
+                            <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
+                        </td>
+                        <td class="product-total-price">Total</td>
+                        <td><a class="product-removal" href="#">Supprimer</a></td>
+                    </tr>
+                }
 
-                    <tbody>
-                        @if (@Model.ShoppingCart.QuantityBatchOne != 0)
-                        {
-                            <tr>
-                                <td class="product-line-price">@Model.EcoStore.NameOne</td>
-                                <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOne</td>
-                                <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
-                                <td class="product-line-price">@Model.ShoppingCart.QuantityBatchOne</td>
-                                <td class="product-line-price">Total</td>
-                                <td class="product-removal"><a href="#">Supprimer</a></td>
-                            </tr>
-                        }
+                @if (@Model.ShoppingCart.QuantityMonthlySubscription != 0)
+                {
+                    <tr>
+                        <td class="product-name">@Model.EcoStore.NameMonth</td>
+                        <td class="product-eco-ecoin">@Model.EcoStore.MonthlySubscription</td>
+                        <td class="product-line-price">@Model.EcoStore.MonthlySubscriptionPrice</td>
+                        <td class="col col-qty layout-inline">
+                            <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
+                            <input tupe="numeric" value="@Model.ShoppingCart.QuantityMonthlySubscription"/>
+                            <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
+                        </td>
+                        <td class="product-total-price">Total</td>
+                        <td><a class="product-removal" href="#">Supprimer</a></td>
+                    </tr>
+                }
 
-                        @if (@Model.ShoppingCart.QuantityBatchTwo != 0)
-                        {
-                            <tr>
-                                <td class="product-line-price">@Model.EcoStore.NameTwo</td>
-                                <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchTwo</td>
-                                <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchTwoPrice</td>
-                                <td class="product-line-price">@Model.ShoppingCart.QuantityBatchTwo</td>
-                                <td class="product-line-price">Total</td>
-                                <td class="product-removal"><a href="#">Supprimer</a></td>
-                            </tr>
-                        }
+                @if (@Model.ShoppingCart.QuantityTrimestrialSubscription != 0)
+                {
+                    <tr>
+                        <td class="product-name">@Model.EcoStore.NameTrimester</td>
+                        <td class="product-eco-ecoin">@Model.EcoStore.TrimestrialSubscription</td>
+                        <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
+                        <td class="col col-qty layout-inline">
+                            <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
+                            <input tupe="numeric" value="@Model.ShoppingCart.QuantityTrimestrialSubscription"/>
+                            <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
+                        </td>
+                        <td class="product-total-price">Total</td>
+                        <td><a class="product-removal" href="#">Supprimer</a></td>
+                    </tr>
+                }
 
-                        @if (@Model.ShoppingCart.QuantityBatchThree != 0)
-                        {
-                            <tr>
-                                <td class="product-line-price">@Model.EcoStore.NameThree</td>
-                                <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchThree</td>
-                                <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
-                                <td class="product-line-price">@Model.ShoppingCart.QuantityBatchThree</td>
-                                <td class="product-line-price">Total</td>
-                                <td class="product-removal"><a href="#">Supprimer</a></td>
-                            </tr>
-                        }
+                @if (@Model.ShoppingCart.QuantitySemestrialSubscription != 0)
+                {
+                    <tr>
+                        <td class="product-name">@Model.EcoStore.NameSemester</td>
+                        <td class="product-eco-ecoin">@Model.EcoStore.SemestrialSubscription</td>
+                        <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
+                        <td class="col col-qty layout-inline">
+                            <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
+                            <input tupe="numeric" value="@Model.ShoppingCart.QuantitySemestrialSubscription"/>
+                            <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
+                        </td>
+                        <td class="product-total-price">Total</td>
+                        <td><a class="product-removal" href="#">Supprimer</a></td>
+                    </tr>
+                }
+            </tbody>
 
-                        @if (@Model.ShoppingCart.QuantityMonthlySubscription != 0)
-                        {
-                            <tr>
-                                <td class="product-line-price">@Model.EcoStore.NameMonth</td>
-                                <td class="product-line-price">@Model.EcoStore.MonthlySubscription</td>
-                                <td class="product-line-price">@Model.EcoStore.MonthlySubscriptionPrice</td>
-                                <td class="product-line-price">@Model.ShoppingCart.QuantityMonthlySubscription</td>
-                                <td class="product-line-price">Total</td>
-                                <td class="product-removal"><a href="#">Supprimer</a></td>
-                            </tr>
-                        }
-
-                        @if (@Model.ShoppingCart.QuantityTrimestrialSubscription != 0)
-                        {
-                            <tr>
-                                <td class="product-line-price">@Model.EcoStore.NameTrimester</td>
-                                <td class="product-line-price">@Model.EcoStore.TrimestrialSubscription</td>
-                                <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
-                                <td class="product-line-price">@Model.ShoppingCart.QuantityTrimestrialSubscription</td>
-                                <td class="product-line-price">Total</td>
-                                <td class="product-removal"><a href="#">Supprimer</a></td>
-                            </tr>
-                        }
-
-                        @if (@Model.ShoppingCart.QuantitySemestrialSubscription != 0)
-                        {
-                            <tr>
-                                <td class="product-line-price">@Model.EcoStore.NameSemester</td>
-                                <td class="product-line-price">@Model.EcoStore.SemestrialSubscription</td>
-                                <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
-                                <td class="product-line-price">@Model.ShoppingCart.QuantitySemestrialSubscription</td>
-                                <td class="product-line-price">Total</td>
-                                <td class="product-removal"><a href="#">Supprimer</a></td>
-                            </tr>
-                        }
-
-
-
-
-                    </tbody>
-                </table>
-            </div>
-
-
-            <!-- / Shopping cart table -->
-            <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
-                <div class="d-flex">
-                    <div class="text-right mt-4">
-                        <label class="totals"><a href="/Financial/EcoStore/" target="_blank">EcoCoins dans votre EcoWallet: @Model.EcoWallet.EcoCoinsAmount</a></label><br />
-                        <label class="totals">Prix Total à payer en Euros: @Model.ShoppingCart.TotalPriceEuros</label>
-                        <div class="float-right">
-                            <button type="button" class="btn btn-lg btn-primary mt-2">Payer</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </table>
     </div>
 </div>
 
+
+
+
+
+
+
+
 <script>
-    /* Assign actions */
-
-    $('.product-removal button').click(function() {
-        removeItem(this);
-    });
 
 
-    /* Recalculate cart */
-    function recalculateCart() {
-        var subtotal = 0;
+  // SHOPPING CART PLUS OR MINUS
+  $('a.qty-minus').on('click', function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    var $input = $this.closest('div').find('input');
+    var value = parseInt($input.val());
+    
+    if (value > 1) {
+      value = value - 1;
+    } else {
+      value = 0;
+    }
+    
+    $input.val(value);
+        
+  });
 
-        /* Sum up row totals */
-        $('.product').each(function() {
-            subtotal += parseFloat($(this).children('.product-line-price').text());
-        });
+    $('a.qty-plus').on('click', function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    var $input = $this.closest('div').find('input');
+    var value = parseInt($input.val());
 
-        /* Calculate totals */
-        var total = subtotal;
-
-        /* Update totals display */
-        $('.totals-value').fadeOut(fadeTime, function() {
-            $('#cart-subtotal').html(subtotal.toFixed(2));
-            $('#cart-total').html(total.toFixed(2));
-            if (total == 0) {
-                $('.checkout').fadeOut(fadeTime);
-            } else {
-                $('.checkout').fadeIn(fadeTime);
-            }
-            $('.totals-value').fadeIn(fadeTime);
-        });
+    if (value < 100) {
+    value = value + 1;
+    } else {
+      value =100;
     }
 
+    $input.val(value);
+  });
 
-    /* Update quantity */
-    function updateQuantity(quantityInput) {
-        /* Calculate line price */
-        var linePrice = parseFloat(productRow.children('.product-price').text());
+  // RESTRICT INPUTS TO NUMBERS ONLY WITH A MIN OF 0 AND A MAX 100
+$('input').on('blur', function(){
+
+  var input = $(this);
+  var value = parseInt($(this).val());
+
+    if (value < 0 || isNaN(value)) {
+      input.val(0);
+    } else if
+      (value > 100) {
+      input.val(100);
     }
+});
 
 
-    /* Remove item from cart */
-    function removeItem(removeButton) {
-        /* Remove row from DOM and recalc cart total */
-        var productRow = $(removeButton).parent().parent();
-        productRow.slideUp(fadeTime, function() {
-            productRow.remove();
-            recalculateCart();
-        });
-    }
+
+// Remove Items From Cart
+$('a.product-removal').click(function(){
+  event.preventDefault();
+  $( this ).parent().parent().parent().hide( 400 );
+ 
+})
+
+//Total
+function calculate() {
+  var qty = document.getElementById('qty').value;
+  var unitaryPrice = document.getElementById('unitaryPrice').value;
+  var result = document.getElementById('totalInline');
+  var myResult = parseInt(qty) * parseInt(unitaryPrice); // Parse the strings
+  result.value = myResult;
+}
+
 </script>

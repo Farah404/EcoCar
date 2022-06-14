@@ -18,9 +18,8 @@
                     {
                         <li>
                             <span>
-                                <p>@Model.User.Account.Username</p>
-                                <br>
-
+                            <p>@Model.User.Account.Username</p>
+                             <br>
                             </span>
                         </li>
                     }
@@ -92,7 +91,7 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                    <p>@Model.Account.CreationDate</p>
+                                    <p>@Model.Account.CreationDate.ToShortDateString()</p>
                                 </td>
                             </tr>
 
@@ -160,35 +159,6 @@
         </table>
     </div>
 </div>
-
-<div class="container bootstrap snippets bootdey">
-    <div class="panel-body inf-content">
-        <div class="row">
-                <strong>Prestations en cours</strong><br>
-                <div class="table-responsive">
-                    <table class="table table-user-information">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-road  text-success"></span>
-                                        Prestation #2565
-                                    </strong>
-                                </td>
-                                <td class="text-success">
-                                    ***
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-        </div>
-    </div>
-</div>
-
-
-
-
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>

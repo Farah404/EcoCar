@@ -12,6 +12,7 @@ namespace EcoCar.Models.Services
         //Service
 
         List<Service> GetAllServices();
+        List<Service> GetAllUserServices(int userId);
         int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int userProviderId);
         void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType);
         void UpdateService(Service service);
@@ -24,6 +25,7 @@ namespace EcoCar.Models.Services
         //CarPoolingService
 
         List<CarPoolingService> GetAllCarPoolingServices();
+        List<CarPoolingService> GetAllUserCarPoolingServices(int userId);
         CarPoolingService CreateCarPoolingService(CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int trajectoryId, int vehiculeId, int serviceId);
         void UpdateCarPoolingService(int id, CarPoolingType selectCarPoolingType, int avalaibleSeats, bool petsAllowed, bool smokingAllowed, bool musicAllowed, bool chattingAllowed, int trajectoryId, int vehiculeId, int serviceId);
         void DeleteCarPoolingService(int id);
@@ -32,6 +34,7 @@ namespace EcoCar.Models.Services
         //CarRentalService
 
         List<CarRentalService> GetAllCarRentalServices();
+        List<CarRentalService> GetAllUserCarRentalServices(int userId);
         int CreateCarRentalService(string keyPickUpAdress, string keyDropOffAdress, int vehiculeId, int serviceId);
         void UpdateCarRentalService(int id, string keyPickUpAdress, string keyDropOffAdress, int vehiculeId, int serviceId);
         void DeleteCarRentalService(int id);
@@ -41,6 +44,7 @@ namespace EcoCar.Models.Services
         //ParcelService
 
         List<ParcelService> GetAllParcelServices();
+        List<ParcelService> GetAllUserParcelServices(int userId);
         int CreateParcelService(int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId, int vehiculeId);
         void UpdateParcelService(int id, int barCode, double weightKilogrammes, bool atypicalVolume, bool fragile, int trajectoryId, int serviceId, int vehiculeId);
         void DeleteParcelService(int id);

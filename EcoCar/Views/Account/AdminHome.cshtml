@@ -9,7 +9,9 @@
 <div class="container-fluid bg-grey">
     @*Users List Display*@
     <div class="table-responsive">
-        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher un utilisateur"></center><br />
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Utilisateurs</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher un utilisateur">
+        <br />
+        <br />
         <table class="table" id="userTable">
             <thead>
 
@@ -17,13 +19,13 @@
                     <th>Nom d'utilisateur</th>
                     <th>Nom</th>
                     <th>Prénom</th>
-                    <th>EcoRating</th>
                     <th>EcoStatus</th>
                     <th>Email</th>
                     <th>EcoMembre depuis</th>
                     <th>Montant EcoCoins</th>
                     <th>Formule d'abonnement</th>
-                    <th>Suspendre</th>
+                    <th>Actif</th>
+                    <th>EcoSuspension</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,12 +35,142 @@
                     <td><a href="/account/userprofile/@users.Id">@users.Account.Username</a></td>
                     <td>@users.Person.LastName</td>
                     <td>@users.Person.Name</td>
-                    <td>@users.UserRating</td>
                     <td>@users.SelectEcoStatusType</td>
                     <td>@users.Email</td>
-                    <td>@users.Account.CreationDate</td>
+                    <td>@users.Account.CreationDate.ToShortDateString()</td>
                     <td>@users.EcoWallet.EcoCoinsAmount</td>
                     <td>@users.EcoWallet.Subscription</td>
+                    <td>@users.Account.IsActive</td>
+                    <td><a href="/Account/UserProfilePersonalByAdmin/@users.Id">Détails</a></td> 
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<br />
+<div class="container-fluid bg-grey">
+    @*Services List Display*@
+    <div class="table-responsive">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Prestations proposées</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation">
+        <table class="table" id="userTable">
+            <thead>
+               
+                <tr class="header">
+                    <th>Date de début</th>
+                    <th>Type de service</th>
+                    <th>Numéro de réference</th>
+                    <th>Provider</th>
+                    <th>Statut</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+                 @foreach (var carPoolingService in Model.CarPoolingServices)
+                {
+                <tr>
+                    <td>@carPoolingService.Service.Start.ToShortDateString()</td>
+                    <td>@carPoolingService.Service.SelectServiceType</td>
+                    <td>@carPoolingService.Service.ReferenceNumber</td>
+                        @foreach (var user in Model.Users.Where(u => u.Id == carPoolingService.Service.UserProviderId))
+                        {
+                            <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
+                        }
+                    <td>@carPoolingService.Service.IsAvailable</td>
+                    <td>lien</td>
+
+                </tr>
+                }
+                 @foreach (var carRentalService in Model.CarRentalServices)
+                {
+                <tr>
+                    <td>@carRentalService.Service.Start.ToShortDateString()</td>
+                    <td>@carRentalService.Service.SelectServiceType</td>
+                    <td>@carRentalService.Service.ReferenceNumber</td>
+                    @foreach (var user in Model.Users.Where(u => u.Id == carRentalService.Service.UserProviderId))
+                        {
+                            <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
+                        }
+                    <td>@carRentalService.Service.IsAvailable</td>
+                    <td>lien</td>
+
+                </tr>
+                }
+                 @foreach (var parcelService in Model.ParcelServices)
+                {
+                <tr>
+                    <td>@parcelService.Service.Start.ToShortDateString()</td>
+                    <td>@parcelService.Service.SelectServiceType</td>
+                    <td>@parcelService.Service.ReferenceNumber</td>
+                    @foreach (var user in Model.Users.Where(u => u.Id == parcelService.Service.UserProviderId))
+                        {
+                            <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
+                        }
+                    <td>@parcelService.Service.IsAvailable</td>
+                    <td>lien</td>
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<br />
+<div class="container-fluid bg-grey">
+    @*Requests List Display*@
+    <div class="table-responsive">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Prestations demandées</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation">
+        <table class="table" id="userTable">
+            <thead>
+                <tr class="header">
+                    <th>Date de début</th>
+                    <th>Type de service</th>
+                    <th>Numéro de réference</th>
+                    <th>Provider</th>
+                    <th>Statut</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var carPoolingService in Model.CarPoolingServices.Where(c=>c.Service.IsRequest==true))
+                {
+                <tr>
+                    <td>@carPoolingService.Service.Start.ToShortDateString()</td>
+                    <td>@carPoolingService.Service.SelectServiceType</td>
+                    <td>@carPoolingService.Service.ReferenceNumber</td>
+                    @foreach (var user in Model.Users.Where(u => u.Id == carPoolingService.Service.UserProviderId))
+                        {
+                            <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
+                        }
+                    <td>@carPoolingService.Service.IsAvailable</td>
+                    <td>lien</td>
+                </tr>
+                }
+                 @foreach (var carRentalService in Model.CarRentalServices.Where(c=>c.Service.IsRequest==true))
+                {
+                <tr>
+                    <td>@carRentalService.Service.Start.ToShortDateString()</td>
+                    <td>@carRentalService.Service.SelectServiceType</td>
+                    <td>@carRentalService.Service.ReferenceNumber</td>
+                    @foreach (var user in Model.Users.Where(u => u.Id == carRentalService.Service.UserProviderId))
+                        {
+                            <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
+                        }
+                    <td>@carRentalService.Service.IsAvailable</td>
+                    <td>lien</td>
+                </tr>
+                }
+                 @foreach (var parcelService in Model.ParcelServices.Where(c=>c.Service.IsRequest==true))
+                {
+                <tr>
+                    <td>@parcelService.Service.Start.ToShortDateString()</td>
+                    <td>@parcelService.Service.SelectServiceType</td>
+                    <td>@parcelService.Service.ReferenceNumber</td>
+                    @foreach (var user in Model.Users.Where(u => u.Id == parcelService.Service.UserProviderId))
+                        {
+                            <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
+                        }
+                    <td>@parcelService.Service.IsAvailable</td>
                     <td>lien</td>
                 </tr>
                 }
@@ -46,71 +178,13 @@
         </table>
     </div>
 </div>
-
-<div class="container-fluid">
-    @*Services List Display*@
-    <div class="table-responsive">
-        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation"></center><br />
-        <table class="table" id="userTable">
-            <thead>
-
-                <tr class="header">
-                    <th>Date de début</th>
-                    <th>Type de service</th>
-                    <th>Numéro de réference</th>
-                    <th>Provider</th>
-                    <th>Consumer</th>
-                    <th>Statut</th>
-                    <th>Supprimer</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
+<br />
 <div class="container-fluid bg-grey">
-    @*Requests List Display*@
-    <div class="table-responsive">
-        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation"></center><br />
-        <table class="table" id="userTable">
-            <thead>
-
-                <tr class="header">
-                    <th>Date de début</th>
-                    <th>Type de service</th>
-                    <th>Numéro de réference</th>
-                    <th>Provider</th>
-                    <th>Consumer</th>
-                    <th>Statut</th>
-                    <th>Commande</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="container-fluid ">
     @*Purchases List Display*@
     <div class="table-responsive">
-        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher un achat"></center><br />
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">EcoStore</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher un achat">
         <table class="table" id="userTable">
             <thead>
-
                 <tr class="header">
                     <th>Date d'achat</th>
                     <th>Type d'achat</th>
@@ -128,12 +202,6 @@
         </table>
     </div>
 </div>
-
-
-
-
-
-
 
 <script>
     function myFunction() {

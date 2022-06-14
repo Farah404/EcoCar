@@ -14,9 +14,6 @@
                     <ul title="Ratings" class="list-inline ratings text-center">
                         <li>
                             <span>
-                               
-
-                                
                                 <br>
                                 Modifier ma photo de profil
                                 @Html.TextBoxFor(model => model.Person.ProfilePictureURL, new { @class = "form-control", placeholder = "Votre image de profil", })
@@ -25,19 +22,14 @@
                             </span>
                         </li>
                     </ul>
-
                 </div>
-
-
                 @*Information*@
                 <div class="col-md-6">
                     <span class="text-success"><strong>Information</strong><br></span>
                     <div class="table-responsive">
 
                         <table class="table table-user-information">
-
                             <tbody>
-
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-user  text-success"></span>
@@ -47,13 +39,8 @@
 
                                         @Html.TextBoxFor(model => model.Person.Name, new { @class = "form-control", placeholder = "Prénom" })
                                 <input type="file" id="file" name="file" multiple>
-                                      
-                                       
-
                                     </td>
-
                                 </tr>
-
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-user  text-success"></span>
@@ -63,12 +50,8 @@
 
 
                                         @Html.TextBoxFor(model => model.Person.LastName, new { @class = "form-control", placeholder = "Nom" })
-                                        
-
                                     </td>
-
                                 </tr>
-
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
@@ -77,7 +60,6 @@
                                     <td class="text-success">
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-star text-success"></span>
@@ -115,7 +97,6 @@
                                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Numéro de téléphone" })
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-ok text-success"></span>
@@ -300,9 +281,6 @@
 
     </div>
     </div>
-   
-
-<hr class="solid">
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>

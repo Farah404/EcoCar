@@ -25,18 +25,15 @@
                                 @using (Html.BeginForm())
                                 {
                                     <div class="form-floating mb-3">
-                                        @Html.TextBoxFor(model => model.Administrator.Username, new {@class = "form-control", placeholder = "Nom d'utilisateur" })
+                                        @Html.TextBoxFor(model => model.Administrator.Username, new {@class = "form-control", placeholder = "Nom d'administrateur" })
                                         @Html.ValidationMessageFor(model =>model.Administrator.Username)
                                     </div>
+                                    <br />
                                     <div class="form-floating mb-3">
                                         @Html.TextBoxFor(model => model.Administrator.Password, new { @type="password", @class = "form-control", placeholder = "Mot de passe" })
                                         @Html.ValidationMessageFor(model =>model.Administrator.Password)
                                     </div>
-                                    <div class="form-floating mb-3">
-                                        @Html.TextBoxFor(model => model.Administrator.EmployeeCode, new {@class = "form-control", placeholder = "Code Employé" })
-                                        @Html.ValidationMessageFor(model =>model.Administrator.EmployeeCode)
-                                    </div>
-                                    <br>
+                                    <br />
                                     <br>
                                     <!-- Submit Button-->
                                     <button class="btn btn-success btn-xl" type="submit">Se Connecter</button>
@@ -56,4 +53,3 @@
         </div>
     </div>
 </section>
-<hr class="solid">

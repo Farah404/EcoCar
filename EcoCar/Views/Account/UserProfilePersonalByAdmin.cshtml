@@ -1,9 +1,7 @@
-﻿@*@model EcoCar.Models.PersonManagement.Account*@
-@*@model List<EcoCar.Models.PersonManagement.User>*@
-@model EcoCar.ViewModels.AccountViewModel
+﻿@model EcoCar.ViewModels.AccountViewModel
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "Mon profil";
+    ViewBag.Title = "Profil complet du membre";
 }
 
 <div class="container bootstrap snippets bootdey">
@@ -16,15 +14,17 @@
                 <ul title="Ratings" class="list-inline ratings text-center">
                     <li>
                         <span>
-                            <a class="navbar-brand" href="/">@Model.User.Account.Username</a>
+                         <a class="navbar-brand" href="/">@Model.User.Account.Username</a>   
                         </span>
                     </li>
                 </ul>
-                    <button class="btn btn-success center-block" type="submit" onclick="location.href='/Account/UpdateUser/@Model.User.Id'">Modifier mon profil</button>
-                    <br>
-                <button class="btn btn-success center-block" type="submit" onclick="location.href='/Account/CreateInsurance'">Ajouter un véhicule</button>
                 <br />
-                <button class="btn btn-success center-block" type="submit" onclick="location.href='/Messaging/EcoUserInbox'">Messagerie</button>
+                @using (Html.BeginForm())
+                {
+                    @Html.Hidden("userId",@Model.User.Id)
+                
+                <button class="btn btn-success center-block" type="submit" onclick="location.href='/Account/UserProfilePersonalByAdmin/@Model.User.Id'"> Suspendre le profil</button>
+                   } 
             </div>
 
 
@@ -73,7 +73,7 @@
                                     Date de naissance
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.BirthDate.ToShortDateString()</p>
+                                        <p>@Model.User.BirthDate</p>
                                 </td>
                             </tr>
 
@@ -124,7 +124,7 @@
                                     EcoMembre depuis
                                 </td>
                                 <td class="text-success">
-                                    <p>@Model.Account.CreationDate.ToShortDateString()</p>
+                                    <p>@Model.Account.CreationDate</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -270,7 +270,7 @@
 </div>
 
 <div id="services" class="container-fluid bg-grey">
-    <center><h2>Mon historique de prestations</h2></center>
+    <center><h2>Son historique de prestations</h2></center>
   @*Service List Display*@
     <div class="table-responsive">
         <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une de mes prestations..."></center><br />
@@ -322,10 +322,6 @@
                     <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
-
-                @Html.Hidden("serviceId",@ViewBag.serviceId,null)
-                
-
             </tbody>
         </table>
     </div>

@@ -43,6 +43,8 @@ namespace EcoCar.Controllers
             {
                 Account account = dalPersonManagement.Authentify(viewModel.Account.Username, viewModel.Account.Password);
                 if (account != null)
+                       if(account.IsActive==true)
+                    { 
                 {
                     var userClaims = new List<Claim>()
                     {
@@ -60,6 +62,8 @@ namespace EcoCar.Controllers
                     return Redirect("/Home/Index");
                 }
                 ModelState.AddModelError("Account.Username", "Nom d'utilisateur et/ou mot de passe incorrect(s)");
+                    }
+                return View();
             }
             return View();
         }
@@ -118,6 +122,36 @@ namespace EcoCar.Controllers
                 ModelState.AddModelError("Administrator.Username", "Nom d'utilisateur et/ou mot de passe incorrect(s)");
             }
             return Redirect("/Account/AdminHome");
+        }
+        public IActionResult UserProfilePersonalByAdmin(int? id)
+        
+        {
+            if (id.HasValue)
+            {
+                AccountViewModel accountViewModel = new AccountViewModel
+                {
+                    User = dalPersonManagement.GetUser((int)id),
+                    Services = dalServiceManagement.GetAllServices(),
+                    Account = dalPersonManagement.GetAccount((int)id),
+                    CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices((int)id),
+                    CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices((int)id),
+                    ParcelServices = dalServiceManagement.GetAllUserParcelServices((int)id)
+                };
+                return View(accountViewModel);
+            }
+            return NotFound();
+
+        }
+        [HttpPost]
+        public IActionResult UserProfilePersonalByAdmin(int userid)
+        {
+            if (userid != null)
+            {
+                Account accountToBan = dalPersonManagement.GetAccount(userid);
+                dalPersonManagement.UpdateAccount(accountToBan.Id, accountToBan.Username, accountToBan.Password, false, accountToBan.PersonId);
+                return Redirect("/Account/adminHome");
+            }
+            return Redirect("/");
         }
         #endregion
 
@@ -236,9 +270,9 @@ namespace EcoCar.Controllers
                 User = dalPersonManagement.GetUser(id),
                 Services = dalServiceManagement.GetAllServices(),
                 Account = dalPersonManagement.GetAccount(id),
-                CarPoolingServices = dalServiceManagement.GetAllCarPoolingServices(),
-                CarRentalServices = dalServiceManagement.GetAllCarRentalServices(),
-                ParcelServices = dalServiceManagement.GetAllParcelServices()
+                CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices(id),
+                CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices(id),
+                ParcelServices = dalServiceManagement.GetAllUserParcelServices(id)
             };
             
             return View(viewModel) ;
@@ -255,9 +289,9 @@ namespace EcoCar.Controllers
                     User = dalPersonManagement.GetUser(userId),
                     Services = dalServiceManagement.GetAllServices(),
                     Account = dalPersonManagement.GetAccount(userId),
-                    CarPoolingServices = dalServiceManagement.GetAllCarPoolingServices(),
-                    CarRentalServices = dalServiceManagement.GetAllCarRentalServices(),
-                    ParcelServices = dalServiceManagement.GetAllParcelServices()
+                    CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices(userId),
+                    CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices(userId),
+                    ParcelServices = dalServiceManagement.GetAllUserParcelServices(userId)
                 };
                 return View(accountViewModel);
             }

@@ -6,9 +6,19 @@
     background-color: #93bb83;
     color: #ffffff;
     font-size: 75px;
-    padding: 25px 25px;
+    padding: 50px 25px;
     font-family: Montserrat, sans-serif;
 }
+.jumbotron .btn:hover {
+    border: 1px solid #93bb83;
+    background-color: #fff !important;
+    color: #93bb83;
+}
+    .jumbotron .btn {
+        border: 1px solid #f6f6f6;
+        background-color: #93bb83;
+        color: #f6f6f6;
+    }
 /*containers reference*/
 .container-fluid {
     padding: 60px 50px;
@@ -108,7 +118,7 @@
 
 .panel-heading {
     color: #fff !important;
-    background-color: #a1df86 !important;
+    background-color: #93bb83 !important;
     padding: 25px;
     border-bottom: 1px solid transparent;
     border-top-left-radius: 0px;
@@ -149,7 +159,7 @@
 }
 
     .navbar li a, .navbar .navbar-brand {
-        color: #000000 !important;
+        color: #fff !important;
     }
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
@@ -316,4 +326,26 @@ hr.solid {
     right: 20px;
     position: fixed;
     z-index: 3000;
+}
+/*padding des layout*/
+.main-layout {
+    box-sizing: border-box;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+/*    .main-layout .btn-success {
+        margin: 15px 0;
+        background-color: #a1df86;
+        color: #fff;
+        border: 1px solid #a1df86;
+    }
+.main-layout .btn-success:hover {
+    border: 1px solid #93bb83;
+    background-color: #fff !important;
+    color: #93bb83;
+}*/
+.verticalcenter {
+    position: relative;
+    top: 50%;
+    transform: translateY(30%);
 }

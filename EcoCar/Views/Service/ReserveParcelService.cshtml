@@ -1,6 +1,6 @@
 ﻿@using static EcoCar.Models.ServiceManagement.ParcelService
 
-@model List<EcoCar.Models.ServiceManagement.ParcelService>
+@model EcoCar.ViewModels.ServiceViewModel
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Reserver une prestation de transport de colis";
@@ -22,11 +22,7 @@
                     <button class="btn btn-primary center-block" type="submit">Réserver la prestation</button>
                 }
                 <br />
-                @foreach (var parcelService in Model)
-                {
-
-                    <button onclick="location.href='/Account/UserProfile/@parcelService.Service.UserProviderId'" class="btn btn-success center-block">Consulter le profil de l'EcoMembre</button>
-                }
+                    <button onclick="location.href='/Account/UserProfile/@Model.ParcelService.Service.UserProviderId'" class="btn btn-success center-block">Consulter le profil de l'EcoMembre</button>
             </div>
 
 
@@ -43,10 +39,7 @@
                                     Date et heure de départ
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var parcelService in Model)
-                                    {
-                                        <p>@parcelService.Service.Start</p>
-                                    }
+                                        <p>@Model.ParcelService.Service.Start</p>
                                 </td>
                             </tr>
                             <tr>
@@ -56,10 +49,7 @@
                                     Date et heure de d'arrivée'
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var parcelService in Model)
-                                    {
-                                        <p>@parcelService.Service.End</p>
-                                    }
+                                        <p>@Model.ParcelService.Service.End</p>
                                 </td>
                             </tr>
                             <tr>
@@ -68,10 +58,7 @@
                                     Code barre
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var parcelService in Model)
-                                    {
-                                        <p>@parcelService.BarCode</p>
-                                    }
+                                        <p>@Model.ParcelService.BarCode</p>
                                 </td>
                             </tr>
 
@@ -81,10 +68,7 @@
                                     Poids en kilogrammes
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var parcelService in Model)
-                                    {
-                                        <p>@parcelService.WeightKilogrammes</p>
-                                    }
+                                        <p>@Model.ParcelService.WeightKilogrammes</p>
                                 </td>
                             </tr>
 
@@ -94,10 +78,7 @@
                                     Forme atypique
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var parcelService in Model)
-                                    {
-                                        <p>@parcelService.AtypicalVolume</p>
-                                    }
+                                        <p>@Model.ParcelService.AtypicalVolume</p>
                                 </td>
                             </tr>
 
@@ -107,10 +88,7 @@
                                     Fragile
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var parcelService in Model)
-                                    {
-                                        <p>@parcelService.Fragile</p>
-                                    }
+                                        <p>@Model.ParcelService.Fragile</p>
                                 </td>
                             </tr>
 
@@ -122,10 +100,7 @@
                                     Adresse de départ
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var parcelService in Model)
-                                    {
-                                        <p>@parcelService.Trajectory.PickUpAddress</p>
-                                    }
+                                        <p>@Model.ParcelService.Trajectory.PickUpAddress</p>
                                 </td>
                             </tr>
 
@@ -135,10 +110,7 @@
                                     Adresse d'arrivée
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var parcelService in Model)
-                                    {
-                                        <p>@parcelService.Trajectory.DeliveryAddress</p>
-                                    }
+                                        <p>@Model.ParcelService.Trajectory.DeliveryAddress</p>
                                 </td>
                             </tr>
 

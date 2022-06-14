@@ -1,6 +1,6 @@
 ﻿@using static EcoCar.Models.ServiceManagement.CarPoolingService
 
-@model List<EcoCar.Models.ServiceManagement.CarPoolingService>
+@model EcoCar.ViewModels.ServiceViewModel
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Reserver une prestation de covoiturage";
@@ -18,16 +18,11 @@
                 @using (Html.BeginForm())
                 {
                     <br>
-
                     <button class="btn btn-success center-block" type="submit">Réserver la prestation</button>
 
                 }
                 <br />
-                @foreach (var carPoolingService in Model)
-                {
-
-                    <button onclick="location.href='/Account/UserProfile/@carPoolingService.Service.UserProviderId'" class="btn btn-success center-block">Profil de l'EcoMembre prestataire</button>
-                }
+                    <button onclick="location.href='/Account/UserProfile/@Model.CarPoolingService.Service.UserProviderId'" class="btn btn-success center-block">Profil de l'EcoMembre prestataire</button>
             </div>
 
 
@@ -44,10 +39,7 @@
                                     Date et heure de départ
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.Service.Start</p>
-                                    }
+                                        <p>@Model.CarPoolingService.Service.Start</p>
                                 </td>
                             </tr>
                             <tr>
@@ -57,10 +49,7 @@
                                     Date et heure de d'arrivée'
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.Service.End</p>
-                                    }
+                                        <p>@Model.CarPoolingService.Service.End</p>
                                 </td>
                             </tr>
                             <tr>
@@ -69,10 +58,7 @@
                                     Type de covoiturage
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.SelectCarPoolingType</p>
-                                    }
+                                        <p>@Model.CarPoolingService.SelectCarPoolingType</p>
                                 </td>
                             </tr>
 
@@ -82,10 +68,7 @@
                                     Sièges disponibles
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.AvailableSeats</p>
-                                    }
+                                        <p>@Model.CarPoolingService.AvailableSeats</p>
                                 </td>
                             </tr>
 
@@ -95,10 +78,7 @@
                                     Durée du trajet en heure
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.Trajectory.DurationHours</p>
-                                    }
+                                        <p>@Model.CarPoolingService.Trajectory.DurationHours</p>
                                 </td>
                             </tr>
 
@@ -108,10 +88,7 @@
                                     Nombre d'arrêts
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.Trajectory.StopNumber</p>
-                                    }
+                                        <p>@Model.CarPoolingService.Trajectory.StopNumber</p>
                                 </td>
                             </tr>
                             <tr>
@@ -120,10 +97,7 @@
                                     Durée d'arrêt en minutes
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.Trajectory.StopsDurationMinutes</p>
-                                    }
+                                        <p>@Model.CarPoolingService.Trajectory.StopsDurationMinutes</p>
                                 </td>
                             </tr>
 
@@ -133,10 +107,7 @@
                                     Adresse de départ
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.Trajectory.PickUpAddress</p>
-                                    }
+                                        <p>@Model.CarPoolingService.Trajectory.PickUpAddress</p>
                                 </td>
                             </tr>
 
@@ -146,10 +117,7 @@
                                     Adresse d'arrivée
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.Trajectory.DeliveryAddress</p>
-                                    }
+                                        <p>@Model.CarPoolingService.Trajectory.DeliveryAddress</p>
                                 </td>
                             </tr>
 
@@ -159,10 +127,7 @@
                                     Type du trajet
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.Trajectory.SelectTrajectoryType</p>
-                                    }
+                                        <p>@Model.CarPoolingService.Trajectory.SelectTrajectoryType</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -179,10 +144,7 @@
                                     Animaux de compagnie
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.PetsAllowed</p>
-                                    }
+                                        <p>@Model.CarPoolingService.PetsAllowed</p>
                                 </td>
                             </tr>
 
@@ -192,10 +154,7 @@
                                     Fumeur
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.SmokingAllowed</p>
-                                    }
+                                        <p>@Model.CarPoolingService.SmokingAllowed</p>
                                 </td>
                             </tr>
 
@@ -205,10 +164,7 @@
                                     Musique
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.MusicAllowed</p>
-                                    }
+                                        <p>@Model.CarPoolingService.MusicAllowed</p>
                                 </td>
                             </tr>
 
@@ -218,10 +174,7 @@
                                     Discussion
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carPoolingService in Model)
-                                    {
-                                        <p>@carPoolingService.ChattingAllowed</p>
-                                    }
+                                        <p>@Model.CarPoolingService.ChattingAllowed</p>
                                 </td>
                             </tr>
 

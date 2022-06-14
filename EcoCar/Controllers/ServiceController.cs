@@ -23,15 +23,15 @@ namespace EcoCar.Controllers
         public ActionResult SearchService()
         {
             ServiceViewModel serviceViewModel = new ServiceViewModel
-                {
+            {
                 Users = dalPersonManagement.GetAllUsers(),
                 Accounts = dalPersonManagement.GetAllAccounts(),
                 CarPoolingServices = dalServiceManagement.GetAllCarPoolingServices(),
                 ParcelServices = dalServiceManagement.GetAllParcelServices(),
                 CarRentalServices = dalServiceManagement.GetAllCarRentalServices()
-                
-                };
-           
+
+            };
+
 
             return View(serviceViewModel);
         }
@@ -270,9 +270,11 @@ namespace EcoCar.Controllers
         //Reserve
         public ActionResult ReserveCarPoolingService(int? id)
         {
-            List<CarPoolingService> carPoolingServices = dalServiceManagement.GetAllCarPoolingServices();
-            carPoolingServices = carPoolingServices.Where(x => x.Id == id).ToList();
-            return View(carPoolingServices.ToList());
+            ServiceViewModel serviceViewModel = new ServiceViewModel
+            {
+                CarPoolingService = dalServiceManagement.GetCarPoolingService((int)id)
+            };
+            return View(serviceViewModel);
         }
 
         [HttpPost]
@@ -330,9 +332,11 @@ namespace EcoCar.Controllers
         #region Reserving a parcel service
         public ActionResult ReserveParcelService(int? id)
         {
-            List<ParcelService> parcelServices = dalServiceManagement.GetAllParcelServices();
-            parcelServices = parcelServices.Where(x => x.Id == id).ToList();
-            return View(parcelServices.ToList());
+            ServiceViewModel serviceViewModel = new ServiceViewModel
+            {
+                ParcelService = dalServiceManagement.GetParcelService((int)id)
+            };
+            return View(serviceViewModel);
         }
 
         [HttpPost]
@@ -381,9 +385,11 @@ namespace EcoCar.Controllers
         #region Reserving a car rental service
         public ActionResult ReserveCarRentalService(int? id)
         {
-            List<CarRentalService> carRentalServices = dalServiceManagement.GetAllCarRentalServices();
-            carRentalServices = carRentalServices.Where(x => x.Id == id).ToList();
-            return View(carRentalServices.ToList());
+            ServiceViewModel serviceViewModel = new ServiceViewModel
+            {
+                CarRentalService = dalServiceManagement.GetCarRentalService((int)id)
+            };
+            return View(serviceViewModel);
 
         }
 
@@ -563,11 +569,13 @@ namespace EcoCar.Controllers
 
         #region RespondingToCarPoolingRequest
 
-        public ActionResult RespondToCarPoolRequest(int id)
+        public ActionResult RespondToCarPoolRequest(int? id)
         {
-            List<CarPoolingService> carPoolingServices = dalServiceManagement.GetAllCarPoolingServices();
-            carPoolingServices = carPoolingServices.Where(x => x.Id == id).ToList();
-            return View(carPoolingServices.ToList());
+            ServiceViewModel serviceViewModel = new ServiceViewModel
+            {
+                CarPoolingService = dalServiceManagement.GetCarPoolingService((int)id)
+            };
+            return View(serviceViewModel);
         }
         #endregion
 
@@ -575,28 +583,77 @@ namespace EcoCar.Controllers
 
         public ActionResult RespondToCarRentalRequest(int? id)
         {
-            //ServiceViewModel serviceViewModel = new ServiceViewModel
-            //{
-            //    CarRentalServices = dalServiceManagement.GetAllCarRentalServices(),
-            //    Services = dalServiceManagement.GetAllServices()
-            //};
-
-            //return View(serviceViewModel);
-            List<CarRentalService> carRentalServices = dalServiceManagement.GetAllCarRentalServices();
-            carRentalServices = carRentalServices.Where(x => x.Id == id).ToList();
-            return View(carRentalServices.ToList());
+            ServiceViewModel serviceViewModel = new ServiceViewModel
+            {
+                CarRentalService = dalServiceManagement.GetCarRentalService((int)id)
+            };
+            return View(serviceViewModel);
         }
         #endregion
 
         #region RespondingToParcelRequest
 
-        public ActionResult RespondToParcelRequest(int id)
+        public ActionResult RespondToParcelRequest(int? id)
         {
-            List<ParcelService> parcelServices = dalServiceManagement.GetAllParcelServices();
-            parcelServices = parcelServices.Where(x => x.Id == id).ToList();
-            return View(parcelServices.ToList());
+            ServiceViewModel serviceViewModel = new ServiceViewModel
+            {
+                ParcelService = dalServiceManagement.GetParcelService((int)id)
+            };
+
+            return View(serviceViewModel);
         }
         #endregion
 
+        #region AdminDeleting
+        public ActionResult AdminViewCarPoolingService(int? id)
+        {
+            ServiceViewModel serviceViewModel = new ServiceViewModel
+            {
+                CarPoolingService = dalServiceManagement.GetCarPoolingService((int)id)
+            };
+            return View(serviceViewModel);
+        }
+        [HttpPost]
+        public IActionResult AdminViewCarPoolingService(int id)
+        {
+            CarPoolingService carPoolService = dalServiceManagement.GetCarPoolingService((int)id);
+            dalServiceManagement.DeleteService(carPoolService.ServiceId);
+
+            return Redirect("/account/AdminHome");
+        }
+        public ActionResult AdminViewCarRentalService(int? id)
+        {
+            ServiceViewModel serviceViewModel = new ServiceViewModel
+            {
+                CarRentalService = dalServiceManagement.GetCarRentalService((int)id)
+            };
+            return View(serviceViewModel);
+        }
+        [HttpPost]
+        public IActionResult AdminViewCarRentalService(int id)
+        {
+            CarRentalService carRentalService = dalServiceManagement.GetCarRentalService((int)id);
+            dalServiceManagement.DeleteService(carRentalService.ServiceId);
+
+            return Redirect("/account/AdminHome");
+        }
+        public ActionResult AdminViewParcelService(int? id)
+        {
+            ServiceViewModel serviceViewModel = new ServiceViewModel
+            {
+                ParcelService = dalServiceManagement.GetParcelService((int)id)
+            };
+
+            return View(serviceViewModel);
+        }
+        [HttpPost]
+        public IActionResult AdminViewParcelService(int id)
+        {
+            ParcelService parcelService = dalServiceManagement.GetParcelService((int)id);
+            dalServiceManagement.DeleteService(parcelService.ServiceId);
+
+            return Redirect("/account/AdminHome");
+        }
+        #endregion
     }
 }

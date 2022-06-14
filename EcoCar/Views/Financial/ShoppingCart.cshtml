@@ -1,7 +1,4 @@
-﻿@*SHOPPING CART WILL BE INCLUDED IN ECOSTORE INSTEAD OF BEING A CLASS ON ITS OWN*@
-
-
-@*@model List<EcoCar.Models.FinancialManagement.ShoppingCart>
+﻿@model EcoCar.ViewModels.FinancialViewModel
 
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
@@ -26,60 +23,74 @@
                     <thead>
                         <tr>
                             <!-- Set columns width -->
-                            <th class="text-center py-3 px-4" style="width: 200px;">Prestation ou EcoAchat</th>
-                            <th class="text-right py-3 px-4" style="width: 200px;">Prix en EcoCoins</th>
+                            <th class="text-center py-3 px-4" style="width: 200px;">EcoAchat</th>
+                            <th class="text-right py-3 px-4" style="width: 200px;">Montant EcoCoins</th>
                             <th class="text-right py-3 px-4" style="width: 200px;">Prix en Euros</th>
+                            <th class="text-right py-3 px-4" style="width: 200px;">Quantité</th>
                             <th class="product-line-price" style="width: 200px;">Total</th>
                             <th class="text-center py-3 px-4" style="width: 200px;">Vider mon panier</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td class="p-4">
-                                <div class="media align-items-center">
-                                    <img src="" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                    <div class="media-body">
-                                        <a href="#" class="d-block text-dark">Product 1</a>
 
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="product-line-price">$57.55</td>
-                            <td class="product-line-price">$115.1</td>
-                            <td class="product-line-price">$115.1</td>
+                        <tr>
+                            <td class="product-line-price">@Model.EcoStore.NameOne</td>
+                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOne</td>
+                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
+                            <td class="product-line-price">@Model.ShoppingCart.QuantityBatchOne</td>
+                            <td class="product-line-price">Total</td>
                             <td class="product-removal"><a href="#">Supprimer</a></td>
                         </tr>
 
                         <tr>
-                            <td class="p-4">
-                                <div class="media align-items-center">
-                                    <img src="" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                    <div class="media-body">
-                                        <a href="#" class="d-block text-dark">Product 2</a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="product-line-price">$57.55</td>
-                            <td class="product-line-price">$115.1</td>
-                            <td class="product-line-price">$115.1</td>
+                            <td class="product-line-price">@Model.EcoStore.NameTwo</td>
+                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchTwo</td>
+                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchTwoPrice</td>
+                            <td class="product-line-price">@Model.ShoppingCart.QuantityBatchTwo</td>
+                            <td class="product-line-price">Total</td>
                             <td class="product-removal"><a href="#">Supprimer</a></td>
                         </tr>
 
                         <tr>
-                            <td class="p-4">
-                                <div class="media align-items-center">
-                                    <img src="" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                    <div class="media-body">
-                                        <a href="#" class="d-block text-dark">Product 3</a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="product-line-price">$57.55</td>
-                            <td class="product-line-price">$115.1</td>
-                            <td class="product-line-price">$115.1</td>
+                            <td class="product-line-price">@Model.EcoStore.NameThree</td>
+                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchThree</td>
+                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
+                            <td class="product-line-price">@Model.ShoppingCart.QuantityBatchThree</td>
+                            <td class="product-line-price">Total</td>
                             <td class="product-removal"><a href="#">Supprimer</a></td>
                         </tr>
+
+                        <tr>
+                            <td class="product-line-price">@Model.EcoStore.NameMonth</td>
+                            <td class="product-line-price">@Model.EcoStore.MonthlySubscription</td>
+                            <td class="product-line-price">@Model.EcoStore.MonthlySubscriptionPrice</td>
+                            <td class="product-line-price">@Model.ShoppingCart.QuantityMonthlySubscription</td>
+                            <td class="product-line-price">Total</td>
+                            <td class="product-removal"><a href="#">Supprimer</a></td>
+                        </tr>
+
+                        <tr>
+                            <td class="product-line-price">@Model.EcoStore.NameTrimester</td>
+                            <td class="product-line-price">@Model.EcoStore.TrimestrialSubscription</td>
+                            <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
+                            <td class="product-line-price">@Model.ShoppingCart.QuantityTrimestrialSubscription</td>
+                            <td class="product-line-price">Total</td>
+                            <td class="product-removal"><a href="#">Supprimer</a></td>
+                        </tr>
+
+                        <tr>
+                            <td class="product-line-price">@Model.EcoStore.NameSemester</td>
+                            <td class="product-line-price">@Model.EcoStore.SemestrialSubscription</td>
+                            <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
+                            <td class="product-line-price">@Model.ShoppingCart.QuantitySemestrialSubscription</td>
+                            <td class="product-line-price">Total</td>
+                            <td class="product-removal"><a href="#">Supprimer</a></td>
+                        </tr>
+
+
+
+
 
                     </tbody>
                 </table>
@@ -90,8 +101,8 @@
             <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
                 <div class="d-flex">
                     <div class="text-right mt-4">
-                        <label class="totals"><a href="/Financial/EcoStore/" target="_blank">EcoCoins dans votre EcoWallet: $1164.65</a></label><br />
-                        <label class="totals">Prix Total à payer en EcoCoins: $1164.65</label>
+                        <label class="totals"><a href="/Financial/EcoStore/" target="_blank">EcoCoins dans votre EcoWallet: @Model.EcoWallet.EcoCoinsAmount</a></label><br />
+                        <label class="totals">Prix Total à payer en Euros: @Model.ShoppingCart.TotalPriceEuros</label>
                         <div class="float-right">
                             <button type="button" class="btn btn-lg btn-primary mt-2">Payer</button>
                         </div>
@@ -101,7 +112,6 @@
         </div>
     </div>
 </div>
-<hr class="solid">
 
 <script>
     /* Assign actions */
@@ -153,4 +163,4 @@
             recalculateCart();
         });
     }
-</script>*@
+</script>

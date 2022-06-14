@@ -58,6 +58,7 @@ namespace EcoCar.Models.Services
 
         //EcoWallet
         List<EcoWallet> GetAllEcoWallets();
+        EcoWallet GetUserEcoWallet(int id);
         int CreateEcoWallet(double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros);
         void UpdateEcoWallet(int id, double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros);
         void DeleteEcoWallet(int id);
@@ -66,8 +67,14 @@ namespace EcoCar.Models.Services
 
         //EcoStore
         List<EcoStore> GetAllEcoStores();
+        EcoStore GetEcoStore(int id);
         int CreateEcoStore(
-            PurchaseType selectPurchaseType,
+            string nameOne,
+            string nameTwo,
+            string nameThree,
+            string nameMonth,
+            string nameTrimester,
+            string nameSemester,
             double ecoCoinsBatchOnePrice,
             int ecoCoinsBatchOne,
             double ecoCoinsBatchTwoPrice,
@@ -83,5 +90,33 @@ namespace EcoCar.Models.Services
             );
 
         //-------------------------------------------------------------------------------------------------
+
+        //ShoppingCart
+        List<ShoppingCart> GetAllShoppingCarts();
+
+        int CreateShoppingCart(
+            int quantityBatchOne,
+            int quantityBatchTwo,
+            int quantityBatchThree,
+            int quantityMonthlySubscription,
+            int quantityTrimestrialSubscription,
+            int quantitysemestrialSubscription,
+            double totalPriceEuros,
+            int userId
+            );
+
+        void UpdateShoppingCart(
+            int id,
+            int quantityBatchOne,
+            int quantityBatchTwo,
+            int quantityBatchThree,
+            int quantityMonthlySubscription,
+            int quantityTrimestrialSubscription,
+            int quantitysemestrialSubscription,
+            double totalPriceEuros,
+            int userId
+            );
+
+        void DeleteShoppingCart(int id);
     }
 }

@@ -68,6 +68,7 @@ namespace EcoCar.Controllers
             return View();
         }
         #endregion
+
         #region Admin
 
         public IActionResult AdminHome()
@@ -288,7 +289,9 @@ namespace EcoCar.Controllers
                 {
                     User = dalPersonManagement.GetUser(userId),
                     Services = dalServiceManagement.GetAllServices(),
-                    Account = dalPersonManagement.GetAccount(userId),
+                    Account = dalPersonManagement.GetUserAccount(userId),
+                    Vehicule = dalPersonManagement.GetUserVehicule(userId),
+                    EcoWallet = dalFinancialManagement.GetUserEcoWallet(userId),
                     CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices(userId),
                     CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices(userId),
                     ParcelServices = dalServiceManagement.GetAllUserParcelServices(userId)

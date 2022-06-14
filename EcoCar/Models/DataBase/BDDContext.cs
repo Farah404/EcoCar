@@ -1,4 +1,5 @@
-﻿using EcoCar.Models.FinancialManagement;
+﻿
+using EcoCar.Models.FinancialManagement;
 using EcoCar.Models.ServiceManagement;
 using EcoCar.Models.MessagingManagement;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace EcoCar.Models.DataBase
         public DbSet<BankDetails> BankingDetails { get; set; }
         public DbSet<BillingAddress> BillingAddresses { get; set; }
         public DbSet<EcoStore> EcoStores { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<ServiceInvoice> ServiceInvoices { get; set; }
@@ -46,7 +48,7 @@ namespace EcoCar.Models.DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rootine;database=EcoCar");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
         }
 
 
@@ -56,120 +58,54 @@ namespace EcoCar.Models.DataBase
             this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
 
+            this.ShoppingCarts.Add(
+                new ShoppingCart
+                {
+                    Id=1,
+                    QuantityBatchOne =0,
+                    QuantityBatchTwo = 0,
+                    QuantityBatchThree = 0,
+                    QuantityMonthlySubscription = 0,
+                    QuantityTrimestrialSubscription = 0,
+                    QuantitySemestrialSubscription = 0,
+                    TotalPriceEuros = 0,
+                    UserId=1,
+                });
+
+
             #region Initializing the EcoStore
             this.EcoStores.Add(
                 new EcoStore
                 {
                     Id = 1,
-                    SelectPurchaseType = EcoStore.PurchaseType.EcoCoinsBatchOne,
+
                     EcoCoinsBatchOnePrice = 10.00,
                     EcoCoinsBatchOne = 20,
-                    EcoCoinsBatchTwoPrice = 0,
-                    EcoCoinsBatchTwo = 0,
-                    EcoCoinsBatchThreePrice = 0,
-                    EcoCoinsBatchThree = 0,
-                    MonthlySubscriptionPrice = 0,
-                    MonthlySubscription = 0,
-                    TrimestrialSubscriptionPrice = 0,
-                    TrimestrialSubscription = 0,
-                    SemestrialSubscriptionPrice = 0,
-                    SemestrialSubscription = 0
-                });
+                    NameOne = "EcoCoinsBatchOne",
 
-            this.EcoStores.Add(
-                new EcoStore
-                {
-                    Id = 2,
-                    SelectPurchaseType = EcoStore.PurchaseType.EcoCoinsBatchTwo,
-                    EcoCoinsBatchOnePrice = 0,
-                    EcoCoinsBatchOne = 0,
                     EcoCoinsBatchTwoPrice = 18.00,
                     EcoCoinsBatchTwo = 40,
-                    EcoCoinsBatchThreePrice = 0,
-                    EcoCoinsBatchThree = 0,
-                    MonthlySubscriptionPrice = 0,
-                    MonthlySubscription = 0,
-                    TrimestrialSubscriptionPrice = 0,
-                    TrimestrialSubscription = 0,
-                    SemestrialSubscriptionPrice = 0,
-                    SemestrialSubscription = 0
-                });
+                    NameTwo = "EcoCoinsBatchTwo",
 
-            this.EcoStores.Add(
-                new EcoStore
-                {
-                    Id = 3,
-                    SelectPurchaseType = EcoStore.PurchaseType.EcoCoinsBatchThree,
-                    EcoCoinsBatchOnePrice = 0,
-                    EcoCoinsBatchOne = 0,
-                    EcoCoinsBatchTwoPrice = 0,
-                    EcoCoinsBatchTwo = 0,
                     EcoCoinsBatchThreePrice = 35.00,
                     EcoCoinsBatchThree = 60,
+                    NameThree = "EcoCoinsBatchThree",
+
+
                     MonthlySubscriptionPrice = 0,
                     MonthlySubscription = 0,
-                    TrimestrialSubscriptionPrice = 0,
-                    TrimestrialSubscription = 0,
-                    SemestrialSubscriptionPrice = 0,
-                    SemestrialSubscription = 0
-                });
+                    NameMonth = "MonthlySubscription",
 
-            this.EcoStores.Add(
-                new EcoStore
-                {
-                    Id = 4,
-                    SelectPurchaseType = EcoStore.PurchaseType.MonthlySubscription,
-                    EcoCoinsBatchOnePrice = 0,
-                    EcoCoinsBatchOne = 0,
-                    EcoCoinsBatchTwoPrice = 0,
-                    EcoCoinsBatchTwo = 0,
-                    EcoCoinsBatchThreePrice = 0,
-                    EcoCoinsBatchThree = 0,
-                    MonthlySubscriptionPrice = 10.00,
-                    MonthlySubscription = 20,
-                    TrimestrialSubscriptionPrice = 0,
-                    TrimestrialSubscription = 0,
-                    SemestrialSubscriptionPrice = 0,
-                    SemestrialSubscription = 0
-                });
-
-            this.EcoStores.Add(
-                new EcoStore
-                {
-                    Id = 5,
-                    SelectPurchaseType = EcoStore.PurchaseType.TrimestrialSubscription,
-                    EcoCoinsBatchOnePrice = 0,
-                    EcoCoinsBatchOne = 0,
-                    EcoCoinsBatchTwoPrice = 0,
-                    EcoCoinsBatchTwo = 0,
-                    EcoCoinsBatchThreePrice = 0,
-                    EcoCoinsBatchThree = 0,
-                    MonthlySubscriptionPrice = 0,
-                    MonthlySubscription = 0,
                     TrimestrialSubscriptionPrice = 50.00,
                     TrimestrialSubscription = 30,
-                    SemestrialSubscriptionPrice = 0,
-                    SemestrialSubscription = 0
+                    NameTrimester = "TrimestrialSubscription",
+
+                    SemestrialSubscriptionPrice = 70.00,
+                    SemestrialSubscription = 50,
+                    NameSemester = "SemestrialSubscription",
                 });
 
-            this.EcoStores.Add(
-                new EcoStore
-                {
-                    Id = 6,
-                    SelectPurchaseType = EcoStore.PurchaseType.SemestrialSubscription,
-                    EcoCoinsBatchOnePrice = 0,
-                    EcoCoinsBatchOne = 0,
-                    EcoCoinsBatchTwoPrice = 0,
-                    EcoCoinsBatchTwo = 0,
-                    EcoCoinsBatchThreePrice = 0,
-                    EcoCoinsBatchThree = 0,
-                    MonthlySubscriptionPrice = 0,
-                    MonthlySubscription = 0,
-                    TrimestrialSubscriptionPrice = 0,
-                    TrimestrialSubscription = 0,
-                    SemestrialSubscriptionPrice = 70.00,
-                    SemestrialSubscription = 50
-                });
+          
             #endregion
 
             #region Initializing the admins

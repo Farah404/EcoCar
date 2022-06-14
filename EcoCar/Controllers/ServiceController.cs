@@ -598,12 +598,5 @@ namespace EcoCar.Controllers
         }
         #endregion
 
-        #region Searching a service request in the lists of requests
-        //public IActionResult SearchRequest()
-        //{
-        //    List<ServiceRequest> serviceRequests = dalServiceManagement.GetAllServiceRequests();
-        //    return View(serviceRequests.ToList());
-        //}
-        #endregion
     }
 }

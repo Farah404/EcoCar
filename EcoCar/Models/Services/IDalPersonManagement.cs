@@ -46,12 +46,14 @@ namespace EcoCar.Models.Services
         Account Authentify(string username, string passwordClear);
         Account GetAccount(int id);
         Account GetAccount(string idStr);
+        Account GetUserAccount(int id);
 
         //-------------------------------------------------------------------------------------------------
 
 
         //Vehicule
         List<Vehicule> GetAllVehicules();
+        Vehicule GetUserVehicule(int id);
         int CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId);
         void UpdateVehicule(int id, string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId);
         void DeleteVehicule(int id);

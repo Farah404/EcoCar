@@ -305,9 +305,20 @@ namespace EcoCar.Models.Services
             return accounts;
         }
 
+        public Account GetUserAccount(int id)
+        {
+
+            User user = _bddContext.Users.Find(id);
+            Account account = _bddContext.Accounts.Include(e => e.Person).FirstOrDefault(e => e.Id == user.AccountId);
+            return account;
+        }
+
         public Account GetAccount(int id)
         {
-            return this._bddContext.Accounts.Include(e => e.Person).FirstOrDefault(e => e.Id == id);
+
+           
+            return _bddContext.Accounts.Include(e => e.Person).FirstOrDefault(e => e.Id == id);
+            
         }
 
         public Account GetAccount(string idStr)
@@ -407,9 +418,11 @@ namespace EcoCar.Models.Services
             return _bddContext.Vehicules.Include(e => e.Insurance).ToList();
         }
 
-        public Vehicule GetVehicules(int id)
+        public Vehicule GetUserVehicule(int id)
         {
-            return _bddContext.Vehicules.Include(e => e.Insurance).FirstOrDefault(e => e.Id == id);
+            User user = _bddContext.Users.Find(id);
+            Vehicule vehicule = _bddContext.Vehicules.Include(e => e.Insurance).FirstOrDefault(e => e.Id == user.VehiculeId);
+            return vehicule;
         }
 
         //Create Vehicule

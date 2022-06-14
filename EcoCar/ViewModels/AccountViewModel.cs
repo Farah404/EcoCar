@@ -1,4 +1,5 @@
-﻿using EcoCar.Models.PersonManagement;
+﻿using EcoCar.Models.FinancialManagement;
+using EcoCar.Models.PersonManagement;
 using EcoCar.Models.ServiceManagement;
 using System.Collections.Generic;
 
@@ -21,6 +22,8 @@ namespace EcoCar.ViewModels
         public Vehicule Vehicule { get; set; }
 
         public Insurance Insurance { get; set; }
+
+        public EcoWallet EcoWallet { get; set; }
 
         public List<User> Users { get; set; }
         public List<Service> Services { get; set; }

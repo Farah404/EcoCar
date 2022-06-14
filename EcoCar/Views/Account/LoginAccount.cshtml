@@ -22,37 +22,34 @@
                                     <h4 class="mt-1 mb-5 pb-1">Je me connecte à mon compte EcoCar</h4>
                                 </div>
                                 <center>
-                                @using (Html.BeginForm())
-                                {
-                                    <div class="form-floating mb-3">
-                                        @Html.TextBoxFor(model => model.Account.Username, new {@class = "form-control", placeholder = "Nom d'utilisateur" })
-                                        @Html.ValidationMessageFor(model =>model.Account.Username)
-                                    </div>
-                                    <br>
-                                    <div class="form-floating mb-3">
-                                        @Html.TextBoxFor(model => model.Account.Password, new { @type="password", @class = "form-control", placeholder = "Mot de passe" })
-                                        @Html.ValidationMessageFor(model => model.Account.Password)
-                                    </div>
-                                    <br>
-                                    <!-- Submit Button-->
-                                    <button class="btn btn-success btn-xl" type="submit">Se Connecter</button>
-                                }</center><br>
+                                    @using (Html.BeginForm())
+                                    {
+                                        <div class="form-floating mb-3">
+                                            @Html.TextBoxFor(model => model.Account.Username, new {@class = "form-control", placeholder = "Nom d'utilisateur" })
+                                            @Html.ValidationMessageFor(model =>model.Account.Username)
+                                        </div>
+                                        <br>
+                                        <div class="form-floating mb-3">
+                                            @Html.TextBoxFor(model => model.Account.Password, new { @type="password", @class = "form-control", placeholder = "Mot de passe" })
+                                            @Html.ValidationMessageFor(model => model.Account.Password)
+                                        </div>
+                                        <br>
+                                        <!-- Submit Button-->
+                                        <button class="btn btn-success btn-xl" type="submit">Se Connecter</button>
+                                    }
+                                </center><br>
                                 <div>
+                                    <a class="text-muted" href="LoginAdministrator">Je me connecte en tant qu'admin</a><br />
                                     <a class="text-muted" href="ForgotPassword">J'ai oublié mon mot de passe</a><br />
-                                    <a class="text-muted" href="LoginAdministrator">Je me connecte en tant qu'admin</a>
+                                    <a class="text-muted" href="CreatePerson"> Je ne possède pas un compte EcoCar</a>
                                 </div>
-                            </div>
-                            <div>
-                                <p>
-                                    Je ne possède pas un compte EcoCar
-                                    <button type="btn btn-success btn-xl" class="text-muted" onclick="location.href='CreatePerson'">S'inscrire</button>
-                                </p>
                             </div>
                         </div>
                         <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                             <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                               
-                                 <img src=~/Images/CityEcoCar.png width="1100px" height="600px" />
+                                <div class="verticalcenter">
+                                    <img src=~/Images/CityEcoCar.png width="120%" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -61,3 +58,4 @@
         </div>
     </div>
 </section>
+<br />

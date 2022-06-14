@@ -4,22 +4,28 @@ using EcoCar.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 
 namespace EcoCar.Controllers
 {
-    
+
     public class AccountController : Controller
     {
         private IDalPersonManagement dalPersonManagement;
         private IDalFinancialManagement dalFinancialManagement;
         private IDalServiceManagement dalServiceManagement;
-        public AccountController()
+        private IWebHostEnvironment _webEnv;
+
+        public AccountController(IWebHostEnvironment environment)
         {
             dalPersonManagement = new DalPersonManagement();
             dalFinancialManagement = new DalFinancialManagement();
             dalServiceManagement = new DalServiceManagement();
+            _webEnv = environment;
         }
 
         #region Authentification
@@ -43,31 +49,32 @@ namespace EcoCar.Controllers
             {
                 Account account = dalPersonManagement.Authentify(viewModel.Account.Username, viewModel.Account.Password);
                 if (account != null)
-                       if(account.IsActive==true)
-                    { 
-                {
-                    var userClaims = new List<Claim>()
+                    if (account.IsActive == true)
+                    {
+                        {
+                            var userClaims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.Name, account.Username),
                         new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
                     };
 
-                    var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
+                            var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
 
-                    var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
-                    HttpContext.SignInAsync(userPrincipal);
+                            var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
+                            HttpContext.SignInAsync(userPrincipal);
 
-                    if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
-                        return Redirect(returnUrl);
-                    return Redirect("/Home/Index");
-                }
-                ModelState.AddModelError("Account.Username", "Nom d'utilisateur et/ou mot de passe incorrect(s)");
+                            if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+                                return Redirect(returnUrl);
+                            return Redirect("/Home/Index");
+                        }
+                        ModelState.AddModelError("Account.Username", "Nom d'utilisateur et/ou mot de passe incorrect(s)");
                     }
                 return View();
             }
             return View();
         }
         #endregion
+
         #region Admin
 
         public IActionResult AdminHome()
@@ -124,7 +131,7 @@ namespace EcoCar.Controllers
             return Redirect("/Account/AdminHome");
         }
         public IActionResult UserProfilePersonalByAdmin(int? id)
-        
+
         {
             if (id.HasValue)
             {
@@ -164,7 +171,7 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult CreatePerson(Person person)
         {
-            int personId = dalPersonManagement.CreatePerson(person.Name, person.LastName, person.ProfilePictureURL);
+            int personId = dalPersonManagement.CreatePerson(person.Name, person.LastName);
             string url = "/Financial/CreateBankDetails" + "?personId=" + personId;
             return Redirect(url);
         }
@@ -184,24 +191,24 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult CreateUser(User user, int personId)
         {
-                dalPersonManagement.CreateUser(
-                user.Email,
-                user.BirthDate,
-                user.PhoneNumber,
-                user.IdentityCardNumber,
-                user.DrivingPermitNumber,
-                user.UserRating,
-                user.SelectEcoStatusType,
-                user.BankDetailsId,
-                user.BillingAddressId,
-                user.PersonId,
-                user.VehiculeId,
-                user.EcoWalletId,
-                user.AccountId
-                );
+            dalPersonManagement.CreateUser(
+            user.Email,
+            user.BirthDate,
+            user.PhoneNumber,
+            user.IdentityCardNumber,
+            user.DrivingPermitNumber,
+            user.UserRating,
+            user.SelectEcoStatusType,
+            user.BankDetailsId,
+            user.BillingAddressId,
+            user.PersonId,
+            user.VehiculeId,
+            user.EcoWalletId,
+            user.AccountId
+            );
 
-                string url = "/Account/CreateAccount" + "?personId=" + personId;
-                return Redirect(url);
+            string url = "/Account/CreateAccount" + "?personId=" + personId;
+            return Redirect(url);
         }
 
         //Creating an account based on a user
@@ -213,7 +220,7 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult CreateAccount(Account account, int personId)
         {
-            dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive,account.CreationDate, account.PersonId);
+            dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive, account.CreationDate, account.PersonId);
             return Redirect("/Account/LoginAccount");
         }
 
@@ -225,7 +232,7 @@ namespace EcoCar.Controllers
 
         //Updating Account
         public IActionResult UpdateUser(int? id)
-        
+
         {
             if (id.HasValue)
             {
@@ -243,24 +250,56 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult UpdateUser(User user)
         {
-            dalPersonManagement.UpdateUser(
-                user.Id,
-                user.Email,
-                user.BirthDate,
-                user.PhoneNumber,
-                user.IdentityCardNumber,
-                user.DrivingPermitNumber,
-                user.BankDetailsId,
-                user.BillingAddressId,
-                user.PersonId,
-                user.VehiculeId,
-                user.EcoWalletId,
-                user.AccountId
-                );
-            dalPersonManagement.UpdatePerson(user.PersonId, user.Person.Name, user.Person.LastName, user.Person.ProfilePictureURL);
-            dalFinancialManagement.UpdateBankDetails(user.BankDetailsId, user.BankDetails.BankName, user.BankDetails.Swift, user.BankDetails.Iban);
-            dalFinancialManagement.UpdateBillingAddress(user.BillingAddressId, user.BillingAddress.AddressLine, user.BillingAddress.City, user.BillingAddress.Region, user.BillingAddress.Country, user.BillingAddress.PostalCode);
-            
+            if (user.Person.ProfilePicture != null)
+            {
+                if (user.Person.ProfilePicture.Length != 0)
+                {
+                    string uploads = Path.Combine(_webEnv.WebRootPath, "images");
+                    string filePath = Path.Combine(uploads, user.Person.ProfilePicture.FileName);
+                    using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        user.Person.ProfilePicture.CopyTo(fileStream);
+                    }
+                    dalPersonManagement.UpdateUser(
+                        user.Id,
+                        user.Email,
+                        user.BirthDate,
+                        user.PhoneNumber,
+                        user.IdentityCardNumber,
+                        user.DrivingPermitNumber,
+                        user.BankDetailsId,
+                        user.BillingAddressId,
+                        user.PersonId,
+                        user.VehiculeId,
+                        user.EcoWalletId,
+                        user.AccountId
+                        );
+                    dalPersonManagement.UpdatePerson(user.PersonId, user.Person.Name, user.Person.LastName, "/images/" + user.Person.ProfilePicture.FileName);
+                    dalFinancialManagement.UpdateBankDetails(user.BankDetailsId, user.BankDetails.BankName, user.BankDetails.Swift, user.BankDetails.Iban);
+                    dalFinancialManagement.UpdateBillingAddress(user.BillingAddressId, user.BillingAddress.AddressLine, user.BillingAddress.City, user.BillingAddress.Region, user.BillingAddress.Country, user.BillingAddress.PostalCode);
+
+                }
+            }
+            else
+            {
+                dalPersonManagement.UpdateUser(
+                    user.Id,
+                    user.Email,
+                    user.BirthDate,
+                    user.PhoneNumber,
+                    user.IdentityCardNumber,
+                    user.DrivingPermitNumber,
+                    user.BankDetailsId,
+                    user.BillingAddressId,
+                    user.PersonId,
+                    user.VehiculeId,
+                    user.EcoWalletId,
+                    user.AccountId
+                    );
+                dalPersonManagement.UpdatePerson(user.PersonId, user.Person.Name, user.Person.LastName, user.Person.ProfilePicturePath);
+                dalFinancialManagement.UpdateBankDetails(user.BankDetailsId, user.BankDetails.BankName, user.BankDetails.Swift, user.BankDetails.Iban);
+                dalFinancialManagement.UpdateBillingAddress(user.BillingAddressId, user.BillingAddress.AddressLine, user.BillingAddress.City, user.BillingAddress.Region, user.BillingAddress.Country, user.BillingAddress.PostalCode);
+            }
             return Redirect("/Account/UserProfilePersonal");
         }
         public IActionResult UserProfile(int id)
@@ -274,8 +313,8 @@ namespace EcoCar.Controllers
                 CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices(id),
                 ParcelServices = dalServiceManagement.GetAllUserParcelServices(id)
             };
-            
-            return View(viewModel) ;
+
+            return View(viewModel);
         }
 
 
@@ -288,14 +327,16 @@ namespace EcoCar.Controllers
                 {
                     User = dalPersonManagement.GetUser(userId),
                     Services = dalServiceManagement.GetAllServices(),
-                    Account = dalPersonManagement.GetAccount(userId),
+                    Account = dalPersonManagement.GetUserAccount(userId),
+                    Vehicule = dalPersonManagement.GetUserVehicule(userId),
+                    EcoWallet = dalFinancialManagement.GetUserEcoWallet(userId),
                     CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices(userId),
                     CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices(userId),
                     ParcelServices = dalServiceManagement.GetAllUserParcelServices(userId)
                 };
                 return View(accountViewModel);
             }
-          
+
         }
 
         public ActionResult ForgotPassword()
@@ -345,7 +386,7 @@ namespace EcoCar.Controllers
             };
             return View();
         }
-        
+
         [HttpPost]
         public IActionResult CreateVehicule(Vehicule vehicule)
         {

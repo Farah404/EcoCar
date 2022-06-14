@@ -1,6 +1,6 @@
 ﻿@using static EcoCar.Models.ServiceManagement.CarRentalService
 
-@model List<EcoCar.Models.ServiceManagement.CarRentalService>
+@model EcoCar.ViewModels.ServiceViewModel
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Reserver une prestation de location de véhicule";
@@ -22,11 +22,7 @@
                     <button class="btn btn-primary center-block" type="submit">Réserver la prestation</button>
                 }
                 <br />
-                @foreach (var carRentalService in Model)
-                {
-
-                    <button onclick="location.href='/Account/UserProfile/@carRentalService.Service.UserProviderId'" class="btn btn-success center-block">Consulter le profil de l'EcoMembre</button>
-                }
+                    <button onclick="location.href='/Account/UserProfile/@Model.CarRentalService.Service.UserProviderId'" class="btn btn-success center-block">Consulter le profil de l'EcoMembre</button>
             </div>
             <div class="col-md-6">
                 <div class="table-responsive">
@@ -40,10 +36,7 @@
                                     Date et heure de départ
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
-                                    {
-                                        <p>@carRentalService.Service.Start</p>
-                                    }
+                                        <p>@Model.CarRentalService.Service.Start</p>
                                 </td>
                             </tr>
                             <tr>
@@ -53,10 +46,7 @@
                                     Date et heure de d'arrivée'
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
-                                    {
-                                        <p>@carRentalService.Service.End</p>
-                                    }
+                                        <p>@Model.CarRentalService.Service.End</p>
                                 </td>
                             </tr>
                             <tr>
@@ -65,10 +55,7 @@
                                     KeyPickUpAddress
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
-                                    {
-                                        <p>@carRentalService.KeyPickUpAddress</p>
-                                    }
+                                        <p>@Model.CarRentalService.KeyPickUpAddress</p>
                                 </td>
                             </tr>
 
@@ -78,10 +65,7 @@
                                     KeyDropOffAddress
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
-                                    {
-                                        <p>@carRentalService.KeyDropOffAddress</p>
-                                    }
+                                        <p>@Model.CarRentalService.KeyDropOffAddress</p>
                                 </td>
                             </tr>
 
@@ -91,10 +75,7 @@
                                     Vehicule.Brand
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
-                                    {
-                                        <p>@carRentalService.Vehicule.Brand</p>
-                                    }
+                                        <p>@Model.CarRentalService.Vehicule.Brand</p>
                                 </td>
                             </tr>
 
@@ -104,10 +85,7 @@
                                     Vehicule.Model
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
-                                    {
-                                        <p>@carRentalService.Vehicule.Model</p>
-                                    }
+                                        <p>@Model.CarRentalService.Vehicule.Model</p>
                                 </td>
                             </tr>
                             <tr>
@@ -116,10 +94,7 @@
                                     Vehicule.Hybrid
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
-                                    {
-                                        <p>@carRentalService.Vehicule.Hybrid</p>
-                                    }
+                                        <p>@Model.CarRentalService.Vehicule.Hybrid</p>
                                 </td>
                             </tr>
 
@@ -129,10 +104,7 @@
                                     Vehicule.Electric
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
-                                    {
-                                        <p>@carRentalService.Vehicule.Electric</p>
-                                    }
+                                        <p>@Model.CarRentalService.Vehicule.Electric</p>
                                 </td>
                             </tr>
 
@@ -142,10 +114,7 @@
                                     Vehicule.AvailableSeats
                                 </td>
                                 <td class="text-success">
-                                    @foreach (var carRentalService in Model)
-                                    {
-                                        <p>@carRentalService.Vehicule.AvailableSeats</p>
-                                    }
+                                        <p>@Model.CarRentalService.Vehicule.AvailableSeats</p>
                                 </td>
                             </tr>
                         </tbody>

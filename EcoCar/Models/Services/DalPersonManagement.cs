@@ -34,9 +34,9 @@ namespace EcoCar.Models.Services
         }
 
         //Create Person
-        public int CreatePerson(string name, string lastName, string profilePictureURL)
+        public int CreatePerson(string name, string lastName)
         {
-            Person person = new Person() { Name = name, LastName = lastName, ProfilePictureURL = profilePictureURL };
+            Person person = new Person() { Name = name, LastName = lastName};
             _bddContext.People.Add(person);
             _bddContext.SaveChanges();
             return person.Id;
@@ -49,7 +49,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update Person
-        public void UpdatePerson(int id, string name, string lastName, string profilePictureURL)
+        public void UpdatePerson(int id, string name, string lastName, string profilePicturePath)
         {
             Person person = _bddContext.People.Find(id);
 
@@ -58,7 +58,7 @@ namespace EcoCar.Models.Services
                 person.Id = id;
                 person.Name = name;
                 person.LastName = lastName;
-                person.ProfilePictureURL = profilePictureURL;
+                person.ProfilePicturePath = profilePicturePath;
                 _bddContext.SaveChanges();
             }
         }
@@ -305,9 +305,20 @@ namespace EcoCar.Models.Services
             return accounts;
         }
 
+        public Account GetUserAccount(int id)
+        {
+
+            User user = _bddContext.Users.Find(id);
+            Account account = _bddContext.Accounts.Include(e => e.Person).FirstOrDefault(e => e.Id == user.AccountId);
+            return account;
+        }
+
         public Account GetAccount(int id)
         {
-            return this._bddContext.Accounts.Include(e => e.Person).FirstOrDefault(e => e.Id == id);
+
+           
+            return _bddContext.Accounts.Include(e => e.Person).FirstOrDefault(e => e.Id == id);
+            
         }
 
         public Account GetAccount(string idStr)
@@ -407,9 +418,11 @@ namespace EcoCar.Models.Services
             return _bddContext.Vehicules.Include(e => e.Insurance).ToList();
         }
 
-        public Vehicule GetVehicules(int id)
+        public Vehicule GetUserVehicule(int id)
         {
-            return _bddContext.Vehicules.Include(e => e.Insurance).FirstOrDefault(e => e.Id == id);
+            User user = _bddContext.Users.Find(id);
+            Vehicule vehicule = _bddContext.Vehicules.Include(e => e.Insurance).FirstOrDefault(e => e.Id == user.VehiculeId);
+            return vehicule;
         }
 
         //Create Vehicule

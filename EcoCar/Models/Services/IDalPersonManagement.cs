@@ -9,8 +9,8 @@ namespace EcoCar.Models.Services
     {
         //Person
         List<Person> GetAllPeople();
-        int CreatePerson(string name, string lastName, string profilePictureURL);
-        void UpdatePerson(int id, string name, string lastName, string profilePictureURL);
+        int CreatePerson(string name, string lastName);
+        void UpdatePerson(int id, string name, string lastName, string ProfilePicturePath);
         void DeletePerson (int id);
 
         //-------------------------------------------------------------------------------------------------
@@ -46,12 +46,14 @@ namespace EcoCar.Models.Services
         Account Authentify(string username, string passwordClear);
         Account GetAccount(int id);
         Account GetAccount(string idStr);
+        Account GetUserAccount(int id);
 
         //-------------------------------------------------------------------------------------------------
 
 
         //Vehicule
         List<Vehicule> GetAllVehicules();
+        Vehicule GetUserVehicule(int id);
         int CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId);
         void UpdateVehicule(int id, string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId);
         void DeleteVehicule(int id);

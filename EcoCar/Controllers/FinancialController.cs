@@ -1,8 +1,9 @@
 ﻿using EcoCar.Models.FinancialManagement;
 using EcoCar.Models.Services;
+using EcoCar.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
+using System.Security.Claims;
 
 namespace EcoCar.Controllers
 {
@@ -64,11 +65,39 @@ namespace EcoCar.Controllers
         #region Ecostore
         public ActionResult EcoStore()
         {
-            List<EcoStore> ecoStores = dalFinancialManagement.GetAllEcoStores();
-            return View(ecoStores.ToList());
+            FinancialViewModel financialViewModel = new FinancialViewModel
+            {
+                EcoStore = dalFinancialManagement.GetEcoStore(1)
+            };
+            
+            return View(financialViewModel);
         }
+
+        [HttpPost]
+        public IActionResult EcoStore(int quantityBatchOne, int quantityBatchTwo,int quantityBatchThree, int quantityMonthlySubscription,int quantityTrimestrialSubscription, int quantitySemestrialSubscription)  
+        {
+           
+            
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                ShoppingCart shoppingCart = dalFinancialManagement.GetUserShoppingCart(userId);
+                dalFinancialManagement.UpdateShoppingCart(
+                    shoppingCart.Id,
+                    quantityBatchOne,
+                    quantityBatchTwo,
+                    quantityBatchThree,
+                    quantityMonthlySubscription,
+                    quantityTrimestrialSubscription,
+                    quantitySemestrialSubscription,
+                    shoppingCart.TotalPriceEuros,
+                    shoppingCart.UserId);
+                return Redirect("/Financial/EcoStore");
+            
+        }
+
+
         public IActionResult UpdateEcoStore()
         {
+
             return View();
         }
         #endregion
@@ -90,8 +119,22 @@ namespace EcoCar.Controllers
         {
             return View();
         }
-        #endregion 
+        #endregion
 
+        #region Shopping Cart
+        public ActionResult ShoppingCart()
+        {
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            FinancialViewModel financialViewModel = new FinancialViewModel
+            {
+                ShoppingCart = dalFinancialManagement.GetUserShoppingCart(userId),
+                EcoWallet = dalFinancialManagement.GetUserEcoWallet(userId),
+                EcoStore = dalFinancialManagement.GetEcoStore(1)
 
+            };
+                
+            return View(financialViewModel);
+        }
+        #endregion
     }
 }

@@ -10,6 +10,8 @@
     @*Users List Display*@
     <div class="table-responsive">
         <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Utilisateurs</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher un utilisateur">
+        <br />
+        <br />
         <table class="table" id="userTable">
             <thead>
 
@@ -17,12 +19,12 @@
                     <th>Nom d'utilisateur</th>
                     <th>Nom</th>
                     <th>Prénom</th>
-                    <th>EcoRating</th>
                     <th>EcoStatus</th>
                     <th>Email</th>
                     <th>EcoMembre depuis</th>
                     <th>Montant EcoCoins</th>
                     <th>Formule d'abonnement</th>
+                    <th>Actif</th>
                     <th>EcoSuspension</th>
                 </tr>
             </thead>
@@ -33,21 +35,21 @@
                     <td><a href="/account/userprofile/@users.Id">@users.Account.Username</a></td>
                     <td>@users.Person.LastName</td>
                     <td>@users.Person.Name</td>
-                    <td>@users.UserRating</td>
                     <td>@users.SelectEcoStatusType</td>
                     <td>@users.Email</td>
                     <td>@users.Account.CreationDate.ToShortDateString()</td>
                     <td>@users.EcoWallet.EcoCoinsAmount</td>
                     <td>@users.EcoWallet.Subscription</td>
-                    <td><a href="/Account/UserProfilePersonalByAdmin/@users.Id" type="submit"> Détails</a></td> 
+                    <td>@users.Account.IsActive</td>
+                    <td><a href="/Account/UserProfilePersonalByAdmin/@users.Id">Détails</a></td> 
                 </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
-
-<div class="container-fluid">
+<br />
+<div class="container-fluid bg-grey">
     @*Services List Display*@
     <div class="table-responsive">
         <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Prestations proposées</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation">
@@ -70,7 +72,10 @@
                     <td>@carPoolingService.Service.Start.ToShortDateString()</td>
                     <td>@carPoolingService.Service.SelectServiceType</td>
                     <td>@carPoolingService.Service.ReferenceNumber</td>
-                    <td>@carPoolingService.Service.UserProviderId</td>
+                        @foreach (var user in Model.Users.Where(u => u.Id == carPoolingService.Service.UserProviderId))
+                        {
+                            <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
+                        }
                     <td>@carPoolingService.Service.IsAvailable</td>
                     <td>lien</td>
 
@@ -82,7 +87,10 @@
                     <td>@carRentalService.Service.Start.ToShortDateString()</td>
                     <td>@carRentalService.Service.SelectServiceType</td>
                     <td>@carRentalService.Service.ReferenceNumber</td>
-                    <td>@carRentalService.Service.UserProviderId</td>
+                    @foreach (var user in Model.Users.Where(u => u.Id == carRentalService.Service.UserProviderId))
+                        {
+                            <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
+                        }
                     <td>@carRentalService.Service.IsAvailable</td>
                     <td>lien</td>
 
@@ -94,7 +102,10 @@
                     <td>@parcelService.Service.Start.ToShortDateString()</td>
                     <td>@parcelService.Service.SelectServiceType</td>
                     <td>@parcelService.Service.ReferenceNumber</td>
-                    <td>@parcelService.Service.UserProviderId</td>
+                    @foreach (var user in Model.Users.Where(u => u.Id == parcelService.Service.UserProviderId))
+                        {
+                            <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
+                        }
                     <td>@parcelService.Service.IsAvailable</td>
                     <td>lien</td>
 
@@ -104,7 +115,7 @@
         </table>
     </div>
 </div>
-
+<br />
 <div class="container-fluid bg-grey">
     @*Requests List Display*@
     <div class="table-responsive">
@@ -127,7 +138,10 @@
                     <td>@carPoolingService.Service.Start.ToShortDateString()</td>
                     <td>@carPoolingService.Service.SelectServiceType</td>
                     <td>@carPoolingService.Service.ReferenceNumber</td>
-                    <td>@carPoolingService.Service.UserProviderId</td>
+                    @foreach (var user in Model.Users.Where(u => u.Id == carPoolingService.Service.UserProviderId))
+                        {
+                            <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
+                        }
                     <td>@carPoolingService.Service.IsAvailable</td>
                     <td>lien</td>
                 </tr>
@@ -138,7 +152,10 @@
                     <td>@carRentalService.Service.Start.ToShortDateString()</td>
                     <td>@carRentalService.Service.SelectServiceType</td>
                     <td>@carRentalService.Service.ReferenceNumber</td>
-                    <td>@carRentalService.Service.UserProviderId</td>
+                    @foreach (var user in Model.Users.Where(u => u.Id == carRentalService.Service.UserProviderId))
+                        {
+                            <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
+                        }
                     <td>@carRentalService.Service.IsAvailable</td>
                     <td>lien</td>
                 </tr>
@@ -149,7 +166,10 @@
                     <td>@parcelService.Service.Start.ToShortDateString()</td>
                     <td>@parcelService.Service.SelectServiceType</td>
                     <td>@parcelService.Service.ReferenceNumber</td>
-                    <td>@parcelService.Service.UserProviderId</td>
+                    @foreach (var user in Model.Users.Where(u => u.Id == parcelService.Service.UserProviderId))
+                        {
+                            <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
+                        }
                     <td>@parcelService.Service.IsAvailable</td>
                     <td>lien</td>
                 </tr>
@@ -158,8 +178,8 @@
         </table>
     </div>
 </div>
-
-<div class="container-fluid ">
+<br />
+<div class="container-fluid bg-grey">
     @*Purchases List Display*@
     <div class="table-responsive">
         <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">EcoStore</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher un achat">

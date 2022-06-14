@@ -344,3 +344,8 @@ hr.solid {
     background-color: #fff !important;
     color: #93bb83;
 }*/
+.verticalcenter {
+    position: relative;
+    top: 50%;
+    transform: translateY(30%);
+}

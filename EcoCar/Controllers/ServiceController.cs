@@ -260,49 +260,52 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult ReserveCarPoolingService(Reservation reservation, int id)
         {
-            CarPoolingService carPoolingService = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
-            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            if (carPoolingService.AvailableSeats != 0)
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
-                dalServiceManagement.CreateReservation(
-                carPoolingService.Service.Id,
-                userId
-                );
-                dalServiceManagement.UpdateCarPoolingService(
-                    carPoolingService.Id,
-                    carPoolingService.SelectCarPoolingType,
-                    (carPoolingService.AvailableSeats) - 1,
-                    carPoolingService.PetsAllowed,
-                    carPoolingService.SmokingAllowed,
-                    carPoolingService.MusicAllowed,
-                    carPoolingService.ChattingAllowed,
-                    carPoolingService.VehiculeId,
-                    carPoolingService.TrajectoryId,
-                    carPoolingService.ServiceId);
-                CarPoolingService carPoolingServiceUpdated = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
-                
-                if (carPoolingServiceUpdated.AvailableSeats == 0)
+                CarPoolingService carPoolingService = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                if (carPoolingService.AvailableSeats != 0)
                 {
-                    dalServiceManagement.ServiceAvailability(
-                    carPoolingService.Service.Id
+                    dalServiceManagement.CreateReservation(
+                    carPoolingService.Service.Id,
+                    userId
                     );
-                    string url = "/Home/Index";
-                    return Redirect(url);
+                    dalServiceManagement.UpdateCarPoolingService(
+                        carPoolingService.Id,
+                        carPoolingService.SelectCarPoolingType,
+                        (carPoolingService.AvailableSeats) - 1,
+                        carPoolingService.PetsAllowed,
+                        carPoolingService.SmokingAllowed,
+                        carPoolingService.MusicAllowed,
+                        carPoolingService.ChattingAllowed,
+                        carPoolingService.VehiculeId,
+                        carPoolingService.TrajectoryId,
+                        carPoolingService.ServiceId);
+                    CarPoolingService carPoolingServiceUpdated = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
+
+                    if (carPoolingServiceUpdated.AvailableSeats == 0)
+                    {
+                        dalServiceManagement.ServiceAvailability(
+                        carPoolingService.Service.Id
+                        );
+                        string url = "/Home/Index";
+                        return Redirect(url);
+                    }
+                    else
+                    {
+                        string url = "/Home/Index";
+                        return Redirect(url);
+                    }
                 }
+
                 else
                 {
-                    string url = "/Home/Index";
-                    return Redirect(url);
+                    return Redirect("/Home/Index");
+
                 }
             }
-
-            else
-            {
-                return Redirect("/Home/Index");
-
-            }
-
+            return Redirect("/Account/LoginAccount");
         }
         #endregion
 
@@ -317,39 +320,43 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult ReserveParcelService(Reservation reservation, int id)
         {
-            ParcelService parcelService = dalServiceManagement.GetAllParcelServices().FirstOrDefault(x => x.Id == id);
-            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            if (parcelService.Service.IsAvailable != false)
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
-                dalServiceManagement.CreateReservation(
-                    parcelService.Service.Id,
-                    userId
-                    );
+                ParcelService parcelService = dalServiceManagement.GetAllParcelServices().FirstOrDefault(x => x.Id == id);
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                dalServiceManagement.UpdateParcelService(
-                    parcelService.Id,
-                    parcelService.BarCode,
-                    parcelService.WeightKilogrammes,
-                    parcelService.AtypicalVolume,
-                    parcelService.Fragile,
-                    parcelService.TrajectoryId,
-                    parcelService.ServiceId,
-                    parcelService.VehiculeId
-                    );
+                if (parcelService.Service.IsAvailable != false)
+                {
+                    dalServiceManagement.CreateReservation(
+                        parcelService.Service.Id,
+                        userId
+                        );
 
-                dalServiceManagement.ServiceAvailability(
-                    parcelService.Service.Id
-                    );
+                    dalServiceManagement.UpdateParcelService(
+                        parcelService.Id,
+                        parcelService.BarCode,
+                        parcelService.WeightKilogrammes,
+                        parcelService.AtypicalVolume,
+                        parcelService.Fragile,
+                        parcelService.TrajectoryId,
+                        parcelService.ServiceId,
+                        parcelService.VehiculeId
+                        );
+
+                    dalServiceManagement.ServiceAvailability(
+                        parcelService.Service.Id
+                        );
 
 
-                string url = "/Home/Index";
-                return Redirect(url);
+                    string url = "/Home/Index";
+                    return Redirect(url);
+                }
+                else
+                {
+                    return Redirect("/Service/SearchService");
+                }
             }
-            else
-            {
-                return Redirect("/Service/SearchService");
-            }
+            return Redirect("/Account/LoginAccount");
         }
         #endregion
 
@@ -365,35 +372,39 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult ReserveCarRentalService(Reservation reservation, int id)
         {
-            CarRentalService carRentalService = dalServiceManagement.GetAllCarRentalServices().FirstOrDefault(x => x.Id == id);
-            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            if (carRentalService.Service.IsAvailable != false)
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
-                dalServiceManagement.CreateReservation(
-                    carRentalService.Service.Id,
-                    userId
-                    );
+                CarRentalService carRentalService = dalServiceManagement.GetAllCarRentalServices().FirstOrDefault(x => x.Id == id);
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                dalServiceManagement.UpdateCarRentalService(
-                    carRentalService.Id,
-                    carRentalService.KeyPickUpAddress,
-                    carRentalService.KeyDropOffAddress,
-                    carRentalService.VehiculeId,
-                    carRentalService.ServiceId
-                    );
+                if (carRentalService.Service.IsAvailable != false)
+                {
+                    dalServiceManagement.CreateReservation(
+                        carRentalService.Service.Id,
+                        userId
+                        );
 
-                dalServiceManagement.ServiceAvailability(
-                    carRentalService.Service.Id
-                    );
+                    dalServiceManagement.UpdateCarRentalService(
+                        carRentalService.Id,
+                        carRentalService.KeyPickUpAddress,
+                        carRentalService.KeyDropOffAddress,
+                        carRentalService.VehiculeId,
+                        carRentalService.ServiceId
+                        );
 
-                string url = "/Home/Index";
-                return Redirect(url);
+                    dalServiceManagement.ServiceAvailability(
+                        carRentalService.Service.Id
+                        );
+
+                    string url = "/Home/Index";
+                    return Redirect(url);
+                }
+                else
+                {
+                    return Redirect("/Service/SearchService");
+                }
             }
-            else
-            {
-                return Redirect("/Service/SearchService");
-            }
+            return Redirect("/Account/LoginAccount");
         }
         #endregion
 

@@ -25,6 +25,7 @@ namespace EcoCar.Controllers
             ServiceViewModel serviceViewModel = new ServiceViewModel
                 {
                 Users = dalPersonManagement.GetAllUsers(),
+                Accounts = dalPersonManagement.GetAllAccounts(),
                 CarPoolingServices = dalServiceManagement.GetAllCarPoolingServices(),
                 ParcelServices = dalServiceManagement.GetAllParcelServices(),
                 CarRentalServices = dalServiceManagement.GetAllCarRentalServices()

@@ -24,6 +24,7 @@ namespace EcoCar.ViewModels
 
         public User User { get; set; }
         public Account Account { get; set; }
+        public List<Account>Accounts { get; set; }
 
         public List<User> Users { get; set; }
 

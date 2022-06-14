@@ -1,0 +1,39 @@
+﻿@model EcoCar.Models.ServiceManagement.CarRentalService
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Mettre son véhicule en location";
+}
+
+
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Proposer un service</h4>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.Label("Lieu de récupération initial des clés") <br>
+                    @Html.TextBoxFor(model => model.KeyPickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.KeyPickUpAddress)
+                    <br>
+
+
+                    @Html.Label("Lieu de retour des clés") <br>
+                    @Html.TextBoxFor(model => model.KeyDropOffAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.KeyDropOffAddress)
+                    <br>
+                    @Html.HiddenFor(model => model.VehiculeId)
+                    @Html.HiddenFor(model => model.ServiceId)
+                    <br>
+                    <button class="btn btn-success" type="submit">Soumettre</button>
+
+                }
+
+            </div>
+            <div class="col-md-6">
+                <img style="width:400px;" title="" src="~/Images/CarRental.png">
+            </div>
+        </div>
+    </div>
+</div>

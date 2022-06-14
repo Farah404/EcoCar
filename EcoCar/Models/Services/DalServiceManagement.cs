@@ -27,6 +27,11 @@ namespace EcoCar.Models.Services
             List<Service> services = _bddContext.Services.Include(s=>s.UserProvider).ToList();
             return services;
         }
+        public List<Service> GetAllUserServices(int userId)
+        {
+            List<Service> servicesOfUser = _bddContext.Services.Include(s => s.UserProvider).Where(s=>s.Id==userId).ToList();
+            return servicesOfUser;
+        }
 
         public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int userProviderId)
         {
@@ -38,7 +43,7 @@ namespace EcoCar.Models.Services
                 IsAvailable = true,
                 Start = start,
                 End = end,
-                IsRequest = false,
+                IsRequest = isRequest,
                 SelectServiceType = selectServiceType,
                 UserProvider = _bddContext.Users.First(s => s.Id == userProviderId)
             };
@@ -115,6 +120,11 @@ namespace EcoCar.Models.Services
         public List<CarPoolingService> GetAllCarPoolingServices()
         {
             return _bddContext.CarPoolingServices.Include(e => e.Trajectory).Include(e => e.Service).ToList();
+        }
+        public List<CarPoolingService> GetAllUserCarPoolingServices(int userId)
+        {
+            List<CarPoolingService> userCarPoolingServices = _bddContext.CarPoolingServices.Include(e => e.Trajectory).Include(e => e.Service).Where(e=>e.Service.UserProviderId==userId).ToList();
+            return userCarPoolingServices;
         }
 
         public CarPoolingService GetCarPoolingService(int id)
@@ -210,7 +220,10 @@ namespace EcoCar.Models.Services
         {
             return _bddContext.CarRentalServices.Include(e => e.Vehicule).Include(e => e.Service).ToList();
         }
-
+        public List<CarRentalService> GetAllUserCarRentalServices(int userId)
+        {
+            return _bddContext.CarRentalServices.Include(e => e.Vehicule).Include(e => e.Service).Where(e=>e.Service.UserProviderId==userId).ToList();
+        }
         public CarRentalService GetCarRentalService(int id)
         {
             return _bddContext.CarRentalServices.Include(e => e.Vehicule).Include(e => e.Service).FirstOrDefault(e => e.Id == id);
@@ -275,7 +288,10 @@ namespace EcoCar.Models.Services
         {
             return _bddContext.ParcelServices.Include(e => e.Trajectory).Include(e => e.Service).ToList();
         }
-
+        public List<ParcelService> GetAllUserParcelServices(int userId)
+        {
+            return _bddContext.ParcelServices.Include(e => e.Trajectory).Include(e => e.Service).Where(e=>e.Service.UserProviderId==userId).ToList();
+        }
         public ParcelService GetParcelService(int id)
         {
             return _bddContext.ParcelServices.Include(e => e.Trajectory).Include(e => e.Service).FirstOrDefault(e => e.Id == id);

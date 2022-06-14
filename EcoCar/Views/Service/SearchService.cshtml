@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var carPoolingService in Model.CarPoolingServices)
+                @foreach (var carPoolingService in Model.CarPoolingServices.Where(s => s.Service.IsRequest == false))
                 {
                     <tr>
                         <td>@carPoolingService.Service.Start.ToShortDateString()</td>
@@ -43,7 +43,7 @@
                         <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
-                @foreach (var carRentalService in Model.CarRentalServices)
+                @foreach (var carRentalService in Model.CarRentalServices.Where(s => s.Service.IsRequest == false))
                 {
                     <tr>
                         <td>@carRentalService.Service.Start.ToShortDateString()</td>
@@ -61,7 +61,7 @@
                    
                 }
 
-                @foreach (var parcelService in Model.ParcelServices)
+                @foreach (var parcelService in Model.ParcelServices.Where(s => s.Service.IsRequest == false))
                 {
                     <tr>
                         <td>@parcelService.Service.Start.ToShortDateString()</td>
@@ -117,7 +117,7 @@
                              <td>@user.Account.Username</td>
                         }
                         <td>@carPoolingServiceRequest.Service.IsAvailable</td>
-                        <td> <a href="/Service/ReserveCarPoolingService/@carPoolingServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        <td> <a href="/Service/RespondToCarPoolRequest/@carPoolingServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
                 @foreach (var carRentalServiceRequest in Model.CarRentalServices.Where(s => s.Service.IsRequest == true))
@@ -132,7 +132,7 @@
                              <td>@user.Account.Username</td>
                         }
                         <td>@carRentalServiceRequest.Service.IsAvailable</td>
-                        <td> <a href="/Service/ReserveCarRentalService/@carRentalServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        <td> <a href="/Service/RespondToCarRentalRequest/@carRentalServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
 
                    
@@ -150,7 +150,7 @@
                              <td>@user.Account.Username</td>
                         }
                         <td>@parcelServiceRequest.Service.IsAvailable</td>
-                    <td> <a href="/Service/ReserveParcelService/@parcelServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                    <td> <a href="/Service/RespondToParcelRequest/@parcelServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
 

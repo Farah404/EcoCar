@@ -133,9 +133,9 @@ namespace EcoCar.Controllers
                     User = dalPersonManagement.GetUser((int)id),
                     Services = dalServiceManagement.GetAllServices(),
                     Account = dalPersonManagement.GetAccount((int)id),
-                    CarPoolingServices = dalServiceManagement.GetAllCarPoolingServices(),
-                    CarRentalServices = dalServiceManagement.GetAllCarRentalServices(),
-                    ParcelServices = dalServiceManagement.GetAllParcelServices()
+                    CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices((int)id),
+                    CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices((int)id),
+                    ParcelServices = dalServiceManagement.GetAllUserParcelServices((int)id)
                 };
                 return View(accountViewModel);
             }
@@ -270,9 +270,9 @@ namespace EcoCar.Controllers
                 User = dalPersonManagement.GetUser(id),
                 Services = dalServiceManagement.GetAllServices(),
                 Account = dalPersonManagement.GetAccount(id),
-                CarPoolingServices = dalServiceManagement.GetAllCarPoolingServices(),
-                CarRentalServices = dalServiceManagement.GetAllCarRentalServices(),
-                ParcelServices = dalServiceManagement.GetAllParcelServices()
+                CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices(id),
+                CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices(id),
+                ParcelServices = dalServiceManagement.GetAllUserParcelServices(id)
             };
             
             return View(viewModel) ;
@@ -289,9 +289,9 @@ namespace EcoCar.Controllers
                     User = dalPersonManagement.GetUser(userId),
                     Services = dalServiceManagement.GetAllServices(),
                     Account = dalPersonManagement.GetAccount(userId),
-                    CarPoolingServices = dalServiceManagement.GetAllCarPoolingServices(),
-                    CarRentalServices = dalServiceManagement.GetAllCarRentalServices(),
-                    ParcelServices = dalServiceManagement.GetAllParcelServices()
+                    CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices(userId),
+                    CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices(userId),
+                    ParcelServices = dalServiceManagement.GetAllUserParcelServices(userId)
                 };
                 return View(accountViewModel);
             }

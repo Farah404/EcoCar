@@ -1,0 +1,65 @@
+﻿@using static EcoCar.Models.ServiceManagement.CarPoolingService
+@model EcoCar.Models.ServiceManagement.CarPoolingService
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Proposer une prestation de covoiturage";
+}
+
+
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Proposer un service</h4>
+             
+                @using (Html.BeginForm())
+                {
+                    @Html.Label("Type de covoiturage") <br>
+                    @Html.DropDownListFor(model => model.SelectCarPoolingType, new SelectList(Enum.GetValues(typeof(CarPoolingType))),"--Selectionnez le type de covoiturage--")
+                    @Html.ValidationMessageFor(model => model.SelectCarPoolingType)
+                    <br>
+
+
+                    @Html.Label("Sièges disponibles")  <br>
+                    @Html.TextBoxFor(model => model.AvailableSeats, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.AvailableSeats)
+                    <br>
+
+
+                    @Html.Label("Animaux de compagnie")<br>
+                    @Html.CheckBoxFor(model => model.PetsAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.PetsAllowed) 
+                    <br>
+
+
+                    @Html.Label("Autorisation de fumer") <br>
+                    @Html.CheckBoxFor(model => model.SmokingAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.SmokingAllowed)
+                    <br>
+
+                    @Html.Label("Musique forte")<br>
+                    @Html.CheckBoxFor(model => model.MusicAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.MusicAllowed)
+                    <br>
+
+
+                    @Html.Label("Discussion")<br>
+                    @Html.CheckBoxFor(model => model.ChattingAllowed, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.ChattingAllowed)
+                    <br>
+
+                    @Html.HiddenFor(model => model.ServiceId)
+                    @Html.HiddenFor(model => model.TrajectoryId)
+                    @Html.HiddenFor(model => model.VehiculeId)
+
+                    <br>
+                    <button class="btn btn-success" type="submit">Soumettre</button>
+                }
+
+            </div>
+            <div class="col-md-6">
+                <img alt="" style="width:80%;" title="" src="~/Images/Covoiturage.png">
+            </div>
+        </div>
+    </div>
+</div>

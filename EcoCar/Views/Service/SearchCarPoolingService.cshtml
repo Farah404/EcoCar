@@ -1,59 +1,97 @@
 ﻿
-@*@using EcoCar.Models.ServiceManagement*@
-@*@model IEnumerable<CarPoolingService>*@
-@*@model EcoCar.Models.ServiceManagement.Trajectory*@
+@model List<EcoCar.Models.ServiceManagement.CarPoolingService>
+
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "EcoCar Covoiturage";
 }
-        
-        <form class="form-inline"> 
-            <div class="formHalf headForms  floatLeft inlineElements"> 
-                <input type="text" class="form-control" size="10" placeholder="Départ" required> 
-                 <input type="text" class="form-control" size="10" placeholder="Destination" required> 
-                 <input type="date" class="form-control" size="10" placeholder="Quand?" required> 
-                 <button type="button" class="btn btn-success">Rechercher</button> 
-            </div> 
-        </form>     
+   
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Trouver un covoiturage</h4>
 
+ <form action = "/service/SearchCarPoolingService" method="get">
 
-        <form action = "/service/SearchCarpoolingService" method="get">
-				<div id = "choix_typeService"><label> Rechercher par type de trajet : </label> <br/>  
-					<select name="ServiceType" onChange = "submit()"> 
+    <div> 
+			
+				 <label for="AvailableSeats">Nombre de sièges disponibles:</label>
+				<input type="text" name="Siege" value="" />
+		
+		
+      </div>            
 
-                        <option value ="All">Tous</option> 
+      
+    
+   <div id = "choix_typeService">
+                <label for="Selection">Vos préférences:</label></br>
+				 <input type="checkbox" name="AnimauxDeCompagnie">  
+                 <label for="PetsAllowed">Animaux de compagnie</label> </br>
+                 <input type="checkbox" name="AutorisationDeFumer">  
+                 <label for="SmokingAllowed">Autorisation de fumer</label> </br>
+                 <input type="checkbox" name="MusiqueForte">  
+                 <label for="MusicAllowed">Musique forte</label> </br>
+                 <input type="checkbox" name="Discussion">  
+                 <label for="ChattingAllowed">Discussion</label> </br>
+
+                 <label for="Selection">Trajet:</label></br>
+                 <input type="checkbox" name="Régulier">  
+                 <label for="Regular">Regulier</label> </br>
+                 <input type="checkbox" name="Ponctuel">  
+                 <label for="Punctual">Ponctuel</label> </br>
+    </div>
+
+				<div id = "choix_typeService"><label> Type de covoiturage : </label> <br/>  
+@*					<select name="selection" onChange = "submit()"> 
+*@                     <select name="selection"> 
+						<option value ="All">Tous</option> 
                         <option value ="HomeToWork">Domicile-Travail</option>
                         <option value ="HomeToSchool">Domicile-Ecole/Université</option>
                         <option value ="Events">Evénement</option>
                          <option value ="Travel">Voyage</option>
 					</select>
                  </div>
+
+                 <button class="btn btn-primary btn-xl" type="submit">Valider</button>
         </form>
-            
-   
-         @*<div class="row justify-content-start">
-			@foreach (var service in Model)
-			{
-				<div class="card col-6 m-5" style="width: 18rem;">
-					<div class="card-body d-flex flex-column justify-content-between">
-                        <div>
-                            @*<h5 class="card-title">@Html.LabelFor(model => model.) && @Html.LabelFor(model => model.DeliveryAddress) ; </h5>*@
-                            @*<h5 class="card-title">@NOM DU SERVICE</h5>*@
-                            @*<div class="my-3">*@
-                               @* <img src="@sejour.ImagePath" width="200" height="200" />*@
-                            @*</div>
 
-                            <h6 class="card-subtitle mb-2 text-muted">@service.referenceNumber </h6>
-                            <h6 class="card-subtitle mb-2 text-muted">@service.Start</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">@service.End</h6>
-                            <p class="card-text">@service.SelectServiceType</p>
+        
 
-                        </div>				
+@foreach (var CarPoolingService in Model) 
+{
+<h2 style="text-align:center"> Provider's Name propose un(e) @CarPoolingService.SelectCarPoolingType </h2> @*récupérer prénom du prestataire via idserviceprovider de la classe service + forcer le nom du service => traduire en français*@
 
-					</div>
-				</div>
-			}
-       ]
+<div class="card">
+    
+  <img src="~/Images/Covoiturage.png" alt="Covoiturage" style="width:50%"> @*Image selon le type de service*@
+  <h3> Nombre de sièges disponibles: @CarPoolingService.AvailableSeats</h3> @*remplacer par des icônes sièges, animaux, cigarette, notes musiques, bulles dialogues*@
+  <h3> Animaux autorisés: @CarPoolingService.PetsAllowed </h3>
+  <h3> Autorisation de fumer: @CarPoolingService.SmokingAllowed</h3>
+  <h3> Musique forte autorisée: @CarPoolingService.MusicAllowed</h3>
+  <h3> Conversation autorisée: @CarPoolingService.ChattingAllowed</h3>
+  <p class="price"> Tarif : 20 € </p>
+  <p><button>Réserver</button></p>
+    
+</div> 
+}
 
-			<div class="col-4 m-5" style="width: 18rem;">*@
+
+@if (Model.Count == 0){
+     <h1>Dommage...Aucun service ne correspond à votre recherche actuellement.</h1>
+    <h3> Poster une demande</h3>
+    <h3> <a href="SearchService?selection=All">Modifier les critères de recherche</a></h3>
+    
+    
+}      
+
+
+  </div>
+            <div class="col-md-6">
+                <img alt="" style="width:800px;" title="" src="~/Images/Covoit.png">
+            </div>
         </div>
+    </div>
+</div>
+
+<hr class="solid">

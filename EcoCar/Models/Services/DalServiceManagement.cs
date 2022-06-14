@@ -1,4 +1,5 @@
 ﻿using EcoCar.Models.DataBase;
+using EcoCar.Models.PersonManagement;
 using EcoCar.Models.ServiceManagement;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -469,6 +470,11 @@ namespace EcoCar.Models.Services
         }
 
         void IDalServiceManagement.SearchCarRentalService()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Vehicule> GetAllVehicules()
         {
             throw new NotImplementedException();
         }

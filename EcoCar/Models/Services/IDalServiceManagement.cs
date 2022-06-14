@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using static EcoCar.Models.ServiceManagement.Service;
 using static EcoCar.Models.ServiceManagement.CarPoolingService;
 using static EcoCar.Models.ServiceManagement.Trajectory;
+using EcoCar.Models.PersonManagement;
 
 namespace EcoCar.Models.Services
 {
@@ -77,9 +78,10 @@ namespace EcoCar.Models.Services
         void SearchCarpoolingService();
         void SearchParcelService();
         void SearchCarRentalService();
+        List<Vehicule> GetAllVehicules();
 
-       // void FilterServices(string ServiceType);
-      
+        // void FilterServices(string ServiceType);
+
 
 
         //------------------------------------------------------------------------------------------------------

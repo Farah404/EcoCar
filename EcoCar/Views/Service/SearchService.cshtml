@@ -26,13 +26,15 @@
             </div> 
         </form>*@
 
+ <fieldset>
+    <legend> <h2>  Rechercher un service </h2> </legend>
 
 <form action = "/service/SearchService" method="get">
     
                 <label for="Selection">Rechercher par date:</label>
 				<input type="date" name="StartingDate" value=""  placeholder="Date de début"/>
                 <input type="date" name="EndingDate" value="" placeholder="Date de fin"/>
-				<div id = "choix_typeService"><label> Rechercher par type de service : </label> <br/>  
+				<div id = "choix_typeService"><label> Rechercher par type de service : </label>
 @*					<select name="selection" onChange = "submit()"> 
 *@                     <select name="selection"> 
 						<option value ="All">Tous</option> 
@@ -64,62 +66,13 @@
 
 
 @if (Model.Count == 0){
-     <h1>Oooh...Aucun service ne correspond à votre recherche actuellement</h1>
+     <h1>Dommage...Aucun service ne correspond à votre recherche actuellement.</h1>
     <h3> Poster une demande</h3>
-    <h3> <a href="EcoCar/Views/Shared/SearchService">Modifier les critères de recherche</a></h3>
+    <h3> <a href="SearchService?selection=All">Modifier les critères de recherche</a></h3>
     
     
 }
 
+</fieldset>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--Add a form with an input field and a button-->
-
-        
-        
-        
-      @* <div class="row justify-content-start">
-			
-			{
-				<div class="card col-6 m-5" style="width: 18rem;">
-					<div class="card-body d-flex flex-column justify-content-between">
-                        <div>
-                             <h5 class="card-title">@service.ReferenceNumber</h5>
-                                                      <h6 class="card-subtitle mb-2 text-muted">@service.Start</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">@service.End</h6>
-                            <p class="card-text">@service.SelectServiceType</p>
-
-                        </div>	
-
-					</div>
-				</div>
-			}
-       ]
-
-			<div class="col-4 m-5" style="width: 18rem;">
-        </div>
-*@
+<hr class="solid">

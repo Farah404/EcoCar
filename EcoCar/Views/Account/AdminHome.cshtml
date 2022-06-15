@@ -9,7 +9,7 @@
 <div class="container-fluid bg-grey">
     @*Users List Display*@
     <div class="table-responsive">
-        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Utilisateurs</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher un utilisateur">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Utilisateurs</p><input style="width:50%;float:right" type="text" id="searchUserInput" onkeyup="myFunctionUser()" placeholder="Rechercher un utilisateur">
         <br />
         <br />
         <table class="table" id="userTable">
@@ -52,8 +52,8 @@
 <div class="container-fluid bg-grey">
     @*Services List Display*@
     <div class="table-responsive">
-        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Prestations proposées</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation">
-        <table class="table" id="userTable">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Prestations proposées</p><input style="width:50%;float:right" type="text" id="searchServiceNoRequestInput" onkeyup="myFunctionNoRequest()" placeholder="Rechercher une prestation">
+        <table class="table" id="serviceTableIsRequestFalse">
             <thead>
                
                 <tr class="header">
@@ -66,7 +66,7 @@
                 </tr>
             </thead>
             <tbody>
-                 @foreach (var carPoolingService in Model.CarPoolingServices)
+                 @foreach (var carPoolingService in Model.CarPoolingServices.Where(c=>c.Service.IsRequest==false))
                 {
                 <tr>
                     <td>@carPoolingService.Service.Start.ToShortDateString()</td>
@@ -81,7 +81,7 @@
 
                 </tr>
                 }
-                 @foreach (var carRentalService in Model.CarRentalServices)
+                 @foreach (var carRentalService in Model.CarRentalServices.Where(c=>c.Service.IsRequest==false))
                 {
                 <tr>
                     <td>@carRentalService.Service.Start.ToShortDateString()</td>
@@ -96,7 +96,7 @@
 
                 </tr>
                 }
-                 @foreach (var parcelService in Model.ParcelServices)
+                 @foreach (var parcelService in Model.ParcelServices.Where(c=>c.Service.IsRequest==false))
                 {
                 <tr>
                     <td>@parcelService.Service.Start.ToShortDateString()</td>
@@ -119,8 +119,8 @@
 <div class="container-fluid bg-grey">
     @*Requests List Display*@
     <div class="table-responsive">
-        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Prestations demandées</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une prestation">
-        <table class="table" id="userTable">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Prestations demandées</p><input style="width:50%;float:right" type="text" id="searchServiceIsRequestInput" onkeyup="myFunctionIsRequest()" placeholder="Rechercher une prestation">
+        <table class="table" id="serviceTableIsRequestTrue">
             <thead>
                 <tr class="header">
                     <th>Date de début</th>
@@ -182,7 +182,7 @@
 <div class="container-fluid bg-grey">
     @*Purchases List Display*@
     <div class="table-responsive">
-        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">EcoStore</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher un achat">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">EcoStore</p><input style="width:50%;float:right" type="text" id="searchServiceRequestInput" onkeyup="myFunction()" placeholder="Rechercher un achat">
         <table class="table" id="userTable">
             <thead>
                 <tr class="header">
@@ -204,10 +204,50 @@
 </div>
 
 <script>
-    function myFunction() {
+    function myFunctionUser() {
         var input, filter, table, tr, td, cell, i, j;
-        filter = document.getElementById("searchInput").value.toLowerCase();
+        filter = document.getElementById("searchUserInput").value.toLowerCase();
         table = document.getElementById("userTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            const tdArray = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < tdArray.length; j++) {
+                const cellValue = tdArray[j];
+                if (cellValue && cellValue.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                }
+            }
+        }
+    }
+
+</script>
+<script>
+    function myFunctionNoRequest() {
+        var input, filter, table, tr, td, cell, i, j;
+        filter = document.getElementById("searchServiceNoRequestInput").value.toLowerCase();
+        table = document.getElementById("serviceTableIsRequestFalse");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            const tdArray = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < tdArray.length; j++) {
+                const cellValue = tdArray[j];
+                if (cellValue && cellValue.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                }
+            }
+        }
+    }
+
+</script>
+<script>
+    function myFunctionIsRequest() {
+        var input, filter, table, tr, td, cell, i, j;
+        filter = document.getElementById("searchServiceIsRequestInput").value.toLowerCase();
+        table = document.getElementById("serviceTableIsRequestTrue");
         tr = table.getElementsByTagName("tr");
         for (i = 1; i < tr.length; i++) {
             tr[i].style.display = "none";

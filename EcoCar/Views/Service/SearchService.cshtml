@@ -16,14 +16,14 @@
 
 
 
-        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Propositions de prestations</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une proposition de prestation...">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Propositions de prestations</p><input style="width:50%;float:right" type="text" id="serviceNoRequestInput" onkeyup="searchServiceNoRequest()" placeholder="Rechercher une proposition de prestation...">
         <br />
 @*        <div id="services" class="services" onselect="filterTable()">
             @Html.DropDownListFor(model => model.Service.SelectServiceType, new SelectList(Enum.GetValues(typeof(ServiceType))),"--Type de prestation--",new {required = "required"})
             @Html.ValidationMessageFor(model => model.Service.SelectServiceType)
         </div>*@
         <br />
-        <table class="table" id="userTable">
+        <table class="table" id="serviceNoRequestTable">
             <thead>
                 <tr class="header">
                     <th>Date de début</th>
@@ -97,10 +97,10 @@
 <div class="container-fluid">
     @*Service List Display*@
     <div class="table-responsive">
-        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Demandes de prestations</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une demande de prestation...">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Demandes de prestations</p><input style="width:50%;float:right" type="text" id="serviceIsRequestInput" onkeyup="searchServiceIsRequest()" placeholder="Rechercher une demande de prestation...">
         <br />
         <br />
-        <table class="table" id="userTable">
+        <table class="table" id="serviceIsRequestTable">
             <thead>
                 <tr class="header">
                     <th>Date de début</th>
@@ -170,10 +170,29 @@
     </div>
 </div>
 <script>
-    function myFunction() {
+    function searchServiceNoRequest() {
         var input, filter, table, tr, td, cell, i, j;
-        filter = document.getElementById("searchInput").value.toLowerCase();
-        table = document.getElementById("userTable");
+        filter = document.getElementById("serviceNoRequestInput").value.toLowerCase();
+        table = document.getElementById("serviceNoRequestTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            const tdArray = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < tdArray.length; j++) {
+                const cellValue = tdArray[j];
+                if (cellValue && cellValue.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                }
+            }
+        }
+    }
+</script>
+<script>
+    function searchServiceIsRequest() {
+        var input, filter, table, tr, td, cell, i, j;
+        filter = document.getElementById("serviceIsRequestInput").value.toLowerCase();
+        table = document.getElementById("serviceIsRequestTable");
         tr = table.getElementsByTagName("tr");
         for (i = 1; i < tr.length; i++) {
             tr[i].style.display = "none";

@@ -1,5 +1,4 @@
-﻿
-@model EcoCar.ViewModels.AccountViewModel
+﻿@model EcoCar.ViewModels.AccountViewModel
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Eco Profil";
@@ -12,27 +11,26 @@
     <div class="panel-body inf-content">
         <div class="row">
             <div class="col-md-4">
-                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
-                <ul title="Ratings" class="list-inline ratings text-center">
+                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="~/assets/img/avataaars.svg">
+                <ul title="username" class="list-inline ratings text-center">
                     @using (Html.BeginForm())
                     {
-                        <li>
-                            <span>
-                            <p>@Model.User.Account.Username</p>
-                             <br>
-                            </span>
-                        </li>
+                        <h3>@Model.User.Account.Username</h3>
                     }
                 </ul>
-                <button class="btn btn-success center-block" type="submit" onclick="location.href='/Messaging/UserReporting'">Signaler l'utilisateur</button>
-                <br> <button class="btn btn-success center-block" type="submit" onclick="location.href='/Messaging/Message'">Contacter l'utilisateur</button>
+                <center>
+                <a class="btn btn-success" data-toggle="modal" data-target="#basicModal">Signaler @Model.User.Account.Username</a>
+                <br />  <br /> 
+                <a class="btn btn-success" data-toggle="modal" data-target="#basicModalSms" >Contacter @Model.User.Account.Username</a>
+                </center>
             </div>
+
             <div class="col-md-6">
 
                 <strong>Information</strong><br>
 
-                <div class="table-responsive">      
-                        <p>@Model.User.BirthDate</p>
+                <div class="table-responsive">
+                    <p>@Model.User.BirthDate</p>
                     <table class="table table-user-information">
                         <tbody>
                             <tr>
@@ -46,7 +44,6 @@
                                     <p>@Model.User.Person.LastName @Model.User.Person.Name</p>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     <strong>
@@ -58,7 +55,6 @@
                                     <p>@Model.User.SelectEcoStatusType</p>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     <strong>
@@ -67,10 +63,9 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                   <p>@Model.User.UserRating</p>
+                                    <p>@Model.User.UserRating</p>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     <strong>
@@ -79,7 +74,6 @@
                                     </strong>
                                 </td>
                                 <td class="text-success">
-                                    
                                 </td>
                             </tr>
 
@@ -104,7 +98,7 @@
 </div>
 <div id="services" class="container-fluid bg-grey">
     <center><h2>Prestations de @Model.User.Account.Username en cours</h2></center>
-  @*Service List Display*@
+    @*Service List Display*@
     <div class="table-responsive">
         <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Prestations du membre en cours"></center><br />
         <table class="table" id="userTable">
@@ -114,11 +108,12 @@
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
                     <th>Prestation demandée</th>
-                    <th>Consulter la prestation<th>
+                    <th>Consulter la prestation
+                    <th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var carPoolingService in Model.CarPoolingServices.Where(c=>c.Service.IsAvailable==true))
+                @foreach (var carPoolingService in Model.CarPoolingServices.Where(c => c.Service.IsAvailable == true))
                 {
                     <tr>
                         <td>@carPoolingService.Service.Start</td>
@@ -128,7 +123,7 @@
                         <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
-                @foreach (var carRentalService in Model.CarRentalServices.Where(c=>c.Service.IsAvailable==true))
+                @foreach (var carRentalService in Model.CarRentalServices.Where(c => c.Service.IsAvailable == true))
                 {
                     <tr>
                         <td>@carRentalService.Service.Start</td>
@@ -138,7 +133,7 @@
                         <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
 
-                   
+
                 }
 
                 @foreach (var parcelService in Model.ParcelServices)
@@ -148,17 +143,83 @@
                         <td>@parcelService.Service.SelectServiceType</td>
                         <td>@parcelService.Service.ReferenceNumber</td>
                         <td>@parcelService.Service.IsRequest</td>
-                    <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
 
                 @Html.Hidden("serviceId",@ViewBag.serviceId,null)
-                
+
 
             </tbody>
         </table>
     </div>
 </div>
+
+
+
+<!-- The Modal SMS -->
+<div class="modal fade" id="basicModalSms" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fermer</button>
+                <h4 class="modal-title" id="myModalLabel">Contacter @Model.User.Account.Username</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <center><img src="~/Images/MessageUser.png" style="width:50%;"></center>
+                <br />
+                <form method="post" enctype="text/plain">
+                    <input class="form-control" id="text" name="idPrestation" placeholder="Numéro de reference" type="text" required>
+                    <br />
+                    <textarea class="form-control" id="comments" name="comments" placeholder="Commentaires" rows="5" required></textarea><br>
+
+
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-default pull-right" type="submit">Envoyer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- The Modal Report -->
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fermer</button>
+                <h4 class="modal-title" id="myModalLabel">Signaler @Model.User.Account.Username</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <center><img src="~/Images/reporting.png" style="width:50%;"></center>
+                <br />
+                <form method="post" enctype="text/plain">
+                    <input class="form-control" id="text" name="idPrestation" placeholder="Raison de signalement" type="text" required>
+                    <br />
+                    <textarea class="form-control" id="comments" name="comments" placeholder="Commentaires" rows="5" required></textarea><br>
+
+
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-default pull-right" type="submit">Soumettre</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>

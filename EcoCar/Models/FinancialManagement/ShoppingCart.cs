@@ -15,9 +15,5 @@ namespace EcoCar.Models.FinancialManagement
         public int QuantityTrimestrialSubscription { get; set; }
         public int QuantitySemestrialSubscription { get; set; }
         public double TotalPriceEuros { get; set; }
-
-        //Foreign Key
-        public int UserId { get; set; }
-        public User User { get; set; }
     }
 }

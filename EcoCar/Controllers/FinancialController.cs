@@ -80,16 +80,16 @@ namespace EcoCar.Controllers
             
                 int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 ShoppingCart shoppingCart = dalFinancialManagement.GetUserShoppingCart(userId);
-                dalFinancialManagement.UpdateShoppingCart(
-                    shoppingCart.Id,
-                    quantityBatchOne,
-                    quantityBatchTwo,
-                    quantityBatchThree,
-                    quantityMonthlySubscription,
-                    quantityTrimestrialSubscription,
-                    quantitySemestrialSubscription,
-                    shoppingCart.TotalPriceEuros,
-                    shoppingCart.UserId);
+            dalFinancialManagement.UpdateShoppingCart(
+                shoppingCart.Id,
+                quantityBatchOne,
+                quantityBatchTwo,
+                quantityBatchThree,
+                quantityMonthlySubscription,
+                quantityTrimestrialSubscription,
+                quantitySemestrialSubscription,
+                shoppingCart.TotalPriceEuros
+                );
                 return Redirect("/Financial/EcoStore");
             
         }
@@ -132,8 +132,25 @@ namespace EcoCar.Controllers
                 EcoStore = dalFinancialManagement.GetEcoStore(1)
 
             };
-                
             return View(financialViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult ShoppingCart(int quantityBatchOne)
+        {
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            ShoppingCart shoppingCart = dalFinancialManagement.GetUserShoppingCart(userId);
+            dalFinancialManagement.UpdateShoppingCart(
+                shoppingCart.Id,
+                quantityBatchOne,
+                shoppingCart.QuantityBatchTwo,
+                shoppingCart.QuantityBatchThree,
+                shoppingCart.QuantityMonthlySubscription,
+                shoppingCart.QuantityTrimestrialSubscription,
+                shoppingCart.QuantitySemestrialSubscription,
+                shoppingCart.TotalPriceEuros
+                );
+            return Redirect("/Financial/EcoStore");
         }
         #endregion
     }

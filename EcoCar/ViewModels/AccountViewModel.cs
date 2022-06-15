@@ -25,6 +25,8 @@ namespace EcoCar.ViewModels
 
         public EcoWallet EcoWallet { get; set; }
 
+        public ShoppingCart ShoppingCart { get; set; }
+
         public List<User> Users { get; set; }
         public List<Service> Services { get; set; }
         public List<CarPoolingService> CarPoolingServices { get; set; }

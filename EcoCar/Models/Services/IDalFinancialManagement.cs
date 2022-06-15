@@ -93,6 +93,7 @@ namespace EcoCar.Models.Services
 
         //ShoppingCart
         List<ShoppingCart> GetAllShoppingCarts();
+        ShoppingCart GetUserShoppingCart(int userId);
 
         int CreateShoppingCart(
             int quantityBatchOne,
@@ -101,8 +102,7 @@ namespace EcoCar.Models.Services
             int quantityMonthlySubscription,
             int quantityTrimestrialSubscription,
             int quantitysemestrialSubscription,
-            double totalPriceEuros,
-            int userId
+            double totalPriceEuros
             );
 
         void UpdateShoppingCart(
@@ -113,8 +113,7 @@ namespace EcoCar.Models.Services
             int quantityMonthlySubscription,
             int quantityTrimestrialSubscription,
             int quantitysemestrialSubscription,
-            double totalPriceEuros,
-            int userId
+            double totalPriceEuros
             );
 
         void DeleteShoppingCart(int id);

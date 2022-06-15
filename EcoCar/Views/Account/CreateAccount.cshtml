@@ -37,8 +37,9 @@
 
                          <br>
                          @Html.HiddenFor(model=>model.CreationDate, new{ @class = "form-control",@id="currentDate",style="width:300px"})
-                         @Html.Hidden("personId", @ViewBag.personId, null)
+                         
 
+                         @Html.Hidden("userId", @ViewBag.userId, null)
                         <!-- Submit Button-->
                         <button class="btn btn-success btn-xl" type="submit">Créer mon EcoCompte</button>
                     }

@@ -522,7 +522,8 @@ namespace EcoCar.Models.Services
 
         public ShoppingCart GetUserShoppingCart(int userId)
         {
-            ShoppingCart shoppingCart = _bddContext.ShoppingCarts.FirstOrDefault(s => s.UserId == userId);
+            User user = _bddContext.Users.Find(userId);
+            ShoppingCart shoppingCart = _bddContext.ShoppingCarts.FirstOrDefault(s => s.Id == user.Id);
             return (shoppingCart);
         }
 
@@ -534,8 +535,7 @@ namespace EcoCar.Models.Services
             int quantityMonthlySubscription,
             int quantityTrimestrialSubscription,
             int quantitysemestrialSubscription,
-            double totalPriceEuros,
-            int userId
+            double totalPriceEuros
             )
         {
             ShoppingCart shoppingCart = new ShoppingCart()
@@ -547,7 +547,6 @@ namespace EcoCar.Models.Services
                 QuantityTrimestrialSubscription = quantityTrimestrialSubscription,
                 QuantitySemestrialSubscription = quantitysemestrialSubscription,
                 TotalPriceEuros = totalPriceEuros,
-                User = _bddContext.Users.First(u => u.Id == userId),
             };
             _bddContext.ShoppingCarts.Add(shoppingCart);
             _bddContext.SaveChanges();
@@ -568,8 +567,7 @@ namespace EcoCar.Models.Services
             int quantityMonthlySubscription,
             int quantityTrimestrialSubscription,
             int quantitysemestrialSubscription,
-            double totalPriceEuros,
-            int userId
+            double totalPriceEuros
             )
         {
             ShoppingCart shoppingCart = _bddContext.ShoppingCarts.Find(id);
@@ -584,7 +582,6 @@ namespace EcoCar.Models.Services
                 shoppingCart.QuantityTrimestrialSubscription = shoppingCart.QuantityTrimestrialSubscription+quantityTrimestrialSubscription;
                 shoppingCart.QuantitySemestrialSubscription = shoppingCart.QuantitySemestrialSubscription+quantitysemestrialSubscription;
                 shoppingCart.TotalPriceEuros = shoppingCart.TotalPriceEuros+totalPriceEuros;
-                shoppingCart.User = _bddContext.Users.First(u => u.Id == userId);
                 _bddContext.SaveChanges();
             }
         }

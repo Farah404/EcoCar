@@ -177,21 +177,23 @@ namespace EcoCar.Controllers
         }
 
         //Creating a user based on a person
-        public IActionResult CreateUser(int bankDetailsId, int billingAddressId, int personId, int? vehiculeId)
+        public IActionResult CreateUser(int bankDetailsId, int billingAddressId, int personId, int? vehiculeId, int? shoppingCartId, int accountId)
         {
             User user = new User()
             {
                 BankDetailsId = bankDetailsId,
                 BillingAddressId = billingAddressId,
                 PersonId = personId,
-                VehiculeId = vehiculeId
+                VehiculeId = vehiculeId,
+                ShoppingCartId = shoppingCartId,
+                AccountId = accountId
             };
             return View();
         }
         [HttpPost]
-        public IActionResult CreateUser(User user, int personId)
+        public IActionResult CreateUser(User user)
         {
-            dalPersonManagement.CreateUser(
+           int userId = dalPersonManagement.CreateUser(
             user.Email,
             user.BirthDate,
             user.PhoneNumber,
@@ -204,17 +206,18 @@ namespace EcoCar.Controllers
             user.PersonId,
             user.VehiculeId,
             user.EcoWalletId,
+            user.ShoppingCartId,
             user.AccountId
             );
 
-            string url = "/Account/CreateAccount" + "?personId=" + personId;
+            string url = "/Account/CreateAccount" + "?userId=" + userId;
             return Redirect(url);
         }
 
         //Creating an account based on a user
-        public IActionResult CreateAccount(int personId)
+        public IActionResult CreateAccount(int userId)
         {
-            ViewBag.PersonId = personId;
+            ViewBag.UserId = userId;
             return View();
         }
         [HttpPost]
@@ -272,6 +275,7 @@ namespace EcoCar.Controllers
                         user.PersonId,
                         user.VehiculeId,
                         user.EcoWalletId,
+                        user.ShoppingCartId,
                         user.AccountId
                         );
                     dalPersonManagement.UpdatePerson(user.PersonId, user.Person.Name, user.Person.LastName, "/images/" + user.Person.ProfilePicture.FileName);
@@ -294,6 +298,7 @@ namespace EcoCar.Controllers
                     user.PersonId,
                     user.VehiculeId,
                     user.EcoWalletId,
+                    user.ShoppingCartId,
                     user.AccountId
                     );
                 dalPersonManagement.UpdatePerson(user.PersonId, user.Person.Name, user.Person.LastName, user.Person.ProfilePicturePath);

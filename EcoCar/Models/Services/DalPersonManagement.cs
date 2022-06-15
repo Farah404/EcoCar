@@ -102,7 +102,7 @@ namespace EcoCar.Models.Services
         }
 
         //Create User
-        public User CreateUser(
+        public int CreateUser(
             string email, 
             DateTime birthDate, 
             int phoneNumber, 
@@ -115,6 +115,7 @@ namespace EcoCar.Models.Services
             int personId, 
             int? vehiculeId,
             int? ecoWalletId,
+            int? shoppingCartId,
             int? accountId
             )
         {
@@ -131,11 +132,12 @@ namespace EcoCar.Models.Services
                 Person = _bddContext.People.First(b => b.Id == personId),
                 Vehicule = _bddContext.Vehicules.FirstOrDefault(b => b.Id == vehiculeId),
                 EcoWallet = _bddContext.EcoWallets.FirstOrDefault(b => b.Id == ecoWalletId),
+                ShoppingCart = _bddContext.ShoppingCarts.FirstOrDefault(b => b.Id==shoppingCartId),
                 Account = _bddContext.Accounts.FirstOrDefault(b => b.Id == accountId)
             };
             _bddContext.Users.Add(user);
             _bddContext.SaveChanges();
-            return user;
+            return user.Id;
         }
         public void CreateUser(User user)
         {
@@ -156,6 +158,7 @@ namespace EcoCar.Models.Services
             int personId,
             int? vehiculeId,
             int? ecoWalletId,
+            int? shoppingcartId,
             int? accountId
 
             )
@@ -176,6 +179,7 @@ namespace EcoCar.Models.Services
                 userToUpdate.Person = _bddContext.People.First(b => b.Id == personId);
                 userToUpdate.Vehicule = _bddContext.Vehicules.First(b => b.Id==vehiculeId);
                 userToUpdate.EcoWallet = _bddContext.EcoWallets.First(b => b.Id== ecoWalletId);
+                userToUpdate.ShoppingCart=_bddContext.ShoppingCarts.First(b => b.Id==shoppingcartId);
                 userToUpdate.Account = _bddContext.Accounts.First(b => b.Id == accountId);
                 _bddContext.SaveChanges();
             }

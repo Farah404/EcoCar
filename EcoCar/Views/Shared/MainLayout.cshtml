@@ -55,7 +55,14 @@
                         if (User.Identity.IsAuthenticated)
                         {
                             <li><a href="/account/UserProfilePersonal">ECOCOMPTE</a></li>
-                            <li><a href="/financial/ShoppingCart">MON PANIER</a></li>
+
+                            <li>
+                            
+                            
+                            <a href="/financial/ShoppingCart">MON PANIER</a>
+                           
+                            </li>
+
                             <li>@Html.ActionLink("DECONNEXION", "SignOut", "Account")</li>
                            
                         }

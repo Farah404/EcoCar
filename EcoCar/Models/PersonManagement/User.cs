@@ -40,6 +40,8 @@ namespace EcoCar.Models.PersonManagement
         public Vehicule Vehicule { get; set; }
         public int? EcoWalletId { get; set; }
         public EcoWallet EcoWallet { get; set; }
+        public int? ShoppingCartId { get; set; }
+        public ShoppingCart ShoppingCart { get; set; }
         public int? AccountId { get; set; }
         public Account Account { get; set; }
 

@@ -48,7 +48,7 @@ namespace EcoCar.Models.DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rootine;database=EcoCar");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
         }
 
 
@@ -57,21 +57,6 @@ namespace EcoCar.Models.DataBase
         {
             this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
-
-            this.ShoppingCarts.Add(
-                new ShoppingCart
-                {
-                    Id=1,
-                    QuantityBatchOne =0,
-                    QuantityBatchTwo = 0,
-                    QuantityBatchThree = 0,
-                    QuantityMonthlySubscription = 0,
-                    QuantityTrimestrialSubscription = 0,
-                    QuantitySemestrialSubscription = 0,
-                    TotalPriceEuros = 0,
-                    UserId=1,
-                });
-
 
             #region Initializing the EcoStore
             this.EcoStores.Add(
@@ -146,7 +131,8 @@ namespace EcoCar.Models.DataBase
                     VehiculeId = 1,
                     UserRating = 4,
                     AccountId = 1,
-                    EcoWalletId = 1
+                    EcoWalletId = 1,
+                    ShoppingCartId = 1,
                 }
                 );
             this.Accounts.Add(
@@ -184,6 +170,18 @@ namespace EcoCar.Models.DataBase
                     EcoCoinsAmount = 101,
                     Subscription = false,
                     EcoCoinsValueEuros = 41
+                });
+            this.ShoppingCarts.Add(
+                new ShoppingCart
+                {
+                    Id = 1,
+                    QuantityBatchOne = 0,
+                    QuantityBatchTwo = 0,
+                    QuantityBatchThree = 0,
+                    QuantityMonthlySubscription = 0,
+                    QuantityTrimestrialSubscription = 0,
+                    QuantitySemestrialSubscription = 0,
+                    TotalPriceEuros = 0,
                 });
             this.Vehicules.Add(
                 new Vehicule
@@ -229,7 +227,8 @@ namespace EcoCar.Models.DataBase
                     PersonId = 2,
                     VehiculeId = 2,
                     AccountId = 2,
-                    EcoWalletId = 2
+                    EcoWalletId = 2,
+                    ShoppingCartId = 2
                 }
                 );
             this.Accounts.Add(
@@ -267,6 +266,18 @@ namespace EcoCar.Models.DataBase
                     EcoCoinsAmount = 101,
                     Subscription = false,
                     EcoCoinsValueEuros = 41
+                });
+            this.ShoppingCarts.Add(
+                new ShoppingCart
+                {
+                    Id = 2,
+                    QuantityBatchOne = 0,
+                    QuantityBatchTwo = 0,
+                    QuantityBatchThree = 0,
+                    QuantityMonthlySubscription = 0,
+                    QuantityTrimestrialSubscription = 0,
+                    QuantitySemestrialSubscription = 0,
+                    TotalPriceEuros = 0,
                 });
             this.Vehicules.Add(
                 new Vehicule

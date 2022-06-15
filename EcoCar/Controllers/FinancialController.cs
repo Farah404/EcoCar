@@ -1,7 +1,9 @@
 ﻿using EcoCar.Models.FinancialManagement;
+using EcoCar.Models.PersonManagement;
 using EcoCar.Models.Services;
 using EcoCar.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
@@ -10,9 +12,11 @@ namespace EcoCar.Controllers
     public class FinancialController : Controller
     {
         private DalFinancialManagement dalFinancialManagement;
+        private DalPersonManagement dalPersonManagement;
         public FinancialController()
         {
             dalFinancialManagement = new DalFinancialManagement();
+            dalPersonManagement = new DalPersonManagement();
         }
 
 
@@ -74,23 +78,21 @@ namespace EcoCar.Controllers
         }
 
         [HttpPost]
-        public IActionResult EcoStore(int quantityBatchOne, int quantityBatchTwo,int quantityBatchThree, int quantityMonthlySubscription,int quantityTrimestrialSubscription, int quantitySemestrialSubscription)  
+        public IActionResult EcoStore(int? quantityBatchOne, int? quantityBatchTwo,int? quantityBatchThree, int? quantityMonthlySubscription,int? quantityTrimestrialSubscription, int? quantitySemestrialSubscription)  
         {
-           
-            
                 int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-                ShoppingCart shoppingCart = dalFinancialManagement.GetUserShoppingCart(userId);
+                ShoppingCart shoppingCartToUp = dalFinancialManagement.GetUserShoppingCart(userId);
             dalFinancialManagement.UpdateShoppingCart(
-                shoppingCart.Id,
-                quantityBatchOne,
-                quantityBatchTwo,
-                quantityBatchThree,
-                quantityMonthlySubscription,
-                quantityTrimestrialSubscription,
-                quantitySemestrialSubscription,
-                shoppingCart.TotalPriceEuros
+                shoppingCartToUp.Id,
+                shoppingCartToUp.QuantityBatchOne+(int)quantityBatchOne,
+                shoppingCartToUp.QuantityBatchTwo+ (int)quantityBatchTwo,
+                shoppingCartToUp.QuantityBatchThree+ (int)quantityBatchThree,
+                shoppingCartToUp.QuantityMonthlySubscription+ (int)quantityMonthlySubscription,
+                shoppingCartToUp.QuantityTrimestrialSubscription+ (int)quantityTrimestrialSubscription,
+                shoppingCartToUp.QuantitySemestrialSubscription+ (int)quantitySemestrialSubscription,
+                shoppingCartToUp.TotalPriceEuros
                 );
-                return Redirect("/Financial/EcoStore");
+            return Redirect("/Financial/EcoStore");
             
         }
 
@@ -110,9 +112,19 @@ namespace EcoCar.Controllers
         #endregion
 
         #region Invoices: Ecostore and service
-        public IActionResult EcoStoreInvoice()
+        public IActionResult EcoStoreInvoice(int id)
         {
-            return View();
+            EcoStoreInvoice ecoStoreInvoice = dalFinancialManagement.GetEcoStoreInvoice(id);
+            User user = dalPersonManagement.GetUser(ecoStoreInvoice.UserId);
+            FinancialViewModel financialViewModel = new FinancialViewModel
+            {
+                EcoStore = dalFinancialManagement.GetEcoStore(1),
+                User = dalPersonManagement.GetUser(ecoStoreInvoice.UserId),
+                Account = dalPersonManagement.GetAccount(user.Id),
+                ServiceInvoice = dalFinancialManagement.GetServiceInvoice(ecoStoreInvoice.InvoiceId),
+                EcoStoreInvoice = ecoStoreInvoice
+            };   
+            return View(financialViewModel);
         }
 
         public IActionResult ServiceInvoice()
@@ -136,20 +148,34 @@ namespace EcoCar.Controllers
         }
 
         [HttpPost]
-        public IActionResult ShoppingCart(int quantityBatchOne)
+        public IActionResult ShoppingCart(int? quantityBatchOne, int? quantityBatchTwo, int? quantityBatchThree, int? quantityMonthlySubscription, int? quantityTrimestrialSubscription, int? quantitySemestrialSubscription)
         {
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             ShoppingCart shoppingCart = dalFinancialManagement.GetUserShoppingCart(userId);
             dalFinancialManagement.UpdateShoppingCart(
                 shoppingCart.Id,
-                quantityBatchOne,
-                shoppingCart.QuantityBatchTwo,
-                shoppingCart.QuantityBatchThree,
-                shoppingCart.QuantityMonthlySubscription,
-                shoppingCart.QuantityTrimestrialSubscription,
-                shoppingCart.QuantitySemestrialSubscription,
+                (int)quantityBatchOne,
+                (int)quantityBatchTwo,
+                (int)quantityBatchThree,
+                (int)quantityMonthlySubscription,
+                (int)quantityTrimestrialSubscription,
+                (int)quantitySemestrialSubscription,
                 shoppingCart.TotalPriceEuros
                 );
+            //paiement
+            //condition si ok =>
+            // CreFacture ICI
+            //reinitalise le panier
+            // Redirigevers page avec
+            int invoiceId = dalFinancialManagement.CreateInvoice(1, null, DateTime.Now, 0);
+            dalFinancialManagement.CreateEcoStoreInvoice(userId, invoiceId, shoppingCart.QuantityBatchOne,
+            shoppingCart.QuantityBatchTwo,
+            shoppingCart.QuantityBatchThree,
+            shoppingCart.QuantityMonthlySubscription,
+            shoppingCart.QuantityTrimestrialSubscription,
+            shoppingCart.QuantitySemestrialSubscription,
+            shoppingCart.TotalPriceEuros);
+            dalFinancialManagement.UpdateShoppingCart(shoppingCart.Id,0,0,0,0,0,0,0);
             return Redirect("/Financial/EcoStore");
         }
         #endregion

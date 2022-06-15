@@ -48,7 +48,7 @@ namespace EcoCar.Models.DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=rootine;database=EcoCar");
         }
 
 
@@ -141,8 +141,7 @@ namespace EcoCar.Models.DataBase
                     Id = 1,
                     Username = "random",
                     Password = "5E-A1-36-6C-34-CC-38-0D-AD-F1-62-AC-F6-CB-FD-42", //random
-                    IsActive = true,
-                    PersonId = 1
+                    IsActive = true
                 });
 
             this.BankingDetails.Add(
@@ -237,8 +236,7 @@ namespace EcoCar.Models.DataBase
                     Id = 2,
                     Username = "Farah",
                     Password = "5E-A1-36-6C-34-CC-38-0D-AD-F1-62-AC-F6-CB-FD-42", //random
-                    IsActive = true,
-                    PersonId = 2
+                    IsActive = true
                 });
             
             this.BankingDetails.Add(

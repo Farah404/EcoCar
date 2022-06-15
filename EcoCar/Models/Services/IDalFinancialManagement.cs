@@ -26,8 +26,8 @@ namespace EcoCar.Models.Services
 
         //Invoice
         List<Invoice> GetAllInvoices();
-        int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId);
-        void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId);
+        int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType);
+        void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType);
         void DeleteInvoice(int id);
 
         //-------------------------------------------------------------------------------------------------
@@ -42,9 +42,16 @@ namespace EcoCar.Models.Services
 
         //EcoStoreInvoice
         List<EcoStoreInvoice> GetAllEcoStoreInvoices();
-        int CreateEcoStoreInvoice();
-        void UpdateEcoStoreInvoice(int id);
-        void DeleteEcoStoreInvoice(int id);
+        int CreateEcoStoreInvoice(int userId, int invoiceId, int quantityBatchOne,
+            int quantityBatchTwo,
+            int quantityBatchThree,
+            int quantityMonthlySubscription,
+            int quantityTrimestrialSubscription,
+            int quantitySemestrialSubscription,
+            double totalPriceEuros);
+        EcoStoreInvoice GetEcoStoreInvoice(int ecoStoreInvoiceId);
+        //void UpdateEcoStoreInvoice(int id, int userId, int invoiceId);
+        //void DeleteEcoStoreInvoice(int id);
 
         //-------------------------------------------------------------------------------------------------
 

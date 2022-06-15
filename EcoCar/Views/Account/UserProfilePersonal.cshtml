@@ -142,6 +142,7 @@
                                         Montant EcoCoins
                                     </td>
                                     <td class="text-success">
+                                        <p>@Model.EcoWallet.EcoCoinsAmount</p>
                                     </td>
                                 </tr>
 
@@ -151,6 +152,7 @@
                                         Formule d'abonnement
                                     </td>
                                     <td class="text-success">
+                                        <p>@Model.EcoWallet.Subscription</p>
                                     </td>
                                 </tr>
 
@@ -329,6 +331,35 @@
     </div>
 </div>
 
+<div class="container-fluid bg-grey">
+    @*Purchases List Display*@
+    <div class="table-responsive">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">EcoStore</p><input style="width:50%;float:right" type="text" id="searchInvoice" onkeyup="searchInvoice()" placeholder="Rechercher un achat">
+        <table class="table" id="userInvoices">
+            <thead>
+                <tr class="header">
+                    <th>Date d'achat</th>
+                    <th>Type d'achat</th>
+                    <th>Numéro de Facture</th>
+                    <th>Lien vers la Facture</th>
+                </tr>
+            </thead>
+            <tbody>
+                 @foreach (var ecoStoreInvoice in Model.EcoStoreInvoices)
+                {
+                <tr>
+                    <td>@ecoStoreInvoice.Invoice.InvoiceIssueDate.ToShortDateString()</td>
+                    <td>@ecoStoreInvoice.Invoice.SelectInvoiceType</td>
+                    <td>@ecoStoreInvoice.Invoice.InvoiceNumber</td>
+                    <td><a href ="/Financial/EcoStoreInvoice/@ecoStoreInvoice.Id">Détails</a></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
 <script>
     function myFunction() {
         var input, filter, table, tr, td, cell, i, j;
@@ -349,7 +380,26 @@
     }
 
 </script>
+<script>
+    function searchInvoice() {
+        var input, filter, table, tr, td, cell, i, j;
+        filter = document.getElementById("searchInvoice").value.toLowerCase();
+        table = document.getElementById("userInvoices");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            const tdArray = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < tdArray.length; j++) {
+                const cellValue = tdArray[j];
+                if (cellValue && cellValue.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                }
+            }
+        }
+    }
 
+</script>
 
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>

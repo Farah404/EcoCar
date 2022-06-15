@@ -139,24 +139,23 @@ namespace EcoCar.Models.Services
         #region CRUD Invoice
         public List<Invoice> GetAllInvoices()
         {
-            return _bddContext.Invoices.Include(e => e.BillingAddress).ToList();
+            return _bddContext.Invoices.ToList();
         }
 
         public Invoice GetInvoice(int id)
         {
-            return _bddContext.Invoices.Include(e => e.BillingAddress).FirstOrDefault(e => e.Id == id);
+            return _bddContext.Invoices.FirstOrDefault(e => e.Id == id);
         }
 
         //Create Invoice
-        public int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId)
+        public int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType)
         {
             Invoice invoice = new Invoice()
             {
                 InvoiceNumber = invoiceNumber,
                 InvoiceDescription = invoiceDescription,
                 InvoiceIssueDate = invoiceIssueDate,
-                SelectInvoiceType = selectInvoiceType,
-                BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId)
+                SelectInvoiceType = selectInvoiceType
             };
             _bddContext.Invoices.Add(invoice);
             _bddContext.SaveChanges();
@@ -169,7 +168,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update Invoice
-        public void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId)
+        public void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType)
         {
             Invoice invoice = _bddContext.Invoices.Find(id);
 
@@ -180,7 +179,6 @@ namespace EcoCar.Models.Services
                 invoice.InvoiceDescription = invoiceDescription;
                 invoice.InvoiceIssueDate = invoiceIssueDate;
                 invoice.SelectInvoiceType = selectInvoiceType;
-                invoice.BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId);
                 _bddContext.SaveChanges();
             }
         }
@@ -276,13 +274,42 @@ namespace EcoCar.Models.Services
         #region CRUD EcoStore Invoice
         public List<EcoStoreInvoice> GetAllEcoStoreInvoices()
         {
-            return _bddContext.EcoStoreInvoices.ToList();
+            return _bddContext.EcoStoreInvoices.Include(x=>x.User).Include(x=>x.Invoice).ToList();
         }
+        public EcoStoreInvoice GetEcoStoreInvoice(int ecoStoreInvoiceId)
+        {
+            return _bddContext.EcoStoreInvoices.Include(x => x.User).Include(x => x.Invoice).FirstOrDefault(x=>x.Id== ecoStoreInvoiceId);
+        }
+        //public EcoStoreInvoice GetUserEcoStoreInvoice(int userId)
+        //{
+        //    User user = _bddContext.Users.Find(userId);
+        //    EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Include(x => x.User).Include(x => x.Invoice).FirstOrDefault(x => x.Id == user.);
+        //    return ;
+        //}
+        
 
         //Create ServiceInvoice
-        public int CreateEcoStoreInvoice()
+        public int CreateEcoStoreInvoice(int userId,
+            int invoiceId,
+            int quantityBatchOne,
+            int quantityBatchTwo,
+            int quantityBatchThree,
+            int quantityMonthlySubscription,
+            int quantityTrimestrialSubscription,
+            int quantitysemestrialSubscription,
+            double totalPriceEuros)
         {
-            EcoStoreInvoice ecoStoreInvoice = new EcoStoreInvoice() { };
+            EcoStoreInvoice ecoStoreInvoice = new EcoStoreInvoice() {
+            User = _bddContext.Users.First(u => u.Id == userId),
+            Invoice = _bddContext.Invoices.First(u => u.Id == invoiceId),
+             QuantityBatchOne = quantityBatchOne,
+                QuantityBatchTwo = quantityBatchTwo,
+                QuantityBatchThree = quantityBatchThree,
+                QuantityMonthlySubscription = quantityMonthlySubscription,
+                QuantityTrimestrialSubscription = quantityTrimestrialSubscription,
+                QuantitySemestrialSubscription = quantitysemestrialSubscription,
+                TotalPriceEuros = totalPriceEuros
+            };
             _bddContext.EcoStoreInvoices.Add(ecoStoreInvoice);
             _bddContext.SaveChanges();
             return ecoStoreInvoice.Id;
@@ -294,33 +321,36 @@ namespace EcoCar.Models.Services
         }
 
         //Update ServiceInvoice
-        public void UpdateEcoStoreInvoice(int id)
-        {
-            EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Find(id);
+        //public void UpdateEcoStoreInvoice(int id, int userId, int invoiceId)
+        //{
+        //    EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Find(id);
 
-            if (ecoStoreInvoice != null)
-            {
-                ecoStoreInvoice.Id = id;
-                _bddContext.SaveChanges();
-            }
-        }
-        public void UpdateEcoStoreInvoice(EcoStoreInvoice ecoStoreInvoice)
-        {
-            _bddContext.EcoStoreInvoices.Update(ecoStoreInvoice);
-            _bddContext.SaveChanges();
-        }
+        //    if (ecoStoreInvoice != null)
+        //    {
+        //        ecoStoreInvoice.Id = id;
+        //        ecoStoreInvoice.User = _bddContext.Users.First(u => u.Id == userId);
+        //        ecoStoreInvoice.Invoice = _bddContext.Invoices.First(u => u.Id == invoiceId);
+        //        _bddContext.SaveChanges();
+        //    }
 
-        //Delete ServiceInvoice
-        public void DeleteEcoStoreInvoice(int id)
-        {
-            EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Find(id);
+        //}
+        //public void UpdateEcoStoreInvoice(EcoStoreInvoice ecoStoreInvoice)
+        //{
+        //    _bddContext.EcoStoreInvoices.Update(ecoStoreInvoice);
+        //    _bddContext.SaveChanges();
+        //}
 
-            if (ecoStoreInvoice != null)
-            {
-                _bddContext.EcoStoreInvoices.Remove(ecoStoreInvoice);
-                _bddContext.SaveChanges();
-            }
-        }
+        ////Delete ServiceInvoice
+        //public void DeleteEcoStoreInvoice(int id)
+        //{
+        //    EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Find(id);
+
+        //    if (ecoStoreInvoice != null)
+        //    {
+        //        _bddContext.EcoStoreInvoices.Remove(ecoStoreInvoice);
+        //        _bddContext.SaveChanges();
+        //    }
+        //}
         #endregion
 
         //-------------------------------------------------------------------------------------------------
@@ -575,13 +605,13 @@ namespace EcoCar.Models.Services
             if (shoppingCart != null)
             {
                 shoppingCart.Id = id;
-                shoppingCart.QuantityBatchOne = shoppingCart.QuantityBatchOne+quantityBatchOne;
-                shoppingCart.QuantityBatchTwo = shoppingCart.QuantityBatchTwo+quantityBatchTwo;
-                shoppingCart.QuantityBatchThree = shoppingCart.QuantityBatchThree+quantityBatchThree;
-                shoppingCart.QuantityMonthlySubscription = shoppingCart.QuantityMonthlySubscription+quantityMonthlySubscription;
-                shoppingCart.QuantityTrimestrialSubscription = shoppingCart.QuantityTrimestrialSubscription+quantityTrimestrialSubscription;
-                shoppingCart.QuantitySemestrialSubscription = shoppingCart.QuantitySemestrialSubscription+quantitysemestrialSubscription;
-                shoppingCart.TotalPriceEuros = shoppingCart.TotalPriceEuros+totalPriceEuros;
+                shoppingCart.QuantityBatchOne = quantityBatchOne;
+                shoppingCart.QuantityBatchTwo = quantityBatchTwo;
+                shoppingCart.QuantityBatchThree = quantityBatchThree;
+                shoppingCart.QuantityMonthlySubscription = quantityMonthlySubscription;
+                shoppingCart.QuantityTrimestrialSubscription = quantityTrimestrialSubscription;
+                shoppingCart.QuantitySemestrialSubscription = quantitysemestrialSubscription;
+                shoppingCart.TotalPriceEuros = totalPriceEuros;
                 _bddContext.SaveChanges();
             }
         }

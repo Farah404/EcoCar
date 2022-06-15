@@ -22,7 +22,7 @@ namespace EcoCar.Models.Services
         int CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, double userRating, EcoStatusType selectEcoStatusType, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId, int? ecoWalletId, int? shoppingCartId, int? accountId);
         void UpdateUser(int id, string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId, int? ecoWalletId, int? shoppingCartId, int? accountId);
         void DeleteUser(int id);
-        void UpdateUserVehicule(int userId, int vehiculeId);
+        //void UpdateUserVehicule(int userId, int vehiculeId);
 
         //-------------------------------------------------------------------------------------------------
 
@@ -39,8 +39,8 @@ namespace EcoCar.Models.Services
 
         //Account
         List<Account> GetAllAccounts();
-        int CreateAccount(string username, string password, bool isActive, DateTime creationDate, int personId);
-        void UpdateAccount(int id, string username, string password, bool isActive, int personId);
+        int CreateAccount(string username, string password, bool isActive, DateTime creationDate);
+        void UpdateAccount(int id, string username, string password, bool isActive);
         void UpdateAccountPassword(int id, string password);
         void DeleteAccount(int id);
         Account Authentify(string username, string passwordClear);
@@ -62,6 +62,7 @@ namespace EcoCar.Models.Services
 
         //Insurance
         List<Insurance> GetAllInsurances();
+        Insurance GetInsurance(int id);
         int CreateInsurance(string insuranceAgency, DateTime insuranceExpiration, string contractNumber);
         void UpdateInsurance(int id, string insuranceAgency, DateTime insuranceExpiration, string contractNumber);
         void DeleteInsurance(int id);

@@ -42,7 +42,11 @@
                             <td><a class="product-removal" href="#">Supprimer</a></td>
                         </tr>
                     }
-                    
+                    else
+                    {
+                        @Html.Hidden("QuantityBatchOne",0)
+                    }
+
 
 
                     @if (@Model.ShoppingCart.QuantityBatchTwo != 0)
@@ -60,6 +64,10 @@
                             <td><a class="product-removal" href="#">Supprimer</a></td>
                         </tr>
                     }
+                    else
+                    {
+                        @Html.Hidden("QuantityBatchTwo",0)
+                    }
 
                     @if (@Model.ShoppingCart.QuantityBatchThree != 0)
                     {
@@ -76,7 +84,10 @@
                             <td><a class="product-removal" href="#">Supprimer</a></td>
                         </tr>
                     }
-
+                    else
+                    {
+                        @Html.Hidden("QuantityBatchThree",0)
+                    }
                     @if (@Model.ShoppingCart.QuantityMonthlySubscription != 0)
                     {
                         <tr>
@@ -92,7 +103,10 @@
                             <td><a class="product-removal" href="#">Supprimer</a></td>
                         </tr>
                     }
-
+                    else
+                    {
+                        @Html.Hidden("QuantityMonthlySubscription",0)
+                    }
                     @if (@Model.ShoppingCart.QuantityTrimestrialSubscription != 0)
                     {
                         <tr>
@@ -108,7 +122,10 @@
                             <td><a class="product-removal" href="#">Supprimer</a></td>
                         </tr>
                     }
-
+                    else
+                    {
+                        @Html.Hidden("QuantityTrimestrialSubscription",0)
+                    }
                     @if (@Model.ShoppingCart.QuantitySemestrialSubscription != 0)
                     {
                         <tr>
@@ -124,7 +141,10 @@
                             <td><a class="product-removal" href="#">Supprimer</a></td>
                         </tr>
                     }
-
+                    else
+                    {
+                        @Html.Hidden("QuantitySemestrialSubscription",0)
+                    }
                 </tbody>
 
             </table>

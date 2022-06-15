@@ -23,7 +23,6 @@ namespace EcoCar.Models.DataBase
         public DbSet<BillingAddress> BillingAddresses { get; set; }
         public DbSet<EcoStore> EcoStores { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
-        public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<ServiceInvoice> ServiceInvoices { get; set; }
         public DbSet<EcoStoreInvoice> EcoStoreInvoices { get; set; }
@@ -48,7 +47,7 @@ namespace EcoCar.Models.DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rootine;database=EcoCar");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
         }
 
 

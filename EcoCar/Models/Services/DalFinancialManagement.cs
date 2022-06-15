@@ -355,61 +355,6 @@ namespace EcoCar.Models.Services
 
         //-------------------------------------------------------------------------------------------------
 
-        #region CRUD Subscription
-        public List<Subscription> GetAllSubscriptions()
-        {
-            return _bddContext.Subscriptions.ToList();
-        }
-
-        //Create Subscription
-        public int CreateSubscription(double subscriptionCostEuro, DateTime subscriptionExpiration, DateTime subscriptionStart, bool isActive)
-        {
-            Subscription subscription = new Subscription() { SubscriptionCostEuro = subscriptionCostEuro, SubscriptionExpiration = subscriptionExpiration, SubscriptionStart = subscriptionStart, IsActive = isActive };
-            _bddContext.Subscriptions.Add(subscription);
-            _bddContext.SaveChanges();
-            return subscription.Id;
-        }
-        public void CreateSubscription(Subscription subscription)
-        {
-            _bddContext.Subscriptions.Update(subscription);
-            _bddContext.SaveChanges();
-        }
-
-        //Update Subscription
-        public void UpdateSubscription(int id, double subscriptionCostEuro, DateTime subscriptionExpiration, DateTime subscriptionStart, bool isActive)
-        {
-            Subscription subscription = _bddContext.Subscriptions.Find(id);
-
-            if (subscription != null)
-            {
-                subscription.Id = id;
-                subscription.SubscriptionCostEuro = subscriptionCostEuro;
-                subscription.SubscriptionExpiration = subscriptionExpiration;
-                subscription.SubscriptionStart = subscriptionStart;
-                subscription.IsActive = isActive;
-                _bddContext.SaveChanges();
-            }
-        }
-        public void UpdateSubscription(Subscription subscription)
-        {
-            _bddContext.Subscriptions.Update(subscription);
-            _bddContext.SaveChanges();
-        }
-
-        //Delete Subscription
-        public void DeleteSubscription(int id)
-        {
-            Subscription subscription = _bddContext.Subscriptions.Find(id);
-
-            if (subscription != null)
-            {
-                _bddContext.Subscriptions.Remove(subscription);
-                _bddContext.SaveChanges();
-            }
-        }
-        #endregion
-
-        //-------------------------------------------------------------------------------------------------
 
         #region CRUD EcoWallet
         public List<EcoWallet> GetAllEcoWallets()
@@ -426,9 +371,9 @@ namespace EcoCar.Models.Services
         }
 
         //Create EcoWallet
-        public int CreateEcoWallet(double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros)
+        public int CreateEcoWallet(int ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros, DateTime subscriptionExpiration, DateTime subscriptionStart)
         {
-            EcoWallet ecoWallet = new EcoWallet() { EcoCoinsAmount = ecoCoinsAmount, Subscription = subscription, EcoCoinsValueEuros = ecoCoinsValueEuros };
+            EcoWallet ecoWallet = new EcoWallet() { EcoCoinsAmount = ecoCoinsAmount, Subscription = subscription, EcoCoinsValueEuros = ecoCoinsValueEuros, SubscriptionExpiration = subscriptionExpiration, SubscriptionStart = subscriptionStart };
             _bddContext.EcoWallets.Add(ecoWallet);
             _bddContext.SaveChanges();
             return ecoWallet.Id;
@@ -440,7 +385,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update EcoWallet
-        public void UpdateEcoWallet(int id, double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros)
+        public void UpdateEcoWallet(int id, int ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros, DateTime subscriptionExpiration, DateTime subscriptionStart)
         {
             EcoWallet ecoWallet = _bddContext.EcoWallets.Find(id);
 
@@ -450,6 +395,8 @@ namespace EcoCar.Models.Services
                 ecoWallet.EcoCoinsAmount = ecoCoinsAmount;
                 ecoWallet.Subscription = subscription;
                 ecoWallet.EcoCoinsValueEuros = ecoCoinsValueEuros;
+                ecoWallet.SubscriptionExpiration = subscriptionExpiration;
+                ecoWallet.SubscriptionStart = subscriptionStart;
                 _bddContext.SaveChanges();
             }
         }

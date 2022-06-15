@@ -13,24 +13,24 @@
 
                 @using (Html.BeginForm())
                 {
-                    @Html.Label("BarCode") <br>
+                    @Html.Label("Code barre") <br>
                     @Html.TextBoxFor(model => model.BarCode, new { htmlAttributes = new { @class = "form-control",@id="Refnunmber",@readonly = true, style="width:300px"}})
                     <br>
 
 
-                    @Html.Label("WeightKilogrammes") <br>
+                    @Html.Label("Poids (kilogrammes)") <br>
                     @Html.TextBoxFor(model => model.WeightKilogrammes, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
                     @Html.ValidationMessageFor(model => model.WeightKilogrammes)
                     <br>
 
 
-                    @Html.Label("AtypicalVolume") <br>
+                    @Html.Label("Forme atypique") 
                     @Html.CheckBoxFor(model => model.AtypicalVolume, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
                     @Html.ValidationMessageFor(model => model.AtypicalVolume)
                     <br>
 
 
-                    @Html.Label("Fragile")<br>
+                    @Html.Label("Fragile")
                     @Html.CheckBoxFor(model => model.Fragile, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
                     @Html.ValidationMessageFor(model => model.Fragile)
                     <br>
@@ -38,7 +38,7 @@
                     @Html.HiddenFor(model => model.ServiceId)
                     @Html.HiddenFor(model => model.TrajectoryId)
                     @Html.HiddenFor(model => model.VehiculeId)
-                    <br>
+                    <br><br>
                     <button class="btn btn-success" type="submit">Soumettre</button>
                 }
 

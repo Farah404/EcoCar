@@ -55,19 +55,11 @@ namespace EcoCar.Models.Services
 
         //-------------------------------------------------------------------------------------------------
 
-        //Subscription
-        List<Subscription> GetAllSubscriptions();
-        int CreateSubscription(double subscriptionCostEuro, DateTime subscriptionExpiration, DateTime subscriptionStart, bool isActive);
-        void UpdateSubscription(int id, double subscriptionCostEuro, DateTime subscriptionExpiration, DateTime subscriptionStart, bool isActive);
-        void DeleteSubscription(int id);
-
-        //-------------------------------------------------------------------------------------------------
-
         //EcoWallet
         List<EcoWallet> GetAllEcoWallets();
         EcoWallet GetUserEcoWallet(int id);
-        int CreateEcoWallet(double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros);
-        void UpdateEcoWallet(int id, double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros);
+        int CreateEcoWallet(int ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros, DateTime subscriptionExpiration, DateTime subscriptionStart);
+        void UpdateEcoWallet(int id, int ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros, DateTime subscriptionExpiration, DateTime subscriptionStart);
         void DeleteEcoWallet(int id);
 
         //-------------------------------------------------------------------------------------------------

@@ -227,7 +227,7 @@ namespace EcoCar.Controllers
         {
             int accountId = dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive, account.CreationDate);
             User user = dalPersonManagement.GetUser(userId);
-            int ecoWalletId = dalFinancialManagement.CreateEcoWallet(0,false,0);
+            int ecoWalletId = dalFinancialManagement.CreateEcoWallet(0,false,0,DateTime.Now,DateTime.MaxValue);
             int shoppingCartId = dalFinancialManagement.CreateShoppingCart(0, 0, 0, 0, 0, 0, 0);
             int insuranceId = dalPersonManagement.CreateInsurance(null,DateTime.Now, null);
             int vehiculeId = dalPersonManagement.CreateVehicule(null, 0, null, false, false, DateTime.Now, 0,insuranceId);

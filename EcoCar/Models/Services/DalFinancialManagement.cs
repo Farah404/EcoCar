@@ -429,6 +429,7 @@ namespace EcoCar.Models.Services
             _bddContext.SaveChanges();
         }
 
+       
         //Delete EcoWallet
         public void DeleteEcoWallet(int id)
         {
@@ -605,6 +606,11 @@ namespace EcoCar.Models.Services
                 _bddContext.ShoppingCarts.Remove(shoppingCart);
                 _bddContext.SaveChanges();
             }
+        }
+
+        object IDalFinancialManagement.UpdateEcoWallet(EcoWallet consumerEcoWallet)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

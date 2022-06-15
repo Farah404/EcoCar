@@ -8,11 +8,13 @@ namespace EcoCar.Models.ServiceManagement
         //Primary Key
         public int Id { get; set; }
 
+       
+
         //Foreign Keys
         public int ServiceConsumedId { get; set; }
-        public Service ServiceConsumed { get; set; }
+        public Service ServiceConsumed { get; set; }//service réservé
         public int ServiceUserConsumerId { get; set; }
-        public User ServiceUserConsumer { get; set; }
+        public User ServiceUserConsumer { get; set; }// consommateur qui réserve le service
 
     }
 }

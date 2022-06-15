@@ -14,6 +14,7 @@ namespace EcoCar.Models.FinancialManagement
         public int InvoiceNumber { get; set; }
         public string InvoiceDescription { get; set; }
         public DateTime InvoiceIssueDate { get; set; }
+        public double InvoiceAmount { get; set; }        //added
         public InvoiceType SelectInvoiceType { get; set; }
         public enum InvoiceType
         {

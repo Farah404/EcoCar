@@ -16,6 +16,7 @@ namespace EcoCar.Models.ServiceManagement
         public DateTime PublicationDate { get; set; }
         public DateTime ExpirationDate { get; set; }
         public int ReferenceNumber { get; set; }
+        public double ServicePrice { get; set; } //Added
       
         public bool IsAvailable { get; set; }
         public DateTime Start { get; set; }

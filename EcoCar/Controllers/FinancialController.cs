@@ -3,6 +3,7 @@ using EcoCar.Models.Services;
 using EcoCar.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 
 namespace EcoCar.Controllers
@@ -107,6 +108,10 @@ namespace EcoCar.Controllers
         {
             return View();
         }
+
+
+        
+
         #endregion
 
         #region Invoices: Ecostore and service
@@ -136,5 +141,9 @@ namespace EcoCar.Controllers
             return View(financialViewModel);
         }
         #endregion
+
+
+
+
     }
 }

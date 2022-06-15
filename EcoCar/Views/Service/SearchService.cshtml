@@ -32,6 +32,7 @@
                     <th>Numéro de réference</th>
                     <th>EcoMembre prestataire</th>
                     <th>Disponibilité</th>
+                     <th>EcoCoins</th>
                     <th>Reserver</th>
                 </tr>
             </thead>
@@ -48,6 +49,8 @@
                             <td>@user.Account.Username</td>
                         }
                         <td>@carPoolingService.Service.IsAvailable</td>
+                        <td>@carPoolingService.Service.ServicePrice</td>
+
                         <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
@@ -63,6 +66,7 @@
                             <td>@user.Account.Username</td>
                         }
                         <td>@carRentalService.Service.IsAvailable</td>
+                        <td>@carRentalService.Service.ServicePrice</td>
                         <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
 
@@ -81,6 +85,7 @@
                             <td>@user.Account.Username</td>
                         }
                         <td>@parcelService.Service.IsAvailable</td>
+                        <td>@parcelService.Service.ServicePrice</td>
                         <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
@@ -125,6 +130,8 @@
                             <td>@user.Account.Username</td>
                         }
                         <td>@carPoolingServiceRequest.Service.IsAvailable</td>
+                        <td>@carPoolingServiceRequest.Service.ServicePrice</td>
+
                         <td> <a href="/Service/RespondToCarPoolRequest/@carPoolingServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
@@ -140,6 +147,7 @@
                             <td>@user.Account.Username</td>
                         }
                         <td>@carRentalServiceRequest.Service.IsAvailable</td>
+                         <td>@carRentalServiceRequest.Service.ServicePrice</td>
                         <td> <a href="/Service/RespondToCarRentalRequest/@carRentalServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
 
@@ -158,6 +166,7 @@
                             <td>@user.Account.Username</td>
                         }
                         <td>@parcelServiceRequest.Service.IsAvailable</td>
+                        <td>@parcelServiceRequest.Service.ServicePrice</td>
                         <td> <a href="/Service/RespondToParcelRequest/@parcelServiceRequest.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }

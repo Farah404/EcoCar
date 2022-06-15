@@ -118,5 +118,6 @@ namespace EcoCar.Models.Services
             );
 
         void DeleteShoppingCart(int id);
+        object UpdateEcoWallet(EcoWallet consumerEcoWallet);
     }
 }

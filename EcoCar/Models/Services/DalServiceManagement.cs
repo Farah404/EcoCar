@@ -33,10 +33,11 @@ namespace EcoCar.Models.Services
             return servicesOfUser;
         }
 
-        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int userProviderId)
+        public int CreateService(double servicePrice, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int userProviderId)
         {
             Service service = new Service()
             {
+                ServicePrice = servicePrice,
                 PublicationDate = publicationDate,
                 ExpirationDate = expirationDate,
                 ReferenceNumber = referenceNumber,
@@ -56,13 +57,14 @@ namespace EcoCar.Models.Services
             _bddContext.Services.Update(service);
             _bddContext.SaveChanges();
         }
-        public void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType)
+        public void UpdateService(int id,double servicePrice, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType)
         {
             Service service = _bddContext.Services.Find(id);
 
             if (service != null)
             {
                 service.Id = id;
+                service.ServicePrice = servicePrice;
                 service.PublicationDate = publicationDate;
                 service.ExpirationDate = expirationDate;
                 service.ReferenceNumber = referenceNumber;
@@ -569,6 +571,11 @@ namespace EcoCar.Models.Services
         {
             _bddContext.Services.Update(serviceRequest);
             _bddContext.SaveChanges();
+        }
+
+        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int userProviderId)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Collections.Generic;
 using EcoCar.ViewModels;
+using EcoCar.Models.FinancialManagement;
 
 namespace EcoCar.Controllers
 {
@@ -13,6 +14,7 @@ namespace EcoCar.Controllers
     {
         private IDalServiceManagement dalServiceManagement;
         private IDalPersonManagement dalPersonManagement;
+        private IDalFinancialManagement dalFinancialManagement ;
         public ServiceController()
         {
             dalServiceManagement = new DalServiceManagement();
@@ -80,6 +82,7 @@ namespace EcoCar.Controllers
 
 
                     int serviceId = dalServiceManagement.CreateService(
+                                   service.ServicePrice,
                                    service.PublicationDate,
                                    service.ExpirationDate,
                                    service.ReferenceNumber,
@@ -270,19 +273,32 @@ namespace EcoCar.Controllers
         //Reserve
         public ActionResult ReserveCarPoolingService(int? id)
         {
-            ServiceViewModel serviceViewModel = new ServiceViewModel
-            {
-                CarPoolingService = dalServiceManagement.GetCarPoolingService((int)id)
-            };
-            return View(serviceViewModel);
+
+                ServiceViewModel serviceViewModel = new ServiceViewModel
+                {
+                    CarPoolingService = dalServiceManagement.GetCarPoolingService((int)id)
+                };
+                return View(serviceViewModel);
+
         }
 
         [HttpPost]
-        public IActionResult ReserveCarPoolingService(Reservation reservation, int id)
+        public IActionResult ReserveCarPoolingService(Reservation reservation, int id, int consumerId, int providerId)
         {
+
+            EcoWallet consumerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(c => c.Id == consumerId);
+            EcoWallet providerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(p => p.Id == providerId);
+            CarPoolingService carPoolingService = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(s => s.Id == id);
+
+
+            double newEcocoinsAmount = consumerEcoWallet.EcoCoinsAmount - carPoolingService.Service.ServicePrice;
+
+            providerEcoWallet.EcoCoinsAmount = consumerEcoWallet.EcoCoinsAmount + carPoolingService.Service.ServicePrice;
+
+
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                CarPoolingService carPoolingService = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
+                //CarPoolingService carPoolingService = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
                 int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
                 if (carPoolingService.AvailableSeats != 0)
@@ -303,6 +319,11 @@ namespace EcoCar.Controllers
                         carPoolingService.TrajectoryId,
                         carPoolingService.ServiceId);
                     CarPoolingService carPoolingServiceUpdated = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
+                    
+                    dalFinancialManagement.UpdateEcoWallet(consumerEcoWallet);
+                    dalFinancialManagement.UpdateEcoWallet(providerEcoWallet);
+
+
 
                     if (carPoolingServiceUpdated.AvailableSeats == 0)
                     {
@@ -448,6 +469,7 @@ namespace EcoCar.Controllers
                 User user = dalPersonManagement.GetAllUsers().FirstOrDefault(r => r.Id == userId);
                 int? vehiculeId = user.VehiculeId;
                 int serviceRequestId = dalServiceManagement.CreateService(
+                               serviceRequest.ServicePrice,
                                serviceRequest.PublicationDate,
                                serviceRequest.ExpirationDate,
                                serviceRequest.ReferenceNumber,

@@ -48,7 +48,7 @@ namespace EcoCar.Models.DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rootine;database=EcoCar");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
         }
 
 
@@ -130,8 +130,8 @@ namespace EcoCar.Models.DataBase
                     Name = "RandomName",
                     LastName = "RandomLastName",
                     ProfilePicturePath = "wololo.jpg"
-                }
-                );
+                } );
+
             this.Users.Add(
                 new User
                 {
@@ -147,9 +147,9 @@ namespace EcoCar.Models.DataBase
                     UserRating = 4,
                     AccountId = 1,
                     EcoWalletId = 1
-                }
-                );
-            this.Accounts.Add(
+                });
+
+            this.Accounts.AddRange(
                 new Account
                 {
                     Id = 1,
@@ -159,7 +159,7 @@ namespace EcoCar.Models.DataBase
                     PersonId = 1
                 });
 
-            this.BankingDetails.Add(
+            this.BankingDetails.AddRange(
                 new BankDetails
                 {
                     Id = 1,
@@ -167,7 +167,9 @@ namespace EcoCar.Models.DataBase
                     Swift = "OABGAOG",
                     Iban = "FIOAFNEOAIFNAFKNAEFOJKN°31234"
                 });
-            this.BillingAddresses.Add(
+
+
+            this.BillingAddresses.AddRange(
                 new BillingAddress
                 {
                     Id = 1,
@@ -176,8 +178,9 @@ namespace EcoCar.Models.DataBase
                     Region = "SaltyAlpes",
                     Country = "France",
                     PostalCode = 40404
-                });
-            this.EcoWallets.Add(
+              });
+
+            this.EcoWallets.AddRange(
                 new EcoWallet
                 {
                     Id = 1,
@@ -185,7 +188,8 @@ namespace EcoCar.Models.DataBase
                     Subscription = false,
                     EcoCoinsValueEuros = 41
                 });
-            this.Vehicules.Add(
+
+            this.Vehicules.AddRange(
                 new Vehicule
                 {
                     Id = 1,
@@ -197,10 +201,104 @@ namespace EcoCar.Models.DataBase
                     AvailableSeats = 3,
                     InsuranceId = 1,
                 });
-            this.Insurances.Add(
+
+            this.Insurances.AddRange(
                 new Insurance
                 {
                     Id = 1,
+                    InsuranceAgency = "OFIBNA",
+                    ContractNumber = "R124124124TRAT"
+                });
+            #endregion
+
+
+
+            #region  Initializing User10
+            this.People.AddRange(
+                new Person
+                {
+                    Id = 10,
+                    Name = "NO",
+                    LastName = "Womannocry",
+                    ProfilePicturePath = "wololo.jpg"
+                }
+                );
+
+            this.Users.AddRange(
+                 new User
+                 {
+                     Id = 10,
+                     Email = "random@ecocar.com",
+                     PhoneNumber = 1234457891,
+                     IdentityCardNumber = 1234535315,
+                     DrivingPermitNumber = 1230432153,
+                     BankDetailsId = 10,
+                     BillingAddressId = 10,
+                     PersonId = 10,
+                     VehiculeId = 10,
+                     UserRating = 4,
+                     AccountId = 10,
+                     EcoWalletId = 10
+                 });
+
+            this.Accounts.AddRange(
+                new Account
+                {
+                    Id = 10,
+                    Username = "NO",
+                    Password = "5E-A1-36-6C-34-CC-38-0D-AD-F1-62-AC-F6-CB-FD-42", //random
+                    IsActive = true,
+                    PersonId = 10
+                }
+
+                );
+
+            this.BankingDetails.AddRange(
+                 new BankDetails
+                 {
+                     Id = 10,
+                     BankName = "SwissBank",
+                     Swift = "OABGAOG",
+                     Iban = "FIOAFNEOAIFNAFKNAEFOJKN°31234"
+                 });
+
+
+            this.BillingAddresses.AddRange(
+                new BillingAddress
+                {
+                    Id = 10,
+                    AddressLine = "403, Salty Road",
+                    City = "Brest",
+                    Region = "SaltyAlpes",
+                    Country = "France",
+                    PostalCode = 40404
+                });
+
+            this.EcoWallets.AddRange(
+                new EcoWallet
+                {
+                    Id = 10,
+                    EcoCoinsAmount = 1000,
+                    Subscription = false,
+                    EcoCoinsValueEuros = 410
+                });
+            this.Vehicules.AddRange(
+                 new Vehicule
+                 {
+                     Id = 10,
+                     Brand = "AnAmazingBrand",
+                     RegistrationNumber = 010,
+                     Model = "Teslite",
+                     Hybrid = false,
+                     Electric = true,
+                     AvailableSeats = 3,
+                     InsuranceId = 10,
+                 });
+
+            this.Insurances.AddRange(
+                 new Insurance
+                {
+                    Id = 10,
                     InsuranceAgency = "OFIBNA",
                     ContractNumber = "R124124124TRAT"
                 });
@@ -289,8 +387,162 @@ namespace EcoCar.Models.DataBase
                 });
             this.SaveChanges();
             #endregion
-        }
 
+
+            #region Initializing Servies
+
+            this.Itineraries.AddRange(
+                   new Itinerary
+                   {
+                       Id = 100,
+                       FirtsStopAddress = "1, Rue B, 13000 Marseille",
+                    //SecondStopAddress = "1, Rue C, 13000 Marseille",
+                    //ThirdStopAddress = "1, Rue D, 13000 Marseille"
+                   },
+
+                   new Itinerary
+                   {
+                       Id = 300,
+                       FirtsStopAddress = "2, Rue B, 13100 Aix en Provence",
+                    //SecondStopAddress = "1, Rue C, 13000 Marseille",
+                    //ThirdStopAddress = "1, Rue D, 13000 Marseille"
+                   });
+            this.SaveChanges();
+
+
+            this.Trajectories.AddRange(
+
+                new Trajectory
+                {
+                    Id = 100,
+                    DurationHours = (int)1.5,
+                    StopNumber = 1,
+                    StopsDurationMinutes = 30,
+                    PickUpAddress = "1, Rue A, 13000 Marseille",
+                    DeliveryAddress = "2, Rue A, 13100 Aix en Provence",
+                    SelectTrajectoryType = Trajectory.TrajectoryType.Regular,
+                    ItineraryId = 100
+
+                },
+
+                new Trajectory
+                {
+                    Id = 300,
+                    DurationHours = (int)1.5,
+                    StopNumber = 1,
+                    StopsDurationMinutes = 5,
+                    PickUpAddress = "1, Rue A, 13000 Marseille",
+                    DeliveryAddress = "2, Rue A, 13100 Aix en Provence",
+                    SelectTrajectoryType = Trajectory.TrajectoryType.Punctual,
+                    ItineraryId = 300
+
+                });
+            this.SaveChanges();
+
+
+
+
+         //   this.Services.AddRange(
+
+        //        new Service
+        //        {
+        //            Id = 100,
+        //            UserProviderId = 100,
+        //            PublicationDate = new DateTime(2022, 06, 10),
+        //            ExpirationDate = new DateTime(2022, 06, 19),
+        //            ReferenceNumber = 100,
+        //            ServicePrice = 20,
+        //// Isexpired=false,
+        //            Start = new DateTime(2022, 06, 21),
+        //            End = new DateTime(2022, 06, 21),
+
+        //            SelectServiceType = Service.ServiceType.CarPoolingService
+        //        },
+
+
+        //        new Service
+        //        {
+        //            Id = 200,
+        //            UserProviderId = 200,
+        //            PublicationDate = new DateTime(2022, 06, 10),
+        //            ExpirationDate = new DateTime(2022, 06, 19),
+        //            ReferenceNumber = 100,
+        //// Isexpired=false,
+        //            Start = new DateTime(2022, 06, 21),
+        //            End = new DateTime(2022, 06, 21),
+        //            IsRequest = false,
+
+        //            SelectServiceType = Service.ServiceType.CarRentalService
+        //        },
+
+
+        //        new Service
+        //        {
+        //            Id = 300,
+        //            UserProviderId = 300,
+        //            PublicationDate = new DateTime(2022, 06, 10),
+        //            ExpirationDate = new DateTime(2022, 06, 19),
+        //            ReferenceNumber = 300,
+        //// Isexpired=false,
+        //            Start = new DateTime(2022, 06, 21),
+        //            End = new DateTime(2022, 06, 21),
+        //            IsRequest = false,
+
+        //            SelectServiceType = Service.ServiceType.ParcelService
+               // });
+            //this.SaveChanges();
+
+
+            //this.CarPoolingServices.Add(
+
+            //    new CarPoolingService
+            //    {
+            //        Id = 100,
+            //        ServiceId = 100,
+            //        SelectCarPoolingType = CarPoolingService.CarPoolingType.HomeToWork,
+            //        AvailableSeats = 3,
+            //        PetsAllowed = false,
+            //        SmokingAllowed = false,
+            //        MusicAllowed = true,
+            //        ChattingAllowed = false,
+            //        TrajectoryId = 100
+
+            //    });
+            //this.SaveChanges();
+
+
+            //this.CarRentalServices.Add(
+
+            //    new CarRentalService
+            //    {
+            //        Id = 200,
+            //        ServiceId = 200,
+            //        KeyPickUpAddress = "1, Rue A, 13000 Marseille",
+            //        KeyDropOffAddress = "1, Rue A, 13000 Marseille",
+            //        VehiculeId = 1,
+
+
+            //    });
+
+            //this.ParcelServices.Add(
+
+            //    new ParcelService
+            //    {
+            //        Id = 300,
+            //        ServiceId = 300,
+            //        BarCode = 300000,
+            //        WeightKilogrammes = 5,
+            //        AtypicalVolume = true,
+            //        Fragile = false,
+            //        TrajectoryId = 300,
+
+            //    });
+            //this.SaveChanges();
+
+            #endregion
+
+
+        }
 
 
         #region Defining character length properties of each table

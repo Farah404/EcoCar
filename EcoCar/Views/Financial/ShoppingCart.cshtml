@@ -33,7 +33,7 @@
                             <input id="qty" value="@Model.ShoppingCart.QuantityBatchOne"/>
                             <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
                         </td>
-                        <td><a id="totalInline" class="product-total-price" /></td>
+                        <td><p id="totalInline"> </p></td>
                         <td><a class="product-removal" href="#">Supprimer</a></td>
                     </tr>
                 }
@@ -46,7 +46,7 @@
                         <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchTwoPrice</td>
                         <td class="col col-qty layout-inline">
                             <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
-                            <input tupe="numeric" value="@Model.ShoppingCart.QuantityBatchTwo"/>
+                            <input value="@Model.ShoppingCart.QuantityBatchTwo"/>
                             <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
                         </td>
                         <td class="product-total-price">Total</td>
@@ -78,10 +78,10 @@
                         <td class="product-line-price">@Model.EcoStore.MonthlySubscriptionPrice</td>
                         <td class="col col-qty layout-inline">
                             <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
-                            <input tupe="numeric" value="@Model.ShoppingCart.QuantityMonthlySubscription"/>
+                            <input value="@Model.ShoppingCart.QuantityMonthlySubscription"/>
                             <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
                         </td>
-                        <td class="product-total-price">Total</td>
+                        <td class="totalInline">Total</td>
                         <td><a class="product-removal" href="#">Supprimer</a></td>
                     </tr>
                 }
@@ -94,7 +94,7 @@
                         <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
                         <td class="col col-qty layout-inline">
                             <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
-                            <input tupe="numeric" value="@Model.ShoppingCart.QuantityTrimestrialSubscription"/>
+                            <input value="@Model.ShoppingCart.QuantityTrimestrialSubscription"/>
                             <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
                         </td>
                         <td class="product-total-price">Total</td>
@@ -110,7 +110,7 @@
                         <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
                         <td class="col col-qty layout-inline">
                             <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
-                            <input tupe="numeric" value="@Model.ShoppingCart.QuantitySemestrialSubscription"/>
+                            <input value="@Model.ShoppingCart.QuantitySemestrialSubscription"/>
                             <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
                         </td>
                         <td class="product-total-price">Total</td>
@@ -123,34 +123,27 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
 <script>
   // SHOPPING CART PLUS OR MINUS
   $('a.qty-minus').on('click', function(e) {
     e.preventDefault();
     var $this = $(this);
-    var $input = $this.closest('div').find('input');
+    var $input = $this.closest('tr').find('input');
     var value = parseInt($input.val());
-    
+
     if (value > 1) {
       value = value - 1;
     } else {
       value = 0;
     }
-    
+
     $input.val(value);
-        
+
   });
     $('a.qty-plus').on('click', function(e) {
     e.preventDefault();
     var $this = $(this);
-    var $input = $this.closest('div').find('input');
+    var $input = $this.closest('tr').find('input');
     var value = parseInt($input.val());
     if (value < 100) {
     value = value + 1;
@@ -166,14 +159,14 @@ $('input').on('blur', function(){
     if (value < 0 || isNaN(value)) {
       input.val(0);
     } else if
-      (value > 100) {
+      (value > 20) {
       input.val(100);
     }
 });
 // Remove Items From Cart
 $('a.product-removal').click(function(){
   event.preventDefault();
-  $( this ).parent().parent().parent().hide( 400 );
+  $( this ).parent().parent().hide( 400 );
  
 })
 //Total

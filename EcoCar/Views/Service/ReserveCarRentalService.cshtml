@@ -19,10 +19,10 @@
                 {
                     <br>
 
-                    <button class="btn btn-primary center-block" type="submit">Réserver la prestation</button>
+                    <button class="btn btn-success center-block" type="submit">Réserver la prestation pour @Model.CarRentalService.Service.PriceEcoCoins EcoCoins</button>
                 }
                 <br />
-                    <button onclick="location.href='/Account/UserProfile/@Model.CarRentalService.Service.UserProviderId'" class="btn btn-success center-block">Consulter le profil de l'EcoMembre</button>
+                    <button onclick="location.href='/Account/UserProfile/@Model.CarRentalService.Service.UserProviderId'" class="btn btn-success center-block">Profil de l'EcoMembre prestataire</button>
             </div>
             <div class="col-md-6">
                 <div class="table-responsive">
@@ -32,7 +32,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-road  text-success"></span>
+                                    <span class="glyphicon glyphicon-play  text-success"></span>
                                     Date et heure de départ
                                 </td>
                                 <td class="text-success">
@@ -42,8 +42,8 @@
                             <tr>
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-road  text-success"></span>
-                                    Date et heure de d'arrivée'
+                                    <span class="glyphicon glyphicon-stop  text-success"></span>
+                                    Date et heure de d'arrivée
                                 </td>
                                 <td class="text-success">
                                         <p>@Model.CarRentalService.Service.End</p>
@@ -51,7 +51,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-road  text-success"></span>
+                                    <span class="glyphicon glyphicon-arrow-up  text-success"></span>
                                     KeyPickUpAddress
                                 </td>
                                 <td class="text-success">
@@ -61,7 +61,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-user text-success"></span>
+                                    <span class="glyphicon glyphicon-arrow-up text-success"></span>
                                     KeyDropOffAddress
                                 </td>
                                 <td class="text-success">
@@ -71,7 +71,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-hourglass text-success"></span>
+                                    <span class="glyphicon glyphicon-tags text-success"></span>
                                     Vehicule.Brand
                                 </td>
                                 <td class="text-success">
@@ -81,7 +81,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-pause text-success"></span>
+                                    <span class="glyphicon glyphicon-star text-success"></span>
                                     Vehicule.Model
                                 </td>
                                 <td class="text-success">
@@ -90,7 +90,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-time text-success"></span>
+                                    <span class="glyphicon glyphicon-cog text-success"></span>
                                     Vehicule.Hybrid
                                 </td>
                                 <td class="text-success">
@@ -100,7 +100,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-arrow-up text-success"></span>
+                                    <span class="glyphicon glyphicon-flash text-success"></span>
                                     Vehicule.Electric
                                 </td>
                                 <td class="text-success">
@@ -110,7 +110,7 @@
 
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-arrow-down text-success"></span>
+                                    <span class="glyphicon glyphicon-arrow-user text-success"></span>
                                     Vehicule.AvailableSeats
                                 </td>
                                 <td class="text-success">

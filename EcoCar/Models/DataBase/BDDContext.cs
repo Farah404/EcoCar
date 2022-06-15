@@ -1,5 +1,4 @@
-﻿
-using EcoCar.Models.FinancialManagement;
+﻿using EcoCar.Models.FinancialManagement;
 using EcoCar.Models.ServiceManagement;
 using EcoCar.Models.MessagingManagement;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +22,6 @@ namespace EcoCar.Models.DataBase
         public DbSet<BillingAddress> BillingAddresses { get; set; }
         public DbSet<EcoStore> EcoStores { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
-        public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<ServiceInvoice> ServiceInvoices { get; set; }
         public DbSet<EcoStoreInvoice> EcoStoreInvoices { get; set; }
@@ -77,8 +75,8 @@ namespace EcoCar.Models.DataBase
                     NameThree = "EcoCoinsBatchThree",
 
 
-                    MonthlySubscriptionPrice = 0,
-                    MonthlySubscription = 0,
+                    MonthlySubscriptionPrice = 10.00,
+                    MonthlySubscription = 20,
                     NameMonth = "MonthlySubscription",
 
                     TrimestrialSubscriptionPrice = 50.00,
@@ -90,7 +88,7 @@ namespace EcoCar.Models.DataBase
                     NameSemester = "SemestrialSubscription",
                 });
 
-          
+
             #endregion
 
             #region Initializing the admins
@@ -141,8 +139,7 @@ namespace EcoCar.Models.DataBase
                     Id = 1,
                     Username = "random",
                     Password = "5E-A1-36-6C-34-CC-38-0D-AD-F1-62-AC-F6-CB-FD-42", //random
-                    IsActive = true,
-                    PersonId = 1
+                    IsActive = true
                 });
 
             this.BankingDetails.Add(
@@ -237,10 +234,9 @@ namespace EcoCar.Models.DataBase
                     Id = 2,
                     Username = "Farah",
                     Password = "5E-A1-36-6C-34-CC-38-0D-AD-F1-62-AC-F6-CB-FD-42", //random
-                    IsActive = true,
-                    PersonId = 2
+                    IsActive = true
                 });
-            
+
             this.BankingDetails.Add(
                 new BankDetails
                 {

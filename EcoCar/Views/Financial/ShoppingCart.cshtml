@@ -34,15 +34,17 @@
                             <td class="product-eco-ecoin">@Model.EcoStore.EcoCoinsBatchOne</td>
                             <td id="unitaryPrice" class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
                             <td class="col col-qty layout-inline">
-                                <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
                                 @Html.TextBox("QuantityBatchOne",@Model.ShoppingCart.QuantityBatchOne, new{id="qty", @class ="form-control"})
-                                <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
                             </td>
                             <td><p id="totalInline"> </p></td>
                             <td><a class="product-removal" href="#">Supprimer</a></td>
                         </tr>
                     }
-                    
+                    else
+                    {
+                        @Html.Hidden("QuantityBatchOne",0)
+                    }
+
 
 
                     @if (@Model.ShoppingCart.QuantityBatchTwo != 0)
@@ -52,13 +54,15 @@
                             <td class="product-eco-ecoin">@Model.EcoStore.EcoCoinsBatchTwo</td>
                             <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchTwoPrice</td>
                             <td class="col col-qty layout-inline">
-                                <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
                                 @Html.TextBox("QuantityBatchTwo",@Model.ShoppingCart.QuantityBatchTwo, new{id="qty", @class ="form-control"})
-                                <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
                             </td>
                             <td class="product-total-price">Total</td>
                             <td><a class="product-removal" href="#">Supprimer</a></td>
                         </tr>
+                    }
+                    else
+                    {
+                        @Html.Hidden("QuantityBatchTwo",0)
                     }
 
                     @if (@Model.ShoppingCart.QuantityBatchThree != 0)
@@ -68,15 +72,16 @@
                             <td class="product-eco-ecoin">@Model.EcoStore.EcoCoinsBatchThree</td>
                             <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
                             <td class="col col-qty layout-inline">
-                                <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
                                 @Html.TextBox("QuantityBatchThree",@Model.ShoppingCart.QuantityBatchThree, new{id="qty", @class ="form-control"})
-                                <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
                             </td>
                             <td class="product-total-price">Total</td>
                             <td><a class="product-removal" href="#">Supprimer</a></td>
                         </tr>
                     }
-
+                    else
+                    {
+                        @Html.Hidden("QuantityBatchThree",0)
+                    }
                     @if (@Model.ShoppingCart.QuantityMonthlySubscription != 0)
                     {
                         <tr>
@@ -84,15 +89,16 @@
                             <td class="product-eco-ecoin">@Model.EcoStore.MonthlySubscription</td>
                             <td class="product-line-price">@Model.EcoStore.MonthlySubscriptionPrice</td>
                             <td class="col col-qty layout-inline">
-                                <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
-                                @Html.TextBox("QuantityMonthlySubscription",@Model.ShoppingCart.QuantityMonthlySubscription, new{id="qty", @class ="form-control"})
-                                <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
+                                @Html.TextBox("QuantityMonthlySubscription",@Model.ShoppingCart.QuantityMonthlySubscription, new{@readonly = true,id="qty", @class ="form-control"})
                             </td>
                             <td class="totalInline">Total</td>
                             <td><a class="product-removal" href="#">Supprimer</a></td>
                         </tr>
                     }
-
+                    else
+                    {
+                        @Html.Hidden("QuantityMonthlySubscription",0)
+                    }
                     @if (@Model.ShoppingCart.QuantityTrimestrialSubscription != 0)
                     {
                         <tr>
@@ -100,15 +106,16 @@
                             <td class="product-eco-ecoin">@Model.EcoStore.TrimestrialSubscription</td>
                             <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
                             <td class="col col-qty layout-inline">
-                                <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
-                                 @Html.TextBox("QuantityTrimestrialSubscription",@Model.ShoppingCart.QuantityTrimestrialSubscription, new{id="qty", @class ="form-control"})
-                                <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
+                                 @Html.TextBox("QuantityTrimestrialSubscription",@Model.ShoppingCart.QuantityTrimestrialSubscription, new{@readonly = true,id="qty", @class ="form-control"})
                             </td>
                             <td class="product-total-price">Total</td>
                             <td><a class="product-removal" href="#">Supprimer</a></td>
                         </tr>
                     }
-
+                    else
+                    {
+                        @Html.Hidden("QuantityTrimestrialSubscription",0)
+                    }
                     @if (@Model.ShoppingCart.QuantitySemestrialSubscription != 0)
                     {
                         <tr>
@@ -116,15 +123,16 @@
                             <td class="product-eco-ecoin">@Model.EcoStore.SemestrialSubscription</td>
                             <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
                             <td class="col col-qty layout-inline">
-                                <a href="#" class="qty qty-minus"><span class="glyphicon glyphicon-minus"></span></a>
-                                 @Html.TextBox("QuantitySemestrialSubscription",@Model.ShoppingCart.QuantitySemestrialSubscription, new{id="qty", @class ="form-control"})
-                                <a href="#" class="qty qty-plus"><span class="glyphicon glyphicon-plus"></span></a>
+                                 @Html.TextBox("QuantitySemestrialSubscription",@Model.ShoppingCart.QuantitySemestrialSubscription, new{@readonly = true,id="qty", @class ="form-control"})
                             </td>
                             <td class="product-total-price">Total</td>
                             <td><a class="product-removal" href="#">Supprimer</a></td>
                         </tr>
                     }
-
+                    else
+                    {
+                        @Html.Hidden("QuantitySemestrialSubscription",0)
+                    }
                 </tbody>
 
             </table>
@@ -134,33 +142,6 @@
     
 }
 <script>
-    // SHOPPING CART PLUS OR MINUS
-    $('a.qty-minus').on('click', function(e) {
-        e.preventDefault();
-        var $this = $(this);
-        var $input = $this.closest('tr').find('input');
-        var value = parseInt($input.val());
-
-        if (value > 1) {
-            value = value - 1;
-        } else {
-            value = 0;
-        }
-
-        $input.val(value);
-
-    });
-    $('a.qty-plus').on('click', function(e) {
-        e.preventDefault();
-        var $this = $(this);
-        var $input = $this.closest('tr').find('input');
-        var value = parseInt($input.val());
-        if (value < 100) {
-            value = value + 1;
-        } else {
-            value = 100;
-        }
-        $input.val(value);
     });
     // RESTRICT INPUTS TO NUMBERS ONLY WITH A MIN OF 0 AND A MAX 100
     $('input').on('blur', function() {
@@ -177,7 +158,6 @@
     $('a.product-removal').click(function() {
         event.preventDefault();
         $(this).parent().parent().hide(400);
-
     })
     //Total
     function calculate() {

@@ -1,4 +1,213 @@
-﻿@{
-    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+﻿@model EcoCar.ViewModels.FinancialViewModel
+
+
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "EcoStore";
 }
+
+<!--Pricing container Subscribe-->
+<div id="pricing" class="container-fluid bg-grey">
+    <div class="text-center">
+        <h2>Abonnement</h2>
+        <h4>Choisissez le type d'abonnement le plus adapté à vos besoins</h4>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Mensuel</h1>
+                </div>
+                <div class="panel-body">
+                    <p><img src="~/Images/subMonth.png" style="width:125px;height:225;"></p>
+                </div>
+                <div class="panel-footer">
+                    <h3 class="card-title">
+                        @Model.EcoStore.MonthlySubscriptionPrice €
+                    </h3>
+                    <h4>tous les mois pour</h4>
+                    <h5 class="card-text">
+                        @Model.EcoStore.MonthlySubscription EcoCoins/mois
+                    </h5>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.Hidden("QuantityBatchOne",0)
+                        @Html.Hidden("QuantityBatchTwo",0)
+                        @Html.Hidden("QuantityBatchThree",0)
+                        @Html.Hidden("QuantityMonthlySubscription",1)
+                        @Html.Hidden("QuantityTrimestrialSubscription",0)
+                        @Html.Hidden("QuantitySemestrialSubscription",0)
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">Je m'abonne</button>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Trimestriel</h1>
+                </div>
+                <div class="panel-body">
+
+                    <p><img src="~/Images/sub3Months.png" style="width:200px;height:300;"></p>
+                </div>
+                <div class="panel-footer">
+                    <h3 class="card-title">
+                        @Model.EcoStore.TrimestrialSubscriptionPrice €
+                    </h3>
+                    <h4>tous les 3 mois pour</h4>
+                    <h5 class="card-text">
+                        @Model.EcoStore.TrimestrialSubscription EcoCoins/mois
+                    </h5>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.Hidden("QuantityBatchOne",0)
+                        @Html.Hidden("QuantityBatchTwo",0)
+                        @Html.Hidden("QuantityBatchThree",0)
+                        @Html.Hidden("QuantityMonthlySubscription",0)
+                        @Html.Hidden("QuantityTrimestrialSubscription",1)
+                        @Html.Hidden("QuantitySemestrialSubscription",0)
+                        <button type="submit" name="AbonnementTrimestriel" class="btn btn-success btn-xl">Je m'abonne</button>
+                    }
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Semestriel</h1>
+                </div>
+                <div class="panel-body">
+
+                    <p><img src="~/Images/sub6Months.png" style="width:200px;height:300;"></p>
+                </div>
+                <div class="panel-footer">
+                    <h3 class="card-title">
+                        @Model.EcoStore.SemestrialSubscriptionPrice €
+                    </h3>
+                    <h4>tous les 6 mois pour</h4>
+                    <h5 class="card-text">
+                        @Model.EcoStore.SemestrialSubscription EcoCoins/mois
+                    </h5>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.Hidden("QuantityBatchOne",0)
+                        @Html.Hidden("QuantityBatchTwo",0)
+                        @Html.Hidden("QuantityBatchThree",0)
+                        @Html.Hidden("QuantityMonthlySubscription",0)
+                        @Html.Hidden("QuantityTrimestrialSubscription",0)
+                        @Html.Hidden("QuantitySemestrialSubscription",1)
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">Je m'abonne</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Pricing container Buy EcoCoins-->
+<div id="pricing" class="container-fluid">
+    <div class="text-center">
+        <h2>Achat EcoCoins</h2>
+        <h4>Choisissez le lot EcoCoins le plus adapté à vos besoins</h4>
+    </div>
+    <div class="row slideanim">
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Lot 1</h1>
+                </div>
+                <div class="panel-body">
+                    <p><img src="~/Images/EcoCoin.png" style="width:100px;height:100px;"></p>
+                </div>
+                <div class="panel-footer">
+                    <h3 class="card-title">
+                        @Model.EcoStore.EcoCoinsBatchOnePrice €
+                    </h3>
+                    <h4>pour</h4>
+                    <h5 class="card-text">
+                        @Model.EcoStore.EcoCoinsBatchOne EcoCoins
+                    </h5>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.Hidden("QuantityBatchOne",1)
+                        @Html.Hidden("QuantityBatchTwo",0)
+                        @Html.Hidden("QuantityBatchThree",0)
+                        @Html.Hidden("QuantityMonthlySubscription",0)
+                        @Html.Hidden("QuantityTrimestrialSubscription",0)
+                        @Html.Hidden("QuantitySemestrialSubscription",0)
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">J'achète</button>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Lot 2</h1>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
+                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
+                    </p>
+                </div>
+                <div class="panel-footer">
+                    <h3 class="card-title">
+                        @Model.EcoStore.EcoCoinsBatchTwoPrice €
+                    </h3>
+                    <h4>pour</h4>
+                    <h5 class="card-text">
+                        @Model.EcoStore.EcoCoinsBatchTwo EcoCoins
+                    </h5>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.Hidden("QuantityBatchOne",0)
+                        @Html.Hidden("QuantityBatchTwo",1)
+                        @Html.Hidden("QuantityBatchThree",0)
+                        @Html.Hidden("QuantityMonthlySubscription",0)
+                        @Html.Hidden("QuantityTrimestrialSubscription",0)
+                        @Html.Hidden("QuantitySemestrialSubscription",0)
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">J'achète</button>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Lot 3</h1>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
+                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
+                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
+                    </p>
+                </div>
+                <div class="panel-footer">
+                    <h3 class="card-title"> 
+                        @Model.EcoStore.EcoCoinsBatchThreePrice €
+                    </h3>
+                    <h4>pour</h4>
+                    <h5 class="card-text">
+                        @Model.EcoStore.EcoCoinsBatchThree EcoCoins
+                    </h5>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.Hidden("QuantityBatchOne",0)
+                        @Html.Hidden("QuantityBatchTwo",0)
+                        @Html.Hidden("QuantityBatchThree",1)
+                        @Html.Hidden("QuantityMonthlySubscription",0)
+                        @Html.Hidden("QuantityTrimestrialSubscription",0)
+                        @Html.Hidden("QuantitySemestrialSubscription",0)
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">J'achète</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

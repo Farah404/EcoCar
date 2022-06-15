@@ -1,4 +1,5 @@
 ﻿using EcoCar.Models.FinancialManagement;
+using EcoCar.Models.PersonManagement;
 using System.Collections.Generic;
 
 namespace EcoCar.ViewModels
@@ -20,6 +21,10 @@ namespace EcoCar.ViewModels
         public ShoppingCart ShoppingCart { get; set; }
 
         public List<EcoStore> EcoStores { get; set; }
+
+        public User User { get; set; }
+
+        public Account Account { get; set; }
 
     }
 }

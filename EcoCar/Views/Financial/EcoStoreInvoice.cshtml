@@ -4,10 +4,8 @@
     ViewBag.Title = "Facture EcoStore";
 }
 
-
-<div class="container bootdey">
-<div class="row invoice row-printable">
-    <div class="col-12 col-md-8">
+<div class=" container-fluid">
+    <div class="row invoice row-printable">
         <!-- col-lg-12 start here -->
         <div class="panel panel-default plain" id="dash_0">
             <!-- Start .panel -->
@@ -16,16 +14,17 @@
                     <!-- Start .row -->
                     <div class="col-lg-6">
                         <!-- col-lg-6 start here -->
-                        <div class="invoice-logo"><img width="100" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Invoice logo"></div>
+                        <div class="invoice-logo"><img width="100" src="~/assets/img/avataaars.svg" alt="Invoice logo"></div>
                     </div>
                     <!-- col-lg-6 end here -->
                     <div class="col-lg-6">
                         <!-- col-lg-6 start here -->
                         <div class="invoice-from">
                             <ul class="list-unstyled text-right">
-                                <li>BillingAddress.AddressLine</li>
-                                <li>BillingAddress.PostalCode+City</li>
-                                <li>BillingAddress.Country</li>
+                                <li>@Model.User.Account.Username</li>
+                                <li>@Model.User.BillingAddress.AddressLine</li>
+                                <li>@Model.User.BillingAddress.PostalCode @Model.User.BillingAddress.City</li>
+                                <li>@Model.User.BillingAddress.Country</li>
                             </ul>
                         </div>
                     </div>
@@ -35,9 +34,10 @@
                         <div class="invoice-details mt25">
                             <div class="well">
                                 <ul class="list-unstyled mb0">
-                                    <li><strong>Invoice.InvoiceNumber</strong> ******</li>
-                                    <li><strong>InvoiceIssueDate:</strong> ******</</li>
-                                    <li><strong>InvoiceType:</strong>******</</li>
+                                    <li><strong>Numéro de facture</strong> @Model.EcoStoreInvoice.Invoice.InvoiceNumber</li>
+                                    <li><strong>Date d'émission de la facture</strong> @Model.EcoStoreInvoice.Invoice.InvoiceIssueDate.ToShortDateString()</</li>
+                                    <li><strong>Heure d'émission de la facture</strong> @Model.EcoStoreInvoice.Invoice.InvoiceIssueDate.ToShortTimeString()</</li>
+                                    <li><strong>Type de facture</strong> @Model.EcoStoreInvoice.Invoice.SelectInvoiceType</li>
 
                                 </ul>
                             </div>
@@ -47,44 +47,87 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="per70 text-center">PurchaseType</th>
-                                            <th class="per25 text-center">Prix</th>
+                                            <th class="per70 text-center">Type d'achat</th>
+                                            <th class="per25 text-center">Prix unitaire en €</th>
+                                            <th class="per25 text-center">EcoCoins unitaire crédités</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1024MB Cloud 2.0 Server - elisium.dynamic.com (12/04/2014 - 01/03/2015)</td>
-                                            <td class="text-center">$25.00 USD</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Logo design</td>
-                                            <td class="text-center">$200.00 USD</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Backup - 1024MB Cloud 2.0 Server - elisium.dynamic.com</td>
-                                            <td class="text-center">$12.00 USD</td>
-                                        </tr>
+                                        @if (@Model.EcoStoreInvoice.QuantityBatchOne != 0)
+                                        {
+                                            <tr>
+                                                <td>@Model.EcoStoreInvoice.QuantityBatchOne @Model.EcoStore.NameOne</td>
+                                                <td class="text-center">@Model.EcoStore.EcoCoinsBatchOnePrice €</td>
+                                                <td class="text-center">@Model.EcoStore.EcoCoinsBatchOne EcoCoins</td>
+                                            </tr>
+
+                                        }
+                                        @if (@Model.EcoStoreInvoice.QuantityBatchTwo != 0)
+                                        {
+                                            <tr>
+                                                <td>@Model.EcoStoreInvoice.QuantityBatchTwo @Model.EcoStore.NameTwo</td>
+                                                <td class="text-center">@Model.EcoStore.EcoCoinsBatchTwoPrice €</td>
+                                                <td class="text-center">@Model.EcoStore.EcoCoinsBatchTwo EcoCoins</td>
+                                            </tr>
+
+                                        }
+                                        @if (@Model.EcoStoreInvoice.QuantityBatchThree != 0)
+                                        {
+                                            <tr>
+                                                <td>@Model.EcoStoreInvoice.QuantityBatchThree @Model.EcoStore.NameThree</td>
+                                                <td class="text-center">@Model.EcoStore.EcoCoinsBatchThreePrice €</td>
+                                                <td class="text-center">@Model.EcoStore.EcoCoinsBatchThree EcoCoins</td>
+                                            </tr>
+
+                                        }
+                                        @if (@Model.EcoStoreInvoice.QuantityMonthlySubscription != 0)
+                                        {
+                                            <tr>
+                                                <td>@Model.EcoStoreInvoice.QuantityMonthlySubscription @Model.EcoStore.NameMonth</td>
+                                                <td class="text-center">@Model.EcoStore.MonthlySubscriptionPrice €</td>
+                                                <td class="text-center">@Model.EcoStore.MonthlySubscription EcoCoins</td>
+                                            </tr>
+
+                                        }@if (@Model.EcoStoreInvoice.QuantityTrimestrialSubscription != 0)
+                                        {
+                                            <tr>
+                                                <td>@Model.EcoStoreInvoice.QuantityTrimestrialSubscription @Model.EcoStore.TrimestrialSubscription</td>
+                                                <td class="text-center">@Model.EcoStore.TrimestrialSubscriptionPrice €</td>
+                                                <td class="text-center">@Model.EcoStore.TrimestrialSubscription EcoCoins</td>
+                                            </tr>
+
+                                        }
+                                        @if (@Model.EcoStoreInvoice.QuantitySemestrialSubscription != 0)
+                                        {
+                                            <tr>
+                                                <td>@Model.EcoStoreInvoice.QuantitySemestrialSubscription @Model.EcoStore.SemestrialSubscription</td>
+                                                <td class="text-center">@Model.EcoStore.SemestrialSubscriptionPrice €</td>
+                                                <td class="text-center">@Model.EcoStore.SemestrialSubscription EcoCoins</td>
+                                            </tr>
+
+                                        }
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="2" class="text-right">Total en euros:</th>
-                                            <th class="text-center">$284.4.40 USD</th>
+                                            <th colspan="1" class="text-right">Total:</th>
+                                            <th class="text-center">@Model.EcoStoreInvoice.TotalPriceEuros €</th>
+                                            <th class="text-center">Total EcoCoins</th>
                                         </tr>
                                     </tfoot>
                                 </table>
                                 <div class="float-right">
-                                <button type="button" class="btn btn-lg btn-primary mt-2">Imprimer</button>
+                                    <button type="button" id="cmd" class="btn btn-lg btn-success">Imprimer la facture</button>
                                 </div>
                             </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-4">
-        <center><img style="width:650px" src="~/Images/ServiceRequestList.png"></center>
-        </div>
 </div>
 
-</div>
+
+
+
+

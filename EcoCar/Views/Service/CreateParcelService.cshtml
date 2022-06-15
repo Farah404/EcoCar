@@ -9,31 +9,37 @@
     <div class="panel-body inf-content">
         <div class="row">
             <div class="col-md-4">
-                <h4>Proposer un service</h4>
+                <h4>Proposer un service: Colis</h4>
 
                 @using (Html.BeginForm())
                 {
-                    @Html.Label("BarCode") <br>
-                    @Html.TextBoxFor(model => model.BarCode, new { htmlAttributes = new { @class = "form-control",@id="Refnunmber",@readonly = true, style="width:300px"}})
-                    <br>
+                    <div class="form-floating mb-3">
+                        @Html.Label("Code barre") <br>
+                        @Html.EditorFor(model => model.BarCode, new { htmlAttributes = new { @class = "form-control",@id="codeBar",@readonly = true, style="width:300px"}})
+                        <br>
+                    </div>
 
+                    <div class="form-floating mb-3">
+                        @Html.Label("Poids en kilogrammes") <br>
+                        @Html.EditorFor(model => model.WeightKilogrammes, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.WeightKilogrammes)
+                        <br>
+                    </div>
 
-                    @Html.Label("WeightKilogrammes") <br>
-                    @Html.TextBoxFor(model => model.WeightKilogrammes, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.WeightKilogrammes)
-                    <br>
+                    <div class="form-floating mb-3">
+                        @Html.CheckBoxFor(model => model.AtypicalVolume, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.Label("Forme Atypique")
+                        @Html.ValidationMessageFor(model => model.AtypicalVolume)
+                        <br>
+                    </div>
 
+                    <div class="form-floating mb-3">
 
-                    @Html.Label("AtypicalVolume") <br>
-                    @Html.CheckBoxFor(model => model.AtypicalVolume, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.AtypicalVolume)
-                    <br>
-
-
-                    @Html.Label("Fragile")<br>
-                    @Html.CheckBoxFor(model => model.Fragile, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.Fragile)
-                    <br>
+                        @Html.CheckBoxFor(model => model.Fragile, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.Label("Fragile")
+                        @Html.ValidationMessageFor(model => model.Fragile)
+                        <br>
+                    </div>
 
                     @Html.HiddenFor(model => model.ServiceId)
                     @Html.HiddenFor(model => model.TrajectoryId)
@@ -49,3 +55,18 @@
         </div>
     </div>
 </div>
+
+<script>
+function randomNumber(len) {
+  var randomNumber;
+  var n = '';
+
+  for (var count = 0; count < len; count++) {
+    randomNumber = Math.floor(Math.random() * 10);
+    n += randomNumber.toString();
+  }
+  return n;
+}
+
+document.getElementById("codeBar").value = randomNumber(9);
+</script>

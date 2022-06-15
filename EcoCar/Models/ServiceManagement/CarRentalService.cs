@@ -1,5 +1,4 @@
-﻿
-using EcoCar.Models.PersonManagement;
+﻿using EcoCar.Models.PersonManagement;
 
 namespace EcoCar.Models.ServiceManagement
 {

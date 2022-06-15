@@ -13,7 +13,7 @@ namespace EcoCar.Models.FinancialManagement
         //Attributes
         public int IdServiceProvider { get; set; }
         public int IdServiceConsumer { get; set; }
-        
+
         //Foreign Keys
         public int ServiceId { get; set; }
         public Service Service { get; set; }

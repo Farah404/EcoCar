@@ -88,6 +88,7 @@ namespace EcoCar.Controllers
                                    service.End,
                                    false,
                                    service.SelectServiceType,
+                                   service.PriceEcoCoins,
                                    userId
                                    );
 
@@ -456,6 +457,7 @@ namespace EcoCar.Controllers
                                serviceRequest.End,
                                true,
                                serviceRequest.SelectServiceType,
+                               serviceRequest.PriceEcoCoins,
                                userId
                                );
                 var selectedValue = serviceRequest.SelectServiceType;

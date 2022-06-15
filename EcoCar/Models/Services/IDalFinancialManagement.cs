@@ -26,8 +26,8 @@ namespace EcoCar.Models.Services
 
         //Invoice
         List<Invoice> GetAllInvoices();
-        int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId);
-        void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId);
+        int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType);
+        void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType);
         void DeleteInvoice(int id);
 
         //-------------------------------------------------------------------------------------------------
@@ -42,25 +42,24 @@ namespace EcoCar.Models.Services
 
         //EcoStoreInvoice
         List<EcoStoreInvoice> GetAllEcoStoreInvoices();
-        int CreateEcoStoreInvoice();
-        void UpdateEcoStoreInvoice(int id);
-        void DeleteEcoStoreInvoice(int id);
-
-        //-------------------------------------------------------------------------------------------------
-
-        //Subscription
-        List<Subscription> GetAllSubscriptions();
-        int CreateSubscription(double subscriptionCostEuro, DateTime subscriptionExpiration, DateTime subscriptionStart, bool isActive);
-        void UpdateSubscription(int id, double subscriptionCostEuro, DateTime subscriptionExpiration, DateTime subscriptionStart, bool isActive);
-        void DeleteSubscription(int id);
+        int CreateEcoStoreInvoice(int userId, int invoiceId, int quantityBatchOne,
+            int quantityBatchTwo,
+            int quantityBatchThree,
+            int quantityMonthlySubscription,
+            int quantityTrimestrialSubscription,
+            int quantitySemestrialSubscription,
+            double totalPriceEuros);
+        EcoStoreInvoice GetEcoStoreInvoice(int ecoStoreInvoiceId);
+        //void UpdateEcoStoreInvoice(int id, int userId, int invoiceId);
+        //void DeleteEcoStoreInvoice(int id);
 
         //-------------------------------------------------------------------------------------------------
 
         //EcoWallet
         List<EcoWallet> GetAllEcoWallets();
         EcoWallet GetUserEcoWallet(int id);
-        int CreateEcoWallet(double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros);
-        void UpdateEcoWallet(int id, double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros);
+        int CreateEcoWallet(int ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros, DateTime subscriptionExpiration, DateTime subscriptionStart);
+        void UpdateEcoWallet(int id, int ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros, DateTime subscriptionExpiration, DateTime subscriptionStart);
         void DeleteEcoWallet(int id);
 
         //-------------------------------------------------------------------------------------------------

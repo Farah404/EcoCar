@@ -11,7 +11,7 @@ namespace EcoCar.Models.ServiceManagement
         public CarPoolingType SelectCarPoolingType { get; set; }
         public enum CarPoolingType
         {
-            HomeToWork ,
+            HomeToWork,
             HomeToSchool,
             Events,
             Travel

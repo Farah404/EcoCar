@@ -30,9 +30,10 @@
                 <strong>Information</strong><br>
 
                 <div class="table-responsive">
-                    <p>@Model.User.BirthDate</p>
+   
                     <table class="table table-user-information">
                         <tbody>
+                             
                             <tr>
                                 <td>
                                     <strong>
@@ -69,6 +70,17 @@
                             <tr>
                                 <td>
                                     <strong>
+                                        <span class="glyphicon glyphicon-gift  text-success"></span>
+                                        Date de naissance
+                                    </strong>
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.User.BirthDate</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
                                         <span class="glyphicon glyphicon-ok text-success"></span>
                                         Email et numéro de téléphone vérifiés
                                     </strong>
@@ -97,11 +109,10 @@
     </div>
 </div>
 <div id="services" class="container-fluid bg-grey">
-    <center><h2>Prestations de @Model.User.Account.Username en cours</h2></center>
     @*Service List Display*@
     <div class="table-responsive">
-        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Prestations du membre en cours"></center><br />
-        <table class="table" id="userTable">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Prestations de @Model.User.Account.Username en cours</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Prestations de @Model.User.Account.Username en cours...">
+        <table class="table" id="userInvoices">
             <thead>
                 <tr class="header">
                     <th>Date de début</th>

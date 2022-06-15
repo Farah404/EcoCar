@@ -20,23 +20,23 @@ namespace EcoCar.Models.FinancialManagement
 
         public double EcoCoinsBatchOnePrice { get; set; }
         public int EcoCoinsBatchOne { get; set; }
-        
+
 
         public double EcoCoinsBatchTwoPrice { get; set; }
         public int EcoCoinsBatchTwo { get; set; }
-        
+
 
         public double EcoCoinsBatchThreePrice { get; set; }
         public int EcoCoinsBatchThree { get; set; }
-        
+
 
         public double MonthlySubscriptionPrice { get; set; }
         public int MonthlySubscription { get; set; }
-        
+
 
         public double TrimestrialSubscriptionPrice { get; set; }
         public int TrimestrialSubscription { get; set; }
-        
+
 
         public double SemestrialSubscriptionPrice { get; set; }
         public int SemestrialSubscription { get; set; }

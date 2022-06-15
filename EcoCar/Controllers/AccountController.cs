@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
+using System;
 
 namespace EcoCar.Controllers
 {
@@ -140,6 +141,7 @@ namespace EcoCar.Controllers
                     User = dalPersonManagement.GetUser((int)id),
                     Services = dalServiceManagement.GetAllServices(),
                     Account = dalPersonManagement.GetAccount((int)id),
+                    EcoWallet = dalFinancialManagement.GetUserEcoWallet((int)id),
                     CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices((int)id),
                     CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices((int)id),
                     ParcelServices = dalServiceManagement.GetAllUserParcelServices((int)id)
@@ -155,7 +157,7 @@ namespace EcoCar.Controllers
             if (userid != null)
             {
                 Account accountToBan = dalPersonManagement.GetAccount(userid);
-                dalPersonManagement.UpdateAccount(accountToBan.Id, accountToBan.Username, accountToBan.Password, false, accountToBan.PersonId);
+                dalPersonManagement.UpdateAccount(accountToBan.Id, accountToBan.Username, accountToBan.Password, false);
                 return Redirect("/Account/adminHome");
             }
             return Redirect("/");
@@ -177,7 +179,7 @@ namespace EcoCar.Controllers
         }
 
         //Creating a user based on a person
-        public IActionResult CreateUser(int bankDetailsId, int billingAddressId, int personId, int? vehiculeId, int? shoppingCartId, int accountId)
+        public IActionResult CreateUser(int bankDetailsId, int billingAddressId, int personId, int? vehiculeId, int? shoppingCartId, int? accountId)
         {
             User user = new User()
             {
@@ -193,22 +195,22 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult CreateUser(User user)
         {
-           int userId = dalPersonManagement.CreateUser(
-            user.Email,
-            user.BirthDate,
-            user.PhoneNumber,
-            user.IdentityCardNumber,
-            user.DrivingPermitNumber,
-            user.UserRating,
-            user.SelectEcoStatusType,
-            user.BankDetailsId,
-            user.BillingAddressId,
-            user.PersonId,
-            user.VehiculeId,
-            user.EcoWalletId,
-            user.ShoppingCartId,
-            user.AccountId
-            );
+            int userId = dalPersonManagement.CreateUser(
+             user.Email,
+             user.BirthDate,
+             user.PhoneNumber,
+             user.IdentityCardNumber,
+             user.DrivingPermitNumber,
+             user.UserRating,
+             user.SelectEcoStatusType,
+             user.BankDetailsId,
+             user.BillingAddressId,
+             user.PersonId,
+             user.VehiculeId,
+             user.EcoWalletId,
+             user.ShoppingCartId,
+             user.AccountId
+             );
 
             string url = "/Account/CreateAccount" + "?userId=" + userId;
             return Redirect(url);
@@ -221,9 +223,15 @@ namespace EcoCar.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateAccount(Account account, int personId)
+        public IActionResult CreateAccount(Account account, int userId)
         {
-            dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive, account.CreationDate, account.PersonId);
+            int accountId = dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive, account.CreationDate);
+            User user = dalPersonManagement.GetUser(userId);
+            int ecoWalletId = dalFinancialManagement.CreateEcoWallet(0, false, 0, DateTime.Now, DateTime.MaxValue);
+            int shoppingCartId = dalFinancialManagement.CreateShoppingCart(0, 0, 0, 0, 0, 0, 0);
+            int insuranceId = dalPersonManagement.CreateInsurance(null, DateTime.Now, null);
+            int vehiculeId = dalPersonManagement.CreateVehicule(null, 0, null, false, false, DateTime.Now, 0, insuranceId);
+            dalPersonManagement.UpdateUser(userId, user.Email, user.BirthDate, user.PhoneNumber, user.IdentityCardNumber, user.IdentityCardNumber, user.BankDetailsId, user.BillingAddressId, user.PersonId, vehiculeId, ecoWalletId, shoppingCartId, accountId);
             return Redirect("/Account/LoginAccount");
         }
 
@@ -335,9 +343,11 @@ namespace EcoCar.Controllers
                     Account = dalPersonManagement.GetUserAccount(userId),
                     Vehicule = dalPersonManagement.GetUserVehicule(userId),
                     EcoWallet = dalFinancialManagement.GetUserEcoWallet(userId),
+                    ShoppingCart = dalFinancialManagement.GetUserShoppingCart(userId),
                     CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices(userId),
                     CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices(userId),
-                    ParcelServices = dalServiceManagement.GetAllUserParcelServices(userId)
+                    ParcelServices = dalServiceManagement.GetAllUserParcelServices(userId),
+                    EcoStoreInvoices = dalFinancialManagement.GetAllEcoStoreInvoices().Where(x => x.UserId == userId).ToList()
                 };
                 return View(accountViewModel);
             }
@@ -347,21 +357,6 @@ namespace EcoCar.Controllers
         public ActionResult ForgotPassword()
         {
             return View();
-        }
-
-        [HttpPost]
-        public IActionResult ForgotPassword(string email, string password)
-        {
-
-            User user = dalPersonManagement.GetUserByEmail(email);
-            if (user != null)
-            {
-                Account account = dalPersonManagement.GetAccount(user.Id);
-                dalPersonManagement.UpdateAccountPassword(account.Id, password);
-                return Redirect("/account/loginAccount");
-            }
-
-            return Redirect("/account/forgotpassword");
         }
         #endregion
 
@@ -374,28 +369,32 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult CreateInsurance(Insurance insurance)
         {
-            int insuranceId = dalPersonManagement.CreateInsurance(
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            User user = dalPersonManagement.GetUser(userId);
+            Vehicule vehicule = dalPersonManagement.GetUserVehicule(userId);
+            Insurance insuranceToUpdate = dalPersonManagement.GetInsurance(vehicule.InsuranceId);
+            dalPersonManagement.UpdateInsurance(
+                   insuranceToUpdate.Id,
                    insurance.InsuranceAgency,
                    insurance.InsuranceExpiration,
                    insurance.ContractNumber
-                   );
-            string url = "/Account/CreateVehicule" + "?insuranceId=" + insuranceId;
+                   ); ;
+            string url = "/Account/CreateVehicule";
             return Redirect(url);
         }
 
-        public ActionResult CreateVehicule(int insuranceId)
+        public ActionResult CreateVehicule()
         {
-            Vehicule vehicule = new Vehicule()
-            {
-                InsuranceId = insuranceId,
-            };
             return View();
         }
 
         [HttpPost]
         public IActionResult CreateVehicule(Vehicule vehicule)
         {
-            int vehiculeId = dalPersonManagement.CreateVehicule(
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            Vehicule vehiculeToUpdate = dalPersonManagement.GetUserVehicule(userId);
+            dalPersonManagement.UpdateVehicule(
+                   vehiculeToUpdate.Id,
                    vehicule.Brand,
                    vehicule.RegistrationNumber,
                    vehicule.Model,
@@ -403,16 +402,11 @@ namespace EcoCar.Controllers
                    vehicule.Electric,
                    vehicule.TechnicalTestExpiration,
                    vehicule.AvailableSeats,
-                   vehicule.InsuranceId
+                   vehiculeToUpdate.InsuranceId
                    );
-            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            dalPersonManagement.UpdateUserVehicule(userId, vehiculeId);
             string url = "/Account/UserProfilePersonal";
             return Redirect(url);
         }
         #endregion
     }
 }
-
-
-

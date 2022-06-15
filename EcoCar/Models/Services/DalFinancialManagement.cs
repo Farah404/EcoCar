@@ -139,24 +139,23 @@ namespace EcoCar.Models.Services
         #region CRUD Invoice
         public List<Invoice> GetAllInvoices()
         {
-            return _bddContext.Invoices.Include(e => e.BillingAddress).ToList();
+            return _bddContext.Invoices.ToList();
         }
 
         public Invoice GetInvoice(int id)
         {
-            return _bddContext.Invoices.Include(e => e.BillingAddress).FirstOrDefault(e => e.Id == id);
+            return _bddContext.Invoices.FirstOrDefault(e => e.Id == id);
         }
 
         //Create Invoice
-        public int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId)
+        public int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType)
         {
             Invoice invoice = new Invoice()
             {
                 InvoiceNumber = invoiceNumber,
                 InvoiceDescription = invoiceDescription,
                 InvoiceIssueDate = invoiceIssueDate,
-                SelectInvoiceType = selectInvoiceType,
-                BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId)
+                SelectInvoiceType = selectInvoiceType
             };
             _bddContext.Invoices.Add(invoice);
             _bddContext.SaveChanges();
@@ -169,7 +168,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update Invoice
-        public void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId)
+        public void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType)
         {
             Invoice invoice = _bddContext.Invoices.Find(id);
 
@@ -180,7 +179,6 @@ namespace EcoCar.Models.Services
                 invoice.InvoiceDescription = invoiceDescription;
                 invoice.InvoiceIssueDate = invoiceIssueDate;
                 invoice.SelectInvoiceType = selectInvoiceType;
-                invoice.BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId);
                 _bddContext.SaveChanges();
             }
         }
@@ -276,13 +274,43 @@ namespace EcoCar.Models.Services
         #region CRUD EcoStore Invoice
         public List<EcoStoreInvoice> GetAllEcoStoreInvoices()
         {
-            return _bddContext.EcoStoreInvoices.ToList();
+            return _bddContext.EcoStoreInvoices.Include(x => x.User).Include(x => x.Invoice).ToList();
         }
+        public EcoStoreInvoice GetEcoStoreInvoice(int ecoStoreInvoiceId)
+        {
+            return _bddContext.EcoStoreInvoices.Include(x => x.User).Include(x => x.Invoice).FirstOrDefault(x => x.Id == ecoStoreInvoiceId);
+        }
+        //public EcoStoreInvoice GetUserEcoStoreInvoice(int userId)
+        //{
+        //    User user = _bddContext.Users.Find(userId);
+        //    EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Include(x => x.User).Include(x => x.Invoice).FirstOrDefault(x => x.Id == user.);
+        //    return ;
+        //}
+
 
         //Create ServiceInvoice
-        public int CreateEcoStoreInvoice()
+        public int CreateEcoStoreInvoice(int userId,
+            int invoiceId,
+            int quantityBatchOne,
+            int quantityBatchTwo,
+            int quantityBatchThree,
+            int quantityMonthlySubscription,
+            int quantityTrimestrialSubscription,
+            int quantitysemestrialSubscription,
+            double totalPriceEuros)
         {
-            EcoStoreInvoice ecoStoreInvoice = new EcoStoreInvoice() { };
+            EcoStoreInvoice ecoStoreInvoice = new EcoStoreInvoice()
+            {
+                User = _bddContext.Users.First(u => u.Id == userId),
+                Invoice = _bddContext.Invoices.First(u => u.Id == invoiceId),
+                QuantityBatchOne = quantityBatchOne,
+                QuantityBatchTwo = quantityBatchTwo,
+                QuantityBatchThree = quantityBatchThree,
+                QuantityMonthlySubscription = quantityMonthlySubscription,
+                QuantityTrimestrialSubscription = quantityTrimestrialSubscription,
+                QuantitySemestrialSubscription = quantitysemestrialSubscription,
+                TotalPriceEuros = totalPriceEuros
+            };
             _bddContext.EcoStoreInvoices.Add(ecoStoreInvoice);
             _bddContext.SaveChanges();
             return ecoStoreInvoice.Id;
@@ -294,92 +322,40 @@ namespace EcoCar.Models.Services
         }
 
         //Update ServiceInvoice
-        public void UpdateEcoStoreInvoice(int id)
-        {
-            EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Find(id);
+        //public void UpdateEcoStoreInvoice(int id, int userId, int invoiceId)
+        //{
+        //    EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Find(id);
 
-            if (ecoStoreInvoice != null)
-            {
-                ecoStoreInvoice.Id = id;
-                _bddContext.SaveChanges();
-            }
-        }
-        public void UpdateEcoStoreInvoice(EcoStoreInvoice ecoStoreInvoice)
-        {
-            _bddContext.EcoStoreInvoices.Update(ecoStoreInvoice);
-            _bddContext.SaveChanges();
-        }
+        //    if (ecoStoreInvoice != null)
+        //    {
+        //        ecoStoreInvoice.Id = id;
+        //        ecoStoreInvoice.User = _bddContext.Users.First(u => u.Id == userId);
+        //        ecoStoreInvoice.Invoice = _bddContext.Invoices.First(u => u.Id == invoiceId);
+        //        _bddContext.SaveChanges();
+        //    }
 
-        //Delete ServiceInvoice
-        public void DeleteEcoStoreInvoice(int id)
-        {
-            EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Find(id);
+        //}
+        //public void UpdateEcoStoreInvoice(EcoStoreInvoice ecoStoreInvoice)
+        //{
+        //    _bddContext.EcoStoreInvoices.Update(ecoStoreInvoice);
+        //    _bddContext.SaveChanges();
+        //}
 
-            if (ecoStoreInvoice != null)
-            {
-                _bddContext.EcoStoreInvoices.Remove(ecoStoreInvoice);
-                _bddContext.SaveChanges();
-            }
-        }
+        ////Delete ServiceInvoice
+        //public void DeleteEcoStoreInvoice(int id)
+        //{
+        //    EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Find(id);
+
+        //    if (ecoStoreInvoice != null)
+        //    {
+        //        _bddContext.EcoStoreInvoices.Remove(ecoStoreInvoice);
+        //        _bddContext.SaveChanges();
+        //    }
+        //}
         #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        #region CRUD Subscription
-        public List<Subscription> GetAllSubscriptions()
-        {
-            return _bddContext.Subscriptions.ToList();
-        }
-
-        //Create Subscription
-        public int CreateSubscription(double subscriptionCostEuro, DateTime subscriptionExpiration, DateTime subscriptionStart, bool isActive)
-        {
-            Subscription subscription = new Subscription() { SubscriptionCostEuro = subscriptionCostEuro, SubscriptionExpiration = subscriptionExpiration, SubscriptionStart = subscriptionStart, IsActive = isActive };
-            _bddContext.Subscriptions.Add(subscription);
-            _bddContext.SaveChanges();
-            return subscription.Id;
-        }
-        public void CreateSubscription(Subscription subscription)
-        {
-            _bddContext.Subscriptions.Update(subscription);
-            _bddContext.SaveChanges();
-        }
-
-        //Update Subscription
-        public void UpdateSubscription(int id, double subscriptionCostEuro, DateTime subscriptionExpiration, DateTime subscriptionStart, bool isActive)
-        {
-            Subscription subscription = _bddContext.Subscriptions.Find(id);
-
-            if (subscription != null)
-            {
-                subscription.Id = id;
-                subscription.SubscriptionCostEuro = subscriptionCostEuro;
-                subscription.SubscriptionExpiration = subscriptionExpiration;
-                subscription.SubscriptionStart = subscriptionStart;
-                subscription.IsActive = isActive;
-                _bddContext.SaveChanges();
-            }
-        }
-        public void UpdateSubscription(Subscription subscription)
-        {
-            _bddContext.Subscriptions.Update(subscription);
-            _bddContext.SaveChanges();
-        }
-
-        //Delete Subscription
-        public void DeleteSubscription(int id)
-        {
-            Subscription subscription = _bddContext.Subscriptions.Find(id);
-
-            if (subscription != null)
-            {
-                _bddContext.Subscriptions.Remove(subscription);
-                _bddContext.SaveChanges();
-            }
-        }
-        #endregion
-
-        //-------------------------------------------------------------------------------------------------
 
         #region CRUD EcoWallet
         public List<EcoWallet> GetAllEcoWallets()
@@ -396,9 +372,9 @@ namespace EcoCar.Models.Services
         }
 
         //Create EcoWallet
-        public int CreateEcoWallet(double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros)
+        public int CreateEcoWallet(int ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros, DateTime subscriptionExpiration, DateTime subscriptionStart)
         {
-            EcoWallet ecoWallet = new EcoWallet() { EcoCoinsAmount = ecoCoinsAmount, Subscription = subscription, EcoCoinsValueEuros = ecoCoinsValueEuros };
+            EcoWallet ecoWallet = new EcoWallet() { EcoCoinsAmount = ecoCoinsAmount, Subscription = subscription, EcoCoinsValueEuros = ecoCoinsValueEuros, SubscriptionExpiration = subscriptionExpiration, SubscriptionStart = subscriptionStart };
             _bddContext.EcoWallets.Add(ecoWallet);
             _bddContext.SaveChanges();
             return ecoWallet.Id;
@@ -410,7 +386,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update EcoWallet
-        public void UpdateEcoWallet(int id, double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros)
+        public void UpdateEcoWallet(int id, int ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros, DateTime subscriptionExpiration, DateTime subscriptionStart)
         {
             EcoWallet ecoWallet = _bddContext.EcoWallets.Find(id);
 
@@ -420,6 +396,8 @@ namespace EcoCar.Models.Services
                 ecoWallet.EcoCoinsAmount = ecoCoinsAmount;
                 ecoWallet.Subscription = subscription;
                 ecoWallet.EcoCoinsValueEuros = ecoCoinsValueEuros;
+                ecoWallet.SubscriptionExpiration = subscriptionExpiration;
+                ecoWallet.SubscriptionStart = subscriptionStart;
                 _bddContext.SaveChanges();
             }
         }
@@ -482,7 +460,7 @@ namespace EcoCar.Models.Services
             EcoStore ecoStore = new EcoStore()
             {
                 NameOne = nameOne,
-                NameTwo = nameTwo,  
+                NameTwo = nameTwo,
                 NameThree = nameThree,
                 NameMonth = nameMonth,
                 NameTrimester = nameTrimester,
@@ -575,13 +553,13 @@ namespace EcoCar.Models.Services
             if (shoppingCart != null)
             {
                 shoppingCart.Id = id;
-                shoppingCart.QuantityBatchOne = shoppingCart.QuantityBatchOne+quantityBatchOne;
-                shoppingCart.QuantityBatchTwo = shoppingCart.QuantityBatchTwo+quantityBatchTwo;
-                shoppingCart.QuantityBatchThree = shoppingCart.QuantityBatchThree+quantityBatchThree;
-                shoppingCart.QuantityMonthlySubscription = shoppingCart.QuantityMonthlySubscription+quantityMonthlySubscription;
-                shoppingCart.QuantityTrimestrialSubscription = shoppingCart.QuantityTrimestrialSubscription+quantityTrimestrialSubscription;
-                shoppingCart.QuantitySemestrialSubscription = shoppingCart.QuantitySemestrialSubscription+quantitysemestrialSubscription;
-                shoppingCart.TotalPriceEuros = shoppingCart.TotalPriceEuros+totalPriceEuros;
+                shoppingCart.QuantityBatchOne = quantityBatchOne;
+                shoppingCart.QuantityBatchTwo = quantityBatchTwo;
+                shoppingCart.QuantityBatchThree = quantityBatchThree;
+                shoppingCart.QuantityMonthlySubscription = quantityMonthlySubscription;
+                shoppingCart.QuantityTrimestrialSubscription = quantityTrimestrialSubscription;
+                shoppingCart.QuantitySemestrialSubscription = quantitysemestrialSubscription;
+                shoppingCart.TotalPriceEuros = totalPriceEuros;
                 _bddContext.SaveChanges();
             }
         }

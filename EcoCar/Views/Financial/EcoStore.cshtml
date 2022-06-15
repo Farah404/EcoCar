@@ -26,9 +26,9 @@
                         @Model.EcoStore.MonthlySubscriptionPrice €
                     </h3>
                     <h4>tous les mois pour</h4>
-                    <h3 class="card-text">
+                    <h5 class="card-text">
                         @Model.EcoStore.MonthlySubscription EcoCoins/mois
-                    </h3>
+                    </h5>
 
                     @using (Html.BeginForm())
                     {
@@ -38,7 +38,7 @@
                         @Html.Hidden("QuantityMonthlySubscription",1)
                         @Html.Hidden("QuantityTrimestrialSubscription",0)
                         @Html.Hidden("QuantitySemestrialSubscription",0)
-                        <button type="submit" name="action:Save" class="btn-succes">Je m'abonne</button>
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">Je m'abonne</button>
                     }
                 </div>
             </div>
@@ -57,9 +57,9 @@
                         @Model.EcoStore.TrimestrialSubscriptionPrice €
                     </h3>
                     <h4>tous les 3 mois pour</h4>
-                    <h3 class="card-text">
+                    <h5 class="card-text">
                         @Model.EcoStore.TrimestrialSubscription EcoCoins/mois
-                    </h3>
+                    </h5>
 
                     @using (Html.BeginForm())
                     {
@@ -69,7 +69,7 @@
                         @Html.Hidden("QuantityMonthlySubscription",0)
                         @Html.Hidden("QuantityTrimestrialSubscription",1)
                         @Html.Hidden("QuantitySemestrialSubscription",0)
-                        <button type="submit" name="AbonnementTrimestriel" class="btn-succes">Je m'abonne</button>
+                        <button type="submit" name="AbonnementTrimestriel" class="btn btn-success btn-xl">Je m'abonne</button>
                     }
 
                 </div>
@@ -89,9 +89,9 @@
                         @Model.EcoStore.SemestrialSubscriptionPrice €
                     </h3>
                     <h4>tous les 6 mois pour</h4>
-                    <h3 class="card-text">
+                    <h5 class="card-text">
                         @Model.EcoStore.SemestrialSubscription EcoCoins/mois
-                    </h3>
+                    </h5>
                     @using (Html.BeginForm())
                     {
                         @Html.Hidden("QuantityBatchOne",0)
@@ -100,7 +100,7 @@
                         @Html.Hidden("QuantityMonthlySubscription",0)
                         @Html.Hidden("QuantityTrimestrialSubscription",0)
                         @Html.Hidden("QuantitySemestrialSubscription",1)
-                        <button type="submit" name="action:Save" class="btn-succes">Je m'abonne</button>
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">Je m'abonne</button>
                     }
                 </div>
             </div>
@@ -109,7 +109,7 @@
 </div>
 
 <!--Pricing container Buy EcoCoins-->
-<div id="pricing" class="container-fluid">
+<div id="pricing" class="container-fluid bg-grey">
     <div class="text-center">
         <h2>Achat EcoCoins</h2>
         <h4>Choisissez le lot EcoCoins le plus adapté à vos besoins</h4>
@@ -128,9 +128,9 @@
                         @Model.EcoStore.EcoCoinsBatchOnePrice €
                     </h3>
                     <h4>pour</h4>
-                    <h3 class="card-text">
+                    <h5 class="card-text">
                         @Model.EcoStore.EcoCoinsBatchOne EcoCoins
-                    </h3>
+                    </h5>
                     @using (Html.BeginForm())
                     {
                         @Html.Hidden("QuantityBatchOne",1)
@@ -139,7 +139,7 @@
                         @Html.Hidden("QuantityMonthlySubscription",0)
                         @Html.Hidden("QuantityTrimestrialSubscription",0)
                         @Html.Hidden("QuantitySemestrialSubscription",0)
-                        <button type="submit" name="action:Save" class="btn-succes">J'achète</button>
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">J'achète</button>
                     }
                 </div>
             </div>
@@ -160,9 +160,9 @@
                         @Model.EcoStore.EcoCoinsBatchTwoPrice €
                     </h3>
                     <h4>pour</h4>
-                    <h3 class="card-text">
+                    <h5 class="card-text">
                         @Model.EcoStore.EcoCoinsBatchTwo EcoCoins
-                    </h3>
+                    </h5>
                     @using (Html.BeginForm())
                     {
                         @Html.Hidden("QuantityBatchOne",0)
@@ -171,7 +171,7 @@
                         @Html.Hidden("QuantityMonthlySubscription",0)
                         @Html.Hidden("QuantityTrimestrialSubscription",0)
                         @Html.Hidden("QuantitySemestrialSubscription",0)
-                        <button type="submit" name="action:Save" class="btn-succes">J'achète</button>
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">J'achète</button>
                     }
                 </div>
             </div>
@@ -193,9 +193,9 @@
                         @Model.EcoStore.EcoCoinsBatchThreePrice €
                     </h3>
                     <h4>pour</h4>
-                    <h3 class="card-text">
+                    <h5 class="card-text">
                         @Model.EcoStore.EcoCoinsBatchThree EcoCoins
-                    </h3>
+                    </h5>
                     @using (Html.BeginForm())
                     {
                         @Html.Hidden("QuantityBatchOne",0)
@@ -204,10 +204,11 @@
                         @Html.Hidden("QuantityMonthlySubscription",0)
                         @Html.Hidden("QuantityTrimestrialSubscription",0)
                         @Html.Hidden("QuantitySemestrialSubscription",0)
-                        <button type="submit" name="action:Save" class="btn-succes">J'achète</button>
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">J'achète</button>
                     }
                 </div>
             </div>
         </div>
     </div>
 </div>
+<br />

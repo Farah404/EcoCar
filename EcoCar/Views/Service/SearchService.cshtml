@@ -13,15 +13,9 @@
     @*Service List Display*@
     <div class="table-responsive">
 
-
-
-
-        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Propositions de prestations</p><input style="width:50%;float:right" type="text" id="serviceNoRequestInput" onkeyup="searchServiceNoRequest()" placeholder="Rechercher une proposition de prestation...">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Propositions de prestations</p>
+        <input style="width:50%;float:right" type="text" id="serviceNoRequestInput" onkeyup="searchServiceNoRequest()" placeholder="Rechercher une proposition de prestation...">
         <br />
-@*        <div id="services" class="services" onselect="filterTable()">
-            @Html.DropDownListFor(model => model.Service.SelectServiceType, new SelectList(Enum.GetValues(typeof(ServiceType))),"--Type de prestation--",new {required = "required"})
-            @Html.ValidationMessageFor(model => model.Service.SelectServiceType)
-        </div>*@
         <br />
         <table class="table" id="serviceNoRequestTable">
             <thead>
@@ -31,6 +25,7 @@
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
                     <th>EcoMembre prestataire</th>
+                    <th>EcoPrice</th>
                     <th>Disponibilité</th>
                     <th>Reserver</th>
                 </tr>
@@ -47,6 +42,7 @@
                         {
                             <td>@user.Account.Username</td>
                         }
+                        <td>@carPoolingService.Service.PriceEcoCoins</td>
                         <td>@carPoolingService.Service.IsAvailable</td>
                         <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
@@ -62,6 +58,7 @@
                         {
                             <td>@user.Account.Username</td>
                         }
+                        <td>@carRentalService.Service.PriceEcoCoins</td>
                         <td>@carRentalService.Service.IsAvailable</td>
                         <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
@@ -80,6 +77,7 @@
                         {
                             <td>@user.Account.Username</td>
                         }
+                        <td>@parcelService.Service.PriceEcoCoins</td>
                         <td>@parcelService.Service.IsAvailable</td>
                         <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
@@ -93,8 +91,10 @@
     </div>
 </div>
 
+<br />
+
 <!-- Requested services list-->
-<div class="container-fluid">
+<div class="container-fluid bg-grey">
     @*Service List Display*@
     <div class="table-responsive">
         <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Demandes de prestations</p><input style="width:50%;float:right" type="text" id="serviceIsRequestInput" onkeyup="searchServiceIsRequest()" placeholder="Rechercher une demande de prestation...">
@@ -169,6 +169,17 @@
         </table>
     </div>
 </div>
+<br />
+
+
+
+
+
+
+
+
+
+
 <script>
     function searchServiceNoRequest() {
         var input, filter, table, tr, td, cell, i, j;

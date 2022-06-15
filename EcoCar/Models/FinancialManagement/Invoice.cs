@@ -20,10 +20,6 @@ namespace EcoCar.Models.FinancialManagement
             EcoStoreInvoice, Serviceinvoice
         }
 
-        //Foreign Key
-        public int BillingAddressId { get; set; }
-        public BillingAddress BillingAddress { get; set; }
-
 
     }
 }

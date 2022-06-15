@@ -36,7 +36,7 @@ namespace EcoCar.Models.Services
         //Create Person
         public int CreatePerson(string name, string lastName)
         {
-            Person person = new Person() { Name = name, LastName = lastName};
+            Person person = new Person() { Name = name, LastName = lastName };
             _bddContext.People.Add(person);
             _bddContext.SaveChanges();
             return person.Id;
@@ -86,40 +86,41 @@ namespace EcoCar.Models.Services
         # region CRUD User
         public List<User> GetAllUsers()
         {
-            List<User> listUsers = _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).Include(e=>e.Account).Include(e=>e.Vehicule).Include(e=>e.EcoWallet).ToList();
+            List<User> listUsers = _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).Include(e => e.Account).Include(e => e.Vehicule).Include(e => e.EcoWallet).Include(e => e.ShoppingCart).ToList();
             return listUsers;
         }
 
         public User GetUser(int id)
         {
-            return _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).Include(e => e.Account).Include(e => e.Vehicule).Include(e => e.EcoWallet).FirstOrDefault(e => e.Id == id);
+            return _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).Include(e => e.Account).Include(e => e.Vehicule).Include(e => e.EcoWallet).Include(e => e.ShoppingCart).FirstOrDefault(e => e.Id == id);
         }
 
         public User GetUserByEmail(string email)
         {
-            User user = _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).Include(e => e.Account).Include(e => e.Vehicule).Include(e => e.EcoWallet).FirstOrDefault(e => e.Email == email);
+            User user = _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).Include(e => e.Account).Include(e => e.Vehicule).Include(e => e.EcoWallet).Include(e => e.ShoppingCart).FirstOrDefault(e => e.Email == email);
             return user;
         }
 
         //Create User
         public int CreateUser(
-            string email, 
-            DateTime birthDate, 
-            int phoneNumber, 
-            int identityCardNumber, 
-            int drivingPermitNumber, 
+            string email,
+            DateTime birthDate,
+            int phoneNumber,
+            int identityCardNumber,
+            int drivingPermitNumber,
             double userRating,
             EcoStatusType selectEcoStatusType,
-            int bankDetailsId, 
-            int billingAddressId, 
-            int personId, 
+            int bankDetailsId,
+            int billingAddressId,
+            int personId,
             int? vehiculeId,
             int? ecoWalletId,
             int? shoppingCartId,
             int? accountId
             )
         {
-            User user = new User() {
+            User user = new User()
+            {
                 Email = email,
                 BirthDate = birthDate,
                 PhoneNumber = phoneNumber,
@@ -132,7 +133,7 @@ namespace EcoCar.Models.Services
                 Person = _bddContext.People.First(b => b.Id == personId),
                 Vehicule = _bddContext.Vehicules.FirstOrDefault(b => b.Id == vehiculeId),
                 EcoWallet = _bddContext.EcoWallets.FirstOrDefault(b => b.Id == ecoWalletId),
-                ShoppingCart = _bddContext.ShoppingCarts.FirstOrDefault(b => b.Id==shoppingCartId),
+                ShoppingCart = _bddContext.ShoppingCarts.FirstOrDefault(b => b.Id == shoppingCartId),
                 Account = _bddContext.Accounts.FirstOrDefault(b => b.Id == accountId)
             };
             _bddContext.Users.Add(user);
@@ -163,7 +164,7 @@ namespace EcoCar.Models.Services
 
             )
         {
-            
+
             User userToUpdate = _bddContext.Users.Find(id);
 
             if (userToUpdate != null)
@@ -174,13 +175,13 @@ namespace EcoCar.Models.Services
                 userToUpdate.PhoneNumber = phoneNumber;
                 userToUpdate.IdentityCardNumber = identityCardNumber;
                 userToUpdate.DrivingPermitNumber = drivingPermitNumber;
-                userToUpdate.BankDetails = _bddContext.BankingDetails.First(b => b.Id == bankDetailsId);
-                userToUpdate.BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId);
-                userToUpdate.Person = _bddContext.People.First(b => b.Id == personId);
-                userToUpdate.Vehicule = _bddContext.Vehicules.First(b => b.Id==vehiculeId);
-                userToUpdate.EcoWallet = _bddContext.EcoWallets.First(b => b.Id== ecoWalletId);
-                userToUpdate.ShoppingCart=_bddContext.ShoppingCarts.First(b => b.Id==shoppingcartId);
-                userToUpdate.Account = _bddContext.Accounts.First(b => b.Id == accountId);
+                userToUpdate.BankDetails = _bddContext.BankingDetails.FirstOrDefault(b => b.Id == bankDetailsId);
+                userToUpdate.BillingAddress = _bddContext.BillingAddresses.FirstOrDefault(b => b.Id == billingAddressId);
+                userToUpdate.Person = _bddContext.People.FirstOrDefault(b => b.Id == personId);
+                userToUpdate.Vehicule = _bddContext.Vehicules.FirstOrDefault(b => b.Id == vehiculeId);
+                userToUpdate.EcoWallet = _bddContext.EcoWallets.FirstOrDefault(b => b.Id == ecoWalletId);
+                userToUpdate.ShoppingCart = _bddContext.ShoppingCarts.FirstOrDefault(b => b.Id == shoppingcartId);
+                userToUpdate.Account = _bddContext.Accounts.FirstOrDefault(b => b.Id == accountId);
                 _bddContext.SaveChanges();
             }
         }
@@ -190,17 +191,17 @@ namespace EcoCar.Models.Services
             _bddContext.SaveChanges();
         }
 
-        public void UpdateUserVehicule(int userId, int vehiculeId)
-        {
-            User userToUpdateVehicule = _bddContext.Users.Find(userId);
+        //public void UpdateUserVehicule(int userId, int vehiculeId)
+        //{
+        //    User userToUpdateVehicule = _bddContext.Users.Find(userId);
 
-            if (userToUpdateVehicule != null)
-            {
-                userToUpdateVehicule.Id = userId;
-                userToUpdateVehicule.Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId);
-                _bddContext.SaveChanges();
-            }
-        }
+        //    if (userToUpdateVehicule != null)
+        //    {
+        //        userToUpdateVehicule.Id = userId;
+        //        userToUpdateVehicule.Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId);
+        //        _bddContext.SaveChanges();
+        //    }
+        //}
         //Delete User
         public void DeleteUser(int id)
         {
@@ -248,10 +249,11 @@ namespace EcoCar.Models.Services
         public int CreateAdministrator(string username, string passwordClear, string emailPro, int phoneNumberPro, string employeeCode)
         {
             string password = EncodeMD5(passwordClear);
-            Administrator administrator = new Administrator() {
+            Administrator administrator = new Administrator()
+            {
                 Username = username,
                 Password = passwordClear,
-                EmailPro = emailPro, 
+                EmailPro = emailPro,
                 PhoneNumberPro = phoneNumberPro,
                 EmployeeCode = employeeCode
             };
@@ -305,7 +307,7 @@ namespace EcoCar.Models.Services
         #region CRUD Account
         public List<Account> GetAllAccounts()
         {
-            List<Account> accounts = _bddContext.Accounts.Include(e => e.Person).ToList();
+            List<Account> accounts = _bddContext.Accounts.ToList();
             return accounts;
         }
 
@@ -313,16 +315,16 @@ namespace EcoCar.Models.Services
         {
 
             User user = _bddContext.Users.Find(id);
-            Account account = _bddContext.Accounts.Include(e => e.Person).FirstOrDefault(e => e.Id == user.AccountId);
+            Account account = _bddContext.Accounts.FirstOrDefault(e => e.Id == user.AccountId);
             return account;
         }
 
         public Account GetAccount(int id)
         {
 
-           
-            return _bddContext.Accounts.Include(e => e.Person).FirstOrDefault(e => e.Id == id);
-            
+
+            return _bddContext.Accounts.FirstOrDefault(e => e.Id == id);
+
         }
 
         public Account GetAccount(string idStr)
@@ -342,15 +344,15 @@ namespace EcoCar.Models.Services
 
 
         //Create Account
-        public int CreateAccount(string username, string passwordClear, bool isActive, DateTime creationDate, int personId)
+        public int CreateAccount(string username, string passwordClear, bool isActive, DateTime creationDate)
         {
             string password = EncodeMD5(passwordClear);
-            Account account = new Account() { 
-                Username = username, 
-                Password = password, 
+            Account account = new Account()
+            {
+                Username = username,
+                Password = password,
                 IsActive = true,
-                CreationDate = creationDate,
-                Person = _bddContext.People.First(b=>b.Id == personId) 
+                CreationDate = creationDate
             };
             _bddContext.Accounts.Add(account);
             _bddContext.SaveChanges();
@@ -363,7 +365,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update Account
-        public void UpdateAccount(int id, string username, string password, bool isActive, int personId)
+        public void UpdateAccount(int id, string username, string password, bool isActive)
         {
             Account account = _bddContext.Accounts.Find(id);
 
@@ -373,7 +375,6 @@ namespace EcoCar.Models.Services
                 account.Username = username;
                 account.Password = password;
                 account.IsActive = isActive;
-                account.Person = _bddContext.People.First(b => b.Id == personId);
                 _bddContext.SaveChanges();
             }
         }
@@ -422,9 +423,9 @@ namespace EcoCar.Models.Services
             return _bddContext.Vehicules.Include(e => e.Insurance).ToList();
         }
 
-        public Vehicule GetUserVehicule(int id)
+        public Vehicule GetUserVehicule(int userId)
         {
-            User user = _bddContext.Users.Find(id);
+            User user = _bddContext.Users.Find(userId);
             Vehicule vehicule = _bddContext.Vehicules.Include(e => e.Insurance).FirstOrDefault(e => e.Id == user.VehiculeId);
             return vehicule;
         }
@@ -432,13 +433,14 @@ namespace EcoCar.Models.Services
         //Create Vehicule
         public int CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId)
         {
-            Vehicule vehicule = new Vehicule() {
-                Brand = brand, 
-                RegistrationNumber = registrationNumber, 
-                Model = model, 
-                Hybrid = hybrid, 
-                Electric = electric, 
-                TechnicalTestExpiration = technicalTestExpiration, 
+            Vehicule vehicule = new Vehicule()
+            {
+                Brand = brand,
+                RegistrationNumber = registrationNumber,
+                Model = model,
+                Hybrid = hybrid,
+                Electric = electric,
+                TechnicalTestExpiration = technicalTestExpiration,
                 AvailableSeats = availableSeats,
                 Insurance = _bddContext.Insurances.First(b => b.Id == insuranceId)
             };
@@ -496,6 +498,11 @@ namespace EcoCar.Models.Services
         public List<Insurance> GetAllInsurances()
         {
             return _bddContext.Insurances.ToList();
+        }
+
+        public Insurance GetInsurance(int insuranceId)
+        {
+            return _bddContext.Insurances.FirstOrDefault(a => a.Id == insuranceId);
         }
 
         //Create Insurance

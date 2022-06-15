@@ -33,6 +33,6 @@ namespace EcoCar.ViewModels
         public List<CarRentalService> CarRentalServices { get; set; }
         public List<ParcelService> ParcelServices { get; set; }
         public List<Account> Accounts { get; set; }
-
+        public List<EcoStoreInvoice> EcoStoreInvoices { get; set; }
     }
 }

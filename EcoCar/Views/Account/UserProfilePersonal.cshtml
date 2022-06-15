@@ -15,11 +15,11 @@
                 <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="~/assets/img/avataaars.svg" data-original-title="Usuario">
                 <ul title="Username" class="list-inline ratings text-center">
 
-                            <h3>@Model.User.Account.Username</h3>
+                    <h3>@Model.User.Account.Username</h3>
 
                 </ul>
-                    <button class="btn btn-success center-block" type="submit" onclick="location.href='/Account/UpdateUser/@Model.User.Id'">Modifier mon profil</button>
-                    <br>
+                <button class="btn btn-success center-block" type="submit" onclick="location.href='/Account/UpdateUser/@Model.User.Id'">Modifier mon profil</button>
+                <br>
                 <button class="btn btn-success center-block" type="submit" onclick="location.href='/Account/CreateInsurance'">Ajouter un véhicule</button>
                 <br />
                 <button class="btn btn-success center-block" type="submit" onclick="location.href='/Messaging/EcoUserInbox'">Messagerie</button>
@@ -41,7 +41,7 @@
                                     Nom et Prénom
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.Person.LastName @Model.User.Person.Name</p>
+                                    <p>@Model.User.Person.LastName @Model.User.Person.Name</p>
                                 </td>
                             </tr>
 
@@ -51,7 +51,7 @@
                                     EcoStatus
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.SelectEcoStatusType</p>
+                                    <p>@Model.User.SelectEcoStatusType</p>
                                 </td>
                             </tr>
 
@@ -61,7 +61,7 @@
                                     EcoRating
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.UserRating</p>
+                                    <p>@Model.User.UserRating</p>
                                 </td>
                             </tr>
 
@@ -71,7 +71,7 @@
                                     Date de naissance
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.BirthDate.ToShortDateString()</p>
+                                    <p>@Model.User.BirthDate.ToShortDateString()</p>
                                 </td>
                             </tr>
 
@@ -81,7 +81,7 @@
                                     Email
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.Email</p>
+                                    <p>@Model.User.Email</p>
                                 </td>
                             </tr>
 
@@ -91,7 +91,7 @@
                                     Numéro de téléphone
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.PhoneNumber</p>
+                                    <p>@Model.User.PhoneNumber</p>
                                 </td>
                             </tr>
 
@@ -102,7 +102,7 @@
 
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.IdentityCardNumber</p>
+                                    <p>@Model.User.IdentityCardNumber</p>
                                 </td>
                             </tr>
 
@@ -112,7 +112,7 @@
                                     Numéro de permis de conduire
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.DrivingPermitNumber</p>
+                                    <p>@Model.User.DrivingPermitNumber</p>
                                 </td>
                             </tr>
 
@@ -142,17 +142,36 @@
                                         Montant EcoCoins
                                     </td>
                                     <td class="text-success">
+                                        <p>@Model.EcoWallet.EcoCoinsAmount</p>
                                     </td>
                                 </tr>
 
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-leaf text-success"></span>
-                                        Formule d'abonnement
-                                    </td>
-                                    <td class="text-success">
-                                    </td>
-                                </tr>
+                                @if (@Model.EcoWallet.Subscription == true)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-leaf text-success"></span>
+                                            Abonnement
+                                        </td>
+                                        <td class="text-success">
+
+                                            <p>Jusqu'au @Model.EcoWallet.SubscriptionExpiration.ToShortDateString()</p>
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-leaf text-success"></span>
+                                            Abonnement
+                                        </td>
+                                        <td class="text-success">
+
+                                            <p> Pas d'abonnement en cours</p>
+                                        </td>
+                                    </tr>
+                                }
 
                             </tbody>
                         </table>
@@ -173,7 +192,7 @@
                                     Nom de l'agence bancaire
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.BankDetails.BankName</p>
+                                    <p>@Model.User.BankDetails.BankName</p>
                                 </td>
                             </tr>
 
@@ -183,7 +202,7 @@
                                     Numéro SWIFT
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.BankDetails.Swift</p>
+                                    <p>@Model.User.BankDetails.Swift</p>
                                 </td>
                             </tr>
 
@@ -193,7 +212,7 @@
                                     Numéro IBAN
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.BankDetails.Iban</p>
+                                    <p>@Model.User.BankDetails.Iban</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -213,7 +232,7 @@
                                     Adresse
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.BillingAddress.AddressLine</p>
+                                    <p>@Model.User.BillingAddress.AddressLine</p>
                                 </td>
                             </tr>
 
@@ -223,7 +242,7 @@
                                     Ville
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.BillingAddress.City</p>
+                                    <p>@Model.User.BillingAddress.City</p>
 
                                 </td>
                             </tr>
@@ -234,7 +253,7 @@
                                     Région
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.BillingAddress.Region</p>
+                                    <p>@Model.User.BillingAddress.Region</p>
                                 </td>
                             </tr>
 
@@ -244,7 +263,7 @@
                                     Pays
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.BillingAddress.Country</p>
+                                    <p>@Model.User.BillingAddress.Country</p>
                                 </td>
                             </tr>
 
@@ -254,7 +273,7 @@
                                     Code postal
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.User.BillingAddress.PostalCode</p>
+                                    <p>@Model.User.BillingAddress.PostalCode</p>
                                 </td>
                             </tr>
 
@@ -268,11 +287,10 @@
 </div>
 
 <div id="services" class="container-fluid bg-grey">
-    <center><h2>Mon historique de prestations</h2></center>
-  @*Service List Display*@
+    @*Service List Display*@
     <div class="table-responsive">
-        <center><input style="width:50%" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une de mes prestations..."></center><br />
-        <table class="table" id="userTable">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Mon historique de prestations</p><input style="width:50%;float:right" type="text" id="searchInput" onkeyup="myFunction()" placeholder="Rechercher une de mes prestations...">
+        <table class="table" id="userInvoices">
             <thead>
                 <tr class="header">
                     <th>Date de début</th>
@@ -306,7 +324,7 @@
                         <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
 
-                   
+
                 }
 
                 @foreach (var parcelService in Model.ParcelServices)
@@ -317,17 +335,46 @@
                         <td>@parcelService.Service.ReferenceNumber</td>
                         <td>@parcelService.Service.IsRequest</td>
                         <td>@parcelService.Service.IsAvailable</td>
-                    <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
 
                 @Html.Hidden("serviceId",@ViewBag.serviceId,null)
-                
+
 
             </tbody>
         </table>
     </div>
 </div>
+
+<div class="container-fluid bg-grey">
+    @*Purchases List Display*@
+    <div class="table-responsive">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">EcoStore</p><input style="width:50%;float:right" type="text" id="searchInvoice" onkeyup="searchInvoice()" placeholder="Rechercher un achat">
+        <table class="table" id="userInvoices">
+            <thead>
+                <tr class="header">
+                    <th>Date d'achat</th>
+                    <th>Type d'achat</th>
+                    <th>Numéro de Facture</th>
+                    <th>Lien vers la Facture</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ecoStoreInvoice in Model.EcoStoreInvoices)
+                {
+                    <tr>
+                        <td>@ecoStoreInvoice.Invoice.InvoiceIssueDate.ToShortDateString()</td>
+                        <td>@ecoStoreInvoice.Invoice.SelectInvoiceType</td>
+                        <td>@ecoStoreInvoice.Invoice.InvoiceNumber</td>
+                        <td><a href="/Financial/EcoStoreInvoice/@ecoStoreInvoice.Id">Détails</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<br />
 
 <script>
     function myFunction() {
@@ -347,9 +394,26 @@
             }
         }
     }
-
 </script>
-
+<script>
+    function searchInvoice() {
+        var input, filter, table, tr, td, cell, i, j;
+        filter = document.getElementById("searchInvoice").value.toLowerCase();
+        table = document.getElementById("userInvoices");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            const tdArray = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < tdArray.length; j++) {
+                const cellValue = tdArray[j];
+                if (cellValue && cellValue.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                }
+            }
+        }
+    }
+</script>
 
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>

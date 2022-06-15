@@ -24,16 +24,16 @@ namespace EcoCar.Models.Services
 
         public List<Service> GetAllServices()
         {
-            List<Service> services = _bddContext.Services.Include(s=>s.UserProvider).ToList();
+            List<Service> services = _bddContext.Services.Include(s => s.UserProvider).ToList();
             return services;
         }
         public List<Service> GetAllUserServices(int userId)
         {
-            List<Service> servicesOfUser = _bddContext.Services.Include(s => s.UserProvider).Where(s=>s.Id==userId).ToList();
+            List<Service> servicesOfUser = _bddContext.Services.Include(s => s.UserProvider).Where(s => s.Id == userId).ToList();
             return servicesOfUser;
         }
 
-        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int userProviderId)
+        public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int priceEcoCoins, int userProviderId)
         {
             Service service = new Service()
             {
@@ -45,6 +45,7 @@ namespace EcoCar.Models.Services
                 End = end,
                 IsRequest = isRequest,
                 SelectServiceType = selectServiceType,
+                PriceEcoCoins = priceEcoCoins,
                 UserProvider = _bddContext.Users.First(s => s.Id == userProviderId)
             };
             _bddContext.Services.Add(service);
@@ -56,7 +57,7 @@ namespace EcoCar.Models.Services
             _bddContext.Services.Update(service);
             _bddContext.SaveChanges();
         }
-        public void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType)
+        public void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType, int priceEcoCoins)
         {
             Service service = _bddContext.Services.Find(id);
 
@@ -69,6 +70,7 @@ namespace EcoCar.Models.Services
                 service.IsAvailable = isAvailable;
                 service.Start = start;
                 service.End = end;
+                service.PriceEcoCoins = priceEcoCoins;
                 service.SelectServiceType = selectServiceType;
 
                 _bddContext.SaveChanges();
@@ -123,7 +125,7 @@ namespace EcoCar.Models.Services
         }
         public List<CarPoolingService> GetAllUserCarPoolingServices(int userId)
         {
-            List<CarPoolingService> userCarPoolingServices = _bddContext.CarPoolingServices.Include(e => e.Trajectory).Include(e => e.Service).Where(e=>e.Service.UserProviderId==userId).ToList();
+            List<CarPoolingService> userCarPoolingServices = _bddContext.CarPoolingServices.Include(e => e.Trajectory).Include(e => e.Service).Where(e => e.Service.UserProviderId == userId).ToList();
             return userCarPoolingServices;
         }
 
@@ -222,7 +224,7 @@ namespace EcoCar.Models.Services
         }
         public List<CarRentalService> GetAllUserCarRentalServices(int userId)
         {
-            return _bddContext.CarRentalServices.Include(e => e.Vehicule).Include(e => e.Service).Where(e=>e.Service.UserProviderId==userId).ToList();
+            return _bddContext.CarRentalServices.Include(e => e.Vehicule).Include(e => e.Service).Where(e => e.Service.UserProviderId == userId).ToList();
         }
         public CarRentalService GetCarRentalService(int id)
         {
@@ -290,7 +292,7 @@ namespace EcoCar.Models.Services
         }
         public List<ParcelService> GetAllUserParcelServices(int userId)
         {
-            return _bddContext.ParcelServices.Include(e => e.Trajectory).Include(e => e.Service).Where(e=>e.Service.UserProviderId==userId).ToList();
+            return _bddContext.ParcelServices.Include(e => e.Trajectory).Include(e => e.Service).Where(e => e.Service.UserProviderId == userId).ToList();
         }
         public ParcelService GetParcelService(int id)
         {

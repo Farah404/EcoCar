@@ -32,7 +32,7 @@ namespace EcoCar.Models.Services
         //Create Message
         public int CreateMessage(string messageContent)
         {
-            Message message = new Message() { MessageContent = messageContent};
+            Message message = new Message() { MessageContent = messageContent };
             _bddContext.Messages.Add(message);
             _bddContext.SaveChanges();
             return message.Id;
@@ -137,9 +137,9 @@ namespace EcoCar.Models.Services
         }
 
         //Create UserReporting
-        public int CreateUserReporting(string comment, ReportingReason selectReportingReason)
+        public int CreateUserReporting(string comment, ReportingReason selectReportingReason, int reportingId)
         {
-            UserReporting userReporting = new UserReporting() { Comment = comment, SelectReportingReason = selectReportingReason };
+            UserReporting userReporting = new UserReporting() { Comment = comment, SelectReportingReason = selectReportingReason, Reporting=_bddContext.Reportings.First(b => b.Id == reportingId) };
             _bddContext.UserReportings.Add(userReporting);
             _bddContext.SaveChanges();
             return userReporting.Id;
@@ -150,36 +150,6 @@ namespace EcoCar.Models.Services
             _bddContext.SaveChanges();
         }
 
-        //Update UserReporting
-        public void UpdateUserReporting(int id, string comment, ReportingReason selectReportingReason)
-        {
-            UserReporting userReporting = _bddContext.UserReportings.Find(id);
-
-            if (userReporting != null)
-            {
-                userReporting.Id = id;
-                userReporting.Comment = comment;
-                userReporting.SelectReportingReason = selectReportingReason;
-                _bddContext.SaveChanges();
-            }
-        }
-        public void UpdateUserReporting(UserReporting userReporting)
-        {
-            _bddContext.UserReportings.Update(userReporting);
-            _bddContext.SaveChanges();
-        }
-
-        //Delete UserReporting
-        public void DeleteUserReporting(int id)
-        {
-            UserReporting userReporting = _bddContext.UserReportings.Find(id);
-
-            if (userReporting != null)
-            {
-                _bddContext.UserReportings.Remove(userReporting);
-                _bddContext.SaveChanges();
-            }
-        }
         #endregion
 
         //-------------------------------------------------------------------------------------------------
@@ -193,7 +163,7 @@ namespace EcoCar.Models.Services
         //Create HelpReporting
         public int CreateHelpReporting(string helpMessageContent)
         {
-            HelpReporting helpReporting = new HelpReporting() { HelpMessageContent = helpMessageContent};
+            HelpReporting helpReporting = new HelpReporting() { HelpMessageContent = helpMessageContent };
             _bddContext.HelpReportings.Add(helpReporting);
             _bddContext.SaveChanges();
             return helpReporting.Id;
@@ -204,35 +174,6 @@ namespace EcoCar.Models.Services
             _bddContext.SaveChanges();
         }
 
-        //Update HelpReporting
-        public void UpdateHelpReporting(int id, string helpMessageContent)
-        {
-            HelpReporting helpReporting = _bddContext.HelpReportings.Find(id);
-
-            if (helpReporting != null)
-            {
-                helpReporting.Id = id;
-                helpReporting.HelpMessageContent = helpMessageContent;
-                _bddContext.SaveChanges();
-            }
-        }
-        public void UpdateHelpReporting(HelpReporting helpReporting)
-        {
-            _bddContext.HelpReportings.Update(helpReporting);
-            _bddContext.SaveChanges();
-        }
-
-        //Delete HelpReporting
-        public void DeleteHelpReporting(int id)
-        {
-            HelpReporting helpReporting = _bddContext.HelpReportings.Find(id);
-
-            if (helpReporting != null)
-            {
-                _bddContext.HelpReportings.Remove(helpReporting);
-                _bddContext.SaveChanges();
-            }
-        }
         #endregion
 
         //-------------------------------------------------------------------------------------------------
@@ -257,35 +198,6 @@ namespace EcoCar.Models.Services
             _bddContext.SaveChanges();
         }
 
-        //Update AdministratorResponse
-        public void UpdateAdministratorResponse(int id, string responseContent)
-        {
-            AdministratorResponse administratorResponse = _bddContext.AdministratorResponses.Find(id);
-
-            if (administratorResponse != null)
-            {
-                administratorResponse.Id = id;
-                administratorResponse.ResponseContent = responseContent;
-                _bddContext.SaveChanges();
-            }
-        }
-        public void UpdateAdministratorResponse(AdministratorResponse administratorResponse)
-        {
-            _bddContext.AdministratorResponses.Update(administratorResponse);
-            _bddContext.SaveChanges();
-        }
-
-        //Delete AdministratorResponse
-        public void DeleteAdministratorResponse(int id)
-        {
-            AdministratorResponse administratorResponse = _bddContext.AdministratorResponses.Find(id);
-
-            if (administratorResponse != null)
-            {
-                _bddContext.AdministratorResponses.Remove(administratorResponse);
-                _bddContext.SaveChanges();
-            }
-        }
         #endregion
 
         //-------------------------------------------------------------------------------------------------

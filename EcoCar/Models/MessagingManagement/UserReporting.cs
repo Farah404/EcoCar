@@ -14,11 +14,11 @@ namespace EcoCar.Models.MessagingManagement
         public ReportingReason SelectReportingReason { get; set; }
         public enum ReportingReason
         {
-            FalseIdentity = 0,
-            FalseAccount = 1,
-            InappropriateContent = 2,
-            OffensiveLanguage = 3,
-            InappropriateProfilePicture = 4
+            FalseIdentity,
+            FalseAccount,
+            InappropriateContent,
+            OffensiveLanguage,
+            InappropriateProfilePicture
         }
 
         //Inheritance Class

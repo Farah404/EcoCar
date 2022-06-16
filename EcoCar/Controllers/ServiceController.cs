@@ -303,7 +303,7 @@ namespace EcoCar.Controllers
                     dalServiceManagement.ServiceAvailability(
                     carPoolingService.Service.Id
                     );
-                    string url2 = "/Service/CreateCarpoolingRequest";
+                    string url2 = "/Service/CreateRequest";
                     return Redirect(url2);
                 }
 
@@ -330,7 +330,7 @@ namespace EcoCar.Controllers
                         dalFinancialManagement.UpdateEcoWallet(consumerEcoWallet);
                         dalFinancialManagement.UpdateEcoWallet(providerEcoWallet);
 
-                        string url = "/Service/CreateRequest";
+                        string url = "/Service/SearchService";
                         return Redirect(url);
 
                     }

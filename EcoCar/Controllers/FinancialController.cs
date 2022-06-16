@@ -1,4 +1,5 @@
-﻿using EcoCar.Models.FinancialManagement;
+﻿using Braintree;
+using EcoCar.Models.FinancialManagement;
 using EcoCar.Models.PersonManagement;
 using EcoCar.Models.Services;
 using EcoCar.ViewModels;
@@ -7,18 +8,27 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
+// ecoCarDevT randomSalt5
+// ecocardevteam@gmail.com  random
+
 namespace EcoCar.Controllers
 {
     public class FinancialController : Controller
     {
+        //Payment
+        private readonly IBraintreeService _braintreeService;
+        
         private DalFinancialManagement dalFinancialManagement;
         private DalPersonManagement dalPersonManagement;
-        public FinancialController()
+        
+
+        public FinancialController(IBraintreeService braintreeService)
         {
             dalFinancialManagement = new DalFinancialManagement();
             dalPersonManagement = new DalPersonManagement();
+            _braintreeService = braintreeService;
         }
-
+        
 
         #region Creating bank details and billing address as part of creating an account
         // Create bAnking details & billing address
@@ -107,12 +117,73 @@ namespace EcoCar.Controllers
         #region Payment
         public IActionResult PaymentForm()
         {
-            return View();
-        }
-        #endregion
+            var gateway = _braintreeService.GetGateway();
+            var clientToken = gateway.ClientToken.Generate();  //Genarate a token
+            ViewBag.ClientToken = clientToken;
 
-        #region Invoices: Ecostore and service
-        public IActionResult EcoStoreInvoice(int id)
+            var data = new EcoStorePurchaseVM
+            {
+                Id = 2,
+                EcoCoinsBatchOnePrice = "20",
+                EcoCoinsBatchOne = 40,
+                NameOne = "EcoCoinsBatchOne",
+
+                EcoCoinsBatchTwoPrice = 0,
+                EcoCoinsBatchTwo = 0,
+                NameTwo = "EcoCoinsBatchTwo",
+
+                EcoCoinsBatchThreePrice = 0,
+                EcoCoinsBatchThree = 0,
+                NameThree = "EcoCoinsBatchThree",
+
+
+                MonthlySubscriptionPrice = 0,
+                MonthlySubscription = 0,
+                NameMonth = "MonthlySubscription",
+
+                TrimestrialSubscriptionPrice = 0,
+                TrimestrialSubscription = 0,
+                NameTrimester = "TrimestrialSubscription",
+
+                SemestrialSubscriptionPrice = 0,
+                SemestrialSubscription = 0,
+                NameSemester = "SemestrialSubscription",
+
+                Nonce = ""
+            };
+
+            return View(data);
+        }
+        [HttpPost]
+        public IActionResult Create(EcoStorePurchaseVM model)
+        {
+            var gateway = _braintreeService.GetGateway();
+            var request = new TransactionRequest
+            {
+                Amount = Convert.ToDecimal(model.EcoCoinsBatchOnePrice),
+                PaymentMethodNonce = model.Nonce,
+                Options = new TransactionOptionsRequest
+                {
+                    SubmitForSettlement = true
+                }
+            };
+
+            Result<Transaction> result = gateway.Transaction.Sale(request);
+
+            if (result.IsSuccess())
+            {
+                return Redirect("/Home/Index");
+            }
+            else
+            {
+                return Redirect("/Shared/Error");
+            }
+        }
+    
+    #endregion
+
+    #region Invoices: Ecostore and service
+    public IActionResult EcoStoreInvoice(int id)
         {
             EcoStoreInvoice ecoStoreInvoice = dalFinancialManagement.GetEcoStoreInvoice(id);
             User user = dalPersonManagement.GetUser(ecoStoreInvoice.UserId);

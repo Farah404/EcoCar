@@ -112,7 +112,7 @@ namespace EcoCar.Models.Services
             string nameMonth,
             string nameTrimester,
             string nameSemester,
-            double ecoCoinsBatchOnePrice,
+            string ecoCoinsBatchOnePrice,
             int ecoCoinsBatchOne,
             double ecoCoinsBatchTwoPrice,
             int ecoCoinsBatchTwo,

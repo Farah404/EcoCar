@@ -41,7 +41,7 @@
                     <td>@users.EcoWallet.EcoCoinsAmount</td>
                     <td>@users.EcoWallet.Subscription</td>
                     <td>@users.Account.IsActive</td>
-                    <td><a href="/Account/UserProfilePersonalByAdmin/@users.Id">Détails</a></td> 
+                    <td><a href="/Account/UserProfilePersonalByAdmin/@users.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td> 
                 </tr>
                 }
             </tbody>
@@ -107,7 +107,7 @@
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
                     <td>@parcelService.Service.IsAvailable</td>
-                    <td><a href="/Service/AdminViewParcelService/@parcelService.Id">Détails</a></td>
+                    <td><a href="/Service/AdminViewParcelService/@parcelService.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
 
                 </tr>
                 }
@@ -171,7 +171,7 @@
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
                     <td>@parcelService.Service.IsAvailable</td>
-                    <td><a href="/Service/AdminViewParcelService/@parcelService.Id">Détails</a></td>
+                    <td><a href="/Service/AdminViewParcelService/@parcelService.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
                 </tr>
                 }
             </tbody>
@@ -182,26 +182,33 @@
 <div class="container-fluid bg-grey">
     @*Purchases List Display*@
     <div class="table-responsive">
-        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">EcoStore</p><input style="width:50%;float:right" type="text" id="searchInvoice" onkeyup="invoiceSearch()" placeholder="Rechercher un achat">
-        <table class="table" id="userTable">
+        <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">EcoStore</p><input style="width:50%;float:right" type="text" id="searchInvoice" onkeyup="searchInvoice()" placeholder="Rechercher un achat">
+        <table class="table" id="userInvoices">
             <thead>
                 <tr class="header">
                     <th>Date d'achat</th>
                     <th>Type d'achat</th>
                     <th>Numéro de Facture</th>
-                    <th>Provider</th>
-                    <th>Consumer</th>
-                    <th>Lien vers la Facture</th>
+                    <th>Utilisateur concerné</th>
+                    <th>Détails</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                </tr>
+                @foreach (var ecoStoreInvoice in Model.EcoStoreInvoices)
+                {
+                    <tr>
+                        <td>@ecoStoreInvoice.Invoice.InvoiceIssueDate.ToShortDateString()</td>
+                        <td>@ecoStoreInvoice.Invoice.SelectInvoiceType</td>
+                        <td>@ecoStoreInvoice.Invoice.InvoiceNumber</td>
+                        <td>@ecoStoreInvoice.UserId</td>
+                        <td><a href="/Financial/EcoStoreInvoice/@ecoStoreInvoice.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
 </div>
+<br />
 
 <script>
     function myFunctionUser() {
@@ -246,6 +253,25 @@
         var input, filter, table, tr, td, cell, i, j;
         filter = document.getElementById("searchServiceIsRequestInput").value.toLowerCase();
         table = document.getElementById("serviceTableIsRequestTrue");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            const tdArray = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < tdArray.length; j++) {
+                const cellValue = tdArray[j];
+                if (cellValue && cellValue.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                }
+            }
+        }
+    }
+</script>
+<script>
+    function searchInvoice() {
+        var input, filter, table, tr, td, cell, i, j;
+        filter = document.getElementById("searchInvoice").value.toLowerCase();
+        table = document.getElementById("userInvoices");
         tr = table.getElementsByTagName("tr");
         for (i = 1; i < tr.length; i++) {
             tr[i].style.display = "none";

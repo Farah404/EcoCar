@@ -87,7 +87,8 @@ namespace EcoCar.Controllers
                 Services = dalServiceManagement.GetAllServices(),
                 CarPoolingServices = dalServiceManagement.GetAllCarPoolingServices(),
                 ParcelServices = dalServiceManagement.GetAllParcelServices(),
-                CarRentalServices = dalServiceManagement.GetAllCarRentalServices()
+                CarRentalServices = dalServiceManagement.GetAllCarRentalServices(),
+                EcoStoreInvoices = dalFinancialManagement.GetAllEcoStoreInvoices()
             };
             return View(accountViewModel);
         }

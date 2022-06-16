@@ -37,7 +37,7 @@
 
                                     <br />
                                     @Html.HiddenFor(model=>model.CreationDate, new{ @class = "form-control",@id="currentDate",style="width:300px"})
-
+                                    @Html.HiddenFor(model=>model.LastLoginDate, new{ @class = "form-control",style="width:300px"})
 
                                     @Html.Hidden("userId", @ViewBag.userId, null)
                                     <!-- Submit Button-->
@@ -72,6 +72,7 @@
             changeYear: true,
         });
     });
+
 
     var password = document.getElementById("password")
         , confirm_password = document.getElementById("confirm_password");

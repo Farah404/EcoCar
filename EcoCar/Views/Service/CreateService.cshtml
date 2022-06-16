@@ -39,7 +39,7 @@
 
                     <div class="form-outline mb-3">
                         @Html.Label("Type de Prestation")<br>
-                        @Html.DropDownListFor(model => model.SelectServiceType, new SelectList(Enum.GetValues(typeof(ServiceType))),"--Selectionnez le type de prestation--",new {required = "required"})
+                        @Html.DropDownListFor(model => model.SelectServiceType, Html.GetEnumSelectList<ServiceType>(),"--Selectionnez le type de prestation--",new {required = "required"})
                         @Html.ValidationMessageFor(model => model.SelectServiceType)
                     <br></div>
 

@@ -179,18 +179,41 @@ namespace EcoCar.Controllers
             EcoStore ecoStore = dalFinancialManagement.GetEcoStore(1);
             EcoWallet ecoWallet = dalFinancialManagement.GetUserEcoWallet(userId);
 
+            //Managing added EcoCoins to EcoWallet based on subscription status
+            int ecoWalletEcoCoinsPlusPurchasedAmounts = ecoWallet.EcoCoinsAmount;
+            if (ecoWallet.Subscription == true)
+            {
+                ecoWalletEcoCoinsPlusPurchasedAmounts = ecoWalletEcoCoinsPlusPurchasedAmounts + (shoppingCart.QuantityBatchOne * ecoStore.EcoCoinsBatchOne) + (shoppingCart.QuantityBatchTwo * ecoStore.EcoCoinsBatchTwo) + (shoppingCart.QuantityBatchThree * ecoStore.EcoCoinsBatchThree);
+            }
+            else
+            {
+                ecoWalletEcoCoinsPlusPurchasedAmounts = ecoWalletEcoCoinsPlusPurchasedAmounts 
+                    + (shoppingCart.QuantityBatchOne * ecoStore.EcoCoinsBatchOne)
+                    + (shoppingCart.QuantityBatchTwo * ecoStore.EcoCoinsBatchTwo)
+                    + (shoppingCart.QuantityBatchThree * ecoStore.EcoCoinsBatchThree)
+                    + (shoppingCart.QuantityMonthlySubscription * ecoStore.MonthlySubscription)
+                    + (shoppingCart.QuantityTrimestrialSubscription * ecoStore.TrimestrialSubscription)
+                    + (shoppingCart.QuantitySemestrialSubscription * ecoStore.SemestrialSubscription);
+            }
 
-            int purchaseEcoCoins = ecoWallet.EcoCoinsAmount
-                + (shoppingCart.QuantityBatchOne * ecoStore.EcoCoinsBatchOne)
-                + (shoppingCart.QuantityBatchTwo * ecoStore.EcoCoinsBatchTwo)
-                + (shoppingCart.QuantityBatchThree * ecoStore.EcoCoinsBatchThree)
-                + (shoppingCart.QuantityMonthlySubscription * ecoStore.MonthlySubscription)
-                + (shoppingCart.QuantityTrimestrialSubscription * ecoStore.TrimestrialSubscription)
-                + (shoppingCart.QuantitySemestrialSubscription * ecoStore.SemestrialSubscription);
-
-
+            //Defining Subscription system values based on subscription start and expiration dates and duration
             bool subscription = false;
-            DateTime subPurchased = DateTime.Now;
+
+            bool firstMonth = ecoWallet.FirstMonth;
+            bool secondMonth = ecoWallet.SecondMonth;
+            bool thirdMonth = ecoWallet.ThirdMonth;
+            bool fourthMonth = ecoWallet.FourthMonth;
+            bool fifthMonth = ecoWallet.FifthMonth;
+            bool sixthMonth = ecoWallet.SixthMonth;
+
+            DateTime ecoCoinsFirstMonth = ecoWallet.EcoCoinsFirstMonth;
+            DateTime ecoCoinsSecondMonth = ecoWallet.EcoCoinsSecondMonth;
+            DateTime ecoCoinsThirdMonth = ecoWallet.EcoCoinsThirdMonth;
+            DateTime ecoCoinsFourthMonth = ecoWallet.EcoCoinsFourthMonth;
+            DateTime ecoCoinsFitfhMonth = ecoWallet.EcoCoinsFifthMonth;
+            DateTime ecoCoinsSixthMonth = ecoWallet.EcoCoinsSixthMonth;
+
+            DateTime subPurchasedExpiration = DateTime.Now;
             DateTime subPurchasedStart = DateTime.Now;
 
             if (shoppingCart.QuantityMonthlySubscription != 0 || shoppingCart.QuantityTrimestrialSubscription != 0 || shoppingCart.QuantitySemestrialSubscription != 0)
@@ -209,27 +232,59 @@ namespace EcoCar.Controllers
 
                 if (shoppingCart.QuantityMonthlySubscription != 0)
                 {
-
-                    subPurchased = ecoWallet.SubscriptionExpiration.AddDays(30);
+                    firstMonth = true;
+                    ecoCoinsFirstMonth = subPurchasedStart;
+                    subPurchasedExpiration = ecoWallet.SubscriptionExpiration.AddDays(30);
 
                 }
                 else if (shoppingCart.QuantityTrimestrialSubscription != 0)
                 {
-                    subPurchased = ecoWallet.SubscriptionExpiration.AddDays(90);
+                    firstMonth = true;
+                    secondMonth = true;
+                    thirdMonth = true;
+                    subPurchasedExpiration = ecoWallet.SubscriptionExpiration.AddDays(90);
+                    ecoCoinsFirstMonth = subPurchasedStart;
+                    ecoCoinsSecondMonth = subPurchasedStart.AddDays(30);
+                    ecoCoinsThirdMonth = subPurchasedStart.AddDays(60);
                 }
                 else
                 {
-                    subPurchased = ecoWallet.SubscriptionExpiration.AddDays(180);
+                    firstMonth = true;
+                    secondMonth = true;
+                    thirdMonth = true;
+                    fourthMonth = true;
+                    fifthMonth = true;
+                    sixthMonth = true;
+                    subPurchasedExpiration = ecoWallet.SubscriptionExpiration.AddDays(180);
+                    ecoCoinsFirstMonth = subPurchasedStart;
+                    ecoCoinsSecondMonth = subPurchasedStart.AddDays(30);
+                    ecoCoinsThirdMonth = subPurchasedStart.AddDays(60);
+                    ecoCoinsFourthMonth = subPurchasedStart.AddDays(90);
+                    ecoCoinsFitfhMonth = subPurchasedStart.AddDays(120);
+                    ecoCoinsSixthMonth = subPurchasedStart.AddDays(150);
                 }
             }
 
             dalFinancialManagement.UpdateEcoWallet(
                ecoWallet.Id,
-               purchaseEcoCoins,
+               ecoWalletEcoCoinsPlusPurchasedAmounts,
                subscription,
                0,
-               subPurchased,
-               subPurchasedStart);
+               subPurchasedExpiration,
+               subPurchasedStart,
+               ecoCoinsFirstMonth,
+               firstMonth,
+               ecoCoinsSecondMonth,
+               secondMonth,
+               ecoCoinsThirdMonth,
+               thirdMonth,
+               ecoCoinsFourthMonth,
+               fourthMonth,
+               ecoCoinsFitfhMonth,
+               fifthMonth,
+               ecoCoinsSixthMonth,
+               sixthMonth
+               );
 
             dalFinancialManagement.UpdateShoppingCart(shoppingCart.Id, 0, 0, 0, 0, 0, 0, 0);
             return Redirect("/Financial/EcoStore");
@@ -237,5 +292,6 @@ namespace EcoCar.Controllers
 
         }
         #endregion
+
     }
 }

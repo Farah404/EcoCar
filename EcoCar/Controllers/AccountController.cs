@@ -10,6 +10,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System;
+using EcoCar.Models.FinancialManagement;
 
 namespace EcoCar.Controllers
 {
@@ -66,6 +67,91 @@ namespace EcoCar.Controllers
 
                             if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                                 return Redirect(returnUrl);
+
+                            //SubTest
+
+                            //int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                            Account userAccount = dalPersonManagement.GetUserAccount(account.Id);
+                            EcoWallet ecoWallet = dalFinancialManagement.GetUserEcoWallet(account.Id);
+                            EcoStore ecoStore = dalFinancialManagement.GetEcoStore(1);
+                            int ecoWalletSub = ecoWallet.EcoCoinsAmount;
+                            bool firstMonth = ecoWallet.FirstMonth;
+                            bool secondMonth = ecoWallet.SecondMonth;
+                            bool thirdMonth = ecoWallet.ThirdMonth;
+                            bool fourthMonth = ecoWallet.FourthMonth;
+                            bool fifthMonth = ecoWallet.FifthMonth;
+                            bool sixthMonth = ecoWallet.SixthMonth;
+
+                            if ((DateTime.Compare(userAccount.LastLoginDate, ecoWallet.EcoCoinsFirstMonth) >= 0))
+                            {
+                                if (ecoWallet.FirstMonth == true)
+                                {
+                                    firstMonth = false;
+                                    ecoWalletSub = ecoWalletSub + ecoStore.MonthlySubscription;
+                                }
+
+                                else if ((DateTime.Compare(userAccount.LastLoginDate, ecoWallet.EcoCoinsSecondMonth) >= 0))
+                                {
+                                    if (ecoWallet.SecondMonth == true)
+                                    {
+                                        secondMonth = false;
+                                        ecoWalletSub = ecoWalletSub + ecoStore.TrimestrialSubscription;
+                                    }
+                                    else if (DateTime.Compare(userAccount.LastLoginDate, ecoWallet.EcoCoinsThirdMonth) >= 0)
+                                    {
+                                        if (ecoWallet.ThirdMonth == true)
+                                        {
+                                            thirdMonth = false;
+                                            ecoWalletSub = ecoWalletSub + ecoStore.TrimestrialSubscription;
+                                        }
+                                        else if (DateTime.Compare(userAccount.LastLoginDate, ecoWallet.EcoCoinsFourthMonth) >= 0)
+                                        {
+                                            if (ecoWallet.FourthMonth == true)
+                                            {
+                                                fourthMonth = false;
+                                                ecoWalletSub = ecoWalletSub + ecoStore.SemestrialSubscription;
+                                            }
+                                            else if (DateTime.Compare(userAccount.LastLoginDate, ecoWallet.EcoCoinsFifthMonth) >= 0)
+                                            {
+                                                if (ecoWallet.FifthMonth == true)
+                                                {
+                                                    fifthMonth = false;
+                                                    ecoWalletSub = ecoWalletSub + ecoStore.SemestrialSubscription;
+                                                }
+                                                else if (DateTime.Compare(userAccount.LastLoginDate, ecoWallet.EcoCoinsSixthMonth) >= 0)
+                                                {
+                                                    if (ecoWallet.SixthMonth == true)
+                                                    {
+                                                        sixthMonth = false;
+                                                        ecoWalletSub = ecoWalletSub + ecoStore.SemestrialSubscription;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                dalFinancialManagement.UpdateEcoWallet(
+                                    ecoWallet.Id,
+                                    ecoWalletSub,
+                                    ecoWallet.Subscription,
+                                    0,
+                                    ecoWallet.SubscriptionExpiration,
+                                    ecoWallet.SubscriptionStart,
+                                    ecoWallet.EcoCoinsFirstMonth,
+                                    ecoWallet.FirstMonth,
+                                    ecoWallet.EcoCoinsSecondMonth,
+                                    secondMonth,
+                                    ecoWallet.EcoCoinsThirdMonth,
+                                    thirdMonth,
+                                    ecoWallet.EcoCoinsFourthMonth,
+                                    fourthMonth,
+                                    ecoWallet.EcoCoinsFifthMonth,
+                                    fifthMonth,
+                                    ecoWallet.EcoCoinsSixthMonth,
+                                    sixthMonth);
+                            }
+                            dalPersonManagement.UpdateAccount(userAccount.Id, userAccount.Username, userAccount.Password, userAccount.IsActive, DateTime.Now);
                             return Redirect("/Home/Index");
                         }
                         ModelState.AddModelError("Account.Username", "Nom d'utilisateur et/ou mot de passe incorrect(s)");
@@ -158,7 +244,7 @@ namespace EcoCar.Controllers
             if (userid != null)
             {
                 Account accountToBan = dalPersonManagement.GetAccount(userid);
-                dalPersonManagement.UpdateAccount(accountToBan.Id, accountToBan.Username, accountToBan.Password, false);
+                dalPersonManagement.UpdateAccount(accountToBan.Id, accountToBan.Username, accountToBan.Password, false, accountToBan.LastLoginDate);
                 return Redirect("/Account/adminHome");
             }
             return Redirect("/");
@@ -226,9 +312,9 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult CreateAccount(Account account, int userId)
         {
-            int accountId = dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive, account.CreationDate);
+            int accountId = dalPersonManagement.CreateAccount(account.Username, account.Password, account.IsActive, account.CreationDate, DateTime.Now);
             User user = dalPersonManagement.GetUser(userId);
-            int ecoWalletId = dalFinancialManagement.CreateEcoWallet(0, false, 0, DateTime.Now, DateTime.MaxValue);
+            int ecoWalletId = dalFinancialManagement.CreateEcoWallet(0, false, 0, DateTime.Now, DateTime.MaxValue, DateTime.MaxValue, false, DateTime.MaxValue, false, DateTime.MaxValue, false, DateTime.MaxValue, false, DateTime.MaxValue, false, DateTime.MaxValue, false);
             int shoppingCartId = dalFinancialManagement.CreateShoppingCart(0, 0, 0, 0, 0, 0, 0);
             int insuranceId = dalPersonManagement.CreateInsurance(null, DateTime.Now, null);
             int vehiculeId = dalPersonManagement.CreateVehicule(null, 0, null, false, false, DateTime.Now, 0, insuranceId);

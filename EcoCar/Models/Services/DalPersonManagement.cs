@@ -344,7 +344,7 @@ namespace EcoCar.Models.Services
 
 
         //Create Account
-        public int CreateAccount(string username, string passwordClear, bool isActive, DateTime creationDate)
+        public int CreateAccount(string username, string passwordClear, bool isActive, DateTime creationDate, DateTime lastLoginDate)
         {
             string password = EncodeMD5(passwordClear);
             Account account = new Account()
@@ -352,7 +352,8 @@ namespace EcoCar.Models.Services
                 Username = username,
                 Password = password,
                 IsActive = true,
-                CreationDate = creationDate
+                CreationDate = creationDate,
+                LastLoginDate = lastLoginDate,
             };
             _bddContext.Accounts.Add(account);
             _bddContext.SaveChanges();
@@ -365,7 +366,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update Account
-        public void UpdateAccount(int id, string username, string password, bool isActive)
+        public void UpdateAccount(int id, string username, string password, bool isActive, DateTime lastLoginDate)
         {
             Account account = _bddContext.Accounts.Find(id);
 
@@ -375,6 +376,7 @@ namespace EcoCar.Models.Services
                 account.Username = username;
                 account.Password = password;
                 account.IsActive = isActive;
+                account.LastLoginDate = lastLoginDate;
                 _bddContext.SaveChanges();
             }
         }

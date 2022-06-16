@@ -15,6 +15,7 @@ namespace EcoCar.Models.PersonManagement
         public string Password { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreationDate { get; set; }
+        public DateTime LastLoginDate { get; set; }
 
     }
 }

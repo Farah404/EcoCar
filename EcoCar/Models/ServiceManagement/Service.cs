@@ -4,6 +4,7 @@
 using EcoCar.Models.PersonManagement;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace EcoCar.Models.ServiceManagement
 {
@@ -24,8 +25,11 @@ namespace EcoCar.Models.ServiceManagement
         public ServiceType SelectServiceType { get; set; }
         public enum ServiceType
         {
+            [Display(Name="Covoiturage")]
             CarPoolingService,
+            [Display(Name = "Transport de colis")]
             ParcelService,
+            [Display(Name = "Location de véhicule")]
             CarRentalService
         }
         public int PriceEcoCoins { get; set; }

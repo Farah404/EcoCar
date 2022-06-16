@@ -216,12 +216,13 @@ namespace EcoCar.Models.Services
         }
 
         //Create ServiceInvoice
-        public int CreateServiceInvoice(int iIdServiceProvider, int idServiceConsumer, int serviceId, int invoiceId)
+        public int CreateServiceInvoice(int idServiceProvider, int idServiceConsumer, int ecoCoinAmount, int serviceId, int invoiceId)
         {
             ServiceInvoice serviceInvoice = new ServiceInvoice()
             {
-                IdServiceProvider = iIdServiceProvider,
+                IdServiceProvider = idServiceProvider,
                 IdServiceConsumer = idServiceConsumer,
+                EcoCoinAmount = ecoCoinAmount,
                 Service = _bddContext.Services.First(b => b.Id == serviceId),
                 Invoice = _bddContext.Invoices.First(b => b.Id == invoiceId),
             };
@@ -236,7 +237,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update ServiceInvoice
-        public void UpdateServiceInvoice(int id, int iIdServiceProvider, int idServiceConsumer, int serviceId, int invoiceId)
+        public void UpdateServiceInvoice(int id, int iIdServiceProvider, int idServiceConsumer, int ecoCoinAmount, int serviceId, int invoiceId)
         {
             ServiceInvoice serviceInvoice = _bddContext.ServiceInvoices.Find(id);
 
@@ -245,6 +246,7 @@ namespace EcoCar.Models.Services
                 serviceInvoice.Id = id;
                 serviceInvoice.IdServiceProvider = iIdServiceProvider;
                 serviceInvoice.IdServiceConsumer = idServiceConsumer;
+                serviceInvoice.EcoCoinAmount = ecoCoinAmount;
                 serviceInvoice.Service = _bddContext.Services.First(b => b.Id == serviceId);
                 serviceInvoice.Invoice = _bddContext.Invoices.First(b => b.Id == invoiceId);
                 _bddContext.SaveChanges();
@@ -371,10 +373,62 @@ namespace EcoCar.Models.Services
             return ecoWallet;
         }
 
-        //Create EcoWallet
-        public int CreateEcoWallet(int ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros, DateTime subscriptionExpiration, DateTime subscriptionStart)
+        //Check Funds
+        public bool CheckUserFunds (int ecoAmount, int userId)
         {
-            EcoWallet ecoWallet = new EcoWallet() { EcoCoinsAmount = ecoCoinsAmount, Subscription = subscription, EcoCoinsValueEuros = ecoCoinsValueEuros, SubscriptionExpiration = subscriptionExpiration, SubscriptionStart = subscriptionStart };
+            User user = _bddContext.Users.Find(userId);
+            EcoWallet ecoWallet = _bddContext.EcoWallets.Find(user.EcoWalletId);
+            if (ecoWallet.EcoCoinsAmount >= ecoAmount)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            } 
+        }
+
+        //Create EcoWallet
+        public int CreateEcoWallet(
+            int ecoCoinsAmount, 
+            bool subscription, 
+            double ecoCoinsValueEuros, 
+            DateTime subscriptionExpiration, 
+            DateTime subscriptionStart,
+            DateTime ecoCoinsFirstMonth,
+            bool firstMonth,
+            DateTime ecoCoinsSecondMonth,
+            bool secondMonth,
+            DateTime eEcoCoinsThirdMonth,
+            bool thirdMonth,
+            DateTime ecoCoinsFourthMonth,
+            bool fourthMonth,
+            DateTime ecoCoinsFifthMonth,
+            bool fifthMonth,
+            DateTime ecoCoinsSixthMonth,
+            bool sixthMonth
+            )
+        {
+            EcoWallet ecoWallet = new EcoWallet() { 
+                EcoCoinsAmount = ecoCoinsAmount, 
+                Subscription = subscription, 
+                EcoCoinsValueEuros = ecoCoinsValueEuros, 
+                SubscriptionExpiration = subscriptionExpiration, 
+                SubscriptionStart = subscriptionStart,
+                EcoCoinsFirstMonth = ecoCoinsFirstMonth,
+                FirstMonth = firstMonth,
+                EcoCoinsSecondMonth = ecoCoinsSecondMonth,
+                SecondMonth = secondMonth,
+                EcoCoinsThirdMonth = eEcoCoinsThirdMonth,
+                ThirdMonth = thirdMonth,
+                EcoCoinsFourthMonth = ecoCoinsFourthMonth,
+                FourthMonth = fourthMonth,
+                EcoCoinsFifthMonth = ecoCoinsFifthMonth,
+                FifthMonth = fifthMonth,
+                EcoCoinsSixthMonth = ecoCoinsSixthMonth,
+                SixthMonth = sixthMonth
+                   
+            };
             _bddContext.EcoWallets.Add(ecoWallet);
             _bddContext.SaveChanges();
             return ecoWallet.Id;
@@ -386,7 +440,26 @@ namespace EcoCar.Models.Services
         }
 
         //Update EcoWallet
-        public void UpdateEcoWallet(int id, int ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros, DateTime subscriptionExpiration, DateTime subscriptionStart)
+        public void UpdateEcoWallet(
+            int id, 
+            int ecoCoinsAmount, 
+            bool subscription, 
+            double ecoCoinsValueEuros, 
+            DateTime subscriptionExpiration, 
+            DateTime subscriptionStart,
+            DateTime ecoCoinsFirstMonth,
+            bool firstMonth,
+            DateTime ecoCoinsSecondMonth,
+            bool secondMonth,
+            DateTime eEcoCoinsThirdMonth,
+            bool thirdMonth,
+            DateTime ecoCoinsFourthMonth,
+            bool fourthMonth,
+            DateTime ecoCoinsFifthMonth,
+            bool fifthMonth,
+            DateTime ecoCoinsSixthMonth,
+            bool sixthMonth
+            )
         {
             EcoWallet ecoWallet = _bddContext.EcoWallets.Find(id);
 
@@ -398,6 +471,18 @@ namespace EcoCar.Models.Services
                 ecoWallet.EcoCoinsValueEuros = ecoCoinsValueEuros;
                 ecoWallet.SubscriptionExpiration = subscriptionExpiration;
                 ecoWallet.SubscriptionStart = subscriptionStart;
+                ecoWallet.EcoCoinsFirstMonth = ecoCoinsFirstMonth;
+                ecoWallet.FirstMonth = firstMonth;
+                ecoWallet.EcoCoinsSecondMonth = ecoCoinsSecondMonth;
+                ecoWallet.SecondMonth = secondMonth;
+                ecoWallet.EcoCoinsThirdMonth = eEcoCoinsThirdMonth;
+                ecoWallet.ThirdMonth = thirdMonth;
+                ecoWallet.EcoCoinsFourthMonth = ecoCoinsFourthMonth;
+                ecoWallet.FourthMonth = fourthMonth;
+                ecoWallet.EcoCoinsFifthMonth = ecoCoinsFifthMonth;
+                ecoWallet.FifthMonth = fifthMonth;
+                ecoWallet.EcoCoinsSixthMonth = ecoCoinsSixthMonth;
+                ecoWallet.SixthMonth = sixthMonth;
                 _bddContext.SaveChanges();
             }
         }
@@ -583,5 +668,31 @@ namespace EcoCar.Models.Services
         }
         #endregion
 
+        //-------------------------------------------------------------------------------------------------
+
+        #region EcoCoins transactions between users
+
+        public void EcoCoinsTransactionService (int userProviderId, int userConsumerId, int ecoCoinAmount)
+        {
+            User userProvider = _bddContext.Users.Find(userProviderId);
+            User userConsumer = _bddContext.Users.Find(userConsumerId);
+            EcoWallet ecoWalletProvider = _bddContext.EcoWallets.Find(userProvider.EcoWalletId);
+            EcoWallet ecoWalletConsumer = _bddContext.EcoWallets.Find(userConsumer.EcoWalletId);
+            ecoWalletProvider.EcoCoinsAmount = ecoWalletProvider.EcoCoinsAmount + ecoCoinAmount;
+            ecoWalletConsumer.EcoCoinsAmount = ecoWalletConsumer.EcoCoinsAmount - ecoCoinAmount;
+            _bddContext.SaveChanges();
+        }
+
+        public void EcoCoinsTransactionRequest(int userProviderId, int userConsumerId, int ecoCoinAmount)
+        {
+            User userProvider = _bddContext.Users.Find(userProviderId);
+            User userConsumer = _bddContext.Users.Find(userConsumerId);
+            EcoWallet ecoWalletProvider = _bddContext.EcoWallets.Find(userProvider.EcoWalletId);
+            EcoWallet ecoWalletConsumer = _bddContext.EcoWallets.Find(userConsumer.EcoWalletId);
+            ecoWalletProvider.EcoCoinsAmount = ecoWalletProvider.EcoCoinsAmount - ecoCoinAmount;
+            ecoWalletConsumer.EcoCoinsAmount = ecoWalletConsumer.EcoCoinsAmount + ecoCoinAmount;
+            _bddContext.SaveChanges();
+        }
+        #endregion
     }
 }

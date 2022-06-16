@@ -39,8 +39,8 @@ namespace EcoCar.Models.Services
 
         //Account
         List<Account> GetAllAccounts();
-        int CreateAccount(string username, string password, bool isActive, DateTime creationDate);
-        void UpdateAccount(int id, string username, string password, bool isActive);
+        int CreateAccount(string username, string password, bool isActive, DateTime creationDate, DateTime lastLoginDate);
+        void UpdateAccount(int id, string username, string password, bool isActive, DateTime lastLoginDate);
         void UpdateAccountPassword(int id, string password);
         void DeleteAccount(int id);
         Account Authentify(string username, string passwordClear);

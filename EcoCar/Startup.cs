@@ -24,7 +24,7 @@ namespace EcoCar
 
             });
             services.AddControllersWithViews();
-
+            services.AddTransient<IBraintreeService, BraintreeService>();
 
         }
 

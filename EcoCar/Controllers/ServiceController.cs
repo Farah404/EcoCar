@@ -288,7 +288,7 @@ namespace EcoCar.Controllers
         public IActionResult ReserveCarPoolingService(Reservation reservation, int id)
         {
            
-            if (HttpContext.User.Identity.IsAuthenticated)
+            if (HttpContext.User.Identity.IsAuthenticated) 
             {
 
                 int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);

@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using EcoCar.ViewModels;
 using EcoCar.Models.FinancialManagement;
+using Microsoft.AspNetCore.Http;
 
 namespace EcoCar.Controllers
 {
@@ -19,6 +20,7 @@ namespace EcoCar.Controllers
         {
             dalServiceManagement = new DalServiceManagement();
             dalPersonManagement = new DalPersonManagement();
+            dalFinancialManagement = new DalFinancialManagement();
         }
 
         #region Searching a service in the list of services
@@ -274,77 +276,67 @@ namespace EcoCar.Controllers
         public ActionResult ReserveCarPoolingService(int? id)
         {
 
-                ServiceViewModel serviceViewModel = new ServiceViewModel
-                {
-                    CarPoolingService = dalServiceManagement.GetCarPoolingService((int)id)
+            ServiceViewModel serviceViewModel = new ServiceViewModel
+            {
+                CarPoolingService = dalServiceManagement.GetCarPoolingService((int)id)
                 };
                 return View(serviceViewModel);
 
         }
 
         [HttpPost]
-        public IActionResult ReserveCarPoolingService(Reservation reservation, int id, int consumerId, int providerId)
+        public IActionResult ReserveCarPoolingService(Reservation reservation, int id)
         {
-
-            EcoWallet consumerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(c => c.Id == consumerId);
-            EcoWallet providerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(p => p.Id == providerId);
-            CarPoolingService carPoolingService = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(s => s.Id == id);
-
-
-            double newEcocoinsAmount = consumerEcoWallet.EcoCoinsAmount - carPoolingService.Service.ServicePrice;
-
-            providerEcoWallet.EcoCoinsAmount = consumerEcoWallet.EcoCoinsAmount + carPoolingService.Service.ServicePrice;
-
-
+           
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                //CarPoolingService carPoolingService = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
+
                 int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                EcoWallet consumerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(c => c.Id == userId);
+                CarPoolingService carPoolingService = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(s => s.Id == id);
+                EcoWallet providerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(p => p.Id == carPoolingService.Service.UserProviderId);
+                consumerEcoWallet.EcoCoinsAmount = consumerEcoWallet.EcoCoinsAmount + carPoolingService.Service.ServicePrice;
 
-                if (carPoolingService.AvailableSeats != 0)
+                providerEcoWallet.EcoCoinsAmount = providerEcoWallet.EcoCoinsAmount + carPoolingService.Service.ServicePrice;
+
+                if (carPoolingService.AvailableSeats == 0)
                 {
-                    dalServiceManagement.CreateReservation(
-                    carPoolingService.Service.Id,
-                    userId
+                    dalServiceManagement.ServiceAvailability(
+                    carPoolingService.Service.Id
                     );
-                    dalServiceManagement.UpdateCarPoolingService(
-                        carPoolingService.Id,
-                        carPoolingService.SelectCarPoolingType,
-                        (carPoolingService.AvailableSeats) - 1,
-                        carPoolingService.PetsAllowed,
-                        carPoolingService.SmokingAllowed,
-                        carPoolingService.MusicAllowed,
-                        carPoolingService.ChattingAllowed,
-                        carPoolingService.VehiculeId,
-                        carPoolingService.TrajectoryId,
-                        carPoolingService.ServiceId);
-                    CarPoolingService carPoolingServiceUpdated = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
-                    
-                    dalFinancialManagement.UpdateEcoWallet(consumerEcoWallet);
-                    dalFinancialManagement.UpdateEcoWallet(providerEcoWallet);
+                    string url2 = "/Service/CreateCarpoolingRequest";
+                    return Redirect(url2);
+                }
 
-
-
-                    if (carPoolingServiceUpdated.AvailableSeats == 0)
+              
+                else if (carPoolingService.AvailableSeats >= 0 && consumerEcoWallet.EcoCoinsAmount != 0 && consumerEcoWallet.EcoCoinsAmount >= carPoolingService.Service.ServicePrice)
                     {
-                        dalServiceManagement.ServiceAvailability(
-                        carPoolingService.Service.Id
+                        dalServiceManagement.CreateReservation(
+                        carPoolingService.Service.Id,
+                        userId
                         );
-                        string url = "/Home/Index";
-                        return Redirect(url);
-                    }
-                    else
-                    {
-                        string url = "/Home/Index";
-                        return Redirect(url);
-                    }
-                }
+                        dalServiceManagement.UpdateCarPoolingService(
+                            carPoolingService.Id,
+                            carPoolingService.SelectCarPoolingType,
+                            (carPoolingService.AvailableSeats) - 1,
+                            carPoolingService.PetsAllowed,
+                            carPoolingService.SmokingAllowed,
+                            carPoolingService.MusicAllowed,
+                            carPoolingService.ChattingAllowed,
+                            carPoolingService.VehiculeId,
+                            carPoolingService.TrajectoryId,
+                            carPoolingService.ServiceId);
+                        CarPoolingService carPoolingServiceUpdated = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
 
-                else
-                {
-                    return Redirect("/Home/Index");
+                        dalFinancialManagement.UpdateEcoWallet(consumerEcoWallet);
+                        dalFinancialManagement.UpdateEcoWallet(providerEcoWallet);
 
-                }
+                        string url = "/Service/ReserveCarPoolingService";
+                        return Redirect(url);
+
+                    }
+
+
             }
             return Redirect("/Account/LoginAccount");
         }

@@ -26,13 +26,13 @@ namespace EcoCar.Models.Services
         //-------------------------------------------------------------------------------------------------
 
         #region CRUD Bank Details
-        public List<BankDetails> GetAllBankingDetails()
+        List<BankDetails> IDalFinancialManagement.GetAllBankingDetails()
         {
             return _bddContext.BankingDetails.ToList();
         }
 
         //Create BankDetails
-        public int CreateBankDetails(string bankName, string swift, string iban)
+        int IDalFinancialManagement.CreateBankDetails(string bankName, string swift, string iban)
         {
             BankDetails bankDetails = new BankDetails() { BankName = bankName, Swift = swift, Iban = iban };
             _bddContext.BankingDetails.Add(bankDetails);
@@ -46,7 +46,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update BankDetails
-        public void UpdateBankDetails(int id, string bankName, string swift, string iban)
+        void IDalFinancialManagement.UpdateBankDetails(int id, string bankName, string swift, string iban)
         {
             BankDetails bankDetails = _bddContext.BankingDetails.Find(id);
 
@@ -66,7 +66,7 @@ namespace EcoCar.Models.Services
         }
 
         //Delete BankDetails
-        public void DeleteBankDetails(int id)
+        void IDalFinancialManagement.DeleteBankDetails(int id)
         {
             BankDetails bankDetails = _bddContext.BankingDetails.Find(id);
 
@@ -81,13 +81,13 @@ namespace EcoCar.Models.Services
         //-------------------------------------------------------------------------------------------------
 
         #region CRUD BillingAddress
-        public List<BillingAddress> GetAllBillingaddresses()
+        List<BillingAddress> IDalFinancialManagement.GetAllBillingaddresses()
         {
             return _bddContext.BillingAddresses.ToList();
         }
 
         //Create BillingAddress
-        public int CreateBillingAddress(string addressLine, string city, string region, string country, int postalCode)
+        int IDalFinancialManagement.CreateBillingAddress(string addressLine, string city, string region, string country, int postalCode)
         {
             BillingAddress billingAddress = new BillingAddress() { AddressLine = addressLine, City = city, Region = region, Country = country, PostalCode = postalCode };
             _bddContext.BillingAddresses.Add(billingAddress);
@@ -101,7 +101,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update BillingAddress
-        public void UpdateBillingAddress(int id, string addressLine, string city, string region, string country, int postalCode)
+        void IDalFinancialManagement.UpdateBillingAddress(int id, string addressLine, string city, string region, string country, int postalCode)
         {
             BillingAddress billingAddress = _bddContext.BillingAddresses.Find(id);
 
@@ -122,7 +122,7 @@ namespace EcoCar.Models.Services
         }
 
         //Delete BillingAddress
-        public void DeleteBillingAddress(int id)
+        void IDalFinancialManagement.DeleteBillingAddress(int id)
         {
             BillingAddress billingAddress = _bddContext.BillingAddresses.Find(id);
 
@@ -137,7 +137,7 @@ namespace EcoCar.Models.Services
         //-------------------------------------------------------------------------------------------------
 
         #region CRUD Invoice
-        public List<Invoice> GetAllInvoices()
+        List<Invoice> IDalFinancialManagement.GetAllInvoices()
         {
             return _bddContext.Invoices.Include(e => e.BillingAddress).ToList();
         }
@@ -148,7 +148,7 @@ namespace EcoCar.Models.Services
         }
 
         //Create Invoice
-        public int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId)
+        int IDalFinancialManagement.CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId)
         {
             Invoice invoice = new Invoice()
             {
@@ -169,7 +169,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update Invoice
-        public void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId)
+        void IDalFinancialManagement.UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType, int billingAddressId)
         {
             Invoice invoice = _bddContext.Invoices.Find(id);
 
@@ -191,7 +191,7 @@ namespace EcoCar.Models.Services
         }
 
         //Delete Invoice
-        public void DeleteInvoice(int id)
+        void IDalFinancialManagement.DeleteInvoice(int id)
         {
             Invoice invoice = _bddContext.Invoices.Find(id);
 
@@ -207,7 +207,7 @@ namespace EcoCar.Models.Services
 
         #region CRUD Service Invoice
         //CRUD ServiceInvoice
-        public List<ServiceInvoice> GetAllServiceInvoices()
+        List<ServiceInvoice> IDalFinancialManagement.GetAllServiceInvoices()
         {
             return _bddContext.ServiceInvoices.Include(e => e.Service).Include(e => e.Invoice).ToList();
         }
@@ -218,7 +218,7 @@ namespace EcoCar.Models.Services
         }
 
         //Create ServiceInvoice
-        public int CreateServiceInvoice(int iIdServiceProvider, int idServiceConsumer, int serviceId, int invoiceId)
+        int IDalFinancialManagement.CreateServiceInvoice(int iIdServiceProvider, int idServiceConsumer, int serviceId, int invoiceId)
         {
             ServiceInvoice serviceInvoice = new ServiceInvoice()
             {
@@ -238,7 +238,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update ServiceInvoice
-        public void UpdateServiceInvoice(int id, int iIdServiceProvider, int idServiceConsumer, int serviceId, int invoiceId)
+        void IDalFinancialManagement.UpdateServiceInvoice(int id, int iIdServiceProvider, int idServiceConsumer, int serviceId, int invoiceId)
         {
             ServiceInvoice serviceInvoice = _bddContext.ServiceInvoices.Find(id);
 
@@ -259,7 +259,7 @@ namespace EcoCar.Models.Services
         }
 
         //Delete ServiceInvoice
-        public void DeleteServiceInvoice(int id)
+        void IDalFinancialManagement.DeleteServiceInvoice(int id)
         {
             ServiceInvoice serviceInvoice = _bddContext.ServiceInvoices.Find(id);
 
@@ -274,13 +274,13 @@ namespace EcoCar.Models.Services
         //-------------------------------------------------------------------------------------------------
 
         #region CRUD EcoStore Invoice
-        public List<EcoStoreInvoice> GetAllEcoStoreInvoices()
+        List<EcoStoreInvoice> IDalFinancialManagement.GetAllEcoStoreInvoices()
         {
             return _bddContext.EcoStoreInvoices.ToList();
         }
 
         //Create ServiceInvoice
-        public int CreateEcoStoreInvoice()
+        int IDalFinancialManagement.CreateEcoStoreInvoice()
         {
             EcoStoreInvoice ecoStoreInvoice = new EcoStoreInvoice() { };
             _bddContext.EcoStoreInvoices.Add(ecoStoreInvoice);
@@ -294,7 +294,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update ServiceInvoice
-        public void UpdateEcoStoreInvoice(int id)
+        void IDalFinancialManagement.UpdateEcoStoreInvoice(int id)
         {
             EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Find(id);
 
@@ -311,7 +311,7 @@ namespace EcoCar.Models.Services
         }
 
         //Delete ServiceInvoice
-        public void DeleteEcoStoreInvoice(int id)
+        void IDalFinancialManagement.DeleteEcoStoreInvoice(int id)
         {
             EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Find(id);
 
@@ -326,13 +326,13 @@ namespace EcoCar.Models.Services
         //-------------------------------------------------------------------------------------------------
 
         #region CRUD Subscription
-        public List<Subscription> GetAllSubscriptions()
+        List<Subscription> IDalFinancialManagement.GetAllSubscriptions()
         {
             return _bddContext.Subscriptions.ToList();
         }
 
         //Create Subscription
-        public int CreateSubscription(double subscriptionCostEuro, DateTime subscriptionExpiration, DateTime subscriptionStart, bool isActive)
+        int IDalFinancialManagement.CreateSubscription(double subscriptionCostEuro, DateTime subscriptionExpiration, DateTime subscriptionStart, bool isActive)
         {
             Subscription subscription = new Subscription() { SubscriptionCostEuro = subscriptionCostEuro, SubscriptionExpiration = subscriptionExpiration, SubscriptionStart = subscriptionStart, IsActive = isActive };
             _bddContext.Subscriptions.Add(subscription);
@@ -346,7 +346,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update Subscription
-        public void UpdateSubscription(int id, double subscriptionCostEuro, DateTime subscriptionExpiration, DateTime subscriptionStart, bool isActive)
+        void IDalFinancialManagement.UpdateSubscription(int id, double subscriptionCostEuro, DateTime subscriptionExpiration, DateTime subscriptionStart, bool isActive)
         {
             Subscription subscription = _bddContext.Subscriptions.Find(id);
 
@@ -367,7 +367,7 @@ namespace EcoCar.Models.Services
         }
 
         //Delete Subscription
-        public void DeleteSubscription(int id)
+        void IDalFinancialManagement.DeleteSubscription(int id)
         {
             Subscription subscription = _bddContext.Subscriptions.Find(id);
 
@@ -382,12 +382,12 @@ namespace EcoCar.Models.Services
         //-------------------------------------------------------------------------------------------------
 
         #region CRUD EcoWallet
-        public List<EcoWallet> GetAllEcoWallets()
+        List<EcoWallet> IDalFinancialManagement.GetAllEcoWallets()
         {
             return _bddContext.EcoWallets.ToList();
         }
 
-        public EcoWallet GetUserEcoWallet(int id)
+        EcoWallet IDalFinancialManagement.GetUserEcoWallet(int id)
         {
 
             User user = _bddContext.Users.Find(id);
@@ -396,7 +396,7 @@ namespace EcoCar.Models.Services
         }
 
         //Create EcoWallet
-        public int CreateEcoWallet(double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros)
+        int IDalFinancialManagement.CreateEcoWallet(double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros)
         {
             EcoWallet ecoWallet = new EcoWallet() { EcoCoinsAmount = ecoCoinsAmount, Subscription = subscription, EcoCoinsValueEuros = ecoCoinsValueEuros };
             _bddContext.EcoWallets.Add(ecoWallet);
@@ -410,7 +410,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update EcoWallet
-        public void UpdateEcoWallet(int id, double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros)
+       public void UpdateEcoWallet(int id, double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros)
         {
             EcoWallet ecoWallet = _bddContext.EcoWallets.Find(id);
 
@@ -431,7 +431,7 @@ namespace EcoCar.Models.Services
 
        
         //Delete EcoWallet
-        public void DeleteEcoWallet(int id)
+        void IDalFinancialManagement.DeleteEcoWallet(int id)
         {
             EcoWallet ecoWallet = _bddContext.EcoWallets.Find(id);
 
@@ -447,18 +447,18 @@ namespace EcoCar.Models.Services
 
         #region CRUD EcoStore
         //CRUD EcoStore
-        public List<EcoStore> GetAllEcoStores()
+        List<EcoStore> IDalFinancialManagement.GetAllEcoStores()
         {
             return _bddContext.EcoStores.ToList();
         }
 
-        public EcoStore GetEcoStore(int id)
+        EcoStore IDalFinancialManagement.GetEcoStore(int id)
         {
             return _bddContext.EcoStores.Find(id);
         }
 
         //Create EcoStore
-        public int CreateEcoStore(
+        int IDalFinancialManagement.CreateEcoStore(
             string nameOne,
             string nameTwo,
             string nameThree,
@@ -516,7 +516,7 @@ namespace EcoCar.Models.Services
         //-------------------------------------------------------------------------------------------------
 
         #region CRUD Shopping Cart
-        public List<ShoppingCart> GetAllShoppingCarts()
+        List<ShoppingCart> IDalFinancialManagement.GetAllShoppingCarts()
         {
             return _bddContext.ShoppingCarts.ToList();
         }
@@ -528,7 +528,7 @@ namespace EcoCar.Models.Services
         }
 
         //Create ShoppingCart
-        public int CreateShoppingCart(
+        int IDalFinancialManagement.CreateShoppingCart(
             int quantityBatchOne,
             int quantityBatchTwo,
             int quantityBatchThree,
@@ -561,7 +561,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update ShoppingCart
-        public void UpdateShoppingCart(
+        void IDalFinancialManagement.UpdateShoppingCart(
             int id,
             int quantityBatchOne,
             int quantityBatchTwo,
@@ -597,7 +597,7 @@ namespace EcoCar.Models.Services
 
 
         //Delete EcoWallet
-        public void DeleteShoppingCart(int id)
+        void IDalFinancialManagement.DeleteShoppingCart(int id)
         {
             ShoppingCart shoppingCart = _bddContext.ShoppingCarts.Find(id);
 
@@ -608,10 +608,11 @@ namespace EcoCar.Models.Services
             }
         }
 
-        object IDalFinancialManagement.UpdateEcoWallet(EcoWallet consumerEcoWallet)
-        {
-            throw new NotImplementedException();
-        }
+        //object IDalFinancialManagement.UpdateEcoWallet(EcoWallet consumerEcoWallet)
+        //{
+        //    _bddContext.consumerEcoWallet.Update(consumerEcoWallet);
+        //    _bddContext.SaveChanges();
+        //}
         #endregion
 
     }

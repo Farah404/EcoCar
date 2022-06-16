@@ -61,6 +61,7 @@ namespace EcoCar.Models.Services
         EcoWallet GetUserEcoWallet(int id);
         int CreateEcoWallet(double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros);
         void UpdateEcoWallet(int id, double ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros);
+        void UpdateEcoWallet(EcoWallet ecoWallet);
         void DeleteEcoWallet(int id);
 
         //-------------------------------------------------------------------------------------------------
@@ -118,6 +119,6 @@ namespace EcoCar.Models.Services
             );
 
         void DeleteShoppingCart(int id);
-        object UpdateEcoWallet(EcoWallet consumerEcoWallet);
+        //object UpdateEcoWallet(EcoWallet consumerEcoWallet);
     }
 }

@@ -4,6 +4,7 @@ using EcoCar.Models.ServiceManagement;
 using EcoCar.Models.MessagingManagement;
 using Microsoft.EntityFrameworkCore;
 using EcoCar.Models.PersonManagement;
+using System;
 
 namespace EcoCar.Models.DataBase
 {
@@ -228,7 +229,7 @@ namespace EcoCar.Models.DataBase
                  new User
                  {
                      Id = 10,
-                     Email = "random@ecocar.com",
+                     Email = "NO@ecocar.com",
                      PhoneNumber = 1234457891,
                      IdentityCardNumber = 1234535315,
                      DrivingPermitNumber = 1230432153,
@@ -389,7 +390,7 @@ namespace EcoCar.Models.DataBase
             #endregion
 
 
-            #region Initializing Servies
+            #region Initializing Services
 
             this.Itineraries.AddRange(
                    new Itinerary
@@ -442,102 +443,104 @@ namespace EcoCar.Models.DataBase
 
 
 
-         //   this.Services.AddRange(
+            this.Services.AddRange(
 
-        //        new Service
-        //        {
-        //            Id = 100,
-        //            UserProviderId = 100,
-        //            PublicationDate = new DateTime(2022, 06, 10),
-        //            ExpirationDate = new DateTime(2022, 06, 19),
-        //            ReferenceNumber = 100,
-        //            ServicePrice = 20,
-        //// Isexpired=false,
-        //            Start = new DateTime(2022, 06, 21),
-        //            End = new DateTime(2022, 06, 21),
+                new Service
+                {
+                    Id = 100,
+                    UserProviderId = 1,
+                    PublicationDate = new DateTime(2022, 06, 10),
+                    ExpirationDate = new DateTime(2022, 06, 19),
+                    ReferenceNumber = 100,
+                    ServicePrice = 500,
+                    Start = new DateTime(2022, 06, 21),
+                    End = new DateTime(2022, 06, 21),
+                    IsRequest = false,
 
-        //            SelectServiceType = Service.ServiceType.CarPoolingService
-        //        },
-
-
-        //        new Service
-        //        {
-        //            Id = 200,
-        //            UserProviderId = 200,
-        //            PublicationDate = new DateTime(2022, 06, 10),
-        //            ExpirationDate = new DateTime(2022, 06, 19),
-        //            ReferenceNumber = 100,
-        //// Isexpired=false,
-        //            Start = new DateTime(2022, 06, 21),
-        //            End = new DateTime(2022, 06, 21),
-        //            IsRequest = false,
-
-        //            SelectServiceType = Service.ServiceType.CarRentalService
-        //        },
+                    SelectServiceType = Service.ServiceType.CarPoolingService
+                },
 
 
-        //        new Service
-        //        {
-        //            Id = 300,
-        //            UserProviderId = 300,
-        //            PublicationDate = new DateTime(2022, 06, 10),
-        //            ExpirationDate = new DateTime(2022, 06, 19),
-        //            ReferenceNumber = 300,
-        //// Isexpired=false,
-        //            Start = new DateTime(2022, 06, 21),
-        //            End = new DateTime(2022, 06, 21),
-        //            IsRequest = false,
+                new Service
+                {
+                    Id = 200,
+                    UserProviderId = 10,
+                    PublicationDate = new DateTime(2022, 06, 10),
+                    ExpirationDate = new DateTime(2022, 06, 19),
+                    ReferenceNumber = 100,
+                    ServicePrice = 200,
+                    Start = new DateTime(2022, 06, 21),
+                    End = new DateTime(2022, 06, 21),
+                    IsRequest = false,
 
-        //            SelectServiceType = Service.ServiceType.ParcelService
-               // });
-            //this.SaveChanges();
-
-
-            //this.CarPoolingServices.Add(
-
-            //    new CarPoolingService
-            //    {
-            //        Id = 100,
-            //        ServiceId = 100,
-            //        SelectCarPoolingType = CarPoolingService.CarPoolingType.HomeToWork,
-            //        AvailableSeats = 3,
-            //        PetsAllowed = false,
-            //        SmokingAllowed = false,
-            //        MusicAllowed = true,
-            //        ChattingAllowed = false,
-            //        TrajectoryId = 100
-
-            //    });
-            //this.SaveChanges();
+                    SelectServiceType = Service.ServiceType.CarRentalService
+                },
 
 
-            //this.CarRentalServices.Add(
+                new Service
+                {
+                    Id = 300,
+                    UserProviderId = 2,
+                    PublicationDate = new DateTime(2022, 06, 10),
+                    ExpirationDate = new DateTime(2022, 06, 19),
+                    ReferenceNumber = 300,
+                    ServicePrice = 200,
+                    Start = new DateTime(2022, 06, 21),
+                    End = new DateTime(2022, 06, 21),
+                    IsRequest = false,
 
-            //    new CarRentalService
-            //    {
-            //        Id = 200,
-            //        ServiceId = 200,
-            //        KeyPickUpAddress = "1, Rue A, 13000 Marseille",
-            //        KeyDropOffAddress = "1, Rue A, 13000 Marseille",
-            //        VehiculeId = 1,
+                    SelectServiceType = Service.ServiceType.ParcelService
+                });
+            this.SaveChanges();
 
 
-            //    });
+            this.CarPoolingServices.Add(
 
-            //this.ParcelServices.Add(
+                new CarPoolingService
+                {
+                    Id = 100,
+                    ServiceId = 100,
+                    SelectCarPoolingType = CarPoolingService.CarPoolingType.HomeToWork,
+                    AvailableSeats = 3,
+                    PetsAllowed = false,
+                    SmokingAllowed = false,
+                    MusicAllowed = true,
+                    ChattingAllowed = false,
+                    TrajectoryId = 100,
+                    VehiculeId = 1,
 
-            //    new ParcelService
-            //    {
-            //        Id = 300,
-            //        ServiceId = 300,
-            //        BarCode = 300000,
-            //        WeightKilogrammes = 5,
-            //        AtypicalVolume = true,
-            //        Fragile = false,
-            //        TrajectoryId = 300,
+                });
+            this.SaveChanges();
 
-            //    });
-            //this.SaveChanges();
+
+            this.CarRentalServices.Add(
+
+                new CarRentalService
+                {
+                    Id = 200,
+                    ServiceId = 200,
+                    KeyPickUpAddress = "1, Rue A, 13000 Marseille",
+                    KeyDropOffAddress = "1, Rue A, 13000 Marseille",
+                    VehiculeId = 1,
+
+
+                });
+
+            this.ParcelServices.Add(
+
+                new ParcelService
+                {
+                    Id = 300,
+                    ServiceId = 300,
+                    BarCode = 300000,
+                    WeightKilogrammes = 5,
+                    AtypicalVolume = true,
+                    Fragile = false,
+                    TrajectoryId = 300,
+                    VehiculeId = 1,
+
+                });
+            this.SaveChanges();
 
             #endregion
 

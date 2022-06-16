@@ -27,7 +27,7 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult CreateBankDetails(BankDetails bankDetails, int personId)
         {
-            int bankDetailsId = dalFinancialManagement.CreateBankDetails(bankDetails.BankName, bankDetails.Swift, bankDetails.Iban);
+            int bankDetailsId = ((IDalFinancialManagement)dalFinancialManagement).CreateBankDetails(bankDetails.BankName, bankDetails.Swift, bankDetails.Iban);
             string url = "/Financial/CreateBillingAddress" + "?personId=" + personId + "&bankDetailsId=" + bankDetailsId;
             return Redirect(url);
         }
@@ -42,7 +42,7 @@ namespace EcoCar.Controllers
         public IActionResult CreateBillingAddress(BillingAddress billingAddress, int bankDetailsId, int personId)
         {
 
-            int billingAddressId = dalFinancialManagement.CreateBillingAddress(billingAddress.AddressLine, billingAddress.City, billingAddress.Region, billingAddress.Country, billingAddress.PostalCode);
+            int billingAddressId = ((IDalFinancialManagement)dalFinancialManagement).CreateBillingAddress(billingAddress.AddressLine, billingAddress.City, billingAddress.Region, billingAddress.Country, billingAddress.PostalCode);
             string url = "/Account/CreateUser" + "?personId=" + personId + "&bankDetailsId=" + bankDetailsId + "&billingAddressId=" + billingAddressId; ;
             return Redirect(url);
         }
@@ -50,14 +50,14 @@ namespace EcoCar.Controllers
         public IActionResult ListBankDetails()
         {
             {
-                List<BankDetails> listBankDetails = dalFinancialManagement.GetAllBankingDetails();
+                List<BankDetails> listBankDetails = ((IDalFinancialManagement)dalFinancialManagement).GetAllBankingDetails();
                 return View(listBankDetails);
             }
         }
         public IActionResult ListBillingAddress()
         {
             {
-                List<BillingAddress> listBillingAddress = dalFinancialManagement.GetAllBillingaddresses();
+                List<BillingAddress> listBillingAddress = ((IDalFinancialManagement)dalFinancialManagement).GetAllBillingaddresses();
                 return View(listBillingAddress);
             }
         }
@@ -68,7 +68,7 @@ namespace EcoCar.Controllers
         {
             FinancialViewModel financialViewModel = new FinancialViewModel
             {
-                EcoStore = dalFinancialManagement.GetEcoStore(1)
+                EcoStore = ((IDalFinancialManagement)dalFinancialManagement).GetEcoStore(1)
             };
             
             return View(financialViewModel);
@@ -81,7 +81,7 @@ namespace EcoCar.Controllers
             
                 int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 ShoppingCart shoppingCart = dalFinancialManagement.GetUserShoppingCart(userId);
-                dalFinancialManagement.UpdateShoppingCart(
+            ((IDalFinancialManagement)dalFinancialManagement).UpdateShoppingCart(
                     shoppingCart.Id,
                     quantityBatchOne,
                     quantityBatchTwo,
@@ -133,8 +133,8 @@ namespace EcoCar.Controllers
             FinancialViewModel financialViewModel = new FinancialViewModel
             {
                 ShoppingCart = dalFinancialManagement.GetUserShoppingCart(userId),
-                EcoWallet = dalFinancialManagement.GetUserEcoWallet(userId),
-                EcoStore = dalFinancialManagement.GetEcoStore(1)
+                EcoWallet = ((IDalFinancialManagement)dalFinancialManagement).GetUserEcoWallet(userId),
+                EcoStore = ((IDalFinancialManagement)dalFinancialManagement).GetEcoStore(1)
 
             };
                 

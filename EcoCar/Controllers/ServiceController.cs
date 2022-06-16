@@ -295,8 +295,7 @@ namespace EcoCar.Controllers
                 EcoWallet consumerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(c => c.Id == userId);
                 CarPoolingService carPoolingService = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(s => s.Id == id);
                 EcoWallet providerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(p => p.Id == carPoolingService.Service.UserProviderId);
-                consumerEcoWallet.EcoCoinsAmount = consumerEcoWallet.EcoCoinsAmount + carPoolingService.Service.ServicePrice;
-
+                consumerEcoWallet.EcoCoinsAmount = consumerEcoWallet.EcoCoinsAmount - carPoolingService.Service.ServicePrice;
                 providerEcoWallet.EcoCoinsAmount = providerEcoWallet.EcoCoinsAmount + carPoolingService.Service.ServicePrice;
 
                 if (carPoolingService.AvailableSeats == 0)
@@ -331,7 +330,7 @@ namespace EcoCar.Controllers
                         dalFinancialManagement.UpdateEcoWallet(consumerEcoWallet);
                         dalFinancialManagement.UpdateEcoWallet(providerEcoWallet);
 
-                        string url = "/Service/ReserveCarPoolingService";
+                        string url = "/Service/CreateRequest";
                         return Redirect(url);
 
                     }

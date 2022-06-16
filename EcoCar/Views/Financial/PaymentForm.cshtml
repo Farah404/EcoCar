@@ -7,8 +7,7 @@
     <div class="checkout container">
         <form id="payment-form" method="post" asp-controller="Financial" asp-action="Create">
             @Html.HiddenFor(n => n.Id)
-            @Html.HiddenFor(n=>n.EcoCoinsBatchOnePrice)
-            <div class="card">
+            @*<div class="card">
                 <div class="card-body">
                     <h5 class="card-title" name="Title" asp-for="@Model.NameOne">@Model.NameOne</h5>
                     <p class="card-text">@Model.EcoCoinsBatchOne</p>
@@ -16,15 +15,24 @@
                     <p class="card-text"><small class="text-muted">Price: @Model.EcoCoinsBatchOnePrice</small></p>
                 </div>
                 <img style="width: 90%" class="card-img-bottom" src="@Model.EcoCoinsBatchOne" alt="Card image cap">
-            </div>
+            </div>*@
             <section>
                 <div class="bt-drop-in-wrapper">
                     <div id="bt-dropin"></div>
                 </div>
             </section>
             @Html.HiddenFor(n => n.Nonce, new { @id = "nonce" })
+            @Html.Hidden("userId", @ViewBag.userId, null)
+            @Html.HiddenFor(n=>n.EcoCoinsBatchOnePrice)
+            @Html.HiddenFor(n=>n.EcoCoinsBatchTwoPrice)
+            @Html.HiddenFor(n=>n.EcoCoinsBatchThreePrice)
+            @Html.HiddenFor(n=>n.MonthlySubscriptionPrice)
+            @Html.HiddenFor(n=>n.SemestrialSubscriptionPrice)
+            @Html.HiddenFor(n=>n.SemestrialSubscriptionPrice)
+            @Html.HiddenFor(n=>n.TotalEuros)
+
             <hr />
-            <button class="btn btn-success" type="submit"><span>Confirm payment - $@Model.EcoCoinsBatchOnePrice</span></button>
+            <button class="btn btn-success" type="submit"><span>Confirm payment - $@Model.TotalEuros</span></button>
         </form>
     </div>
 </div>
@@ -52,62 +60,3 @@
         });
     });
 </script>
-@*<centre>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12 col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Payment Details
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <form role="form">
-                    <div class="form-group">
-                        <label for="cardNumber">
-                            CARD NUMBER</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number"
-                                required autofocus />
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-7 col-md-7">
-                            <div class="form-group">
-                                <label for="expityMonth">
-                                    EXPIRY DATE</label>
-                                <div class="col-xs-6 col-lg-6 pl-ziro">
-                                    <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
-                                </div>
-                                <div class="col-xs-6 col-lg-6 pl-ziro">
-                                    <input type="text" class="form-control" id="expityYear" placeholder="YY" required /></div>
-                            </div>
-                        </div>
-                        <div class="col-xs-5 col-md-5 pull-right">
-                            <div class="form-group">
-                                <label for="cvCode">
-                                    CV CODE</label>
-                                <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-            </div>
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><span class="badge pull-right"><span class="glyphicon glyphicon-usd"></span>4200</span> Final Payment</a>
-                </li>
-            </ul>
-            <br/>
-            <a  class="btn btn-success btn-lg btn-block" role="button">Pay</a>
-        </div>
-                <div class="col-8 col-md-4">
-        <center>
-            <img style="width:400px" src="~/Images/EcoStore.png"></center>
-        </div>
-    </div>
-
-</div>
-</centre>*@

@@ -18,7 +18,7 @@ namespace EcoCar.Models.FinancialManagement
         public string NameTrimester { get; set; }
         public string NameSemester { get; set; }
 
-        public string EcoCoinsBatchOnePrice { get; set; }
+        public double EcoCoinsBatchOnePrice { get; set; }
         public int EcoCoinsBatchOne { get; set; }
 
 

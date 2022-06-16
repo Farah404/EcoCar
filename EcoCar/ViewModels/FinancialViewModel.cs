@@ -15,13 +15,9 @@ namespace EcoCar.ViewModels
         public BillingAddress BillingAddress { get; set; }
 
         public EcoStoreInvoice EcoStoreInvoice { get; set; }
-
         public ServiceInvoice ServiceInvoice { get; set; }
 
         public ShoppingCart ShoppingCart { get; set; }
-
-        public List<EcoStore> EcoStores { get; set; }
-
         public User User { get; set; }
 
         public Account Account { get; set; }

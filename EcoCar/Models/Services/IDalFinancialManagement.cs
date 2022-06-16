@@ -34,8 +34,8 @@ namespace EcoCar.Models.Services
 
         //ServiceInvoice
         List<ServiceInvoice> GetAllServiceInvoices();
-        int CreateServiceInvoice(int iIdServiceProvider, int idServiceConsumer, int serviceId, int invoiceId);
-        void UpdateServiceInvoice(int id, int iIdServiceProvider, int idServiceConsumer, int serviceId, int invoiceId);
+        int CreateServiceInvoice(int idServiceProvider, int idServiceConsumer, int ecoCoinAmount, int serviceId, int invoiceId);
+        void UpdateServiceInvoice(int id, int idServiceProvider, int idServiceConsumer, int ecoCoinAmount, int serviceId, int invoiceId);
         void DeleteServiceInvoice(int id);
 
         //-------------------------------------------------------------------------------------------------
@@ -58,8 +58,46 @@ namespace EcoCar.Models.Services
         //EcoWallet
         List<EcoWallet> GetAllEcoWallets();
         EcoWallet GetUserEcoWallet(int id);
-        int CreateEcoWallet(int ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros, DateTime subscriptionExpiration, DateTime subscriptionStart);
-        void UpdateEcoWallet(int id, int ecoCoinsAmount, bool subscription, double ecoCoinsValueEuros, DateTime subscriptionExpiration, DateTime subscriptionStart);
+        bool CheckUserFunds(int ecoAmount, int userId);
+        int CreateEcoWallet(
+            int ecoCoinsAmount,
+            bool subscription,
+            double ecoCoinsValueEuros,
+            DateTime subscriptionExpiration,
+            DateTime subscriptionStart,
+            DateTime ecoCoinsFirstMonth,
+            bool firstMonth,
+            DateTime ecoCoinsSecondMonth,
+            bool secondMonth,
+            DateTime eEcoCoinsThirdMonth,
+            bool thirdMonth,
+            DateTime ecoCoinsFourthMonth,
+            bool fourthMonth,
+            DateTime ecoCoinsFifthMonth,
+            bool fifthMonth,
+            DateTime ecoCoinsSixthMonth,
+            bool sixthMonth
+            );
+        void UpdateEcoWallet(
+            int id,
+            int ecoCoinsAmount,
+            bool subscription,
+            double ecoCoinsValueEuros,
+            DateTime subscriptionExpiration,
+            DateTime subscriptionStart,
+            DateTime ecoCoinsFirstMonth,
+            bool firstMonth,
+            DateTime ecoCoinsSecondMonth,
+            bool secondMonth,
+            DateTime eEcoCoinsThirdMonth,
+            bool thirdMonth,
+            DateTime ecoCoinsFourthMonth,
+            bool fourthMonth,
+            DateTime ecoCoinsFifthMonth,
+            bool fifthMonth,
+            DateTime ecoCoinsSixthMonth,
+            bool sixthMonth
+            );
         void DeleteEcoWallet(int id);
 
         //-------------------------------------------------------------------------------------------------
@@ -116,5 +154,14 @@ namespace EcoCar.Models.Services
             );
 
         void DeleteShoppingCart(int id);
+
+        //-------------------------------------------------------------------------------------------------
+
+        //EcoCoinsTransaction
+
+        void EcoCoinsTransactionService(int userProviderId, int userConsumerId, int ecoCoinAmount);
+        void EcoCoinsTransactionRequest(int userProviderId, int userConsumerId, int ecoCoinAmount);
+
+        //-------------------------------------------------------------------------------------------------
     }
 }

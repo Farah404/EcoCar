@@ -13,10 +13,12 @@ namespace EcoCar.Controllers
     {
         private IDalServiceManagement dalServiceManagement;
         private IDalPersonManagement dalPersonManagement;
+        private IDalFinancialManagement dalFinancialManagement;
         public ServiceController()
         {
             dalServiceManagement = new DalServiceManagement();
             dalPersonManagement = new DalPersonManagement();
+            dalFinancialManagement = new DalFinancialManagement();
         }
 
         #region Searching a service in the list of services
@@ -288,38 +290,40 @@ namespace EcoCar.Controllers
 
                 if (carPoolingService.AvailableSeats != 0)
                 {
-                    dalServiceManagement.CreateReservation(
-                    carPoolingService.Service.Id,
-                    userId
-                    );
-                    dalServiceManagement.UpdateCarPoolingService(
-                        carPoolingService.Id,
-                        carPoolingService.SelectCarPoolingType,
-                        (carPoolingService.AvailableSeats) - 1,
-                        carPoolingService.PetsAllowed,
-                        carPoolingService.SmokingAllowed,
-                        carPoolingService.MusicAllowed,
-                        carPoolingService.ChattingAllowed,
-                        carPoolingService.VehiculeId,
-                        carPoolingService.TrajectoryId,
-                        carPoolingService.ServiceId);
-                    CarPoolingService carPoolingServiceUpdated = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
+                    bool UserHasEnoughFunds = dalFinancialManagement.CheckUserFunds(carPoolingService.Service.PriceEcoCoins, userId);
+                    if (UserHasEnoughFunds == true)
+                    {
+                        dalFinancialManagement.EcoCoinsTransactionService(carPoolingService.Service.UserProviderId, userId, carPoolingService.Service.PriceEcoCoins);
+                        dalServiceManagement.CreateReservation(carPoolingService.Service.Id, userId);
+                        dalServiceManagement.UpdateCarPoolingService(
+                            carPoolingService.Id,
+                            carPoolingService.SelectCarPoolingType,
+                            (carPoolingService.AvailableSeats) - 1,
+                            carPoolingService.PetsAllowed,
+                            carPoolingService.SmokingAllowed,
+                            carPoolingService.MusicAllowed,
+                            carPoolingService.ChattingAllowed,
+                            carPoolingService.VehiculeId,
+                            carPoolingService.TrajectoryId,
+                            carPoolingService.ServiceId);
 
-                    if (carPoolingServiceUpdated.AvailableSeats == 0)
-                    {
-                        dalServiceManagement.ServiceAvailability(
-                        carPoolingService.Service.Id
-                        );
-                        string url = "/Home/Index";
-                        return Redirect(url);
-                    }
-                    else
-                    {
-                        string url = "/Home/Index";
-                        return Redirect(url);
+                        CarPoolingService carPoolingServiceUpdated = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
+
+                        if (carPoolingServiceUpdated.AvailableSeats == 0)
+                        {
+                            dalServiceManagement.ServiceAvailability(
+                            carPoolingService.Service.Id
+                            );
+                            string url = "/Home/Index";
+                            return Redirect(url);
+                        }
+                        else
+                        {
+                            string url = "/Home/Index";
+                            return Redirect(url);
+                        }
                     }
                 }
-
                 else
                 {
                     return Redirect("/Home/Index");
@@ -350,29 +354,34 @@ namespace EcoCar.Controllers
 
                 if (parcelService.Service.IsAvailable != false)
                 {
-                    dalServiceManagement.CreateReservation(
+                    bool UserHasEnoughFunds = dalFinancialManagement.CheckUserFunds(parcelService.Service.PriceEcoCoins, userId);
+                    if (UserHasEnoughFunds == true)
+                    {
+                        dalFinancialManagement.EcoCoinsTransactionService(parcelService.Service.UserProviderId, userId, parcelService.Service.PriceEcoCoins);
+                        dalServiceManagement.CreateReservation(
                         parcelService.Service.Id,
                         userId
                         );
 
-                    dalServiceManagement.UpdateParcelService(
-                        parcelService.Id,
-                        parcelService.BarCode,
-                        parcelService.WeightKilogrammes,
-                        parcelService.AtypicalVolume,
-                        parcelService.Fragile,
-                        parcelService.TrajectoryId,
-                        parcelService.ServiceId,
-                        parcelService.VehiculeId
-                        );
+                        dalServiceManagement.UpdateParcelService(
+                            parcelService.Id,
+                            parcelService.BarCode,
+                            parcelService.WeightKilogrammes,
+                            parcelService.AtypicalVolume,
+                            parcelService.Fragile,
+                            parcelService.TrajectoryId,
+                            parcelService.ServiceId,
+                            parcelService.VehiculeId
+                            );
 
-                    dalServiceManagement.ServiceAvailability(
-                        parcelService.Service.Id
-                        );
+                        dalServiceManagement.ServiceAvailability(
+                            parcelService.Service.Id
+                            );
 
 
-                    string url = "/Home/Index";
-                    return Redirect(url);
+                        string url = "/Home/Index";
+                        return Redirect(url);
+                    }
                 }
                 else
                 {
@@ -404,25 +413,30 @@ namespace EcoCar.Controllers
 
                 if (carRentalService.Service.IsAvailable != false)
                 {
-                    dalServiceManagement.CreateReservation(
+                    bool UserHasEnoughFunds = dalFinancialManagement.CheckUserFunds(carRentalService.Service.PriceEcoCoins, userId);
+                    if (UserHasEnoughFunds == true)
+                    {
+                        dalFinancialManagement.EcoCoinsTransactionService(carRentalService.Service.UserProviderId, userId, carRentalService.Service.PriceEcoCoins);
+                        dalServiceManagement.CreateReservation(
                         carRentalService.Service.Id,
                         userId
                         );
 
-                    dalServiceManagement.UpdateCarRentalService(
-                        carRentalService.Id,
-                        carRentalService.KeyPickUpAddress,
-                        carRentalService.KeyDropOffAddress,
-                        carRentalService.VehiculeId,
-                        carRentalService.ServiceId
-                        );
+                        dalServiceManagement.UpdateCarRentalService(
+                            carRentalService.Id,
+                            carRentalService.KeyPickUpAddress,
+                            carRentalService.KeyDropOffAddress,
+                            carRentalService.VehiculeId,
+                            carRentalService.ServiceId
+                            );
 
-                    dalServiceManagement.ServiceAvailability(
-                        carRentalService.Service.Id
-                        );
+                        dalServiceManagement.ServiceAvailability(
+                            carRentalService.Service.Id
+                            );
 
-                    string url = "/Home/Index";
-                    return Redirect(url);
+                        string url = "/Home/Index";
+                        return Redirect(url);
+                    }
                 }
                 else
                 {
@@ -579,6 +593,60 @@ namespace EcoCar.Controllers
             };
             return View(serviceViewModel);
         }
+
+        [HttpPost]
+        public IActionResult RespondToCarPoolRequest(Reservation reservation, int id)
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                CarPoolingService carPoolingRequest = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                if (carPoolingRequest.AvailableSeats != 0)
+                {
+                    bool UserHasEnoughFunds = dalFinancialManagement.CheckUserFunds(carPoolingRequest.Service.PriceEcoCoins, carPoolingRequest.Service.UserProviderId);
+                    if (UserHasEnoughFunds == true)
+                    {
+                        dalFinancialManagement.EcoCoinsTransactionRequest(carPoolingRequest.Service.UserProviderId, userId, carPoolingRequest.Service.PriceEcoCoins);
+                        dalServiceManagement.CreateReservation(carPoolingRequest.Service.Id, userId);
+                        dalServiceManagement.UpdateCarPoolingService(
+                            carPoolingRequest.Id,
+                            carPoolingRequest.SelectCarPoolingType,
+                            (carPoolingRequest.AvailableSeats) - 1,
+                            carPoolingRequest.PetsAllowed,
+                            carPoolingRequest.SmokingAllowed,
+                            carPoolingRequest.MusicAllowed,
+                            carPoolingRequest.ChattingAllowed,
+                            carPoolingRequest.VehiculeId,
+                            carPoolingRequest.TrajectoryId,
+                            carPoolingRequest.ServiceId);
+
+                        CarPoolingService carPoolingServiceUpdated = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
+
+                        if (carPoolingServiceUpdated.AvailableSeats == 0)
+                        {
+                            dalServiceManagement.ServiceAvailability(
+                            carPoolingRequest.Service.Id
+                            );
+                            string url = "/Home/Index";
+                            return Redirect(url);
+                        }
+                        else
+                        {
+                            string url = "/Home/Index";
+                            return Redirect(url);
+                        }
+                    }
+                }
+                else
+                {
+                    return Redirect("/Home/Index");
+
+                }
+            }
+            return Redirect("/Account/LoginAccount");
+        }
+
         #endregion
 
         #region RespondingToCarRentalRequest
@@ -591,6 +659,50 @@ namespace EcoCar.Controllers
             };
             return View(serviceViewModel);
         }
+
+        [HttpPost]
+        public IActionResult RespondToCarRentalRequest(Reservation reservation, int id)
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                CarRentalService carRentalRequest = dalServiceManagement.GetAllCarRentalServices().FirstOrDefault(x => x.Id == id);
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                if (carRentalRequest.Service.IsAvailable != false)
+                {
+                    bool UserHasEnoughFunds = dalFinancialManagement.CheckUserFunds(carRentalRequest.Service.PriceEcoCoins, userId);
+                    if (UserHasEnoughFunds == true)
+                    {
+                        dalFinancialManagement.EcoCoinsTransactionRequest(carRentalRequest.Service.UserProviderId, userId, carRentalRequest.Service.PriceEcoCoins);
+                        dalServiceManagement.CreateReservation(
+                        carRentalRequest.Service.Id,
+                        userId
+                        );
+
+                        dalServiceManagement.UpdateCarRentalService(
+                            carRentalRequest.Id,
+                            carRentalRequest.KeyPickUpAddress,
+                            carRentalRequest.KeyDropOffAddress,
+                            carRentalRequest.VehiculeId,
+                            carRentalRequest.ServiceId
+                            );
+
+                        dalServiceManagement.ServiceAvailability(
+                            carRentalRequest.Service.Id
+                            );
+
+                        string url = "/Home/Index";
+                        return Redirect(url);
+                    }
+                }
+                else
+                {
+                    return Redirect("/Service/SearchService");
+                }
+            }
+            return Redirect("/Account/LoginAccount");
+        }
+
         #endregion
 
         #region RespondingToParcelRequest
@@ -603,6 +715,53 @@ namespace EcoCar.Controllers
             };
 
             return View(serviceViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult RespondToParcelRequest(Reservation reservation, int id)
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                ParcelService parcelRequest = dalServiceManagement.GetAllParcelServices().FirstOrDefault(x => x.Id == id);
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                if (parcelRequest.Service.IsAvailable != false)
+                {
+                    bool UserHasEnoughFunds = dalFinancialManagement.CheckUserFunds(parcelRequest.Service.PriceEcoCoins, userId);
+                    if (UserHasEnoughFunds == true)
+                    {
+                        dalFinancialManagement.EcoCoinsTransactionRequest(parcelRequest.Service.UserProviderId, userId, parcelRequest.Service.PriceEcoCoins);
+                        dalServiceManagement.CreateReservation(
+                        parcelRequest.Service.Id,
+                        userId
+                        );
+
+                        dalServiceManagement.UpdateParcelService(
+                            parcelRequest.Id,
+                            parcelRequest.BarCode,
+                            parcelRequest.WeightKilogrammes,
+                            parcelRequest.AtypicalVolume,
+                            parcelRequest.Fragile,
+                            parcelRequest.TrajectoryId,
+                            parcelRequest.ServiceId,
+                            parcelRequest.VehiculeId
+                            );
+
+                        dalServiceManagement.ServiceAvailability(
+                            parcelRequest.Service.Id
+                            );
+
+
+                        string url = "/Home/Index";
+                        return Redirect(url);
+                    }
+                }
+                else
+                {
+                    return Redirect("/Service/SearchService");
+                }
+            }
+            return Redirect("/Account/LoginAccount");
         }
         #endregion
 

@@ -16,6 +16,8 @@ namespace EcoCar.Models.FinancialManagement
         public double EcoCoinsValueEuros { get; set; }
         public DateTime SubscriptionExpiration { get; set; }
         public DateTime SubscriptionStart { get; set; }
+        public DateTime EcoCoinsFirstMonth { get; set; }
+        public bool FirstMonth { get; set; }
         public DateTime EcoCoinsSecondMonth { get; set; }
         public bool SecondMonth { get; set; }
         public DateTime EcoCoinsThirdMonth { get; set; }

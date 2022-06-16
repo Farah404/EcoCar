@@ -46,7 +46,7 @@ namespace EcoCar.Models.DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rootine;database=EcoCar");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
         }
 
 

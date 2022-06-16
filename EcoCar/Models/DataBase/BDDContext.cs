@@ -456,6 +456,7 @@ namespace EcoCar.Models.DataBase
                     Start = new DateTime(2022, 06, 21),
                     End = new DateTime(2022, 06, 21),
                     IsRequest = false,
+                    IsAvailable =true,
 
                     SelectServiceType = Service.ServiceType.CarPoolingService
                 },
@@ -468,10 +469,11 @@ namespace EcoCar.Models.DataBase
                     PublicationDate = new DateTime(2022, 06, 10),
                     ExpirationDate = new DateTime(2022, 06, 19),
                     ReferenceNumber = 100,
-                    ServicePrice = 200,
+                    ServicePrice = 10,
                     Start = new DateTime(2022, 06, 21),
                     End = new DateTime(2022, 06, 21),
                     IsRequest = false,
+                    IsAvailable = true,
 
                     SelectServiceType = Service.ServiceType.CarRentalService
                 },
@@ -487,7 +489,8 @@ namespace EcoCar.Models.DataBase
                     ServicePrice = 200,
                     Start = new DateTime(2022, 06, 21),
                     End = new DateTime(2022, 06, 21),
-                    IsRequest = false,
+                    IsRequest = true,
+                    IsAvailable = true,
 
                     SelectServiceType = Service.ServiceType.ParcelService
                 });

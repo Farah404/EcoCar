@@ -399,7 +399,7 @@ namespace EcoCar.Controllers
         {
             ServiceViewModel serviceViewModel = new ServiceViewModel
             {
-                CarRentalService = dalServiceManagement.GetCarRentalService((int)id)
+                CarRentalService = dalServiceManagement.GetCarRentalService((int)id) 
             };
             return View(serviceViewModel);
 
@@ -410,36 +410,82 @@ namespace EcoCar.Controllers
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                CarRentalService carRentalService = dalServiceManagement.GetAllCarRentalServices().FirstOrDefault(x => x.Id == id);
                 int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                EcoWallet consumerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(c => c.Id == userId);
+                CarRentalService carRentalService = dalServiceManagement.GetAllCarRentalServices().FirstOrDefault(s => s.Id == id);
+                EcoWallet providerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(p => p.Id == carRentalService.Service.UserProviderId);
+                consumerEcoWallet.EcoCoinsAmount = consumerEcoWallet.EcoCoinsAmount - carRentalService.Service.ServicePrice;
 
-                if (carRentalService.Service.IsAvailable != false)
+                providerEcoWallet.EcoCoinsAmount = providerEcoWallet.EcoCoinsAmount + carRentalService.Service.ServicePrice;
+
+                if (carRentalService.Service.IsAvailable != true)
+                {
+                    dalServiceManagement.ServiceAvailability(
+                    carRentalService.Service.Id
+                    );
+                    string url2 = "/Service/CreateRequest";
+                    return Redirect(url2);
+                }
+
+
+                else if (carRentalService.Service.IsAvailable != false && consumerEcoWallet.EcoCoinsAmount != 0 && consumerEcoWallet.EcoCoinsAmount >= carRentalService.Service.ServicePrice)
                 {
                     dalServiceManagement.CreateReservation(
-                        carRentalService.Service.Id,
-                        userId
-                        );
-
+                    carRentalService.Service.Id,
+                    userId
+                    );
+                    
                     dalServiceManagement.UpdateCarRentalService(
-                        carRentalService.Id,
-                        carRentalService.KeyPickUpAddress,
-                        carRentalService.KeyDropOffAddress,
-                        carRentalService.VehiculeId,
-                        carRentalService.ServiceId
-                        );
+                    carRentalService.Id,
+                    carRentalService.KeyPickUpAddress,
+                    carRentalService.KeyDropOffAddress,
+                    carRentalService.VehiculeId,
+                    carRentalService.ServiceId
+                    );
+                    //CarRentalService carRentalServiceUpdated = dalServiceManagement.GetAllCarRentalServices().FirstOrDefault(x => x.Id == id);
 
-                    dalServiceManagement.ServiceAvailability(
-                        carRentalService.Service.Id
-                        );
+                    carRentalService.Service.IsAvailable = false;
 
-                    string url = "/Home/Index";
+                    dalFinancialManagement.UpdateEcoWallet(consumerEcoWallet);
+                    dalFinancialManagement.UpdateEcoWallet(providerEcoWallet);
+
+                    string url = "/Service/SearchService";
                     return Redirect(url);
+
                 }
-                else
-                {
-                    return Redirect("/Service/SearchService");
-                }
+
+
             }
+
+
+
+            //if (carRentalService.Service.IsAvailable != false)
+            //{
+            //    dalServiceManagement.CreateReservation(
+            //        carRentalService.Service.Id,
+            //        userId
+            //        );
+
+            //dalServiceManagement.UpdateCarRentalService(
+            //    carRentalService.Id,
+            //    carRentalService.KeyPickUpAddress,
+            //    carRentalService.KeyDropOffAddress,
+            //    carRentalService.VehiculeId,
+            //    carRentalService.ServiceId
+            //    );
+
+            //dalServiceManagement.ServiceAvailability(
+            //    carRentalService.Service.Id
+            //    );
+
+            //        string url = "/Home/Index";
+            //        return Redirect(url);
+            //    }
+            //    else
+            //    {
+            //        return Redirect("/Service/SearchService");
+            //    }
+            //}
             return Redirect("/Account/LoginAccount");
         }
         #endregion

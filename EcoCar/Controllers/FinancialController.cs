@@ -216,10 +216,17 @@ namespace EcoCar.Controllers
                 else if (shoppingCart.QuantityTrimestrialSubscription != 0)
                 {
                     subPurchased = ecoWallet.SubscriptionExpiration.AddDays(90);
+                    DateTime ecoCoinsSecondMonth = DateTime.Now.AddDays(30);
+                    DateTime ecoCoinsThirdMonth = DateTime.Now.AddDays(60);
                 }
                 else
                 {
                     subPurchased = ecoWallet.SubscriptionExpiration.AddDays(180);
+                    DateTime ecoCoinsSecondMonth = DateTime.Now.AddDays(30);
+                    DateTime ecoCoinsThirdMonth = DateTime.Now.AddDays(60);
+                    DateTime ecoCoinsFourthMonth = DateTime.Now.AddDays(90);
+                    DateTime ecoCoinsFitfhMonth = DateTime.Now.AddDays(120);
+                    DateTime ecoCoinsSixthMonth = DateTime.Now.AddDays(150);
                 }
             }
 

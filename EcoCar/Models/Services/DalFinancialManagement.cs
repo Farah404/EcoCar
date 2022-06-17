@@ -147,6 +147,11 @@ namespace EcoCar.Models.Services
             return _bddContext.Invoices.FirstOrDefault(e => e.Id == id);
         }
 
+        public int LastInvoice()
+        {
+            int invoiceNumber = _bddContext.Invoices.Count()+1;
+            return invoiceNumber;
+        }
         //Create Invoice
         public int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType)
         {
@@ -289,7 +294,6 @@ namespace EcoCar.Models.Services
         //    return ;
         //}
 
-
         //Create ServiceInvoice
         public int CreateEcoStoreInvoice(int userId,
             int invoiceId,
@@ -298,7 +302,7 @@ namespace EcoCar.Models.Services
             int quantityBatchThree,
             int quantityMonthlySubscription,
             int quantityTrimestrialSubscription,
-            int quantitysemestrialSubscription,
+            int quantitySemestrialSubscription,
             double totalPriceEuros)
         {
             EcoStoreInvoice ecoStoreInvoice = new EcoStoreInvoice()
@@ -310,7 +314,7 @@ namespace EcoCar.Models.Services
                 QuantityBatchThree = quantityBatchThree,
                 QuantityMonthlySubscription = quantityMonthlySubscription,
                 QuantityTrimestrialSubscription = quantityTrimestrialSubscription,
-                QuantitySemestrialSubscription = quantitysemestrialSubscription,
+                QuantitySemestrialSubscription = quantitySemestrialSubscription,
                 TotalPriceEuros = totalPriceEuros
             };
             _bddContext.EcoStoreInvoices.Add(ecoStoreInvoice);
@@ -598,9 +602,16 @@ namespace EcoCar.Models.Services
             int quantityMonthlySubscription,
             int quantityTrimestrialSubscription,
             int quantitysemestrialSubscription,
+            double totalBatchOne,
+            double totalBatchTwo,
+            double totalBatchThree,
+            double totalMonthlySub,
+            double totalTrimestrialSub,
+            double totalSemestrialSub,
             double totalPriceEuros
             )
         {
+            EcoStore ecoStore = _bddContext.EcoStores.Find(1);
             ShoppingCart shoppingCart = new ShoppingCart()
             {
                 QuantityBatchOne = quantityBatchOne,
@@ -609,7 +620,15 @@ namespace EcoCar.Models.Services
                 QuantityMonthlySubscription = quantityMonthlySubscription,
                 QuantityTrimestrialSubscription = quantityTrimestrialSubscription,
                 QuantitySemestrialSubscription = quantitysemestrialSubscription,
-                TotalPriceEuros = totalPriceEuros,
+                TotalBatchOne = totalBatchOne*ecoStore.EcoCoinsBatchOnePrice,
+                TotalBatchTwo = totalBatchTwo*ecoStore.EcoCoinsBatchTwoPrice,
+                TotalBatchThree = totalBatchThree*ecoStore.EcoCoinsBatchThreePrice,
+                TotalMonthlySub = totalMonthlySub*ecoStore.MonthlySubscriptionPrice,
+                TotalTrimestrialSub = totalTrimestrialSub*ecoStore.TrimestrialSubscriptionPrice,
+                TotalSemestrialSub = totalSemestrialSub*ecoStore.SemestrialSubscriptionPrice,
+                TotalPriceEuros = totalBatchOne * ecoStore.EcoCoinsBatchOnePrice+ totalBatchTwo * ecoStore.EcoCoinsBatchTwoPrice+
+                totalBatchThree * ecoStore.EcoCoinsBatchThreePrice+ totalMonthlySub * ecoStore.MonthlySubscriptionPrice+
+                totalTrimestrialSub * ecoStore.TrimestrialSubscriptionPrice+ totalSemestrialSub * ecoStore.SemestrialSubscriptionPrice,
             };
             _bddContext.ShoppingCarts.Add(shoppingCart);
             _bddContext.SaveChanges();
@@ -629,12 +648,19 @@ namespace EcoCar.Models.Services
             int quantityBatchThree,
             int quantityMonthlySubscription,
             int quantityTrimestrialSubscription,
-            int quantitysemestrialSubscription,
+            int quantitySemestrialSubscription,
+            double totalBatchOne,
+            double totalBatchTwo,
+            double totalBatchThree,
+            double totalMonthlySub,
+            double totalTrimestrialSub,
+            double totalSemestrialSub,
             double totalPriceEuros
             )
         {
             ShoppingCart shoppingCart = _bddContext.ShoppingCarts.Find(id);
-
+            EcoStore ecoStore = _bddContext.EcoStores.Find(1);
+                    
             if (shoppingCart != null)
             {
                 shoppingCart.Id = id;
@@ -643,8 +669,19 @@ namespace EcoCar.Models.Services
                 shoppingCart.QuantityBatchThree = quantityBatchThree;
                 shoppingCart.QuantityMonthlySubscription = quantityMonthlySubscription;
                 shoppingCart.QuantityTrimestrialSubscription = quantityTrimestrialSubscription;
-                shoppingCart.QuantitySemestrialSubscription = quantitysemestrialSubscription;
-                shoppingCart.TotalPriceEuros = totalPriceEuros;
+                shoppingCart.QuantitySemestrialSubscription = quantitySemestrialSubscription;
+                shoppingCart.TotalBatchOne = quantityBatchOne*ecoStore.EcoCoinsBatchOnePrice;
+                shoppingCart.TotalBatchTwo = quantityBatchTwo*ecoStore.EcoCoinsBatchTwoPrice;
+                shoppingCart.TotalBatchThree = quantityBatchThree*ecoStore.EcoCoinsBatchThreePrice;
+                shoppingCart.TotalMonthlySub = quantityMonthlySubscription*ecoStore.MonthlySubscriptionPrice;
+                shoppingCart.TotalTrimestrialSub = quantityTrimestrialSubscription*ecoStore.TrimestrialSubscriptionPrice;
+                shoppingCart.TotalSemestrialSub = quantitySemestrialSubscription*ecoStore.SemestrialSubscriptionPrice;
+                shoppingCart.TotalPriceEuros = quantityBatchOne * ecoStore.EcoCoinsBatchOnePrice
+                    + quantityBatchTwo * ecoStore.EcoCoinsBatchTwoPrice
+                    + quantityBatchThree * ecoStore.EcoCoinsBatchThreePrice
+                    + quantityMonthlySubscription * ecoStore.MonthlySubscriptionPrice
+                    + quantityTrimestrialSubscription * ecoStore.TrimestrialSubscriptionPrice
+                    + quantitySemestrialSubscription * ecoStore.SemestrialSubscriptionPrice;
                 _bddContext.SaveChanges();
             }
         }

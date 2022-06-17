@@ -8,13 +8,39 @@
     font-size: 75px;
     padding: 50px 25px;
     font-family: Montserrat, sans-serif;
+    animation: slidein;
+    animation-duration: 1s;
 }
-.jumbotron .btn:hover {
-    border: 1px solid #93bb83;
-    background-color: #fff !important;
-    color: #93bb83;
-}
+
+    .jumbotron .btn:hover {
+        border: 1px solid #93bb83;
+        background-color: #fff !important;
+        color: #93bb83;
+        transform: scale(1.1);
+    }
+
     .jumbotron .btn {
+        border: 1px solid #f6f6f6;
+        background-color: #93bb83;
+        color: #f6f6f6;
+    }
+
+.jumbotron-main {
+    background-color: #93bb83;
+    color: #ffffff;
+    font-size: 75px;
+    padding: 50px 25px;
+    font-family: Montserrat, sans-serif;
+}
+
+    .jumbotron-main .btn:hover {
+        border: 1px solid #93bb83;
+        background-color: #fff !important;
+        color: #93bb83;
+        transform: scale(1.1);
+    }
+
+    .jumbotron-main .btn {
         border: 1px solid #f6f6f6;
         background-color: #93bb83;
         color: #f6f6f6;
@@ -305,6 +331,7 @@ hr.solid {
     cursor: pointer;
     border-bottom: 1px solid #E44C4C;
 }
+
 .modal-dialog {
     height: 100vh !important;
     display: flex;
@@ -333,17 +360,7 @@ hr.solid {
     padding-left: 10%;
     padding-right: 10%;
 }
-/*    .main-layout .btn-success {
-        margin: 15px 0;
-        background-color: #a1df86;
-        color: #fff;
-        border: 1px solid #a1df86;
-    }
-.main-layout .btn-success:hover {
-    border: 1px solid #93bb83;
-    background-color: #fff !important;
-    color: #93bb83;
-}*/
+
 .verticalcenter {
     position: relative;
     top: 50%;
@@ -367,5 +384,230 @@ a.qty {
 
 .modal {
     position: center;
-    
+}
+
+
+.glyphicon:hover {
+    transform: scale(1.5);
+}
+
+.anim-right {
+    animation: from-right 1s;
+}
+
+.anim-left {
+    animation: from-left 1s;
+}
+
+.eco-valeurs-image {
+    width: 30%;
+}
+
+
+.moving-car {
+    width: 20%;
+    position: absolute;
+    -webkit-animation: linear infinite;
+    -webkit-animation-name: run;
+    -webkit-animation-duration: 20s;
+    bottom: 255px;
+}
+
+div.eco-store {
+    position: relative;
+}
+
+    div.eco-store img {
+        width: 20%;
+        position: absolute;
+        left: -30px;
+        bottom: -80px;
+    }
+
+div.eco-scape {
+    position: relative;
+    height: 10px;
+}
+
+    div.eco-scape img {
+        width: 20%;
+        position: absolute;
+        right: -20px;
+        bottom: -70px;
+    }
+
+div.eco-cloud-right {
+    position: relative;
+    height: 10px;
+}
+
+    div.eco-cloud-right img {
+        width: 20%;
+        position: absolute;
+        right: 60px;
+        bottom: 130px;
+    }
+
+
+div.eco-cloud-left {
+    position: relative;
+    height: 10px;
+}
+
+    div.eco-cloud-left img {
+        width: 20%;
+        position: absolute;
+        left: 60px;
+        bottom: 150px;
+    }
+
+        div.eco-cloud-left img:hover {
+            opacity: 1;
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+
+
+.moving-car-other {
+    width: 20%;
+    position: absolute;
+    -webkit-animation: linear infinite;
+    -webkit-animation-name: run;
+    -webkit-animation-duration: 20s;
+    bottom: 337px;
+}
+
+div.eco-store-other {
+    position: relative;
+}
+
+    div.eco-store-other img {
+        width: 20%;
+        position: absolute;
+        left: -30px;
+        bottom: -80px;
+    }
+
+div.eco-scape-other {
+    position: relative;
+    height: 10px;
+}
+
+    div.eco-scape-other img {
+        width: 20%;
+        position: absolute;
+        right: -20px;
+        bottom: -70px;
+    }
+
+div.eco-cloud-right-other {
+    position: relative;
+    height: 10px;
+}
+
+    div.eco-cloud-right-other img {
+        width: 20%;
+        position: absolute;
+        right: 60px;
+        bottom: 80px;
+    }
+
+div.eco-cloud-left-other {
+    position: relative;
+    height: 10px;
+}
+
+    div.eco-cloud-left-other img {
+        width: 20%;
+        position: absolute;
+        left: 60px;
+        bottom: 80px;
+        animation-name: grow-and-shrink;
+    }
+
+
+@keyframes slidein {
+    from {
+        margin-top: 100%;
+        width: 300%;
+    }
+
+    to {
+        margin-top: 0%;
+        width: 100%;
+    }
+}
+
+
+@keyframes from-right {
+    0% {
+        transform: translateX(200vh);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes from-left {
+    0% {
+        transform: translateX(-200vh);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes from-top {
+    0% {
+        transform: translateY(-200vh);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+@keyframes grow-and-shrink {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes run {
+    0% {
+        left: 0;
+    }
+
+    25% {
+        left: 25%;
+    }
+
+    50% {
+        left: 50%;
+    }
+
+    75% {
+        left: 75%;
+    }
+
+    100% {
+        left: 100%;
+    }
 }

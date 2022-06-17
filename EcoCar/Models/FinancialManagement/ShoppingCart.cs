@@ -14,6 +14,12 @@ namespace EcoCar.Models.FinancialManagement
         public int QuantityMonthlySubscription { get; set; }
         public int QuantityTrimestrialSubscription { get; set; }
         public int QuantitySemestrialSubscription { get; set; }
+        public double TotalBatchOne { get; set; }
+        public double TotalBatchTwo { get; set; }
+        public double TotalBatchThree { get; set; }
+        public double TotalMonthlySub { get; set; }
+        public double TotalTrimestrialSub { get; set; }
+        public double TotalSemestrialSub { get; set; }
         public double TotalPriceEuros { get; set; }
     }
 }

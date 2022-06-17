@@ -6,7 +6,7 @@
 <div class="container bootstrap snippets bootdey">
     <div class="panel-body inf-content">
         <div class="row">
-            @using (Html.BeginForm("UpdateUser","Account", FormMethod.Post, new{enctype="multipart/form-data"}))
+            @using (Html.BeginForm("UpdateUser", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @*Profile picture Part with buttons*@
                 <div class="col-md-4">
@@ -205,6 +205,7 @@
                             </tbody>
                         </table>
                     </div>
+
                     @*Billing Address*@
                     <span class="text-success"><strong>Adresse de facturation</strong><br></span>
                     <div class="table-responsive">
@@ -277,6 +278,129 @@
                         </table>
 
                     </div>
+
+                    @*Insurance Details*@
+                    <span class="text-success"><strong>Votre assurance</strong><br></span>
+                    <div class="table-responsive">
+
+                        <table class="table table-user-information">
+
+                            <tbody>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-sort-by-alphabet  text-success"></span>
+                                        Nom de l'assureur
+                                    </td>
+                                    <td class="text-success">
+
+                                        @Html.TextBoxFor(model => model.Vehicule.Insurance.InsuranceAgency, new { @class = "form-control", placeholder = "Nom de l'assureur" })
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-hourglass text-success"></span>
+                                        Date de fin de validité de l'assurance
+                                    </td>
+                                    <td class="text-success">
+                                        @Html.TextBoxFor(model => model.Vehicule.Insurance.InsuranceExpiration, new { @class = "form-control", placeholder = "Date de fin de validité de l'assurance" })
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-dashboard text-success"></span>
+                                        Numéro du contrat d'assurance
+                                    </td>
+                                    <td class="text-success">
+                                        @Html.TextBoxFor(model => model.Vehicule.Insurance.ContractNumber, new { @class = "form-control", placeholder = "Numéro du contrat d'assurance" })
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    @*Vehicule Details*@
+                    <span class="text-success"><strong>Votre assurance</strong><br></span>
+                    <div class="table-responsive">
+
+                        <table class="table table-user-information">
+
+                            <tbody>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-wrench text-success"></span>
+                                        Marque du véhicule
+                                    </td>
+                                    <td class="text-success">
+
+                                        @Html.TextBoxFor(model => model.Vehicule.Brand, new { @class = "form-control", placeholder = "Marque du véhicule" })
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-sort-by-order text-success"></span>
+                                        Plaque d'immatriculation
+                                    </td>
+                                    <td class="text-success">
+                                        @Html.TextBoxFor(model => model.Vehicule.RegistrationNumber, new { @class = "form-control", placeholder = "Plaque d'immatriculation" })
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-modal-window text-success"></span>
+                                        Modèle du véhicule
+                                    </td>
+                                    <td class="text-success">
+                                        @Html.TextBoxFor(model => model.Vehicule.Model, new { @class = "form-control", placeholder = "Modèle du véhicule" })
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-modal-window text-success"></span>
+                                        Hybride
+                                    </td>
+                                    <td class="text-success">
+                                        @Html.TextBoxFor(model => model.Vehicule.Hybrid, new { @class = "form-control", placeholder = "Modèle du véhicule" })
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-modal-window text-success"></span>
+                                        100% electrique
+                                    </td>
+                                    <td class="text-success">
+                                        @Html.TextBoxFor(model => model.Vehicule.Electric, new { @class = "form-control", placeholder = "Modèle du véhicule" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-modal-window text-success"></span>
+                                        Date de fin de validité du contrôle technique
+                                    </td>
+                                    <td class="text-success">
+                                        @Html.TextBoxFor(model => model.Vehicule.TechnicalTestExpiration, new { @class = "form-control", placeholder = "Date de fin de validité du contrôle technique" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-modal-window text-success"></span>
+                                        Nombre de sièges disponibles
+                                    </td>
+                                    <td class="text-success">
+                                        @Html.TextBoxFor(model => model.Vehicule.AvailableSeats, new { @class = "form-control", placeholder = "Nombre de sièges disponibles" })
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
                 <center><button class="btn btn-success btn-xl" type="submit">Soumettre les modifications</button></center>
 

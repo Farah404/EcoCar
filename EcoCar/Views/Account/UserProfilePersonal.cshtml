@@ -1,4 +1,6 @@
-﻿@model EcoCar.ViewModels.AccountViewModel
+﻿@*@model EcoCar.Models.PersonManagement.Account*@
+@*@model List<EcoCar.Models.PersonManagement.User>*@
+@model EcoCar.ViewModels.AccountViewModel
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Mon profil";
@@ -35,19 +37,19 @@
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <a href="" data-target="#general" data-toggle="tab" class="nav-link active">Général</a>
+                                        <a href="" data-target="#general" data-toggle="tab" class="nav-link active text-success">Général</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="" data-target="#wallet" data-toggle="tab" class="nav-link">EcoWallet</a>
+                                        <a href="" data-target="#wallet" data-toggle="tab" class="nav-link text-success">EcoWallet</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="" data-target="#rib" data-toggle="tab" class="nav-link">RIB & Adresse de facturation</a>
+                                        <a href="" data-target="#rib" data-toggle="tab" class="nav-link text-success">RIB & Adresse de facturation</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="" data-target="#vehicule" data-toggle="tab" class="nav-link">Véhicule & Assurance</a>
+                                        <a href="" data-target="#vehicule" data-toggle="tab" class="nav-link text-success">Véhicule & Assurance</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="" data-target="#sms" data-toggle="tab" class="nav-link">Message</a>
+                                        <a href="" data-target="#sms" data-toggle="tab" class="nav-link text-success">Message</a>
                                     </li>
                                 </ul>
 
@@ -291,7 +293,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-piggy-bank  text-success"></span>
+                                                        <span class="glyphicon glyphicon-sort-by-alphabet  text-success"></span>
                                                         Nom de l'assureur
                                                     </td>
                                                     <td class="text-success">
@@ -300,7 +302,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        <span class="glyphicon glyphicon-hourglass text-success"></span>
                                                         Date de fin de validité de l'assurance
                                                     </td>
                                                     <td class="text-success">
@@ -311,7 +313,7 @@
 
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        <span class="glyphicon glyphicon-dashboard text-success"></span>
                                                         Numéro du contrat d'assurance
                                                     </td>
                                                     <td class="text-success">
@@ -322,7 +324,7 @@
 
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        <span class="glyphicon glyphicon-wrench text-success"></span>
                                                         Marque du véhicule
                                                     </td>
                                                     <td class="text-success">
@@ -333,7 +335,7 @@
 
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        <span class="glyphicon glyphicon-sort-by-order text-success"></span>
                                                         Plaque d'immatriculation
                                                     </td>
                                                     <td class="text-success">
@@ -342,9 +344,9 @@
                                                     </td>
                                                 </tr>
 
-                                                  <tr>
+                                                <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        <span class="glyphicon glyphicon-modal-window text-success"></span>
                                                         Modèle du véhicule
                                                     </td>
                                                     <td class="text-success">
@@ -355,7 +357,7 @@
 
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        <span class="glyphicon glyphicon-grain text-success"></span>
                                                         Hybride
                                                     </td>
                                                     <td class="text-success">
@@ -366,7 +368,7 @@
 
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        <span class="glyphicon glyphicon-flash text-success"></span>
                                                         100% Electrique
                                                     </td>
                                                     <td class="text-success">
@@ -377,7 +379,7 @@
 
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        <span class="glyphicon glyphicon-briefcase text-success"></span>
                                                         Date de fin de validité du contrôle technique
                                                     </td>
                                                     <td class="text-success">
@@ -388,7 +390,7 @@
 
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        <span class="glyphicon glyphicon-user text-success"></span>
                                                         Nombre de sièges disponibles
                                                     </td>
                                                     <td class="text-success">
@@ -403,17 +405,16 @@
 
 
                                     <div class="tab-pane" id="sms">
-                                        <div class="container-fluid bg-grey">
-                                            @*Service List Display*@
+                                        <div class="container-fluid">
                                             <div class="table-responsive">
                                                 <table class="table" id="userTable">
                                                     <thead>
 
                                                         <tr class="header">
-                                                            <th>Sender</th>
-                                                            <th>Subject</th>
-                                                            <th>Type</th>
-                                                            <th>Check Message</th>
+                                                            <th>Expéditeur </th>
+                                                            <th>Sujet</th>
+                                                            <th>Numéro de reference de la prestations</th>
+                                                            <th>Consulter le message</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -422,9 +423,30 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
+                                                 <a class="btn btn-success" data-toggle="modal" data-target="#basicModal">sms</a>
                                             </div>
                                         </div>
 
+                                        <!-- The Modal Report -->
+                                        <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fermer</button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+
+                                                       body
+
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        footer
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -437,6 +459,7 @@
         </div>
     </div>
 </div>
+
 
 <div id="services" class="container-fluid bg-grey">
     @*Service List Display*@
@@ -462,11 +485,7 @@
                         <td>@carPoolingService.Service.ReferenceNumber</td>
                         <td>@carPoolingService.Service.IsRequest</td>
                         <td>@carPoolingService.Service.IsAvailable</td>
-                        @foreach (var serviceInvoice in Model.ServiceInvoices.Where(s=>s.ServiceId==carPoolingService.ServiceId))
-                        {
-                             <td> <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
-                        }
-                       
+                        <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
                 @foreach (var carRentalService in Model.CarRentalServices)
@@ -477,10 +496,7 @@
                         <td>@carRentalService.Service.ReferenceNumber</td>
                         <td>@carRentalService.Service.IsRequest</td>
                         <td>@carRentalService.Service.IsAvailable</td>
-                        @foreach (var serviceInvoice in Model.ServiceInvoices.Where(s=>s.ServiceId==carRentalService.ServiceId))
-                        {
-                             <td> <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
-                        }
+                        <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
 
 
@@ -494,10 +510,7 @@
                         <td>@parcelService.Service.ReferenceNumber</td>
                         <td>@parcelService.Service.IsRequest</td>
                         <td>@parcelService.Service.IsAvailable</td>
-                        @foreach (var serviceInvoice in Model.ServiceInvoices.Where(s=>s.ServiceId==parcelService.ServiceId))
-                        {
-                             <td> <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
-                        }
+                        <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
                     </tr>
                 }
 
@@ -581,6 +594,3 @@
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />

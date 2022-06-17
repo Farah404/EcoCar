@@ -1,10 +1,9 @@
-﻿@*@model EcoCar.Models.PersonManagement.Account*@
-@*@model List<EcoCar.Models.PersonManagement.User>*@
-@model EcoCar.ViewModels.AccountViewModel
+﻿@model EcoCar.ViewModels.AccountViewModel
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Mon profil";
 }
+
 
 <div class="container bootstrap snippets bootdey">
     <div class="panel-body inf-content">
@@ -22,264 +21,417 @@
                 <br>
                 <button class="btn btn-success center-block" type="submit" onclick="location.href='/Account/CreateInsurance'">Ajouter un véhicule</button>
                 <br />
-                <button class="btn btn-success center-block" type="submit" onclick="location.href='/Messaging/EcoUserInbox'">Messagerie</button>
             </div>
 
 
-            @*Information*@
-            <div class="col-md-6">
-                <span class="text-success"><strong>Informations</strong><br></span>
-                <div class="table-responsive">
+            <div class="container">
+                <div class="row my-2">
+                    <div class="col-md-8">
 
-                    <table class="table table-user-information">
 
-                        <tbody>
+                        <div class="portlet-body">
+                            <div>
 
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-user  text-success"></span>
-                                    Nom et Prénom
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.Person.LastName @Model.User.Person.Name</p>
-                                </td>
-                            </tr>
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a href="" data-target="#general" data-toggle="tab" class="nav-link active">Général</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" data-target="#wallet" data-toggle="tab" class="nav-link">EcoWallet</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" data-target="#rib" data-toggle="tab" class="nav-link">RIB & Adresse de facturation</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" data-target="#vehicule" data-toggle="tab" class="nav-link">Véhicule & Assurance</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" data-target="#sms" data-toggle="tab" class="nav-link">Message</a>
+                                    </li>
+                                </ul>
 
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
-                                    EcoStatus
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.SelectEcoStatusType</p>
-                                </td>
-                            </tr>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="general">
+                                        <table class="table table-user-information">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-user  text-success"></span>
+                                                        Nom et Prénom
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.Person.LastName @Model.User.Person.Name</p>
+                                                    </td>
+                                                </tr>
 
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-star text-success"></span>
-                                    EcoRating
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.UserRating</p>
-                                </td>
-                            </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-tree-deciduous text-success"></span>
+                                                        EcoStatus
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.SelectEcoStatusType</p>
+                                                    </td>
+                                                </tr>
 
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-gift text-success"></span>
-                                    Date de naissance
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.BirthDate.ToShortDateString()</p>
-                                </td>
-                            </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-star text-success"></span>
+                                                        EcoRating
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.UserRating</p>
+                                                    </td>
+                                                </tr>
 
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-inbox text-success"></span>
-                                    Email
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.Email</p>
-                                </td>
-                            </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-gift text-success"></span>
+                                                        Date de naissance
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.BirthDate.ToShortDateString()</p>
+                                                    </td>
+                                                </tr>
 
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-phone text-success"></span>
-                                    Numéro de téléphone
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.PhoneNumber</p>
-                                </td>
-                            </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-inbox text-success"></span>
+                                                        Email
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.Email</p>
+                                                    </td>
+                                                </tr>
 
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-credit-card text-success"></span>
-                                    Numéro de carte d'identité ou passeport
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-phone text-success"></span>
+                                                        Numéro de téléphone
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.PhoneNumber</p>
+                                                    </td>
+                                                </tr>
 
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.IdentityCardNumber</p>
-                                </td>
-                            </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-credit-card text-success"></span>
+                                                        Numéro de carte d'identité ou passeport
 
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-dashboard text-success"></span>
-                                    Numéro de permis de conduire
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.DrivingPermitNumber</p>
-                                </td>
-                            </tr>
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.IdentityCardNumber</p>
+                                                    </td>
+                                                </tr>
 
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-calendar text-success"></span>
-                                    EcoMembre depuis
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.Account.CreationDate.ToShortDateString()</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-dashboard text-success"></span>
+                                                        Numéro de permis de conduire
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.DrivingPermitNumber</p>
+                                                    </td>
+                                                </tr>
 
-                    @*EcoWallet*@
-                    <span class="text-success"><strong>Mon EcoWallet</strong><br></span>
-                    <div class="table-responsive">
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-calendar text-success"></span>
+                                                        EcoMembre depuis
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.Account.CreationDate.ToShortDateString()</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
-                        <table class="table table-user-information">
 
-                            <tbody>
 
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-piggy-bank  text-success"></span>
-                                        Montant EcoCoins
-                                    </td>
-                                    <td class="text-success">
-                                        <p>@Model.EcoWallet.EcoCoinsAmount</p>
-                                    </td>
-                                </tr>
+                                    <div class="tab-pane" id="wallet">
+                                        <table class="table table-user-information">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-piggy-bank  text-success"></span>
+                                                        Montant EcoCoins
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.EcoWallet.EcoCoinsAmount</p>
+                                                    </td>
+                                                </tr>
 
-                                @if (@Model.EcoWallet.Subscription == true)
-                                {
-                                    <tr>
-                                        <td>
-                                            <span class="glyphicon glyphicon-leaf text-success"></span>
-                                            Abonnement
-                                        </td>
-                                        <td class="text-success">
+                                                @if (@Model.EcoWallet.Subscription == true)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                            Abonnement
+                                                        </td>
+                                                        <td class="text-success">
 
-                                            <p>Jusqu'au @Model.EcoWallet.SubscriptionExpiration.ToShortDateString()</p>
-                                        </td>
-                                    </tr>
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <td>
-                                            <span class="glyphicon glyphicon-leaf text-success"></span>
-                                            Abonnement
-                                        </td>
-                                        <td class="text-success">
+                                                            <p>Jusqu'au @Model.EcoWallet.SubscriptionExpiration.ToShortDateString()</p>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                else
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                            Abonnement
+                                                        </td>
+                                                        <td class="text-success">
 
-                                            <p> Pas d'abonnement en cours</p>
-                                        </td>
-                                    </tr>
-                                }
+                                                            <p> Pas d'abonnement en cours</p>
+                                                        </td>
+                                                    </tr>
+                                                }
 
-                            </tbody>
-                        </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+
+                                    <div class="tab-pane" id="rib">
+                                        <table class="table table-user-information">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-font  text-success"></span>
+                                                        Nom de l'agence bancaire
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.BankDetails.BankName</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-sort-by-order-alt text-success"></span>
+                                                        Numéro SWIFT
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.BankDetails.Swift</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-sort-by-order text-success"></span>
+                                                        Numéro IBAN
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.BankDetails.Iban</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                        <table class="table table-user-information">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-map-marker  text-success"></span>
+                                                        Adresse
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.BillingAddress.AddressLine</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-picture text-success"></span>
+                                                        Ville
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.BillingAddress.City</p>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-tree-conifer text-success"></span>
+                                                        Région
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.BillingAddress.Region</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-globe text-success"></span>
+                                                        Pays
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.BillingAddress.Country</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-send text-success"></span>
+                                                        Code postal
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.User.BillingAddress.PostalCode</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+
+                                    <div class="tab-pane" id="vehicule">
+                                        <table class="table table-user-information">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-piggy-bank  text-success"></span>
+                                                        Nom de l'assureur
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <p>@Model.Insurance.InsuranceAgency</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        Date de fin de validité de l'assurance
+                                                    </td>
+                                                    <td class="text-success">
+
+                                                        <p>@Model.Insurance.InsuranceExpiration</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        Numéro du contrat d'assurance
+                                                    </td>
+                                                    <td class="text-success">
+
+                                                        <p>@Model.Insurance.ContractNumber</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        Marque du véhicule
+                                                    </td>
+                                                    <td class="text-success">
+
+                                                        <p>@Model.Vehicule.Brand</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        Plaque d'immatriculation
+                                                    </td>
+                                                    <td class="text-success">
+
+                                                        <p>@Model.Vehicule.RegistrationNumber</p>
+                                                    </td>
+                                                </tr>
+
+                                                  <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        Modèle du véhicule
+                                                    </td>
+                                                    <td class="text-success">
+
+                                                        <p>@Model.Vehicule.Model</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        Hybride
+                                                    </td>
+                                                    <td class="text-success">
+
+                                                        <p>@Model.Vehicule.Hybrid</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        100% Electrique
+                                                    </td>
+                                                    <td class="text-success">
+
+                                                        <p>@Model.Vehicule.Electric</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        Date de fin de validité du contrôle technique
+                                                    </td>
+                                                    <td class="text-success">
+
+                                                        <p>@Model.Vehicule.TechnicalTestExpiration</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-leaf text-success"></span>
+                                                        Nombre de sièges disponibles
+                                                    </td>
+                                                    <td class="text-success">
+
+                                                        <p>@Model.Vehicule.AvailableSeats</p>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                    <div class="tab-pane" id="sms">
+                                        <div class="container-fluid bg-grey">
+                                            @*Service List Display*@
+                                            <div class="table-responsive">
+                                                <table class="table" id="userTable">
+                                                    <thead>
+
+                                                        <tr class="header">
+                                                            <th>Sender</th>
+                                                            <th>Subject</th>
+                                                            <th>Type</th>
+                                                            <th>Check Message</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
-
-                @*Banking Details*@
-                <span class="text-success"><strong>Relevé d'identité bancaire</strong><br></span>
-                <div class="table-responsive">
-
-                    <table class="table table-user-information">
-
-                        <tbody>
-
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-font  text-success"></span>
-                                    Nom de l'agence bancaire
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.BankDetails.BankName</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-sort-by-order-alt text-success"></span>
-                                    Numéro SWIFT
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.BankDetails.Swift</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-sort-by-order text-success"></span>
-                                    Numéro IBAN
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.BankDetails.Iban</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                @*Billing Address*@
-                <span class="text-success"><strong>Adresse de Facturation</strong><br></span>
-                <div class="table-responsive">
-
-                    <table class="table table-user-information">
-
-                        <tbody>
-
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-map-marker  text-success"></span>
-                                    Adresse
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.BillingAddress.AddressLine</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-picture text-success"></span>
-                                    Ville
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.BillingAddress.City</p>
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-tree-conifer text-success"></span>
-                                    Région
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.BillingAddress.Region</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-globe text-success"></span>
-                                    Pays
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.BillingAddress.Country</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-send text-success"></span>
-                                    Code postal
-                                </td>
-                                <td class="text-success">
-                                    <p>@Model.User.BillingAddress.PostalCode</p>
-                                </td>
-                            </tr>
-
-                        </tbody>
-
-                    </table>
                 </div>
             </div>
         </div>
@@ -310,7 +462,11 @@
                         <td>@carPoolingService.Service.ReferenceNumber</td>
                         <td>@carPoolingService.Service.IsRequest</td>
                         <td>@carPoolingService.Service.IsAvailable</td>
-                        <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        @foreach (var serviceInvoice in Model.ServiceInvoices.Where(s=>s.ServiceId==carPoolingService.ServiceId))
+                        {
+                             <td> <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        }
+                       
                     </tr>
                 }
                 @foreach (var carRentalService in Model.CarRentalServices)
@@ -321,7 +477,10 @@
                         <td>@carRentalService.Service.ReferenceNumber</td>
                         <td>@carRentalService.Service.IsRequest</td>
                         <td>@carRentalService.Service.IsAvailable</td>
-                        <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        @foreach (var serviceInvoice in Model.ServiceInvoices.Where(s=>s.ServiceId==carRentalService.ServiceId))
+                        {
+                             <td> <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        }
                     </tr>
 
 
@@ -335,7 +494,10 @@
                         <td>@parcelService.Service.ReferenceNumber</td>
                         <td>@parcelService.Service.IsRequest</td>
                         <td>@parcelService.Service.IsAvailable</td>
-                        <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        @foreach (var serviceInvoice in Model.ServiceInvoices.Where(s=>s.ServiceId==parcelService.ServiceId))
+                        {
+                             <td> <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        }
                     </tr>
                 }
 
@@ -419,3 +581,6 @@
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />

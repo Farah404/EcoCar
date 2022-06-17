@@ -810,12 +810,14 @@ namespace EcoCar.Controllers
         }
         #endregion
 
-        #region AdminDeleting
+        #region AdminViewing
         public ActionResult AdminViewCarPoolingService(int? id)
         {
+            CarPoolingService carPoolingService = dalServiceManagement.GetCarPoolingService((int)id);
             ServiceViewModel serviceViewModel = new ServiceViewModel
             {
-                CarPoolingService = dalServiceManagement.GetCarPoolingService((int)id)
+                CarPoolingService = carPoolingService,
+                ServiceInvoice = dalFinancialManagement.GetServiceInvoice(carPoolingService.ServiceId),
             };
             return View(serviceViewModel);
         }
@@ -829,9 +831,11 @@ namespace EcoCar.Controllers
         }
         public ActionResult AdminViewCarRentalService(int? id)
         {
+            CarRentalService carRentalService = dalServiceManagement.GetCarRentalService((int)id);
             ServiceViewModel serviceViewModel = new ServiceViewModel
             {
-                CarRentalService = dalServiceManagement.GetCarRentalService((int)id)
+                CarRentalService = carRentalService,
+                ServiceInvoice = dalFinancialManagement.GetServiceInvoice(carRentalService.ServiceId)
             };
             return View(serviceViewModel);
         }
@@ -845,9 +849,11 @@ namespace EcoCar.Controllers
         }
         public ActionResult AdminViewParcelService(int? id)
         {
+            ParcelService parcelService = dalServiceManagement.GetParcelService((int)id);
             ServiceViewModel serviceViewModel = new ServiceViewModel
             {
-                ParcelService = dalServiceManagement.GetParcelService((int)id)
+                ParcelService = parcelService,
+                ServiceInvoice = dalFinancialManagement.GetServiceInvoice(parcelService.ServiceId)
             };
 
             return View(serviceViewModel);

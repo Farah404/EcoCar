@@ -1,4 +1,5 @@
-﻿using EcoCar.Models.PersonManagement;
+﻿using EcoCar.Models.FinancialManagement;
+using EcoCar.Models.PersonManagement;
 using EcoCar.Models.ServiceManagement;
 using System.Collections.Generic;
 
@@ -29,6 +30,7 @@ namespace EcoCar.ViewModels
         public List<Account> Accounts { get; set; }
         public List<User> Users { get; set; }
 
-
+        public List<ServiceInvoice> ServiceInvoices { get; set; }
+        public ServiceInvoice ServiceInvoice { get; internal set; }
     }
 }

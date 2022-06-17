@@ -35,6 +35,7 @@ namespace EcoCar.Models.Services
 
         //ServiceInvoice
         List<ServiceInvoice> GetAllServiceInvoices();
+        public ServiceInvoice GetServiceInvoice(int id);
         int CreateServiceInvoice(int idServiceProvider, int idServiceConsumer, int ecoCoinAmount, int serviceId, int invoiceId);
         void UpdateServiceInvoice(int id, int idServiceProvider, int idServiceConsumer, int ecoCoinAmount, int serviceId, int invoiceId);
         void DeleteServiceInvoice(int id);

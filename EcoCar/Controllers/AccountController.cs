@@ -434,7 +434,9 @@ namespace EcoCar.Controllers
                     CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices(userId),
                     CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices(userId),
                     ParcelServices = dalServiceManagement.GetAllUserParcelServices(userId),
-                    EcoStoreInvoices = dalFinancialManagement.GetAllEcoStoreInvoices().Where(x => x.UserId == userId).ToList()
+                    EcoStoreInvoices = dalFinancialManagement.GetAllEcoStoreInvoices().Where(x => x.UserId == userId).ToList(),
+                    ServiceInvoices = dalFinancialManagement.GetAllServiceInvoices().Where(x=>x.IdServiceProvider==userId || x.IdServiceConsumer==userId).ToList(),
+                    Insurance = dalPersonManagement.GetUserInsurance(userId)
                 };
                 return View(accountViewModel);
             }

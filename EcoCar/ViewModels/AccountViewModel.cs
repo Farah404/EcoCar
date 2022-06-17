@@ -34,5 +34,7 @@ namespace EcoCar.ViewModels
         public List<ParcelService> ParcelServices { get; set; }
         public List<Account> Accounts { get; set; }
         public List<EcoStoreInvoice> EcoStoreInvoices { get; set; }
+
+        public List<ServiceInvoice> ServiceInvoices { get; set; }
     }
 }

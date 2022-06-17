@@ -63,6 +63,8 @@ namespace EcoCar.Models.Services
         //Insurance
         List<Insurance> GetAllInsurances();
         Insurance GetInsurance(int id);
+
+        Insurance GetUserInsurance(int userId);
         int CreateInsurance(string insuranceAgency, DateTime insuranceExpiration, string contractNumber);
         void UpdateInsurance(int id, string insuranceAgency, DateTime insuranceExpiration, string contractNumber);
         void DeleteInsurance(int id);

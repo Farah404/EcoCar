@@ -506,6 +506,13 @@ namespace EcoCar.Models.Services
         {
             return _bddContext.Insurances.FirstOrDefault(a => a.Id == insuranceId);
         }
+        public Insurance GetUserInsurance(int userId)
+        {
+            User user = _bddContext.Users.FirstOrDefault(x => x.Id == userId);
+            Vehicule vehicule = _bddContext.Vehicules.Find(user.VehiculeId);
+            Insurance insurance = _bddContext.Insurances.Find(vehicule.InsuranceId);
+            return insurance;
+        }
 
         //Create Insurance
         public int CreateInsurance(string insuranceAgency, DateTime insuranceExpiration, string contractNumber)

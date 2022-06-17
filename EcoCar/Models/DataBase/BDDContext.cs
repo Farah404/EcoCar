@@ -3,6 +3,8 @@ using EcoCar.Models.ServiceManagement;
 using EcoCar.Models.MessagingManagement;
 using Microsoft.EntityFrameworkCore;
 using EcoCar.Models.PersonManagement;
+using Microsoft.Extensions.Configuration;
+
 
 namespace EcoCar.Models.DataBase
 {

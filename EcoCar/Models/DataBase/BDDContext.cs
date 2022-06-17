@@ -4,7 +4,7 @@ using EcoCar.Models.MessagingManagement;
 using Microsoft.EntityFrameworkCore;
 using EcoCar.Models.PersonManagement;
 using Microsoft.Extensions.Configuration;
-
+using System;
 
 namespace EcoCar.Models.DataBase
 {

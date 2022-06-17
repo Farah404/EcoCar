@@ -1,13 +1,11 @@
 ﻿@model EcoCar.ViewModels.FinancialViewModel
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "Facture Prestattion";
+    ViewBag.Title = "Facture liée à votre prestation";
 }
 
-
-<div class="container bootdey">
-<div class="row invoice row-printable">
-    <div class="col-12 col-md-8">
+<div class=" container-fluid">
+    <div class="row invoice row-printable">
         <!-- col-lg-12 start here -->
         <div class="panel panel-default plain" id="dash_0">
             <!-- Start .panel -->
@@ -16,16 +14,21 @@
                     <!-- Start .row -->
                     <div class="col-lg-6">
                         <!-- col-lg-6 start here -->
-                        <div class="invoice-logo"><img width="100" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Invoice logo"></div>
+                        <div class="invoice-logo"><img width="100" src="~/assets/img/avataaars.svg" alt="Invoice logo"></div>
                     </div>
                     <!-- col-lg-6 end here -->
                     <div class="col-lg-6">
                         <!-- col-lg-6 start here -->
                         <div class="invoice-from">
                             <ul class="list-unstyled text-right">
-                                <li>BillingAddress.AddressLine</li>
-                                <li>BillingAddress.PostalCode+City</li>
-                                <li>BillingAddress.Country</li>
+                                @foreach(var user in Model.Users.Where(s => s.Id == Model.ServiceInvoice.IdServiceProvider))
+                                                {
+                                                   <li> EcoMembre Prestataire : @user.Account.Username</li>
+                                                }
+                                @foreach(var user in Model.Users.Where(s => s.Id == Model.ServiceInvoice.IdServiceConsumer))
+                                                {
+                                                    <li>Bénéficiaire du service : @user.Account.Username</li>
+                                                }
                             </ul>
                         </div>
                     </div>
@@ -35,10 +38,10 @@
                         <div class="invoice-details mt25">
                             <div class="well">
                                 <ul class="list-unstyled mb0">
-                                    <li><strong>Invoice.InvoiceNumber</strong> ******</li>
-                                    <li><strong>InvoiceIssueDate:</strong> ******</</li>
-                                    <li><strong>InvoiceType:</strong>******</</li>
-                                    <li><strong>PaidTo.UserProvider:</strong>******</</li>
+                                    <li><strong>Numéro de facture</strong> @Model.ServiceInvoice.Invoice.InvoiceNumber</li>
+                                    <li><strong>Date d'émission de la facture</strong> @Model.ServiceInvoice.Invoice.InvoiceIssueDate.ToShortDateString()</</li>
+                                    <li><strong>Heure d'émission de la facture</strong> @Model.ServiceInvoice.Invoice.InvoiceIssueDate.ToShortTimeString()</</li>
+                                    <li><strong>Type de facture</strong> @Model.ServiceInvoice.Invoice.SelectInvoiceType</li>
 
                                 </ul>
                             </div>
@@ -48,44 +51,47 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="per70 text-center">PurchaseType</th>
-                                            <th class="per25 text-center">Prix</th>
+                                            <th class="per70 text-center">Type de prestation</th>
+                                            <th class="per25 text-center">Référence de la prestation</th>
+                                            <th class="per25 text-center">EcoMembre prestataire</th>
+                                            <th class="per25 text-center">EcoMembre consommateur</th>
+                                            <th class="per25 text-center">Montant de la transaction</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1024MB Cloud 2.0 Server - elisium.dynamic.com (12/04/2014 - 01/03/2015)</td>
-                                            <td class="text-center">$25.00 USD</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Logo design</td>
-                                            <td class="text-center">$200.00 USD</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Backup - 1024MB Cloud 2.0 Server - elisium.dynamic.com</td>
-                                            <td class="text-center">$12.00 USD</td>
-                                        </tr>
+                                            <tr>
+                                                <td>@Model.ServiceInvoice.Service.SelectServiceType</td>
+                                                <td>@Model.ServiceInvoice.Service.ReferenceNumber</td>
+                                            <td>@foreach(var user in Model.Users.Where(s => s.Id == Model.ServiceInvoice.IdServiceProvider))
+                                                {
+                                                    @user.Account.Username
+                                                }</td>
+                                                <td>@foreach(var user in Model.Users.Where(s => s.Id == Model.ServiceInvoice.IdServiceConsumer))
+                                                {
+                                                    @user.Account.Username
+                                                }</td>
+                                            <td class="text-center">@Model.ServiceInvoice.EcoCoinAmount</td>
+                                            </tr>
+
+                                        
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="2" class="text-right">Total en EcoCoins:</th>
-                                            <th class="text-center">$284.4.40 USD</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                                 <div class="float-right">
-                                <button type="button" class="btn btn-lg btn-primary mt-2">Imprimer</button>
+                                    <button type="button" id="cmd" class="btn btn-lg btn-success">Imprimer la facture</button>
                                 </div>
                             </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-4">
-        <center><img style="width:650px" src="~/Images/ServiceRequestList.png"></center>
-        </div>
+</div>
+<div class="landscape">
+    <center><img src="~/Images/Landscape1.png"></center>
 </div>
 
-</div>
+
+
+
+

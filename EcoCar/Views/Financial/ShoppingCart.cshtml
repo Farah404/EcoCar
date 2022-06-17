@@ -16,12 +16,11 @@
             <table class="table" id="userTable">
                 <thead>
                     <tr class="header">
-                        <th>EcoAchat</th>
+                        <th>Catégorie d'EcoAchat</th>
                         <th>Montant EcoCoins</th>
-                        <th>Prix en Euros</th>
+                        <th>Prix unitaire</th>
                         <th>Quantité</th>
                         <th>Total</th>
-                        <th>Vider mon panier</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,12 +31,11 @@
                         <tr>
                             <td class="product-name">@Model.EcoStore.NameOne</td>
                             <td class="product-eco-ecoin">@Model.EcoStore.EcoCoinsBatchOne</td>
-                            <td id="unitaryPrice" class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
+                            <td id="unitaryPrice" class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice €</td>
                             <td class="col col-qty layout-inline">
                                 @Html.TextBox("QuantityBatchOne",@Model.ShoppingCart.QuantityBatchOne, new{id="qty", @class ="form-control"})
                             </td>
-                            <td><p id="totalInline"> </p></td>
-                            <td><a class="product-removal" href="#">Supprimer</a></td>
+                            <td>@Model.ShoppingCart.TotalBatchOne €</td>
                         </tr>
                     }
                     else
@@ -52,12 +50,11 @@
                         <tr>
                             <td class="product-name">@Model.EcoStore.NameTwo</td>
                             <td class="product-eco-ecoin">@Model.EcoStore.EcoCoinsBatchTwo</td>
-                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchTwoPrice</td>
+                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchTwoPrice €</td>
                             <td class="col col-qty layout-inline">
                                 @Html.TextBox("QuantityBatchTwo",@Model.ShoppingCart.QuantityBatchTwo, new{id="qty", @class ="form-control"})
                             </td>
-                            <td class="product-total-price">Total</td>
-                            <td><a class="product-removal" href="#">Supprimer</a></td>
+                            <td>@Model.ShoppingCart.TotalBatchTwo €</td>
                         </tr>
                     }
                     else
@@ -70,12 +67,11 @@
                         <tr>
                             <td class="product-name">@Model.EcoStore.NameThree</td>
                             <td class="product-eco-ecoin">@Model.EcoStore.EcoCoinsBatchThree</td>
-                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchOnePrice</td>
+                            <td class="product-line-price">@Model.EcoStore.EcoCoinsBatchThreePrice €</td>
                             <td class="col col-qty layout-inline">
                                 @Html.TextBox("QuantityBatchThree",@Model.ShoppingCart.QuantityBatchThree, new{id="qty", @class ="form-control"})
                             </td>
-                            <td class="product-total-price">Total</td>
-                            <td><a class="product-removal" href="#">Supprimer</a></td>
+                            <td>@Model.ShoppingCart.TotalBatchThree €</td>
                         </tr>
                     }
                     else
@@ -87,12 +83,11 @@
                         <tr>
                             <td class="product-name">@Model.EcoStore.NameMonth</td>
                             <td class="product-eco-ecoin">@Model.EcoStore.MonthlySubscription</td>
-                            <td class="product-line-price">@Model.EcoStore.MonthlySubscriptionPrice</td>
+                            <td class="product-line-price">@Model.EcoStore.MonthlySubscriptionPrice €</td>
                             <td class="col col-qty layout-inline">
                                 @Html.TextBox("QuantityMonthlySubscription",@Model.ShoppingCart.QuantityMonthlySubscription, new{@readonly = true,id="qty", @class ="form-control"})
                             </td>
-                            <td class="totalInline">Total</td>
-                            <td><a class="product-removal" href="#">Supprimer</a></td>
+                            <td>@Model.ShoppingCart.TotalMonthlySub €</td>
                         </tr>
                     }
                     else
@@ -104,12 +99,11 @@
                         <tr>
                             <td class="product-name">@Model.EcoStore.NameTrimester</td>
                             <td class="product-eco-ecoin">@Model.EcoStore.TrimestrialSubscription</td>
-                            <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
+                            <td class="product-line-price">@Model.EcoStore.TrimestrialSubscriptionPrice €</td>
                             <td class="col col-qty layout-inline">
                                  @Html.TextBox("QuantityTrimestrialSubscription",@Model.ShoppingCart.QuantityTrimestrialSubscription, new{@readonly = true,id="qty", @class ="form-control"})
                             </td>
-                            <td class="product-total-price">Total</td>
-                            <td><a class="product-removal" href="#">Supprimer</a></td>
+                            <td>@Model.ShoppingCart.TotalTrimestrialSub €</td>
                         </tr>
                     }
                     else
@@ -121,28 +115,37 @@
                         <tr>
                             <td class="product-name">@Model.EcoStore.NameSemester</td>
                             <td class="product-eco-ecoin">@Model.EcoStore.SemestrialSubscription</td>
-                            <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice</td>
+                            <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice €</td>
                             <td class="col col-qty layout-inline">
                                  @Html.TextBox("QuantitySemestrialSubscription",@Model.ShoppingCart.QuantitySemestrialSubscription, new{@readonly = true,id="qty", @class ="form-control"})
                             </td>
-                            <td class="product-total-price">Total</td>
-                            <td><a class="product-removal" href="#">Supprimer</a></td>
+                            <td>@Model.ShoppingCart.TotalSemestrialSub €</td>
                         </tr>
                     }
                     else
                     {
                         @Html.Hidden("QuantitySemestrialSubscription",0)
                     }
+                     <tr>
+                            <td class="product-name"></td>
+                            <td class="product-eco-ecoin"></td>
+                            <td class="product-line-price"></td>
+                            <td class="col col-qty layout-inline">Sous-total</td>
+                            <td class="product-total-price">@Model.ShoppingCart.TotalPriceEuros €</td>
+                        </tr>
                 </tbody>
 
             </table>
         </div>
-        <button style="float: right;" class="btn btn-success btn-xl" type="submit">Payer</button>
+        <button style="float: right;" class="btn btn-success btn-xl" type="submit" formaction="EmptyShoppingCart">Vider le panier</button>
+        <button style="float: right;" class="btn btn-success btn-xl" type="submit" formaction="RefreshShoppingCart">Rafraîchir le panier</button>
+        <br/>
+        <br/>
+        <button style="float: right;" class="btn btn-success btn-xl" type="submit" formaction="ShoppingCart">Valider la commande</button>
     </div>
     
 }
 <script>
-    });
     // RESTRICT INPUTS TO NUMBERS ONLY WITH A MIN OF 0 AND A MAX 100
     $('input').on('blur', function() {
         var input = $(this);
@@ -154,17 +157,6 @@
             input.val(100);
         }
     });
-    // Remove Items From Cart
-    $('a.product-removal').click(function() {
-        event.preventDefault();
-        $(this).parent().parent().hide(400);
-    })
-    //Total
-    function calculate() {
-        var qty = document.getElementById('qty').value;
-        var unitaryPrice = document.getElementById('unitaryPrice').value;
-        var result = document.getElementById('totalInline');
-        var myResult = parseInt(qty) * parseInt(unitaryPrice); // Parse the strings
-        result.value = myResult;
+   
     }
 </script>

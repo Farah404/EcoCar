@@ -32,6 +32,10 @@ namespace EcoCar.Models.Services
             List<Service> servicesOfUser = _bddContext.Services.Include(s => s.UserProvider).Where(s => s.Id == userId).ToList();
             return servicesOfUser;
         }
+        public Service GetServiceFromUserProviderId(int userProviderId)
+        {
+            return _bddContext.Services.Include(s=>s.UserProvider).FirstOrDefault(s=>s.UserProviderId==userProviderId);
+        }
 
         public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int priceEcoCoins, int userProviderId)
         {
@@ -57,7 +61,7 @@ namespace EcoCar.Models.Services
             _bddContext.Services.Update(service);
             _bddContext.SaveChanges();
         }
-        public void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType, int priceEcoCoins)
+        public void UpdateService(int id, DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, ServiceType selectServiceType, int priceEcoCoins, int userProviderId)
         {
             Service service = _bddContext.Services.Find(id);
 
@@ -72,6 +76,7 @@ namespace EcoCar.Models.Services
                 service.End = end;
                 service.PriceEcoCoins = priceEcoCoins;
                 service.SelectServiceType = selectServiceType;
+                service.UserProviderId = userProviderId;
 
                 _bddContext.SaveChanges();
             }

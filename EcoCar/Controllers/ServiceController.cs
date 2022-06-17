@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Collections.Generic;
 using EcoCar.ViewModels;
+using System;
 
 namespace EcoCar.Controllers
 {
@@ -309,6 +310,11 @@ namespace EcoCar.Controllers
 
                         CarPoolingService carPoolingServiceUpdated = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
 
+                        //Generating ServiceInvoice with incremented invoiceNumber
+                        int invoiceNumber = dalFinancialManagement.LastInvoice();
+                        int invoiceId = dalFinancialManagement.CreateInvoice(invoiceNumber, null, DateTime.Now, (Models.FinancialManagement.Invoice.InvoiceType)1);
+                        dalFinancialManagement.CreateServiceInvoice(carPoolingServiceUpdated.Service.UserProviderId, userId, carPoolingServiceUpdated.Service.PriceEcoCoins, carPoolingServiceUpdated.ServiceId, invoiceId);
+
                         if (carPoolingServiceUpdated.AvailableSeats == 0)
                         {
                             dalServiceManagement.ServiceAvailability(
@@ -378,6 +384,10 @@ namespace EcoCar.Controllers
                             parcelService.Service.Id
                             );
 
+                        //Generating ServiceInvoice with incremented invoiceNumber
+                        int invoiceNumber = dalFinancialManagement.LastInvoice();
+                        int invoiceId = dalFinancialManagement.CreateInvoice(invoiceNumber, null, DateTime.Now, (Models.FinancialManagement.Invoice.InvoiceType)1);
+                        dalFinancialManagement.CreateServiceInvoice(parcelService.Service.UserProviderId, userId, parcelService.Service.PriceEcoCoins, parcelService.ServiceId, invoiceId);
 
                         string url = "/Home/Index";
                         return Redirect(url);
@@ -433,6 +443,11 @@ namespace EcoCar.Controllers
                         dalServiceManagement.ServiceAvailability(
                             carRentalService.Service.Id
                             );
+
+                        //Generating ServiceInvoice with incremented invoiceNumber
+                        int invoiceNumber = dalFinancialManagement.LastInvoice();
+                        int invoiceId = dalFinancialManagement.CreateInvoice(invoiceNumber, null, DateTime.Now, (Models.FinancialManagement.Invoice.InvoiceType)1);
+                        dalFinancialManagement.CreateServiceInvoice(carRentalService.Service.UserProviderId, userId, carRentalService.Service.PriceEcoCoins, carRentalService.ServiceId, invoiceId);
 
                         string url = "/Home/Index";
                         return Redirect(url);
@@ -623,6 +638,17 @@ namespace EcoCar.Controllers
 
                         CarPoolingService carPoolingServiceUpdated = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
 
+                        //Generating ServiceInvoice with incremented invoiceNumber
+                        int invoiceNumber = dalFinancialManagement.LastInvoice();
+                        int invoiceId = dalFinancialManagement.CreateInvoice(invoiceNumber, null, DateTime.Now, (Models.FinancialManagement.Invoice.InvoiceType)1);
+                        dalFinancialManagement.CreateServiceInvoice(userId, carPoolingRequest.Service.UserProviderId, carPoolingRequest.Service.PriceEcoCoins, carPoolingRequest.ServiceId, invoiceId);
+
+                        // Switching Service request user idenfication with user who choose to do that service
+                        Service serviceToUpdate = dalServiceManagement.GetServiceFromUserProviderId(carPoolingRequest.Service.UserProviderId);
+                        dalServiceManagement.UpdateService(serviceToUpdate.Id, serviceToUpdate.PublicationDate, serviceToUpdate.ExpirationDate, serviceToUpdate.ReferenceNumber, serviceToUpdate.IsAvailable,
+                            serviceToUpdate.Start, serviceToUpdate.End, serviceToUpdate.SelectServiceType,serviceToUpdate.PriceEcoCoins,userId);
+
+                        // Updating CarPoolingService availability
                         if (carPoolingServiceUpdated.AvailableSeats == 0)
                         {
                             dalServiceManagement.ServiceAvailability(
@@ -691,6 +717,16 @@ namespace EcoCar.Controllers
                             carRentalRequest.Service.Id
                             );
 
+                        //Generating ServiceInvoice with incremented invoiceNumber
+                        int invoiceNumber = dalFinancialManagement.LastInvoice();
+                        int invoiceId = dalFinancialManagement.CreateInvoice(invoiceNumber, null, DateTime.Now, (Models.FinancialManagement.Invoice.InvoiceType)1);
+                        dalFinancialManagement.CreateServiceInvoice(userId, carRentalRequest.Service.UserProviderId, carRentalRequest.Service.PriceEcoCoins, carRentalRequest.ServiceId, invoiceId);
+                        
+                        // Switching Service request user idenfication with user who choose to do that service
+                        Service serviceToUpdate = dalServiceManagement.GetServiceFromUserProviderId(carRentalRequest.Service.UserProviderId);
+                        dalServiceManagement.UpdateService(serviceToUpdate.Id, serviceToUpdate.PublicationDate, serviceToUpdate.ExpirationDate, serviceToUpdate.ReferenceNumber, serviceToUpdate.IsAvailable,
+                            serviceToUpdate.Start, serviceToUpdate.End, serviceToUpdate.SelectServiceType, serviceToUpdate.PriceEcoCoins, userId);
+
                         string url = "/Home/Index";
                         return Redirect(url);
                     }
@@ -751,6 +787,15 @@ namespace EcoCar.Controllers
                             parcelRequest.Service.Id
                             );
 
+                        //Generating ServiceInvoice with incremented invoiceNumber
+                        int invoiceNumber = dalFinancialManagement.LastInvoice();
+                        int invoiceId = dalFinancialManagement.CreateInvoice(invoiceNumber, null, DateTime.Now, (Models.FinancialManagement.Invoice.InvoiceType)1);
+                        dalFinancialManagement.CreateServiceInvoice(userId, parcelRequest.Service.UserProviderId, parcelRequest.Service.PriceEcoCoins, parcelRequest.ServiceId, invoiceId);
+
+                        // Switching Service request user idenfication with user who choose to do that service
+                        Service serviceToUpdate = dalServiceManagement.GetServiceFromUserProviderId(parcelRequest.Service.UserProviderId);
+                        dalServiceManagement.UpdateService(serviceToUpdate.Id, serviceToUpdate.PublicationDate, serviceToUpdate.ExpirationDate, serviceToUpdate.ReferenceNumber, serviceToUpdate.IsAvailable,
+                            serviceToUpdate.Start, serviceToUpdate.End, serviceToUpdate.SelectServiceType, serviceToUpdate.PriceEcoCoins, userId);
 
                         string url = "/Home/Index";
                         return Redirect(url);

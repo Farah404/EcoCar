@@ -19,6 +19,8 @@ namespace EcoCar.ViewModels
 
         public ShoppingCart ShoppingCart { get; set; }
         public User User { get; set; }
+        public List<User> Users { get; set; }
+        public List<Account> Accounts { get; set; }
 
         public Account Account { get; set; }
 

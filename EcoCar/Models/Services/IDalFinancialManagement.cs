@@ -27,6 +27,7 @@ namespace EcoCar.Models.Services
         //Invoice
         List<Invoice> GetAllInvoices();
         int CreateInvoice(int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType);
+        int LastInvoice();
         void UpdateInvoice(int id, int invoiceNumber, string invoiceDescription, DateTime invoiceIssueDate, InvoiceType selectInvoiceType);
         void DeleteInvoice(int id);
 
@@ -139,6 +140,12 @@ namespace EcoCar.Models.Services
             int quantityMonthlySubscription,
             int quantityTrimestrialSubscription,
             int quantitysemestrialSubscription,
+            double totalBatchOne,
+            double totalBatchTwo,
+            double totalBatchThree,
+            double totalMonthlySub,
+            double totalTrimestrialSub,
+            double totalSemestrialSub,
             double totalPriceEuros
             );
 
@@ -150,9 +157,15 @@ namespace EcoCar.Models.Services
             int quantityMonthlySubscription,
             int quantityTrimestrialSubscription,
             int quantitysemestrialSubscription,
+            double totalBatchOne,
+            double totalBatchTwo,
+            double totalBatchThree,
+            double totalMonthlySub,
+            double totalTrimestrialSub,
+            double totalSemestrialSub,
             double totalPriceEuros
             );
-
+       
         void DeleteShoppingCart(int id);
 
         //-------------------------------------------------------------------------------------------------

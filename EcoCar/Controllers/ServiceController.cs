@@ -335,6 +335,11 @@ namespace EcoCar.Controllers
 
                     }
 
+                else
+                {
+                    return Redirect("/Financial/EcoStore"); // Acheter des EcoCoins
+                }
+
 
             }
             return Redirect("/Account/LoginAccount");
@@ -356,38 +361,54 @@ namespace EcoCar.Controllers
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                ParcelService parcelService = dalServiceManagement.GetAllParcelServices().FirstOrDefault(x => x.Id == id);
                 int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                EcoWallet consumerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(c => c.Id == userId);
+                ParcelService parcelService = dalServiceManagement.GetAllParcelServices().FirstOrDefault(s => s.Id == id);
+                EcoWallet providerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(p => p.Id == parcelService.Service.UserProviderId);
+                consumerEcoWallet.EcoCoinsAmount = consumerEcoWallet.EcoCoinsAmount - parcelService.Service.ServicePrice;
+                providerEcoWallet.EcoCoinsAmount = providerEcoWallet.EcoCoinsAmount + parcelService.Service.ServicePrice;
 
-                if (parcelService.Service.IsAvailable != false)
+
+                if (parcelService.Service.IsAvailable != true)
                 {
                     dalServiceManagement.CreateReservation(
                         parcelService.Service.Id,
                         userId
                         );
 
+                    string url2 = "/Service/CreateRequest";
+                    return Redirect(url2);
+                }
+                else if (parcelService.Service.IsAvailable != false && consumerEcoWallet.EcoCoinsAmount != 0 && consumerEcoWallet.EcoCoinsAmount >= parcelService.Service.ServicePrice)
+                {
                     dalServiceManagement.UpdateParcelService(
-                        parcelService.Id,
-                        parcelService.BarCode,
-                        parcelService.WeightKilogrammes,
-                        parcelService.AtypicalVolume,
-                        parcelService.Fragile,
-                        parcelService.TrajectoryId,
-                        parcelService.ServiceId,
-                        parcelService.VehiculeId
-                        );
+                       parcelService.Id,
+                       parcelService.BarCode,
+                       parcelService.WeightKilogrammes,
+                       parcelService.AtypicalVolume,
+                       parcelService.Fragile,
+                       parcelService.TrajectoryId,
+                       parcelService.ServiceId,
+                       parcelService.VehiculeId
+                       );
 
                     dalServiceManagement.ServiceAvailability(
                         parcelService.Service.Id
                         );
 
+                    parcelService.Service.IsAvailable = false;
 
-                    string url = "/Home/Index";
+                    dalFinancialManagement.UpdateEcoWallet(consumerEcoWallet);
+                    dalFinancialManagement.UpdateEcoWallet(providerEcoWallet);
+
+                    string url = "/Service/SearchService";
                     return Redirect(url);
+
                 }
+
                 else
                 {
-                    return Redirect("/Service/SearchService");
+                    return Redirect("/Financial/EcoStore"); // Acheter des EcoCoins
                 }
             }
             return Redirect("/Account/LoginAccount");
@@ -415,7 +436,6 @@ namespace EcoCar.Controllers
                 CarRentalService carRentalService = dalServiceManagement.GetAllCarRentalServices().FirstOrDefault(s => s.Id == id);
                 EcoWallet providerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(p => p.Id == carRentalService.Service.UserProviderId);
                 consumerEcoWallet.EcoCoinsAmount = consumerEcoWallet.EcoCoinsAmount - carRentalService.Service.ServicePrice;
-
                 providerEcoWallet.EcoCoinsAmount = providerEcoWallet.EcoCoinsAmount + carRentalService.Service.ServicePrice;
 
                 if (carRentalService.Service.IsAvailable != true)
@@ -442,8 +462,7 @@ namespace EcoCar.Controllers
                     carRentalService.VehiculeId,
                     carRentalService.ServiceId
                     );
-                    //CarRentalService carRentalServiceUpdated = dalServiceManagement.GetAllCarRentalServices().FirstOrDefault(x => x.Id == id);
-
+                    
                     carRentalService.Service.IsAvailable = false;
 
                     dalFinancialManagement.UpdateEcoWallet(consumerEcoWallet);
@@ -454,38 +473,14 @@ namespace EcoCar.Controllers
 
                 }
 
+                else
+                {
+                    return Redirect("/Financial/EcoStore"); // Acheter des EcoCoins
+                }
 
             }
 
 
-
-            //if (carRentalService.Service.IsAvailable != false)
-            //{
-            //    dalServiceManagement.CreateReservation(
-            //        carRentalService.Service.Id,
-            //        userId
-            //        );
-
-            //dalServiceManagement.UpdateCarRentalService(
-            //    carRentalService.Id,
-            //    carRentalService.KeyPickUpAddress,
-            //    carRentalService.KeyDropOffAddress,
-            //    carRentalService.VehiculeId,
-            //    carRentalService.ServiceId
-            //    );
-
-            //dalServiceManagement.ServiceAvailability(
-            //    carRentalService.Service.Id
-            //    );
-
-            //        string url = "/Home/Index";
-            //        return Redirect(url);
-            //    }
-            //    else
-            //    {
-            //        return Redirect("/Service/SearchService");
-            //    }
-            //}
             return Redirect("/Account/LoginAccount");
         }
         #endregion
@@ -636,6 +631,67 @@ namespace EcoCar.Controllers
             };
             return View(serviceViewModel);
         }
+
+        [HttpPost]
+        public IActionResult RespondToCarPoolRequest(Reservation reservation, int id)
+        {
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                EcoWallet consumerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(c => c.Id == userId);
+                CarPoolingService carPoolingService = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(s => s.Id == id);
+                EcoWallet providerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(p => p.Id == carPoolingService.Service.UserProviderId);
+                consumerEcoWallet.EcoCoinsAmount = consumerEcoWallet.EcoCoinsAmount + carPoolingService.Service.ServicePrice;
+                providerEcoWallet.EcoCoinsAmount = providerEcoWallet.EcoCoinsAmount - carPoolingService.Service.ServicePrice;
+
+                if (carPoolingService.AvailableSeats == 0)
+                {
+                    dalServiceManagement.ServiceAvailability(
+                    carPoolingService.Service.Id
+                    );
+                    string url2 = "/Service/SearchService";
+                    return Redirect(url2);
+                }
+
+
+                else if (carPoolingService.AvailableSeats >= 0 && providerEcoWallet.EcoCoinsAmount != 0 && providerEcoWallet.EcoCoinsAmount >= carPoolingService.Service.ServicePrice)
+                {
+                    dalServiceManagement.CreateReservation(
+                    carPoolingService.Service.Id,
+                    userId
+                    );
+                    dalServiceManagement.UpdateCarPoolingService(
+                        carPoolingService.Id,
+                        carPoolingService.SelectCarPoolingType,
+                        (carPoolingService.AvailableSeats) - 1,
+                        carPoolingService.PetsAllowed,
+                        carPoolingService.SmokingAllowed,
+                        carPoolingService.MusicAllowed,
+                        carPoolingService.ChattingAllowed,
+                        carPoolingService.VehiculeId,
+                        carPoolingService.TrajectoryId,
+                        carPoolingService.ServiceId);
+                    CarPoolingService carPoolingServiceUpdated = dalServiceManagement.GetAllCarPoolingServices().FirstOrDefault(x => x.Id == id);
+
+                    dalFinancialManagement.UpdateEcoWallet(consumerEcoWallet);
+                    dalFinancialManagement.UpdateEcoWallet(providerEcoWallet);
+
+                    string url = "/Service/SearchService";
+                    return Redirect(url);
+
+                }
+
+                else
+                {
+                    return Redirect("/Messaging/Message"); //contacter l'utilisateur
+                }
+
+
+            }
+            return Redirect("/Account/LoginAccount");
+        }
         #endregion
 
         #region RespondingToCarRentalRequest
@@ -647,6 +703,65 @@ namespace EcoCar.Controllers
                 CarRentalService = dalServiceManagement.GetCarRentalService((int)id)
             };
             return View(serviceViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult RespondToCarRentalRequest(Reservation reservation, int id)
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                EcoWallet consumerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(c => c.Id == userId);
+                CarRentalService carRentalService = dalServiceManagement.GetAllCarRentalServices().FirstOrDefault(s => s.Id == id);
+                EcoWallet providerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(p => p.Id == carRentalService.Service.UserProviderId);
+                consumerEcoWallet.EcoCoinsAmount = consumerEcoWallet.EcoCoinsAmount + carRentalService.Service.ServicePrice;
+                providerEcoWallet.EcoCoinsAmount = providerEcoWallet.EcoCoinsAmount - carRentalService.Service.ServicePrice;
+
+                if (carRentalService.Service.IsAvailable != true)
+                {
+                    dalServiceManagement.ServiceAvailability(
+                    carRentalService.Service.Id
+                    );
+                    string url2 = "/Service/SearchService";
+                    return Redirect(url2);
+                }
+
+
+                else if (carRentalService.Service.IsAvailable != false && providerEcoWallet.EcoCoinsAmount != 0 && providerEcoWallet.EcoCoinsAmount >= carRentalService.Service.ServicePrice)
+                {
+                    dalServiceManagement.CreateReservation(
+                    carRentalService.Service.Id,
+                    userId
+                    );
+
+                    dalServiceManagement.UpdateCarRentalService(
+                    carRentalService.Id,
+                    carRentalService.KeyPickUpAddress,
+                    carRentalService.KeyDropOffAddress,
+                    carRentalService.VehiculeId,
+                    carRentalService.ServiceId
+                    );
+
+                    carRentalService.Service.IsAvailable = false;
+
+                    dalFinancialManagement.UpdateEcoWallet(consumerEcoWallet);
+                    dalFinancialManagement.UpdateEcoWallet(providerEcoWallet);
+
+                    string url = "/Service/SearchService";
+                    return Redirect(url);
+
+                }
+
+                else
+                {
+                    return Redirect("/Messaging/Message"); //contacter l'utilisateur
+                }
+
+
+            }
+
+
+            return Redirect("/Account/LoginAccount");
         }
         #endregion
 
@@ -661,7 +776,68 @@ namespace EcoCar.Controllers
 
             return View(serviceViewModel);
         }
+
+
+
+        [HttpPost]
+        public IActionResult RespondToParcelRequest(Reservation reservation, int id)
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                EcoWallet consumerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(c => c.Id == userId);
+                ParcelService parcelService = dalServiceManagement.GetAllParcelServices().FirstOrDefault(s => s.Id == id);
+                EcoWallet providerEcoWallet = dalFinancialManagement.GetAllEcoWallets().FirstOrDefault(p => p.Id == parcelService.Service.UserProviderId);
+                consumerEcoWallet.EcoCoinsAmount = consumerEcoWallet.EcoCoinsAmount + parcelService.Service.ServicePrice;
+                providerEcoWallet.EcoCoinsAmount = providerEcoWallet.EcoCoinsAmount - parcelService.Service.ServicePrice;
+
+
+                if (parcelService.Service.IsAvailable != true)
+                {
+                    dalServiceManagement.CreateReservation(
+                        parcelService.Service.Id,
+                        userId
+                        );
+
+                    string url2 = "/Service/SearchService";
+                    return Redirect(url2);
+                }
+                else if (parcelService.Service.IsAvailable != false && providerEcoWallet.EcoCoinsAmount != 0 && providerEcoWallet.EcoCoinsAmount >= parcelService.Service.ServicePrice)
+                {
+                    dalServiceManagement.UpdateParcelService(
+                       parcelService.Id,
+                       parcelService.BarCode,
+                       parcelService.WeightKilogrammes,
+                       parcelService.AtypicalVolume,
+                       parcelService.Fragile,
+                       parcelService.TrajectoryId,
+                       parcelService.ServiceId,
+                       parcelService.VehiculeId
+                       );
+
+                    dalServiceManagement.ServiceAvailability(
+                        parcelService.Service.Id
+                        );
+
+                    parcelService.Service.IsAvailable = false;
+
+                    dalFinancialManagement.UpdateEcoWallet(consumerEcoWallet);
+                    dalFinancialManagement.UpdateEcoWallet(providerEcoWallet);
+
+                    string url = "/Service/SearchService";
+                    return Redirect(url);
+
+                }
+                else
+                {
+                    return Redirect("/Messaging/Message"); //contacter l'utilisateur
+                }
+
+            }
+            return Redirect("/Account/LoginAccount");
+        }
         #endregion
+
 
         #region AdminDeleting
         public ActionResult AdminViewCarPoolingService(int? id)

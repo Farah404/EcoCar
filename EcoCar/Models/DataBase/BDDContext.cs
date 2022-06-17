@@ -489,7 +489,7 @@ namespace EcoCar.Models.DataBase
                     ServicePrice = 200,
                     Start = new DateTime(2022, 06, 21),
                     End = new DateTime(2022, 06, 21),
-                    IsRequest = true,
+                    IsRequest = false,
                     IsAvailable = true,
 
                     SelectServiceType = Service.ServiceType.ParcelService
@@ -540,6 +540,72 @@ namespace EcoCar.Models.DataBase
                     AtypicalVolume = true,
                     Fragile = false,
                     TrajectoryId = 300,
+                    VehiculeId = 1,
+
+                });
+            this.SaveChanges();
+
+            #endregion
+
+            #region Initialize ParcelService request
+
+            this.Itineraries.AddRange(
+
+                   new Itinerary
+                   {
+                       Id = 400,
+                       FirtsStopAddress = "2, Rue B, 13100 Aix en Provence",
+                       //SecondStopAddress = "1, Rue C, 13000 Marseille",
+                       //ThirdStopAddress = "1, Rue D, 13000 Marseille"
+                   });
+            this.SaveChanges();
+
+            this.Trajectories.AddRange(
+
+            new Trajectory
+               {
+                   Id = 400,
+                   DurationHours = (int)1.5,
+                   StopNumber = 1,
+                   StopsDurationMinutes = 5,
+                   PickUpAddress = "1, Rue A, 13000 Marseille",
+                   DeliveryAddress = "2, Rue A, 13100 Aix en Provence",
+                   SelectTrajectoryType = Trajectory.TrajectoryType.Punctual,
+                   ItineraryId = 400
+
+               });
+            this.SaveChanges();
+
+            this.Services.AddRange(
+
+               new Service
+                {
+                    Id = 400,
+                    UserProviderId = 2,
+                    PublicationDate = new DateTime(2022, 06, 10),
+                    ExpirationDate = new DateTime(2022, 06, 19),
+                    ReferenceNumber = 400,
+                    ServicePrice = 20,
+                    Start = new DateTime(2022, 06, 21),
+                    End = new DateTime(2022, 06, 21),
+                    IsRequest = true,
+                    IsAvailable = true,
+
+                    SelectServiceType = Service.ServiceType.ParcelService
+                });
+            this.SaveChanges();
+
+            this.ParcelServices.Add(
+
+                new ParcelService
+                {
+                    Id = 400,
+                    ServiceId = 400,
+                    BarCode = 400000,
+                    WeightKilogrammes = 5,
+                    AtypicalVolume = true,
+                    Fragile = false,
+                    TrajectoryId = 400,
                     VehiculeId = 1,
 
                 });

@@ -22,6 +22,12 @@
                     @Html.Label("Lieu de retour des clés") <br>
                     @Html.TextBoxFor(model => model.KeyDropOffAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
                     @Html.ValidationMessageFor(model => model.KeyDropOffAddress)
+
+                    @Html.Label("Tarif en EcoCoins")  <br>
+                    @Html.TextBoxFor(model => model.Service.ServicePrice, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.Service.ServicePrice)
+                    <br>
+
                     <br>
                     @Html.HiddenFor(model => model.VehiculeId)
                     @Html.HiddenFor(model => model.ServiceId)

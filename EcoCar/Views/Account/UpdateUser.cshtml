@@ -6,7 +6,7 @@
 <div class="container bootstrap snippets bootdey">
     <div class="panel-body inf-content">
         <div class="row">
-            @using (Html.BeginForm(FormMethod.Post))
+            @using (Html.BeginForm("UpdateUser","Account", FormMethod.Post, new{enctype="multipart/form-data"}))
             {
                 @*Profile picture Part with buttons*@
                 <div class="col-md-4">

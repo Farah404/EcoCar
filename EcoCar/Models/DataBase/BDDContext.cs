@@ -39,10 +39,10 @@ namespace EcoCar.Models.DataBase
         #endregion
         #region Messagins Management tables
         public DbSet<Message> Messages { get; set; }
-        public DbSet<Reporting> Reportings { get; set; }
-        public DbSet<HelpReporting> HelpReportings { get; set; }
-        public DbSet<UserReporting> UserReportings { get; set; }
-        public DbSet<AdministratorResponse> AdministratorResponses { get; set; }
+        //public DbSet<Reporting> Reportings { get; set; }
+        //public DbSet<HelpReporting> HelpReportings { get; set; }
+        //public DbSet<UserReporting> UserReportings { get; set; }
+        //public DbSet<AdministratorResponse> AdministratorResponses { get; set; }
         #endregion
 
 

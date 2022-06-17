@@ -412,15 +412,24 @@
 
                                                         <tr class="header">
                                                             <th>Expéditeur </th>
-                                                            <th>Sujet</th>
-                                                            <th>Numéro de reference de la prestations</th>
-                                                            <th>Consulter le message</th>
+                                                            <th>Prestation</th>
+                                                            <th>Contenu du message</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @foreach(var message in Model.Messages){
                                                         <tr>
-                                                            <td></td>
+                                                            <td>
+                                                                @message.UserSender.Id
+                                                            </td>
+                                                            <td>
+                                                                @message.ServiceConcerned.ReferenceNumber
+                                                            </td>
+                                                            <td>
+                                                                @message.MessageContent
+                                                            </td>
                                                         </tr>
+                                                        }
                                                     </tbody>
                                                 </table>
                                                  <a class="btn btn-success" data-toggle="modal" data-target="#basicModal">sms</a>

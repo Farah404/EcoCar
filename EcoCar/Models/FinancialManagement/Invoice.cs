@@ -2,6 +2,7 @@
 //The Invoice.cs is the parent class of the EcoStoreInvoice.cs and the ServiceInvoice.cs
 
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace EcoCar.Models.FinancialManagement
 {
@@ -17,7 +18,10 @@ namespace EcoCar.Models.FinancialManagement
         public InvoiceType SelectInvoiceType { get; set; }
         public enum InvoiceType
         {
-            EcoStoreInvoice, Serviceinvoice
+            [Display(Name = "Facture EcoStore")]
+            EcoStoreInvoice,
+            [Display(Name = "Facture de Prestation")]
+            Serviceinvoice
         }
 
 

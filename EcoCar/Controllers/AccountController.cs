@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System;
 using EcoCar.Models.FinancialManagement;
+using EcoCar.Models.ServiceManagement;
 
 namespace EcoCar.Controllers
 {
@@ -20,6 +21,7 @@ namespace EcoCar.Controllers
         private IDalPersonManagement dalPersonManagement;
         private IDalFinancialManagement dalFinancialManagement;
         private IDalServiceManagement dalServiceManagement;
+        private IDalMessagingManagement dalMessagingManagement;
         private IWebHostEnvironment _webEnv;
 
         public AccountController(IWebHostEnvironment environment)
@@ -27,6 +29,7 @@ namespace EcoCar.Controllers
             dalPersonManagement = new DalPersonManagement();
             dalFinancialManagement = new DalFinancialManagement();
             dalServiceManagement = new DalServiceManagement();
+            dalMessagingManagement = new DalMessagingManagement();
             _webEnv = environment;
         }
 
@@ -373,6 +376,7 @@ namespace EcoCar.Controllers
                         user.ShoppingCartId,
                         user.AccountId
                         );
+                    dalPersonManagement.UpdateVehicule((int)user.VehiculeId, user.Vehicule.Brand, user.Vehicule.RegistrationNumber, user.Vehicule.Model, user.Vehicule.Hybrid, user.Vehicule.Electric, user.Vehicule.TechnicalTestExpiration, user.Vehicule.AvailableSeats, user.Vehicule.InsuranceId);
                     dalPersonManagement.UpdatePerson(user.PersonId, user.Person.Name, user.Person.LastName, "/images/" + user.Person.ProfilePicture.FileName);
                     dalFinancialManagement.UpdateBankDetails(user.BankDetailsId, user.BankDetails.BankName, user.BankDetails.Swift, user.BankDetails.Iban);
                     dalFinancialManagement.UpdateBillingAddress(user.BillingAddressId, user.BillingAddress.AddressLine, user.BillingAddress.City, user.BillingAddress.Region, user.BillingAddress.Country, user.BillingAddress.PostalCode);
@@ -396,6 +400,7 @@ namespace EcoCar.Controllers
                     user.ShoppingCartId,
                     user.AccountId
                     );
+                dalPersonManagement.UpdateVehicule((int)user.VehiculeId, user.Vehicule.Brand, user.Vehicule.RegistrationNumber, user.Vehicule.Model, user.Vehicule.Hybrid, user.Vehicule.Electric, user.Vehicule.TechnicalTestExpiration, user.Vehicule.AvailableSeats, user.Vehicule.InsuranceId);
                 dalPersonManagement.UpdatePerson(user.PersonId, user.Person.Name, user.Person.LastName, user.Person.ProfilePicturePath);
                 dalFinancialManagement.UpdateBankDetails(user.BankDetailsId, user.BankDetails.BankName, user.BankDetails.Swift, user.BankDetails.Iban);
                 dalFinancialManagement.UpdateBillingAddress(user.BillingAddressId, user.BillingAddress.AddressLine, user.BillingAddress.City, user.BillingAddress.Region, user.BillingAddress.Country, user.BillingAddress.PostalCode);
@@ -411,7 +416,10 @@ namespace EcoCar.Controllers
                 Account = dalPersonManagement.GetAccount(id),
                 CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices(id),
                 CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices(id),
-                ParcelServices = dalServiceManagement.GetAllUserParcelServices(id)
+                ParcelServices = dalServiceManagement.GetAllUserParcelServices(id),
+                //UserReporting = dalMessagingManagement.GetUserReportingByUser(id),
+                Message = dalMessagingManagement.GetUserMessage(id),
+
             };
 
             return View(viewModel);
@@ -436,7 +444,8 @@ namespace EcoCar.Controllers
                     ParcelServices = dalServiceManagement.GetAllUserParcelServices(userId),
                     EcoStoreInvoices = dalFinancialManagement.GetAllEcoStoreInvoices().Where(x => x.UserId == userId).ToList(),
                     ServiceInvoices = dalFinancialManagement.GetAllServiceInvoices().Where(x=>x.IdServiceProvider==userId || x.IdServiceConsumer==userId).ToList(),
-                    Insurance = dalPersonManagement.GetUserInsurance(userId)
+                    Insurance = dalPersonManagement.GetUserInsurance(userId),
+                    Messages=dalMessagingManagement.GetAllMessages().Where(x=>x.ServiceConcerned.UserProviderId==userId).ToList()
                 };
                 return View(accountViewModel);
             }
@@ -495,6 +504,19 @@ namespace EcoCar.Controllers
                    );
             string url = "/Account/UserProfilePersonal";
             return Redirect(url);
+        }
+        #endregion
+
+
+        #region Contacting other users concerning a service they proposed 
+
+        [HttpPost]
+        public IActionResult UserProfile(string messageContent, int referenceNumber)
+        {
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            Service serviceConcerned = dalServiceManagement.GetServiceFromReferenceNumber(referenceNumber);
+            dalMessagingManagement.CreateMessage(messageContent, serviceConcerned.Id, userId);
+            return Redirect("/Home/index");
         }
         #endregion
     }

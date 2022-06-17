@@ -280,7 +280,7 @@
                     </div>
 
                     @*Insurance Details*@
-                    <span class="text-success"><strong>Votre assurance</strong><br></span>
+                    @*<span class="text-success"><strong>Votre assurance</strong><br></span>
                     <div class="table-responsive">
 
                         <table class="table table-user-information">
@@ -320,10 +320,10 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div>*@
 
                     @*Vehicule Details*@
-                    <span class="text-success"><strong>Votre assurance</strong><br></span>
+                    <span class="text-success"><strong>Votre véhicule</strong><br></span>
                     <div class="table-responsive">
 
                         <table class="table table-user-information">
@@ -400,7 +400,7 @@
                             </tbody>
                         </table>
                     </div>
-
+                    @Html.HiddenFor(model =>model.Vehicule.InsuranceId, @Model.Vehicule.InsuranceId)
                 </div>
                 <center><button class="btn btn-success btn-xl" type="submit">Soumettre les modifications</button></center>
 

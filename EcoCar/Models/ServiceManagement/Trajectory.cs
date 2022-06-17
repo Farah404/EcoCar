@@ -17,7 +17,10 @@ namespace EcoCar.Models.ServiceManagement
         public TrajectoryType SelectTrajectoryType { get; set; }
         public enum TrajectoryType
         {
-            Regular, Punctual
+            [Display(Name = "Regulier")]
+            Regular,
+            [Display(Name = "Ponctuel")]
+            Punctual
         }
 
         //Foreign Keys

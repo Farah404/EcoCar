@@ -1,4 +1,6 @@
-﻿@model EcoCar.ViewModels.AccountViewModel
+﻿@*@using static EcoCar.Models.MessagingManagement.UserReporting*@
+
+@model EcoCar.ViewModels.AccountViewModel
 @{
     Layout = "/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Eco Profil";
@@ -13,15 +15,12 @@
             <div class="col-md-4">
                 <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="~/assets/img/avataaars.svg">
                 <ul title="username" class="list-inline ratings text-center">
-                    @using (Html.BeginForm())
-                    {
-                        <h3>@Model.User.Account.Username</h3>
-                    }
+                    <h3>@Model.User.Account.Username</h3>
                 </ul>
                 <center>
-                <a class="btn btn-success" data-toggle="modal" data-target="#basicModal">Signaler @Model.User.Account.Username</a>
-                <br />  <br /> 
-                <a class="btn btn-success" data-toggle="modal" data-target="#basicModalSms" >Contacter @Model.User.Account.Username</a>
+                    <a class="btn btn-success" data-toggle="modal" data-target="#basicModal">Signaler @Model.User.Account.Username</a>
+                    <br />  <br />
+                    <a class="btn btn-success" data-toggle="modal" data-target="#basicModalSms">Contacter @Model.User.Account.Username</a>
                 </center>
             </div>
 
@@ -30,10 +29,10 @@
                 <strong>Information</strong><br>
 
                 <div class="table-responsive">
-   
+
                     <table class="table table-user-information">
                         <tbody>
-                             
+
                             <tr>
                                 <td>
                                     <strong>
@@ -168,39 +167,40 @@
 
 
 
+
 <!-- The Modal SMS -->
 <div class="modal fade" id="basicModalSms" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fermer</button>
-                <h4 class="modal-title" id="myModalLabel">Contacter @Model.User.Account.Username</h4>
+        @using (Html.BeginForm())
+        {
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fermer</button>
+                    <h4 class="modal-title" id="myModalLabel">Contacter @Model.User.Account.Username</h4>
+                </div>
+                <div class="modal-body">
+                    <center><img src="~/Images/MessageUser.png" style="width:50%;"></center>
+                    <div class="form-outline mb-3">
+                        @Html.TextBox("ReferenceNumber")
+                        <br>
+                    </div>
+                    <div class="form-outline mb-3">
+                        @Html.TextBox("MessageContent")
+                        <br>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default pull-right" type="submit" formaction="UserProfile">Envoyer</button>
+                </div>
             </div>
-
-            <div class="modal-body">
-
-                <center><img src="~/Images/MessageUser.png" style="width:50%;"></center>
-                <br />
-                <form method="post" enctype="text/plain">
-                    <input class="form-control" id="text" name="idPrestation" placeholder="Numéro de reference" type="text" required>
-                    <br />
-                    <textarea class="form-control" id="comments" name="comments" placeholder="Commentaires" rows="5" required></textarea><br>
-
-
-                </form>
-
-            </div>
-
-            <div class="modal-footer">
-                <button class="btn btn-default pull-right" type="submit">Envoyer</button>
-            </div>
-        </div>
+        }
     </div>
 </div>
 
 
 
-<!-- The Modal Report -->
+
+@*<!-- The Modal Report -->
 <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -208,27 +208,27 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fermer</button>
                 <h4 class="modal-title" id="myModalLabel">Signaler @Model.User.Account.Username</h4>
             </div>
-
-            <div class="modal-body">
-
-                <center><img src="~/Images/reporting.png" style="width:50%;"></center>
-                <br />
-                <form method="post" enctype="text/plain">
-                    <input class="form-control" id="text" name="idPrestation" placeholder="Raison de signalement" type="text" required>
-                    <br />
-                    <textarea class="form-control" id="comments" name="comments" placeholder="Commentaires" rows="5" required></textarea><br>
-
-
-                </form>
-
-            </div>
-
+            @using (Html.BeginForm())
+            {
+                <div class="modal-body">
+                    <center><img src="~/Images/reporting.png" style="width:50%;"></center>
+                    <div class="form-outline mb-3">
+                        @Html.Label("Raison de signalement")<br>
+                        @Html.DropDownListFor(model => model.UserReporting.SelectUserReportingType, Html.GetEnumSelectList<UserReportingType>(),"--Selectionnez le type de prestation--",new {required = "required"})
+                        <br>
+                    </div>
+                    <div class="form-floating mb-3">
+                        @Html.TextBox("ReportContent")
+                        <br>
+                    </div>
+                </div>
+            }
             <div class="modal-footer">
-                <button class="btn btn-default pull-right" type="submit">Soumettre</button>
+                <button class="btn btn-default pull-right" type="submit">Envoyez</button>
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 
 

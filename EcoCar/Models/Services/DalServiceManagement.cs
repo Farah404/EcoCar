@@ -32,6 +32,12 @@ namespace EcoCar.Models.Services
             List<Service> servicesOfUser = _bddContext.Services.Include(s => s.UserProvider).Where(s => s.Id == userId).ToList();
             return servicesOfUser;
         }
+
+        public Service GetServiceFromReferenceNumber(int referenceNumber)
+        {
+            return _bddContext.Services.Include(s => s.UserProvider).FirstOrDefault(s=> s.ReferenceNumber == referenceNumber);
+        }
+
         public Service GetServiceFromUserProviderId(int userProviderId)
         {
             return _bddContext.Services.Include(s=>s.UserProvider).FirstOrDefault(s=>s.UserProviderId==userProviderId);

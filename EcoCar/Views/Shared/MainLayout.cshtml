@@ -18,22 +18,37 @@
     <script src="~/Scripts/bootstrap-3.4.1.min.js"></script>*@
 </head>
 <body id="EcoCarPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-    <div class="jumbotron text-center">
-    <h1><strong>Eco</strong>Car</h1>
-    <p>Optimiser les déplacements dans une optique éco-vertueuse et conviviale</p>
-</div>
+    <div class="jumbotron-main text-center">
+
+       <h1 id="title"><strong>Eco</strong>Car</h1>
+        <!--Add a form with an input field and a button-->
+        <form class="form-inline">
+            <div class="formHalf headForms  floatLeft inlineElements">
+                <button onclick="location.href='/Service/SearchService'" type="button" class="btn btn-success">Liste des prestations</button>
+                <button onclick="location.href='/Service/CreateService'" type="button" class="btn btn-success">Proposer une prestation</button>
+                <button onclick="location.href='/Service/CreateRequest'" type="button" class="btn btn-success">Déposer une demande</button>
+
+            </div>
+            
+        </form>
+        <div class="moving-car-other"><img src=~/Images/EcoCarBig.png class="moving-car" /></div>
+        <div class="eco-store-other"><img src=~/Images/city.png class="eco-store" /></div>
+        <div class="eco-scape-other"><img src=~/Images/landcape2.png class="eco-scape" /></div>
+        <div class="eco-cloud-right-other"><img src=~/Images/clouds.png class="eco-cloud" /></div>
+        <div class="eco-cloud-left-other"><img src=~/Images/cloud2.png class="eco-cloud" /></div>
+    </div>
     <div class="main-layout">
         <!-- NavigationBar-->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-               @{
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @{
                         if (User.Identity.IsAuthenticated)
                         {
                             <a class="navbar-brand" href="/">Welcome Back Eco @User.Identity.Name</a>
@@ -43,120 +58,114 @@
                             <a class="navbar-brand" href="/">EcoHome</a>
                         }
                     }
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/Financial/EcoStore">ECOSTORE</a></li>
-                    <li><a href="#services">SERVICES</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
-                     
-                    
-                    @{
-                        if (User.Identity.IsAuthenticated)
-                        {
-                            <li><a href="/account/UserProfilePersonal">ECOCOMPTE</a></li>
-
-                            <li>
-                            
-                            
-                            <a href="/financial/ShoppingCart">MON PANIER</a>
-                           
-                            </li>
-
-                            <li>@Html.ActionLink("DECONNEXION", "SignOut", "Account")</li>
-                           
-                        }
-                        else
-                        {
-                            <li><a href="/account/LoginAccount">ECOCONNEXION</a></li>
-                        }
-                    }
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div id="main">
-        <div id="contenu">
-            @RenderBody()
-        </div>
-    </div>
-    <!-- Services Containers / link to services-->
-    <div id="services" class="container-fluid text-center bg-grey">
-        <h2>SERVICES</h2>
-        <br>
-        <div class="row">
-            <div class="col-sm-4">
-                <span class="glyphicon glyphicon-road logo-small"></span>
-                <h4><a href="/Service/SearchService" class="text-muted" target="_blank"><u>Covoiturage</u></a></h4>
-                <p>Envie d'aller quelquepart ?</p>
-            </div>
-            <div class="col-sm-4">
-                <span class="glyphicon glyphicon-barcode logo-small"></span>
-                <h4><a href="/Service/SearchService" class="text-muted" target="_blank"><u>Transport de Colis</u></a></h4>
-                <p>Besoin d'envoyer un colis ?</p>
-            </div>
-            <div class="col-sm-4">
-                <span class="glyphicon glyphicon-transfer logo-small"></span>
-                <h4><a href="/Service/SearchService" class="text-muted" target="_blank"><u>Location</u></a></h4>
-                <p>Il vous faut une voiture pour quelques jours ?</p>
-            </div>
-        </div>
-        <br><br>
-        <div class="row">
-            <div class="col-sm-4">
-                <span class="glyphicon glyphicon-shopping-cart logo-small"></span>
-                <h4><a href="/Financial/EcoStore" class="text-muted" target="_blank"><u>EcoStore Intégré</u></a></h4>
-                <p>Un système simple et efficace</p>
-            </div>
-            <div class="col-sm-4">
-                <span class="glyphicon glyphicon-piggy-bank logo-small"></span>
-                <h4><a href="/Financial/EcoStore" class="text-muted" target="_blank"><u>Monnaie Interne</u></a></h4>
-                <p>Valorisant la communauté</p>
-            </div>
-            <div class="col-sm-4">
-                <span class="glyphicon glyphicon-grain logo-small"></span>
-                <h4><a href="/Home/EcoCarValues" class="text-muted" target="_blank"><u>Eco-Responsabilité</u></a></h4>
-                <p>Vos valeurs sont nos valeurs</p>
-            </div>
-        </div>
-    </div>
-     <!--Contact Container-->
-    <div id="contact" class="container-fluid">
-        <h2 class="text-center">CONTACT</h2>
-        <div class="row">
-            <div class="col-sm-5">
-                <p>Contactez nous et nous vous répondrons dans les plus brefs délais</p>
-                <p><span class="glyphicon glyphicon-map-marker"></span> Salty place on earth, FR</p>
-                <p><span class="glyphicon glyphicon-phone"></span> +00 1515151515</p>
-                <p><span class="glyphicon glyphicon-envelope"></span> farah@salt.com</p>
-            </div>
-            <form action="mailto:someone@example.com" method="post" enctype="text/plain">
-            <div class="col-sm-7">
-                <div class="row">
-                    <div class="col-sm-6 form-group">
-                        <input class="form-control" id="name" name="name" placeholder="Nom" type="text" required>
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-                    </div>
                 </div>
-                <textarea class="form-control" id="comments" name="comments" placeholder="Contenu du message" rows="5" required></textarea><br>
-                <div class="row">
-                    <div class="col-sm-12 form-group">
-                        <button class="btn btn-default pull-right" type="submit">Envoyer</button>
-                    </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/Financial/EcoStore">ECOSTORE</a></li>
+                        <li><a href="#services">SERVICES</a></li>
+                        <li><a href="#contact">CONTACT</a></li>
+
+
+                        @{
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                <li><a href="/account/UserProfilePersonal">ECOCOMPTE</a></li>
+
+                                <li>
+
+
+                                    <a href="/financial/ShoppingCart">MON PANIER</a>
+
+                                </li>
+
+                                <li>@Html.ActionLink("DECONNEXION", "SignOut", "Account")</li>
+
+                            }
+                            else
+                            {
+                                <li><a href="/account/LoginAccount">ECOCONNEXION</a></li>
+                            }
+                        }
+                    </ul>
                 </div>
             </div>
-            </form>
+        </nav>
+        <div id="main">
+            <div id="contenu">
+                @RenderBody()
+            </div>
         </div>
-    </div>
+        <!-- Services Containers / link to services-->
+        <div id="services" class="container-fluid text-center bg-grey">
+            <h2>SERVICES</h2>
+            <br>
+            <div class="row">
+                <div class="col-sm-4">
+                     <a href="/Service/SearchService"><span class="glyphicon glyphicon-road logo-small"></span></a>
+                    <p>Envie d'aller quelquepart ?</p>
+                </div>
+                <div class="col-sm-4">
+                    <a href="/Service/SearchService"><span class="glyphicon glyphicon-barcode logo-small"></span></a>
+                    <p>Besoin d'envoyer un colis ?</p>
+                </div>
+                <div class="col-sm-4">
+                    <a href="/Service/SearchService"><span class="glyphicon glyphicon-transfer logo-small"></span></a>
+                    <p>Il vous faut une voiture pour quelques jours ?</p>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="/Financial/EcoStore"><span class="glyphicon glyphicon-shopping-cart logo-small"></span></a>
+                    <p>Un système simple et efficace</p>
+                </div>
+                <div class="col-sm-4">
+                     <a href="/Financial/EcoStore"><span class="glyphicon glyphicon-piggy-bank logo-small"></span></a>
+                    <p>Valorisant la communauté</p>
+                </div>
+                <div class="col-sm-4">
+                    <a href="/Home/EcoCarValues"><span class="glyphicon glyphicon-grain logo-small"></span></a>
+                    <p>Vos valeurs sont nos valeurs</p>
+                </div>
+            </div>
+        </div>
+        <!--Contact Container-->
+        <div id="contact" class="container-fluid">
+            <h2 class="text-center">CONTACT</h2>
+            <div class="row">
+                <div class="col-sm-5">
+                    <p>Contactez nous et nous vous répondrons dans les plus brefs délais</p>
+                    <p><span class="glyphicon glyphicon-map-marker"></span> Salty place on earth, FR</p>
+                    <p><span class="glyphicon glyphicon-phone"></span> +00 1515151515</p>
+                    <p><span class="glyphicon glyphicon-envelope"></span> farah@salt.com</p>
+                </div>
+                <form action="mailto:someone@example.com" method="post" enctype="text/plain">
+                    <div class="col-sm-7">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <input class="form-control" id="name" name="name" placeholder="Nom" type="text" required>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                            </div>
+                        </div>
+                        <textarea class="form-control" id="comments" name="comments" placeholder="Contenu du message" rows="5" required></textarea><br>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <button class="btn btn-default pull-right" type="submit">Envoyer</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <footer class="container-fluid text-center">
-            <a href="#EcoCarPage" title="To Top">
-                <span class="glyphicon glyphicon-chevron-up"></span>
-            </a>
-            <p>EcoCar WIP <a href="https://github.com/Farah404/EcoCar">GitHub</a></p>
-        </footer>
+        <a href="#EcoCarPage" title="To Top">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a>
+        <p>EcoCar WIP <a href="https://github.com/Farah404/EcoCar">GitHub</a></p>
+    </footer>
     <!-- SmoothScrolling implement-->
     <script>
         $(document).ready(function() {
@@ -189,6 +198,6 @@
                 }
             });
         });
-</script>
+    </script>
 </body>
 </html>

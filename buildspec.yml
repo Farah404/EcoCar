@@ -1,0 +1,19 @@
+version: 0.2
+run-as: root
+artifacts:
+  files:
+    - '.aws/*'
+    - 'appspec.yml'
+    - 'my-website/**/*'
+phases:
+    install:
+        runtime-versions:
+            dotnet: 3.1
+        commands:
+        - ls -hal
+    build:
+        commands:
+        # replace connection string in appsettings.json
+        - find . -type f -name "appsettings.json" -print0 | xargs -0 sed -i -e "s|{cs}|$CS|g"
+        # MakeFile build (dotnet publish)
+        - make build

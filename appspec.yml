@@ -1,0 +1,9 @@
+version: 0.0 
+os: linux 
+files: 
+  - source: my-website 
+    destination: /var/www/my-temp-dir/
+hooks:
+  ApplicationStart:
+    - location: .aws/stopApplication.sh
+    - location: .aws/startApplication.sh 

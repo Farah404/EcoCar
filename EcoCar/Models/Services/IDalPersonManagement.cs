@@ -1,6 +1,7 @@
 ﻿using EcoCar.Models.PersonManagement;
 using System;
 using System.Collections.Generic;
+using static EcoCar.Models.PersonManagement.User;
 
 namespace EcoCar.Models.Services
 {
@@ -8,66 +9,60 @@ namespace EcoCar.Models.Services
     {
         //Person
         List<Person> GetAllPeople();
-        int CreatePerson(string name, string lastName, string profilePictureURL);
-        void UpdatePerson(int id, string name, string lastName, string profilePictureURL);
-        void DeletePerson (int id);
+        int CreatePerson(string name, string lastName);
+        void UpdatePerson(int id, string name, string lastName, string ProfilePicturePath);
+        void DeletePerson(int id);
 
         //-------------------------------------------------------------------------------------------------
 
         //User
         List<User> GetAllUsers();
-        int CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber);
-        void UpdateUser(int id, string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber);
+        User GetUser(int id);
+        User GetUserByEmail(string email);
+        int CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, double userRating, EcoStatusType selectEcoStatusType, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId, int? ecoWalletId, int? shoppingCartId, int? accountId);
+        void UpdateUser(int id, string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId, int? ecoWalletId, int? shoppingCartId, int? accountId);
         void DeleteUser(int id);
+        //void UpdateUserVehicule(int userId, int vehiculeId);
 
         //-------------------------------------------------------------------------------------------------
 
         //Administrator
         List<Administrator> GetAllAdministrators();
-        int CreateAdministrator(string emailPro, int phoneNumberPro);
-        void UpdateAdministrator(int id, string emailPro, int phoneNumberPro);
+        int CreateAdministrator(string username, string password, string emailPro, int phoneNumberPro, string employeeCode);
+        void UpdateAdministrator(int id, string username, string password, string emailPro, int phoneNumberPro, string employeeCode);
         void DeleteAdministrator(int id);
+        Administrator AuthentifyAdministrator(string username, string passwordClear);
+        Administrator GetAdministrator(int id);
+        Administrator GetAdministrator(string idStr);
 
         //-------------------------------------------------------------------------------------------------
 
         //Account
         List<Account> GetAllAccounts();
-        int CreateAccount(string username, string password, bool isActive);
-        void UpdateAccount(int id, string username, string password, bool isActive);
+        int CreateAccount(string username, string password, bool isActive, DateTime creationDate, DateTime lastLoginDate);
+        void UpdateAccount(int id, string username, string password, bool isActive, DateTime lastLoginDate);
+        void UpdateAccountPassword(int id, string password);
         void DeleteAccount(int id);
-
-        //-------------------------------------------------------------------------------------------------
-
-        //AccountUser
-        List<AccountUser> GetAllAccountUsers();
-        int CreateAccountUser(double userRating, int EcoStatusId);
-        void UpdateAccountUser(int id, double userRating, int EcoStatusIds);
-        void DeleteAccountUser(int id);
-
         Account Authentify(string username, string passwordClear);
         Account GetAccount(int id);
         Account GetAccount(string idStr);
+        Account GetUserAccount(int id);
 
         //-------------------------------------------------------------------------------------------------
 
-        //AccountAdministrator
-        List<AccountAdministrator> GetAllAccountAdministrators();
-        int CreateAccountAdministrator(string employeeCode);
-        void UpdateAccountAdministrator(int id, string employeeCode);
-        void DeleteAccountAdministrator(int id);
-
-        //-------------------------------------------------------------------------------------------------
 
         //Vehicule
         List<Vehicule> GetAllVehicules();
-        int CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats);
-        void UpdateVehicule(int id, string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats);
+        Vehicule GetUserVehicule(int id);
+        int CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId);
+        void UpdateVehicule(int id, string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId);
         void DeleteVehicule(int id);
 
         //-------------------------------------------------------------------------------------------------
 
         //Insurance
         List<Insurance> GetAllInsurances();
+        Insurance GetInsurance(int id);
         int CreateInsurance(string insuranceAgency, DateTime insuranceExpiration, string contractNumber);
         void UpdateInsurance(int id, string insuranceAgency, DateTime insuranceExpiration, string contractNumber);
         void DeleteInsurance(int id);

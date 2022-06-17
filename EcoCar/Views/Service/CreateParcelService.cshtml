@@ -1,0 +1,72 @@
+﻿@model EcoCar.Models.ServiceManagement.ParcelService
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Proposer un transport de colis";
+}
+
+
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Proposer un service: Colis</h4>
+
+                @using (Html.BeginForm())
+                {
+                    <div class="form-floating mb-3">
+                        @Html.Label("Code barre") <br>
+                        @Html.EditorFor(model => model.BarCode, new { htmlAttributes = new { @class = "form-control",@id="codeBar",@readonly = true, style="width:300px"}})
+                        <br>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        @Html.Label("Poids en kilogrammes") <br>
+                        @Html.EditorFor(model => model.WeightKilogrammes, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.WeightKilogrammes)
+                        <br>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        @Html.CheckBoxFor(model => model.AtypicalVolume, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.Label("Forme Atypique")
+                        @Html.ValidationMessageFor(model => model.AtypicalVolume)
+                        <br>
+                    </div>
+
+                    <div class="form-floating mb-3">
+
+                        @Html.CheckBoxFor(model => model.Fragile, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.Label("Fragile")
+                        @Html.ValidationMessageFor(model => model.Fragile)
+                        <br>
+                    </div>
+
+                    @Html.HiddenFor(model => model.ServiceId)
+                    @Html.HiddenFor(model => model.TrajectoryId)
+                    @Html.HiddenFor(model => model.VehiculeId)
+                    <br>
+                    <button class="btn btn-success" type="submit">Soumettre</button>
+                }
+
+            </div>
+            <div class="col-md-6">
+                <img style="width:400px;" title="" src="~/Images/Parcels.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function randomNumber(len) {
+  var randomNumber;
+  var n = '';
+
+  for (var count = 0; count < len; count++) {
+    randomNumber = Math.floor(Math.random() * 10);
+    n += randomNumber.toString();
+  }
+  return n;
+}
+
+document.getElementById("codeBar").value = randomNumber(9);
+</script>

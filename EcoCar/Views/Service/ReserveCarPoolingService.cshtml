@@ -1,0 +1,190 @@
+﻿@using static EcoCar.Models.ServiceManagement.CarPoolingService
+
+@model EcoCar.ViewModels.ServiceViewModel
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Reserver une prestation de covoiturage";
+}
+<!--Add a form with an input field and a button-->
+
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+
+            @*Profile picture Part with buttons*@
+            <div class="col-md-4">
+                <img alt="" style="width:100%;" class=" img-thumbnail" src="~/Images/Covoit.png">
+
+                @using (Html.BeginForm())
+                {
+                    <br>
+                    <button class="btn btn-success center-block" type="submit">Réserver la prestation pour @Model.CarPoolingService.Service.PriceEcoCoins EcoCoins</button>
+
+                }
+                <br />
+                <button onclick="location.href='/Account/UserProfile/@Model.CarPoolingService.Service.UserProviderId'" class="btn btn-success center-block">Profil de l'EcoMembre prestataire</button>
+            </div>
+
+
+
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    @*Information*@
+                    <span class="text-success"><strong>Information</strong><br></span>
+                    <table class="table table-user-information">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-play  text-success"></span>
+                                    Date et heure de départ
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.Service.Start</p>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-stop  text-success"></span>
+                                    Date et heure de d'arrivée
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.Service.End</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-road  text-success"></span>
+                                    Type de covoiturage
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.SelectCarPoolingType</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-user text-success"></span>
+                                    Sièges disponibles
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.AvailableSeats</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-hourglass text-success"></span>
+                                    Durée du trajet en heure
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.Trajectory.DurationHours</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-pause text-success"></span>
+                                    Nombre d'arrêts
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.Trajectory.StopNumber</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-time text-success"></span>
+                                    Durée d'arrêt en minutes
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.Trajectory.StopsDurationMinutes</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-up text-success"></span>
+                                    Adresse de départ
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.Trajectory.PickUpAddress</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down text-success"></span>
+                                    Adresse d'arrivée
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.Trajectory.DeliveryAddress</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-resize-small text-success"></span>
+                                    Type du trajet
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.Trajectory.SelectTrajectoryType</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    @*Preferences*@
+                    <span class="text-success"><strong>Preferences</strong><br></span>
+                    <table class="table table-user-information">
+                        <tbody>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-heart  text-success"></span>
+                                    Animaux de compagnie
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.PetsAllowed</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-fire text-success"></span>
+                                    Fumeur
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.SmokingAllowed</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-headphones text-success"></span>
+                                    Musique
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.MusicAllowed</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-bullhorn text-success"></span>
+                                    Discussion
+                                </td>
+                                <td class="text-success">
+                                    <p>@Model.CarPoolingService.ChattingAllowed</p>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

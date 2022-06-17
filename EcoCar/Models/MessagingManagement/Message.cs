@@ -1,4 +1,7 @@
-﻿namespace EcoCar.Models.MessagingManagement
+﻿//Class Description
+//The Message.cs represents a dialogue between two users
+
+namespace EcoCar.Models.MessagingManagement
 {
     public class Message
     {
@@ -7,9 +10,5 @@
 
         //Attributes
         public string MessageContent { get; set; }
-
-        //Foreign Keys
-
-        //Inheritance Class
     }
 }

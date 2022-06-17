@@ -11,36 +11,35 @@ namespace EcoCar.Models.FinancialManagement
         public int Id { get; set; }
 
         //Attributes
-        //Purchase Type
-        [Required]
-        public virtual int PurchaseId
-        {
-            get
-            {
-                return (int)this.Purchase;
-            }
-            set
-            {
-                Purchase = (PurchaseType)value;
-            }
-        }
-        [EnumDataType(typeof(PurchaseType))]
-        public PurchaseType Purchase { get; set; } 
-        public enum PurchaseType
-        {
-            EcoCoinsBatchOne = 0,
-            EcoCoinsBatchTwo = 1,
-            EcoCoinsBatchThree = 2,
-            MonthlySubscription = 3,
-            TrimestrialSubscription = 4,
-            SemestrialSubscription = 5
-        }
+        public string NameOne { get; set; }
+        public string NameTwo { get; set; }
+        public string NameThree { get; set; }
+        public string NameMonth { get; set; }
+        public string NameTrimester { get; set; }
+        public string NameSemester { get; set; }
+
         public double EcoCoinsBatchOnePrice { get; set; }
+        public int EcoCoinsBatchOne { get; set; }
+
+
         public double EcoCoinsBatchTwoPrice { get; set; }
+        public int EcoCoinsBatchTwo { get; set; }
+
+
         public double EcoCoinsBatchThreePrice { get; set; }
+        public int EcoCoinsBatchThree { get; set; }
+
+
         public double MonthlySubscriptionPrice { get; set; }
+        public int MonthlySubscription { get; set; }
+
+
         public double TrimestrialSubscriptionPrice { get; set; }
+        public int TrimestrialSubscription { get; set; }
+
+
         public double SemestrialSubscriptionPrice { get; set; }
+        public int SemestrialSubscription { get; set; }
 
 
 

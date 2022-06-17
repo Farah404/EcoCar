@@ -1,0 +1,81 @@
+﻿@model EcoCar.Models.PersonManagement.User
+@{
+    Layout = "/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Création de compte EcoCar";
+}
+<section class="sign-in-form" style="background-color: white;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+                <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+                        <div class="col-lg-4">
+                            <div class="card-body p-md-5 mx-md-4">
+                                <div class="text-center">
+                                    <img src="~/Images/EcoCar.png"
+                                         style="width: 185px;" alt="logo">
+                                    <h4 class="mt-1 mb-5 pb-1">Je crée mon compte EcoCar</h4>
+                                </div>
+
+                                @using (Html.BeginForm())
+                                {
+                                    <div class="form-outline mb-4">
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Courriel" })
+                                        @Html.ValidationMessageFor(model => model.Email)
+                                    </div>
+                                    <br>
+                                    <div class="form-outline mb-4">
+                                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control",placeholder = "Date de naissance" } })
+                                        @Html.ValidationMessageFor(model => model.BirthDate)
+
+                                    </div>
+                                    <br>
+                                    <div class="form-outline mb-4">
+                                        @Html.TextBoxFor(model => model.IdentityCardNumber, new { @class = "form-control", placeholder = "Numéro de carte d'identité" })
+                                        @Html.ValidationMessageFor(model => model.IdentityCardNumber)
+                                    </div>
+                                    <br>
+                                    <div class="form-outline mb-4">
+                                        @Html.TextBoxFor(model => model.DrivingPermitNumber, new { @class = "form-control", placeholder = "Numéro de permis de conduire" })
+                                        @Html.ValidationMessageFor(model => model.DrivingPermitNumber)
+                                    </div>
+                                    <br>
+                                    <div class="form-outline mb-4">
+                                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Numéro de téléphone" })
+                                        @Html.ValidationMessageFor(model => model.PhoneNumber)
+                                    </div>
+                                    <br>
+
+                                    @Html.HiddenFor(model => model.BankDetailsId)
+                                    @Html.HiddenFor(model => model.BillingAddressId)
+                                    @Html.HiddenFor(model => model.PersonId)
+
+                                    <button class="btn btn-success btn-xl" type="submit">Suivant</button>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                <div class="verticalcenter">
+                                 <img src=~/Images/CityEcoCar.png width="120%" />
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+<br />
+<br />
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+        });
+    });
+</script>

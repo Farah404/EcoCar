@@ -1,0 +1,123 @@
+﻿@using static EcoCar.Models.ServiceManagement.ParcelService
+
+@model EcoCar.ViewModels.ServiceViewModel
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Répondre à une demande de transport de colis";
+}
+<!--Add a form with an input field and a button-->
+
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+
+            @*Profile picture Part with buttons*@
+            <div class="col-md-4">
+                <img alt="" style="width:100%;" class=" img-thumbnail" src="~/Images/ParcelDelivery.png">
+
+                @using (Html.BeginForm())
+                {
+                    <br>
+
+                    <button class="btn btn-success center-block" type="submit">Répondre à la prestation et gagner @Model.ParcelService.Service.PriceEcoCoins EcoCoins</button>
+                }
+                <br />
+                    <button onclick="location.href='/Account/UserProfile/@Model.ParcelService.Service.UserProviderId'" class="btn btn-success center-block">Profil de l'EcoMembre prestataire</button>
+            </div>
+
+
+
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    @*Information*@
+                    <span class="text-success"><strong>Information</strong><br></span>
+                    <table class="table table-user-information">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-play  text-success"></span>
+                                    Date et heure de départ
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.ParcelService.Service.Start</p>
+                                </td>
+                            </tr>
+                            <tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-stop  text-success"></span>
+                                    Date et heure de d'arrivée'
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.ParcelService.Service.End</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-barcode  text-success"></span>
+                                    Code barre
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.ParcelService.BarCode</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-dashboard text-success"></span>
+                                    Poids en kilogrammes
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.ParcelService.WeightKilogrammes</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-cloud text-success"></span>
+                                    Forme atypique
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.ParcelService.AtypicalVolume</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-flash text-success"></span>
+                                    Fragile
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.ParcelService.Fragile</p>
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-up text-success"></span>
+                                    Adresse de départ
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.ParcelService.Trajectory.PickUpAddress</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down text-success"></span>
+                                    Adresse d'arrivée
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.ParcelService.Trajectory.DeliveryAddress</p>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

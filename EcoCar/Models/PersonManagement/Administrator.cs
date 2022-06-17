@@ -10,12 +10,12 @@ namespace EcoCar.Models.PersonManagement
         public int Id { get; set; }
 
         //Attributes
-        public int PhoneNumberPro { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
         public string EmailPro { get; set; }
+        public int PhoneNumberPro { get; set; }
+        public string EmployeeCode { get; set; }
 
-        //Inheritance Class
-        public int PersonId { get; set; }
-        public Person Person { get; set; }
 
     }
 }

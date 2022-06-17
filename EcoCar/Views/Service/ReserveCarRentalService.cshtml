@@ -1,0 +1,129 @@
+﻿@using static EcoCar.Models.ServiceManagement.CarRentalService
+
+@model EcoCar.ViewModels.ServiceViewModel
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Reserver une prestation de location de véhicule";
+}
+<!--Add a form with an input field and a button-->
+
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+
+            @*Profile picture Part with buttons*@
+            <div class="col-md-4">
+                <img alt="" style="width:100%;" class=" img-thumbnail" src="~/Images/CarRental.png">
+
+                @using (Html.BeginForm())
+                {
+                    <br>
+
+                    <button class="btn btn-success center-block" type="submit">Réserver la prestation pour @Model.CarRentalService.Service.PriceEcoCoins EcoCoins</button>
+                }
+                <br />
+                    <button onclick="location.href='/Account/UserProfile/@Model.CarRentalService.Service.UserProviderId'" class="btn btn-success center-block">Profil de l'EcoMembre prestataire</button>
+            </div>
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    @*Information*@
+                    <span class="text-success"><strong>Information</strong><br></span>
+                    <table class="table table-user-information">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-play  text-success"></span>
+                                    Date et heure de départ
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.CarRentalService.Service.Start</p>
+                                </td>
+                            </tr>
+                            <tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-stop  text-success"></span>
+                                    Date et heure de d'arrivée
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.CarRentalService.Service.End</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-up  text-success"></span>
+                                    KeyPickUpAddress
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.CarRentalService.KeyPickUpAddress</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-up text-success"></span>
+                                    KeyDropOffAddress
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.CarRentalService.KeyDropOffAddress</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-tags text-success"></span>
+                                    Vehicule.Brand
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.CarRentalService.Vehicule.Brand</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-star text-success"></span>
+                                    Vehicule.Model
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.CarRentalService.Vehicule.Model</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-cog text-success"></span>
+                                    Vehicule.Hybrid
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.CarRentalService.Vehicule.Hybrid</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-flash text-success"></span>
+                                    Vehicule.Electric
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.CarRentalService.Vehicule.Electric</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-user text-success"></span>
+                                    Vehicule.AvailableSeats
+                                </td>
+                                <td class="text-success">
+                                        <p>@Model.CarRentalService.Vehicule.AvailableSeats</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

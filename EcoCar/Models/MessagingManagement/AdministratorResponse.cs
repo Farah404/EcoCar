@@ -1,4 +1,7 @@
-﻿using EcoCar.Models.PersonManagement;
+﻿//Class Description
+//The AdministratorResponse.cs contains the response of an administrator to a user help message concerning the website or their desire to report another user 
+
+using EcoCar.Models.PersonManagement;
 
 namespace EcoCar.Models.MessagingManagement
 {
@@ -17,7 +20,5 @@ namespace EcoCar.Models.MessagingManagement
         public User User { get; set; }
         public int AdministratorId { get; set; }
         public Administrator Administrator { get; set; }
-
-        //Inheritance Class
     }
 }

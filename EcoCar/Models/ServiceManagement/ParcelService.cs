@@ -1,4 +1,4 @@
-﻿//ClassDescription
+﻿using EcoCar.Models.PersonManagement;
 
 namespace EcoCar.Models.ServiceManagement
 {
@@ -16,6 +16,8 @@ namespace EcoCar.Models.ServiceManagement
         //Foreign Keys
         public int TrajectoryId { get; set; }
         public Trajectory Trajectory { get; set; }
+        public int VehiculeId { get; set; }
+        public Vehicule Vehicule { get; set; }
 
 
         //Inheritance Class

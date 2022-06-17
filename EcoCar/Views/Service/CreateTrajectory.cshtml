@@ -1,0 +1,65 @@
+﻿@using static EcoCar.Models.ServiceManagement.Trajectory
+@model EcoCar.Models.ServiceManagement.Trajectory
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Définition des caractéristiques du trajet";
+}
+
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Proposer un service: le trajet</h4>
+
+                @using (Html.BeginForm())
+                {
+                    <div class="form-floating mb-3">
+                    @Html.Label("Durée approximative en heures")<br>
+                    @Html.EditorFor(model => model.DurationHours, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.DurationHours)
+                    <br></div>
+
+                    <div class="form-floating mb-3">
+                    @Html.Label("Nombre d'arrêts prévus") <br>
+                    @Html.EditorFor(model => model.StopNumber, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.StopNumber)
+                    <br></div>
+
+                    <div class="form-floating mb-3">
+                    @Html.Label("Durée approximative d'un arrêt en minutes") <br>
+                    @Html.EditorFor(model => model.StopsDurationMinutes, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.StopsDurationMinutes)
+                    <br></div>
+
+                    <div class="form-floating mb-3">
+                    @Html.Label("Adresse de départ") <br>
+                    @Html.EditorFor(model => model.PickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.PickUpAddress)
+                    <br></div>
+
+                    <div class="form-floating mb-3">
+                    @Html.Label("Adresse d'arrivée") <br>
+                    @Html.EditorFor(model => model.DeliveryAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.DeliveryAddress)
+                    <br></div>
+
+                    <div class="form-floating mb-3">
+                    @Html.Label("Nature du trajet") <br>
+                    @Html.DropDownListFor(model => model.SelectTrajectoryType, new SelectList(Enum.GetValues(typeof(TrajectoryType))),"--Selectionnez le type de trajet--")
+                    @Html.ValidationMessageFor(model => model.SelectTrajectoryType)
+                    <br></div>
+
+                    @Html.HiddenFor(model => model.ItineraryId)
+
+                    <br>
+                    <button class="btn btn-success" type="submit">Suivant</button>
+                }
+
+            </div>
+            
+            <div class="col-md-6">
+                <img alt="" style="width:80%;" title="" src="~/Images/Itinerary.png">
+            </div>
+        </div>
+    </div>
+</div>

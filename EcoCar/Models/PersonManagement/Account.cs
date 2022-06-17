@@ -1,6 +1,8 @@
 ﻿//Class Description
 //The Account.cs is the parent class of AccountUser.cs and AccountAdministrator.cs
 
+using System;
+
 namespace EcoCar.Models.PersonManagement
 {
     public class Account
@@ -12,10 +14,8 @@ namespace EcoCar.Models.PersonManagement
         public string Username { get; set; }
         public string Password { get; set; }
         public bool IsActive { get; set; }
-
-        //Foreign Key
-        public int? PersonId { get; set; }
-        public Person Person { get; set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastLoginDate { get; set; }
 
     }
 }

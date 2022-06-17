@@ -10,9 +10,5 @@
         public string SecondStopAddress { get; set; }
         public string ThirdStopAddress { get; set; }
 
-        //Foreign Keys
-
-        //Inheritance Class
-
     }
 }

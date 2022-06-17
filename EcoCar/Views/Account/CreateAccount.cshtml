@@ -1,0 +1,91 @@
+﻿@model EcoCar.Models.PersonManagement.Account
+@{
+    Layout = "/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Création de compte EcoCar";
+}
+<section class="sign-in-form" style="background-color: white;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+                <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+                        <div class="col-lg-4">
+                            <div class="card-body p-md-5 mx-md-4">
+                                <div class="text-center">
+                                    <img src="~/Images/EcoCar.png"
+                                         style="width: 185px;" alt="logo">
+                                    <h4 class="mt-1 mb-5 pb-1">Je crée mon compte EcoCar</h4>
+                                </div>
+                                @using (Html.BeginForm())
+                                {
+                                    <div class="form-floating mb-3">
+                                        @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Nom d'utilisateur",required="required" })
+                                        @Html.ValidationMessageFor(model => model.Username)
+                                    </div>
+                                    <br />
+                                    <div class="form-floating mb-3">
+                                        @Html.TextBoxFor(model => model.Password, new { @type = "password", @class = "form-control",@id="password", placeholder = "Mot de passe",required="required"  })
+                                        @Html.ValidationMessageFor(model => model.Password)
+
+                                    </div>
+                                    <br />
+                                    <div class="form-floating mb-3">
+                                        <input type="password" class="form-control" placeholder="Confirmez votre mot de passe" id="confirm_password" required>
+                                    </div>
+
+
+
+                                    <br />
+                                    @Html.HiddenFor(model=>model.CreationDate, new{ @class = "form-control",@id="currentDate",style="width:300px"})
+                                    @Html.HiddenFor(model=>model.LastLoginDate, new{ @class = "form-control",style="width:300px"})
+
+                                    @Html.Hidden("userId", @ViewBag.userId, null)
+                                    <!-- Submit Button-->
+                                    <button class="btn btn-success btn-xl" type="submit">Créer mon EcoCompte</button>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                <div class="verticalcenter">
+                                    <img src=~/Images/CityEcoCar.png width="120%" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+<br />
+<br />
+
+<script>
+    var today = new Date();
+    var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+    document.getElementById("currentDate").value = date;
+    $(document).ready(function() {
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+        });
+    });
+
+
+    var password = document.getElementById("password")
+        , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Les mots de passe ne sont pas identiques");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
+

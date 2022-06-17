@@ -1,10 +1,13 @@
 ﻿using EcoCar.Models.DataBase;
 using EcoCar.Models.PersonManagement;
+using EcoCar.Models.FinancialManagement;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using XSystem.Security.Cryptography;
+using static EcoCar.Models.PersonManagement.User;
 
 namespace EcoCar.Models.Services
 {
@@ -16,26 +19,27 @@ namespace EcoCar.Models.Services
             _bddContext = new BddContext();
         }
 
+        public void Dispose()
+        {
+            _bddContext.Dispose();
+        }
+
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Person
+        #region CRUD Person
+
         public List<Person> GetAllPeople()
         {
             return _bddContext.People.ToList();
         }
 
         //Create Person
-        public int CreatePerson(string name, string lastName, string profilePictureURL)
+        public int CreatePerson(string name, string lastName)
         {
-            Person person = new Person() { Name = name, LastName = lastName, ProfilePictureURL = profilePictureURL };
+            Person person = new Person() { Name = name, LastName = lastName };
             _bddContext.People.Add(person);
             _bddContext.SaveChanges();
             return person.Id;
-        }
-
-        internal Account GetAllAccounts(string name)
-        {
-            throw new NotImplementedException();
         }
 
         public void CreatePerson(Person person)
@@ -45,7 +49,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update Person
-        public void UpdatePerson(int id, string name, string lastName, string profilePictureURL)
+        public void UpdatePerson(int id, string name, string lastName, string profilePicturePath)
         {
             Person person = _bddContext.People.Find(id);
 
@@ -54,7 +58,7 @@ namespace EcoCar.Models.Services
                 person.Id = id;
                 person.Name = name;
                 person.LastName = lastName;
-                person.ProfilePictureURL = profilePictureURL;
+                person.ProfilePicturePath = profilePicturePath;
                 _bddContext.SaveChanges();
             }
         }
@@ -75,19 +79,63 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD User
+        # region CRUD User
         public List<User> GetAllUsers()
         {
-            return _bddContext.Users.ToList();
+            List<User> listUsers = _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).Include(e => e.Account).Include(e => e.Vehicule).Include(e => e.EcoWallet).Include(e => e.ShoppingCart).ToList();
+            return listUsers;
+        }
+
+        public User GetUser(int id)
+        {
+            return _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).Include(e => e.Account).Include(e => e.Vehicule).Include(e => e.EcoWallet).Include(e => e.ShoppingCart).FirstOrDefault(e => e.Id == id);
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            User user = _bddContext.Users.Include(e => e.BankDetails).Include(e => e.BillingAddress).Include(e => e.Person).Include(e => e.Account).Include(e => e.Vehicule).Include(e => e.EcoWallet).Include(e => e.ShoppingCart).FirstOrDefault(e => e.Email == email);
+            return user;
         }
 
         //Create User
-        public int CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber)
+        public int CreateUser(
+            string email,
+            DateTime birthDate,
+            int phoneNumber,
+            int identityCardNumber,
+            int drivingPermitNumber,
+            double userRating,
+            EcoStatusType selectEcoStatusType,
+            int bankDetailsId,
+            int billingAddressId,
+            int personId,
+            int? vehiculeId,
+            int? ecoWalletId,
+            int? shoppingCartId,
+            int? accountId
+            )
         {
-            User user = new User() { Email = email, BirthDate = birthDate, PhoneNumber = phoneNumber, IdentityCardNumber = identityCardNumber, DrivingPermitNumber = drivingPermitNumber};
+            User user = new User()
+            {
+                Email = email,
+                BirthDate = birthDate,
+                PhoneNumber = phoneNumber,
+                IdentityCardNumber = identityCardNumber,
+                DrivingPermitNumber = drivingPermitNumber,
+                UserRating = userRating,
+                SelectEcoStatusType = 0,
+                BankDetails = _bddContext.BankingDetails.First(b => b.Id == bankDetailsId),
+                BillingAddress = _bddContext.BillingAddresses.First(b => b.Id == billingAddressId),
+                Person = _bddContext.People.First(b => b.Id == personId),
+                Vehicule = _bddContext.Vehicules.FirstOrDefault(b => b.Id == vehiculeId),
+                EcoWallet = _bddContext.EcoWallets.FirstOrDefault(b => b.Id == ecoWalletId),
+                ShoppingCart = _bddContext.ShoppingCarts.FirstOrDefault(b => b.Id == shoppingCartId),
+                Account = _bddContext.Accounts.FirstOrDefault(b => b.Id == accountId)
+            };
             _bddContext.Users.Add(user);
             _bddContext.SaveChanges();
             return user.Id;
@@ -99,18 +147,41 @@ namespace EcoCar.Models.Services
         }
 
         //Update User
-        public void UpdateUser(int id, string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber)
-        {
-            User user = _bddContext.Users.Find(id);
+        public void UpdateUser(
+            int id,
+             string email,
+            DateTime birthDate,
+            int phoneNumber,
+            int identityCardNumber,
+            int drivingPermitNumber,
+            int bankDetailsId,
+            int billingAddressId,
+            int personId,
+            int? vehiculeId,
+            int? ecoWalletId,
+            int? shoppingcartId,
+            int? accountId
 
-            if (user != null)
+            )
+        {
+
+            User userToUpdate = _bddContext.Users.Find(id);
+
+            if (userToUpdate != null)
             {
-                user.Id = id;
-                user.Email = email;
-                user.BirthDate = birthDate;
-                user.PhoneNumber = phoneNumber;
-                user.IdentityCardNumber = identityCardNumber;
-                user.DrivingPermitNumber = drivingPermitNumber;
+                userToUpdate.Id = id;
+                userToUpdate.Email = email;
+                userToUpdate.BirthDate = birthDate;
+                userToUpdate.PhoneNumber = phoneNumber;
+                userToUpdate.IdentityCardNumber = identityCardNumber;
+                userToUpdate.DrivingPermitNumber = drivingPermitNumber;
+                userToUpdate.BankDetails = _bddContext.BankingDetails.FirstOrDefault(b => b.Id == bankDetailsId);
+                userToUpdate.BillingAddress = _bddContext.BillingAddresses.FirstOrDefault(b => b.Id == billingAddressId);
+                userToUpdate.Person = _bddContext.People.FirstOrDefault(b => b.Id == personId);
+                userToUpdate.Vehicule = _bddContext.Vehicules.FirstOrDefault(b => b.Id == vehiculeId);
+                userToUpdate.EcoWallet = _bddContext.EcoWallets.FirstOrDefault(b => b.Id == ecoWalletId);
+                userToUpdate.ShoppingCart = _bddContext.ShoppingCarts.FirstOrDefault(b => b.Id == shoppingcartId);
+                userToUpdate.Account = _bddContext.Accounts.FirstOrDefault(b => b.Id == accountId);
                 _bddContext.SaveChanges();
             }
         }
@@ -120,6 +191,17 @@ namespace EcoCar.Models.Services
             _bddContext.SaveChanges();
         }
 
+        //public void UpdateUserVehicule(int userId, int vehiculeId)
+        //{
+        //    User userToUpdateVehicule = _bddContext.Users.Find(userId);
+
+        //    if (userToUpdateVehicule != null)
+        //    {
+        //        userToUpdateVehicule.Id = userId;
+        //        userToUpdateVehicule.Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId);
+        //        _bddContext.SaveChanges();
+        //    }
+        //}
         //Delete User
         public void DeleteUser(int id)
         {
@@ -131,19 +213,50 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Administrator
+        # region CRUD Administrator
         public List<Administrator> GetAllAdministrators()
         {
             return _bddContext.Administrators.ToList();
         }
 
-        //Create Administrator
-        public int CreateAdministrator(string emailPro, int phoneNumberPro)
+        public Administrator GetAdministrator(int id)
         {
-            Administrator administrator = new Administrator() {EmailPro = emailPro, PhoneNumberPro = phoneNumberPro};
+            return _bddContext.Administrators.FirstOrDefault(e => e.Id == id);
+        }
+
+        public Administrator GetAdministrator(string idStr)
+        {
+            int id;
+            if (int.TryParse(idStr, out id))
+            {
+                return this.GetAdministrator(id);
+            }
+            return null;
+        }
+
+        public Administrator AuthentifyAdministrator(string username, string passwordClear)
+        {
+            string password = EncodeMD5(passwordClear);
+            Administrator administrator = this._bddContext.Administrators.FirstOrDefault(a => a.Username == username && a.Password == password);
+            return administrator;
+        }
+
+        //Create Administrator
+        public int CreateAdministrator(string username, string passwordClear, string emailPro, int phoneNumberPro, string employeeCode)
+        {
+            string password = EncodeMD5(passwordClear);
+            Administrator administrator = new Administrator()
+            {
+                Username = username,
+                Password = passwordClear,
+                EmailPro = emailPro,
+                PhoneNumberPro = phoneNumberPro,
+                EmployeeCode = employeeCode
+            };
             _bddContext.Administrators.Add(administrator);
             _bddContext.SaveChanges();
             return administrator.Id;
@@ -155,15 +268,18 @@ namespace EcoCar.Models.Services
         }
 
         //Update Administrator
-        public void UpdateAdministrator(int id, string emailPro, int phoneNumberPro)
+        public void UpdateAdministrator(int id, string username, string password, string emailPro, int phoneNumberPro, string employeeCode)
         {
             Administrator administrator = _bddContext.Administrators.Find(id);
 
             if (administrator != null)
             {
                 administrator.Id = id;
+                administrator.Username = username;
+                administrator.Password = password;
                 administrator.EmailPro = emailPro;
                 administrator.PhoneNumberPro = phoneNumberPro;
+                administrator.EmployeeCode = employeeCode;
                 _bddContext.SaveChanges();
             }
         }
@@ -184,20 +300,61 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Account
+        #region CRUD Account
         public List<Account> GetAllAccounts()
         {
-            return _bddContext.Accounts.ToList();
+            List<Account> accounts = _bddContext.Accounts.ToList();
+            return accounts;
         }
 
+        public Account GetUserAccount(int id)
+        {
+
+            User user = _bddContext.Users.Find(id);
+            Account account = _bddContext.Accounts.FirstOrDefault(e => e.Id == user.AccountId);
+            return account;
+        }
+
+        public Account GetAccount(int id)
+        {
+
+
+            return _bddContext.Accounts.FirstOrDefault(e => e.Id == id);
+
+        }
+
+        public Account GetAccount(string idStr)
+        {
+            int id;
+            if (int.TryParse(idStr, out id))
+            {
+                return this.GetAccount(id);
+            }
+            return null;
+        }
+        public static string EncodeMD5(string password)
+        {
+            string passwordOne = "EcoCar" + password + "ASP.NET MVC";
+            return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(passwordOne)));
+        }
+
+
         //Create Account
-        public int CreateAccount(string username, string passwordClear, bool isActive)
+        public int CreateAccount(string username, string passwordClear, bool isActive, DateTime creationDate, DateTime lastLoginDate)
         {
             string password = EncodeMD5(passwordClear);
-            Account account = new Account() { Username = username, Password = password, IsActive = isActive };
+            Account account = new Account()
+            {
+                Username = username,
+                Password = password,
+                IsActive = true,
+                CreationDate = creationDate,
+                LastLoginDate = lastLoginDate,
+            };
             _bddContext.Accounts.Add(account);
             _bddContext.SaveChanges();
             return account.Id;
@@ -209,7 +366,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update Account
-        public void UpdateAccount(int id, string username, string password, bool isActive)
+        public void UpdateAccount(int id, string username, string password, bool isActive, DateTime lastLoginDate)
         {
             Account account = _bddContext.Accounts.Find(id);
 
@@ -219,8 +376,20 @@ namespace EcoCar.Models.Services
                 account.Username = username;
                 account.Password = password;
                 account.IsActive = isActive;
+                account.LastLoginDate = lastLoginDate;
                 _bddContext.SaveChanges();
             }
+        }
+        public void UpdateAccountPassword(int id, string password)
+        {
+            Account account = _bddContext.Accounts.Find(id);
+            if (account != null)
+            {
+                account.Id = id;
+                account.Password = password;
+                _bddContext.SaveChanges();
+            }
+
         }
         public void UpdateAccount(Account account)
         {
@@ -246,148 +415,37 @@ namespace EcoCar.Models.Services
             Account account = this._bddContext.Accounts.FirstOrDefault(a => a.Username == username && a.Password == password);
             return account;
         }
-
-        public static string EncodeMD5(string password)
-        {
-            string passwordOne = "ChoixResto" + password + "ASP.NET MVC";
-            return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(passwordOne)));
-        }
-
-        public Account GetAccount(int id)
-        {
-            return this._bddContext.Accounts.Find(id);
-        }
-
-        public Account GetAccount(string idStr)
-        {
-            int id;
-            if (int.TryParse(idStr, out id))
-            {
-                return this.GetAccount(id);
-            }
-            return null;
-        }
-
-
-
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD AccountUser
-        public List<AccountUser> GetAllAccountUsers()
-        {
-            return _bddContext.AccountUsers.ToList();
-        }
-
-        //Create AccountUser
-        public int CreateAccountUser(double userRating, int EcoStatusId)
-        {
-            AccountUser accountUser = new AccountUser() { UserRating = userRating, EcoStatusId = EcoStatusId};
-            _bddContext.AccountUsers.Add(accountUser);
-            _bddContext.SaveChanges();
-            return accountUser.Id;
-        }
-        public void CreateAccountUser(AccountUser accountUser)
-        {
-            _bddContext.AccountUsers.Update(accountUser);
-            _bddContext.SaveChanges();
-        }
-
-        //Update AccountUser
-        public void UpdateAccountUser(int id, double userRating, int EcoStatusId)
-        {
-            AccountUser accountUser = _bddContext.AccountUsers.Find(id);
-
-            if (accountUser != null)
-            {
-                accountUser.Id = id;
-                accountUser.UserRating = userRating;
-                accountUser.EcoStatusId = EcoStatusId;
-                _bddContext.SaveChanges();
-            }
-        }
-        public void UpdateAccountUser(AccountUser accountUser)
-        {
-            _bddContext.AccountUsers.Update(accountUser);
-            _bddContext.SaveChanges();
-        }
-
-        //Delete AccountUser
-        public void DeleteAccountUser(int id)
-        {
-            AccountUser accountUser = _bddContext.AccountUsers.Find(id);
-
-            if (accountUser != null)
-            {
-                _bddContext.AccountUsers.Remove(accountUser);
-                _bddContext.SaveChanges();
-            }
-        }
-
-        //-------------------------------------------------------------------------------------------------
-
-        //CRUD AccountAdministrator
-        public List<AccountAdministrator> GetAllAccountAdministrators()
-        {
-            return _bddContext.AccountAdministrators.ToList();
-        }
-
-        //Create AccountAdministrator
-        public int CreateAccountAdministrator(string employeeCode)
-        {
-            AccountAdministrator accountAdministrator = new AccountAdministrator() {EmployeeCode = employeeCode};
-            _bddContext.AccountAdministrators.Add(accountAdministrator);
-            _bddContext.SaveChanges();
-            return accountAdministrator.Id;
-        }
-        public void CreateAccountAdministrator(AccountAdministrator accountAdministrator)
-        {
-            _bddContext.AccountAdministrators.Update(accountAdministrator);
-            _bddContext.SaveChanges();
-        }
-
-        //Update AccountAdministrator
-        public void UpdateAccountAdministrator(int id, string employeeCode)
-        {
-            AccountAdministrator accountAdministrator = _bddContext.AccountAdministrators.Find(id);
-
-            if (accountAdministrator != null)
-            {
-                accountAdministrator.Id = id;
-                accountAdministrator.EmployeeCode = employeeCode;
-                _bddContext.SaveChanges();
-            }
-        }
-        public void UpdateAccountAdministrator(AccountAdministrator accountAdministrator)
-        {
-            _bddContext.AccountAdministrators.Update(accountAdministrator);
-            _bddContext.SaveChanges();
-        }
-
-        //Delete AccountAdministrator
-        public void DeleteAccountAdministrator(int id)
-        {
-            AccountAdministrator accountAdministrator = _bddContext.AccountAdministrators.Find(id);
-
-            if (accountAdministrator != null)
-            {
-                _bddContext.AccountAdministrators.Remove(accountAdministrator);
-                _bddContext.SaveChanges();
-            }
-        }
-
-        //-------------------------------------------------------------------------------------------------
-
-        //CRUD Vehicule
+        #region CRUD Vehicule
         public List<Vehicule> GetAllVehicules()
         {
-            return _bddContext.Vehicules.ToList();
+            return _bddContext.Vehicules.Include(e => e.Insurance).ToList();
+        }
+
+        public Vehicule GetUserVehicule(int userId)
+        {
+            User user = _bddContext.Users.Find(userId);
+            Vehicule vehicule = _bddContext.Vehicules.Include(e => e.Insurance).FirstOrDefault(e => e.Id == user.VehiculeId);
+            return vehicule;
         }
 
         //Create Vehicule
-        public int CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats)
+        public int CreateVehicule(string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId)
         {
-            Vehicule vehicule = new Vehicule() {Brand = brand, RegistrationNumber = registrationNumber, Model = model, Hybrid = hybrid, Electric = electric, TechnicalTestExpiration = technicalTestExpiration, AvailableSeats = availableSeats };
+            Vehicule vehicule = new Vehicule()
+            {
+                Brand = brand,
+                RegistrationNumber = registrationNumber,
+                Model = model,
+                Hybrid = hybrid,
+                Electric = electric,
+                TechnicalTestExpiration = technicalTestExpiration,
+                AvailableSeats = availableSeats,
+                Insurance = _bddContext.Insurances.First(b => b.Id == insuranceId)
+            };
             _bddContext.Vehicules.Add(vehicule);
             _bddContext.SaveChanges();
             return vehicule.Id;
@@ -399,7 +457,7 @@ namespace EcoCar.Models.Services
         }
 
         //Update Vehicule
-        public void UpdateVehicule(int id, string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats)
+        public void UpdateVehicule(int id, string brand, int registrationNumber, string model, bool hybrid, bool electric, DateTime technicalTestExpiration, int availableSeats, int insuranceId)
         {
             Vehicule vehicule = _bddContext.Vehicules.Find(id);
 
@@ -413,6 +471,7 @@ namespace EcoCar.Models.Services
                 vehicule.Electric = electric;
                 vehicule.TechnicalTestExpiration = technicalTestExpiration;
                 vehicule.AvailableSeats = availableSeats;
+                vehicule.Insurance = _bddContext.Insurances.First(b => b.Id == insuranceId);
                 _bddContext.SaveChanges();
             }
         }
@@ -433,13 +492,19 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        //CRUD Insurance
+        #region CRUD Insurance
         public List<Insurance> GetAllInsurances()
         {
             return _bddContext.Insurances.ToList();
+        }
+
+        public Insurance GetInsurance(int insuranceId)
+        {
+            return _bddContext.Insurances.FirstOrDefault(a => a.Id == insuranceId);
         }
 
         //Create Insurance
@@ -487,13 +552,11 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        #endregion
 
         //-------------------------------------------------------------------------------------------------
 
-        public void Dispose()
-        {
-            _bddContext.Dispose();
-        }
+
 
     }
 }

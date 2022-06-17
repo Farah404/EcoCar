@@ -1,8 +1,4 @@
-﻿//Class Description
-
-
-using EcoCar.Models.PersonManagement;
-using System.ComponentModel.DataAnnotations;
+﻿using EcoCar.Models.PersonManagement;
 
 namespace EcoCar.Models.ServiceManagement
 {
@@ -12,27 +8,13 @@ namespace EcoCar.Models.ServiceManagement
         public int Id { get; set; }
 
         //Attributes
-
-        [Required]
-        public virtual int CarPoolingTypeId
-        {
-            get
-            {
-                return (int)this.CarPooling;
-            }
-            set
-            {
-                CarPooling = (CarPoolingType)value;
-            }
-        }
-        [EnumDataType(typeof(CarPoolingType))]
-        public CarPoolingType CarPooling { get; set; }
+        public CarPoolingType SelectCarPoolingType { get; set; }
         public enum CarPoolingType
         {
-            HomeToWork = 0,
-            HomeToSchool = 1,
-            Events = 2,
-            Travel = 3,
+            HomeToWork,
+            HomeToSchool,
+            Events,
+            Travel
         }
 
         public int AvailableSeats { get; set; }
@@ -42,14 +24,14 @@ namespace EcoCar.Models.ServiceManagement
         public bool ChattingAllowed { get; set; }
 
         //Foreign Keys
-        public int VehiculeId { get; set; }
-        public Vehicule Vehicule { get; set; }
         public int TrajectoryId { get; set; }
         public Trajectory Trajectory { get; set; }
+        public int VehiculeId { get; set; }
+        public Vehicule Vehicule { get; set; }
 
         //Inheritance Class
         public int ServiceId { get; set; }
-        public Service Service { get; set; }
+        public virtual Service Service { get; set; }
 
     }
 }

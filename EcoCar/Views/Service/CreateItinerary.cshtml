@@ -1,0 +1,46 @@
+﻿@using static EcoCar.Models.ServiceManagement.Itinerary
+@model EcoCar.Models.ServiceManagement.Itinerary
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Définition de l'itinéraire";
+}
+
+
+
+
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Proposer un service: l'itinéraire</h4>
+
+                @using (Html.BeginForm())
+                {
+                    <div class="form-floating mb-3">
+                    @Html.Label("Première étape éventuelle")
+                    @Html.EditorFor(model => model.FirtsStopAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.FirtsStopAddress)
+                    </div><br>
+
+                    <div class="form-floating mb-3">
+                    @Html.Label("Deuxième étape éventuelle")<br>
+                    @Html.EditorFor(model => model.SecondStopAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.SecondStopAddress)
+                    </div><br>
+
+                    <div class="form-floating mb-3">
+                    @Html.Label("Troisième étape éventuelle") <br>
+                    @Html.EditorFor(model => model.ThirdStopAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.ValidationMessageFor(model => model.ThirdStopAddress)
+                    </div><br>
+                    <button class="btn btn-success" type="submit">Suivant</button>
+                }
+
+            </div>
+            <div class="col-md-6">
+                <img alt="" style="width:80%;" title="" src="~/Images/Itinerary.png">
+            </div>
+        </div>
+    </div>
+</div>
+

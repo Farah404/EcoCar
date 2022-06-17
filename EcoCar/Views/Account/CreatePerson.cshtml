@@ -1,0 +1,52 @@
+﻿@model EcoCar.ViewModels.AccountViewModel
+@{
+    Layout = "/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Création de compte EcoCar";
+}
+<section class="sign-in-form" style="background-color: white;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+                <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+                        <div class="col-lg-4">
+                            <div class="card-body p-md-5 mx-md-4">
+                                <div class="text-center">
+                                    <img src="~/Images/EcoCar.png"
+                                         style="width: 185px;" alt="logo">
+                                    <h4 class="mt-1 mb-5 pb-1">Je crée mon compte EcoCar</h4>
+                                </div>
+
+                                @using (Html.BeginForm())
+                                {
+                                    <div class="form-outline mb-4">
+                                        @Html.TextBoxFor(model => model.Person.Name, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.ValidationMessageFor(model => model.Person.Name)
+                                    </div>
+                                     <br>
+                                    <div class="form-outline mb-4">
+                                        @Html.TextBoxFor(model => model.Person.LastName, new { @class = "form-control", placeholder = "Nom" })
+                                        @Html.ValidationMessageFor(model => model.Person.LastName)
+                                    </div>
+                                     <br>
+                                    <button class="btn btn-success btn-xl" type="submit">Suivant</button>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                <div class="verticalcenter">
+                                 <img src=~/Images/CityEcoCar.png width="120%" />
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+<br />
+<br />

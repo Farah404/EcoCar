@@ -14,10 +14,11 @@ namespace EcoCar.Models.FinancialManagement
         public int InvoiceNumber { get; set; }
         public string InvoiceDescription { get; set; }
         public DateTime InvoiceIssueDate { get; set; }
-
-        //Foreign Key
-        public int BillingAddressId { get; set; }
-        public BillingAddress BillingAddress { get; set; }
+        public InvoiceType SelectInvoiceType { get; set; }
+        public enum InvoiceType
+        {
+            EcoStoreInvoice, Serviceinvoice
+        }
 
 
     }

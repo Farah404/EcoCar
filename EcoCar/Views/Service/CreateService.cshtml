@@ -1,0 +1,91 @@
+﻿@using static EcoCar.Models.ServiceManagement.Service
+
+@model EcoCar.Models.ServiceManagement.Service
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Proposer une Prestation";
+}
+
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Proposer un service</h4>
+
+                @using (Html.BeginForm())
+                {
+                    //Autofill of current Date: Date of publication of the service
+                    <div class="form-floating mb-3">
+                        @Html.Label("Date de publication de la prestation")<br>
+                        @Html.TextBoxFor(model => model.PublicationDate, new{ @class = "form-control",@id="currentDate",@readonly = true,style="width:300px"})
+                    <br></div>
+
+                    <div class="form-floating mb-3">
+                        @Html.Label("Numero de reference de la prestation")<br>
+                        @Html.TextBoxFor(model => model.ReferenceNumber, new{ @class = "form-control",@id="Refnunmber",@readonly = true,style="width:300px"})
+                    <br></div>
+
+                    <div class="form-outline mb-3">
+                        @Html.Label("Date de debut")<br>
+                        @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.Start)
+                    <br></div>
+
+                    <div class="form-outline mb-3">
+                        @Html.Label("Date de fin")<br>
+                        @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control",style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.End)
+                    <br></div>
+
+                    <div class="form-outline mb-3">
+                        @Html.Label("Type de Prestation")<br>
+                        @Html.DropDownListFor(model => model.SelectServiceType, Html.GetEnumSelectList<ServiceType>(),"--Selectionnez le type de prestation--",new {required = "required"})
+                        @Html.ValidationMessageFor(model => model.SelectServiceType)
+                    <br></div>
+
+                    <div class="form-floating mb-3">
+                        @Html.Label("Prix en EcoCoins")<br>
+                        @Html.TextBoxFor(model => model.PriceEcoCoins, new{ @class = "form-control",style="width:300px"})
+                    <br></div>
+
+                    <button class="btn btn-success" type="submit">Suivant</button>
+                }
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="verticalcenter">
+                <img style="width:180%;" src="~/Images/Ville.png">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    var today = new Date();
+    var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+    document.getElementById("currentDate").value = date;
+    $(document).ready(function() {
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+        });
+    });
+
+function randomNumber(len) {
+  var randomNumber;
+  var n = '';
+
+  for (var count = 0; count < len; count++) {
+    randomNumber = Math.floor(Math.random() * 10);
+    n += randomNumber.toString();
+  }
+  return n;
+}
+
+document.getElementById("Refnunmber").value = randomNumber(9);
+
+
+
+</script>

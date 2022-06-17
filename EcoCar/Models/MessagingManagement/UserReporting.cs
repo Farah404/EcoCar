@@ -1,5 +1,6 @@
-﻿using EcoCar.Models.PersonManagement;
-using System.ComponentModel.DataAnnotations;
+﻿//Class Description
+//The UserReporting.cs contains a message sent by a user to the administrator in which the former reports another user
+
 
 namespace EcoCar.Models.MessagingManagement
 {
@@ -10,32 +11,15 @@ namespace EcoCar.Models.MessagingManagement
 
         //Attributes
         public string Comment { get; set; }
-
-        [Required]
-        public virtual int ReportingReasonId
+        public ReportingReason SelectReportingReason { get; set; }
+        public enum ReportingReason
         {
-            get
-            {
-                return (int)this.ReportingReason;
-            }
-            set
-            {
-                ReportingReason = (ReportingReasonType)value;
-            }
+            FalseIdentity,
+            FalseAccount,
+            InappropriateContent,
+            OffensiveLanguage,
+            InappropriateProfilePicture
         }
-        [EnumDataType(typeof(ReportingReasonType))]
-        public ReportingReasonType ReportingReason { get; set; }
-        public enum ReportingReasonType
-        {
-            FalseIdentity = 0,
-            FalseAccount = 1,
-            InappropriateContent = 2,
-            OffensiveLanguage = 3,
-            InappropriateProfilePicture = 4
-        }
-
-        //Foreign Keys
-
 
         //Inheritance Class
         public int ReportingId { get; set; }

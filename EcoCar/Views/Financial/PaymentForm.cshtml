@@ -1,0 +1,62 @@
+﻿@model EcoCar.Models.FinancialManagement.EcoStorePurchaseVM
+@{
+    Layout = "/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Paiement";
+}
+<div class="wrapper">
+    <div class="checkout container">
+        <form id="payment-form" method="post" asp-controller="Financial" asp-action="Create">
+            @Html.HiddenFor(n => n.Id)
+            @*<div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" name="Title" asp-for="@Model.NameOne">@Model.NameOne</h5>
+                    <p class="card-text">@Model.EcoCoinsBatchOne</p>
+                    <p class="card-text"><small class="text-muted">Author: @Model.Id</small></p>
+                    <p class="card-text"><small class="text-muted">Price: @Model.EcoCoinsBatchOnePrice</small></p>
+                </div>
+                <img style="width: 90%" class="card-img-bottom" src="@Model.EcoCoinsBatchOne" alt="Card image cap">
+            </div>*@
+            <section>
+                <div class="bt-drop-in-wrapper">
+                    <div id="bt-dropin"></div>
+                </div>
+            </section>
+            @Html.HiddenFor(n => n.Nonce, new { @id = "nonce" })
+            @Html.Hidden("userId", @ViewBag.userId, null)
+            @Html.HiddenFor(n=>n.EcoCoinsBatchOnePrice)
+            @Html.HiddenFor(n=>n.EcoCoinsBatchTwoPrice)
+            @Html.HiddenFor(n=>n.EcoCoinsBatchThreePrice)
+            @Html.HiddenFor(n=>n.MonthlySubscriptionPrice)
+            @Html.HiddenFor(n=>n.SemestrialSubscriptionPrice)
+            @Html.HiddenFor(n=>n.SemestrialSubscriptionPrice)
+            @Html.HiddenFor(n=>n.TotalEuros)
+
+            <hr />
+            <button class="btn btn-success" type="submit"><span>Confirm payment - $@Model.TotalEuros</span></button>
+        </form>
+    </div>
+</div>
+
+<script src="https://js.braintreegateway.com/web/dropin/1.22.0/js/dropin.min.js"></script>
+<script>
+    var client_token = "@ViewBag.ClientToken";
+    var form = document.querySelector('#payment-form');
+
+    braintree.dropin.create({
+        authorization: client_token,
+        container: '#bt-dropin'
+    }, function (createErr, instance) {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            instance.requestPaymentMethod(function (err, payload) {
+                if (err) {
+                    return;
+                }
+              
+                document.querySelector('#nonce').value = payload.nonce;
+                form.submit();
+            });
+        });
+    });
+</script>

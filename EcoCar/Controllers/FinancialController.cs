@@ -94,7 +94,7 @@ namespace EcoCar.Controllers
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             ShoppingCart shoppingCartToUp = dalFinancialManagement.GetUserShoppingCart(userId);
             EcoStore ecoStore = dalFinancialManagement.GetEcoStore(1);
-            if (shoppingCartToUp.QuantityMonthlySubscription == 0 && shoppingCartToUp.QuantityTrimestrialSubscription ==0 && shoppingCartToUp.QuantitySemestrialSubscription== 0)
+            if (shoppingCartToUp.QuantityMonthlySubscription == 0 && shoppingCartToUp.QuantityTrimestrialSubscription == 0 && shoppingCartToUp.QuantitySemestrialSubscription == 0)
             {
                 dalFinancialManagement.UpdateShoppingCart(
                 shoppingCartToUp.Id,
@@ -127,7 +127,7 @@ namespace EcoCar.Controllers
                 shoppingCartToUp.QuantityBatchOne + (int)quantityBatchOne,
                 shoppingCartToUp.QuantityBatchTwo + (int)quantityBatchTwo,
                 shoppingCartToUp.QuantityBatchThree + (int)quantityBatchThree,
-                shoppingCartToUp.QuantityMonthlySubscription ,
+                shoppingCartToUp.QuantityMonthlySubscription,
                 shoppingCartToUp.QuantityTrimestrialSubscription,
                 shoppingCartToUp.QuantitySemestrialSubscription,
                 shoppingCartToUp.TotalBatchOne,
@@ -147,8 +147,40 @@ namespace EcoCar.Controllers
 
         public IActionResult UpdateEcoStore()
         {
+            FinancialViewModel financialViewModel = new FinancialViewModel
+            {
+                EcoStore = dalFinancialManagement.GetEcoStore(1)
+            };
 
-            return View();
+            return View(financialViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateEcoStore(EcoStore ecoStore)
+        {
+            EcoStore ecoStoreReference = dalFinancialManagement.GetEcoStore(1);
+            dalFinancialManagement.UpdateEcoStore(
+              ecoStoreReference.Id,
+              ecoStoreReference.NameOne,
+              ecoStoreReference.NameTwo,
+              ecoStoreReference.NameThree,
+              ecoStoreReference.NameMonth,
+              ecoStoreReference.NameTrimester,
+              ecoStoreReference.NameSemester,
+              ecoStore.EcoCoinsBatchOnePrice,
+              ecoStore.EcoCoinsBatchOne,
+              ecoStore.EcoCoinsBatchTwoPrice,
+              ecoStore.EcoCoinsBatchTwo,
+              ecoStore.EcoCoinsBatchThreePrice,
+              ecoStore.EcoCoinsBatchThree,
+              ecoStore.MonthlySubscriptionPrice,
+              ecoStore.MonthlySubscription,
+              ecoStore.TrimestrialSubscriptionPrice,
+              ecoStore.TrimestrialSubscription,
+              ecoStore.SemestrialSubscriptionPrice,
+              ecoStore.SemestrialSubscription
+              );
+            return Redirect("/Account/AdminHome");
         }
         #endregion
 
@@ -156,7 +188,7 @@ namespace EcoCar.Controllers
         public IActionResult PaymentForm(int? userId)
         {
             //Sandbox BrainTree method for credit card payment
-            
+
             var gateway = _braintreeService.GetGateway();
             var clientToken = gateway.ClientToken.Generate();  //Genarate a token
             ViewBag.ClientToken = clientToken;
@@ -172,7 +204,7 @@ namespace EcoCar.Controllers
                 EcoCoinsBatchOne = ecoStore.EcoCoinsBatchOne,
                 NameOne = ecoStore.NameOne,
 
-                EcoCoinsBatchTwoPrice = (shoppingCart.QuantityBatchTwo)*(ecoStore.EcoCoinsBatchTwoPrice),
+                EcoCoinsBatchTwoPrice = (shoppingCart.QuantityBatchTwo) * (ecoStore.EcoCoinsBatchTwoPrice),
                 EcoCoinsBatchTwo = ecoStore.EcoCoinsBatchTwo,
                 NameTwo = ecoStore.NameTwo,
 
@@ -293,7 +325,7 @@ namespace EcoCar.Controllers
                         subscription = true;
                         subPurchasedStart = DateTime.Now;
                     }
-                  
+
                     if (shoppingCart.QuantityMonthlySubscription != 0)
                     {
                         firstMonth = true;
@@ -350,7 +382,7 @@ namespace EcoCar.Controllers
                    sixthMonth
                    );
 
-                dalFinancialManagement.UpdateShoppingCart(shoppingCart.Id, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,0);
+                dalFinancialManagement.UpdateShoppingCart(shoppingCart.Id, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 return Redirect("/Financial/EcoStore");
             }
             else
@@ -469,7 +501,7 @@ namespace EcoCar.Controllers
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             ShoppingCart shoppingCart = dalFinancialManagement.GetUserShoppingCart(userId);
             dalFinancialManagement.UpdateShoppingCart(
-                shoppingCart.Id,0,0,0,0,0,0,0,0,0,0,0,0,0);
+                shoppingCart.Id, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             return Redirect("/Financial/ShoppingCart");
         }
         #endregion

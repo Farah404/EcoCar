@@ -127,6 +127,27 @@ namespace EcoCar.Models.Services
             int semestrialSubscription
             );
 
+        void UpdateEcoStore(
+            int id,
+           string nameOne,
+           string nameTwo,
+           string nameThree,
+            string nameMonth,
+            string nameTrimester,
+            string nameSemester,
+            double ecoCoinsBatchOnePrice,
+            int ecoCoinsBatchOne,
+            double ecoCoinsBatchTwoPrice,
+            int ecoCoinsBatchTwo,
+            double ecoCoinsBatchThreePrice,
+            int ecoCoinsBatchThree,
+            double monthlySubscriptionPrice,
+            int monthlySubscription,
+            double trimestrialSubscriptionPrice,
+            int trimestrialSubscription,
+            double semestrialSubscriptionPrice,
+            int semestrialSubscription);
+
         //-------------------------------------------------------------------------------------------------
 
         //ShoppingCart

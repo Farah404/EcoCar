@@ -149,7 +149,7 @@ namespace EcoCar.Models.Services
 
         public int LastInvoice()
         {
-            int invoiceNumber = _bddContext.Invoices.Count()+1;
+            int invoiceNumber = _bddContext.Invoices.Count() + 1;
             return invoiceNumber;
         }
         //Create Invoice
@@ -378,7 +378,7 @@ namespace EcoCar.Models.Services
         }
 
         //Check Funds
-        public bool CheckUserFunds (int ecoAmount, int userId)
+        public bool CheckUserFunds(int ecoAmount, int userId)
         {
             User user = _bddContext.Users.Find(userId);
             EcoWallet ecoWallet = _bddContext.EcoWallets.Find(user.EcoWalletId);
@@ -389,15 +389,15 @@ namespace EcoCar.Models.Services
             else
             {
                 return false;
-            } 
+            }
         }
 
         //Create EcoWallet
         public int CreateEcoWallet(
-            int ecoCoinsAmount, 
-            bool subscription, 
-            double ecoCoinsValueEuros, 
-            DateTime subscriptionExpiration, 
+            int ecoCoinsAmount,
+            bool subscription,
+            double ecoCoinsValueEuros,
+            DateTime subscriptionExpiration,
             DateTime subscriptionStart,
             DateTime ecoCoinsFirstMonth,
             bool firstMonth,
@@ -413,11 +413,12 @@ namespace EcoCar.Models.Services
             bool sixthMonth
             )
         {
-            EcoWallet ecoWallet = new EcoWallet() { 
-                EcoCoinsAmount = ecoCoinsAmount, 
-                Subscription = subscription, 
-                EcoCoinsValueEuros = ecoCoinsValueEuros, 
-                SubscriptionExpiration = subscriptionExpiration, 
+            EcoWallet ecoWallet = new EcoWallet()
+            {
+                EcoCoinsAmount = ecoCoinsAmount,
+                Subscription = subscription,
+                EcoCoinsValueEuros = ecoCoinsValueEuros,
+                SubscriptionExpiration = subscriptionExpiration,
                 SubscriptionStart = subscriptionStart,
                 EcoCoinsFirstMonth = ecoCoinsFirstMonth,
                 FirstMonth = firstMonth,
@@ -431,7 +432,7 @@ namespace EcoCar.Models.Services
                 FifthMonth = fifthMonth,
                 EcoCoinsSixthMonth = ecoCoinsSixthMonth,
                 SixthMonth = sixthMonth
-                   
+
             };
             _bddContext.EcoWallets.Add(ecoWallet);
             _bddContext.SaveChanges();
@@ -445,11 +446,11 @@ namespace EcoCar.Models.Services
 
         //Update EcoWallet
         public void UpdateEcoWallet(
-            int id, 
-            int ecoCoinsAmount, 
-            bool subscription, 
-            double ecoCoinsValueEuros, 
-            DateTime subscriptionExpiration, 
+            int id,
+            int ecoCoinsAmount,
+            bool subscription,
+            double ecoCoinsValueEuros,
+            DateTime subscriptionExpiration,
             DateTime subscriptionStart,
             DateTime ecoCoinsFirstMonth,
             bool firstMonth,
@@ -577,6 +578,60 @@ namespace EcoCar.Models.Services
             _bddContext.EcoStores.Update(ecoStore);
             _bddContext.SaveChanges();
         }
+
+        //Update EcoStore
+        public void UpdateEcoStore(
+           int id,
+           string nameOne,
+           string nameTwo,
+           string nameThree,
+            string nameMonth,
+            string nameTrimester,
+            string nameSemester,
+            double ecoCoinsBatchOnePrice,
+            int ecoCoinsBatchOne,
+            double ecoCoinsBatchTwoPrice,
+            int ecoCoinsBatchTwo,
+            double ecoCoinsBatchThreePrice,
+            int ecoCoinsBatchThree,
+            double monthlySubscriptionPrice,
+            int monthlySubscription,
+            double trimestrialSubscriptionPrice,
+            int trimestrialSubscription,
+            double semestrialSubscriptionPrice,
+            int semestrialSubscription)
+        {
+            EcoStore ecoStore = _bddContext.EcoStores.Find(id);
+            if (ecoStore!= null)
+            {
+                ecoStore.Id = id;
+                ecoStore.NameOne = nameOne;
+                ecoStore.NameTwo = nameTwo;
+                ecoStore.NameThree = nameThree;
+                ecoStore.NameMonth = nameMonth;
+                ecoStore.NameTrimester = nameTrimester;
+                ecoStore.NameSemester = nameSemester;
+                ecoStore.EcoCoinsBatchOnePrice = ecoCoinsBatchOnePrice;
+                ecoStore.EcoCoinsBatchOne = ecoCoinsBatchOne;
+                ecoStore.EcoCoinsBatchTwoPrice = ecoCoinsBatchTwoPrice;
+                ecoStore.EcoCoinsBatchTwo = ecoCoinsBatchTwo;
+                ecoStore.EcoCoinsBatchThreePrice = ecoCoinsBatchThreePrice;
+                ecoStore.EcoCoinsBatchThree = ecoCoinsBatchThree;
+                ecoStore.MonthlySubscriptionPrice = monthlySubscriptionPrice;
+                ecoStore.MonthlySubscription = monthlySubscription;
+                ecoStore.TrimestrialSubscriptionPrice = trimestrialSubscriptionPrice;
+                ecoStore.TrimestrialSubscription = trimestrialSubscription;
+                ecoStore.SemestrialSubscriptionPrice = semestrialSubscriptionPrice;
+                ecoStore.SemestrialSubscription = semestrialSubscription;
+                _bddContext.SaveChanges();
+            }
+        }
+
+        public void UpdateEcoStore(EcoStore ecoStore)
+        {
+            _bddContext.EcoStores.Update(ecoStore);
+            _bddContext.SaveChanges();
+        }
         #endregion
 
         //-------------------------------------------------------------------------------------------------
@@ -620,15 +675,15 @@ namespace EcoCar.Models.Services
                 QuantityMonthlySubscription = quantityMonthlySubscription,
                 QuantityTrimestrialSubscription = quantityTrimestrialSubscription,
                 QuantitySemestrialSubscription = quantitysemestrialSubscription,
-                TotalBatchOne = totalBatchOne*ecoStore.EcoCoinsBatchOnePrice,
-                TotalBatchTwo = totalBatchTwo*ecoStore.EcoCoinsBatchTwoPrice,
-                TotalBatchThree = totalBatchThree*ecoStore.EcoCoinsBatchThreePrice,
-                TotalMonthlySub = totalMonthlySub*ecoStore.MonthlySubscriptionPrice,
-                TotalTrimestrialSub = totalTrimestrialSub*ecoStore.TrimestrialSubscriptionPrice,
-                TotalSemestrialSub = totalSemestrialSub*ecoStore.SemestrialSubscriptionPrice,
-                TotalPriceEuros = totalBatchOne * ecoStore.EcoCoinsBatchOnePrice+ totalBatchTwo * ecoStore.EcoCoinsBatchTwoPrice+
-                totalBatchThree * ecoStore.EcoCoinsBatchThreePrice+ totalMonthlySub * ecoStore.MonthlySubscriptionPrice+
-                totalTrimestrialSub * ecoStore.TrimestrialSubscriptionPrice+ totalSemestrialSub * ecoStore.SemestrialSubscriptionPrice,
+                TotalBatchOne = totalBatchOne * ecoStore.EcoCoinsBatchOnePrice,
+                TotalBatchTwo = totalBatchTwo * ecoStore.EcoCoinsBatchTwoPrice,
+                TotalBatchThree = totalBatchThree * ecoStore.EcoCoinsBatchThreePrice,
+                TotalMonthlySub = totalMonthlySub * ecoStore.MonthlySubscriptionPrice,
+                TotalTrimestrialSub = totalTrimestrialSub * ecoStore.TrimestrialSubscriptionPrice,
+                TotalSemestrialSub = totalSemestrialSub * ecoStore.SemestrialSubscriptionPrice,
+                TotalPriceEuros = totalBatchOne * ecoStore.EcoCoinsBatchOnePrice + totalBatchTwo * ecoStore.EcoCoinsBatchTwoPrice +
+                totalBatchThree * ecoStore.EcoCoinsBatchThreePrice + totalMonthlySub * ecoStore.MonthlySubscriptionPrice +
+                totalTrimestrialSub * ecoStore.TrimestrialSubscriptionPrice + totalSemestrialSub * ecoStore.SemestrialSubscriptionPrice,
             };
             _bddContext.ShoppingCarts.Add(shoppingCart);
             _bddContext.SaveChanges();
@@ -660,7 +715,7 @@ namespace EcoCar.Models.Services
         {
             ShoppingCart shoppingCart = _bddContext.ShoppingCarts.Find(id);
             EcoStore ecoStore = _bddContext.EcoStores.Find(1);
-                    
+
             if (shoppingCart != null)
             {
                 shoppingCart.Id = id;
@@ -670,12 +725,12 @@ namespace EcoCar.Models.Services
                 shoppingCart.QuantityMonthlySubscription = quantityMonthlySubscription;
                 shoppingCart.QuantityTrimestrialSubscription = quantityTrimestrialSubscription;
                 shoppingCart.QuantitySemestrialSubscription = quantitySemestrialSubscription;
-                shoppingCart.TotalBatchOne = quantityBatchOne*ecoStore.EcoCoinsBatchOnePrice;
-                shoppingCart.TotalBatchTwo = quantityBatchTwo*ecoStore.EcoCoinsBatchTwoPrice;
-                shoppingCart.TotalBatchThree = quantityBatchThree*ecoStore.EcoCoinsBatchThreePrice;
-                shoppingCart.TotalMonthlySub = quantityMonthlySubscription*ecoStore.MonthlySubscriptionPrice;
-                shoppingCart.TotalTrimestrialSub = quantityTrimestrialSubscription*ecoStore.TrimestrialSubscriptionPrice;
-                shoppingCart.TotalSemestrialSub = quantitySemestrialSubscription*ecoStore.SemestrialSubscriptionPrice;
+                shoppingCart.TotalBatchOne = quantityBatchOne * ecoStore.EcoCoinsBatchOnePrice;
+                shoppingCart.TotalBatchTwo = quantityBatchTwo * ecoStore.EcoCoinsBatchTwoPrice;
+                shoppingCart.TotalBatchThree = quantityBatchThree * ecoStore.EcoCoinsBatchThreePrice;
+                shoppingCart.TotalMonthlySub = quantityMonthlySubscription * ecoStore.MonthlySubscriptionPrice;
+                shoppingCart.TotalTrimestrialSub = quantityTrimestrialSubscription * ecoStore.TrimestrialSubscriptionPrice;
+                shoppingCart.TotalSemestrialSub = quantitySemestrialSubscription * ecoStore.SemestrialSubscriptionPrice;
                 shoppingCart.TotalPriceEuros = quantityBatchOne * ecoStore.EcoCoinsBatchOnePrice
                     + quantityBatchTwo * ecoStore.EcoCoinsBatchTwoPrice
                     + quantityBatchThree * ecoStore.EcoCoinsBatchThreePrice
@@ -709,7 +764,7 @@ namespace EcoCar.Models.Services
 
         #region EcoCoins transactions between users
 
-        public void EcoCoinsTransactionService (int userProviderId, int userConsumerId, int ecoCoinAmount)
+        public void EcoCoinsTransactionService(int userProviderId, int userConsumerId, int ecoCoinAmount)
         {
             User userProvider = _bddContext.Users.Find(userProviderId);
             User userConsumer = _bddContext.Users.Find(userConsumerId);

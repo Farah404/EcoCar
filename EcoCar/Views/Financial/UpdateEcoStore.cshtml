@@ -6,6 +6,9 @@
     ViewBag.Title = "EcoStore";
 }
 
+@using (Html.BeginForm())
+{
+    
 <!--Pricing container Subscribe-->
 <div id="pricing" class="container-fluid bg-grey">
     <div class="text-center">
@@ -23,23 +26,15 @@
                 </div>
                 <div class="panel-footer">
                     <h3 class="card-title">
-                        @Model.EcoStore.MonthlySubscriptionPrice €
+                         @Html.TextBoxFor(model => model.EcoStore.MonthlySubscriptionPrice, new { @class = "form-control", placeholder = "Prix d'abonnement mensuel" }) €
                     </h3>
                     <h4>tous les mois pour</h4>
                     <h5 class="card-text">
-                        @Model.EcoStore.MonthlySubscription EcoCoins/mois
+                        @Html.TextBoxFor(model => model.EcoStore.MonthlySubscription, new { @class = "form-control", placeholder = "Montant EcoCoins/mois" }) EcoCoins/mois
                     </h5>
 
-                    @using (Html.BeginForm())
-                    {
-                        @Html.Hidden("QuantityBatchOne",0)
-                        @Html.Hidden("QuantityBatchTwo",0)
-                        @Html.Hidden("QuantityBatchThree",0)
-                        @Html.Hidden("QuantityMonthlySubscription",1)
-                        @Html.Hidden("QuantityTrimestrialSubscription",0)
-                        @Html.Hidden("QuantitySemestrialSubscription",0)
-                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">Je m'abonne</button>
-                    }
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">Mettre à jour l'EcoStore</button>
+                    
                 </div>
             </div>
         </div>
@@ -54,23 +49,17 @@
                 </div>
                 <div class="panel-footer">
                     <h3 class="card-title">
-                        @Model.EcoStore.TrimestrialSubscriptionPrice €
+                         @Html.TextBoxFor(model => model.EcoStore.TrimestrialSubscriptionPrice, new { @class = "form-control", placeholder = "Prix d'abonnement trimestriel" }) €
                     </h3>
-                    <h4>tous les 3 mois pour</h4>
+                    <h4>tous les mois pour</h4>
                     <h5 class="card-text">
-                        @Model.EcoStore.TrimestrialSubscription EcoCoins/mois
+                        @Html.TextBoxFor(model => model.EcoStore.TrimestrialSubscription, new { @class = "form-control", placeholder = "Montant EcoCoins/mois" }) EcoCoins/mois
                     </h5>
 
-                    @using (Html.BeginForm())
-                    {
-                        @Html.Hidden("QuantityBatchOne",0)
-                        @Html.Hidden("QuantityBatchTwo",0)
-                        @Html.Hidden("QuantityBatchThree",0)
-                        @Html.Hidden("QuantityMonthlySubscription",0)
-                        @Html.Hidden("QuantityTrimestrialSubscription",1)
-                        @Html.Hidden("QuantitySemestrialSubscription",0)
-                        <button type="submit" name="AbonnementTrimestriel" class="btn btn-success btn-xl">Je m'abonne</button>
-                    }
+
+
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">Mettre à jour l'EcoStore</button>
+                    
 
                 </div>
             </div>
@@ -82,26 +71,20 @@
                 </div>
                 <div class="panel-body">
 
-                    <p><img src="~/Images/sub6Months.png" style="width:200px;height:300;"></p>
+                   <p><img src="~/Images/sub6Months.png" style="width:200px;height:300;"></p>
                 </div>
                 <div class="panel-footer">
                     <h3 class="card-title">
-                        @Model.EcoStore.SemestrialSubscriptionPrice €
+                         @Html.TextBoxFor(model => model.EcoStore.SemestrialSubscriptionPrice, new { @class = "form-control", placeholder = "Prix d'abonnement semestriel" }) €
                     </h3>
-                    <h4>tous les 6 mois pour</h4>
+                    <h4>tous les mois pour</h4>
                     <h5 class="card-text">
-                        @Model.EcoStore.SemestrialSubscription EcoCoins/mois
+                        @Html.TextBoxFor(model => model.EcoStore.SemestrialSubscription, new { @class = "form-control", placeholder = "Montant EcoCoins/mois" }) EcoCoins/mois
                     </h5>
-                    @using (Html.BeginForm())
-                    {
-                        @Html.Hidden("QuantityBatchOne",0)
-                        @Html.Hidden("QuantityBatchTwo",0)
-                        @Html.Hidden("QuantityBatchThree",0)
-                        @Html.Hidden("QuantityMonthlySubscription",0)
-                        @Html.Hidden("QuantityTrimestrialSubscription",0)
-                        @Html.Hidden("QuantitySemestrialSubscription",1)
-                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">Je m'abonne</button>
-                    }
+                   
+
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">Mettre à jour l'EcoStore</button>
+                    
                 </div>
             </div>
         </div>
@@ -121,26 +104,21 @@
                     <h1>Lot 1</h1>
                 </div>
                 <div class="panel-body">
-                    <p><img src="~/Images/EcoCoin.png" style="width:100px;height:100px;"></p>
+                    <p><img src="~/Images/EcoCoin.png" style="width:32%"></p>
                 </div>
                 <div class="panel-footer">
                     <h3 class="card-title">
-                        @Model.EcoStore.EcoCoinsBatchOnePrice €
+                         @Html.TextBoxFor(model => model.EcoStore.EcoCoinsBatchOnePrice, new { @class = "form-control", placeholder = "Prix du lot 1" })€
                     </h3>
                     <h4>pour</h4>
                     <h5 class="card-text">
-                        @Model.EcoStore.EcoCoinsBatchOne EcoCoins
+                        @Html.TextBoxFor(model => model.EcoStore.EcoCoinsBatchOne, new { @class = "form-control", placeholder = "Montant EcoCoins" }) EcoCoins
                     </h5>
-                    @using (Html.BeginForm())
-                    {
-                        @Html.Hidden("QuantityBatchOne",1)
-                        @Html.Hidden("QuantityBatchTwo",0)
-                        @Html.Hidden("QuantityBatchThree",0)
-                        @Html.Hidden("QuantityMonthlySubscription",0)
-                        @Html.Hidden("QuantityTrimestrialSubscription",0)
-                        @Html.Hidden("QuantitySemestrialSubscription",0)
-                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">J'achète</button>
-                    }
+              
+ 
+  
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">Mettre à jour l'EcoStore</button>
+                    
                 </div>
             </div>
         </div>
@@ -151,28 +129,21 @@
                 </div>
                 <div class="panel-body">
                     <p>
-                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
-                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
+                        <img src="~/Images/Batch2.png" style="width:50%">
                     </p>
                 </div>
                 <div class="panel-footer">
                     <h3 class="card-title">
-                        @Model.EcoStore.EcoCoinsBatchTwoPrice €
+                         @Html.TextBoxFor(model => model.EcoStore.EcoCoinsBatchTwoPrice, new { @class = "form-control", placeholder = "Prix du lot 2" })€
                     </h3>
                     <h4>pour</h4>
                     <h5 class="card-text">
-                        @Model.EcoStore.EcoCoinsBatchTwo EcoCoins
+                        @Html.TextBoxFor(model => model.EcoStore.EcoCoinsBatchTwo, new { @class = "form-control", placeholder = "Montant EcoCoins" }) EcoCoins
                     </h5>
-                    @using (Html.BeginForm())
-                    {
-                        @Html.Hidden("QuantityBatchOne",0)
-                        @Html.Hidden("QuantityBatchTwo",1)
-                        @Html.Hidden("QuantityBatchThree",0)
-                        @Html.Hidden("QuantityMonthlySubscription",0)
-                        @Html.Hidden("QuantityTrimestrialSubscription",0)
-                        @Html.Hidden("QuantitySemestrialSubscription",0)
-                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">J'achète</button>
-                    }
+            
+  
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">Mettre à jour l'EcoStore</button>
+                    
                 </div>
             </div>
         </div>
@@ -183,31 +154,24 @@
                 </div>
                 <div class="panel-body">
                     <p>
-                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
-                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
-                        <img src="~/Images/EcoCoin.png" style="width:100px;height:100px;">
+                        <img src="~/Images/Batch3.png" style="width:42%">
                     </p>
                 </div>
                 <div class="panel-footer">
-                    <h3 class="card-title"> 
-                        @Model.EcoStore.EcoCoinsBatchThreePrice €
+                    <h3 class="card-title">
+                         @Html.TextBoxFor(model => model.EcoStore.EcoCoinsBatchThreePrice, new { @class = "form-control", placeholder = "Prix du lot 3" })€
                     </h3>
                     <h4>pour</h4>
                     <h5 class="card-text">
-                        @Model.EcoStore.EcoCoinsBatchThree EcoCoins
+                        @Html.TextBoxFor(model => model.EcoStore.EcoCoinsBatchThree, new { @class = "form-control", placeholder = "Montant EcoCoins" }) EcoCoins
                     </h5>
-                    @using (Html.BeginForm())
-                    {
-                        @Html.Hidden("QuantityBatchOne",0)
-                        @Html.Hidden("QuantityBatchTwo",0)
-                        @Html.Hidden("QuantityBatchThree",1)
-                        @Html.Hidden("QuantityMonthlySubscription",0)
-                        @Html.Hidden("QuantityTrimestrialSubscription",0)
-                        @Html.Hidden("QuantitySemestrialSubscription",0)
-                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">J'achète</button>
-                    }
+                   
+
+                        <button type="submit" name="action:Save" class="btn btn-success btn-xl">Mettre à jour l'EcoStore</button>
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
+}

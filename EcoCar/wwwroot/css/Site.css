@@ -422,6 +422,7 @@ div.eco-store {
         position: absolute;
         left: -30px;
         bottom: -80px;
+        opacity:1;
     }
 
 div.eco-scape {
@@ -434,6 +435,7 @@ div.eco-scape {
         position: absolute;
         right: -20px;
         bottom: -70px;
+        opacity: 1;
     }
 
 div.eco-cloud-right {

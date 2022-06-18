@@ -4,9 +4,10 @@
 }
 <!-- Add two containers (.container-fluid), and add a custom class to the second container (.bg-grey - adds a gray background color):
 -->
-<div id="about" class="container-fluid">
-    <div class="row">
-        <div class="col-sm-8">
+
+<div class="row">
+    <div class="col-sm-8">
+        <div id="about" class="container-fluid" align="justify">
             <h2>A propos d'EcoCar</h2>
 
             <p>
@@ -23,10 +24,11 @@
 
             <button class="btn btn-success btn-lg" onclick="location.href='/Home/EcoCarValues'">Découvrir EcoCar</button>
         </div>
-        <div class="col-sm-4">
-            <video src="/Video/EcoCarPub.mp4" style="width:100%" typeof="video/mp4" controls autoplay muted loop preload="auto" slideanim></video>
-        </div>
     </div>
+    <div class="col-sm-4">
+        <video class="verticalcenter" src="/Video/EcoCarPub.mp4" style="width:100%" typeof="video/mp4" controls autoplay muted loop preload="auto" slideanim></video>
+    </div>
+
 </div>
 
 
@@ -44,13 +46,19 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div class="item active">
+                <center><span class="glyphicon glyphicon-tree-deciduous logo-small"></span></center>
                 <h4>"Simple, clair, efficace"<br><span style="font-style:normal;">Michael Roe, EcoForest</span></h4>
+                 
             </div>
             <div class="item">
+                <center><span class="glyphicon glyphicon-tree-conifer logo-small"></span></center>
                 <h4>"J'étais sceptique, maintenant, c'est ma référence pour mes trajets"<br><span style="font-style:normal;">Farla Doe, EcoTree</span></h4>
+            
             </div>
             <div class="item">
+                <center><span class="glyphicon glyphicon-leaf logo-small"></span></center>
                 <h4>"Efficace et agréable"<br><span style="font-style:normal;">Aristate Rom, EcoLeaf</span></h4>
+                
             </div>
         </div>
 
@@ -121,4 +129,4 @@
 
 
 <!-- Image of location/map -->
-<!--<img src="~/Images/CityEcoCar.png" style="width:70%">-->   
+<img src="~/Images/EcoCart.png" style="width:100%">

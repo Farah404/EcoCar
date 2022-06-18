@@ -13,7 +13,7 @@
 
             @*Profile picture Part with buttons*@
             <div class="col-md-4">
-                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src=@Model.User.Person.ProfilePicturePath data-original-title="Usuario">
+                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src=@Model.User.Person.ProfilePicturePath>
                 <ul title="Username" class="list-inline ratings text-center">
 
                     <h3>@Model.User.Account.Username</h3>
@@ -405,7 +405,6 @@
 
 
                                     <div class="tab-pane" id="sms">
-                                        <div class="container-fluid">
                                             <div class="table-responsive">
                                                 <table class="table" id="userTable">
                                                     <thead>
@@ -414,6 +413,7 @@
                                                             <th>Expéditeur </th>
                                                             <th>Prestation</th>
                                                             <th>Contenu du message</th>
+                                                            <th>Répondre</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -428,13 +428,18 @@
                                                             <td>
                                                                 @message.MessageContent
                                                             </td>
+                                                            <td>
+                                                                @message.MessageContent
+                                                            </td>
+
+                                                            <td>
+                                                                <span  data-toggle="modal" data-target="#basicModal" class="glyphicon glyphicon-envelope  text-success"></span>
+                                                            </td>
                                                         </tr>
                                                         }
                                                     </tbody>
                                                 </table>
-                                                 <a class="btn btn-success" data-toggle="modal" data-target="#basicModal">sms</a>
                                             </div>
-                                        </div>
 
                                         <!-- The Modal Report -->
                                         <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">

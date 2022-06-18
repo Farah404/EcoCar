@@ -8,42 +8,58 @@
     <div class="panel-body inf-content">
         <div class="row">
             <div class="col-md-4">
-                <h4>Proposer un service</h4>
+                <h4>Ajout de véhicule:</h4>
 
                 @using (Html.BeginForm())
                 {
-                    @Html.Label("Marque du véhicule")<br>
-                    @Html.TextBoxFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.Brand)
-                    <br>
+                    <div class="form-floating mb-3">
+                        @Html.Label("Marque du véhicule")<br>
+                        @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.Brand)
+                    </div>
+                    <br />
 
-                    @Html.Label("Plaque d'immatriculation") <br>
-                    @Html.TextBoxFor(model => model.RegistrationNumber, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.RegistrationNumber)
-                    <br>
+                    <div class="form-floating mb-3">
+                        @Html.Label("Plaque d'immatriculation") <br>
+                        @Html.EditorFor(model => model.RegistrationNumber, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.RegistrationNumber)
+                    </div>
+                    <br />
 
-                    @Html.Label("Modèle du véhicule") <br>
-                    @Html.TextBoxFor(model => model.Model, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.Model)
-                    <br>
+                    <div class="form-floating mb-3">
+                        @Html.Label("Modèle du véhicule") <br>
+                        @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.Model)
+                    </div>
+                    <br />
 
-                    @Html.Label("Hybride")<br>
-                    @Html.CheckBoxFor(model => model.Hybrid, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.Hybrid)
-                    <br>
-                    @Html.Label("100% Electrique")<br>
-                    @Html.CheckBoxFor(model => model.Electric, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.Electric)
-                    <br>
-                    
-                    @Html.Label("Date de fin de validité du contrôle technique")<br>
-                    @Html.EditorFor(model => model.TechnicalTestExpiration, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.TechnicalTestExpiration)
+                    <div class="form-floating mb-3">
+                        @Html.CheckBoxFor(model => model.Hybrid, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.Label("Hybride")
+                        @Html.ValidationMessageFor(model => model.Hybrid)
+                    </div>
+                    <br />
 
-                    @Html.Label("Nombre de sièges disponibles")<br>
-                    @Html.TextBoxFor(model => model.AvailableSeats, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
-                    @Html.ValidationMessageFor(model => model.AvailableSeats)
-                    <br>
+                    <div class="form-floating mb-3">
+                        @Html.CheckBoxFor(model => model.Electric, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.Label("100% Electrique")
+                        @Html.ValidationMessageFor(model => model.Electric)
+                    </div>
+                    <br />
+
+                    <div class="form-floating mb-3">
+                        @Html.Label("Date de fin de validité du contrôle technique")<br>
+                        @Html.EditorFor(model => model.TechnicalTestExpiration, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.TechnicalTestExpiration)
+                    </div>
+                    <br />
+
+                    <div class="form-floating mb-3">
+                        @Html.Label("Nombre de sièges disponibles")<br>
+                        @Html.EditorFor(model => model.AvailableSeats, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.ValidationMessageFor(model => model.AvailableSeats)
+                    </div>
+                    <br />
 
                     @Html.HiddenFor(model => model.InsuranceId)
 

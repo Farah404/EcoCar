@@ -38,12 +38,14 @@ namespace EcoCar.Models.Services
         }
 
         //Create Message
-        public Message CreateMessage(string messageContent, int serviceConcernedId, int userSenderId)
+        public Message CreateMessage(string messageContent, int serviceConcernedId, int userSenderId, int userInitializingConversation)
         {
-            Message message = new Message() { 
+            Message message = new Message()
+            {
                 MessageContent = messageContent,
-                ServiceConcerned = _bddContext.Services.FirstOrDefault(s=>s.Id==serviceConcernedId),
-                UserSender = _bddContext.Users.FirstOrDefault(s=>s.Id==userSenderId)
+                ServiceConcerned = _bddContext.Services.FirstOrDefault(s => s.Id == serviceConcernedId),
+                UserSender = _bddContext.Users.FirstOrDefault(s => s.Id == userSenderId),
+                UserInitializingConversation = _bddContext.Users.FirstOrDefault(s => s.Id == userInitializingConversation)
             };
             _bddContext.Messages.Add(message);
             _bddContext.SaveChanges();

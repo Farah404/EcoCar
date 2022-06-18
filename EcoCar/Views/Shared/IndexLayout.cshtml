@@ -96,30 +96,33 @@
             <br>
             <div class="row">
                 <div class="col-sm-4">
-                     <a href="/Service/SearchService"><span class="glyphicon glyphicon-road logo-small"></span></a>
+                     <a href="/Service/SearchService">
+                         <span data-toggle="popover" data-placement="top" title="Covoiturage" class="glyphicon glyphicon-road logo-small"></span></a>
                     <p>Envie d'aller quelquepart ?</p>
                 </div>
                 <div class="col-sm-4">
-                    <a href="/Service/SearchService"><span class="glyphicon glyphicon-barcode logo-small"></span></a>
+                    <a href="/Service/SearchService">
+                        <span data-toggle="popover" data-placement="top" title="Trasport de colis" class="glyphicon glyphicon-barcode logo-small"></span></a>
                     <p>Besoin d'envoyer un colis ?</p>
                 </div>
                 <div class="col-sm-4">
-                    <a href="/Service/SearchService"><span class="glyphicon glyphicon-transfer logo-small"></span></a>
+                    <a href="/Service/SearchService">
+                        <span data-toggle="popover" data-placement="top" title="Location de véhicule"class="glyphicon glyphicon-transfer logo-small"></span></a>
                     <p>Il vous faut une voiture pour quelques jours ?</p>
                 </div>
             </div>
             <br><br>
             <div class="row">
                 <div class="col-sm-4">
-                    <a href="/Financial/EcoStore"><span class="glyphicon glyphicon-shopping-cart logo-small"></span></a>
+                    <a href="/Financial/EcoStore"><span data-toggle="popover" data-placement="top" title="EcoStore" class="glyphicon glyphicon-shopping-cart logo-small"></span></a>
                     <p>Un système simple et efficace</p>
                 </div>
                 <div class="col-sm-4">
-                     <a href="/Financial/EcoStore"><span class="glyphicon glyphicon-piggy-bank logo-small"></span></a>
+                     <a href="/Financial/EcoStore"><span data-toggle="popover" data-placement="top" title="EcoCoins" class="glyphicon glyphicon-piggy-bank logo-small"></span></a>
                     <p>Valorisant la communauté</p>
                 </div>
                 <div class="col-sm-4">
-                    <a href="/Home/EcoCarValues"><span class="glyphicon glyphicon-grain logo-small"></span></a>
+                    <a href="/Home/EcoCarValues"><span data-toggle="popover" data-placement="top" title="EcoValeurs" class="glyphicon glyphicon-grain logo-small"></span></a>
                     <p>Vos valeurs sont nos valeurs</p>
                 </div>
             </div>
@@ -195,6 +198,12 @@
         });
 </script>
 
+<script>
+    // Dismiss Popover on next click
+$('.popover-dismiss').popover({
+  trigger: 'focus'
+})
+</script>
 
 </body>
 </html>

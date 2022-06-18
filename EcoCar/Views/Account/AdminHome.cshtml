@@ -6,6 +6,38 @@
 }
 
 
+<div class="container-fluid">
+
+    <div class="row text-center">
+
+        <div class="col-lg-3 col-sm-6 mb-5 mb-lg-0">
+            <center><span class="glyphicon glyphicon-user logo-small"></span></center>
+            <div class="js-counter h3 mb-1">@Model.Users.Count()</div>
+            <span class="text-success">EcoMembres</span>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 mb-5 mb-lg-0">
+            <center><span class="glyphicon glyphicon-tree-deciduous logo-small"></span></center>
+            <div class="js-counter h3 mb-1">@Model.Services.Where(s=>s.IsRequest==false).Count()</div>
+            <span class="text-success">Propositions de Prestations</span>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 mb-5 mb-lg-0">
+            <center><span class="glyphicon glyphicon-tree-conifer logo-small"></span></center>
+            <div class="js-counter h3 mb-1">@Model.Services.Where(s=>s.IsRequest==true).Count()</div>
+            <span class="text-success">Demandes de Prestations</span>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 mb-5 mb-lg-0">
+            <center><span class="glyphicon glyphicon-shopping-cart logo-small"></span></center>
+            <div class="js-counter h3 mb-1">@Model.EcoStoreInvoices.Count()</div>
+            <span class="text-success">EcoAchats</span>
+        </div>
+    </div>
+
+</div>
+
+
 <div class="container-fluid bg-grey">
     @*Users List Display*@
     <div class="table-responsive">
@@ -31,18 +63,18 @@
             <tbody>
                 @foreach (var users in Model.Users)
                 {
-                 <tr>
-                    <td><a href="/account/userprofile/@users.Id">@users.Account.Username</a></td>
-                    <td>@users.Person.LastName</td>
-                    <td>@users.Person.Name</td>
-                    <td>@users.SelectEcoStatusType</td>
-                    <td>@users.Email</td>
-                    <td>@users.Account.CreationDate.ToShortDateString()</td>
-                    <td>@users.EcoWallet.EcoCoinsAmount</td>
-                    <td>@users.EcoWallet.Subscription</td>
-                    <td>@users.Account.IsActive</td>
-                    <td><a href="/Account/UserProfilePersonalByAdmin/@users.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td> 
-                </tr>
+                    <tr>
+                        <td><a href="/account/userprofile/@users.Id">@users.Account.Username</a></td>
+                        <td>@users.Person.LastName</td>
+                        <td>@users.Person.Name</td>
+                        <td>@users.SelectEcoStatusType</td>
+                        <td>@users.Email</td>
+                        <td>@users.Account.CreationDate.ToShortDateString()</td>
+                        <td>@users.EcoWallet.EcoCoinsAmount</td>
+                        <td>@users.EcoWallet.Subscription</td>
+                        <td>@users.Account.IsActive</td>
+                        <td><a href="/Account/UserProfilePersonalByAdmin/@users.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -55,7 +87,7 @@
         <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Prestations proposées</p><input style="width:50%;float:right" type="text" id="searchServiceNoRequestInput" onkeyup="myFunctionNoRequest()" placeholder="Rechercher une prestation">
         <table class="table" id="serviceTableIsRequestFalse">
             <thead>
-               
+
                 <tr class="header">
                     <th>Date de début</th>
                     <th>Type de service</th>
@@ -66,50 +98,50 @@
                 </tr>
             </thead>
             <tbody>
-                 @foreach (var carPoolingService in Model.CarPoolingServices.Where(c=>c.Service.IsRequest==false))
+                @foreach (var carPoolingService in Model.CarPoolingServices.Where(c => c.Service.IsRequest == false))
                 {
-                <tr>
-                    <td>@carPoolingService.Service.Start.ToShortDateString()</td>
-                    <td>@carPoolingService.Service.SelectServiceType</td>
-                    <td>@carPoolingService.Service.ReferenceNumber</td>
+                    <tr>
+                        <td>@carPoolingService.Service.Start.ToShortDateString()</td>
+                        <td>@carPoolingService.Service.SelectServiceType</td>
+                        <td>@carPoolingService.Service.ReferenceNumber</td>
                         @foreach (var user in Model.Users.Where(u => u.Id == carPoolingService.Service.UserProviderId))
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
-                    <td>@carPoolingService.Service.IsAvailable</td>
-                    <td><a href="/Service/AdminViewCarPoolingService/@carPoolingService.Id">Détails</a></td>
+                        <td>@carPoolingService.Service.IsAvailable</td>
+                        <td><a href="/Service/AdminViewCarPoolingService/@carPoolingService.Id">Détails</a></td>
 
-                </tr>
+                    </tr>
                 }
-                 @foreach (var carRentalService in Model.CarRentalServices.Where(c=>c.Service.IsRequest==false))
+                @foreach (var carRentalService in Model.CarRentalServices.Where(c => c.Service.IsRequest == false))
                 {
-                <tr>
-                    <td>@carRentalService.Service.Start.ToShortDateString()</td>
-                    <td>@carRentalService.Service.SelectServiceType</td>
-                    <td>@carRentalService.Service.ReferenceNumber</td>
-                    @foreach (var user in Model.Users.Where(u => u.Id == carRentalService.Service.UserProviderId))
+                    <tr>
+                        <td>@carRentalService.Service.Start.ToShortDateString()</td>
+                        <td>@carRentalService.Service.SelectServiceType</td>
+                        <td>@carRentalService.Service.ReferenceNumber</td>
+                        @foreach (var user in Model.Users.Where(u => u.Id == carRentalService.Service.UserProviderId))
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
-                    <td>@carRentalService.Service.IsAvailable</td>
-                    <td><a href="/Service/AdminViewCarRentalService/@carRentalService.Id">Détails</a></td>
+                        <td>@carRentalService.Service.IsAvailable</td>
+                        <td><a href="/Service/AdminViewCarRentalService/@carRentalService.Id">Détails</a></td>
 
-                </tr>
+                    </tr>
                 }
-                 @foreach (var parcelService in Model.ParcelServices.Where(c=>c.Service.IsRequest==false))
+                @foreach (var parcelService in Model.ParcelServices.Where(c => c.Service.IsRequest == false))
                 {
-                <tr>
-                    <td>@parcelService.Service.Start.ToShortDateString()</td>
-                    <td>@parcelService.Service.SelectServiceType</td>
-                    <td>@parcelService.Service.ReferenceNumber</td>
-                    @foreach (var user in Model.Users.Where(u => u.Id == parcelService.Service.UserProviderId))
+                    <tr>
+                        <td>@parcelService.Service.Start.ToShortDateString()</td>
+                        <td>@parcelService.Service.SelectServiceType</td>
+                        <td>@parcelService.Service.ReferenceNumber</td>
+                        @foreach (var user in Model.Users.Where(u => u.Id == parcelService.Service.UserProviderId))
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
-                    <td>@parcelService.Service.IsAvailable</td>
-                    <td><a href="/Service/AdminViewParcelService/@parcelService.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
+                        <td>@parcelService.Service.IsAvailable</td>
+                        <td><a href="/Service/AdminViewParcelService/@parcelService.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
 
-                </tr>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -132,47 +164,47 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var carPoolingService in Model.CarPoolingServices.Where(c=>c.Service.IsRequest==true))
+                @foreach (var carPoolingService in Model.CarPoolingServices.Where(c => c.Service.IsRequest == true))
                 {
-                <tr>
-                    <td>@carPoolingService.Service.Start.ToShortDateString()</td>
-                    <td>@carPoolingService.Service.SelectServiceType</td>
-                    <td>@carPoolingService.Service.ReferenceNumber</td>
-                    @foreach (var user in Model.Users.Where(u => u.Id == carPoolingService.Service.UserProviderId))
+                    <tr>
+                        <td>@carPoolingService.Service.Start.ToShortDateString()</td>
+                        <td>@carPoolingService.Service.SelectServiceType</td>
+                        <td>@carPoolingService.Service.ReferenceNumber</td>
+                        @foreach (var user in Model.Users.Where(u => u.Id == carPoolingService.Service.UserProviderId))
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
-                    <td>@carPoolingService.Service.IsAvailable</td>
-                    <td><a href="/Service/AdminViewCarPoolingService/@carPoolingService.Id">Détails</a></td>
-                </tr>
+                        <td>@carPoolingService.Service.IsAvailable</td>
+                        <td><a href="/Service/AdminViewCarPoolingService/@carPoolingService.Id">Détails</a></td>
+                    </tr>
                 }
-                 @foreach (var carRentalService in Model.CarRentalServices.Where(c=>c.Service.IsRequest==true))
+                @foreach (var carRentalService in Model.CarRentalServices.Where(c => c.Service.IsRequest == true))
                 {
-                <tr>
-                    <td>@carRentalService.Service.Start.ToShortDateString()</td>
-                    <td>@carRentalService.Service.SelectServiceType</td>
-                    <td>@carRentalService.Service.ReferenceNumber</td>
-                    @foreach (var user in Model.Users.Where(u => u.Id == carRentalService.Service.UserProviderId))
+                    <tr>
+                        <td>@carRentalService.Service.Start.ToShortDateString()</td>
+                        <td>@carRentalService.Service.SelectServiceType</td>
+                        <td>@carRentalService.Service.ReferenceNumber</td>
+                        @foreach (var user in Model.Users.Where(u => u.Id == carRentalService.Service.UserProviderId))
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
-                    <td>@carRentalService.Service.IsAvailable</td>
-                    <td><a href="/Service/AdminViewCarRentalService/@carRentalService.Id">Détails</a></td>
-                </tr>
+                        <td>@carRentalService.Service.IsAvailable</td>
+                        <td><a href="/Service/AdminViewCarRentalService/@carRentalService.Id">Détails</a></td>
+                    </tr>
                 }
-                 @foreach (var parcelService in Model.ParcelServices.Where(c=>c.Service.IsRequest==true))
+                @foreach (var parcelService in Model.ParcelServices.Where(c => c.Service.IsRequest == true))
                 {
-                <tr>
-                    <td>@parcelService.Service.Start.ToShortDateString()</td>
-                    <td>@parcelService.Service.SelectServiceType</td>
-                    <td>@parcelService.Service.ReferenceNumber</td>
-                    @foreach (var user in Model.Users.Where(u => u.Id == parcelService.Service.UserProviderId))
+                    <tr>
+                        <td>@parcelService.Service.Start.ToShortDateString()</td>
+                        <td>@parcelService.Service.SelectServiceType</td>
+                        <td>@parcelService.Service.ReferenceNumber</td>
+                        @foreach (var user in Model.Users.Where(u => u.Id == parcelService.Service.UserProviderId))
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
-                    <td>@parcelService.Service.IsAvailable</td>
-                    <td><a href="/Service/AdminViewParcelService/@parcelService.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
-                </tr>
+                        <td>@parcelService.Service.IsAvailable</td>
+                        <td><a href="/Service/AdminViewParcelService/@parcelService.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
+                    </tr>
                 }
             </tbody>
         </table>

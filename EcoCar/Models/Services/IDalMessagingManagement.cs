@@ -10,7 +10,8 @@ namespace EcoCar.Models.Services
         //Message
         List<Message> GetAllMessages();
         Message GetUserMessage(int userId);
-        Message CreateMessage(string messageContent, int serviceConcernedId, int userSenderId);
+        Message CreateMessage(string messageContent, int serviceConcernedId, int userSenderId, int userInitializingConversation);
+
 
         ////-------------------------------------------------------------------------------------------------
 

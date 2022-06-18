@@ -17,6 +17,8 @@ namespace EcoCar.Models.MessagingManagement
         //Foreign Keys
         public int UserSenderId { get; set; }
         public User UserSender { get; set; }
+        public int UserInitializingConversationId { get; set; }
+        public User UserInitializingConversation { get; set; }
         public int ServiceConcernedID { get; set; }
         public Service ServiceConcerned { get; set; }
     }

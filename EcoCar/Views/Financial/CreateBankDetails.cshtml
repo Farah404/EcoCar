@@ -4,6 +4,10 @@
     ViewBag.Title = "Création de compte EcoCar";
 }
 
+<br />
+<div class="progress">
+  <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+</div>
 <section class="sign-in-form" style="background-color: white;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -13,8 +17,6 @@
                         <div class="col-lg-4">
                             <div class="card-body p-md-5 mx-md-4">
                                 <div class="text-center">
-                                    <img src="~/Images/EcoCar.png"
-                                         style="width: 185px;" alt="logo">
                                     <h4 class="mt-1 mb-5 pb-1">Je crée mon compte EcoCar</h4>
                                 </div>
                                 @using (Html.BeginForm())
@@ -44,7 +46,7 @@
                         </div>
                         <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                             <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                               <div class="verticalcenter">
+                               <div>
                                  <img src=~/Images/CityEcoCar.png width="120%" />
                                  </div>
                             </div>

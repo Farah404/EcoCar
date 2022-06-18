@@ -434,6 +434,7 @@ namespace EcoCar.Controllers
                 AccountViewModel accountViewModel = new AccountViewModel
                 {
                     User = dalPersonManagement.GetUser(userId),
+                    Users = dalPersonManagement.GetAllUsers(),
                     Services = dalServiceManagement.GetAllServices(),
                     Account = dalPersonManagement.GetUserAccount(userId),
                     Vehicule = dalPersonManagement.GetUserVehicule(userId),
@@ -445,7 +446,7 @@ namespace EcoCar.Controllers
                     EcoStoreInvoices = dalFinancialManagement.GetAllEcoStoreInvoices().Where(x => x.UserId == userId).ToList(),
                     ServiceInvoices = dalFinancialManagement.GetAllServiceInvoices().Where(x=>x.IdServiceProvider==userId || x.IdServiceConsumer==userId).ToList(),
                     Insurance = dalPersonManagement.GetUserInsurance(userId),
-                    Messages=dalMessagingManagement.GetAllMessages().Where(x=>x.ServiceConcerned.UserProviderId==userId).ToList()
+                    Messages=dalMessagingManagement.GetAllMessages(),
                 };
                 return View(accountViewModel);
             }
@@ -515,7 +516,17 @@ namespace EcoCar.Controllers
         {
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             Service serviceConcerned = dalServiceManagement.GetServiceFromReferenceNumber(referenceNumber);
-            dalMessagingManagement.CreateMessage(messageContent, serviceConcerned.Id, userId);
+            dalMessagingManagement.CreateMessage(messageContent, serviceConcerned.Id, userId, userId);
+            return Redirect("/Home/index");
+        }
+
+        [HttpPost]
+        public IActionResult UserToUserMessage(string messageContent, int referenceNumber, int previousMessageUserId)
+        {
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            Service serviceConcerned = dalServiceManagement.GetServiceFromReferenceNumber(referenceNumber);
+            //int initialMessageId = dalMessagingManagement.GetMessage(previousMessageId);
+            dalMessagingManagement.CreateMessage(messageContent, serviceConcerned.Id, userId, previousMessageUserId);
             return Redirect("/Home/index");
         }
         #endregion

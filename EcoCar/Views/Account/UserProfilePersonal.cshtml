@@ -405,22 +405,26 @@
 
 
                                     <div class="tab-pane" id="sms">
-                                            <div class="table-responsive">
-                                                <table class="table" id="userTable">
-                                                    <thead>
+                                        <div class="table-responsive">
+                                            <table class="table" id="userTable">
+                                                <thead>
 
-                                                        <tr class="header">
-                                                            <th>Expéditeur </th>
-                                                            <th>Prestation</th>
-                                                            <th>Contenu du message</th>
-                                                            <th>Répondre</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach(var message in Model.Messages){
+                                                    <tr class="header">
+                                                        <th>Expéditeur </th>
+                                                        <th>Prestation</th>
+                                                        <th>Contenu du message</th>
+                                                        <th>Répondre</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var message in Model.Messages.Where(m => m.ServiceConcerned.UserProviderId == @Model.User.Id))
+                                                    {
                                                         <tr>
                                                             <td>
-                                                                @message.UserSender.Id
+                                                                @foreach (var user in Model.Users.Where(x => x.Id == message.UserSenderId))
+                                                                {
+                                                                    @user.Account.Username
+                                                                }
                                                             </td>
                                                             <td>
                                                                 @message.ServiceConcerned.ReferenceNumber
@@ -429,17 +433,47 @@
                                                                 @message.MessageContent
                                                             </td>
                                                             <td>
-                                                                @message.MessageContent
-                                                            </td>
+                                                                @using (Html.BeginForm())
+                                                                {
+                                                                    @Html.Hidden("ReferenceNumber",message.ServiceConcerned.ReferenceNumber)
+                                                                    @Html.TextBox("MessageContent")
+                                                                    @Html.Hidden("PreviousMessageUserId", message.UserSenderId)
+                                                                    <button class="btn btn-success btn-xs pull-right" type="submit" formaction="UserToUserMessage">Répondre</button>
+                                                                }
 
-                                                            <td>
-                                                                <span  data-toggle="modal" data-target="#basicModal" class="glyphicon glyphicon-envelope  text-success"></span>
                                                             </td>
                                                         </tr>
-                                                        }
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    }
+                                                    @foreach (var message in Model.Messages.Where(m => (m.UserInitializingConversationId == @Model.User.Id) && m.UserSenderId != @Model.User.Id))
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @foreach (var user in Model.Users.Where(x => x.Id == message.UserSenderId))
+                                                                {
+                                                                    @user.Account.Username
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @message.ServiceConcerned.ReferenceNumber
+                                                            </td>
+                                                            <td>
+                                                                @message.MessageContent
+                                                            </td>
+                                                            <td>
+                                                                @using (Html.BeginForm())
+                                                                {
+                                                                    @Html.Hidden("ReferenceNumber",message.ServiceConcerned.ReferenceNumber)
+                                                                    @Html.TextBox("MessageContent")
+                                                                    @Html.Hidden("PreviousMessageUserId", message.UserSenderId)
+                                                                    <button class="btn btn-success btn-xs pull-right" type="submit" formaction="UserToUserMessage">Répondre</button>
+                                                                }
+
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
 
                                         <!-- The Modal Report -->
                                         <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
@@ -451,7 +485,7 @@
 
                                                     <div class="modal-body">
 
-                                                       body
+                                                        body
 
                                                     </div>
 

@@ -41,7 +41,7 @@
                         @Html.Label("Type de Prestation")<br>
                         @Html.DropDownListFor(model => model.SelectServiceType, Html.GetEnumSelectList<ServiceType>(),"--Selectionnez le type de prestation--",new {required = "required"})
                         @Html.ValidationMessageFor(model => model.SelectServiceType)
-                    <br></div>
+                    <br></div> <br>
 
                     <div class="form-floating mb-3">
                         @Html.Label("Prix en EcoCoins")<br>

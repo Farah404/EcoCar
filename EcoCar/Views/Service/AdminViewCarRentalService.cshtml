@@ -24,8 +24,15 @@
                 <br />
                     <button onclick="location.href='/Account/UserProfilePersonalByAdmin/@Model.CarRentalService.Service.UserProviderId'" class="btn btn-success center-block">Consulter le profil de l'EcoMembre</button>
                     <br />
+                     @*Allowing the Admin to view the page when noone reserved/respond to the service and thus no serviceInvoice related exists*@
+                @if (Model.ServiceInvoice != null)
+                {
                     <button onclick="location.href='/Financial/ServiceInvoice/@Model.ServiceInvoice.Id'" class="btn btn-success center-block">Facture de la prestation</button>
-                
+                }
+                 @if (Model.ServiceInvoice == null)
+                {
+                    <button class="btn btn-outline-success center-block">Facture de la prestation</button>
+                }
             </div>
             <div class="col-md-6">
                 <div class="table-responsive">

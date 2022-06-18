@@ -101,7 +101,7 @@
                             <td class="product-eco-ecoin">@Model.EcoStore.TrimestrialSubscription</td>
                             <td class="product-line-price">@Model.EcoStore.TrimestrialSubscriptionPrice €</td>
                             <td class="col col-qty layout-inline">
-                                 @Html.TextBox("QuantityTrimestrialSubscription",@Model.ShoppingCart.QuantityTrimestrialSubscription, new{@readonly = true,id="qty", @class ="form-control"})
+                                @Html.TextBox("QuantityTrimestrialSubscription",@Model.ShoppingCart.QuantityTrimestrialSubscription, new{@readonly = true,id="qty", @class ="form-control"})
                             </td>
                             <td>@Model.ShoppingCart.TotalTrimestrialSub €</td>
                         </tr>
@@ -117,7 +117,7 @@
                             <td class="product-eco-ecoin">@Model.EcoStore.SemestrialSubscription</td>
                             <td class="product-line-price">@Model.EcoStore.SemestrialSubscriptionPrice €</td>
                             <td class="col col-qty layout-inline">
-                                 @Html.TextBox("QuantitySemestrialSubscription",@Model.ShoppingCart.QuantitySemestrialSubscription, new{@readonly = true,id="qty", @class ="form-control"})
+                                @Html.TextBox("QuantitySemestrialSubscription",@Model.ShoppingCart.QuantitySemestrialSubscription, new{@readonly = true,id="qty", @class ="form-control"})
                             </td>
                             <td>@Model.ShoppingCart.TotalSemestrialSub €</td>
                         </tr>
@@ -126,26 +126,29 @@
                     {
                         @Html.Hidden("QuantitySemestrialSubscription",0)
                     }
-                     <tr>
-                            <td class="product-name"></td>
-                            <td class="product-eco-ecoin"></td>
-                            <td class="product-line-price"></td>
-                            <td class="col col-qty layout-inline">Sous-total</td>
-                            <td class="product-total-price">@Model.ShoppingCart.TotalPriceEuros €</td>
-                        </tr>
+                    <tr>
+                        <td class="product-name"></td>
+                        <td class="product-eco-ecoin"></td>
+                        <td class="product-line-price"></td>
+                        <td class="col col-qty layout-inline">Sous-total</td>
+                        <td class="product-total-price">@Model.ShoppingCart.TotalPriceEuros €</td>
+                    </tr>
                 </tbody>
 
             </table>
         </div>
-        <button style="float: right;" class="btn btn-success btn-xl" type="submit" formaction="EmptyShoppingCart">Vider le panier</button>
-        <br/>
-        <br/>
-        <button style="float: right;" class="btn btn-success btn-xl" type="submit" formaction="RefreshShoppingCart">Rafraîchir le panier</button>
-        <br/>
-        <br/>
+        <div class="circle">
+            <button style="float: right;" class="submit-with-icon" type="submit" formaction="EmptyShoppingCart"><span class="glyphicon glyphicon-erase text-success"></span></button>
+            @*<div class="circle">*@
+            <button style="float: right;" class="submit-with-icon" type="submit" formaction="RefreshShoppingCart">
+                <span class="glyphicon glyphicon-refresh text-success"></span>
+            </button>
+        </div>
         <button style="float: right;" class="btn btn-success btn-xl" type="submit" formaction="ShoppingCart">Valider la commande</button>
     </div>
-    
+   
+
+
 }
 <script>
     // RESTRICT INPUTS TO NUMBERS ONLY WITH A MIN OF 0 AND A MAX 100
@@ -159,6 +162,6 @@
             input.val(100);
         }
     });
-   
-    }
+
+        }
 </script>

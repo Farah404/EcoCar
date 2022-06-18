@@ -383,7 +383,7 @@ namespace EcoCar.Controllers
                    );
 
                 dalFinancialManagement.UpdateShoppingCart(shoppingCart.Id, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-                return Redirect("/Financial/EcoStore");
+                return Redirect("/Account/UserProfilePersonal");
             }
             else
             {

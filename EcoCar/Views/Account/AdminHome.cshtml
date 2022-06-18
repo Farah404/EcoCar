@@ -56,7 +56,7 @@
                     <th>Email</th>
                     <th>EcoMembre depuis</th>
                     <th>Montant EcoCoins</th>
-                    <th>Formule d'abonnement</th>
+                    <th>Abonnement</th>
                     <th>Actif</th>
                     <th>EcoSuspension</th>
                 </tr>
@@ -72,8 +72,8 @@
                         <td>@users.Email</td>
                         <td>@users.Account.CreationDate.ToShortDateString()</td>
                         <td>@users.EcoWallet.EcoCoinsAmount</td>
-                        <td>@users.EcoWallet.Subscription</td>
-                        <td>@users.Account.IsActive</td>
+                        <td>@(users.EcoWallet.Subscription ? "En cours":"Aucun")</td>
+                        <td>@(users.Account.IsActive ? "Actif":"Désactivé")</td>
                         <td><a href="/Account/UserProfilePersonalByAdmin/@users.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
                     </tr>
                 }
@@ -109,7 +109,7 @@
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
-                        <td>@carPoolingService.Service.IsAvailable</td>
+                        <td>@(carPoolingService.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         <td><a href="/Service/AdminViewCarPoolingService/@carPoolingService.Id">Détails</a></td>
 
                     </tr>
@@ -124,7 +124,7 @@
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
-                        <td>@carRentalService.Service.IsAvailable</td>
+                        <td>@(carRentalService.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         <td><a href="/Service/AdminViewCarRentalService/@carRentalService.Id">Détails</a></td>
 
                     </tr>
@@ -139,7 +139,7 @@
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
-                        <td>@parcelService.Service.IsAvailable</td>
+                        <td>@(parcelService.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         <td><a href="/Service/AdminViewParcelService/@parcelService.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
 
                     </tr>
@@ -175,7 +175,7 @@
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
-                        <td>@carPoolingService.Service.IsAvailable</td>
+                        <td>@(carPoolingService.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         <td><a href="/Service/AdminViewCarPoolingService/@carPoolingService.Id">Détails</a></td>
                     </tr>
                 }
@@ -189,7 +189,7 @@
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
-                        <td>@carRentalService.Service.IsAvailable</td>
+                        <td>@(carRentalService.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         <td><a href="/Service/AdminViewCarRentalService/@carRentalService.Id">Détails</a></td>
                     </tr>
                 }
@@ -203,7 +203,7 @@
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
-                        <td>@parcelService.Service.IsAvailable</td>
+                        <td>@(parcelService.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         <td><a href="/Service/AdminViewParcelService/@parcelService.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
                     </tr>
                 }

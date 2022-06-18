@@ -187,7 +187,7 @@ namespace EcoCar.Controllers
 
         #endregion
 
-        #region Creatin carpooling service
+        #region Creating carpooling service
         public IActionResult CreateCarPoolingService(int serviceId, int trajectoryId, int vehiculeId)
         {
             CarPoolingService carPoolingService = new CarPoolingService()
@@ -213,7 +213,7 @@ namespace EcoCar.Controllers
                 carPoolingService.VehiculeId,
                 carPoolingService.ServiceId
                 );
-            string url = "/Home/Index";
+            string url = "/Service/SearchService";
             return Redirect(url);
         }
         #endregion
@@ -237,7 +237,7 @@ namespace EcoCar.Controllers
                 carRentalService.VehiculeId,
                 carRentalService.ServiceId
                 );
-            string url = "/Home/Index";
+            string url = "/Service/SearchService";
             return Redirect(url);
         }
         #endregion
@@ -265,7 +265,7 @@ namespace EcoCar.Controllers
                 parcelService.ServiceId,
                 parcelService.VehiculeId
                 );
-            string url = "/Home/Index";
+            string url = "/Service/SearchService";
             return Redirect(url);
         }
         #endregion
@@ -537,7 +537,7 @@ namespace EcoCar.Controllers
                 carPoolingRequest.VehiculeId,
                 carPoolingRequest.ServiceId
                 );
-            string url = "/Home/Index";
+            string url = "/Service/SearchService";
             return Redirect(url);
         }
         #endregion
@@ -566,7 +566,7 @@ namespace EcoCar.Controllers
                 parcelRequest.ServiceId,
                 parcelRequest.VehiculeId
                 );
-            string url = "/Home/Index";
+            string url = "/Service/SearchService";
             return Redirect(url);
         }
 
@@ -592,7 +592,7 @@ namespace EcoCar.Controllers
                 carRentalRequest.VehiculeId,
                 carRentalRequest.ServiceId
                 );
-            string url = "/Home/Index";
+            string url = "/Service/SearchService";
             return Redirect(url);
         }
 
@@ -810,7 +810,7 @@ namespace EcoCar.Controllers
         }
         #endregion
 
-        #region AdminViewing
+        #region AdminViewing&ManagementOfServices
         public ActionResult AdminViewCarPoolingService(int? id)
         {
             CarPoolingService carPoolingService = dalServiceManagement.GetCarPoolingService((int)id);

@@ -616,3 +616,42 @@ div.eco-cloud-left-other {
         left: 100%;
     }
 }
+
+/*glyphiconsInSHoppingCart*/
+.circle {
+    border-radius: 100%;
+    border: 0.25em transparent;
+    height: 50px;
+    width: 50px;
+}
+
+/*.glyphicon.glyphicon-edit {
+    font-size: 28px;
+    padding: 8px 3px 0 8px;
+}*/
+.glyphicon.glyphicon-refresh {
+    font-size: 28px;
+    padding: 8px 3px 0 8px;
+}
+.glyphicon.glyphicon-erase {
+    font-size: 28px;
+    padding: 8px 3px 0 8px;
+}
+
+.submit-with-icon {
+    background: transparent;
+    border: 0px;
+    padding: 0;
+    outline: 0;
+}
+
+.circle:active {
+    content: '';
+    background-color: rgb(235, 235, 235);
+    border-color: rgb(173, 173, 173);
+}
+
+#circle >div {
+    display :inline-block;
+    vertical-align:middle;
+}

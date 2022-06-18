@@ -36,7 +36,7 @@ namespace EcoCar.Models.Services
         //Create Person
         public int CreatePerson(string name, string lastName)
         {
-            Person person = new Person() { Name = name, LastName = lastName };
+            Person person = new Person() { Name = name, LastName = lastName, ProfilePicturePath= "/ProfilePictures/ProfileGif1.gif" };
             _bddContext.People.Add(person);
             _bddContext.SaveChanges();
             return person.Id;

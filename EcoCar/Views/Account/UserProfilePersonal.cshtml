@@ -49,7 +49,7 @@
                                         <a href="" data-target="#vehicule" data-toggle="tab" class="nav-link text-success">Véhicule & Assurance</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="" data-target="#sms" data-toggle="tab" class="nav-link text-success">Message</a>
+                                        <a href="" data-target="#sms" data-toggle="tab" class="nav-link text-success">Messagerie</a>
                                     </li>
                                 </ul>
 
@@ -230,12 +230,6 @@
                                                         <p>@Model.User.BankDetails.Iban</p>
                                                     </td>
                                                 </tr>
-                                            </tbody>
-                                        </table>
-
-
-                                        <table class="table table-user-information">
-                                            <tbody>
                                                 <tr>
                                                     <td>
                                                         <span class="glyphicon glyphicon-map-marker  text-success"></span>
@@ -285,8 +279,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-
-
 
                                     <div class="tab-pane" id="vehicule">
                                         <table class="table table-user-information">
@@ -474,28 +466,6 @@
                                                 </tbody>
                                             </table>
                                         </div>
-
-                                        <!-- The Modal Report -->
-                                        <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fermer</button>
-                                                    </div>
-
-                                                    <div class="modal-body">
-
-                                                        body
-
-                                                    </div>
-
-                                                    <div class="modal-footer">
-                                                        footer
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -507,6 +477,9 @@
         </div>
     </div>
 </div>
+<br />
+<br />
+<br />
 
 
 <div id="services" class="container-fluid bg-grey">
@@ -527,41 +500,41 @@
             </thead>
             <tbody>
                 @*Listing only carPoolingServices related to User (where User is provider & when user is consumer) and displaying in both case the appropriate ServiceInvoice link*@
-                         @foreach(var carPoolingService in Model.CarPoolingServices.Where(c=>c.Service.UserProviderId==@Model.User.Id))
+                @foreach (var carPoolingService in Model.CarPoolingServices.Where(c => c.Service.UserProviderId == @Model.User.Id))
+                {
+                    <tr>
+                        <td>@carPoolingService.Service.Start</td>
+                        <td>@carPoolingService.Service.SelectServiceType</td>
+                        <td>@carPoolingService.Service.ReferenceNumber</td>
+                        <td>@carPoolingService.Service.IsRequest</td>
+                        <td>@carPoolingService.Service.IsAvailable</td>
+                        @if (@carPoolingService.Service.UserProviderId == @Model.User.Id)
                         {
-                            <tr>
-                            <td>@carPoolingService.Service.Start</td>
-                            <td>@carPoolingService.Service.SelectServiceType</td>
-                            <td>@carPoolingService.Service.ReferenceNumber</td>
-                            <td>@carPoolingService.Service.IsRequest</td>
-                            <td>@carPoolingService.Service.IsAvailable</td>
-                            @if (@carPoolingService.Service.UserProviderId == @Model.User.Id)
+                            @using (Html.BeginForm())
                             {
-                                @using (Html.BeginForm())
-                                {
-                                    @Html.Hidden("Id",@carPoolingService.Id)
-                                    <td><button class="btn btn-outline-danger btn-xs" type="submit" formaction="DeleteCarPoolServiceByUser">Supprimer</button></td>
-                                }
+                                @Html.Hidden("Id",@carPoolingService.Id)
+                                <td><button class="btn btn-outline-danger btn-xs" type="submit" formaction="DeleteCarPoolServiceByUser">Supprimer</button></td>
                             }
-                            @if(@carPoolingService.Service.UserProviderId != @Model.User.Id)
-                               {
-                                   <td></td>
-                               }
-                            <td>
-                                @foreach(var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == carPoolingService.ServiceId))
-                                    {
-                                     <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a>
-                                    }
-                                </td>
-                            
-                            </tr>
                         }
-
-                        @foreach(var reservations in Model.Reservations.Where(x => x.ServiceUserConsumerId == @Model.User.Id))
+                        @if (@carPoolingService.Service.UserProviderId != @Model.User.Id)
                         {
-                            @foreach(var carPoolingserviceR in Model.CarPoolingServices.Where(c=>c.Service.Id == reservations.ServiceConsumedId))
+                            <td></td>
+                        }
+                        <td>
+                            @foreach (var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == carPoolingService.ServiceId))
                             {
-                                <tr>
+                                <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a>
+                            }
+                        </td>
+
+                    </tr>
+                }
+
+                @foreach (var reservations in Model.Reservations.Where(x => x.ServiceUserConsumerId == @Model.User.Id))
+                {
+                    @foreach (var carPoolingserviceR in Model.CarPoolingServices.Where(c => c.Service.Id == reservations.ServiceConsumedId))
+                    {
+                        <tr>
                             <td>@carPoolingserviceR.Service.Start</td>
                             <td>@carPoolingserviceR.Service.SelectServiceType</td>
                             <td>@carPoolingserviceR.Service.ReferenceNumber</td>
@@ -569,31 +542,31 @@
                             <td>@carPoolingserviceR.Service.IsAvailable</td>
                             @if (@carPoolingserviceR.Service.UserProviderId == @Model.User.Id)
                             {
-                            @using (Html.BeginForm())
+                                @using (Html.BeginForm())
                                 {
                                     @Html.Hidden("Id",@carPoolingserviceR.Id)
                                     <td><button class="btn btn-outline-danger btn-xs" type="submit" formaction="DeleteCarPoolServiceByUser">Supprimer</button></td>
                                 }
                             }
-                            @if(@carPoolingserviceR.Service.UserProviderId != @Model.User.Id)
-                               {
-                                   <td></td>
-                               }
-
-                                <td> 
-                            @foreach(var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == carPoolingserviceR.ServiceId))
+                            @if (@carPoolingserviceR.Service.UserProviderId != @Model.User.Id)
                             {
-                                <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a>
+                                <td></td>
                             }
+
+                            <td>
+                                @foreach (var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == carPoolingserviceR.ServiceId))
+                                {
+                                    <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a>
+                                }
                             </td>
-                            </tr>
-                            }
-                            
-                        }
+                        </tr>
+                    }
+
+                }
                 @*Listing only carRentalServices related to User (where User is provider & when user is consumer) and displaying in both case the appropriate ServiceInvoice link*@
-                       @foreach(var carRentalService in Model.CarRentalServices.Where(c=>c.Service.UserProviderId==@Model.User.Id))
-                        {
-                             <tr>
+                @foreach (var carRentalService in Model.CarRentalServices.Where(c => c.Service.UserProviderId == @Model.User.Id))
+                {
+                    <tr>
                         <td>@carRentalService.Service.Start</td>
                         <td>@carRentalService.Service.SelectServiceType</td>
                         <td>@carRentalService.Service.ReferenceNumber</td>
@@ -607,113 +580,113 @@
                                 <td><button class="btn btn-outline-danger btn-xs" type="submit" formaction="DeleteCarRentalServiceByUser">Supprimer</button></td>
                             }
                         }
-                        @if(@carRentalService.Service.UserProviderId != @Model.User.Id)
-                               {
-                                   <td></td>
-                               }
+                        @if (@carRentalService.Service.UserProviderId != @Model.User.Id)
+                        {
+                            <td></td>
+                        }
                         <td>
-                         @foreach(var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == carRentalService.ServiceId))
+                            @foreach (var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == carRentalService.ServiceId))
                             {
                                 <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a>
                             }
-                            </td>
+                        </td>
                     </tr>
-                        }
-                        @foreach(var reservations in Model.Reservations.Where(x => x.ServiceUserConsumerId == @Model.User.Id))
-                        {
-                            @foreach(var carRentalServiceR in Model.CarRentalServices.Where(c=>c.Service.Id == reservations.ServiceConsumedId))
+                }
+                @foreach (var reservations in Model.Reservations.Where(x => x.ServiceUserConsumerId == @Model.User.Id))
+                {
+                    @foreach (var carRentalServiceR in Model.CarRentalServices.Where(c => c.Service.Id == reservations.ServiceConsumedId))
+                    {
+                        <tr>
+                            <td>@carRentalServiceR.Service.Start</td>
+                            <td>@carRentalServiceR.Service.SelectServiceType</td>
+                            <td>@carRentalServiceR.Service.ReferenceNumber</td>
+                            <td>@carRentalServiceR.Service.IsRequest</td>
+                            <td>@carRentalServiceR.Service.IsAvailable</td>
+                            @if (@carRentalServiceR.Service.UserProviderId == @Model.User.Id)
                             {
-                                <tr>
-                        <td>@carRentalServiceR.Service.Start</td>
-                        <td>@carRentalServiceR.Service.SelectServiceType</td>
-                        <td>@carRentalServiceR.Service.ReferenceNumber</td>
-                        <td>@carRentalServiceR.Service.IsRequest</td>
-                        <td>@carRentalServiceR.Service.IsAvailable</td>
-                        @if (@carRentalServiceR.Service.UserProviderId == @Model.User.Id)
-                            {
-                        @using (Html.BeginForm())
+                                @using (Html.BeginForm())
                                 {
                                     @Html.Hidden("Id",@carRentalServiceR.Id)
                                     <td><button class="btn btn-outline-danger btn-xs" type="submit" formaction="DeleteCarRentalServiceByUser">Supprimer</button></td>
                                 }
                             }
-                        @if(@carRentalServiceR.Service.UserProviderId != @Model.User.Id)
-                               {
-                                   <td></td>
-                               }
-                               <td>
-                        @foreach(var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == carRentalServiceR.ServiceId))
+                            @if (@carRentalServiceR.Service.UserProviderId != @Model.User.Id)
                             {
-                                <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a>
+                                <td></td>
                             }
+                            <td>
+                                @foreach (var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == carRentalServiceR.ServiceId))
+                                {
+                                    <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a>
+                                }
                             </td>
-                            </tr>
-                            }
-                            
-                        }
+                        </tr>
+                    }
+
+                }
                 @*Listing only carRentalServices related to User (where User is provider & when user is consumer) and displaying in both case the appropriate ServiceInvoice link*@
-                        @foreach(var parcelService in Model.ParcelServices.Where(c=>c.Service.UserProviderId==@Model.User.Id))
-                        {
-                             <tr>
+                @foreach (var parcelService in Model.ParcelServices.Where(c => c.Service.UserProviderId == @Model.User.Id))
+                {
+                    <tr>
                         <td>@parcelService.Service.Start</td>
                         <td>@parcelService.Service.SelectServiceType</td>
                         <td>@parcelService.Service.ReferenceNumber</td>
                         <td>@parcelService.Service.IsRequest</td>
                         <td>@parcelService.Service.IsAvailable</td>
                         @if (@parcelService.Service.UserProviderId == @Model.User.Id)
-                            {
-                            @using (Html.BeginForm())
-                                    {
-                                        @Html.Hidden("Id",@parcelService.Id)
-                                        <td><button class="btn btn-outline-danger btn-xs" type="submit" formaction="DeleteParcelServiceByUser">Supprimer</button></td>
-                                    }
-                            }
-                        @if(@parcelService.Service.UserProviderId != @Model.User.Id)
-                               {
-                                   <td></td>
-                               }
-
-
-                            <td>
-                        @foreach(var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == parcelService.ServiceId))
-                            {
-                                 <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a>
-                            }
-                            </td>
-                    </tr>
-                        }
-                        @foreach(var reservations in Model.Reservations.Where(x => x.ServiceUserConsumerId == @Model.User.Id))
                         {
-                            @foreach(var parcelServiceR in Model.ParcelServices.Where(c=>c.Service.Id == reservations.ServiceConsumedId))
+                            @using (Html.BeginForm())
                             {
-                                <tr>
-                        <td>@parcelServiceR.Service.Start</td>
-                        <td>@parcelServiceR.Service.SelectServiceType</td>
-                        <td>@parcelServiceR.Service.ReferenceNumber</td>
-                        <td>@parcelServiceR.Service.IsRequest</td>
-                        <td>@parcelServiceR.Service.IsAvailable</td>
+                                @Html.Hidden("Id",@parcelService.Id)
+                                <td><button class="btn btn-outline-danger btn-xs" type="submit" formaction="DeleteParcelServiceByUser">Supprimer</button></td>
+                            }
+                        }
+                        @if (@parcelService.Service.UserProviderId != @Model.User.Id)
+                        {
+                            <td></td>
+                        }
+
+
+                        <td>
+                            @foreach (var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == parcelService.ServiceId))
+                            {
+                                <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a>
+                            }
+                        </td>
+                    </tr>
+                }
+                @foreach (var reservations in Model.Reservations.Where(x => x.ServiceUserConsumerId == @Model.User.Id))
+                {
+                    @foreach (var parcelServiceR in Model.ParcelServices.Where(c => c.Service.Id == reservations.ServiceConsumedId))
+                    {
+                        <tr>
+                            <td>@parcelServiceR.Service.Start</td>
+                            <td>@parcelServiceR.Service.SelectServiceType</td>
+                            <td>@parcelServiceR.Service.ReferenceNumber</td>
+                            <td>@parcelServiceR.Service.IsRequest</td>
+                            <td>@parcelServiceR.Service.IsAvailable</td>
                             @if (@parcelServiceR.Service.UserProviderId == @Model.User.Id)
                             {
-                                 @using (Html.BeginForm())
+                                @using (Html.BeginForm())
                                 {
                                     @Html.Hidden("Id",@parcelServiceR.Id)
                                     <td><button class="btn btn-outline-danger btn-xs" type="submit" formaction="DeleteParcelServiceByUser">Supprimer</button></td>
                                 }
                             }
-                           @if(@parcelServiceR.Service.UserProviderId != @Model.User.Id)
-                               {
-                                   <td></td>
-                               }
-                                <td>
-                        @foreach(var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == parcelServiceR.ServiceId))
+                            @if (@parcelServiceR.Service.UserProviderId != @Model.User.Id)
                             {
-                                 <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a>
+                                <td></td>
                             }
+                            <td>
+                                @foreach (var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == parcelServiceR.ServiceId))
+                                {
+                                    <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a>
+                                }
                             </td>
-                    </tr>
-                            }
-                            
-                        }
+                        </tr>
+                    }
+
+                }
                 @Html.Hidden("serviceId",@ViewBag.serviceId,null)
 
 

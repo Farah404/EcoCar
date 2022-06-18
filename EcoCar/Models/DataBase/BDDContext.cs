@@ -50,7 +50,7 @@ namespace EcoCar.Models.DataBase
         {
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                optionsBuilder.UseMySql("server=localhost;user id=root;password=rootine;database=EcoCar");
+                optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
             }
             else
             {
@@ -104,7 +104,7 @@ namespace EcoCar.Models.DataBase
 
             #endregion
 
-            #region Initializing the admins
+            #region Initializing the admin
             this.Administrators.Add(
                 new Administrator
                 {
@@ -118,6 +118,7 @@ namespace EcoCar.Models.DataBase
                 );
             #endregion
 
+            #region USERS
             #region  Initializing User1: Hermann/random
             this.People.Add(
                 new Person
@@ -125,7 +126,7 @@ namespace EcoCar.Models.DataBase
                     Id = 1,
                     Name = "Hermann",
                     LastName = "Gauduin",
-                    ProfilePicturePath = "/ProfilePictures/ProfileGif10.gif"
+                    ProfilePicturePath = "/ProfilePictures/ProfileGif5.gif"
                 }
                 );
             this.Users.Add(
@@ -219,7 +220,6 @@ namespace EcoCar.Models.DataBase
                     ContractNumber = "R124124124TRAT"
                 });
             #endregion
-
             #region Initializing User2: Farah/random
             this.People.Add(
             new Person
@@ -321,7 +321,6 @@ namespace EcoCar.Models.DataBase
                 });
             this.SaveChanges();
             #endregion
-
             #region Initializing User3: Francois/random
             this.People.Add(
             new Person
@@ -329,7 +328,7 @@ namespace EcoCar.Models.DataBase
                 Id = 3,
                 Name = "François-Noël",
                 LastName = "Bernal",
-                ProfilePicturePath = "/ProfilePictures/ProfileGif5.gif"
+                ProfilePicturePath = "/ProfilePictures/ProfileGif10.gif"
             }
             );
             this.Users.Add(
@@ -421,7 +420,6 @@ namespace EcoCar.Models.DataBase
                 });
             this.SaveChanges();
             #endregion
-
             #region Initializing User4: Houda/random
             this.People.Add(
             new Person
@@ -521,7 +519,6 @@ namespace EcoCar.Models.DataBase
                 });
             this.SaveChanges();
             #endregion
-
             #region Initializing User5: Yannick/random
             this.People.Add(
             new Person
@@ -623,7 +620,6 @@ namespace EcoCar.Models.DataBase
                 });
             this.SaveChanges();
             #endregion
-
             #region Initializing User6: Benjamin/random
             this.People.Add(
             new Person
@@ -723,7 +719,6 @@ namespace EcoCar.Models.DataBase
                 });
             this.SaveChanges();
             #endregion
-
             #region Initializing User7: Jules/random
             this.People.Add(
             new Person
@@ -825,7 +820,6 @@ namespace EcoCar.Models.DataBase
                 });
             this.SaveChanges();
             #endregion
-
             #region Initializing User8: Frédéric/random
             this.People.Add(
             new Person
@@ -925,7 +919,6 @@ namespace EcoCar.Models.DataBase
                 });
             this.SaveChanges();
             #endregion
-
             #region Initializing User9: Hamid/random
             this.People.Add(
             new Person
@@ -1024,7 +1017,6 @@ namespace EcoCar.Models.DataBase
                 });
             this.SaveChanges();
             #endregion
-
             #region Initializing User10: Romuald/random
             this.People.Add(
             new Person
@@ -1126,7 +1118,6 @@ namespace EcoCar.Models.DataBase
                 });
             this.SaveChanges();
             #endregion
-
             #region Initializing User11: Nelly/random
             this.People.Add(
             new Person
@@ -1227,7 +1218,6 @@ namespace EcoCar.Models.DataBase
                 });
             this.SaveChanges();
             #endregion
-
             #region Initializing User12: Sabrina/random
             this.People.Add(
             new Person
@@ -1329,7 +1319,6 @@ namespace EcoCar.Models.DataBase
                 });
             this.SaveChanges();
             #endregion
-
             #region Initializing User13: Gaïa/random
             this.People.Add(
             new Person
@@ -1430,6 +1419,867 @@ namespace EcoCar.Models.DataBase
                     ContractNumber = "87746AEV"
                 });
             this.SaveChanges();
+            #endregion
+            #endregion
+
+            #region ITINERARIES
+            #region Initializing Itinerary1: Brest-Paris
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 1,
+                FirtsStopAddress = "Rennes",
+                SecondStopAddress = "Le Mans",
+                ThirdStopAddress = "Chartres"
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary2: Brest-Paris
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 2,
+                FirtsStopAddress = "Saint-Brieuc",
+                SecondStopAddress = "Rennes",
+                ThirdStopAddress = "Chartres"
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary3: Poitiers-Troyes
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 3,
+                FirtsStopAddress = "Tours",
+                SecondStopAddress = "Orléans",
+                ThirdStopAddress = "Montargis"
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary4: Paris-Lille
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 4,
+                FirtsStopAddress = "Amiens",
+                SecondStopAddress = "Orléans",
+                ThirdStopAddress = "Lens"
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary5: Montpellier-Toulouse
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 5,
+                FirtsStopAddress = "Narbonne",
+                SecondStopAddress = "Carcassone",
+                ThirdStopAddress = "Labège"
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary6: Toulouse-Bordeaux
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 6,
+                FirtsStopAddress = "Montauban",
+                SecondStopAddress = "Valence",
+                ThirdStopAddress = "Langon"
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary7: Pau-Paris
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 7,
+                FirtsStopAddress = "Bordeaux",
+                SecondStopAddress = "Poitiers",
+                ThirdStopAddress = "Tours"
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary8: Lille-Brussels
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 8,
+                FirtsStopAddress = "Roubaix",
+                SecondStopAddress = "Bruges",
+                ThirdStopAddress = "Ghent"
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary9: Nancy-Luxembourg
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 9,
+                FirtsStopAddress = "Metz"
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary10: Strasbourg-Bern
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 10,
+                FirtsStopAddress = "Mulhouse"
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary11: Paris-Paris
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 11,
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary12: Brest-Brest
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 12,
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary13: Grenoble-Grenoble
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 13,
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary14: Bordeaux-Bordeaux
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 14,
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Itinerary15: Perpignan-Perpignan
+            this.Itineraries.Add(
+            new Itinerary
+            {
+                Id = 15,
+            });
+            this.SaveChanges();
+            #endregion
+            #endregion
+
+            #region TRAJECTORIES
+            #region Initializing Trajectory1: Brest - Paris
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 1,
+                DurationHours = 8,
+                StopNumber = 3,
+                StopsDurationMinutes = 30,
+                PickUpAddress = "121 Boulevard de l'Hopital 29200 Brest",
+                DeliveryAddress = "48 Rue d'Amsterdam 75009 Paris",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Punctual,
+                ItineraryId = 1
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory2: Poitiers - Troyes
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 2,
+                DurationHours = 6,
+                StopNumber = 3,
+                StopsDurationMinutes = 20,
+                PickUpAddress = "64 Boulevard Haussmann 86000 Poitiers",
+                DeliveryAddress = "8 Rue de la Bidassoam 10420 Troyes",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Punctual,
+                ItineraryId = 2
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory3: Brest-Paris
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 3,
+                DurationHours = 8,
+                StopNumber = 3,
+                StopsDurationMinutes = 30,
+                PickUpAddress = "13 Rue Tiquetonne 29200 Brest",
+                DeliveryAddress = "109 Avenue d'Ivry 75013 Paris",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Punctual,
+                ItineraryId = 3
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory4: Paris-Lille
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 4,
+                DurationHours = 4,
+                StopNumber = 3,
+                StopsDurationMinutes = 20,
+                PickUpAddress = "5 Rue Villedo 75001 Paris",
+                DeliveryAddress = "20 Rue Alibert 59000 Lille",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Punctual,
+                ItineraryId = 4
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory5: Montpellier - Toulouse
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 5,
+                DurationHours = 4,
+                StopNumber = 3,
+                StopsDurationMinutes = 20,
+                PickUpAddress = "11 Rue Danielle Casanova 34000 Montpellier",
+                DeliveryAddress = "127 Avenue Parmentier 31000 Toulouse",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Punctual,
+                ItineraryId = 5
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory6: Toulouse - Bordeaux
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 6,
+                DurationHours = 4,
+                StopNumber = 3,
+                StopsDurationMinutes = 20,
+                PickUpAddress = "8 Rue Nicolas Charlet 31000 Toulouse",
+                DeliveryAddress = "5 Boulevard de la Villette 30072 Bordeaux",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Punctual,
+                ItineraryId = 6
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory7: Pau - Paris
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 7,
+                DurationHours = 12,
+                StopNumber = 3,
+                StopsDurationMinutes = 25,
+                PickUpAddress = "17 Place de la Bourse 64000 Pau",
+                DeliveryAddress = "51 Rue Arbre Sec 75001 Paris",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Punctual,
+                ItineraryId = 7
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory8: Lille - Brussels
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 8,
+                DurationHours = 2,
+                StopNumber = 3,
+                StopsDurationMinutes = 15,
+                PickUpAddress = "19 Rue Saint-Antoine 59000 Lille",
+                DeliveryAddress = "85 Bis Avenue de Wagram 10470 Brussels",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Punctual,
+                ItineraryId = 8
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory9: Nancy - Luxembourg
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 9,
+                DurationHours = 2,
+                StopNumber = 1,
+                StopsDurationMinutes = 30,
+                PickUpAddress = "156 Avenue Ledru Rollin 54000 Nancy",
+                DeliveryAddress = "61 Rue Pierre Charron 10740 Luxembourg",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Punctual,
+                ItineraryId = 9
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory10: Strasbourg - Bern
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 10,
+                DurationHours = 2,
+                StopNumber = 1,
+                StopsDurationMinutes = 30,
+                PickUpAddress = "7 Rue Andre Lefebvre 67000 Strasbourg",
+                DeliveryAddress = "24 Rue de Sevres 30018 Bern",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Regular,
+                ItineraryId = 10
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory11: Paris - Paris
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 11,
+                DurationHours = 1,
+                PickUpAddress = "42 Rue de Lancry 75018 Paris",
+                DeliveryAddress = "67 Rue Marx Dormoy 75018 Paris",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Regular,
+                ItineraryId = 11
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory12: Brest - Brest
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 12,
+                DurationHours = 1,
+                PickUpAddress = "15 Rue des Martyrs 29200 Brest",
+                DeliveryAddress = "16 Rue d'Antin 29200 Brest",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Regular,
+                ItineraryId = 12
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory13: Grenoble - Grenoble
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 13,
+                DurationHours = 1,
+                PickUpAddress = "7 Rue Tournefort 38000 Grenoble",
+                DeliveryAddress = "21 Rue Avre 38000 Grenoble",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Regular,
+                ItineraryId = 13
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory14: Bordeaux - Bordeaux
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 14,
+                DurationHours = 1,
+                PickUpAddress = "94 Rue Saint-Lazare 30072 Bordeaux",
+                DeliveryAddress = "5 Rue Massenet 30072 Bordeaux",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Regular,
+                ItineraryId = 14
+            });
+            this.SaveChanges();
+            #endregion
+            #region Initializing Trajectory15: Perpignan - Perpignan
+            this.Trajectories.Add(
+            new Trajectory
+            {
+                Id = 15,
+                DurationHours = 1,
+                PickUpAddress = "78 Rue de Provence 66000 Perpignan",
+                DeliveryAddress = "88 Ter Avenue Parmentier 66000 Perpignan",
+                SelectTrajectoryType = Trajectory.TrajectoryType.Regular,
+                ItineraryId = 15
+            });
+            this.SaveChanges();
+            #endregion
+            #endregion
+
+            #region SERVICES CARPOOL
+            #region Initializing Service1: CarPooling home to work Brest
+            this.Services.Add(
+            new Service
+            {
+                Id =1,
+                PublicationDate = new DateTime(2022, 06, 02),
+                ReferenceNumber = 855583637,
+                IsAvailable = true,
+                Start = new DateTime(2022, 06, 25),
+                End = new DateTime(2022, 06, 25),
+                IsRequest = false,
+                SelectServiceType = Service.ServiceType.CarPoolingService,
+                PriceEcoCoins = 10,
+                UserProviderId = 1
+            });
+            this.SaveChanges();
+            this.CarPoolingServices.Add(
+                new CarPoolingService
+                {
+                    Id=1,
+                    SelectCarPoolingType = CarPoolingService.CarPoolingType.HomeToWork,
+                    AvailableSeats = 3,
+                    PetsAllowed = false,
+                    SmokingAllowed = false,
+                    MusicAllowed = false,
+                    ChattingAllowed = true,
+                    TrajectoryId = 12,
+                    VehiculeId = 1,
+                    ServiceId = 1,
+                });
+            #endregion
+            #region Initializing Service2: CarPooling home to school Grenoble
+            this.Services.Add(
+            new Service
+            {
+                Id = 2,
+                PublicationDate = new DateTime(2022, 06, 15),
+                ReferenceNumber = 953518504,
+                IsAvailable = true,
+                Start = new DateTime(2022, 07, 01),
+                End = new DateTime(2022, 07, 01),
+                IsRequest = false,
+                SelectServiceType = Service.ServiceType.CarPoolingService,
+                PriceEcoCoins = 15,
+                UserProviderId = 3
+            });
+            this.SaveChanges();
+            this.CarPoolingServices.Add(
+                new CarPoolingService
+                {
+                    Id = 2,
+                    SelectCarPoolingType = CarPoolingService.CarPoolingType.HomeToSchool,
+                    AvailableSeats = 2,
+                    PetsAllowed = true,
+                    SmokingAllowed = true,
+                    MusicAllowed = false,
+                    ChattingAllowed = false,
+                    TrajectoryId = 13,
+                    VehiculeId = 3,
+                    ServiceId = 2,
+                });
+            #endregion
+            #region Initializing Service3: CarPooling home to work Paris
+            this.Services.Add(
+            new Service
+            {
+                Id = 3,
+                PublicationDate = new DateTime(2022, 06, 15),
+                ReferenceNumber = 356742620,
+                IsAvailable = true,
+                Start = new DateTime(2022, 07, 07),
+                End = new DateTime(2022, 07, 07),
+                IsRequest = false,
+                SelectServiceType = Service.ServiceType.CarPoolingService,
+                PriceEcoCoins = 20,
+                UserProviderId = 10
+            });
+            this.SaveChanges();
+            this.CarPoolingServices.Add(
+                new CarPoolingService
+                {
+                    Id = 3,
+                    SelectCarPoolingType = CarPoolingService.CarPoolingType.HomeToWork,
+                    AvailableSeats = 2,
+                    PetsAllowed = false,
+                    SmokingAllowed = true,
+                    MusicAllowed = true,
+                    ChattingAllowed = true,
+                    TrajectoryId = 11,
+                    VehiculeId = 10,
+                    ServiceId = 3,
+                });
+            #endregion
+            #region Initializing Service4: CarPooling home to work Bordeaux
+            this.Services.Add(
+            new Service
+            {
+                Id = 4,
+                PublicationDate = new DateTime(2022, 06, 11),
+                ReferenceNumber = 668318662,
+                IsAvailable = true,
+                Start = new DateTime(2022, 06, 25),
+                End = new DateTime(2022, 06, 25),
+                IsRequest = false,
+                SelectServiceType = Service.ServiceType.CarPoolingService,
+                PriceEcoCoins = 15,
+                UserProviderId = 4
+            });
+            this.SaveChanges();
+            this.CarPoolingServices.Add(
+                new CarPoolingService
+                {
+                    Id = 4,
+                    SelectCarPoolingType = CarPoolingService.CarPoolingType.HomeToWork,
+                    AvailableSeats = 1,
+                    PetsAllowed = false,
+                    SmokingAllowed = true,
+                    MusicAllowed = true,
+                    ChattingAllowed = true,
+                    TrajectoryId = 14,
+                    VehiculeId = 4,
+                    ServiceId = 4,
+                });
+            #endregion
+            #region Initializing Service5: CarPooling home to school Perpignan
+            this.Services.Add(
+            new Service
+            {
+                Id = 5,
+                PublicationDate = new DateTime(2022, 06, 09),
+                ReferenceNumber = 671498279,
+                IsAvailable = true,
+                Start = new DateTime(2022, 07, 01),
+                End = new DateTime(2022, 07, 01),
+                IsRequest = false,
+                SelectServiceType = Service.ServiceType.CarPoolingService,
+                PriceEcoCoins = 8,
+                UserProviderId = 5
+            });
+            this.SaveChanges();
+            this.CarPoolingServices.Add(
+                new CarPoolingService
+                {
+                    Id = 5,
+                    SelectCarPoolingType = CarPoolingService.CarPoolingType.HomeToSchool,
+                    AvailableSeats = 3,
+                    PetsAllowed = false,
+                    SmokingAllowed = false,
+                    MusicAllowed = true,
+                    ChattingAllowed = true,
+                    TrajectoryId = 15,
+                    VehiculeId = 5,
+                    ServiceId = 5,
+                });
+            #endregion
+            #region Initializing Service6: CarPooling travel Brest - Paris
+            this.Services.Add(
+            new Service
+            {
+                Id = 6,
+                PublicationDate = new DateTime(2022, 06, 16),
+                ReferenceNumber = 749189622,
+                IsAvailable = true,
+                Start = new DateTime(2022, 07, 15),
+                End = new DateTime(2022, 07, 15),
+                IsRequest = false,
+                SelectServiceType = Service.ServiceType.CarPoolingService,
+                PriceEcoCoins = 30,
+                UserProviderId = 2
+            });
+            this.SaveChanges();
+            this.CarPoolingServices.Add(
+                new CarPoolingService
+                {
+                    Id = 6,
+                    SelectCarPoolingType = CarPoolingService.CarPoolingType.Travel,
+                    AvailableSeats = 2,
+                    PetsAllowed = true,
+                    SmokingAllowed = false,
+                    MusicAllowed = true,
+                    ChattingAllowed = true,
+                    TrajectoryId = 1,
+                    VehiculeId = 2,
+                    ServiceId = 6,
+                });
+            #endregion
+            #region Initializing Service7: CarPooling travel Paris - Lille
+            this.Services.Add(
+            new Service
+            {
+                Id = 7,
+                PublicationDate = new DateTime(2022, 06, 10),
+                ReferenceNumber = 801382500,
+                IsAvailable = true,
+                Start = new DateTime(2022, 07, 13),
+                End = new DateTime(2022, 07, 13),
+                IsRequest = false,
+                SelectServiceType = Service.ServiceType.CarPoolingService,
+                PriceEcoCoins = 35,
+                UserProviderId = 6
+            });
+            this.SaveChanges();
+            this.CarPoolingServices.Add(
+                new CarPoolingService
+                {
+                    Id = 7,
+                    SelectCarPoolingType = CarPoolingService.CarPoolingType.Travel,
+                    AvailableSeats = 2,
+                    PetsAllowed = false,
+                    SmokingAllowed = false,
+                    MusicAllowed = false,
+                    ChattingAllowed = false,
+                    TrajectoryId = 4,
+                    VehiculeId = 6,
+                    ServiceId = 7,
+                });
+            #endregion
+            #region Initializing Service8: CarPooling travel Strasbourg - Bern
+            this.Services.Add(
+            new Service
+            {
+                Id = 8,
+                PublicationDate = new DateTime(2022, 06, 01),
+                ReferenceNumber = 252593897,
+                IsAvailable = true,
+                Start = new DateTime(2022, 06, 25),
+                End = new DateTime(2022, 06, 25),
+                IsRequest = false,
+                SelectServiceType = Service.ServiceType.CarPoolingService,
+                PriceEcoCoins = 30,
+                UserProviderId = 7
+            });
+            this.SaveChanges();
+            this.CarPoolingServices.Add(
+                new CarPoolingService
+                {
+                    Id = 8,
+                    SelectCarPoolingType = CarPoolingService.CarPoolingType.Travel,
+                    AvailableSeats = 2,
+                    PetsAllowed = false,
+                    SmokingAllowed = false,
+                    MusicAllowed = false,
+                    ChattingAllowed = false,
+                    TrajectoryId = 10,
+                    VehiculeId = 7,
+                    ServiceId = 8,
+                });
+            #endregion
+            #endregion
+
+            #region REQUESTS CARPOOL
+            #region Initializing Request9: CarPooling home to work Paris
+            this.Services.Add(
+            new Service
+            {
+                Id = 9,
+                PublicationDate = new DateTime(2022, 06, 03),
+                ReferenceNumber = 703969084,
+                IsAvailable = true,
+                Start = new DateTime(2022, 06, 25),
+                End = new DateTime(2022, 06, 25),
+                IsRequest = true,
+                SelectServiceType = Service.ServiceType.CarPoolingService,
+                PriceEcoCoins = 10,
+                UserProviderId = 4
+            });
+            this.SaveChanges();
+            this.CarPoolingServices.Add(
+                new CarPoolingService
+                {
+                    Id = 9,
+                    SelectCarPoolingType = CarPoolingService.CarPoolingType.HomeToWork,
+                    AvailableSeats = 1,
+                    PetsAllowed = false,
+                    SmokingAllowed = true,
+                    MusicAllowed = true,
+                    ChattingAllowed = false,
+                    TrajectoryId = 11,
+                    VehiculeId = 4,
+                    ServiceId = 9,
+                });
+            #endregion
+            #region Initializing Request10: CarPooling home to work Perpignan
+            this.Services.Add(
+            new Service
+            {
+                Id = 10,
+                PublicationDate = new DateTime(2022, 06, 11),
+                ReferenceNumber = 703969084,
+                IsAvailable = true,
+                Start = new DateTime(2022, 06, 27),
+                End = new DateTime(2022, 06, 27),
+                IsRequest = true,
+                SelectServiceType = Service.ServiceType.CarPoolingService,
+                PriceEcoCoins = 5,
+                UserProviderId = 8
+            });
+            this.SaveChanges();
+            this.CarPoolingServices.Add(
+                new CarPoolingService
+                {
+                    Id = 10,
+                    SelectCarPoolingType = CarPoolingService.CarPoolingType.HomeToWork,
+                    AvailableSeats = 2,
+                    PetsAllowed = false,
+                    SmokingAllowed = true,
+                    MusicAllowed = true,
+                    ChattingAllowed = true,
+                    TrajectoryId = 15,
+                    VehiculeId = 8,
+                    ServiceId = 10,
+                });
+            #endregion
+            #endregion
+
+            #region Service Parcel
+            #region Initializing Service11: Parcel Lille - Brussels
+            this.Services.Add(
+            new Service
+            {
+                Id = 11,
+                PublicationDate = new DateTime(2022, 06, 11),
+                ReferenceNumber = 703969084,
+                IsAvailable = true,
+                Start = new DateTime(2022, 06, 27),
+                End = new DateTime(2022, 06, 27),
+                IsRequest = false,
+                SelectServiceType = Service.ServiceType.ParcelService,
+                PriceEcoCoins = 20,
+                UserProviderId = 9
+            });
+            this.SaveChanges();
+            this.ParcelServices.Add(
+                new ParcelService
+                {
+                    Id = 1,
+                    BarCode = 001428921,
+                    WeightKilogrammes = 2,
+                    AtypicalVolume = false,
+                    Fragile = true,
+                    TrajectoryId = 8,
+                    VehiculeId = 9,
+                    ServiceId = 11
+                });
+            #endregion
+            #region Initializing Service12: Parcel Toulouse - Bordeaux
+            this.Services.Add(
+            new Service
+            {
+                Id = 12,
+                PublicationDate = new DateTime(2022, 06, 02),
+                ReferenceNumber = 703165710,
+                IsAvailable = true,
+                Start = new DateTime(2022, 06, 26),
+                End = new DateTime(2022, 06, 28),
+                IsRequest = false,
+                SelectServiceType = Service.ServiceType.ParcelService,
+                PriceEcoCoins = 10,
+                UserProviderId = 10
+            });
+            this.SaveChanges();
+            this.ParcelServices.Add(
+                new ParcelService
+                {
+                    Id = 2,
+                    BarCode = 206179074,
+                    WeightKilogrammes = 4,
+                    AtypicalVolume = true,
+                    Fragile = false,
+                    TrajectoryId = 8,
+                    VehiculeId = 10,
+                    ServiceId = 12
+                });
+            #endregion
+            #endregion
+
+            #region REQUESTS PARCEL
+            #region Initializing Service13: Parcel Montpellier - Toulouse
+            this.Services.Add(
+            new Service
+            {
+                Id = 13,
+                PublicationDate = new DateTime(2022, 06, 09),
+                ReferenceNumber = 408023605,
+                IsAvailable = true,
+                Start = new DateTime(2022, 07, 05),
+                End = new DateTime(2022, 07, 07),
+                IsRequest = true,
+                SelectServiceType = Service.ServiceType.ParcelService,
+                PriceEcoCoins = 9,
+                UserProviderId = 10
+            });
+            this.SaveChanges();
+            this.ParcelServices.Add(
+                new ParcelService
+                {
+                    Id = 3,
+                    BarCode = 963384109,
+                    WeightKilogrammes = 1,
+                    AtypicalVolume = false,
+                    Fragile = false,
+                    TrajectoryId = 5,
+                    VehiculeId = 10,
+                    ServiceId = 13
+                });
+            #endregion
+            #endregion
+
+            #region SERVICES RENTAL
+            #region Initializing Service14: Car rental
+            this.Services.Add(
+            new Service
+            {
+                Id = 14,
+                PublicationDate = new DateTime(2022, 05, 20),
+                ReferenceNumber = 046684449,
+                IsAvailable = true,
+                Start = new DateTime(2022, 06, 25),
+                End = new DateTime(2022, 06, 30),
+                IsRequest = false,
+                SelectServiceType = Service.ServiceType.CarRentalService,
+                PriceEcoCoins = 50,
+                UserProviderId = 11
+            });
+            this.SaveChanges();
+            this.CarRentalServices.Add(
+                new CarRentalService
+                {
+                    Id = 1,
+                    KeyPickUpAddress= "8 Rue de la Main d'Or 75011 Paris",
+                    KeyDropOffAddress= "5 Rue Saint-Severin 75005 Paris",
+                    VehiculeId = 11,
+                    ServiceId = 14
+                });
+            #endregion
+            #region Initializing Service15: Car rental
+            this.Services.Add(
+            new Service
+            {
+                Id = 15,
+                PublicationDate = new DateTime(2022, 05, 22),
+                ReferenceNumber = 284613812,
+                IsAvailable = true,
+                Start = new DateTime(2022, 06, 30),
+                End = new DateTime(2022, 07, 05),
+                IsRequest = false,
+                SelectServiceType = Service.ServiceType.CarRentalService,
+                PriceEcoCoins = 35,
+                UserProviderId = 13
+            });
+            this.SaveChanges();
+            this.CarRentalServices.Add(
+                new CarRentalService
+                {
+                    Id = 2,
+                    KeyPickUpAddress = "Street 198 Rue de Tolbiac 75013 Paris",
+                    KeyDropOffAddress = "23 Rue Muller 75018 Paris",
+                    VehiculeId = 13,
+                    ServiceId = 15
+                });
+            #endregion
+            #endregion
+
+            #region REQUESTS RENTAL
+            #region Initializing Service16: Car rental
+            this.Services.Add(
+            new Service
+            {
+                Id = 16,
+                PublicationDate = new DateTime(2022, 06, 10),
+                ReferenceNumber = 516193919,
+                IsAvailable = true,
+                Start = new DateTime(2022, 07, 10),
+                End = new DateTime(2022, 07, 15),
+                IsRequest = true,
+                SelectServiceType = Service.ServiceType.CarRentalService,
+                PriceEcoCoins = 25,
+                UserProviderId = 10
+            });
+            this.SaveChanges();
+            this.CarRentalServices.Add(
+                new CarRentalService
+                {
+                    Id = 3,
+                    KeyPickUpAddress = "15 Place Vendome 75018 Paris",
+                    KeyDropOffAddress = "18 Rue des 3 Freres 75018 Paris",
+                    VehiculeId = 10,
+                    ServiceId = 16
+                });
+            #endregion
             #endregion
         }
 

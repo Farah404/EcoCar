@@ -17,7 +17,6 @@
                                 <br>
                                 Modifier ma photo de profil
                                 @Html.HiddenFor(model=>model.Person.ProfilePicturePath)
-                                @Html.LabelFor(model => model.Person.ProfilePicture, new { id = "imageLabel", @style = "text-align:center;" })
                                 @Html.TextBoxFor(model => model.Person.ProfilePicture, new { placeholder = "Description", @type = "file" })
 
 
@@ -262,49 +261,6 @@
                         </table>
 
                     </div>
-
-                    @*Insurance Details*@
-                    @*<span class="text-success"><strong>Votre assurance</strong><br></span>
-                    <div class="table-responsive">
-
-                        <table class="table table-user-information">
-
-                            <tbody>
-
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-sort-by-alphabet  text-success"></span>
-                                        Nom de l'assureur
-                                    </td>
-                                    <td class="text-success">
-
-                                        @Html.TextBoxFor(model => model.Vehicule.Insurance.InsuranceAgency, new { @class = "form-control", placeholder = "Nom de l'assureur" })
-
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-hourglass text-success"></span>
-                                        Date de fin de validité de l'assurance
-                                    </td>
-                                    <td class="text-success">
-                                        @Html.TextBoxFor(model => model.Vehicule.Insurance.InsuranceExpiration, new { @class = "form-control", placeholder = "Date de fin de validité de l'assurance" })
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-dashboard text-success"></span>
-                                        Numéro du contrat d'assurance
-                                    </td>
-                                    <td class="text-success">
-                                        @Html.TextBoxFor(model => model.Vehicule.Insurance.ContractNumber, new { @class = "form-control", placeholder = "Numéro du contrat d'assurance" })
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>*@
 
                     @*Vehicule Details*@
                     <span class="text-success"><strong>Votre véhicule</strong><br></span>

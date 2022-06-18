@@ -525,43 +525,109 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var carPoolingService in Model.CarPoolingServices)
-                {
-                    <tr>
-                        <td>@carPoolingService.Service.Start</td>
-                        <td>@carPoolingService.Service.SelectServiceType</td>
-                        <td>@carPoolingService.Service.ReferenceNumber</td>
-                        <td>@carPoolingService.Service.IsRequest</td>
-                        <td>@carPoolingService.Service.IsAvailable</td>
-                        <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
-                    </tr>
-                }
-                @foreach (var carRentalService in Model.CarRentalServices)
-                {
-                    <tr>
+                @*Listing only carPoolingServices related to User (where User is provider & when user is consumer) and displaying in both case the appropriate ServiceInvoice link*@
+                         @foreach(var carPoolingService in Model.CarPoolingServices.Where(c=>c.Service.UserProviderId==@Model.User.Id))
+                        {
+                            <tr>
+                            <td>@carPoolingService.Service.Start</td>
+                            <td>@carPoolingService.Service.SelectServiceType</td>
+                            <td>@carPoolingService.Service.ReferenceNumber</td>
+                            <td>@carPoolingService.Service.IsRequest</td>
+                            <td>@carPoolingService.Service.IsAvailable</td>
+                            @foreach(var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == carPoolingService.ServiceId))
+                            {
+                                <td> <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a></td>
+                            }
+                            </tr>
+                        }
+@*                    }
+                    else
+                    {*@
+                        @foreach(var reservations in Model.Reservations.Where(x => x.ServiceUserConsumerId == @Model.User.Id))
+                        {
+                            @foreach(var carPoolingserviceR in Model.CarPoolingServices.Where(c=>c.Service.Id == reservations.ServiceConsumedId))
+                            {
+                                <tr>
+                            <td>@carPoolingserviceR.Service.Start</td>
+                            <td>@carPoolingserviceR.Service.SelectServiceType</td>
+                            <td>@carPoolingserviceR.Service.ReferenceNumber</td>
+                            <td>@carPoolingserviceR.Service.IsRequest</td>
+                            <td>@carPoolingserviceR.Service.IsAvailable</td>
+                            @foreach(var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == carPoolingserviceR.ServiceId))
+                            {
+                                <td> <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a></td>
+                            }
+                            
+                            </tr>
+                            }
+                            
+                        }
+                @*Listing only carRentalServices related to User (where User is provider & when user is consumer) and displaying in both case the appropriate ServiceInvoice link*@
+                       @foreach(var carRentalService in Model.CarRentalServices.Where(c=>c.Service.UserProviderId==@Model.User.Id))
+                        {
+                             <tr>
                         <td>@carRentalService.Service.Start</td>
                         <td>@carRentalService.Service.SelectServiceType</td>
                         <td>@carRentalService.Service.ReferenceNumber</td>
                         <td>@carRentalService.Service.IsRequest</td>
                         <td>@carRentalService.Service.IsAvailable</td>
-                        <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                         @foreach(var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == carRentalService.ServiceId))
+                            {
+                                <td> <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a></td>
+                            }
                     </tr>
-
-
-                }
-
-                @foreach (var parcelService in Model.ParcelServices)
-                {
-                    <tr>
+                        }
+                        @foreach(var reservations in Model.Reservations.Where(x => x.ServiceUserConsumerId == @Model.User.Id))
+                        {
+                            @foreach(var carRentalServiceR in Model.CarRentalServices.Where(c=>c.Service.Id == reservations.ServiceConsumedId))
+                            {
+                                <tr>
+                        <td>@carRentalServiceR.Service.Start</td>
+                        <td>@carRentalServiceR.Service.SelectServiceType</td>
+                        <td>@carRentalServiceR.Service.ReferenceNumber</td>
+                        <td>@carRentalServiceR.Service.IsRequest</td>
+                        <td>@carRentalServiceR.Service.IsAvailable</td>
+                        @foreach(var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == carRentalServiceR.ServiceId))
+                            {
+                                <td> <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a></td>
+                            }
+                    </tr>
+                            }
+                            
+                        }
+                @*Listing only carRentalServices related to User (where User is provider & when user is consumer) and displaying in both case the appropriate ServiceInvoice link*@
+                        @foreach(var parcelService in Model.ParcelServices.Where(c=>c.Service.UserProviderId==@Model.User.Id))
+                        {
+                             <tr>
                         <td>@parcelService.Service.Start</td>
                         <td>@parcelService.Service.SelectServiceType</td>
                         <td>@parcelService.Service.ReferenceNumber</td>
                         <td>@parcelService.Service.IsRequest</td>
                         <td>@parcelService.Service.IsAvailable</td>
-                        <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        @foreach(var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == parcelService.ServiceId))
+                            {
+                                <td> <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a></td>
+                            }
                     </tr>
-                }
-
+                        }
+                        @foreach(var reservations in Model.Reservations.Where(x => x.ServiceUserConsumerId == @Model.User.Id))
+                        {
+                            @foreach(var parcelServiceR in Model.ParcelServices.Where(c=>c.Service.Id == reservations.ServiceConsumedId))
+                            {
+                                <tr>
+                        <td>@parcelServiceR.Service.Start</td>
+                        <td>@parcelServiceR.Service.SelectServiceType</td>
+                        <td>@parcelServiceR.Service.ReferenceNumber</td>
+                        <td>@parcelServiceR.Service.IsRequest</td>
+                        <td>@parcelServiceR.Service.IsAvailable</td>
+                        @foreach(var serviceInvoice in Model.ServiceInvoices.Where(s => s.ServiceId == parcelServiceR.ServiceId))
+                            {
+                                <td> <a href="/Financial/ServiceInvoice/@serviceInvoice.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a></td>
+                            }
+                    </tr>
+                            }
+                            
+                        }
                 @Html.Hidden("serviceId",@ViewBag.serviceId,null)
 
 

@@ -1,4 +1,5 @@
 ﻿using EcoCar.Models.PersonManagement;
+using System.ComponentModel.DataAnnotations;
 
 namespace EcoCar.Models.ServiceManagement
 {
@@ -11,9 +12,13 @@ namespace EcoCar.Models.ServiceManagement
         public CarPoolingType SelectCarPoolingType { get; set; }
         public enum CarPoolingType
         {
+            [Display(Name = "Domicile-travail")]
             HomeToWork,
+            [Display(Name = "Domicile-école/université")]
             HomeToSchool,
+            [Display(Name = "Evènements")]
             Events,
+            [Display(Name = "Voyage")]
             Travel
         }
 

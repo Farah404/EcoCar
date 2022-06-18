@@ -4,20 +4,21 @@
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Proposer une prestation de covoiturage";
 }
-
-
+<br />
+<div class="progress">
+  <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+</div>
 <div class="container bootstrap snippets bootdey">
     <div class="panel-body inf-content">
         <div class="row">
             <div class="col-md-4">
                 <h4>Proposer un service: Covoiturage</h4>
-             
+
                 @using (Html.BeginForm())
                 {
                     <div class="form-floating mb-3">
                     @Html.Label("Type de covoiturage") <br>
-                    @Html.DropDownListFor(model => model.SelectCarPoolingType, new SelectList(Enum.GetValues(typeof(CarPoolingType))),"--Selectionnez le type de covoiturage--")
-                    @Html.ValidationMessageFor(model => model.SelectCarPoolingType)
+                    @Html.DropDownListFor(model => model.SelectCarPoolingType,Html.GetEnumSelectList<CarPoolingType>(),"--Selectionnez le type de covoiturage--",new {required = "required"})
                     <br><br></div>
 
                     <div class="form-floating mb-3">

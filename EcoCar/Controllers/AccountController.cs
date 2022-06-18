@@ -440,14 +440,19 @@ namespace EcoCar.Controllers
                     Vehicule = dalPersonManagement.GetUserVehicule(userId),
                     EcoWallet = dalFinancialManagement.GetUserEcoWallet(userId),
                     ShoppingCart = dalFinancialManagement.GetUserShoppingCart(userId),
-                    CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices(userId),
-                    CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices(userId),
-                    ParcelServices = dalServiceManagement.GetAllUserParcelServices(userId),
+                    CarPoolingServices = dalServiceManagement.GetAllCarPoolingServices(),
+                    CarRentalServices = dalServiceManagement.GetAllCarRentalServices(),
+                    ParcelServices = dalServiceManagement.GetAllParcelServices(),
+                    //CarPoolingServices = dalServiceManagement.GetAllUserCarPoolingServices(userId),
+                    //CarRentalServices = dalServiceManagement.GetAllUserCarRentalServices(userId),
+                    //ParcelServices = dalServiceManagement.GetAllUserParcelServices(userId),
                     EcoStoreInvoices = dalFinancialManagement.GetAllEcoStoreInvoices().Where(x => x.UserId == userId).ToList(),
                     ServiceInvoices = dalFinancialManagement.GetAllServiceInvoices().Where(x=>x.IdServiceProvider==userId || x.IdServiceConsumer==userId).ToList(),
                     Insurance = dalPersonManagement.GetUserInsurance(userId),
                     Messages=dalMessagingManagement.GetAllMessages(),
+                    Reservations = dalServiceManagement.GetAllReservations()
                 };
+
                 return View(accountViewModel);
             }
 

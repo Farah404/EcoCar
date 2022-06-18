@@ -52,5 +52,6 @@ namespace EcoCar.ViewModels
 
         public List<ServiceInvoice> ServiceInvoices { get; set; }
         public List<Message> Messages { get; set; }
+        public List<Reservation> Reservations { get; set; }
     }
 }

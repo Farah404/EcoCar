@@ -3,9 +3,12 @@
 @model EcoCar.Models.ServiceManagement.Service
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
-    ViewBag.Title = "Proposer une Prestation";
+    ViewBag.Title = "Demander une prestation";
 }
-
+<br />
+<div class="progress">
+    <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+</div>
 <div class="container bootstrap snippets bootdey">
     <div class="panel-body inf-content">
         <div class="row">
@@ -21,12 +24,12 @@
                     </div><br>
 
                     <div class="form-floating mb-3">
-                        @Html.Label("Numero de reference de la prestation")<br>
+                        @Html.Label("Numéro de référence de la prestation")<br>
                         @Html.TextBoxFor(model => model.ReferenceNumber, new{ @class = "form-control",@id="Refnunmber",@readonly = true,style="width:300px"})
                     </div><br>
 
                     <div class="form-outline mb-3">
-                        @Html.Label("Date de debut")<br>
+                        @Html.Label("Date de début")<br>
                         @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
                         @Html.ValidationMessageFor(model => model.Start)
                     </div><br>
@@ -37,11 +40,11 @@
                         @Html.ValidationMessageFor(model => model.End)
                     </div><br>
 
-                    <div class="form-outline mb-3">
+                   <div class="form-outline mb-3">
                         @Html.Label("Type de Prestation")<br>
-                        @Html.DropDownListFor(model => model.SelectServiceType, new SelectList(Enum.GetValues(typeof(ServiceType))),"--Selectionnez le type de prestation--",new {required = "required"})
+                        @Html.DropDownListFor(model => model.SelectServiceType, Html.GetEnumSelectList<ServiceType>(),"--Sélectionnez le type de prestation--",new {required = "required"})
                         @Html.ValidationMessageFor(model => model.SelectServiceType)
-                    </div><br>
+                    <br></div> <br>
 
                     <div class="form-floating mb-3">
                         @Html.Label("Prix en EcoCoins")<br>

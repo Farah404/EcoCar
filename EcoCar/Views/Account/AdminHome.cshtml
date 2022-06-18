@@ -5,8 +5,7 @@
     ViewBag.Title = "Tableau de bord administrateur";
 }
 
-
-<div class="container-fluid">
+<div class="container-fluid bg-grey">
 
     <div class="row text-center">
 
@@ -18,24 +17,26 @@
 
         <div class="col-lg-3 col-sm-6 mb-5 mb-lg-0">
             <center><span class="glyphicon glyphicon-tree-deciduous logo-small"></span></center>
-            <div class="js-counter h3 mb-1">@Model.Services.Where(s=>s.IsRequest==false).Count()</div>
+            <div id="service" class="js-counter h3 mb-1">@Model.Services.Where(s=>s.IsRequest==false).Count()</div>
             <span class="text-success">Propositions de Prestations</span>
         </div>
 
         <div class="col-lg-3 col-sm-6 mb-5 mb-lg-0">
             <center><span class="glyphicon glyphicon-tree-conifer logo-small"></span></center>
-            <div class="js-counter h3 mb-1">@Model.Services.Where(s=>s.IsRequest==true).Count()</div>
+            <div id="request" class="js-counter h3 mb-1">@Model.Services.Where(s=>s.IsRequest==true).Count()</div>
             <span class="text-success">Demandes de Prestations</span>
         </div>
 
         <div class="col-lg-3 col-sm-6 mb-5 mb-lg-0">
             <center><span class="glyphicon glyphicon-shopping-cart logo-small"></span></center>
-            <div class="js-counter h3 mb-1">@Model.EcoStoreInvoices.Count()</div>
+            <div id="ecostore" class="js-counter h3 mb-1">@Model.EcoStoreInvoices.Count()</div>
             <span class="text-success">EcoAchats</span>
         </div>
     </div>
 
 </div>
+
+<br />
 
 
 <div class="container-fluid bg-grey">
@@ -242,6 +243,17 @@
 </div>
 <br />
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-8">
+            <canvas class="bar-chart" id="myChart2"></canvas>
+        </div>
+        <div class="col-6 col-md-4">
+            <canvas class="pie-chart" id="myChart"></canvas>
+        </div>
+    </div>
+</div>
+
 <script>
     function myFunctionUser() {
         var input, filter, table, tr, td, cell, i, j;
@@ -317,4 +329,58 @@
             }
         }
     }
+</script>
+
+<script>
+    var xValues = ["EcoMembres", "Achats EcoStore"];
+    var yValues = [@Model.Users.Count(), @Model.EcoStoreInvoices.Count()];
+    var barColors = ["#3e6a3e", "#93bb83"];
+
+    new Chart("myChart2", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: "Evolution des EcoMembres et leurs EcoAchats"
+            },
+            scales: {
+                xAxes: [{ ticks: { min: 0, max: 20 } }]
+            }
+        }
+    });
+</script>
+
+
+<script>
+    var xValues = ["Propositions", "Demandes"];
+    var yValues = [@Model.Services.Where(s=>s.IsRequest==false).Count(), @Model.Services.Where(s=>s.IsRequest==true).Count()];
+    var barColors = [
+        "#3e6a3e",
+        "#93bb83",
+    ];
+
+    new Chart("myChart", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Propositions vs Demandes"
+            }
+        }
+    });
 </script>

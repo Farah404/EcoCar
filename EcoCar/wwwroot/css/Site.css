@@ -422,7 +422,7 @@ div.eco-store {
         position: absolute;
         left: -30px;
         bottom: -80px;
-        opacity:1;
+        opacity:0.9;
     }
 
 div.eco-scape {
@@ -435,7 +435,7 @@ div.eco-scape {
         position: absolute;
         right: -20px;
         bottom: -70px;
-        opacity: 1;
+        opacity: 0.9;
     }
 
 div.eco-cloud-right {
@@ -469,7 +469,7 @@ div.eco-cloud-left {
             transition: .3s ease-in-out;
         }
 
-
+/*other binding form main layout*/
 .moving-car-other {
     width: 20%;
     position: absolute;
@@ -482,12 +482,14 @@ div.eco-cloud-left {
 div.eco-store-other {
     position: relative;
 }
-
-    div.eco-store-other img {
+/*
+left image content layout
+*/    div.eco-store-other img {
         width: 20%;
         position: absolute;
         left: -30px;
         bottom: -80px;
+        opacity:0.9;
     }
 
 div.eco-scape-other {
@@ -500,6 +502,7 @@ div.eco-scape-other {
         position: absolute;
         right: -20px;
         bottom: -70px;
+        opacity: 0.9;
     }
 
 div.eco-cloud-right-other {

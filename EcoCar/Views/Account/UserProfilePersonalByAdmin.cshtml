@@ -321,7 +321,7 @@
                         <td>@carPoolingService.Service.ReferenceNumber</td>
                         <td>@carPoolingService.Service.IsRequest</td>
                         <td>@carPoolingService.Service.IsAvailable</td>
-                        <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        <td> <a href="/Financial/ServiceInvoice/@carPoolingService.Service.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a></td>
                     </tr>
                 }
                 @foreach (var carRentalService in Model.CarRentalServices)
@@ -332,7 +332,7 @@
                         <td>@carRentalService.Service.ReferenceNumber</td>
                         <td>@carRentalService.Service.IsRequest</td>
                         <td>@carRentalService.Service.IsAvailable</td>
-                        <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        <td> <a href="/Financial/ServiceInvoice/@carRentalService.Service.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a></td>
                     </tr>
 
 
@@ -346,7 +346,7 @@
                         <td>@parcelService.Service.ReferenceNumber</td>
                         <td>@parcelService.Service.IsRequest</td>
                         <td>@parcelService.Service.IsAvailable</td>
-                        <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        <td> <a href="/Financial/ServiceInvoice/@parcelService.Service.Id"><span class="glyphicon glyphicon-folder-open  text-success"></span></a></td>
                     </tr>
                 }
             </tbody>

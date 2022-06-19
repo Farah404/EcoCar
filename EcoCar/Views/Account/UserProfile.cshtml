@@ -23,13 +23,9 @@
                     <a class="btn btn-success" data-toggle="modal" data-target="#basicModalSms">Contacter @Model.User.Account.Username</a>
                 </center>
             </div>
-
             <div class="col-md-6">
-
                 <strong>Information</strong><br>
-
                 <div class="table-responsive">
-
                     <table class="table table-user-information">
                         <tbody>
 
@@ -119,7 +115,6 @@
                     <th>Numéro de réference</th>
                     <th>Prestation demandée</th>
                     <th>Consulter la prestation
-                    <th>
                 </tr>
             </thead>
             <tbody>
@@ -127,20 +122,26 @@
                 {
                     <tr>
                         <td>@carPoolingService.Service.Start</td>
-                        <td>@carPoolingService.Service.SelectServiceType</td>
+                        @if(@carPoolingService.Service.SelectServiceType.ToString()=="CarPoolingService")
+                        {
+                            <td>Covoiturage</td>
+                        }
                         <td>@carPoolingService.Service.ReferenceNumber</td>
-                        <td>@carPoolingService.Service.IsRequest</td>
-                        <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        <td>@(carPoolingService.Service.IsRequest ? "Oui":"Non")</td>
+                        <td> <a href="/Service/ReserveCarPoolingService/@carPoolingService.Id"><span class="glyphicon glyphicon-info-sign   text-success"></span></a></td>
                     </tr>
                 }
                 @foreach (var carRentalService in Model.CarRentalServices.Where(c => c.Service.IsAvailable == true))
                 {
                     <tr>
                         <td>@carRentalService.Service.Start</td>
-                        <td>@carRentalService.Service.SelectServiceType</td>
+                        @if(@carRentalService.Service.SelectServiceType.ToString()=="CarRentalService")
+                        {
+                            <td>Location</td>
+                        }
                         <td>@carRentalService.Service.ReferenceNumber</td>
-                        <td>@carRentalService.Service.IsRequest</td>
-                        <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        <td>@(carRentalService.Service.IsRequest ? "Oui":"Non")</td>
+                        <td> <a href="/Service/ReserveCarRentalService/@carRentalService.Id"><span class="glyphicon glyphicon-info-sign   text-success"></span></a></td>
                     </tr>
 
 
@@ -150,10 +151,13 @@
                 {
                     <tr>
                         <td>@parcelService.Service.Start</td>
-                        <td>@parcelService.Service.SelectServiceType</td>
+                        @if(@parcelService.Service.SelectServiceType.ToString()=="ParcelService")
+                        {
+                            <td>Transport de colis</td>
+                        }
                         <td>@parcelService.Service.ReferenceNumber</td>
-                        <td>@parcelService.Service.IsRequest</td>
-                        <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-paperclip  text-success"></span></a></td>
+                        <td>@(parcelService.Service.IsRequest ? "Oui":"Non")</td>
+                        <td> <a href="/Service/ReserveParcelService/@parcelService.Id"><span class="glyphicon glyphicon-info-sign   text-success"></span></a></td>
                     </tr>
                 }
 
@@ -181,11 +185,12 @@
                 <div class="modal-body">
                     <center><img src="~/Images/MessageUser.png" style="width:50%;"></center>
                     <div class="form-outline mb-3">
-                        @Html.TextBox("ReferenceNumber")
+                        @Html.TextBox("ReferenceNumber","" , new { @class = "form-control", style="width:200px",placeholder="Référence du service", required="required"})
                         <br>
                     </div>
                     <div class="form-outline mb-3">
-                        @Html.TextBox("MessageContent")
+                        @Html.TextArea("MessageContent","", new { @class = "form-control", style="width:400px", placeholder="Bonjour, j'aimerais savoir si..." ,required="required"})
+
                         <br>
                     </div>
                 </div>
@@ -196,9 +201,6 @@
         }
     </div>
 </div>
-
-
-
 
 @*<!-- The Modal Report -->
 <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
@@ -229,8 +231,6 @@
         </div>
     </div>
 </div>*@
-
-
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>

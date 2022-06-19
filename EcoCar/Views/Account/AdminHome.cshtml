@@ -83,7 +83,7 @@
 </div>
 <br />
 <div class="container-fluid bg-grey">
-    @*Services List Display*@
+    @*Services list display without requests*@
     <div class="table-responsive">
         <p style="float:left;font-variant:small-caps;font-weight:bold;font-size:larger">Prestations proposées</p><input style="width:50%;float:right" type="text" id="searchServiceNoRequestInput" onkeyup="myFunctionNoRequest()" placeholder="Rechercher une prestation">
         <table class="table" id="serviceTableIsRequestFalse">
@@ -94,6 +94,7 @@
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
                     <th>EcoMembre prestataire</th>
+                    <th>EcoPrix</th>
                     <th>Statut</th>
                     <th>Supprimer</th>
                 </tr>
@@ -109,6 +110,7 @@
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
+                        <td>@carPoolingService.Service.PriceEcoCoins</td>
                         <td>@(carPoolingService.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         <td><a href="/Service/AdminViewCarPoolingService/@carPoolingService.Id">Détails</a></td>
 
@@ -124,6 +126,7 @@
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
+                        <td>@carRentalService.Service.PriceEcoCoins</td>
                         <td>@(carRentalService.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         <td><a href="/Service/AdminViewCarRentalService/@carRentalService.Id">Détails</a></td>
 
@@ -139,8 +142,9 @@
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
+                        <td>@parcelService.Service.PriceEcoCoins</td>
                         <td>@(parcelService.Service.IsAvailable ? "Disponible":"Terminé")</td>
-                        <td><a href="/Service/AdminViewParcelService/@parcelService.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
+                        <td><a href="/Service/AdminViewParcelService/@parcelService.Id">Détails</a></td>
 
                     </tr>
                 }
@@ -160,6 +164,7 @@
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
                     <th>EcoMembre prestataire</th>
+                    <th>EcoPrix</th>
                     <th>Statut</th>
                     <th>Supprimer</th>
                 </tr>
@@ -175,6 +180,7 @@
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
+                        <td>@carPoolingService.Service.PriceEcoCoins</td>
                         <td>@(carPoolingService.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         <td><a href="/Service/AdminViewCarPoolingService/@carPoolingService.Id">Détails</a></td>
                     </tr>
@@ -189,6 +195,7 @@
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
+                        <td>@carRentalService.Service.PriceEcoCoins</td>
                         <td>@(carRentalService.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         <td><a href="/Service/AdminViewCarRentalService/@carRentalService.Id">Détails</a></td>
                     </tr>
@@ -203,8 +210,9 @@
                         {
                             <td><a href="/Account/UserProfilePersonalByAdmin/@user.Id">@user.Account.Username</a></td>
                         }
+                        <td>@parcelService.Service.PriceEcoCoins</td>
                         <td>@(parcelService.Service.IsAvailable ? "Disponible":"Terminé")</td>
-                        <td><a href="/Service/AdminViewParcelService/@parcelService.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
+                        <td><a href="/Service/AdminViewParcelService/@parcelService.Id">Détails</a></td>
                     </tr>
                 }
             </tbody>

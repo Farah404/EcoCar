@@ -108,6 +108,7 @@
                     <th>Type de service</th>
                     <th>Numéro de réference</th>
                     <th>EcoMembre demandeur</th>
+                    <th>EcoPrix</th>
                     <th>Disponibilité</th>
                     <th>Reserver</th>
                 </tr>
@@ -124,6 +125,7 @@
                         {
                             <td>@user.Account.Username</td>
                         }
+                        <td>@carPoolingServiceRequest.Service.PriceEcoCoins</td>
                         <td>@(carPoolingServiceRequest.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         <td> <a href="/Service/RespondToCarPoolRequest/@carPoolingServiceRequest.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
                     </tr>
@@ -139,6 +141,7 @@
                         {
                             <td>@user.Account.Username</td>
                         }
+                        <td>@carRentalServiceRequest.Service.PriceEcoCoins</td>
                         <td>@(carRentalServiceRequest.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         <td> <a href="/Service/RespondToCarRentalRequest/@carRentalServiceRequest.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
                     </tr>
@@ -157,6 +160,7 @@
                         {
                             <td>@user.Account.Username</td>
                         }
+                        <td>@parcelServiceRequest.Service.PriceEcoCoins</td>
                         <td>@(parcelServiceRequest.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         <td> <a href="/Service/RespondToParcelRequest/@parcelServiceRequest.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>
                     </tr>

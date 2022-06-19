@@ -1353,7 +1353,7 @@ namespace EcoCar.Models.DataBase
                 new Account
                 {
                     Id = 13,
-                    Username = "Gaïa",
+                    Username = "Gaia",
                     Password = "5E-A1-36-6C-34-CC-38-0D-AD-F1-62-AC-F6-CB-FD-42", //random
                     CreationDate = new DateTime(2021, 02, 18),
                     LastLoginDate = new DateTime(2022, 06, 18),
@@ -1417,6 +1417,204 @@ namespace EcoCar.Models.DataBase
                     Id = 13,
                     InsuranceAgency = "MAIF",
                     ContractNumber = "87746AEV"
+                });
+            this.SaveChanges();
+            #endregion
+            #region Initializing User14: Julie/random
+            this.People.Add(
+            new Person
+            {
+                Id = 14,
+                Name = "Julie",
+                LastName = "Bisognin",
+                ProfilePicturePath = "/ProfilePictures/ProfileGif16.gif"
+            }
+            );
+            this.Users.Add(
+                new User
+                {
+                    Id = 14,
+                    Email = "Julie@ecocar.com",
+                    PhoneNumber = 0768954235,
+                    IdentityCardNumber = 460382,
+                    DrivingPermitNumber = 865622,
+                    BirthDate = new DateTime(1964, 07, 10),
+                    UserRating = 3.5,
+                    SelectEcoStatusType = User.EcoStatusType.EcoSeed,
+                    BankDetailsId = 14,
+                    BillingAddressId = 14,
+                    PersonId = 14,
+                    VehiculeId = 14,
+                    AccountId = 14,
+                    EcoWalletId = 14,
+                    ShoppingCartId = 14
+                }
+                );
+            this.Accounts.Add(
+                new Account
+                {
+                    Id = 14,
+                    Username = "Julie",
+                    Password = "5E-A1-36-6C-34-CC-38-0D-AD-F1-62-AC-F6-CB-FD-42", //random
+                    CreationDate = new DateTime(2021, 01, 05),
+                    LastLoginDate = new DateTime(2022, 06, 10),
+                    IsActive = true
+                });
+
+            this.BankingDetails.Add(
+                new BankDetails
+                {
+                    Id = 14,
+                    BankName = "Credit Agricole",
+                    Swift = "CA258RG",
+                    Iban = " FR7630004028379876865622686"
+                });
+            this.BillingAddresses.Add(
+                new BillingAddress
+                {
+                    Id = 14,
+                    AddressLine = "12 Rue de la Butte aux Cailles",
+                    City = "Paris",
+                    Region = "Paris",
+                    Country = "France",
+                    PostalCode = 75013
+                });
+            this.EcoWallets.Add(
+                new EcoWallet
+                {
+                    Id = 14,
+                    EcoCoinsAmount = 5,
+                    Subscription = false,
+                });
+            this.ShoppingCarts.Add(
+                new ShoppingCart
+                {
+                    Id = 14,
+                    QuantityBatchOne = 0,
+                    QuantityBatchTwo = 0,
+                    QuantityBatchThree = 0,
+                    QuantityMonthlySubscription = 0,
+                    QuantityTrimestrialSubscription = 0,
+                    QuantitySemestrialSubscription = 0,
+                    TotalPriceEuros = 0,
+                });
+            this.Vehicules.Add(
+                new Vehicule
+                {
+                    Id = 14,
+                    Brand = "Fiat",
+                    RegistrationNumber = 016381,
+                    Model = "Punto",
+                    Hybrid = false,
+                    Electric = false,
+                    AvailableSeats = 3,
+                    InsuranceId = 14,
+                });
+            this.Insurances.Add(
+                new Insurance
+                {
+                    Id = 14,
+                    InsuranceAgency = "MACIF",
+                    ContractNumber = "92246ZQV"
+                });
+            this.SaveChanges();
+            #endregion
+            #region Initializing User15: Lana/random
+            this.People.Add(
+            new Person
+            {
+                Id = 15,
+                Name = "Lana",
+                LastName = "Lana",
+                ProfilePicturePath = "/ProfilePictures/ProfileGif14.gif"
+            }
+            );
+            this.Users.Add(
+                new User
+                {
+                    Id = 15,
+                    Email = "Lana@ecocar.com",
+                    PhoneNumber = 07438180,
+                    IdentityCardNumber = 572381,
+                    DrivingPermitNumber = 558344,
+                    BirthDate = new DateTime(1985, 01, 09),
+                    UserRating = 3.8,
+                    SelectEcoStatusType = User.EcoStatusType.EcoLeaf,
+                    BankDetailsId = 15,
+                    BillingAddressId = 15,
+                    PersonId = 15,
+                    VehiculeId = 15,
+                    AccountId = 15,
+                    EcoWalletId = 15,
+                    ShoppingCartId = 15
+                }
+                );
+            this.Accounts.Add(
+                new Account
+                {
+                    Id = 15,
+                    Username = "Lana",
+                    Password = "5E-A1-36-6C-34-CC-38-0D-AD-F1-62-AC-F6-CB-FD-42", //random
+                    CreationDate = new DateTime(2021, 02, 14),
+                    LastLoginDate = new DateTime(2022, 06, 07),
+                    IsActive = true
+                });
+
+            this.BankingDetails.Add(
+                new BankDetails
+                {
+                    Id = 15,
+                    BankName = "Banque Postale",
+                    Swift = "BPS5974",
+                    Iban = " FR7630004028379876557500330 "
+                });
+            this.BillingAddresses.Add(
+                new BillingAddress
+                {
+                    Id = 15,
+                    AddressLine = "83 Rue Vaneau",
+                    City = "Paris",
+                    Region = "Paris",
+                    Country = "France",
+                    PostalCode = 75007
+                });
+            this.EcoWallets.Add(
+                new EcoWallet
+                {
+                    Id = 15,
+                    EcoCoinsAmount = 28,
+                    Subscription = false,
+                });
+            this.ShoppingCarts.Add(
+                new ShoppingCart
+                {
+                    Id = 15,
+                    QuantityBatchOne = 0,
+                    QuantityBatchTwo = 0,
+                    QuantityBatchThree = 0,
+                    QuantityMonthlySubscription = 0,
+                    QuantityTrimestrialSubscription = 0,
+                    QuantitySemestrialSubscription = 0,
+                    TotalPriceEuros = 0,
+                });
+            this.Vehicules.Add(
+                new Vehicule
+                {
+                    Id = 15,
+                    Brand = "Kia",
+                    RegistrationNumber = 870350,
+                    Model = "rio",
+                    Hybrid = false,
+                    Electric = false,
+                    AvailableSeats = 3,
+                    InsuranceId = 15,
+                });
+            this.Insurances.Add(
+                new Insurance
+                {
+                    Id = 15,
+                    InsuranceAgency = "MACIF",
+                    ContractNumber = "47793IXB"
                 });
             this.SaveChanges();
             #endregion
@@ -1794,8 +1992,8 @@ namespace EcoCar.Models.DataBase
             this.Services.Add(
             new Service
             {
-                Id =1,
-                PublicationDate = new DateTime(2022, 06, 02),
+                Id = 1,
+                PublicationDate = new DateTime(2022, 06, 02, 3, 57, 32),
                 ReferenceNumber = 855583637,
                 IsAvailable = true,
                 Start = new DateTime(2022, 06, 25),
@@ -1809,7 +2007,7 @@ namespace EcoCar.Models.DataBase
             this.CarPoolingServices.Add(
                 new CarPoolingService
                 {
-                    Id=1,
+                    Id = 1,
                     SelectCarPoolingType = CarPoolingService.CarPoolingType.HomeToWork,
                     AvailableSeats = 3,
                     PetsAllowed = false,
@@ -2047,7 +2245,7 @@ namespace EcoCar.Models.DataBase
             {
                 Id = 9,
                 PublicationDate = new DateTime(2022, 06, 03),
-                ReferenceNumber = 703969084,
+                ReferenceNumber = 708569084,
                 IsAvailable = true,
                 Start = new DateTime(2022, 06, 25),
                 End = new DateTime(2022, 06, 25),
@@ -2112,7 +2310,7 @@ namespace EcoCar.Models.DataBase
             {
                 Id = 11,
                 PublicationDate = new DateTime(2022, 06, 11),
-                ReferenceNumber = 703969084,
+                ReferenceNumber = 956875084,
                 IsAvailable = true,
                 Start = new DateTime(2022, 06, 27),
                 End = new DateTime(2022, 06, 27),
@@ -2219,8 +2417,8 @@ namespace EcoCar.Models.DataBase
                 new CarRentalService
                 {
                     Id = 1,
-                    KeyPickUpAddress= "8 Rue de la Main d'Or 75011 Paris",
-                    KeyDropOffAddress= "5 Rue Saint-Severin 75005 Paris",
+                    KeyPickUpAddress = "8 Rue de la Main d'Or 75011 Paris",
+                    KeyDropOffAddress = "5 Rue Saint-Severin 75005 Paris",
                     VehiculeId = 11,
                     ServiceId = 14
                 });
@@ -2267,7 +2465,7 @@ namespace EcoCar.Models.DataBase
                 IsRequest = true,
                 SelectServiceType = Service.ServiceType.CarRentalService,
                 PriceEcoCoins = 25,
-                UserProviderId = 10
+                UserProviderId = 12
             });
             this.SaveChanges();
             this.CarRentalServices.Add(
@@ -2276,9 +2474,10 @@ namespace EcoCar.Models.DataBase
                     Id = 3,
                     KeyPickUpAddress = "15 Place Vendome 75018 Paris",
                     KeyDropOffAddress = "18 Rue des 3 Freres 75018 Paris",
-                    VehiculeId = 10,
+                    VehiculeId = 12,
                     ServiceId = 16
                 });
+            this.SaveChanges();
             #endregion
             #endregion
         }

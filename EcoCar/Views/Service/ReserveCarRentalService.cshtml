@@ -94,7 +94,7 @@
                                     Hybride
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.CarRentalService.Vehicule.Hybrid</p>
+                                        <p>@(Model.CarRentalService.Vehicule.Hybrid ? "Oui":"Non")</p>
                                 </td>
                             </tr>
 
@@ -104,7 +104,7 @@
                                     100% Electrique
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.CarRentalService.Vehicule.Electric</p>
+                                        <p>@(Model.CarRentalService.Vehicule.Electric ? "Oui":"Non")</p>
                                 </td>
                             </tr>
 

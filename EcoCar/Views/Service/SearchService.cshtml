@@ -36,7 +36,11 @@
                     <tr class="content">
                         <td>@carPoolingService.Service.Start.ToShortDateString()</td>
                         <td>@carPoolingService.Service.Start.TimeOfDay</td>
-                        <td>@carPoolingService.Service.SelectServiceType</td>
+                        @*Not ideal but will work*@
+                        @if(@carPoolingService.Service.SelectServiceType.ToString()=="CarPoolingService")
+                        {
+                            <td>Covoiturage</td>
+                        }
                         <td>@carPoolingService.Service.ReferenceNumber</td>
                         @foreach (var user in Model.Users.Where(u => u.Id == @carPoolingService.Service.UserProviderId))
                         {
@@ -52,7 +56,10 @@
                     <tr class="content">
                         <td>@carRentalService.Service.Start.ToShortDateString()</td>
                         <td>@carRentalService.Service.Start.TimeOfDay</td>
-                        <td>@carRentalService.Service.SelectServiceType</td>
+                        @if(@carRentalService.Service.SelectServiceType.ToString()=="CarRentalService")
+                        {
+                            <td>Location</td>
+                        }
                         <td>@carRentalService.Service.ReferenceNumber</td>
                         @foreach (var user in Model.Users.Where(u => u.Id == @carRentalService.Service.UserProviderId))
                         {
@@ -71,7 +78,10 @@
                     <tr class="content">
                         <td>@parcelService.Service.Start.ToShortDateString()</td>
                         <td>@parcelService.Service.Start.TimeOfDay</td>
-                        <td>@parcelService.Service.SelectServiceType</td>
+                        @if(@parcelService.Service.SelectServiceType.ToString()=="ParcelService")
+                        {
+                            <td>Transport de colis</td>
+                        }
                         <td>@parcelService.Service.ReferenceNumber</td>
                         @foreach (var user in Model.Users.Where(u => u.Id == @parcelService.Service.UserProviderId))
                         {
@@ -119,7 +129,10 @@
                     <tr>
                         <td>@carPoolingServiceRequest.Service.Start.ToShortDateString()</td>
                         <td>@carPoolingServiceRequest.Service.Start.TimeOfDay</td>
-                        <td>@carPoolingServiceRequest.Service.SelectServiceType</td>
+                        @if(@carPoolingServiceRequest.Service.SelectServiceType.ToString()=="CarPoolingService")
+                        {
+                            <td>Covoiturage</td>
+                        }
                         <td>@carPoolingServiceRequest.Service.ReferenceNumber</td>
                         @foreach (var user in Model.Users.Where(u => u.Id == @carPoolingServiceRequest.Service.UserProviderId))
                         {
@@ -135,7 +148,10 @@
                     <tr>
                         <td>@carRentalServiceRequest.Service.Start.ToShortDateString()</td>
                         <td>@carRentalServiceRequest.Service.Start.TimeOfDay</td>
-                        <td>@carRentalServiceRequest.Service.SelectServiceType</td>
+                        @if(@carRentalServiceRequest.Service.SelectServiceType.ToString()=="CarRentalService")
+                        {
+                            <td>Location</td>
+                        }
                         <td>@carRentalServiceRequest.Service.ReferenceNumber</td>
                         @foreach (var user in Model.Users.Where(u => u.Id == @carRentalServiceRequest.Service.UserProviderId))
                         {
@@ -154,7 +170,10 @@
                     <tr>
                         <td>@parcelServiceRequest.Service.Start.ToShortDateString()</td>
                         <td>@parcelServiceRequest.Service.Start.TimeOfDay</td>
-                        <td>@parcelServiceRequest.Service.SelectServiceType</td>
+                        @if(@parcelServiceRequest.Service.SelectServiceType.ToString()=="ParcelService")
+                        {
+                            <td>Transport de colis</td>
+                        }
                         <td>@parcelServiceRequest.Service.ReferenceNumber</td>
                         @foreach (var user in Model.Users.Where(u => u.Id == @parcelServiceRequest.Service.UserProviderId))
                         {

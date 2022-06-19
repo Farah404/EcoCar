@@ -70,7 +70,22 @@
                                     Type de covoiturage
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.CarPoolingService.SelectCarPoolingType</p>
+                                       @if(@Model.CarPoolingService.SelectCarPoolingType.ToString()=="HomeToWork")
+                                        {
+                                             <p>Domicile-travail</p>
+                                        }
+                                        @if(@Model.CarPoolingService.SelectCarPoolingType.ToString()=="HomeToSchool")
+                                        {
+                                             <p>Domicile-école/université</p>
+                                        }
+                                        @if(@Model.CarPoolingService.SelectCarPoolingType.ToString()=="Events")
+                                        {
+                                             <p>Evènements</p>
+                                        }
+                                        @if(@Model.CarPoolingService.SelectCarPoolingType.ToString()=="Travel")
+                                        {
+                                             <p>Voyage</p>
+                                        }
                                 </td>
                             </tr>
 
@@ -139,7 +154,14 @@
                                     Type du trajet
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.CarPoolingService.Trajectory.SelectTrajectoryType</p>
+                                    @if(@Model.CarPoolingService.Trajectory.SelectTrajectoryType.ToString()=="Regular")
+                                    {
+                                        <p>Régulier</p>
+                                    }
+                                    @if(@Model.CarPoolingService.Trajectory.SelectTrajectoryType.ToString()=="Punctual")
+                                    {
+                                        <p>Ponctuel</p>
+                                    }
                                 </td>
                             </tr>
                         </tbody>
@@ -156,7 +178,7 @@
                                     Animaux de compagnie
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.CarPoolingService.PetsAllowed</p>
+                                        <p>@(Model.CarPoolingService.PetsAllowed ? "Oui":"Non")</p>
                                 </td>
                             </tr>
 
@@ -166,7 +188,7 @@
                                     Fumeur
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.CarPoolingService.SmokingAllowed</p>
+                                        <p>@(Model.CarPoolingService.SmokingAllowed ? "Oui":"Non")</p>
                                 </td>
                             </tr>
 
@@ -176,7 +198,7 @@
                                     Musique
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.CarPoolingService.MusicAllowed</p>
+                                        <p>@(Model.CarPoolingService.MusicAllowed ? "Oui":"Non")</p>
                                 </td>
                             </tr>
 
@@ -186,7 +208,7 @@
                                     Discussion
                                 </td>
                                 <td class="text-success">
-                                        <p>@Model.CarPoolingService.ChattingAllowed</p>
+                                        <p>@(Model.CarPoolingService.ChattingAllowed ? "Oui":"Non")</p>
                                 </td>
                             </tr>
 

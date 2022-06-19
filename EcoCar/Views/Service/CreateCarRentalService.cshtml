@@ -18,13 +18,13 @@
                 {
                     <div class="form-floating mb-3">
                     @Html.Label("Lieu de récupération initial des clés") <br>
-                    @Html.EditorFor(model => model.KeyPickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.EditorFor(model => model.KeyPickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px",required="required"}})
                     @Html.ValidationMessageFor(model => model.KeyPickUpAddress)
                     <br></div>
 
                     <div class="form-floating mb-3">
                     @Html.Label("Lieu de retour des clés") <br>
-                    @Html.EditorFor(model => model.KeyDropOffAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.EditorFor(model => model.KeyDropOffAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px",required="required"}})
                     @Html.ValidationMessageFor(model => model.KeyDropOffAddress)
                     <br></div>
 

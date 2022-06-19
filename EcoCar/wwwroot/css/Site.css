@@ -644,13 +644,14 @@ div.eco-cloud-left-other {
     outline: 0;
 }
 
-.circle:active {
-    content: '';
-    background-color: rgb(235, 235, 235);
-    border-color: rgb(173, 173, 173);
+.refresh {
+    position: absolute;
+    bottom: 240px;
+    right: 360px;
 }
 
-#circle >div {
-    display :inline-block;
-    vertical-align:middle;
+.empty {
+    position: absolute;
+    bottom: 240px;
+    right: 320px;
 }

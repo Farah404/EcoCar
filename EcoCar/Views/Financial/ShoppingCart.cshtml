@@ -137,16 +137,21 @@
 
             </table>
         </div>
-        <div class="circle">
-            <button style="float: right;" class="submit-with-icon" type="submit" formaction="EmptyShoppingCart"><span class="glyphicon glyphicon-erase text-success"></span></button>
-            @*<div class="circle">*@
-            <button style="float: right;" class="submit-with-icon" type="submit" formaction="RefreshShoppingCart">
+
+        <div class="empty">
+            <button class="submit-with-icon text-right" type="submit" formaction="EmptyShoppingCart">
+                <span data-toggle="popover" data-placement="top" title="Vider mon panier" class="glyphicon glyphicon-erase text-success"></span>
+            </button>
+        </div>
+        <div class="refresh">
+            <button data-toggle="popover" data-placement="top" title="Rafraîchir mon panier" class="submit-with-icon text-right" type="submit" formaction="RefreshShoppingCart">
                 <span class="glyphicon glyphicon-refresh text-success"></span>
             </button>
         </div>
+
         <button style="float: right;" class="btn btn-success btn-xl" type="submit" formaction="ShoppingCart">Valider la commande</button>
     </div>
-   
+
 
 
 }
@@ -163,5 +168,12 @@
         }
     });
 
-        }
+                }
+</script>
+
+<script>
+    // Dismiss Popover on next click
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+    })
 </script>

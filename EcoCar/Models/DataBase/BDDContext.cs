@@ -50,7 +50,7 @@ namespace EcoCar.Models.DataBase
         {
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
+                optionsBuilder.UseMySql("server=localhost;user id=root;password=rootine;database=EcoCar");
             }
             else
             {
@@ -133,7 +133,7 @@ namespace EcoCar.Models.DataBase
                 new User
                 {
                     Id = 1,
-                    Email = "H.gauduin@ecocar.com",
+                    Email = "hermann@ecocar.com",
                     BirthDate = new DateTime(1993, 04, 21),
                     PhoneNumber = 0764241035,
                     IdentityCardNumber = 85649325,

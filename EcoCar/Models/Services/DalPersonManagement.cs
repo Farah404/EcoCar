@@ -368,13 +368,14 @@ namespace EcoCar.Models.Services
         //Update Account
         public void UpdateAccount(int id, string username, string password, bool isActive, DateTime lastLoginDate)
         {
+            string passwordEncrypted = EncodeMD5(password);
             Account account = _bddContext.Accounts.Find(id);
 
             if (account != null)
             {
                 account.Id = id;
                 account.Username = username;
-                account.Password = password;
+                account.Password = passwordEncrypted;
                 account.IsActive = isActive;
                 account.LastLoginDate = lastLoginDate;
                 _bddContext.SaveChanges();
@@ -382,11 +383,12 @@ namespace EcoCar.Models.Services
         }
         public void UpdateAccountPassword(int id, string password)
         {
+            string passwordEncrypted = EncodeMD5(password);
             Account account = _bddContext.Accounts.Find(id);
             if (account != null)
             {
                 account.Id = id;
-                account.Password = password;
+                account.Password = passwordEncrypted;
                 _bddContext.SaveChanges();
             }
 

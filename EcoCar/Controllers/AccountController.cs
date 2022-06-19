@@ -54,14 +54,15 @@ namespace EcoCar.Controllers
             {
                 Account account = dalPersonManagement.Authentify(viewModel.Account.Username, viewModel.Account.Password);
                 if (account != null)
+                {
                     if (account.IsActive == true)
                     {
                         {
                             var userClaims = new List<Claim>()
-                    {
-                        new Claim(ClaimTypes.Name, account.Username),
-                        new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
-                    };
+                                {
+                                    new Claim(ClaimTypes.Name, account.Username),
+                                    new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
+                                };
 
                             var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
 
@@ -69,8 +70,9 @@ namespace EcoCar.Controllers
                             HttpContext.SignInAsync(userPrincipal);
 
                             if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+                            { 
                                 return Redirect(returnUrl);
-
+                            }
                             //SubTest
 
                             //int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
@@ -155,14 +157,14 @@ namespace EcoCar.Controllers
                                     sixthMonth);
                             }
                             dalPersonManagement.UpdateAccount(userAccount.Id, userAccount.Username, userAccount.Password, userAccount.IsActive, DateTime.Now);
-                            return Redirect("/Home/Index");
+                            return Redirect("/Service/SearchService");
                         }
-                        ModelState.AddModelError("Account.Username", "Nom d'utilisateur et/ou mot de passe incorrect(s)");
+                    }
+                }
+                    ModelState.AddModelError("Account.Username", "Nom d'utilisateur et/ou mot de passe incorrect(s)");
                     }
                 return View();
             }
-            return View();
-        }
         #endregion
 
         #region Admin
@@ -328,7 +330,7 @@ namespace EcoCar.Controllers
         public ActionResult SignOut()
         {
             HttpContext.SignOutAsync();
-            return Redirect("/Home/Index");
+            return Redirect("/Account/LoginAccount");
         }
 
         //Updating Account
@@ -461,6 +463,20 @@ namespace EcoCar.Controllers
         public ActionResult ForgotPassword()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult ForgotPassword(User user, Account account)
+        {
+            User userToUpdate = dalPersonManagement.GetUserByEmail(user.Email);
+            if(userToUpdate != null)
+            {
+                dalPersonManagement.UpdateAccount(userToUpdate.Account.Id, userToUpdate.Account.Username, account.Password, userToUpdate.Account.IsActive, userToUpdate.Account.LastLoginDate);
+                return Redirect("/Account/LoginAccount");
+            }
+            else
+            {
+                return View();
+            }
         }
         #endregion
 

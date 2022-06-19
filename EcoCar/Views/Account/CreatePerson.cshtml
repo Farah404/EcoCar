@@ -22,12 +22,12 @@
                                 @using (Html.BeginForm())
                                 {
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.Person.Name, new { @class = "form-control", placeholder = "Prénom" })
+                                        @Html.TextBoxFor(model => model.Person.Name, new { @class = "form-control", placeholder = "Prénom",required="required" })
                                         @Html.ValidationMessageFor(model => model.Person.Name)
                                     </div>
                                      <br>
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.Person.LastName, new { @class = "form-control", placeholder = "Nom" })
+                                        @Html.TextBoxFor(model => model.Person.LastName, new { @class = "form-control", placeholder = "Nom",required="required" })
                                         @Html.ValidationMessageFor(model => model.Person.LastName)
                                     </div>
                                      <br>

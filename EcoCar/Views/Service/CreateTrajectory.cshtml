@@ -18,7 +18,7 @@
                 {
                     <div class="form-floating mb-3">
                     @Html.Label("Durée approximative en heures")<br>
-                    @Html.EditorFor(model => model.DurationHours, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.EditorFor(model => model.DurationHours, new { htmlAttributes = new { @class = "form-control", style="width:300px",required="required"}})
                     @Html.ValidationMessageFor(model => model.DurationHours)
                     <br></div>
 
@@ -36,13 +36,13 @@
 
                     <div class="form-floating mb-3">
                     @Html.Label("Adresse de départ") <br>
-                    @Html.EditorFor(model => model.PickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.EditorFor(model => model.PickUpAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px",required="required"}})
                     @Html.ValidationMessageFor(model => model.PickUpAddress)
                     <br></div>
 
                     <div class="form-floating mb-3">
                     @Html.Label("Adresse d'arrivée") <br>
-                    @Html.EditorFor(model => model.DeliveryAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                    @Html.EditorFor(model => model.DeliveryAddress, new { htmlAttributes = new { @class = "form-control", style="width:300px",required="required"}})
                     @Html.ValidationMessageFor(model => model.DeliveryAddress)
                     <br></div>
 

@@ -22,17 +22,17 @@
                                 @using (Html.BeginForm())
                     {
                         <div class="form-floating mb-3">
-                            @Html.TextBoxFor(model => model.BankDetails.BankName, new { @class = "form-control", placeholder = "Nom de votre banque" })
+                            @Html.TextBoxFor(model => model.BankDetails.BankName, new { @class = "form-control", placeholder = "Nom de votre banque" , required="required"})
                             @Html.ValidationMessageFor(model => model.BankDetails.BankName)
                         </div>
                          <br>
                         <div class="form-floating mb-3">
-                            @Html.TextBoxFor(model => model.BankDetails.Swift, new {@class = "form-control", placeholder = "Numéro SWIFT" })
+                            @Html.TextBoxFor(model => model.BankDetails.Swift, new {@class = "form-control", placeholder = "Numéro SWIFT", required="required" })
                             @Html.ValidationMessageFor(model => model.BankDetails.Swift)
                         </div>
                          <br>
                         <div class="form-floating mb-3">
-                            @Html.TextBoxFor(model => model.BankDetails.Iban, new {@class = "form-control", placeholder = "Numéro IBAN" })
+                            @Html.TextBoxFor(model => model.BankDetails.Iban, new {@class = "form-control", placeholder = "Numéro IBAN",required="required" })
                             @Html.ValidationMessageFor(model => model.BankDetails.Iban)
                         </div>
                          <br>

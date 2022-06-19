@@ -23,28 +23,28 @@
                                 @using (Html.BeginForm())
                                 {
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Courriel" })
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Courriel",required="required" })
                                         @Html.ValidationMessageFor(model => model.Email)
                                     </div>
                                     <br>
                                     <div class="form-outline mb-4">
-                                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control",placeholder = "Date de naissance" } })
+                                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control",placeholder = "Date de naissance",required="required" } })
                                         @Html.ValidationMessageFor(model => model.BirthDate)
 
                                     </div>
                                     <br>
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.IdentityCardNumber, new { @class = "form-control", placeholder = "Numéro de carte d'identité" })
+                                        @Html.TextBoxFor(model => model.IdentityCardNumber, new { @class = "form-control", placeholder = "Numéro de carte d'identité",required="required" })
                                         @Html.ValidationMessageFor(model => model.IdentityCardNumber)
                                     </div>
                                     <br>
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.DrivingPermitNumber, new { @class = "form-control", placeholder = "Numéro de permis de conduire" })
+                                        @Html.TextBoxFor(model => model.DrivingPermitNumber, new { @class = "form-control", placeholder = "Numéro de permis de conduire",required="required" })
                                         @Html.ValidationMessageFor(model => model.DrivingPermitNumber)
                                     </div>
                                     <br>
                                     <div class="form-outline mb-4">
-                                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Numéro de téléphone" })
+                                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Numéro de téléphone" ,required="required"})
                                         @Html.ValidationMessageFor(model => model.PhoneNumber)
                                     </div>
                                     <br>

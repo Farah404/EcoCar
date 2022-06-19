@@ -15,21 +15,21 @@
                     @Html.Label("Nom de l'assureur")
 
                     <div class="form-floating mb-3">
-                        @Html.EditorFor(model => model.Insurance.InsuranceAgency, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.EditorFor(model => model.Insurance.InsuranceAgency, new { htmlAttributes = new { @class = "form-control", style="width:300px",required="required"}})
                         @Html.ValidationMessageFor(model => model.Insurance.InsuranceAgency)
                     </div>
                     <br />
 
                     <div class="form-floating mb-3">
                         @Html.Label("Date de fin de validité de l'assurance") <br>
-                        @Html.EditorFor(model => model.Insurance.InsuranceExpiration, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.EditorFor(model => model.Insurance.InsuranceExpiration, new { htmlAttributes = new { @class = "form-control", style="width:300px",required="required"}})
                         @Html.ValidationMessageFor(model => model.Insurance.InsuranceAgency)
                     </div>
                     <br />
 
                     <div class="form-floating mb-3">
                         @Html.Label("Numéro du contrat d'assurance")<br>
-                        @Html.EditorFor(model => model.Insurance.ContractNumber, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.EditorFor(model => model.Insurance.ContractNumber, new { htmlAttributes = new { @class = "form-control", style="width:300px",required="required"}})
                         @Html.ValidationMessageFor(model => model.Insurance.InsuranceAgency)
                     </div>
                     <br />

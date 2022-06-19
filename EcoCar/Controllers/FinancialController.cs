@@ -8,9 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-// ecoCarDevT randomSalt5
-// ecocardevteam@gmail.com  random
-
 namespace EcoCar.Controllers
 {
     public class FinancialController : Controller

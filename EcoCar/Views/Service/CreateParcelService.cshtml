@@ -24,13 +24,13 @@
 
                     <div class="form-floating mb-3">
                         @Html.Label("Poids en kilogrammes") <br>
-                        @Html.EditorFor(model => model.WeightKilogrammes, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.EditorFor(model => model.WeightKilogrammes, new { htmlAttributes = new { @class = "form-control", style="width:300px",required="required"}})
                         @Html.ValidationMessageFor(model => model.WeightKilogrammes)
                         <br>
                     </div>
 
                     <div class="form-floating mb-3">
-                        @Html.CheckBoxFor(model => model.AtypicalVolume, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.CheckBoxFor(model => model.AtypicalVolume, new { htmlAttributes = new { @class = "form-control", style="width:300px",required="required"}})
                         @Html.Label("Forme Atypique")
                         @Html.ValidationMessageFor(model => model.AtypicalVolume)
                         <br>
@@ -38,7 +38,7 @@
 
                     <div class="form-floating mb-3">
 
-                        @Html.CheckBoxFor(model => model.Fragile, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.CheckBoxFor(model => model.Fragile, new { htmlAttributes = new { @class = "form-control", style="width:300px",required="required"}})
                         @Html.Label("Fragile")
                         @Html.ValidationMessageFor(model => model.Fragile)
                         <br>

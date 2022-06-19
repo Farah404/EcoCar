@@ -30,13 +30,13 @@
 
                     <div class="form-outline mb-3">
                         @Html.Label("Date de debut")<br>
-                        @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", style="width:300px"}})
+                        @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", style="width:300px",required="required"}})
                         @Html.ValidationMessageFor(model => model.Start)
                     <br></div>
 
                     <div class="form-outline mb-3">
                         @Html.Label("Date de fin")<br>
-                        @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control",style="width:300px"}})
+                        @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control",style="width:300px",required="required"}})
                         @Html.ValidationMessageFor(model => model.End)
                     <br></div>
 
@@ -48,7 +48,7 @@
 
                     <div class="form-floating mb-3">
                         @Html.Label("Prix en EcoCoins")<br>
-                        @Html.TextBoxFor(model => model.PriceEcoCoins, new{ @class = "form-control",style="width:300px"})
+                        @Html.TextBoxFor(model => model.PriceEcoCoins, new{ @class = "form-control",style="width:300px",required="required"})
                     <br></div>
 
                     <button class="btn btn-success" type="submit">Suivant</button>

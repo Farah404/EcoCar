@@ -104,7 +104,10 @@
                 {
                     <tr>
                         <td>@carPoolingService.Service.Start.ToShortDateString()</td>
-                        <td>@carPoolingService.Service.SelectServiceType</td>
+                        @if(@carPoolingService.Service.SelectServiceType.ToString()=="CarPoolingService")
+                        {
+                            <td>Covoiturage</td>
+                        }
                         <td>@carPoolingService.Service.ReferenceNumber</td>
                         @foreach (var user in Model.Users.Where(u => u.Id == carPoolingService.Service.UserProviderId))
                         {
@@ -120,7 +123,10 @@
                 {
                     <tr>
                         <td>@carRentalService.Service.Start.ToShortDateString()</td>
-                        <td>@carRentalService.Service.SelectServiceType</td>
+                        @if(@carRentalService.Service.SelectServiceType.ToString()=="CarRentalService")
+                        {
+                            <td>Location</td>
+                        }
                         <td>@carRentalService.Service.ReferenceNumber</td>
                         @foreach (var user in Model.Users.Where(u => u.Id == carRentalService.Service.UserProviderId))
                         {
@@ -136,7 +142,10 @@
                 {
                     <tr>
                         <td>@parcelService.Service.Start.ToShortDateString()</td>
-                        <td>@parcelService.Service.SelectServiceType</td>
+                        @if(@parcelService.Service.SelectServiceType.ToString()=="ParcelService")
+                        {
+                            <td>Transport de colis</td>
+                        }
                         <td>@parcelService.Service.ReferenceNumber</td>
                         @foreach (var user in Model.Users.Where(u => u.Id == parcelService.Service.UserProviderId))
                         {
@@ -174,7 +183,10 @@
                 {
                     <tr>
                         <td>@carPoolingService.Service.Start.ToShortDateString()</td>
-                        <td>@carPoolingService.Service.SelectServiceType</td>
+                        @if(@carPoolingService.Service.SelectServiceType.ToString()=="CarPoolingService")
+                        {
+                            <td>Covoiturage</td>
+                        }
                         <td>@carPoolingService.Service.ReferenceNumber</td>
                         @foreach (var user in Model.Users.Where(u => u.Id == carPoolingService.Service.UserProviderId))
                         {
@@ -189,7 +201,10 @@
                 {
                     <tr>
                         <td>@carRentalService.Service.Start.ToShortDateString()</td>
-                        <td>@carRentalService.Service.SelectServiceType</td>
+                        @if(@carRentalService.Service.SelectServiceType.ToString()=="CarRentalService")
+                        {
+                            <td>Location</td>
+                        }
                         <td>@carRentalService.Service.ReferenceNumber</td>
                         @foreach (var user in Model.Users.Where(u => u.Id == carRentalService.Service.UserProviderId))
                         {
@@ -204,7 +219,10 @@
                 {
                     <tr>
                         <td>@parcelService.Service.Start.ToShortDateString()</td>
-                        <td>@parcelService.Service.SelectServiceType</td>
+                        @if(@parcelService.Service.SelectServiceType.ToString()=="ParcelService")
+                        {
+                            <td>Transport de colis</td>
+                        }
                         <td>@parcelService.Service.ReferenceNumber</td>
                         @foreach (var user in Model.Users.Where(u => u.Id == parcelService.Service.UserProviderId))
                         {
@@ -239,7 +257,10 @@
                 {
                     <tr>
                         <td>@ecoStoreInvoice.Invoice.InvoiceIssueDate.ToShortDateString()</td>
-                        <td>@ecoStoreInvoice.Invoice.SelectInvoiceType</td>
+                        @if(@ecoStoreInvoice.Invoice.SelectInvoiceType.ToString()=="EcoStoreInvoice")
+                        {
+                            <td>Facture EcoStore</td>
+                        }
                         <td>@ecoStoreInvoice.Invoice.InvoiceNumber</td>
                         <td>@ecoStoreInvoice.UserId</td>
                         <td><a href="/Financial/EcoStoreInvoice/@ecoStoreInvoice.Id"><span class="glyphicon glyphicon-info-sign  text-success"></span></a></td>

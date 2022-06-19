@@ -156,7 +156,8 @@ namespace EcoCar.Controllers
                                     ecoWallet.EcoCoinsSixthMonth,
                                     sixthMonth);
                             }
-                            dalPersonManagement.UpdateAccount(userAccount.Id, userAccount.Username, userAccount.Password, userAccount.IsActive, DateTime.Now);
+                            //dalPersonManagement.UpdateAccount(userAccount.Id, userAccount.Username, userAccount.Password, userAccount.IsActive, DateTime.Now);
+                            dalPersonManagement.UpdateAccountWithoutEncodingPassword(userAccount.Id, userAccount.Username, userAccount.Password, userAccount.IsActive, DateTime.Now);
                             return Redirect("/Service/SearchService");
                         }
                     }

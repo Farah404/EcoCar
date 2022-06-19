@@ -381,6 +381,20 @@ namespace EcoCar.Models.Services
                 _bddContext.SaveChanges();
             }
         }
+        public void UpdateAccountWithoutEncodingPassword(int id, string username, string password, bool isActive, DateTime lastLoginDate)
+        {
+            Account account = _bddContext.Accounts.Find(id);
+
+            if (account != null)
+            {
+                account.Id = id;
+                account.Username = username;
+                account.Password = password;
+                account.IsActive = isActive;
+                account.LastLoginDate = lastLoginDate;
+                _bddContext.SaveChanges();
+            }
+        }
         public void UpdateAccountPassword(int id, string password)
         {
             string passwordEncrypted = EncodeMD5(password);

@@ -76,29 +76,29 @@ namespace EcoCar.Models.DataBase
                     Id = 1,
 
                     EcoCoinsBatchOnePrice = 10.00,
-                    EcoCoinsBatchOne = 20,
-                    NameOne = "EcoCoinsBatchOne",
+                    EcoCoinsBatchOne = 15,
+                    NameOne = "Lot EcoLeaf",
 
-                    EcoCoinsBatchTwoPrice = 18.00,
-                    EcoCoinsBatchTwo = 40,
-                    NameTwo = "EcoCoinsBatchTwo",
+                    EcoCoinsBatchTwoPrice = 20.00,
+                    EcoCoinsBatchTwo = 35,
+                    NameTwo = "Lot EcoTree",
 
-                    EcoCoinsBatchThreePrice = 35.00,
-                    EcoCoinsBatchThree = 60,
-                    NameThree = "EcoCoinsBatchThree",
+                    EcoCoinsBatchThreePrice = 30.00,
+                    EcoCoinsBatchThree = 50,
+                    NameThree = "Lot EcoForest",
 
 
-                    MonthlySubscriptionPrice = 10.00,
+                    MonthlySubscriptionPrice = 15.00,
                     MonthlySubscription = 30,
-                    NameMonth = "MonthlySubscription",
+                    NameMonth = "Abonnement d'un mois",
 
-                    TrimestrialSubscriptionPrice = 50.00,
+                    TrimestrialSubscriptionPrice = 45.00,
                     TrimestrialSubscription = 30,
-                    NameTrimester = "TrimestrialSubscription",
+                    NameTrimester = "Abonnement trimestriel",
 
-                    SemestrialSubscriptionPrice = 70.00,
+                    SemestrialSubscriptionPrice = 80.00,
                     SemestrialSubscription = 30,
-                    NameSemester = "SemestrialSubscription",
+                    NameSemester = "Abonnement semestriel",
                 });
 
 

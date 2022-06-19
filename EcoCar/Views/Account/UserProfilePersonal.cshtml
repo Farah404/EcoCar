@@ -504,10 +504,13 @@
                 {
                     <tr>
                         <td>@carPoolingService.Service.Start</td>
-                        <td>@carPoolingService.Service.SelectServiceType</td>
+                        @if(@carPoolingService.Service.SelectServiceType.ToString()=="CarPoolingService")
+                        {
+                            <td>Covoiturage</td>
+                        }
                         <td>@carPoolingService.Service.ReferenceNumber</td>
-                        <td>@carPoolingService.Service.IsRequest</td>
-                        <td>@carPoolingService.Service.IsAvailable</td>
+                        <td>@(carPoolingService.Service.IsRequest ? "Oui":"Non")</td>
+                        <td>@(carPoolingService.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         @if (@carPoolingService.Service.UserProviderId == @Model.User.Id)
                         {
                             @using (Html.BeginForm())
@@ -536,10 +539,13 @@
                     {
                         <tr>
                             <td>@carPoolingserviceR.Service.Start</td>
-                            <td>@carPoolingserviceR.Service.SelectServiceType</td>
+                            @if(@carPoolingserviceR.Service.SelectServiceType.ToString()=="CarPoolingService")
+                            {
+                                <td>Covoiturage</td>
+                            }
                             <td>@carPoolingserviceR.Service.ReferenceNumber</td>
-                            <td>@carPoolingserviceR.Service.IsRequest</td>
-                            <td>@carPoolingserviceR.Service.IsAvailable</td>
+                            <td>@(carPoolingserviceR.Service.IsRequest ?"Oui":"Non")</td>
+                            <td>@(carPoolingserviceR.Service.IsAvailable ? "Disponible":"Terminé")</td>
                             @if (@carPoolingserviceR.Service.UserProviderId == @Model.User.Id)
                             {
                                 @using (Html.BeginForm())
@@ -568,10 +574,13 @@
                 {
                     <tr>
                         <td>@carRentalService.Service.Start</td>
-                        <td>@carRentalService.Service.SelectServiceType</td>
+                        @if(@carRentalService.Service.SelectServiceType.ToString()=="CarRentalService")
+                        {
+                            <td>Location</td>
+                        }
                         <td>@carRentalService.Service.ReferenceNumber</td>
-                        <td>@carRentalService.Service.IsRequest</td>
-                        <td>@carRentalService.Service.IsAvailable</td>
+                        <td>@(carRentalService.Service.IsRequest ?"Oui":"Non")</td>
+                        <td>@(carRentalService.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         @if (@carRentalService.Service.UserProviderId == @Model.User.Id)
                         {
                             @using (Html.BeginForm())
@@ -598,10 +607,13 @@
                     {
                         <tr>
                             <td>@carRentalServiceR.Service.Start</td>
-                            <td>@carRentalServiceR.Service.SelectServiceType</td>
+                            @if(@carRentalServiceR.Service.SelectServiceType.ToString()=="CarRentalService")
+                            {
+                                <td>Location</td>
+                            }
                             <td>@carRentalServiceR.Service.ReferenceNumber</td>
-                            <td>@carRentalServiceR.Service.IsRequest</td>
-                            <td>@carRentalServiceR.Service.IsAvailable</td>
+                            <td>@(carRentalServiceR.Service.IsRequest ? "Oui":"Non")</td>
+                            <td>@(carRentalServiceR.Service.IsAvailable ? "Disponible":"Terminé")</td>
                             @if (@carRentalServiceR.Service.UserProviderId == @Model.User.Id)
                             {
                                 @using (Html.BeginForm())
@@ -629,10 +641,13 @@
                 {
                     <tr>
                         <td>@parcelService.Service.Start</td>
-                        <td>@parcelService.Service.SelectServiceType</td>
+                        @if(@parcelService.Service.SelectServiceType.ToString()=="ParcelService")
+                        {
+                            <td>Transport de colis</td>
+                        }
                         <td>@parcelService.Service.ReferenceNumber</td>
-                        <td>@parcelService.Service.IsRequest</td>
-                        <td>@parcelService.Service.IsAvailable</td>
+                        <td>@(parcelService.Service.IsRequest ? "Oui":"Non")</td>
+                        <td>@(parcelService.Service.IsAvailable ? "Disponible":"Terminé")</td>
                         @if (@parcelService.Service.UserProviderId == @Model.User.Id)
                         {
                             @using (Html.BeginForm())
@@ -661,10 +676,13 @@
                     {
                         <tr>
                             <td>@parcelServiceR.Service.Start</td>
-                            <td>@parcelServiceR.Service.SelectServiceType</td>
+                            @if(@parcelServiceR.Service.SelectServiceType.ToString()=="ParcelService")
+                            {
+                                <td>Transport de colis</td>
+                            }
                             <td>@parcelServiceR.Service.ReferenceNumber</td>
-                            <td>@parcelServiceR.Service.IsRequest</td>
-                            <td>@parcelServiceR.Service.IsAvailable</td>
+                            <td>@(parcelServiceR.Service.IsRequest ? "Oui":"Non")</td>
+                            <td>@(parcelServiceR.Service.IsAvailable ? "Disponible":"Terminé")</td>
                             @if (@parcelServiceR.Service.UserProviderId == @Model.User.Id)
                             {
                                 @using (Html.BeginForm())
@@ -713,7 +731,10 @@
                 {
                     <tr>
                         <td>@ecoStoreInvoice.Invoice.InvoiceIssueDate.ToShortDateString()</td>
-                        <td>@ecoStoreInvoice.Invoice.SelectInvoiceType</td>
+                        @if (@ecoStoreInvoice.Invoice.SelectInvoiceType.ToString() == "EcoStoreInvoice")
+                        {
+                            <td>Facture EcoStore</td>
+                        }
                         <td>@ecoStoreInvoice.Invoice.InvoiceNumber</td>
                         <td><a href="/Financial/EcoStoreInvoice/@ecoStoreInvoice.Id">Détails</a></td>
                     </tr>

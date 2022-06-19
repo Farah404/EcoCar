@@ -41,7 +41,11 @@
                                     <li><strong>Numéro de facture</strong> @Model.ServiceInvoice.Invoice.InvoiceNumber</li>
                                     <li><strong>Date d'émission de la facture</strong> @Model.ServiceInvoice.Invoice.InvoiceIssueDate.ToShortDateString()</</li>
                                     <li><strong>Heure d'émission de la facture</strong> @Model.ServiceInvoice.Invoice.InvoiceIssueDate.ToShortTimeString()</</li>
-                                    <li><strong>Type de facture</strong> @Model.ServiceInvoice.Invoice.SelectInvoiceType</li>
+                                    @if(@Model.ServiceInvoice.Service.SelectServiceType.ToString()=="ServiceInvoice")
+                                    {
+                                        <li><strong>Type de facture</strong>Facture de la prestation</li>
+                                    }
+                                    
 
                                 </ul>
                             </div>
@@ -60,7 +64,18 @@
                                     </thead>
                                     <tbody>
                                             <tr>
-                                                <td>@Model.ServiceInvoice.Service.SelectServiceType</td>
+                                            @if (@Model.ServiceInvoice.Service.SelectServiceType.ToString() == "CarPoolingService")
+                                                {
+                                                    <td>Covoiturage</td>
+                                                }
+                                            @if(@Model.ServiceInvoice.Service.SelectServiceType.ToString()=="CarRentalService")
+                                                {
+                                                    <td>Location</td>
+                                                }
+                                            @if(@Model.ServiceInvoice.Service.SelectServiceType.ToString()=="ParcelService")
+                                            {
+                                                <td>Transport de colis</td>
+                                            }
                                                 <td>@Model.ServiceInvoice.Service.ReferenceNumber</td>
                                             <td>@foreach(var user in Model.Users.Where(s => s.Id == Model.ServiceInvoice.IdServiceProvider))
                                                 {

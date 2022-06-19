@@ -37,7 +37,11 @@
                                     <li><strong>Numéro de facture</strong> @Model.EcoStoreInvoice.Invoice.InvoiceNumber</li>
                                     <li><strong>Date d'émission de la facture</strong> @Model.EcoStoreInvoice.Invoice.InvoiceIssueDate.ToShortDateString()</</li>
                                     <li><strong>Heure d'émission de la facture</strong> @Model.EcoStoreInvoice.Invoice.InvoiceIssueDate.ToShortTimeString()</</li>
-                                    <li><strong>Type de facture</strong> @Model.EcoStoreInvoice.Invoice.SelectInvoiceType</li>
+                                    @if(@Model.EcoStoreInvoice.Invoice.SelectInvoiceType.ToString()=="EcoStoreInvoice")
+                                    {
+                                        <li><strong>Type de facture</strong> Facture EcoStore</li>
+                                    }
+                                    
 
                                 </ul>
                             </div>
@@ -91,7 +95,7 @@
                                         }@if (@Model.EcoStoreInvoice.QuantityTrimestrialSubscription != 0)
                                         {
                                             <tr>
-                                                <td>@Model.EcoStoreInvoice.QuantityTrimestrialSubscription @Model.EcoStore.TrimestrialSubscription</td>
+                                                <td>@Model.EcoStoreInvoice.QuantityTrimestrialSubscription @Model.EcoStore.NameTrimester</td>
                                                 <td class="text-center">@Model.EcoStore.TrimestrialSubscriptionPrice €</td>
                                                 <td class="text-center">@Model.EcoStore.TrimestrialSubscription EcoCoins</td>
                                             </tr>
@@ -100,7 +104,7 @@
                                         @if (@Model.EcoStoreInvoice.QuantitySemestrialSubscription != 0)
                                         {
                                             <tr>
-                                                <td>@Model.EcoStoreInvoice.QuantitySemestrialSubscription @Model.EcoStore.SemestrialSubscription</td>
+                                                <td>@Model.EcoStoreInvoice.QuantitySemestrialSubscription @Model.EcoStore.NameSemester</td>
                                                 <td class="text-center">@Model.EcoStore.SemestrialSubscriptionPrice €</td>
                                                 <td class="text-center">@Model.EcoStore.SemestrialSubscription EcoCoins</td>
                                             </tr>
@@ -111,7 +115,7 @@
                                         <tr>
                                             <th colspan="1" class="text-right">Total:</th>
                                             <th class="text-center">@Model.EcoStoreInvoice.TotalPriceEuros €</th>
-                                            <th class="text-center">Total EcoCoins</th>
+                                            @*<th class="text-center">Total EcoCoins</th>*@
                                         </tr>
                                     </tfoot>
                                 </table>

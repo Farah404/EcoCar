@@ -180,7 +180,7 @@ Project Link: [https://github.com/Farah404/EcoCar](https://github.com/Farah404/E
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* [Isika](https://projet-isika.com/) for providing us this possibility
+* [Isika](https://projet-isika.com/) for providing us this opportunity
 * Cats who entertained us
 
 <p align="right">(<a href="#top">back to top</a>)</p>

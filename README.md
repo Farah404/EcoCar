@@ -58,7 +58,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-There are many CarPooling/CarRental/Location Service available ; however, we wishes to create something who could apprehend these needs and also strengthen the community by given them something more than only price reductions.
+There are many CarPooling/CarRental/Location Service available ; however, we wish to create something who could apprehend these needs and also strengthen the community by given them something more than only price reductions.
 
 Here's how:
 * A simple and efficient way to propose and provide CarPooling/CarRental/Location services

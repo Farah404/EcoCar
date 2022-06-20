@@ -52,7 +52,7 @@ namespace EcoCar.Models.DataBase
         {
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                optionsBuilder.UseMySql("server=localhost;user id=root;password=rootine;database=EcoCar");
+                optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
             }
             else
             {

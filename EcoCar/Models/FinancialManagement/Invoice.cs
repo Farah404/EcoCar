@@ -1,6 +1,6 @@
 ﻿//Class Description
 //The Invoice.cs is the parent class of the EcoStoreInvoice.cs and the ServiceInvoice.cs
-
+//Main Authors : Farah & FrancoisNoel
 using System;
 using System.ComponentModel.DataAnnotations;
 

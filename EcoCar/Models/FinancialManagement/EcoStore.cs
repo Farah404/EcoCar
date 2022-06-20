@@ -9,7 +9,6 @@ namespace EcoCar.Models.FinancialManagement
     {
         //Primary Key
         public int Id { get; set; }
-
         //Attributes
         public string NameOne { get; set; }
         public string NameTwo { get; set; }
@@ -17,27 +16,16 @@ namespace EcoCar.Models.FinancialManagement
         public string NameMonth { get; set; }
         public string NameTrimester { get; set; }
         public string NameSemester { get; set; }
-
         public double EcoCoinsBatchOnePrice { get; set; }
         public int EcoCoinsBatchOne { get; set; }
-
-
         public double EcoCoinsBatchTwoPrice { get; set; }
         public int EcoCoinsBatchTwo { get; set; }
-
-
         public double EcoCoinsBatchThreePrice { get; set; }
         public int EcoCoinsBatchThree { get; set; }
-
-
         public double MonthlySubscriptionPrice { get; set; }
         public int MonthlySubscription { get; set; }
-
-
         public double TrimestrialSubscriptionPrice { get; set; }
         public int TrimestrialSubscription { get; set; }
-
-
         public double SemestrialSubscriptionPrice { get; set; }
         public int SemestrialSubscription { get; set; }
 

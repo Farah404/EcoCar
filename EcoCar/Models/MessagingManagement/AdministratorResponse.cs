@@ -1,5 +1,7 @@
 ﻿//Class Description
 //The AdministratorResponse.cs contains the response of an administrator to a user help message concerning the website or their desire to report another user 
+//Main Authors : Farah & FrancoisNoel
+//Not available in that version
 
 //using EcoCar.Models.PersonManagement;
 

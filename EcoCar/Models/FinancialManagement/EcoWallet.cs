@@ -1,5 +1,6 @@
 ﻿//Class Description
 //The EcoWallet.cs contains the actual EcoCoin credit of the user, if they have a subscription or not and the value of their EcoCoins in euros
+//Main Authors : Farah & FrancoisNoel
 
 using System;
 

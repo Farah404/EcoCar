@@ -12,7 +12,7 @@
     <div class="panel-body inf-content">
         <div class="row">
             <div class="col-md-4">
-                <h4>Proposer un service: le trajet</h4>
+                <h4>Votre trajet</h4>
 
                 @using (Html.BeginForm())
                 {
@@ -48,7 +48,7 @@
 
                     <div class="form-floating mb-3">
                     @Html.Label("Nature du trajet") <br>
-                    @Html.DropDownListFor(model => model.SelectTrajectoryType, Html.GetEnumSelectList<TrajectoryType>(),"--Selectionnez le type de trajet--")
+                    @Html.DropDownListFor(model => model.SelectTrajectoryType, Html.GetEnumSelectList<TrajectoryType>(),"--Sélectionnez le type de trajet--")
                     <br></div>
 
                     @Html.HiddenFor(model => model.ItineraryId)

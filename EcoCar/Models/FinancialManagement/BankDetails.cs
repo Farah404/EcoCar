@@ -1,6 +1,6 @@
 ﻿//Class Description
 //The BankDetails.cs contains all the banking references corresponding to one user
-
+//Main Authors : Farah & FrancoisNoel
 namespace EcoCar.Models.FinancialManagement
 
 {

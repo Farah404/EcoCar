@@ -287,12 +287,6 @@ namespace EcoCar.Models.Services
         {
             return _bddContext.EcoStoreInvoices.Include(x => x.User).Include(x => x.Invoice).FirstOrDefault(x => x.Id == ecoStoreInvoiceId);
         }
-        //public EcoStoreInvoice GetUserEcoStoreInvoice(int userId)
-        //{
-        //    User user = _bddContext.Users.Find(userId);
-        //    EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Include(x => x.User).Include(x => x.Invoice).FirstOrDefault(x => x.Id == user.);
-        //    return ;
-        //}
 
         //Create ServiceInvoice
         public int CreateEcoStoreInvoice(int userId,
@@ -326,42 +320,9 @@ namespace EcoCar.Models.Services
             _bddContext.EcoStoreInvoices.Update(ecoStoreInvoice);
             _bddContext.SaveChanges();
         }
-
-        //Update ServiceInvoice
-        //public void UpdateEcoStoreInvoice(int id, int userId, int invoiceId)
-        //{
-        //    EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Find(id);
-
-        //    if (ecoStoreInvoice != null)
-        //    {
-        //        ecoStoreInvoice.Id = id;
-        //        ecoStoreInvoice.User = _bddContext.Users.First(u => u.Id == userId);
-        //        ecoStoreInvoice.Invoice = _bddContext.Invoices.First(u => u.Id == invoiceId);
-        //        _bddContext.SaveChanges();
-        //    }
-
-        //}
-        //public void UpdateEcoStoreInvoice(EcoStoreInvoice ecoStoreInvoice)
-        //{
-        //    _bddContext.EcoStoreInvoices.Update(ecoStoreInvoice);
-        //    _bddContext.SaveChanges();
-        //}
-
-        ////Delete ServiceInvoice
-        //public void DeleteEcoStoreInvoice(int id)
-        //{
-        //    EcoStoreInvoice ecoStoreInvoice = _bddContext.EcoStoreInvoices.Find(id);
-
-        //    if (ecoStoreInvoice != null)
-        //    {
-        //        _bddContext.EcoStoreInvoices.Remove(ecoStoreInvoice);
-        //        _bddContext.SaveChanges();
-        //    }
-        //}
         #endregion
 
         //-------------------------------------------------------------------------------------------------
-
 
         #region CRUD EcoWallet
         public List<EcoWallet> GetAllEcoWallets()

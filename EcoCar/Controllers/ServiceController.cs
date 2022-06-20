@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using EcoCar.ViewModels;
 using System;
+//Main Authors : Farah&FrancoisNoel
 
 namespace EcoCar.Controllers
 {
@@ -73,7 +74,6 @@ namespace EcoCar.Controllers
                 if (user.VehiculeId == null)
                 {
                     Redirect("/Home/Index");
-                    //if we have time : fix the fact that Service controller always redirect to /Home/index in this case whatever path we write
                 }
                 else
                 {
@@ -623,7 +623,7 @@ namespace EcoCar.Controllers
                     if (UserHasEnoughFunds == true)
                     {
                         dalFinancialManagement.EcoCoinsTransactionRequest(carPoolingRequest.Service.UserProviderId, userId, carPoolingRequest.Service.PriceEcoCoins);
-                        dalServiceManagement.CreateReservation(carPoolingRequest.Service.Id, userId);
+                        dalServiceManagement.CreateReservation(carPoolingRequest.Service.Id, carPoolingRequest.Service.UserProviderId);
                         dalServiceManagement.UpdateCarPoolingService(
                             carPoolingRequest.Id,
                             carPoolingRequest.SelectCarPoolingType,
@@ -644,7 +644,7 @@ namespace EcoCar.Controllers
                         dalFinancialManagement.CreateServiceInvoice(userId, carPoolingRequest.Service.UserProviderId, carPoolingRequest.Service.PriceEcoCoins, carPoolingRequest.ServiceId, invoiceId);
 
                         // Switching Service request user idenfication with user who choose to do that service
-                        Service serviceToUpdate = dalServiceManagement.GetServiceFromUserProviderId(carPoolingRequest.Service.UserProviderId);
+                        Service serviceToUpdate = dalServiceManagement.GetService(carPoolingRequest.Service.Id);
                         dalServiceManagement.UpdateService(serviceToUpdate.Id, serviceToUpdate.PublicationDate, serviceToUpdate.ExpirationDate, serviceToUpdate.ReferenceNumber, serviceToUpdate.IsAvailable,
                             serviceToUpdate.Start, serviceToUpdate.End, serviceToUpdate.SelectServiceType,serviceToUpdate.PriceEcoCoins,userId);
 
@@ -702,7 +702,7 @@ namespace EcoCar.Controllers
                         dalFinancialManagement.EcoCoinsTransactionRequest(carRentalRequest.Service.UserProviderId, userId, carRentalRequest.Service.PriceEcoCoins);
                         dalServiceManagement.CreateReservation(
                         carRentalRequest.Service.Id,
-                        userId
+                        carRentalRequest.Service.UserProviderId
                         );
 
                         dalServiceManagement.UpdateCarRentalService(
@@ -723,7 +723,7 @@ namespace EcoCar.Controllers
                         dalFinancialManagement.CreateServiceInvoice(userId, carRentalRequest.Service.UserProviderId, carRentalRequest.Service.PriceEcoCoins, carRentalRequest.ServiceId, invoiceId);
                         
                         // Switching Service request user idenfication with user who choose to do that service
-                        Service serviceToUpdate = dalServiceManagement.GetServiceFromUserProviderId(carRentalRequest.Service.UserProviderId);
+                        Service serviceToUpdate = dalServiceManagement.GetService(carRentalRequest.Service.Id);
                         dalServiceManagement.UpdateService(serviceToUpdate.Id, serviceToUpdate.PublicationDate, serviceToUpdate.ExpirationDate, serviceToUpdate.ReferenceNumber, serviceToUpdate.IsAvailable,
                             serviceToUpdate.Start, serviceToUpdate.End, serviceToUpdate.SelectServiceType, serviceToUpdate.PriceEcoCoins, userId);
 
@@ -769,7 +769,7 @@ namespace EcoCar.Controllers
                         dalFinancialManagement.EcoCoinsTransactionRequest(parcelRequest.Service.UserProviderId, userId, parcelRequest.Service.PriceEcoCoins);
                         dalServiceManagement.CreateReservation(
                         parcelRequest.Service.Id,
-                        userId
+                        parcelRequest.Service.UserProviderId
                         );
 
                         dalServiceManagement.UpdateParcelService(
@@ -793,9 +793,13 @@ namespace EcoCar.Controllers
                         dalFinancialManagement.CreateServiceInvoice(userId, parcelRequest.Service.UserProviderId, parcelRequest.Service.PriceEcoCoins, parcelRequest.ServiceId, invoiceId);
 
                         // Switching Service request user idenfication with user who choose to do that service
-                        Service serviceToUpdate = dalServiceManagement.GetServiceFromUserProviderId(parcelRequest.Service.UserProviderId);
+                        Service serviceToUpdate = dalServiceManagement.GetService(parcelRequest.Service.Id);
                         dalServiceManagement.UpdateService(serviceToUpdate.Id, serviceToUpdate.PublicationDate, serviceToUpdate.ExpirationDate, serviceToUpdate.ReferenceNumber, serviceToUpdate.IsAvailable,
                             serviceToUpdate.Start, serviceToUpdate.End, serviceToUpdate.SelectServiceType, serviceToUpdate.PriceEcoCoins, userId);
+
+                        //Service serviceToUpdate = dalServiceManagement.GetServiceFromUserProviderId(parcelRequest.Service.UserProviderId);
+                        //dalServiceManagement.UpdateService(serviceToUpdate.Id, serviceToUpdate.PublicationDate, serviceToUpdate.ExpirationDate, serviceToUpdate.ReferenceNumber, serviceToUpdate.IsAvailable,
+                        //    serviceToUpdate.Start, serviceToUpdate.End, serviceToUpdate.SelectServiceType, serviceToUpdate.PriceEcoCoins, userId);
 
                         string url = "/Home/Index";
                         return Redirect(url);

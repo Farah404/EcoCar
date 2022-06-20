@@ -12,13 +12,13 @@
     <div class="panel-body inf-content">
         <div class="row">
             <div class="col-md-4">
-                <h4>Proposer un service: Covoiturage</h4>
+                <h4>Caractéristiques spécifiques du covoiturage</h4>
 
                 @using (Html.BeginForm())
                 {
                     <div class="form-floating mb-3">
                     @Html.Label("Type de covoiturage") <br>
-                    @Html.DropDownListFor(model => model.SelectCarPoolingType,Html.GetEnumSelectList<CarPoolingType>(),"--Selectionnez le type de covoiturage--",new {required = "required"})
+                    @Html.DropDownListFor(model => model.SelectCarPoolingType,Html.GetEnumSelectList<CarPoolingType>(),"--Sélectionnez le type de covoiturage--",new {required = "required"})
                     @Html.ValidationMessageFor(model => model.SelectCarPoolingType)
                     <br><br></div>
 

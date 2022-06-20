@@ -491,7 +491,7 @@
                 <tr class="header">
                     <th>Date de début</th>
                     <th>Type de service</th>
-                    <th>Numéro de réference</th>
+                    <th>Numéro de référence</th>
                     <th>Prestation demandée</th>
                     <th>Disponibilité</th>
                     <th>Supprimer la prestation</th>
@@ -636,7 +636,7 @@
                     }
 
                 }
-                @*Listing only carRentalServices related to User (where User is provider & when user is consumer) and displaying in both case the appropriate ServiceInvoice link*@
+                @*Listing only parcelServices related to User (where User is provider & when user is consumer) and displaying in both case the appropriate ServiceInvoice link*@
                 @foreach (var parcelService in Model.ParcelServices.Where(c => c.Service.UserProviderId == @Model.User.Id))
                 {
                     <tr>

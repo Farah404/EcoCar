@@ -1,6 +1,7 @@
 ﻿//Class Description
 //The Reporting.cs is the parent class for HelpReporting.cs and fore UserReporting.cs
-
+//Main Authors : Farah & FrancoisNoel
+//Not available in that version
 
 //using EcoCar.Models.PersonManagement;
 //using System;

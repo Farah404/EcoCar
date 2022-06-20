@@ -32,16 +32,19 @@ namespace EcoCar.Models.Services
             List<Service> servicesOfUser = _bddContext.Services.Include(s => s.UserProvider).Where(s => s.Id == userId).ToList();
             return servicesOfUser;
         }
-
+        public Service GetService(int serviceId)
+        {
+            return _bddContext.Services.Include(s => s.UserProvider).FirstOrDefault(s => s.Id == serviceId);
+        }
         public Service GetServiceFromReferenceNumber(int referenceNumber)
         {
             return _bddContext.Services.Include(s => s.UserProvider).FirstOrDefault(s=> s.ReferenceNumber == referenceNumber);
         }
 
-        public Service GetServiceFromUserProviderId(int userProviderId)
-        {
-            return _bddContext.Services.Include(s=>s.UserProvider).FirstOrDefault(s=>s.UserProviderId==userProviderId);
-        }
+        //public Service GetServiceFromUserProviderId(int userProviderId)
+        //{
+        //    return _bddContext.Services.Include(s=>s.UserProvider).FirstOrDefault(s=>s.UserProviderId==userProviderId );
+        //}
 
         public int CreateService(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int priceEcoCoins, int userProviderId)
         {
@@ -503,8 +506,6 @@ namespace EcoCar.Models.Services
             return _bddContext.Reservations.Include(r => r.ServiceConsumed).Include(r => r.ServiceUserConsumer).ToList();
         }
 
-
-
         //Create Reservation
         public Reservation CreateReservation(int serviceConsumedId, int serviceUserConsumerId)
         {
@@ -549,16 +550,6 @@ namespace EcoCar.Models.Services
         //-------------------------------------------------------------------------------------------------
 
         #region CRUD ServiceRequestFinal
-
-        //public List<Service> GetAllServiceRequests()
-        //{
-        //    return _bddContext.Services.ToList();
-        //}
-
-        //public Service GetServiceRequest(int id)
-        //{
-        //    return _bddContext.Services.FirstOrDefault(e => e.Id == id);
-        //}
 
         public int CreateServiceRequest(DateTime publicationDate, DateTime expirationDate, int referenceNumber, bool isAvailable, DateTime start, DateTime end, bool isRequest, ServiceType selectServiceType, int? userProviderId)
         {

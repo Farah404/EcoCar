@@ -24,12 +24,12 @@
                     <br></div>
 
                     <div class="form-floating mb-3">
-                        @Html.Label("Numero de reference de la prestation")<br>
+                        @Html.Label("Numéro de référence de la prestation")<br>
                         @Html.TextBoxFor(model => model.ReferenceNumber, new{ @class = "form-control",@id="Refnunmber",@readonly = true,style="width:300px"})
                     <br></div>
 
                     <div class="form-outline mb-3">
-                        @Html.Label("Date de debut")<br>
+                        @Html.Label("Date de début")<br>
                         @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", style="width:300px",required="required"}})
                         @Html.ValidationMessageFor(model => model.Start)
                     <br></div>
@@ -41,8 +41,8 @@
                     <br></div>
 
                     <div class="form-outline mb-3">
-                        @Html.Label("Type de Prestation")<br>
-                        @Html.DropDownListFor(model => model.SelectServiceType, Html.GetEnumSelectList<ServiceType>(),"--Selectionnez le type de prestation--",new {required = "required"})
+                        @Html.Label("Type de prestation")<br>
+                        @Html.DropDownListFor(model => model.SelectServiceType, Html.GetEnumSelectList<ServiceType>(),"--Sélectionnez le type de prestation--",new {required = "required"})
                         @Html.ValidationMessageFor(model => model.SelectServiceType)
                     <br></div> <br>
 

@@ -1,0 +1,753 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Template for deploying dotnet app (cicd)
+
+Parameters:
+  VpcCIDR:
+    Description: Please enter the IP range (CIDR notation) for this VPC
+    Type: String
+    Default: 10.192.0.0/16
+  PublicSubnet1CIDR:
+    Description: Please enter the IP range (CIDR notation) for the public subnet in the first Availability Zone
+    Type: String
+    Default: 10.192.10.0/24
+  PublicSubnet2CIDR:
+    Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone
+    Type: String
+    Default: 10.192.11.0/24
+  PublicSubnet3CIDR:
+    Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone
+    Type: String
+    Default: 10.192.12.0/24
+  Token:
+    Type: String
+    Description: Github token.
+  MyPublicIP:
+    Type: String
+    Description: My own public IP.
+    Default: 86.236.61.199/32
+  MyKeyName:
+    Type: String
+    Description: My own key name.
+    Default: pcourt-01
+  Env:
+    Type: String
+    Description: ...
+    Default: prod
+  DbUser:
+    Type: String
+    Description: ...
+    Default: admin
+  DbPassword:
+    Type: String
+    Description: ...
+    Default: Coucou123!
+  BranchRepo:
+    Type: String
+    Description: ...
+    Default: master
+  GitRepo:
+    Type: String
+    Description: ...
+    Default: ChoixSejour
+  GithubUser:
+    Type: String
+    Description: ...
+    Default: Piercuta
+  ApplicationName:
+    Type: String
+    Description: ...
+    Default: choixsejour
+  DllToStart:
+    Type: String
+    Description: ...
+    Default: ChoixSejour.dll
+  Client:
+    Type: String
+    Description: ...
+    Default: piercuta
+  CertificateArn:
+    Type: String
+    Description: ...
+    Default: arn:aws:acm:eu-west-1:647408608766:certificate/a5b6add8-26ef-4a5b-95c1-0469f2a2f82d
+
+Resources:
+  
+  # Network
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCIDR
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${Client}-${Env}-vpc
+        - Key: env
+          Value: !Ref Env
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Sub ${Client}-${Env}-igw
+        - Key: env
+          Value: !Ref Env
+
+  InternetGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !Ref VPC
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, !GetAZs '' ]
+      CidrBlock: !Ref PublicSubnet1CIDR
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${Client}-${Env}-public-subnet-az1
+        - Key: env
+          Value: !Ref Env
+
+  PublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 1, !GetAZs  '' ]
+      CidrBlock: !Ref PublicSubnet2CIDR
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${Client}-${Env}-public-subnet-az2
+        - Key: env
+          Value: !Ref Env
+  
+  PublicSubnet3:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 2, !GetAZs  '' ]
+      CidrBlock: !Ref PublicSubnet3CIDR
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${Client}-${Env}-public-subnet-az3
+        - Key: env
+          Value: !Ref Env
+ 
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub ${Client}-${Env}-public-route
+        - Key: env
+          Value: !Ref Env
+
+  DefaultPublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: InternetGatewayAttachment
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  PublicSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnet1
+
+  PublicSubnet2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnet2
+
+  PublicSubnet3RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnet3
+  
+  # Database
+  
+  InstanceSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties: 
+      DBSubnetGroupDescription: subnet group for instance mysql
+      DBSubnetGroupName: !Sub ${Client}-${Env}-${ApplicationName}-rds-subnet-group
+      SubnetIds: 
+        - !Ref PublicSubnet1
+        - !Ref PublicSubnet2
+        - !Ref PublicSubnet3
+      Tags: 
+        - Key: env
+          Value: !Ref Env
+
+  RDSSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupName: !Sub ${Client}-${Env}-${ApplicationName}-rds-sg
+      VpcId: !Ref VPC
+      GroupDescription: SecurityGroup for RDS instance.
+      SecurityGroupIngress:
+        - SourceSecurityGroupId: !GetAtt EC2SecurityGroup.GroupId 
+          FromPort: '3306'
+          ToPort: '3306'
+          IpProtocol: tcp
+        - CidrIp: !Ref MyPublicIP
+          IpProtocol: tcp
+          FromPort: '3306'
+          ToPort: '3306'
+      Tags: 
+        - Key: env
+          Value: !Ref Env
+        - Key: Name
+          Value: !Sub ${Client}-${Env}-${ApplicationName}-rds-sg
+
+  RDSInstance:
+    Type: 'AWS::RDS::DBInstance'
+    DeletionPolicy: Delete
+    Properties:
+      MasterUserPassword: !Ref DbPassword
+      DBInstanceClass: db.t2.micro
+      DBSubnetGroupName: !Ref InstanceSubnetGroup
+      VPCSecurityGroups:
+        - !Ref RDSSecurityGroup
+      MasterUsername: !Ref DbUser
+      DBInstanceIdentifier: !Sub ${Client}-${Env}-${ApplicationName}-db-mysql
+      MultiAZ: false
+      PubliclyAccessible: true
+      Engine: mysql
+      AllocatedStorage: 5
+      Tags: 
+        - Key: env
+          Value: !Ref Env
+
+  # Application
+  EC2SecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupName: !Sub ${Client}-${Env}-${ApplicationName}-ec2-sg
+      VpcId: !Ref VPC
+      GroupDescription: SecurityGroup for EC2 instance.
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          FromPort: '22'
+          ToPort: '22'
+          IpProtocol: tcp
+        - CidrIp: 0.0.0.0/0
+          FromPort: '5000'
+          ToPort: '5000'
+          IpProtocol: tcp
+        - CidrIp: 0.0.0.0/0
+          FromPort: '5001'
+          ToPort: '5001'
+          IpProtocol: tcp
+      Tags: 
+        - Key: env
+          Value: !Ref Env
+        - Key: Name
+          Value: !Sub ${Client}-${Env}-${ApplicationName}-ec2-sg
+    
+  EC2InstanceProfile:
+    Type: 'AWS::IAM::InstanceProfile'
+    Properties:
+      Path: /
+      Roles:
+        - !Ref EC2InstanceRole
+
+  EC2InstanceRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName:  !Sub ${Client}-${Env}-${ApplicationName}-instance-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM'
+        - 'arn:aws:iam::aws:policy/AdministratorAccess'
+      Path: /
+      Tags: 
+        - Key: Name
+          Value: !Sub ${Env}-instance-role
+        - Key: env
+          Value: !Ref Env
+  
+  ALBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Sub ${Client}-${Env}-${ApplicationName}-alb-sg
+      GroupDescription: "Security group for alb"
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: tcp
+          FromPort: '443'
+          ToPort: '443'
+      Tags: 
+        - Key: env
+          Value: !Ref Env
+        - Key: Name
+          Value: !Sub ${Client}-${Env}-${ApplicationName}-alb-sg
+
+  ApplicationLoadBalancer:
+    Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
+    Properties:
+      Name: !Sub ${Client}-${Env}-${ApplicationName}-alb
+      SecurityGroups:
+        - !Ref ALBSecurityGroup
+      Subnets: 
+        - !Ref PublicSubnet1
+        - !Ref PublicSubnet2
+        - !Ref PublicSubnet3
+      Tags:
+        - Key: Name
+          Value: !Sub ${Client}-${Env}-${ApplicationName}-alb
+        - Key: env
+          Value: !Ref Env
+
+  ALBListener80:
+    Type: "AWS::ElasticLoadBalancingV2::Listener"
+    Properties:
+      DefaultActions:
+        - Type: "redirect"
+          RedirectConfig:
+            Protocol: "HTTPS"
+            Port: 443
+            Host: "#{host}"
+            Path: "/#{path}"
+            Query: "#{query}"
+            StatusCode: "HTTP_301"
+      LoadBalancerArn: !Ref ApplicationLoadBalancer
+      Port: 80
+      Protocol: "HTTP"
+
+  ALBListener443:
+    Type: 'AWS::ElasticLoadBalancingV2::Listener'
+    Properties:
+      DefaultActions:
+        - Type: forward
+          ForwardConfig:
+            TargetGroups:
+              - TargetGroupArn: !Ref ALBTargetGroup5001
+                Weight: 1
+              - TargetGroupArn: !Ref ALBTargetGroup5000
+                Weight: 1
+            TargetGroupStickinessConfig:
+              DurationSeconds: 300
+              Enabled: true
+          # For having only one target group
+          # TargetGroupArn: !Ref ALBTargetGroup5001
+      LoadBalancerArn: !Ref ApplicationLoadBalancer
+      Port: '443'
+      Protocol: HTTPS
+      Certificates: 
+        - CertificateArn: !Ref CertificateArn
+
+  ALBTargetGroup5000:
+    Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
+    Properties:
+      Name: !Sub ${Client}-${Env}-${ApplicationName}-tg-5000
+      HealthCheckPath: /
+      HealthCheckIntervalSeconds: 10
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 2
+      Port: 5000
+      Protocol: HTTP
+      UnhealthyThresholdCount: 5
+      VpcId: !Ref VPC
+      TargetGroupAttributes:
+        - Key: stickiness.enabled
+          Value: 'true'
+        - Key: stickiness.type
+          Value: lb_cookie
+        - Key: stickiness.lb_cookie.duration_seconds
+          Value: '30'
+      Tags:
+        - Key: Name
+          Value: !Sub ${Client}-${Env}-${ApplicationName}-tg-5000
+        - Key: env
+          Value: !Ref Env
+
+  ALBTargetGroup5001:
+    Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
+    Properties:
+      Name: !Sub ${Client}-${Env}-${ApplicationName}-tg-5001
+      HealthCheckPath: /
+      HealthCheckIntervalSeconds: 10
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 2
+      Port: 5001
+      Protocol: HTTP
+      UnhealthyThresholdCount: 5
+      VpcId: !Ref VPC
+      TargetGroupAttributes:
+        - Key: stickiness.enabled
+          Value: 'true'
+        - Key: stickiness.type
+          Value: lb_cookie
+        - Key: stickiness.lb_cookie.duration_seconds
+          Value: '30'
+      Tags:
+        - Key: Name
+          Value: !Sub ${Client}-${Env}-${ApplicationName}-tg-5001
+        - Key: env
+          Value: !Ref Env
+
+  AutoScalingGroup:
+    Type: 'AWS::AutoScaling::AutoScalingGroup'
+    DependsOn: 
+      - RDSInstance
+    Properties:
+      AutoScalingGroupName: !Sub ${Client}-${Env}-${ApplicationName}-asg
+      VPCZoneIdentifier: 
+        - !Ref PublicSubnet1
+        - !Ref PublicSubnet2
+        - !Ref PublicSubnet3
+      LaunchTemplate:
+        LaunchTemplateId: !Ref AutoScalingLaunchTemplate
+        Version: !GetAtt 
+          - AutoScalingLaunchTemplate
+          - LatestVersionNumber
+      MinSize: '1'
+      MaxSize: '2'
+      DesiredCapacity: '1'
+      HealthCheckType: ELB
+      HealthCheckGracePeriod: '300'
+      TargetGroupARNs:
+        - !Ref ALBTargetGroup5000
+        - !Ref ALBTargetGroup5001
+      Tags:
+        - Key: Name
+          PropagateAtLaunch: true
+          Value: !Sub ${Client}-${Env}-${ApplicationName}-instance
+        - Key: app
+          PropagateAtLaunch: true
+          Value: !Ref ApplicationName
+        - Key: env
+          PropagateAtLaunch: true
+          Value: !Ref Env
+        - Key: deploy
+          PropagateAtLaunch: true
+          Value: !Sub ${Client}-${Env}-${ApplicationName}-deploy
+
+  AutoScalingLaunchTemplate:
+    Type: 'AWS::EC2::LaunchTemplate'
+    DependsOn:
+      - EC2InstanceProfile
+    Properties:
+      LaunchTemplateName: !Sub ${Client}-${Env}-${ApplicationName}-lt
+      LaunchTemplateData:
+        ImageId: ami-04dd4500af104442f
+        InstanceType: t2.micro
+        IamInstanceProfile:
+          Name: !Ref EC2InstanceProfile
+        NetworkInterfaces:
+          - AssociatePublicIpAddress: 'true'
+            DeviceIndex: 0
+            Groups:
+              - !Ref EC2SecurityGroup
+        KeyName: !Ref MyKeyName
+        BlockDeviceMappings:
+          - DeviceName: /dev/xvda
+            Ebs:
+              VolumeSize: 60
+              VolumeType: gp2
+        UserData:
+          Fn::Base64: !Sub |
+             #!/bin/bash -xe
+             echo "START user data instructions"
+             
+             cd  /tmp/
+             curl https://download.visualstudio.microsoft.com/download/pr/3c98126b-50f5-4497-8ffd-18d17a3f6b95/044d0f20256fd9bf2971f8da9a0364e4/dotnet-sdk-3.1.416-linux-x64.tar.gz --output dotnet-sdk-3.1.416-linux-x64.tar.gz
+             DOTNET_FILE=dotnet-sdk-3.1.416-linux-x64.tar.gz
+             export DOTNET_ROOT=/tmp/dotnet
+             mkdir -p "$DOTNET_ROOT" && tar zxf "$DOTNET_FILE" -C "$DOTNET_ROOT"
+            
+             echo ${Env} > env.txt
+             echo ${ApplicationName} > application_name.txt
+             echo ${DllToStart} > dll_to_start.txt
+             
+             cd ..
+             yum install -y ruby
+             cd /home/ec2-user/
+             wget 'https://aws-codedeploy-eu-west-1.s3.eu-west-1.amazonaws.com/latest/install'
+             chmod +x ./install
+             sudo ./install auto
+
+             echo "END user data instructions"
+            #  sudo -i
+            #  echo export DB_PASSWORD=my_password >> /etc/profile
+            #  echo "export PATH=$PATH:/tmp/dotnet" >> /etc/profile
+            #  export DOTNET_ROOT=$(pwd)/dotnet
+            #  export PATH=$PATH:$DOTNET_ROOT
+            #  export PATH=$PATH:/tmp/dotnet
+            #  cd ~/
+            #  sed 's|bin|bin:$HOME\/.dotnet|g' .bash_profile
+            #  echo "export DOTNET_ROOT=\$HOME/.dotnet" >> .bash_profile
+            
+             
+        TagSpecifications:
+          - ResourceType: volume
+            Tags: 
+              - Key: env
+                Value: !Ref Env            
+
+  # AppNameParamStore:
+  #   Type: AWS::SSM::Parameter
+  #   Properties:
+  #     Name: !Sub ${Client}-${Env}-${ApplicationName}
+  #     Type: String
+  #     Value: !Ref ApplicationName
+  #     Description: SSM Parameter for code deploy.
+  
+  # DllToStartParamStore:
+  #   Type: AWS::SSM::Parameter
+  #   Properties:
+  #     Name: !Sub ${Client}-${Env}-${ApplicationName}-dll-to-start
+  #     Type: String
+  #     Value: !Ref DllToStart
+  #     Description: SSM Parameter for code deploy.
+  
+  # CICD
+  DeployApplication:
+    Type: 'AWS::CodeDeploy::Application'
+    Properties:
+      ApplicationName: !Sub ${Client}-${Env}-${ApplicationName}-app
+      ComputePlatform: Server
+      Tags: 
+        - Key: env
+          Value: !Ref Env
+          
+  DeploymentGroup:
+    Type: 'AWS::CodeDeploy::DeploymentGroup'
+    Properties:
+      ApplicationName: !Ref DeployApplication
+      Ec2TagFilters:
+        - Key: deploy
+          Type: KEY_AND_VALUE
+          Value: !Sub ${Client}-${Env}-${ApplicationName}-deploy
+      ServiceRoleArn: !GetAtt 
+        - CodeDeployDGRole
+        - Arn
+      AutoScalingGroups:
+        - Ref: AutoScalingGroup
+      LoadBalancerInfo:
+        TargetGroupInfoList:
+          - Name: !GetAtt ALBTargetGroup5000.TargetGroupName
+      AutoRollbackConfiguration:
+        Enabled: true
+        Events:
+          - DEPLOYMENT_FAILURE
+
+  CodeDeployDGRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName:  !Sub ${Client}-${Env}-${ApplicationName}-code-deploy-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Action:
+              - 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              Service:
+                - codedeploy.amazonaws.com
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/AdministratorAccess'
+      Path: /
+      Tags: 
+        - Key: env
+          Value: !Ref Env
+
+  CodeBuildRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName:  !Sub ${Client}-${Env}-${ApplicationName}-code-build-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Action:
+              - 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              Service:
+                - codebuild.amazonaws.com
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/AdministratorAccess'
+      Path: /
+      Tags: 
+        - Key: env
+          Value: !Ref Env
+
+  CodeBuild:
+    Type: 'AWS::CodeBuild::Project'
+    Properties:
+      Name: !Sub ${Client}-${Env}-${ApplicationName}-code-build-project
+      Description: A description about my project
+      LogsConfig:
+        CloudWatchLogs: 
+          Status: DISABLED 
+      ServiceRole: !GetAtt 
+        - CodeBuildRole
+        - Arn
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: 'aws/codebuild/amazonlinux2-x86_64-standard:3.0'
+        EnvironmentVariables:
+          - Name: ApplicationName
+            Type: PLAINTEXT
+            Value: !Ref ApplicationName
+          - Name: CS
+            Type: PLAINTEXT
+            Value: !Join 
+              - ''
+              - - server=
+                - !GetAtt 
+                  - RDSInstance
+                  - Endpoint.Address
+                - ;user id=
+                - !Ref DbUser
+                - ;password=
+                - !Ref DbPassword
+                - ;database=ChoixSejour
+      Source:
+        Type: CODEPIPELINE
+      Tags: 
+        - Key: env
+          Value: !Ref Env
+
+  CodePipelineRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName:  !Sub ${Client}-${Env}-${ApplicationName}-code-pipeline-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Action:
+              - 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              Service:
+                - codepipeline.amazonaws.com
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/AdministratorAccess'
+      Path: /
+      Tags: 
+        - Key: env
+          Value: !Ref Env
+
+  ArtifactBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Sub ${Client}-${Env}-${ApplicationName}-artifact-bucket
+      VersioningConfiguration:
+        Status: Enabled
+      Tags: 
+        - Key: env
+          Value: !Ref Env
+
+  Secret:
+    Type: AWS::SecretsManager::Secret
+    Properties: 
+      Description: 'Token for accessing github repo'
+      Name:
+        !Sub
+          - 'github_token_${client}_${environment}_${application_name}'
+          - { client: !Ref Client , environment: !Ref Env, application_name: !Ref ApplicationName }
+      SecretString: 
+        !Sub
+          - '{"github_access_token_${client}_${environment}_${application_name}": "${token}"}'
+          - { client: !Ref Client, environment: !Ref Env, application_name: !Ref ApplicationName, token: !Ref Token } 
+      Tags: 
+        - Key: env
+          Value: !Ref Env
+
+  CodePipeline:
+    Type: 'AWS::CodePipeline::Pipeline'
+    DependsOn: Secret
+    Properties:
+      # Name: !Sub ${Client}-${Env}-${ApplicationName}-code-pipeline
+      ArtifactStore:
+        Location: !Ref ArtifactBucket
+        Type: S3
+      RoleArn: !GetAtt 
+        - CodePipelineRole
+        - Arn
+      RestartExecutionOnUpdate: true
+      Stages:
+        - Actions:
+            - Name: SourceAction
+              ActionTypeId:
+                Category: Source
+                Owner: ThirdParty
+                Version: 1
+                Provider: GitHub
+              OutputArtifacts:
+                - Name: SourceArtifact
+              Configuration:
+                Owner: !Ref GithubUser
+                Repo: !Ref GitRepo
+                Branch: !Ref BranchRepo
+                OAuthToken: 
+                    !Sub
+                      - '{{resolve:secretsmanager:github_token_${client}_${environment}_${application_name}:SecretString:github_access_token_${client}_${environment}_${application_name}}}'
+                      # - '{{resolve:secretsmanager:github_token_test_choixsejour:SecretString:github_access_token_test_choixsejour}}'
+                      - { client: !Ref Client, environment: !Ref Env, application_name: !Ref ApplicationName }
+                PollForSourceChanges: true
+              RunOrder: 1
+          Name: SOURCE
+        - Name: Build
+          Actions:
+            - Name: BuildAction
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Version: '1'
+                Provider: CodeBuild
+              InputArtifacts:
+                - Name: SourceArtifact
+              OutputArtifacts:
+                - Name: BuildArtifact
+              Configuration:
+                ProjectName: !Ref CodeBuild
+              RunOrder: 1
+        - Name: Deploy
+          Actions:
+            - Name: DeployAction
+              InputArtifacts:
+                - Name: BuildArtifact
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Version: '1'
+                Provider: CodeDeploy
+              Configuration:
+                ApplicationName: !Ref DeployApplication
+                DeploymentGroupName: !Ref DeploymentGroup
+              RunOrder: 1
+      Tags: 
+        - Key: env
+          Value: !Ref Env
+
+Outputs: {}

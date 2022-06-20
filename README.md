@@ -58,12 +58,12 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-There are many CarPooling/CarRental/Location Service available ; however, we wish to create something who could apprehend these needs and also strengthen the community by given them something more than only price reductions.
+Whime many carpooling services already exist, EcoCar wishes to propose not only price reductions but amso a revolutionnary way to satusfy the needs of the community.
 
 Here's how:
 * A simple and efficient way to propose and provide CarPooling/CarRental/Location services
 * A messaging system between users
-* An integrated internal currency
+* An integrated internal currency: EcoCoins
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

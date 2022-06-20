@@ -13,7 +13,7 @@
 <h3 align="center">EcoCar</h3>
 
   <p align="center">
-    A simple and efficient website to reserve and ask for car pooling, car rental or parcel service.
+    A simple and efficient website to reserve and provide  car pooling, car rental or parcel services.
     <br/>
     ISIKA Project 2 specifications - CDA17 Group 1
     <br />
@@ -61,7 +61,7 @@
 There are many CarPooling/CarRental/Location Service available ; however, we wishes to create something who could apprehend these needs and also strengthen the community by given them something more than only price reductions.
 
 Here's how:
-* A simple and efficient way to propose and profive CarPooling/CarRental/Location services
+* A simple and efficient way to propose and provide CarPooling/CarRental/Location services
 * A messaging system between users
 * An integrated internal currency
 

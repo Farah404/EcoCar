@@ -1,7 +1,8 @@
-﻿using EcoCar.Models.FinancialManagement;
+﻿// MainAuthors : Farah&FrancoisNoel
+
+using EcoCar.Models.FinancialManagement;
 using System;
 using System.Collections.Generic;
-using static EcoCar.Models.FinancialManagement.EcoStore;
 using static EcoCar.Models.FinancialManagement.Invoice;
 
 namespace EcoCar.Models.Services
@@ -52,8 +53,6 @@ namespace EcoCar.Models.Services
             int quantitySemestrialSubscription,
             double totalPriceEuros);
         EcoStoreInvoice GetEcoStoreInvoice(int ecoStoreInvoiceId);
-        //void UpdateEcoStoreInvoice(int id, int userId, int invoiceId);
-        //void DeleteEcoStoreInvoice(int id);
 
         //-------------------------------------------------------------------------------------------------
 

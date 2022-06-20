@@ -1,4 +1,8 @@
-﻿using EcoCar.Models.PersonManagement;
+﻿//Class Description
+//Contains all specific details of a Parcel Service
+// MainAuthors : Farah&FrancoisNoel
+
+using EcoCar.Models.PersonManagement;
 
 namespace EcoCar.Models.ServiceManagement
 {

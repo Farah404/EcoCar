@@ -1,4 +1,6 @@
-﻿using Braintree;
+﻿// Checking & resolving bank authentification with BrainTree process
+
+using Braintree;
 using Microsoft.Extensions.Configuration;
 
 namespace EcoCar.Models.Services

@@ -1,5 +1,6 @@
 ﻿//Class Description
 //The BillingAddress.cs contains the address the user chose as a billing address and not necessarily their postal address
+//Main Authors : Farah&FrancoisNoel
 
 namespace EcoCar.Models.FinancialManagement
 {

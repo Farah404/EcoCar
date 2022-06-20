@@ -1,5 +1,6 @@
 ﻿//Class Description
-//The Insurance.cs contains details related to a vehicule
+//Contains details related to a vehicule
+// MainAuthors : Farah&FrancoisNoel
 
 using System;
 using System.ComponentModel.DataAnnotations;

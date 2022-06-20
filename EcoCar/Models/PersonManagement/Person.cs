@@ -1,5 +1,6 @@
 ﻿//Class Description
-//The Person.cs is the parent class of User.cs and Administrator.cs
+//Parent class of User and Administrator
+// MainAuthors : Farah&FrancoisNoel
 
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations.Schema;

@@ -1,4 +1,6 @@
-﻿using EcoCar.Models.PersonManagement;
+﻿//Class Description
+//User shopping cart values
+// MainAuthors : Farah&FrancoisNoel
 
 namespace EcoCar.Models.FinancialManagement
 {

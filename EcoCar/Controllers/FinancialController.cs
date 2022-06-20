@@ -1,4 +1,6 @@
-﻿using Braintree;
+﻿// Main Authors Farah&FrancoisNoel
+
+using Braintree;
 using EcoCar.Models.FinancialManagement;
 using EcoCar.Models.PersonManagement;
 using EcoCar.Models.Services;
@@ -25,7 +27,6 @@ namespace EcoCar.Controllers
             dalPersonManagement = new DalPersonManagement();
             _braintreeService = braintreeService;
         }
-
 
         #region Creating bank details and billing address as part of creating an account
         // Create banking details & billing address
@@ -184,10 +185,10 @@ namespace EcoCar.Controllers
         #region Payment
         public IActionResult PaymentForm(int? userId)
         {
-            //Sandbox BrainTree method for credit card payment
+            //BrainTree method for credit card payment - checking bank authentification with BrainTree sandbox
 
             var gateway = _braintreeService.GetGateway();
-            var clientToken = gateway.ClientToken.Generate();  //Genarate a token
+            var clientToken = gateway.ClientToken.Generate(); 
             ViewBag.ClientToken = clientToken;
 
             ViewBag.userId = userId;
@@ -238,7 +239,7 @@ namespace EcoCar.Controllers
         [HttpPost]
         public IActionResult Create(EcoStorePurchaseVM model, int userId)
         {
-            //Sandbox BrainTree method for credit card payment
+            //BrainTree method for credit card payment
             var gateway = _braintreeService.GetGateway();
             var request = new TransactionRequest
             {
@@ -255,7 +256,7 @@ namespace EcoCar.Controllers
             if (result.IsSuccess())
 
             {
-                //Creating EcoStore invoice + reinitialising shopping cart
+                //Creating EcoStore invoice and reinitializing shopping cart
                 ShoppingCart shoppingCart = dalFinancialManagement.GetUserShoppingCart(userId);
                 EcoStore ecoStore = dalFinancialManagement.GetEcoStore(1);
                 EcoWallet ecoWallet = dalFinancialManagement.GetUserEcoWallet(userId);
@@ -379,6 +380,7 @@ namespace EcoCar.Controllers
                    sixthMonth
                    );
 
+                //Re-initializing User shopping cart
                 dalFinancialManagement.UpdateShoppingCart(shoppingCart.Id, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 return Redirect("/Account/UserProfilePersonal");
             }

@@ -1,4 +1,6 @@
-﻿using EcoCar.Models.PersonManagement;
+﻿// Main Authors Farah&FrancoisNoel
+
+using EcoCar.Models.PersonManagement;
 using EcoCar.Models.Services;
 using EcoCar.ViewModels;
 using Microsoft.AspNetCore.Authentication;
@@ -73,9 +75,9 @@ namespace EcoCar.Controllers
                             { 
                                 return Redirect(returnUrl);
                             }
-                            //SubTest
+                            
 
-                            //int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                            //Updating User EcoWallet with subscription if he has a subscription pending (checking when he logs)
 
                             Account userAccount = dalPersonManagement.GetUserAccount(account.Id);
                             EcoWallet ecoWallet = dalFinancialManagement.GetUserEcoWallet(account.Id);
@@ -156,7 +158,7 @@ namespace EcoCar.Controllers
                                     ecoWallet.EcoCoinsSixthMonth,
                                     sixthMonth);
                             }
-                            //dalPersonManagement.UpdateAccount(userAccount.Id, userAccount.Username, userAccount.Password, userAccount.IsActive, DateTime.Now);
+
                             dalPersonManagement.UpdateAccountWithoutEncodingPassword(userAccount.Id, userAccount.Username, userAccount.Password, userAccount.IsActive, DateTime.Now);
                             return Redirect("/Service/SearchService");
                         }
@@ -529,7 +531,6 @@ namespace EcoCar.Controllers
             return Redirect(url);
         }
         #endregion
-
 
         #region Contacting other users concerning a service they proposed 
 

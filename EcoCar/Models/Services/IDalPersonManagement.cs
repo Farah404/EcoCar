@@ -1,4 +1,6 @@
-﻿using EcoCar.Models.PersonManagement;
+﻿// MainAuthors : Farah&FrancoisNoel
+
+using EcoCar.Models.PersonManagement;
 using System;
 using System.Collections.Generic;
 using static EcoCar.Models.PersonManagement.User;
@@ -22,7 +24,6 @@ namespace EcoCar.Models.Services
         int CreateUser(string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, double userRating, EcoStatusType selectEcoStatusType, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId, int? ecoWalletId, int? shoppingCartId, int? accountId);
         void UpdateUser(int id, string email, DateTime birthDate, int phoneNumber, int identityCardNumber, int drivingPermitNumber, int bankDetailsId, int billingAddressId, int personId, int? vehiculeId, int? ecoWalletId, int? shoppingCartId, int? accountId);
         void DeleteUser(int id);
-        //void UpdateUserVehicule(int userId, int vehiculeId);
 
         //-------------------------------------------------------------------------------------------------
 

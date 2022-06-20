@@ -1,5 +1,6 @@
 ﻿//Class Description
 //The Service.cs contains all details related to a service that can be purchased or proposed by a user
+// MainAuthors : Farah&FrancoisNoel
 
 using EcoCar.Models.PersonManagement;
 using System;

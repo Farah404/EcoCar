@@ -1,5 +1,6 @@
 ﻿//Class Description
-//The Account.cs is the parent class of AccountUser.cs and AccountAdministrator.cs
+//Account values, initially in order to have a parent class for accountUser and accountAdministrator
+// MainAuthors : Farah&FrancoisNoel
 
 using System;
 

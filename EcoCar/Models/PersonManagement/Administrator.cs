@@ -1,6 +1,6 @@
 ﻿//Class Description
-//The Administrator.cs contains all details of a specific administrator 
-
+//Contains all details of a specific administrator 
+// MainAuthors : Farah&FrancoisNoel
 
 namespace EcoCar.Models.PersonManagement
 {

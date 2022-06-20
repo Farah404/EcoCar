@@ -1,6 +1,5 @@
 ﻿using EcoCar.Models.DataBase;
 using EcoCar.Models.PersonManagement;
-using EcoCar.Models.FinancialManagement;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -190,19 +189,6 @@ namespace EcoCar.Models.Services
             _bddContext.Users.Update(user);
             _bddContext.SaveChanges();
         }
-
-        //public void UpdateUserVehicule(int userId, int vehiculeId)
-        //{
-        //    User userToUpdateVehicule = _bddContext.Users.Find(userId);
-
-        //    if (userToUpdateVehicule != null)
-        //    {
-        //        userToUpdateVehicule.Id = userId;
-        //        userToUpdateVehicule.Vehicule = _bddContext.Vehicules.First(b => b.Id == vehiculeId);
-        //        _bddContext.SaveChanges();
-        //    }
-        //}
-        //Delete User
         public void DeleteUser(int id)
         {
             User user = _bddContext.Users.Find(id);
@@ -578,8 +564,6 @@ namespace EcoCar.Models.Services
         #endregion
 
         //-------------------------------------------------------------------------------------------------
-
-
 
     }
 }

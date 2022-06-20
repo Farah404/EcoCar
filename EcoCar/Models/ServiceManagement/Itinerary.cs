@@ -1,4 +1,8 @@
-﻿namespace EcoCar.Models.ServiceManagement
+﻿//Class Description
+//Contains all details of a Itinerary
+// MainAuthors : Farah&FrancoisNoel
+
+namespace EcoCar.Models.ServiceManagement
 {
     public class Itinerary
     {

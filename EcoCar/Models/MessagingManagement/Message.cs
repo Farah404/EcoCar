@@ -1,5 +1,6 @@
 ﻿//Class Description
-//The Message.cs represents a dialogue between two users
+//Represents a dialogue between two users
+// MainAuthors : Farah&FrancoisNoel
 
 using EcoCar.Models.PersonManagement;
 using EcoCar.Models.ServiceManagement;

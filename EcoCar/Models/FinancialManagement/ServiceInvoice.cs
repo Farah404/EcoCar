@@ -1,5 +1,6 @@
 ﻿//Class Description
-//The ServiceInvoice.cs contains the billing details of a purchased service
+//The ServiceInvoice contains the billing details of a purchased service
+//Main Authors : Farah & FrancoisNoel
 
 using EcoCar.Models.ServiceManagement;
 

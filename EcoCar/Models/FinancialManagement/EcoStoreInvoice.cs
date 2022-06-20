@@ -1,5 +1,6 @@
 ﻿//Class Description
 //The EcoStoreInvoice.cs can either represent an invoice for EcoCoins purchase or a subscription
+// MainAuthors : Farah&FrancoisNoel
 
 using EcoCar.Models.PersonManagement;
 

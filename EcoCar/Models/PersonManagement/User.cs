@@ -1,5 +1,6 @@
 ﻿//Class Description
-//The User.cs contains all details of a specific user wishing to create an account
+//Ccontains all details of a specific user wishing to create an account
+// MainAuthors : Farah&FrancoisNoel
 
 using EcoCar.Models.FinancialManagement;
 using System;

@@ -1,12 +1,12 @@
-﻿using EcoCar.Models.FinancialManagement;
+﻿//Main Author : Farah
+
+using EcoCar.Models.FinancialManagement;
 using EcoCar.Models.ServiceManagement;
 using EcoCar.Models.MessagingManagement;
 using Microsoft.EntityFrameworkCore;
 using EcoCar.Models.PersonManagement;
 using Microsoft.Extensions.Configuration;
 using System;
-
-//Main Author : Farah
 
 namespace EcoCar.Models.DataBase
 {
@@ -52,7 +52,7 @@ namespace EcoCar.Models.DataBase
         {
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=EcoCar");
+                optionsBuilder.UseMySql("server=localhost;user id=root;password=rootine;database=EcoCar");
             }
             else
             {

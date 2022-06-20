@@ -1,4 +1,8 @@
-﻿using EcoCar.Models.PersonManagement;
+﻿//Class Description
+//Contains all specific details of a CarPooling service
+// MainAuthors : Farah&FrancoisNoel
+
+using EcoCar.Models.PersonManagement;
 using System.ComponentModel.DataAnnotations;
 
 namespace EcoCar.Models.ServiceManagement

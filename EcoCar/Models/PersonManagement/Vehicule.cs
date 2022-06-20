@@ -1,5 +1,6 @@
 ﻿//Class Description
-//The Vehicule.cs contains all details related to a vehicule owned by a user
+//Contains all details related to a vehicule owned by a user
+// MainAuthors : Farah&FrancoisNoel
 
 using System;
 using System.ComponentModel.DataAnnotations;

@@ -61,9 +61,9 @@
 There are many CarPooling/CarRental/Location Service available ; however, we wishes to create something who could apprehend these needs and also strengthen the community by given them something more than only price reductions.
 
 Here's how:
-* An simplistic and efficient CarPooling/CarRental/Location service allocation (proposing & asking)
+* A simple and efficient way to propose and profive CarPooling/CarRental/Location services
 * A messaging system between users
-* An integrated appropriate currency
+* An integrated internal currency
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

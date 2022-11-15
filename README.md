@@ -63,7 +63,7 @@ https://user-images.githubusercontent.com/96427557/187072074-f2ce49db-9f55-4909-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Whime many carpooling services already exist, EcoCar wishes to propose not only price reductions but amso a revolutionnary way to satusfy the needs of the community.
+While many carpooling services already exist, EcoCar wishes to propose not only price reductions but amso a revolutionnary way to satusfy the needs of the community.
 
 Here's how:
 * A simple and efficient way to propose and provide CarPooling/CarRental/Location services
